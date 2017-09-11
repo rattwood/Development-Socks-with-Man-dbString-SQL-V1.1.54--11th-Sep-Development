@@ -1,0 +1,776 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{472B0F35-0006-4B5D-93D7-523103330B3B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Development_Socks.My.MyApplication</StartupObject>
+    <RootNamespace>Development_Socks</RootNamespace>
+    <AssemblyName>Development Socks</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\user\Desktop\28-08-2017 Release db\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ProductName>DTYTrack</ProductName>
+    <PublisherName>Tecknoserve Co., Ltd</PublisherName>
+    <SuiteName>DTY</SuiteName>
+    <ApplicationRevision>54</ApplicationRevision>
+    <ApplicationVersion>1.1.1.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Development Socks.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <RegisterForComInterop>true</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Development Socks.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <RegisterForComInterop>true</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>FB772D04DDB2531241218F4B5C26F0341383A15C</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Development Socks_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\ts_final_logo_yk_FSc_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.SqlServer.ManagedConnections, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutBox1.Designer.vb">
+      <DependentUpon>AboutBox1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AboutBox1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="defectsearch.Designer.vb">
+      <DependentUpon>defectsearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectsearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY CART Sort and Colour\frmCart1.designer.vb">
+      <DependentUpon>frmCart1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY CART Sort and Colour\frmCart1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Colour Check Reports\frmFaultTrend.designer.vb">
+      <DependentUpon>frmFaultTrend.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Colour Check Reports\frmFaultTrend.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\frmDailyPackProduction.Designer.vb">
+      <DependentUpon>frmDailyPackProduction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\frmDailyPackProduction.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\frmProdStockWork.Designer.vb">
+      <DependentUpon>frmProdStockWork.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\frmProdStockWork.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY Settings\frmdbString.Designer.vb">
+      <DependentUpon>frmdbString.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Settings\frmdbString.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY Settings\frmProductMod.Designer.vb">
+      <DependentUpon>frmProductMod.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Settings\frmProductMod.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY Settings\frmSettings.Designer.vb">
+      <DependentUpon>frmSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Settings\frmSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY Settings\frmSettingSelect.Designer.vb">
+      <DependentUpon>frmSettingSelect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Settings\frmSettingSelect.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY START\frmChangePassword.Designer.vb">
+      <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY START\frmChangePassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY START\frmConeSearch.Designer.vb">
+      <DependentUpon>frmConeSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY START\frmConeSearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY START\frmDGV.Designer.vb">
+      <DependentUpon>frmDGV.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY START\frmDGV.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Job Reports\frmDGVJobReport.Designer.vb">
+      <DependentUpon>frmDGVJobReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Job Reports\frmDGVJobReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY START\frmPassword.Designer.vb">
+      <DependentUpon>frmPassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY START\frmPassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Colour Check Reports\frmPrintCartReport.Designer.vb">
+      <DependentUpon>frmPrintCartReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Colour Check Reports\frmPrintCartReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY START\SplashScreen1.Designer.vb">
+      <DependentUpon>SplashScreen1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY START\SplashScreen1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\frmEODReport.Designer.vb">
+      <DependentUpon>frmEODReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\frmEODReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Def Report\DGVDefReport.designer.vb">
+      <DependentUpon>DGVDefReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Def Report\DGVDefReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTYPacking\frmExChangeCone.Designer.vb">
+      <DependentUpon>frmExChangeCone.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTYPacking\frmExChangeCone.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmPackPrvGet.designer.vb">
+      <DependentUpon>frmPackPrvGet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmPackPrvGet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmPackRepMain.designer.vb">
+      <DependentUpon>frmPackRepMain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmPackRepMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmPackReport.Designer.vb">
+      <DependentUpon>frmPackReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmPackReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTYPacking\frmPackReports.Designer.vb">
+      <DependentUpon>frmPackReports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTYPacking\frmPackReports.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTYPacking\frmPackSort.Designer.vb">
+      <DependentUpon>frmPackSort.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTYPacking\frmPackSort.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmPackTodayUpdate.designer.vb">
+      <DependentUpon>frmPackTodayUpdate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmPackTodayUpdate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTYPacking\frmRemoveCone.Designer.vb">
+      <DependentUpon>frmRemoveCone.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTYPacking\frmRemoveCone.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoStore.Designer.vb">
+      <DependentUpon>InfoStore.vb</DependentUpon>
+    </Compile>
+    <Compile Include="InfoStore.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmActivate.Designer.vb">
+      <DependentUpon>frmActivate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmActivate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDelay.Designer.vb">
+      <DependentUpon>frmDelay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDelay.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMeasure.Designer.vb">
+      <DependentUpon>frmMeasure.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMeasure.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmPackCreateNew.designer.vb">
+      <DependentUpon>frmPackCreateNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmPackCreateNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTYPacking\frmPacking.Designer.vb">
+      <DependentUpon>frmPacking.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTYPacking\frmPacking.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTYPacking\frmPackingFault.Designer.vb">
+      <DependentUpon>frmPackingFault.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTYPacking\frmPackingFault.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings.vb" />
+    <Compile Include="SQLConn.vb" />
+    <Compile Include="DTY START\frmJobEntry.Designer.vb">
+      <DependentUpon>frmJobEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY START\frmJobEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TorayDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TorayDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="TorayDataSet1.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TorayDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Toraydb.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Toraydb.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AboutBox1.resx">
+      <DependentUpon>AboutBox1.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY CART Sort and Colour\frmCart1.resx">
+      <DependentUpon>frmCart1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY Reports\DTY Colour Check Reports\frmFaultTrend.resx">
+      <DependentUpon>frmFaultTrend.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY Reports\DTY Packing Reports\frmDailyPackProduction.resx">
+      <DependentUpon>frmDailyPackProduction.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY Reports\DTY Packing Reports\frmProdStockWork.resx">
+      <DependentUpon>frmProdStockWork.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY Settings\frmdbString.resx">
+      <DependentUpon>frmdbString.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY Settings\frmProductMod.resx">
+      <DependentUpon>frmProductMod.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY Settings\frmSettings.resx">
+      <DependentUpon>frmSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY Settings\frmSettingSelect.resx">
+      <DependentUpon>frmSettingSelect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY START\frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY START\frmConeSearch.resx">
+      <DependentUpon>frmConeSearch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY START\frmDGV.resx">
+      <DependentUpon>frmDGV.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY Reports\DTY Job Reports\frmDGVJobReport.resx">
+      <DependentUpon>frmDGVJobReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY START\frmPassword.resx">
+      <DependentUpon>frmPassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY Reports\DTY Colour Check Reports\frmPrintCartReport.resx">
+      <DependentUpon>frmPrintCartReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY START\SplashScreen1.resx">
+      <DependentUpon>SplashScreen1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY Reports\DTY Packing Reports\frmEODReport.resx">
+      <DependentUpon>frmEODReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY Reports\DTY Def Report\DGVDefReport.resx">
+      <DependentUpon>DGVDefReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTYPacking\frmExChangeCone.resx">
+      <DependentUpon>frmExChangeCone.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmPackRepMain.resx">
+      <DependentUpon>frmPackRepMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmPackReport.resx">
+      <DependentUpon>frmPackReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTYPacking\frmPackReports.resx">
+      <DependentUpon>frmPackReports.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTYPacking\frmPackSort.resx">
+      <DependentUpon>frmPackSort.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmPackTodayUpdate.resx">
+      <DependentUpon>frmPackTodayUpdate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTYPacking\frmRemoveCone.resx">
+      <DependentUpon>frmRemoveCone.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoStore.resx">
+      <DependentUpon>InfoStore.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmActivate.resx">
+      <DependentUpon>frmActivate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDelay.resx">
+      <DependentUpon>frmDelay.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMeasure.resx">
+      <DependentUpon>frmMeasure.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmPackCreateNew.resx">
+      <DependentUpon>frmPackCreateNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTYPacking\frmPacking.resx">
+      <DependentUpon>frmPacking.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTYPacking\frmPackingFault.resx">
+      <DependentUpon>frmPackingFault.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY START\frmJobEntry.resx">
+      <DependentUpon>frmJobEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Development Socks_TemporaryKey.pfx" />
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\DataSources\frmCart1.datasource" />
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+    <None Include="TorayDataSet.xsc">
+      <DependentUpon>TorayDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="TorayDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TorayDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="TorayDataSet.xss">
+      <DependentUpon>TorayDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="TorayDataSet1.xsc">
+      <DependentUpon>TorayDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="TorayDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TorayDataSet1.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="TorayDataSet1.xss">
+      <DependentUpon>TorayDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="Toraydb.xsc">
+      <DependentUpon>Toraydb.xsd</DependentUpon>
+    </None>
+    <None Include="Toraydb.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Toraydb.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Toraydb.xss">
+      <DependentUpon>Toraydb.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="DtrHostLib">
+      <Guid>{B690A647-C31C-4146-BFE8-F91455FD6D4E}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="InteropExtensionLib">
+      <Guid>{C3D19104-7A67-4EB0-B459-D5B2E734D430}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="otkloadr">
+      <Guid>{C04E4E5E-89E6-43C0-92BD-D3F2C7FBA5C4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\+10.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\-10.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\-30.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\+30.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\+50.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\-50.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zero.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ts_final_logo_yk_FSc_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TS logo SWDK5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BARRE.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="Microsoft.SqlServer.ConnectionInfo">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.Diagnostics.STrace">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.Dmf.Common">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.DtsMsg">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.DTSPipelineWrap">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.DTSRuntimeWrap">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.ManagedConnections">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.ManagedDTS">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.Management.Sdk.Sfc">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.Msxml6_interop">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.PipelineHost">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.ServiceBrokerEnum">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.Smo">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.SqlClrProvider">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.SqlEnum">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>
