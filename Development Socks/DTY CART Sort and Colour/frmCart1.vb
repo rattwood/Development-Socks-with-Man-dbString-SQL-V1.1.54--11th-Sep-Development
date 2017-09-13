@@ -3045,7 +3045,7 @@ Public Class frmCart1
         End Try
 
 
-        If My.Settings.chkUseColour Then frmFaultTrend.DefTrend()
+        'If My.Settings.chkUseColour Then frmFaultTrend.DefTrend()
 
 
 
