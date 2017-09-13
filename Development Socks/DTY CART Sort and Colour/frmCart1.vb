@@ -50,7 +50,7 @@ Public Class frmCart1
     Public shortCone As Integer
     Public varCartStartTime As String   'Record time that we started measuring
     Public varCartEndTime As String
-    Dim coneNumOffset As Integer
+    Public coneNumOffset As Integer
     Dim varConeBCode As String
     Dim fileActive As Integer
     Public varConeNum As Integer
@@ -2906,6 +2906,7 @@ Public Class frmCart1
         txtBoxUpdates()
         UpdateConeVal()
 
+
     End Sub
 
     Public Sub txtBoxUpdates()
@@ -3044,29 +3045,12 @@ Public Class frmCart1
         End Try
 
 
+        If My.Settings.chkUseColour Then frmFaultTrend.DefTrend()
 
 
 
     End Sub
 
-    'Private Sub CheckDefects()
 
-    '    Dim coneNum As Integer
-
-    '    'Get requierd cone range for database search
-
-    '    For i = 1 To 32
-    '        coneNum = i +
-
-
-    '    Next
-
-    '    'check each cone for duplicate faults for last four doffs from current one
-
-
-
-
-
-    'End Sub
 
 End Class

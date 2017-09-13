@@ -133,6 +133,12 @@
     <Compile Include="DTY CART Sort and Colour\frmCart1.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DTY Reports\DTY Colour Check Reports\frmCheeseError.Designer.vb">
+      <DependentUpon>frmCheeseError.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Colour Check Reports\frmCheeseError.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DTY Reports\DTY Colour Check Reports\frmFaultTrend.designer.vb">
       <DependentUpon>frmFaultTrend.vb</DependentUpon>
     </Compile>
@@ -365,6 +371,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DTY CART Sort and Colour\frmCart1.resx">
       <DependentUpon>frmCart1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY Reports\DTY Colour Check Reports\frmCheeseError.resx">
+      <DependentUpon>frmCheeseError.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DTY Reports\DTY Colour Check Reports\frmFaultTrend.resx">
       <DependentUpon>frmFaultTrend.vb</DependentUpon>
