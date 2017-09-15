@@ -96,8 +96,8 @@ Public Class frmPrintCartReport
         ' MyExcel.Visible = True
 
 
-        If frmJobEntry.varMachineCode = 21 Or frmJobEntry.varMachineCode = 23 Or frmJobEntry.varMachineCode = 25 Then sp_nums = "1 - 192"
-        If frmJobEntry.varMachineCode = 22 Or frmJobEntry.varMachineCode = 24 Or frmJobEntry.varMachineCode = 26 Then sp_nums = "193 - 384"
+        If DGVcartReport.Rows(0).Cells(1).Value = 21 Or DGVcartReport.Rows(0).Cells(1).Value = 23 Or DGVcartReport.Rows(0).Cells(1).Value = 25 Then sp_nums = "1 - 192"
+        If DGVcartReport.Rows(0).Cells(1).Value = 22 Or DGVcartReport.Rows(0).Cells(1).Value = 24 Or DGVcartReport.Rows(0).Cells(1).Value = 26 Then sp_nums = "193 - 384"
 
 
 
@@ -118,7 +118,7 @@ Public Class frmPrintCartReport
         MyExcel.Cells(4, 12) = DGVcartReport.Rows(0).Cells(5).Value
         'sp_nums RANGE
         'sp_nums = ((DGVcartReport.Rows(0).Cells(6).Value) & "-" & DGVcartReport.Rows(191).Cells(6).Value)
-        'MyExcel.Cells(4, 15) = sp_nums
+        MyExcel.Cells(4, 15) = sp_nums
         'Machine number from Barcode
         MyExcel.Cells(6, 6) = DGVcartReport.Rows(0).Cells(1).Value
 
@@ -154,10 +154,10 @@ Public Class frmPrintCartReport
             'LINE TO GET WASTE CONES FOUND IN SORTING AND REPORT IN MISSING CONE SECTION
 
             If DGVcartReport.Rows(dgvRW - 1).Cells(46).Value = True Then  'CHECK FOR WATE CONE CHECKED
-                exWasVal = DGVcartReport.Rows(dgvRW - 1).Cells(6).Value.ToString  'GET CONE NUMBER
+                exWasVal = DGVcartReport.Rows(dgvRW - 1).Cells(12).Value.ToString  'GET CONE NUMBER
 
                 If exWasVal > 0 Then
-                    MyExcel.Cells(exNcRw, exNcCl) = (exWasVal + "W")
+                    MyExcel.Cells(exNcRw, exNcCl) = (exWasVal & "W")
                     If exNcRw = 12 Then
                         exNcCl = exNcCl + 1
                         missCount = missCount + 1
