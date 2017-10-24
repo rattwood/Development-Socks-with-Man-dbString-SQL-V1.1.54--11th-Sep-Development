@@ -368,9 +368,7 @@ Public Class frmPacking
 
     End Sub
 
-    Private Sub btnCone32_Click(sender As Object, e As EventArgs) Handles btnCone32.Click
 
-    End Sub
 
     'THIS LOOKS FOR ENTER key to be pressed or received via barcode
     Private Sub frmJobEntry_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown

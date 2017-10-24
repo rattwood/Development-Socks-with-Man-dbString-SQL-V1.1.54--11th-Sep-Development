@@ -48,8 +48,8 @@ Public Class frmJobEntry
     Public JobBarcode As String
     Public varProdWeight As String
     Public varweightcode As String
-
-
+    Public cheeseBcode As String
+    Public packGrade As String
     Dim machineName As String = ""
     Dim machineCode As String
     Dim productCode As String
@@ -79,9 +79,15 @@ Public Class frmJobEntry
         If My.Settings.chkUseColour Then btnCartReport.Visible = True Else btnCartReport.Visible = False
         If My.Settings.chkUseColour Then btnJobReport.Visible = True Else btnJobReport.Visible = False
         If My.Settings.chkUseColour Then btnDefRep.Visible = True Else btnDefRep.Visible = False
-        If My.Settings.chkUsePack Then btnExChangeCone.Visible = True Else btnExChangeCone.Visible = False
-        If My.Settings.chkUsePack Then btnSearchCone.Visible = True Else btnSearchCone.Visible = False
-        If My.Settings.chkUsePack Then btnReports.Visible = True Else btnReports.Visible = False
+        'NEW PACKING MENU ITEMS
+        If My.Settings.chkUsePack Then ToolsToolStripMenuItem.Visible = True Else ToolsToolStripMenuItem.Visible = False
+        If My.Settings.chkUsePack Then PackingGradeToolStripMenuItem.Visible = True Else PackingGradeToolStripMenuItem.Visible = False
+        If My.Settings.chkUsePack Then ReportsToolStripMenuItem.Visible = True Else ReportsToolStripMenuItem.Visible = False
+        If My.Settings.chkUsePack Then btnSearchCone.Visible = False Else btnSearchCone.Visible = True
+
+        'If My.Settings.chkUsePack Then btnExChangeCone.Visible = True Else btnExChangeCone.Visible = False
+        'If My.Settings.chkUsePack Then btnSearchCone.Visible = True Else btnSearchCone.Visible = False
+        'If My.Settings.chkUsePack Then btnReports.Visible = True Else btnReports.Visible = False
 
         If My.Settings.chkUseSort = False And My.Settings.chkUseColour = False And My.Settings.chkUsePack = False Then
             MsgBox("Please edit SETTINGS for type of User")
@@ -89,12 +95,25 @@ Public Class frmJobEntry
             Me.txtLotNumber.Focus()
         End If
 
-        Me.KeyPreview = True  'Allows us to look for advace character from barcode
+        Me.KeyPreview = True  'Allows us to look for advance character from barcode
 
         'Set Form Header text
-        If My.Settings.chkUseSort Then Me.Text = "Job Entry Sorting"
-        If My.Settings.chkUseColour Then Me.Text = "Job Entry Colour"
-        If My.Settings.chkUsePack Then Me.Text = "Job Entry Packing"
+        If My.Settings.chkUseSort Then
+            Me.Text = "Job Entry Sorting"
+            txtOperator.Visible = True
+        End If
+        If My.Settings.chkUseColour Then
+            Me.Text = "Job Entry Colour"
+            txtOperator.Visible = True
+        End If
+
+        If My.Settings.chkUsePack Then
+            Me.Text = "Job Entry Packing"
+            lblSelectGrade.Visible = True
+            txtOperator.Visible = False
+        End If
+
+
 
 
         Me.btnCancelReport.Visible = False
@@ -104,7 +123,10 @@ Public Class frmJobEntry
 
     Public Sub txtOperator_TextChanged(sender As Object, e As EventArgs) Handles txtOperator.TextChanged
 
-        txtLotNumber.Visible = True
+        'Select Grade type
+
+
+
 
         If My.Settings.chkUseSort Then
             SortOP = txtOperator.Text
@@ -115,6 +137,7 @@ Public Class frmJobEntry
         End If
 
 
+        txtLotNumber.Visible = True
 
         varUserName = txtOperator.Text
 
@@ -125,40 +148,43 @@ Public Class frmJobEntry
 
     'Private Sub btnContinue_Click(sender As Object, e As EventArgs) Handles btnContinue.Click
     Private Sub prgContinue()
+
+
         Dim chkBCode As String
-        'Routine to check Barcode is TRUE
-        Try
+            'Routine to check Barcode is TRUE
+            Try
 
-            chkBCode = txtLotNumber.Text.Substring(12, 1)
+                chkBCode = txtLotNumber.Text.Substring(12, 1)
 
-            If chkBCode = "B" Then
-                If txtLotNumber.TextLength > 14 Then  ' For carts B10,11 & 12
-                    cartNum = txtLotNumber.Text.Substring(12, 3)
+                If chkBCode = "B" Then
+                    If txtLotNumber.TextLength > 14 Then  ' For carts B10,11 & 12
+                        cartNum = txtLotNumber.Text.Substring(12, 3)
+                    Else
+                        cartNum = txtLotNumber.Text.Substring(12, 2)
+                    End If
+
+
+
+
                 Else
-                    cartNum = txtLotNumber.Text.Substring(12, 2)
+                    MsgBox("This is not a CART Barcode Please RE Scan")
+                    Me.txtLotNumber.Clear()
+
+                    Me.txtLotNumber.Focus()
+                    Me.txtLotNumber.Refresh()
+                    Exit Sub
                 End If
 
-
-
-
-            Else
-                MsgBox("This is not a CART Barcode Please RE Scan")
+            Catch ex As Exception
+                MsgBox("BarCcode Is Not Valid")
                 Me.txtLotNumber.Clear()
-
                 Me.txtLotNumber.Focus()
                 Me.txtLotNumber.Refresh()
                 Exit Sub
-            End If
+            End Try
 
-        Catch ex As Exception
-            MsgBox("BarCcode Is Not Valid")
-            Me.txtLotNumber.Clear()
-            Me.txtLotNumber.Focus()
-            Me.txtLotNumber.Refresh()
-            Exit Sub
-        End Try
+            CreateJob()
 
-        CreateJob()
 
     End Sub
 
@@ -171,9 +197,12 @@ Public Class frmJobEntry
             year = txtLotNumber.Text.Substring(5, 2)
             month = txtLotNumber.Text.Substring(7, 2)
             doffingNum = txtLotNumber.Text.Substring(9, 3)
+
             cartNum = txtLotNumber.Text.Substring(12, 3)
+
+
         Else
-            machineName = ""                                    ' For carts B1 - 9
+                machineName = ""                                    ' For carts B1 - 9
             machineCode = txtLotNumber.Text.Substring(0, 2)
             productCode = txtLotNumber.Text.Substring(2, 3)
             year = txtLotNumber.Text.Substring(5, 2)
@@ -183,118 +212,121 @@ Public Class frmJobEntry
 
         End If
 
+
         varCartBCode = txtLotNumber.Text
 
-        If machineCode = 21 Then
-            machineName = "11D1"        'Left Side
-        ElseIf machineCode = 22 Then
-            machineName = "11D2"        'Right Side
-        ElseIf machineCode = 23 Then
-            machineName = "12D1"        'Left Side
-        ElseIf machineCode = 24 Then
-            machineName = "12D2"        'Right Side
-        ElseIf machineCode = 25 Then
-            machineName = "21D1"        'Left Side
-        ElseIf machineCode = 26 Then
-            machineName = "21D2"        'Right Side
-        ElseIf machineCode = 27 Then
-            machineName = "22D1"        'Left Side
-        ElseIf machineCode = 28 Then
-            machineName = "22D2"        'Right Side
-        End If
-
-        'Dim cartSelect As String
-        If machineCode = 21 Or machineCode = 23 Or machineCode = 25 Or machineCode = 27 Then    ' Set Left Side of Machine
-
-            If cartNum = "B1" Or cartNum = "B2" Then
-                varCartNameA = "B1"
-                varCartNameB = "B2"
-                cartSelect = 1
-                varSpNums = "001 - 032"
-            ElseIf cartNum = "B3" Or cartNum = "B4" Then
-                varCartNameA = "B3"
-                varCartNameB = "B4"
-                cartSelect = 2
-                varSpNums = "033 - 064"
-            ElseIf cartNum = "B5" Or cartNum = "B6" Then
-                varCartNameA = "B5"
-                varCartNameB = "B6"
-                cartSelect = 3
-                varSpNums = "065 - 096"
-            ElseIf cartNum = "B7" Or cartNum = "B8" Then
-                varCartNameA = "B7"
-                varCartNameB = "B8"
-                cartSelect = 4
-                varSpNums = "097 - 128"
-            ElseIf cartNum = "B9" Or cartNum = "B10" Then
-                varCartNameA = "B9"
-                varCartNameB = "B10"
-                cartSelect = 5
-                varSpNums = "129 - 160"
-            ElseIf cartNum = "B11" Or cartNum = "B12" Then
-                varCartNameA = "B11"
-                varCartNameB = "B12"
-                cartSelect = 6
-                varSpNums = "161 - 192"
-
+            If machineCode = 21 Then
+                machineName = "11D1"        'Left Side
+            ElseIf machineCode = 22 Then
+                machineName = "11D2"        'Right Side
+            ElseIf machineCode = 23 Then
+                machineName = "12D1"        'Left Side
+            ElseIf machineCode = 24 Then
+                machineName = "12D2"        'Right Side
+            ElseIf machineCode = 25 Then
+                machineName = "21D1"        'Left Side
+            ElseIf machineCode = 26 Then
+                machineName = "21D2"        'Right Side
+            ElseIf machineCode = 27 Then
+                machineName = "22D1"        'Left Side
+            ElseIf machineCode = 28 Then
+                machineName = "22D2"        'Right Side
             End If
-        End If
 
+            'Dim cartSelect As String
+            If machineCode = 21 Or machineCode = 23 Or machineCode = 25 Or machineCode = 27 Then    ' Set Left Side of Machine
 
-        If machineCode = 22 Or machineCode = 24 Or machineCode = 26 Or machineCode = 28 Then  ' Set Right Side of Machine
-            If cartNum = "B1" Or cartNum = "B2" Then
-                varCartNameA = "B1"
-                varCartNameB = "B2"
-                cartSelect = 7
-                varSpNums = "193 - 224"
-            ElseIf cartNum = "B3" Or cartNum = "B4" Then
-                varCartNameA = "B3"
-                varCartNameB = "B4"
-                cartSelect = 8
-                varSpNums = "225 - 256"
-            ElseIf cartNum = "B5" Or cartNum = "B6" Then
-                varCartNameA = "B5"
-                varCartNameB = "B6"
-                cartSelect = 9
-                varSpNums = "257 - 288"
-            ElseIf cartNum = "B7" Or cartNum = "B8" Then
-                varCartNameA = "B7"
-                varCartNameB = "B8"
-                cartSelect = 10
-                varSpNums = "289 - 320"
-            ElseIf cartNum = "B9" Or cartNum = "B10" Then
-                varCartNameA = "B9"
-                varCartNameB = "B10"
-                cartSelect = 11
-                varSpNums = "321 - 352"
-            ElseIf cartNum = "B11" Or cartNum = "B12" Then
-                varCartNameA = "B11"
-                varCartNameB = "B12"
-                cartSelect = 12
-                varSpNums = "353 - 384"
+                If cartNum = "B1" Or cartNum = "B2" Then
+                    varCartNameA = "B1"
+                    varCartNameB = "B2"
+                    cartSelect = 1
+                    varSpNums = "001 - 032"
+                ElseIf cartNum = "B3" Or cartNum = "B4" Then
+                    varCartNameA = "B3"
+                    varCartNameB = "B4"
+                    cartSelect = 2
+                    varSpNums = "033 - 064"
+                ElseIf cartNum = "B5" Or cartNum = "B6" Then
+                    varCartNameA = "B5"
+                    varCartNameB = "B6"
+                    cartSelect = 3
+                    varSpNums = "065 - 096"
+                ElseIf cartNum = "B7" Or cartNum = "B8" Then
+                    varCartNameA = "B7"
+                    varCartNameB = "B8"
+                    cartSelect = 4
+                    varSpNums = "097 - 128"
+                ElseIf cartNum = "B9" Or cartNum = "B10" Then
+                    varCartNameA = "B9"
+                    varCartNameB = "B10"
+                    cartSelect = 5
+                    varSpNums = "129 - 160"
+                ElseIf cartNum = "B11" Or cartNum = "B12" Then
+                    varCartNameA = "B11"
+                    varCartNameB = "B12"
+                    cartSelect = 6
+                    varSpNums = "161 - 192"
 
+                End If
             End If
-        End If
-
-        varMachineCode = machineCode
-        varMachineName = machineName
-        varProductCode = productCode
-        varYear = year
-        varMonth = month
-        varDoffingNum = doffingNum
-        varCartNum = cartNum
-        varCartSelect = cartSelect
 
 
-        varJobNum = (machineName & " " & month & " " & doffingNum & " " & varCartNameA)
+            If machineCode = 22 Or machineCode = 24 Or machineCode = 26 Or machineCode = 28 Then  ' Set Right Side of Machine
+                If cartNum = "B1" Or cartNum = "B2" Then
+                    varCartNameA = "B1"
+                    varCartNameB = "B2"
+                    cartSelect = 7
+                    varSpNums = "193 - 224"
+                ElseIf cartNum = "B3" Or cartNum = "B4" Then
+                    varCartNameA = "B3"
+                    varCartNameB = "B4"
+                    cartSelect = 8
+                    varSpNums = "225 - 256"
+                ElseIf cartNum = "B5" Or cartNum = "B6" Then
+                    varCartNameA = "B5"
+                    varCartNameB = "B6"
+                    cartSelect = 9
+                    varSpNums = "257 - 288"
+                ElseIf cartNum = "B7" Or cartNum = "B8" Then
+                    varCartNameA = "B7"
+                    varCartNameB = "B8"
+                    cartSelect = 10
+                    varSpNums = "289 - 320"
+                ElseIf cartNum = "B9" Or cartNum = "B10" Then
+                    varCartNameA = "B9"
+                    varCartNameB = "B10"
+                    cartSelect = 11
+                    varSpNums = "321 - 352"
+                ElseIf cartNum = "B11" Or cartNum = "B12" Then
+                    varCartNameA = "B11"
+                    varCartNameB = "B12"
+                    cartSelect = 12
+                    varSpNums = "353 - 384"
 
-        'Routine to change the scanned BARCODE to be the First CART not the secone cart and this is what will be stored in the DATABASE
+                End If
+            End If
 
-        dbBarcode = txtLotNumber.Text.Replace(varCartNum, varCartNameA)
+            varMachineCode = machineCode
+            varMachineName = machineName
+            varProductCode = productCode
+            varYear = year
+            varMonth = month
+            varDoffingNum = doffingNum
+            varCartNum = cartNum
+            varCartSelect = cartSelect
 
 
+            varJobNum = (machineName & " " & month & " " & doffingNum & " " & varCartNameA)
 
+            'Routine to change the scanned BARCODE to be the First CART not the secone cart and this is what will be stored in the DATABASE
+
+            dbBarcode = txtLotNumber.Text.Replace(varCartNum, varCartNameA)
+
+
+        ' Select SOrt or Colour routine
         If My.Settings.chkUseColour Or My.Settings.chkUseSort Then CheckJob()
+
+        'Select Packing Routine
         If My.Settings.chkUsePack Then PackScree1()
 
 
@@ -396,6 +428,7 @@ Public Class frmJobEntry
             frmDGV.DGVdata.Rows(0).Selected = True
             frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
             frmCart1.Show()
+
             If My.Settings.debugSet Then frmDGV.Show()
 
             Me.Hide()
@@ -474,11 +507,7 @@ Public Class frmJobEntry
         Dim today As String = DateAndTime.Today
         today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
 
-        'If My.Settings.chkUseSort And My.Settings.chkUseColour = False Then today = "04-Feb-1960"
 
-
-        'Routine to check get product name and merge number and load in to variables then clear grid
-        'LExecQuery("SELECT PRODNAME,MERGENUM,PRODWEIGHT,WEIGHTCODE FROM PRODUCT WHERE PRNUM = '" & varProductCode & "'")
         LExecQuery("SELECT PRODNAME,MERGENUM,PRODWEIGHT,WEIGHTCODE FROM PRODUCT WHERE PRNUM = '" & varProductCode & "'")
 
         If LRecordCount > 0 Then
@@ -620,6 +649,145 @@ Public Class frmJobEntry
 
     End Sub
 
+    Private Sub nonAPacking()
+
+        'Check Barcode is a valid Chees number, it must be 15 characters and no "B" in it
+        Dim chkBCode As String
+
+        Try
+
+            chkBCode = txtLotNumber.Text.Substring(12, 1)
+
+            If chkBCode = "B" Then
+                MsgBox("This is not a Valid Cheese Number")
+                Me.txtLotNumber.Clear()
+                Me.txtLotNumber.Focus()
+                Me.txtLotNumber.Refresh()
+                Exit Sub
+            Else
+                cheeseBcode = txtLotNumber.Text
+            End If
+        Catch ex As Exception
+            MsgBox("BarCcode Is Not Valid")
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Focus()
+            Me.txtLotNumber.Refresh()
+            Exit Sub
+        End Try
+
+        'Extract requierd Informatiom
+        varProductCode = txtLotNumber.Text.Substring(2, 3)
+        year = txtLotNumber.Text.Substring(5, 2)
+        month = txtLotNumber.Text.Substring(7, 2)
+
+        'GET PRODUCT WEIGHT INFORMATION
+        LExecQuery("SELECT PRODNAME,PRODWEIGHT,WEIGHTCODE FROM PRODUCT WHERE PRNUM = '" & varProductCode & "'")
+
+        If LRecordCount > 0 Then
+            'LOAD THE DATA FROM dB IN TO THE DATAGRID
+            frmDGV.DGVdata.DataSource = LDS.Tables(0)
+            frmDGV.DGVdata.Rows(0).Selected = True
+
+            varProductName = frmDGV.DGVdata.Rows(0).Cells(0).Value.ToString
+            varProdWeight = frmDGV.DGVdata.Rows(0).Cells(1).Value.ToString
+            varweightcode = frmDGV.DGVdata.Rows(0).Cells(2).Value.ToString
+
+
+            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+
+        Else
+            MsgBox("PRODUCT NUMBER " & varProductCode & " THIS PRODUCT IS NOT IN THE PRODUCT LIST")
+            quit = 1
+            Exit Sub
+
+        End If
+
+
+
+        Dim sqlstring As String
+        'Check for correct cheese selection
+        If txtGrade.Text = "B" Then
+            packGrade = txtGrade.Text
+            'sqlstring = "And Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0 And FLT_W = 'False' And PACKENDTM is Null Or Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And CONEBARLEY > 0 And PACKENDTM is Null"
+            LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And Jobs.FLT_S = 'False' And Jobs.CONESTATE = 8 And Jobs.MISSCONE = 0 And Jobs.DEFCONE > 0 And Jobs.FLT_W = 'False' And Jobs.PACKENDTM is Null Or Jobs.PRNUM = '" & varProductCode & "' And Jobs.FLT_S = 'False' And Jobs.CONESTATE = 8 And Jobs.MISSCONE = 0 And Jobs.CONEBARLEY > 0 And Jobs.PACKENDTM is Null")
+        ElseIf txtGrade.Text = "AL" Then
+            packGrade = txtGrade.Text
+            'sqlstring = "Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAL And PACKENDTM is Null"
+            LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAL = 'True' And PACKENDTM is Null")
+        ElseIf txtGrade.Text = "AD" Then
+            packGrade = txtGrade.Text
+            'sqlstring = "Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAD And PACKENDTM is Null"
+            LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAD = 'True' And PACKENDTM is Null")
+        ElseIf txtGrade.Text = "P15 AS" Then
+            packGrade = txtGrade.Text
+            'sqlstring = "Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 9 And MISSCONE = 0 And DEFCONE = 0 CONEBARLEY = 0 And  PACKENDTM is Null"
+            LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 9 And MISSCONE = 0 And DEFCONE = 0 CONEBARLEY = 0 And  PACKENDTM is Null")
+        ElseIf txtGrade.Text = "P25 AS" Then
+            packGrade = txtGrade.Text
+            '  sqlstring = "Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0 And CONEBARLEY > 0 And PACKENDTM is Null"
+            LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0 And CONEBARLEY > 0 And PACKENDTM is Null")
+        ElseIf txtGrade.Text = "P35 AS" Then
+            packGrade = txtGrade.Text
+            '  sqlstring = "PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0 And CONEBARLEY > 0 And PACKENDTM is Null"
+            LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0 And CONEBARLEY > 0 And PACKENDTM is Null")
+        ElseIf txtGrade.Text = "P20 BS" Then
+            packGrade = txtGrade.Text
+            'sqlstring = "Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0 And FLW_W = 'False' And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And CONEBARLEY > 0 And PACKENDTM is Null  "
+            LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0 And FLW_W = 'False' And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And CONEBARLEY > 0 And PACKENDTM is Null ")
+        ElseIf txtGrade.Text = "P30 BS" Then
+            packGrade = txtGrade.Text
+            '    sqlstring = "Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0 And CONEBARLEY > 0 And PACKENDTM is Null"
+            LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0 And CONEBARLEY > 0 And PACKENDTM is Null")
+        ElseIf txtGrade.Text = "P35 BS" Then
+            packGrade = txtGrade.Text
+            '    sqlstring = "Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0 And CONEBARLEY > 0 And PACKENDTM is Null"
+            LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0 And CONEBARLEY > 0 And PACKENDTM is Null")
+            'Read in Cheeses for ReCheck
+        ElseIf txtGrade.Text = "ReCheck" Then
+            packGrade = txtGrade.Text
+            'sqlstring = "Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And M30 > 0 DEFCONE = 0  And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And P30 > 0 DEFCONE = 0 And PACKENDTM is Null"
+            LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And M30 > 0 DEFCONE = 0  And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And P30 > 0 DEFCONE = 0 And PACKENDTM is Null")
+        ElseIf txtGrade.Text = "Waste" Then
+            packGrade = txtGrade.Text
+            'sqlstring = "Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And FLT_W > 0 And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And COLWASTE > 0 And PACKENDTM is Null "
+            LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And FLT_W > 0 And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And COLWASTE > 0 And PACKENDTM is Null ")
+        End If
+
+        'Get Information from Database of Cheeses for selected Packing Grade classed as not Packed
+
+        'GET ALL VAlid Cheeses
+        'LExecQuery("Select * FROM Jobs INNER JOIN Product ON Jobs.PRNUM = Product.PRNUM & '" & sqlstring & "'  ")
+        '   & "'" & sqlstring & "'")
+
+
+        If LRecordCount > 0 Then
+            'LOAD THE DATA FROM dB IN TO THE DATAGRID
+            frmDGV.DGVdata.DataSource = LDS.Tables(0)
+            frmDGV.DGVdata.Rows(0).Selected = True
+            Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
+
+            'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
+            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(0), ListSortDirection.Ascending)  'sorts On cone number
+
+
+        Else
+            MsgBox("NO CHEESES CAN BE FOUND")
+            quit = 1
+            Exit Sub
+
+        End If
+
+
+
+        Me.Hide()
+        If My.Settings.debugSet Then frmDGV.Show()
+        frmB_AL_AD_W.txtConeBcode.Clear()
+        frmB_AL_AD_W.txtConeBcode.Focus()
+        frmB_AL_AD_W.Show()
+
+
+
+    End Sub
 
     Private Sub DelayTM()
         Dim interval As Integer = "2000"
@@ -636,7 +804,7 @@ Public Class frmJobEntry
 
 
 
-    Private Sub btnSettings_Click_1(sender As Object, e As EventArgs) Handles btnSettings.Click
+    Private Sub btnSettings_Click_1(sender As Object, e As EventArgs)
         frmPassword.Show()
     End Sub
 
@@ -776,10 +944,12 @@ Public Class frmJobEntry
         If e.KeyCode = Keys.Return Then
             If cartReport = 1 Then
                 cartReportSub()
-
-            Else
-
+            ElseIf My.Settings.chkUseSort Or My.Settings.chkUseColour Or My.Settings.chkUsePack And txtGrade.Text = "A" Then
                 prgContinue()
+
+            ElseIf My.Settings.chkUsePack And Not txtGrade.Text = "A" Then
+                nonAPacking()
+
             End If
         End If
     End Sub
@@ -794,5 +964,135 @@ Public Class frmJobEntry
         DGVDefReport.Show()
     End Sub
 
+    Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
+        frmPassword.Show()
+    End Sub
 
+
+
+    Private Sub ReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReportsToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub EndOfDayReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EndOfDayReportToolStripMenuItem.Click
+        frmEODReport.Show()
+    End Sub
+
+    Private Sub StockToProcessReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StockToProcessReportToolStripMenuItem.Click
+        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        lblMessage.Text = "Please wait Creating Work in Process Report"
+        frmProdStockWork.processReport()
+        Me.Cursor = System.Windows.Forms.Cursors.Default
+        lblMessage.Text = ""
+
+    End Sub
+
+    Private Sub DailyPackingReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DailyPackingReportToolStripMenuItem.Click
+        frmDailyPackProduction.Show()
+    End Sub
+
+    Private Sub ExChangeCheeseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExChangeCheeseToolStripMenuItem.Click
+
+        If txtOperator.Text = "" Then
+            MsgBox("Please Enter Operator Name First")
+        Else
+            changeCone = 1
+            Me.Hide()
+            frmExChangeCone.Show()
+        End If
+
+    End Sub
+
+    Private Sub FindCheeseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FindCheeseToolStripMenuItem.Click
+        If txtOperator.Text = "" Then
+            MsgBox("Please Enter Operator Name First")
+        Else
+            Me.Hide()
+            frmConeSearch.Show()
+        End If
+    End Sub
+
+    Private Sub AGradeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AGradeToolStripMenuItem.Click
+        txtGrade.Text = AGradeToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan Job Sheet"
+    End Sub
+
+    Private Sub P15ASToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles P15ASToolStripMenuItem.Click
+        txtGrade.Text = P15ASToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub P25ASToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles P25ASToolStripMenuItem.Click
+        txtGrade.Text = P25ASToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub P35ASToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles P35ASToolStripMenuItem.Click
+        txtGrade.Text = P35ASToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub ReCheckToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReCheckToolStripMenuItem.Click
+        txtGrade.Text = ReCheckToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub WasteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WasteToolStripMenuItem.Click
+        txtGrade.Text = WasteToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub BToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BToolStripMenuItem.Click
+        txtGrade.Text = BToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub ALToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ALToolStripMenuItem.Click
+        txtGrade.Text = ALToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub ADToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ADToolStripMenuItem.Click
+        txtGrade.Text = ADToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub P20BSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles P20BSToolStripMenuItem.Click
+        txtGrade.Text = P20BSToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub P30BSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles P30BSToolStripMenuItem.Click
+        txtGrade.Text = P30BSToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub P35BSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles P35BSToolStripMenuItem.Click
+        txtGrade.Text = P35BSToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
 End Class

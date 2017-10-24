@@ -1,14 +1,7 @@
 ﻿
 Public Class frmRemoveCone
 
-    'Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
 
-
-    '    Me.btnContinue.Enabled = True
-
-
-
-    'End Sub
 
     Private Sub chkBarcode()
 
