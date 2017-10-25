@@ -36,7 +36,20 @@ Public Class frmB_AL_AD_W
         'create rows 
         DataGridView1.Rows.Add(30)
 
+        For nums = 1 To 90
+            DataGridView1.Rows(nums - 1).Cells(2).Value = nums
 
+            If gridRow = 30 Then
+                gridRow = 0
+                gridCol = gridCol + 2
+            End If
+        Next
+
+        For i = 1 To dgvRows - 1
+            If frmDGV.DGVdata.Rows(i - 1).Cells(78).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+                toAllocatedCount = toAllocatedCount + 1
+            End If
+        Next
 
 
 
@@ -75,11 +88,11 @@ Public Class frmB_AL_AD_W
         today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
 
 
-        packedFlag = 0
+
 
         For i = 1 To dgvRows - 1
 
-
+            'CHECK FOR UNPACKED CHEESE AND ALLOCATE
             If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
 
                 'write to the local DGV grid
@@ -91,9 +104,9 @@ Public Class frmB_AL_AD_W
                 gridRow = gridRow + 1
                 coneCount = coneCount + 1
                 DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
-                txtConeBcode.Clear()
-                txtConeBcode.Focus()
-
+                packedFlag = 1
+                Exit For
+                'CHECK FOR ALREADY PACKED CHEESE
             ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
                 Label8.Visible = True
                 Label8.Text = "Cheese already allocated"
@@ -103,38 +116,44 @@ Public Class frmB_AL_AD_W
                 txtConeBcode.Clear()
                 txtConeBcode.Focus()
                 Exit Sub
-            Else
+            ElseIf i = dgvRows - 1 And packedFlag = 0 Then    'CHECK FOR WRONG CHEESE ON CART
                 Label8.Visible = True
                 Label8.Text = ("This is not a Grade " & frmJobEntry.txtGrade.Text & " Cheese")
                 DelayTM()
+                'frmRemoveCone.Show()
                 Label8.Visible = False
                 txtConeBcode.Clear()
                 txtConeBcode.Focus()
+                Exit Sub
+
             End If
 
-            If coneCount = 9 Then
-                jobEnd()
-            End If
+        Next
 
-            If gridRow = 3 Then
-                gridRow = 0
-                gridCol = gridCol + 2
-            End If
+        If coneCount = 9 Then
+            jobEnd()
+        End If
 
+        If gridRow = 3 Then
+            gridRow = 0
+            gridCol = gridCol + 2
+        End If
 
+        packedFlag = 0
+
+        'TURN DEBUG ON
+        If My.Settings.debugSet Then
             Label12.Text = gridRow
             Label13.Text = gridCol
             Label14.Text = coneCount
-            'MsgBox("idxRow =" & idxRow & "  idxCol =" & idxCol & "  Conecount =" & coneCount)
+        End If
+
+        txtConeBcode.Clear()
+        txtConeBcode.Focus()
 
 
 
 
-            ' If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And Not (frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value)
-            ' Me.Hide()
-            'frmRemoveCone.Show()
-
-        Next
 
 
     End Sub
@@ -142,9 +161,11 @@ Public Class frmB_AL_AD_W
     Private Sub jobEnd()
 
         Me.Close()
+        frmPackRepMain.PackRepMainSub()
         frmJobEntry.Show()
         frmJobEntry.txtLotNumber.Clear()
-        frmJobEntry.txtLotNumber.Focus()
+        frmJobEntry.txtTraceNum.Clear()
+        frmJobEntry.txtTraceNum.Focus()
 
 
     End Sub
@@ -171,6 +192,7 @@ Public Class frmB_AL_AD_W
 
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        ' TODO WRITE CURRENT SCANNED CONES TO THE PRINT FORM AND ALLOCATE PACKED VALUES TO THE DATABASE
         If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
         frmDGV.DGVdata.ClearSelection()
         frmJobEntry.Show()
@@ -188,7 +210,7 @@ Public Class frmB_AL_AD_W
             'frmPackReport.packPrint() 'Print the packing report and go back to Job Entry for the next cart
             frmPackRepMain.PackRepMainSub()
             frmPackRepMain.Close()
-            UpdateDatabase()
+            'UpdateDatabase()
 
         End If
         Me.Cursor = System.Windows.Forms.Cursors.Default

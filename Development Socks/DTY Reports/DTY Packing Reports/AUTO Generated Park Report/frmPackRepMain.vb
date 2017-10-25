@@ -36,7 +36,7 @@ Public Class frmPackRepMain
         'CREATE THE FULL NAME FOR SAVING THE FILE
         saveString = (prodNameMod & " " _
             & frmDGV.DGVdata.Rows(0).Cells(7).Value.ToString & "_" _
-            & frmDGV.DGVdata.Rows(0).Cells(2).Value.ToString)
+            & frmDGV.DGVdata.Rows(0).Cells(2).Value.ToString) & " " & frmJobEntry.txtGrade.Text
 
 
 
@@ -104,7 +104,14 @@ Public Class frmPackRepMain
         'CHECK TO SEE IF THERE IS ALREADY A FILE STARTED FOR PRODUCT NUMBER
         'IN TODATY DIRECTORY
         If File.Exists(savename) Then
-            'MsgBox("I am ready to update existing sheet")
+
+            Select Case frmJobEntry.txtGrade.Text
+                Case "A"
+                    frmPackTodayUpdate.TodayUpdate()
+                Case "B"
+                    frmPackTodayUpdate.TodayUpdateB()
+            End Select
+
             frmPackTodayUpdate.TodayUpdate()
             frmPackTodayUpdate.Close()
             Exit Sub

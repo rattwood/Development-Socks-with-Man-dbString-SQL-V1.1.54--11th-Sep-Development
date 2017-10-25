@@ -69,6 +69,8 @@ Partial Class frmJobEntry
         Me.lblGrade = New System.Windows.Forms.Label()
         Me.txtGrade = New System.Windows.Forms.TextBox()
         Me.lblSelectGrade = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtTraceNum = New System.Windows.Forms.TextBox()
         CType(Me.ToraydbBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Toraydb, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
@@ -81,14 +83,14 @@ Partial Class frmJobEntry
         Me.txtOperator.Location = New System.Drawing.Point(281, 86)
         Me.txtOperator.Name = "txtOperator"
         Me.txtOperator.Size = New System.Drawing.Size(292, 44)
-        Me.txtOperator.TabIndex = 0
+        Me.txtOperator.TabIndex = 2
         Me.txtOperator.Visible = False
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(14, 99)
+        Me.Label1.Location = New System.Drawing.Point(18, 92)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(213, 31)
         Me.Label1.TabIndex = 2
@@ -98,7 +100,7 @@ Partial Class frmJobEntry
         '
         Me.lblScanType.AutoSize = True
         Me.lblScanType.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblScanType.Location = New System.Drawing.Point(15, 167)
+        Me.lblScanType.Location = New System.Drawing.Point(18, 201)
         Me.lblScanType.Name = "lblScanType"
         Me.lblScanType.Size = New System.Drawing.Size(0, 31)
         Me.lblScanType.TabIndex = 3
@@ -106,7 +108,7 @@ Partial Class frmJobEntry
         'txtLotNumber
         '
         Me.txtLotNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.txtLotNumber.Location = New System.Drawing.Point(396, 154)
+        Me.txtLotNumber.Location = New System.Drawing.Point(388, 201)
         Me.txtLotNumber.Name = "txtLotNumber"
         Me.txtLotNumber.Size = New System.Drawing.Size(294, 44)
         Me.txtLotNumber.TabIndex = 4
@@ -181,7 +183,7 @@ Partial Class frmJobEntry
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.Color.Red
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(14, 242)
+        Me.Label3.Location = New System.Drawing.Point(17, 242)
         Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(119, 37)
@@ -191,7 +193,7 @@ Partial Class frmJobEntry
         '
         'btnReports
         '
-        Me.btnReports.Location = New System.Drawing.Point(555, 324)
+        Me.btnReports.Location = New System.Drawing.Point(558, 350)
         Me.btnReports.Name = "btnReports"
         Me.btnReports.Size = New System.Drawing.Size(113, 47)
         Me.btnReports.TabIndex = 177
@@ -412,7 +414,7 @@ Partial Class frmJobEntry
         Me.txtGrade.Location = New System.Drawing.Point(281, 29)
         Me.txtGrade.Name = "txtGrade"
         Me.txtGrade.Size = New System.Drawing.Size(142, 44)
-        Me.txtGrade.TabIndex = 182
+        Me.txtGrade.TabIndex = 1
         '
         'lblSelectGrade
         '
@@ -426,18 +428,39 @@ Partial Class frmJobEntry
         Me.lblSelectGrade.Text = "Please Select Grade First"
         Me.lblSelectGrade.Visible = False
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(18, 147)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(187, 31)
+        Me.Label2.TabIndex = 185
+        Me.Label2.Text = "Scan Trace #"
+        '
+        'txtTraceNum
+        '
+        Me.txtTraceNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.txtTraceNum.Location = New System.Drawing.Point(281, 141)
+        Me.txtTraceNum.Name = "txtTraceNum"
+        Me.txtTraceNum.Size = New System.Drawing.Size(292, 44)
+        Me.txtTraceNum.TabIndex = 3
+        Me.txtTraceNum.Visible = False
+        '
         'frmJobEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(821, 432)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.txtTraceNum)
         Me.Controls.Add(Me.lblSelectGrade)
         Me.Controls.Add(Me.txtGrade)
         Me.Controls.Add(Me.lblGrade)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.btnDefRep)
         Me.Controls.Add(Me.btnReports)
-        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.btnCancelReport)
         Me.Controls.Add(Me.txtBoxCartReport)
         Me.Controls.Add(Me.btnSearchCone)
@@ -511,4 +534,6 @@ Partial Class frmJobEntry
     Friend WithEvents P30BSToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents P35BSToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblSelectGrade As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents txtTraceNum As TextBox
 End Class
