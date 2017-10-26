@@ -722,34 +722,34 @@ Public Class frmJobEntry
         Select Case txtGrade.Text
             Case "B"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And Jobs.FLT_S = 'False' And Jobs.CONESTATE = 8 And Jobs.MISSCONE = 0 And Jobs.DEFCONE > 0 And Jobs.FLT_W = 'False' And Jobs.PACKENDTM is Null Or Jobs.PRNUM = '" & varProductCode & "' And Jobs.FLT_S = 'False' And Jobs.CONESTATE = 8 And Jobs.MISSCONE = 0 And Jobs.CONEBARLEY > 0 And Jobs.PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0 And FLT_W = 'False' And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And CONEBARLEY > 0 And PACKENDTM is Null")
             Case "AL"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAL = 'True' And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAL = 'True' And PACKENDTM is Null")
             Case "AD"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAD = 'True' And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAD = 'True' And PACKENDTM is Null")
             Case "P15 AS"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 9 And MISSCONE = 0 And DEFCONE = 0 CONEBARLEY = 0 And  PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 9 And MISSCONE = 0 And DEFCONE = 0 CONEBARLEY = 0 And  PACKENDTM is Null")
             Case "P25 AS"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0 And CONEBARLEY > 0 And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 9 And MISSCONE = 0 And DEFCONE > 0 And CONEBARLEY > 0 And PACKENDTM is Null")
             Case "P35 AS"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0 And CONEBARLEY > 0 And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 9 And MISSCONE = 0 And DEFCONE > 0 And CONEBARLEY > 0 And PACKENDTM is Null")
             Case "P20 BS"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0 And FLW_W = 'False' And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And CONEBARLEY > 0 And PACKENDTM is Null ")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0  And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And CONEBARLEY > 0 And PACKENDTM is Null ")
             Case "P30 BS"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0 And CONEBARLEY > 0 And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0  And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And CONEBARLEY > 0 And PACKENDTM is Null ")
             Case "P35 BS"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0 And CONEBARLEY > 0 And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0  And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And CONEBARLEY > 0 And PACKENDTM is Null ")
             Case "Waste"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where Jobs.PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And FLT_W > 0 And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And COLWASTE > 0 And PACKENDTM is Null ")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And FLT_W > 0 And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And MISSCONE = 0 And COLWASTE > 0 And PACKENDTM is Null ")
 
 
 
@@ -821,7 +821,11 @@ Public Class frmJobEntry
 
 
         Else
-            MsgBox("NO CHEESES CAN BE FOUND")
+            MsgBox("NO GRADE " & "'" & txtGrade.Text & "'" & " CHEESES CAN BE FOUND")
+            Me.txtTraceNum.Clear()
+            Me.txtTraceNum.Focus()
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Visible = False
             quit = 1
             Exit Sub
 
@@ -894,7 +898,7 @@ Public Class frmJobEntry
 
         LExecQuery("SELECT * FROM JOBS WHERE BCODEJOB = '" & modLotStr & "' ")
 
-        If LRecordCount > 0 Then
+            If LRecordCount > 0 Then
             'IF JOBS HAVE BEEN FOUND THEN CREATE A SORTED LIST OF THESE JOBS
             'If LRecordCount = 192 Then
 

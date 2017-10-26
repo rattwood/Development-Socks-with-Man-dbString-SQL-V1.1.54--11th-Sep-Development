@@ -33,7 +33,7 @@ Partial Class frmRemoveCone
         '
         'btnContinue
         '
-        Me.btnContinue.BackColor = System.Drawing.Color.LimeGreen
+        Me.btnContinue.BackColor = System.Drawing.Color.Lime
         Me.btnContinue.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnContinue.Location = New System.Drawing.Point(390, 393)
         Me.btnContinue.Name = "btnContinue"
@@ -41,6 +41,7 @@ Partial Class frmRemoveCone
         Me.btnContinue.TabIndex = 7
         Me.btnContinue.Text = "Continue"
         Me.btnContinue.UseVisualStyleBackColor = False
+        Me.btnContinue.Visible = False
         '
         'Label2
         '

@@ -195,7 +195,7 @@ Public Class frmPackTodayUpdate
     End Sub
 
 
-    Public Sub TodayUpdateB()
+    Public Sub TodayUpdateB_AL_AD()
 
         Dim xlTodyWorkbook As Excel.Workbook
         Dim xlTodysheets As Excel.Worksheet
@@ -260,49 +260,49 @@ Public Class frmPackTodayUpdate
                     'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
                     Select Case nfree
                         Case 13, 14, 15, 16, 17, 18
-                            cartonNum = frmJobEntry.txtTraceNum.Text + 1
+                            cartonNum = frmJobEntry.txtTraceNum.Text
                             cellNum = 13
                         Case 19, 20, 21, 22, 23, 24
-                            cartonNum = frmJobEntry.txtTraceNum.Text + 2
+                            cartonNum = frmJobEntry.txtTraceNum.Text + 1
                             cellNum = 19
                         Case 25, 26, 27, 28, 29, 30
-                            cartonNum = frmJobEntry.txtTraceNum.Text + 3
+                            cartonNum = frmJobEntry.txtTraceNum.Text + 2
                             cellNum = 25
                         Case 31, 32, 33, 34, 35, 36
-                            cartonNum = frmJobEntry.txtTraceNum.Text + 4
+                            cartonNum = frmJobEntry.txtTraceNum.Text + 3
                             cellNum = 31
                         Case 37, 38, 39, 40, 41, 42
-                            cartonNum = frmJobEntry.txtTraceNum.Text + 5
+                            cartonNum = frmJobEntry.txtTraceNum.Text + 4
                             cellNum = 37
                         Case 43, 44, 45, 46, 47, 48
-                            cartonNum = frmJobEntry.txtTraceNum.Text + 6
+                            cartonNum = frmJobEntry.txtTraceNum.Text + 5
                             cellNum = 43
                         Case 49, 50, 51, 52, 53, 54
-                            cartonNum = frmJobEntry.txtTraceNum.Text + 7
+                            cartonNum = frmJobEntry.txtTraceNum.Text + 6
                             cellNum = 49
                         Case 55, 56, 57, 58, 59, 60
-                            cartonNum = frmJobEntry.txtTraceNum.Text + 8
+                            cartonNum = frmJobEntry.txtTraceNum.Text + 7
                             cellNum = 55
                         Case 61, 62, 63, 64, 65, 66
-                            cartonNum = frmJobEntry.txtTraceNum.Text + 9
+                            cartonNum = frmJobEntry.txtTraceNum.Text + 8
                             cellNum = 61
                         Case 67, 68, 69, 70, 71, 72
-                            cartonNum = frmJobEntry.txtTraceNum.Text + 10
+                            cartonNum = frmJobEntry.txtTraceNum.Text + 9
                             cellNum = 67
                         Case 73, 74, 75, 76, 77, 78
-                            cartonNum = frmJobEntry.txtTraceNum.Text + 11
+                            cartonNum = frmJobEntry.txtTraceNum.Text + 10
                             cellNum = 73
                         Case 79, 80, 81, 82, 83, 84
-                            cartonNum = frmJobEntry.txtTraceNum.Text + 12
+                            cartonNum = frmJobEntry.txtTraceNum.Text + 11
                             cellNum = 79
                         Case 85, 86, 87, 88, 89, 90
-                            cartonNum = frmJobEntry.txtTraceNum.Text + 13
+                            cartonNum = frmJobEntry.txtTraceNum.Text + 12
                             cellNum = 85
                         Case 91, 92, 93, 94, 95, 96
-                            cartonNum = frmJobEntry.txtTraceNum.Text + 14
+                            cartonNum = frmJobEntry.txtTraceNum.Text + 13
                             cellNum = 91
                         Case 97, 98, 99, 100, 101, 102
-                            cartonNum = frmJobEntry.txtTraceNum.Text + 15
+                            cartonNum = frmJobEntry.txtTraceNum.Text + 14
                             cellNum = 97
                     End Select
 
@@ -312,7 +312,11 @@ Public Class frmPackTodayUpdate
                     'WRITE CONE NUMBER TO SHEET
                     MyTodyExcel.Cells(nfree, 4) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
 
-                    'WRITE CARTON NUMBER TO SHEET AND PUT IN DGV
+
+
+
+
+                    'WRITE CARTON NUMBER (TraceNumber) TO SHEET AND PUT IN DGV
                     MyTodyExcel.Cells(cellNum, 2) = cartonNum
                     frmDGV.DGVdata.Rows(i - 1).Cells(61).Value = cartonNum
                     nfree = nfree + 1

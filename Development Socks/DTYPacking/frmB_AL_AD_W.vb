@@ -52,13 +52,15 @@ Public Class frmB_AL_AD_W
 
         Next
 
-        For i = 1 To dgvRows - 1
-            If frmDGV.DGVdata.Rows(i - 1).Cells(78).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
-                toAllocatedCount = toAllocatedCount + 1
-            End If
-        Next
+        ' For i = 1 To dgvRows - 1
+        'If frmDGV.DGVdata.Rows(i - 1).Cells(78).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+        'toAllocatedCount = toAllocatedCount + 1
+        'End If
+        ' Next
 
+        toAllocatedCount = frmDGV.DGVdata.Rows.Count
 
+        lbltotCount.Text = toAllocatedCount
 
         Me.KeyPreview = True 'Allows us to look for advace character from barcode
 
@@ -89,7 +91,7 @@ Public Class frmB_AL_AD_W
 
 
         bcodeScan = txtConeBcode.Text
-        Dim curcone As String
+
 
         Dim today As String = DateAndTime.Today
         today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
@@ -127,7 +129,15 @@ Public Class frmB_AL_AD_W
                 Label8.Visible = True
                 Label8.Text = ("This is not a Grade " & frmJobEntry.txtGrade.Text & " Cheese")
                 DelayTM()
-                'frmRemoveCone.Show()
+                Me.Hide()
+                frmRemoveCone.Show()
+
+
+                frmDGV.DGVdata.Rows(i - 1).Cells(58).Value = 1
+                frmDGV.DGVdata.Rows(i - 1).Cells(55).Value = frmJobEntry.PackOp
+                'frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "14"
+                frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
+
                 Label8.Visible = False
                 txtConeBcode.Clear()
                 txtConeBcode.Focus()
@@ -135,11 +145,18 @@ Public Class frmB_AL_AD_W
 
             End If
 
-        Next
 
-        If coneCount = 9 Then
-            jobEnd()
-        End If
+
+
+
+
+
+        Next
+        'UPDATE TOTAL COUNTED
+        lbltotScan.Text = coneCount
+
+        'Check if all cheeses or 90 have been scanned
+        endCheck()
 
         If gridRow = 3 Then
             gridRow = 0
@@ -147,6 +164,7 @@ Public Class frmB_AL_AD_W
         End If
 
         packedFlag = 0
+
 
         'TURN DEBUG ON
         If My.Settings.debugSet Then
@@ -163,17 +181,35 @@ Public Class frmB_AL_AD_W
 
 
 
+
     End Sub
+
+    Public Sub endCheck()
+
+        If coneCount = 9 Or coneCount = toAllocatedCount Then
+
+            jobEnd()
+
+        End If
+
+    End Sub
+
 
     Private Sub jobEnd()
 
-        Me.Close()
+        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+
+
+
         frmPackRepMain.PackRepMainSub()
+        frmPackRepMain.Close()
+        'UpdateDatabase()
         frmJobEntry.Show()
         frmJobEntry.txtLotNumber.Clear()
         frmJobEntry.txtTraceNum.Clear()
         frmJobEntry.txtTraceNum.Focus()
-
+        Me.Cursor = System.Windows.Forms.Cursors.Default
+        Me.Close()
 
     End Sub
 
@@ -191,14 +227,10 @@ Public Class frmB_AL_AD_W
     End Sub
 
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-        'frmPackReport.Hide()
-
-    End Sub
 
 
-    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         ' TODO WRITE CURRENT SCANNED CONES TO THE PRINT FORM AND ALLOCATE PACKED VALUES TO THE DATABASE
         If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
         frmDGV.DGVdata.ClearSelection()
@@ -210,18 +242,6 @@ Public Class frmB_AL_AD_W
 
 
 
-    Public Sub endCheck()
-        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        If toAllocatedCount = allocatedCount Then
-
-            'frmPackReport.packPrint() 'Print the packing report and go back to Job Entry for the next cart
-            frmPackRepMain.PackRepMainSub()
-            frmPackRepMain.Close()
-            'UpdateDatabase()
-
-        End If
-        Me.Cursor = System.Windows.Forms.Cursors.Default
-    End Sub
 
 
 
@@ -289,5 +309,9 @@ Public Class frmB_AL_AD_W
 
     End Sub
 
+    Private Sub btnFinish_Click(sender As Object, e As EventArgs) Handles btnFinish.Click
 
+        jobEnd()
+
+    End Sub
 End Class

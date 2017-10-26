@@ -11,18 +11,37 @@ Public Class frmRemoveCone
 
             chkBCode = TextBox1.Text
 
-            If chkBCode = frmPacking.bcodeScan Then
+            If frmJobEntry.txtGrade.Text = "A" Then
+                If chkBCode = frmPacking.bcodeScan Then
 
-                btnContinue.Enabled = True
+                    btnContinue.Enabled = True
+                    btnContinue.Enabled = True
+                Else
+                    MsgBox("This is not the cone to remove")
+                    Me.TextBox1.Clear()
+                    Me.btnContinue.Enabled = False
+                    Me.TextBox1.Focus()
+                    Me.TextBox1.Refresh()
+                    Exit Sub
+                End If
+            End If
 
 
-            Else
-                MsgBox("This is not the cone to remove")
-                Me.TextBox1.Clear()
-                Me.btnContinue.Enabled = False
-                Me.TextBox1.Focus()
-                Me.TextBox1.Refresh()
-                Exit Sub
+
+            If frmJobEntry.txtGrade.Text <> "A" Then
+                'Routine for non Grade A cheese
+                If chkBCode = frmB_AL_AD_W.bcodeScan Then
+
+                    btnContinue.Visible = True
+                    btnContinue.Enabled = True
+                Else
+                    MsgBox("This is not the cone to remove")
+                    Me.TextBox1.Clear()
+                    Me.btnContinue.Enabled = False
+                    Me.TextBox1.Focus()
+                    Me.TextBox1.Refresh()
+                    Exit Sub
+                End If
             End If
 
         Catch ex As Exception
@@ -37,10 +56,15 @@ Public Class frmRemoveCone
 
     Private Sub btnContinue_Click(sender As Object, e As EventArgs) Handles btnContinue.Click
 
-
-        frmPacking.txtConeBcode.Clear()
-                frmPacking.txtConeBcode.Focus()
-                frmPacking.Show()
+        If frmJobEntry.txtGrade.Text = "A" Then
+            frmPacking.txtConeBcode.Clear()
+            frmPacking.txtConeBcode.Focus()
+            frmPacking.Show()
+        Else
+            frmB_AL_AD_W.txtConeBcode.Clear()
+            frmB_AL_AD_W.txtConeBcode.Focus()
+            frmB_AL_AD_W.Show()
+        End If
 
         Me.Close()
 
@@ -48,8 +72,13 @@ Public Class frmRemoveCone
 
     Private Sub frmRemoveCone_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Me.Label5.Text = frmPacking.bcodeScan
-        Me.KeyPreview = True
+        btnContinue.Visible = False
+
+        If frmJobEntry.txtGrade.Text = "A" Then
+            Me.Label5.Text = frmPacking.bcodeScan
+        Else
+            Me.Label5.Text = frmB_AL_AD_W.bcodeScan
+        End If
 
         Me.btnContinue.Enabled = False
         Me.KeyPreview = True  'Allows us to look for advace character from barcode

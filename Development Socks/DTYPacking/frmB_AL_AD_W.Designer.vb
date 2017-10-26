@@ -39,14 +39,18 @@ Partial Class frmB_AL_AD_W
         Me.txtConeBcode = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.btnDefect = New System.Windows.Forms.Button()
-        Me.btnBack = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnFinish = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.lbltotCount = New System.Windows.Forms.Label()
+        Me.lbltotScan = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -225,25 +229,26 @@ Partial Class frmB_AL_AD_W
         Me.btnDefect.Text = "Enter Defect"
         Me.btnDefect.UseVisualStyleBackColor = False
         '
-        'btnBack
+        'btnCancel
         '
-        Me.btnBack.Location = New System.Drawing.Point(22, 916)
-        Me.btnBack.Name = "btnBack"
-        Me.btnBack.Size = New System.Drawing.Size(197, 80)
-        Me.btnBack.TabIndex = 176
-        Me.btnBack.Text = "Go Back"
-        Me.btnBack.UseVisualStyleBackColor = True
+        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.Location = New System.Drawing.Point(16, 914)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(197, 80)
+        Me.btnCancel.TabIndex = 176
+        Me.btnCancel.Text = "Cancel and Clear"
+        Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnFinish
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Button1.Location = New System.Drawing.Point(391, 953)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(372, 43)
-        Me.Button1.TabIndex = 175
-        Me.Button1.Text = "Continue"
-        Me.Button1.UseVisualStyleBackColor = False
-        Me.Button1.Visible = False
+        Me.btnFinish.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.btnFinish.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFinish.Location = New System.Drawing.Point(392, 914)
+        Me.btnFinish.Name = "btnFinish"
+        Me.btnFinish.Size = New System.Drawing.Size(372, 80)
+        Me.btnFinish.TabIndex = 175
+        Me.btnFinish.Text = "Finish"
+        Me.btnFinish.UseVisualStyleBackColor = False
         '
         'Label9
         '
@@ -299,11 +304,53 @@ Partial Class frmB_AL_AD_W
         Me.Label14.TabIndex = 184
         Me.Label14.Text = "Label14"
         '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(611, 146)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(175, 25)
+        Me.Label15.TabIndex = 185
+        Me.Label15.Text = "Total In System"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(611, 184)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(164, 25)
+        Me.Label16.TabIndex = 186
+        Me.Label16.Text = "Total Scanned"
+        '
+        'lbltotCount
+        '
+        Me.lbltotCount.AutoSize = True
+        Me.lbltotCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbltotCount.Location = New System.Drawing.Point(828, 146)
+        Me.lbltotCount.Name = "lbltotCount"
+        Me.lbltotCount.Size = New System.Drawing.Size(0, 25)
+        Me.lbltotCount.TabIndex = 187
+        '
+        'lbltotScan
+        '
+        Me.lbltotScan.AutoSize = True
+        Me.lbltotScan.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbltotScan.Location = New System.Drawing.Point(828, 184)
+        Me.lbltotScan.Name = "lbltotScan"
+        Me.lbltotScan.Size = New System.Drawing.Size(0, 25)
+        Me.lbltotScan.TabIndex = 188
+        '
         'frmB_AL_AD_W
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1664, 1011)
+        Me.Controls.Add(Me.lbltotScan)
+        Me.Controls.Add(Me.lbltotCount)
+        Me.Controls.Add(Me.Label16)
+        Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label12)
@@ -312,8 +359,8 @@ Partial Class frmB_AL_AD_W
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.btnDefect)
-        Me.Controls.Add(Me.btnBack)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.btnFinish)
         Me.Controls.Add(Me.txtConeBcode)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
@@ -342,8 +389,8 @@ Partial Class frmB_AL_AD_W
     Friend WithEvents txtConeBcode As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents btnDefect As Button
-    Friend WithEvents btnBack As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnCancel As Button
+    Friend WithEvents btnFinish As Button
     Friend WithEvents Label9 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents Label11 As Label
@@ -356,4 +403,8 @@ Partial Class frmB_AL_AD_W
     Friend WithEvents CheeseAloc2 As DataGridViewTextBoxColumn
     Friend WithEvents CheeseNum3 As DataGridViewTextBoxColumn
     Friend WithEvents CheeseAloc3 As DataGridViewTextBoxColumn
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label16 As Label
+    Friend WithEvents lbltotCount As Label
+    Friend WithEvents lbltotScan As Label
 End Class

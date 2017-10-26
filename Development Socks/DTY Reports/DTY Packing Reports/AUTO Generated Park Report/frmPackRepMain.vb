@@ -109,7 +109,7 @@ Public Class frmPackRepMain
                 Case "A"
                     frmPackTodayUpdate.TodayUpdate()
                 Case "B"
-                    frmPackTodayUpdate.TodayUpdateB()
+                    frmPackTodayUpdate.TodayUpdateB_AL_AD()
             End Select
 
             frmPackTodayUpdate.TodayUpdate()
