@@ -145,11 +145,16 @@ Public Class frmJobEntry
 
     Private Sub txtTraceNum_TextChanged(sender As Object, e As EventArgs) Handles txtTraceNum.TextChanged
         txtLotNumber.Visible = True
-        varUserName = txtOperator.Text
+        'varUserName = txtOperator.Text
 
         'Me.KeyPreview = True  'Allows us to look for advance character from barcode
         'txtLotNumber.Focus()
-        If txtTraceNum.MaxLength = 10 Then Me.KeyPreview = True
+        If txtTraceNum.TextLength = 10 Then
+            Me.txtLotNumber.Focus()
+            txtLotNumber.Visible = True
+            Me.txtLotNumber.Focus()
+            Me.KeyPreview = True
+        End If
 
     End Sub
 
@@ -994,7 +999,7 @@ Public Class frmJobEntry
             ElseIf My.Settings.chkUseSort Or My.Settings.chkUseColour Or My.Settings.chkUsePack And txtGrade.Text = "A" Then
                 prgContinue()
 
-            ElseIf My.Settings.chkUsePack And Not txtGrade.Text = "A" Then
+            ElseIf My.Settings.chkUsePack And Not txtGrade.Text = "A" And Not txtLotNumber.Text = "" Then
                 nonAPacking()
 
             End If

@@ -14,6 +14,9 @@ Public Class frmB_AL_AD_W
     'Index for DGV
     Dim gridRow As Integer = 0
     Dim gridCol As Integer = 0
+    'INDEX FOR DGV1
+    Dim dgv1gridRow As Integer = 0
+    Dim dgv1gridCol As Integer = 1
     'Index for changing input location in DGV
 
 
@@ -37,12 +40,16 @@ Public Class frmB_AL_AD_W
         DataGridView1.Rows.Add(30)
 
         For nums = 1 To 90
-            DataGridView1.Rows(nums - 1).Cells(2).Value = nums
 
-            If gridRow = 30 Then
-                gridRow = 0
-                gridCol = gridCol + 2
+
+            DataGridView1.Rows(dgv1gridRow).Cells(dgv1gridCol).Value = nums
+            dgv1gridRow = dgv1gridRow + 1
+
+            If dgv1gridRow = 30 And dgv1gridCol < 5 Then
+                dgv1gridRow = 0
+                dgv1gridCol = dgv1gridCol + 2
             End If
+
         Next
 
         For i = 1 To dgvRows - 1
@@ -53,7 +60,7 @@ Public Class frmB_AL_AD_W
 
 
 
-        Me.KeyPreview = True  'Allows us to look for advace character from barcode
+        Me.KeyPreview = True 'Allows us to look for advace character from barcode
 
 
     End Sub
