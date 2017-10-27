@@ -75,11 +75,13 @@ Public Class frmRemoveCone
         btnContinue.Visible = False
 
         If frmJobEntry.txtGrade.Text = "A" Then
+            Label1.Text = "Not Grade 'A' Cheese"
             Me.Label5.Text = frmPacking.bcodeScan
         Else
+            Label1.Text = "Not Grade " & "'" & frmJobEntry.txtGrade.Text & "'" & " Cheese"
             Me.Label5.Text = frmB_AL_AD_W.bcodeScan
         End If
-
+        Label1.Text = "Not Grade " & frmJobEntry.txtGrade.Text & " Cheese"
         Me.btnContinue.Enabled = False
         Me.KeyPreview = True  'Allows us to look for advace character from barcode
 

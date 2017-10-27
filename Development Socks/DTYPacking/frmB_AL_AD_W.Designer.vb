@@ -51,6 +51,10 @@ Partial Class frmB_AL_AD_W
         Me.Label16 = New System.Windows.Forms.Label()
         Me.lbltotCount = New System.Windows.Forms.Label()
         Me.lbltotScan = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -342,11 +346,51 @@ Partial Class frmB_AL_AD_W
         Me.lbltotScan.Size = New System.Drawing.Size(0, 25)
         Me.lbltotScan.TabIndex = 188
         '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(661, 537)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(54, 13)
+        Me.Label17.TabIndex = 189
+        Me.Label17.Text = "i - 1 Value"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(661, 416)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(56, 13)
+        Me.Label18.TabIndex = 190
+        Me.Label18.Text = "rowscount"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(743, 416)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(45, 13)
+        Me.Label19.TabIndex = 191
+        Me.Label19.Text = "Label19"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(743, 537)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(45, 13)
+        Me.Label20.TabIndex = 192
+        Me.Label20.Text = "Label20"
+        '
         'frmB_AL_AD_W
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1664, 1011)
+        Me.Controls.Add(Me.Label20)
+        Me.Controls.Add(Me.Label19)
+        Me.Controls.Add(Me.Label18)
+        Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.lbltotScan)
         Me.Controls.Add(Me.lbltotCount)
         Me.Controls.Add(Me.Label16)
@@ -407,4 +451,8 @@ Partial Class frmB_AL_AD_W
     Friend WithEvents Label16 As Label
     Friend WithEvents lbltotCount As Label
     Friend WithEvents lbltotScan As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label19 As Label
+    Friend WithEvents Label20 As Label
 End Class

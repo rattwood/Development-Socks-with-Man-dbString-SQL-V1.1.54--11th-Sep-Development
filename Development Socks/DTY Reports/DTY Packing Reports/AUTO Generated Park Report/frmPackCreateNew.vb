@@ -69,7 +69,12 @@ Public Class frmPackCreateNew
         releaseObject(xlWorkbook)
         releaseObject(MyPakExcel)
 
-        frmPackTodayUpdate.TodayUpdate()
+        If frmJobEntry.txtGrade.Text = "A" Then
+            frmPackTodayUpdate.TodayUpdate()
+        Else
+            frmPackTodayUpdate.TodayUpdateB_AL_AD()
+        End If
+
         Me.Close()
 
     End Sub

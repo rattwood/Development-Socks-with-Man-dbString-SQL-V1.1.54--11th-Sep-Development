@@ -87,7 +87,7 @@ Public Class frmB_AL_AD_W
 
 
 
-        dgvRows = frmDGV.DGVdata.Rows.Count - 1
+        dgvRows = toAllocatedCount
 
 
         bcodeScan = txtConeBcode.Text
@@ -99,24 +99,25 @@ Public Class frmB_AL_AD_W
 
 
 
-        For i = 1 To dgvRows - 1
+        For i = 0 To dgvRows - 1
 
             'CHECK FOR UNPACKED CHEESE AND ALLOCATE
-            If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+            Label20.Text = i - 1
+            If frmDGV.DGVdata.Rows(i).Cells(36).Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i).Cells("PACKENDTM").Value) Then
 
                 'write to the local DGV grid
-                DataGridView1.Rows(gridRow).Cells(gridCol).Value = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value  'Write to Grid Cone Bcode
+                DataGridView1.Rows(gridRow).Cells(gridCol).Value = frmDGV.DGVdata.Rows(i).Cells(36).Value  'Write to Grid Cone Bcode
                 DataGridView1.Rows(gridRow).Cells(gridCol).Style.BackColor = Color.LightGreen
 
                 'Update DGV that Cheese has been alocated, update Packendtm
-                frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Today
+                frmDGV.DGVdata.Rows(i).Cells("PACKENDTM").Value = DateAndTime.Today
                 gridRow = gridRow + 1
                 coneCount = coneCount + 1
                 DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
                 packedFlag = 1
                 Exit For
                 'CHECK FOR ALREADY PACKED CHEESE
-            ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+            ElseIf frmDGV.DGVdata.Rows(i).Cells(36).Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i).Cells("PACKENDTM").Value) Then
                 Label8.Visible = True
                 Label8.Text = "Cheese already allocated"
                 DelayTM()
@@ -158,9 +159,10 @@ Public Class frmB_AL_AD_W
         'Check if all cheeses or 90 have been scanned
         endCheck()
 
-        If gridRow = 3 Then
+        If gridRow = 3 And gridCol < 4 Then
             gridRow = 0
             gridCol = gridCol + 2
+            DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
         End If
 
         packedFlag = 0
@@ -171,6 +173,8 @@ Public Class frmB_AL_AD_W
             Label12.Text = gridRow
             Label13.Text = gridCol
             Label14.Text = coneCount
+            Label19.Text = dgvRows
+
         End If
 
         txtConeBcode.Clear()
@@ -204,12 +208,12 @@ Public Class frmB_AL_AD_W
         frmPackRepMain.PackRepMainSub()
         frmPackRepMain.Close()
         'UpdateDatabase()
+        Me.Cursor = System.Windows.Forms.Cursors.Default
+        Me.Close()
         frmJobEntry.Show()
         frmJobEntry.txtLotNumber.Clear()
         frmJobEntry.txtTraceNum.Clear()
         frmJobEntry.txtTraceNum.Focus()
-        Me.Cursor = System.Windows.Forms.Cursors.Default
-        Me.Close()
 
     End Sub
 
