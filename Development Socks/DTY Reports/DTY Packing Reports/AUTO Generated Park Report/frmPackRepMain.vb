@@ -38,7 +38,7 @@ Public Class frmPackRepMain
             & frmDGV.DGVdata.Rows(0).Cells(7).Value.ToString & "_" _
             & frmDGV.DGVdata.Rows(0).Cells(2).Value.ToString) & " " & frmJobEntry.txtGrade.Text
 
-        MsgBox(saveString)
+
 
         'CALL SUB TO GET TODAYS SAVE DIRECTORY
         todayDir()
@@ -85,33 +85,6 @@ Public Class frmPackRepMain
         End Select
 
 
-        'SELECT CORRECT PRINT TEMPLATE
-        'If frmJobEntry.txtGrade.Text = "A" Then
-        '    template = (My.Settings.dirTemplate & "\" & "PackingTemplate.xlsx").ToString
-        'ElseIf frmJobEntry.txtGrade.Text = "B" Then
-        '    template = (My.Settings.dirTemplate & "\" & "Packing Template Grade B.xlsx").ToString
-        'ElseIf frmJobEntry.txtGrade.Text = "AL" Then
-        '    template = (My.Settings.dirTemplate & "\" & "Packing Template Grade AL.xlsx").ToString
-        'ElseIf frmJobEntry.txtGrade.Text = "AD" Then
-        '    template = (My.Settings.dirTemplate & "\" & "Packing Template Grade AD.xlsx").ToString
-        'ElseIf frmJobEntry.txtGrade.Text = "Waste" Then
-        '    template = (My.Settings.dirTemplate & "\" & "Packing Template Grade B.xlsx").ToString
-        'ElseIf frmJobEntry.txtGrade.Text = "P15 AS" Then
-        '    template = (My.Settings.dirTemplate & "\" & "Packing P15 AS Template.xlsx").ToString
-        'ElseIf frmJobEntry.txtGrade.Text = "P25 AS" Then
-        '    template = (My.Settings.dirTemplate & "\" & "Packing P25 AS Template.xlsx").ToString
-        'ElseIf frmJobEntry.txtGrade.Text = "P35 AS" Then
-        '    template = (My.Settings.dirTemplate & "\" & "Packing P35 AS Template.xlsx").ToString
-        'ElseIf frmJobEntry.txtGrade.Text = "P20 BS" Then
-        '    template = (My.Settings.dirTemplate & "\" & "Packing P20 AS Template.xlsx").ToString
-        'ElseIf frmJobEntry.txtGrade.Text = "P30 BS" Then
-        '    template = (My.Settings.dirTemplate & "\" & "Packing P30 AS Template.xlsx").ToString
-        'ElseIf frmJobEntry.txtGrade.Text = "P35 BS" Then
-        '    template = (My.Settings.dirTemplate & "\" & "Packing P35 AS Template.xlsx").ToString
-        'ElseIf frmJobEntry.txtGrade.Text = "ReCheck" Then
-        '    template = (My.Settings.dirTemplate & "\" & "Recheck Template.xlsx").ToString
-
-        'End If
 
 
         'Create PREVIOUS THREE DAYS CHECK NAMES
@@ -134,10 +107,8 @@ Public Class frmPackRepMain
             Select Case frmJobEntry.txtGrade.Text
 
                 Case "A"
-                    MsgBox(frmJobEntry.txtGrade.Text)
                     frmPackTodayUpdate.TodayUpdate()
                 Case "B", "AD", "AL", "Waste", "P15 AS", "P25 AS", "P35 AS", "P20 BS", "P30 BS", "P35 BS", "ReCheck"
-                    MsgBox(frmJobEntry.txtGrade.Text)
                     frmPackTodayUpdate.TodayUpdateB_AL_AD()
             End Select
 

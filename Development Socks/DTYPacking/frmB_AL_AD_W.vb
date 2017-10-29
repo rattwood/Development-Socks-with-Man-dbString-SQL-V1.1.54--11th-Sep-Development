@@ -190,6 +190,8 @@ Public Class frmB_AL_AD_W
 
     Public Sub endCheck()
 
+
+
         If coneCount = 9 Or coneCount = toAllocatedCount Then
 
             jobEnd()

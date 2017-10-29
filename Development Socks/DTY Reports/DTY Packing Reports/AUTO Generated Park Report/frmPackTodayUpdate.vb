@@ -252,7 +252,7 @@ Public Class frmPackTodayUpdate
 
         Try
 
-            For i = 1 To frmDGV.DGVdata.Rows.Count - 1
+            For i = 1 To frmDGV.DGVdata.Rows.Count
 
                 If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
 
@@ -310,6 +310,7 @@ Public Class frmPackTodayUpdate
                     'cartonNum = (cartonNum & "-" & boxCount).ToString
 
                     'WRITE CONE NUMBER TO SHEET
+                    MsgBox("I value = " & i & " Cone Number = " & frmDGV.DGVdata.Rows(i - 1).Cells(36).Value & " nfree Value = " & nfree)
                     MyTodyExcel.Cells(nfree, 4) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
 
 
@@ -407,8 +408,6 @@ Public Class frmPackTodayUpdate
         sw.Stop()
 
     End Sub
-
-
 
 
 End Class
