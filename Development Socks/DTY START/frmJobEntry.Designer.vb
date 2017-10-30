@@ -71,6 +71,7 @@ Partial Class frmJobEntry
         Me.lblSelectGrade = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtTraceNum = New System.Windows.Forms.TextBox()
+        Me.StatusPanel = New System.Windows.Forms.ToolStripStatusLabel()
         CType(Me.ToraydbBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Toraydb, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
@@ -380,7 +381,7 @@ Partial Class frmJobEntry
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.lblMessage})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.lblMessage, Me.StatusPanel})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 410)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(821, 22)
@@ -446,6 +447,12 @@ Partial Class frmJobEntry
         Me.txtTraceNum.Size = New System.Drawing.Size(292, 44)
         Me.txtTraceNum.TabIndex = 3
         Me.txtTraceNum.Visible = False
+        '
+        'StatusPanel
+        '
+        Me.StatusPanel.Name = "StatusPanel"
+        Me.StatusPanel.Size = New System.Drawing.Size(120, 17)
+        Me.StatusPanel.Text = "ToolStripStatusLabel2"
         '
         'frmJobEntry
         '
@@ -536,4 +543,5 @@ Partial Class frmJobEntry
     Friend WithEvents lblSelectGrade As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents txtTraceNum As TextBox
+    Friend WithEvents StatusPanel As ToolStripStatusLabel
 End Class

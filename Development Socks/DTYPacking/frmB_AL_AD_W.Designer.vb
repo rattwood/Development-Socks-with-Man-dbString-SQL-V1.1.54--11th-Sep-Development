@@ -41,20 +41,10 @@ Partial Class frmB_AL_AD_W
         Me.btnDefect = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnFinish = New System.Windows.Forms.Button()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.lbltotCount = New System.Windows.Forms.Label()
         Me.lbltotScan = New System.Windows.Forms.Label()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -254,60 +244,6 @@ Partial Class frmB_AL_AD_W
         Me.btnFinish.Text = "Finish"
         Me.btnFinish.UseVisualStyleBackColor = False
         '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(661, 447)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(58, 13)
-        Me.Label9.TabIndex = 179
-        Me.Label9.Text = "Row Index"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(661, 477)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(51, 13)
-        Me.Label10.TabIndex = 180
-        Me.Label10.Text = "Col Index"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(661, 506)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(63, 13)
-        Me.Label11.TabIndex = 181
-        Me.Label11.Text = "Cone Count"
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(743, 447)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(45, 13)
-        Me.Label12.TabIndex = 182
-        Me.Label12.Text = "Label12"
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(743, 477)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(45, 13)
-        Me.Label13.TabIndex = 183
-        Me.Label13.Text = "Label13"
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(743, 506)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(45, 13)
-        Me.Label14.TabIndex = 184
-        Me.Label14.Text = "Label14"
-        '
         'Label15
         '
         Me.Label15.AutoSize = True
@@ -346,61 +282,15 @@ Partial Class frmB_AL_AD_W
         Me.lbltotScan.Size = New System.Drawing.Size(0, 25)
         Me.lbltotScan.TabIndex = 188
         '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(661, 537)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(54, 13)
-        Me.Label17.TabIndex = 189
-        Me.Label17.Text = "i - 1 Value"
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(661, 416)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(56, 13)
-        Me.Label18.TabIndex = 190
-        Me.Label18.Text = "rowscount"
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(743, 416)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(45, 13)
-        Me.Label19.TabIndex = 191
-        Me.Label19.Text = "Label19"
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(743, 537)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(45, 13)
-        Me.Label20.TabIndex = 192
-        Me.Label20.Text = "Label20"
-        '
         'frmB_AL_AD_W
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1664, 1011)
-        Me.Controls.Add(Me.Label20)
-        Me.Controls.Add(Me.Label19)
-        Me.Controls.Add(Me.Label18)
-        Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.lbltotScan)
         Me.Controls.Add(Me.lbltotCount)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label15)
-        Me.Controls.Add(Me.Label14)
-        Me.Controls.Add(Me.Label13)
-        Me.Controls.Add(Me.Label12)
-        Me.Controls.Add(Me.Label11)
-        Me.Controls.Add(Me.Label10)
-        Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.btnDefect)
         Me.Controls.Add(Me.btnCancel)
@@ -435,12 +325,6 @@ Partial Class frmB_AL_AD_W
     Friend WithEvents btnDefect As Button
     Friend WithEvents btnCancel As Button
     Friend WithEvents btnFinish As Button
-    Friend WithEvents Label9 As Label
-    Friend WithEvents Label10 As Label
-    Friend WithEvents Label11 As Label
-    Friend WithEvents Label12 As Label
-    Friend WithEvents Label13 As Label
-    Friend WithEvents Label14 As Label
     Friend WithEvents CheeseNum1 As DataGridViewTextBoxColumn
     Friend WithEvents CheeseAloc1 As DataGridViewTextBoxColumn
     Friend WithEvents CheeseNum2 As DataGridViewTextBoxColumn
@@ -451,8 +335,4 @@ Partial Class frmB_AL_AD_W
     Friend WithEvents Label16 As Label
     Friend WithEvents lbltotCount As Label
     Friend WithEvents lbltotScan As Label
-    Friend WithEvents Label17 As Label
-    Friend WithEvents Label18 As Label
-    Friend WithEvents Label19 As Label
-    Friend WithEvents Label20 As Label
 End Class

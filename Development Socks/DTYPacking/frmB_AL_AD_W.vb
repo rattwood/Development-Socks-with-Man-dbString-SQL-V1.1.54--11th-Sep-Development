@@ -64,6 +64,11 @@ Public Class frmB_AL_AD_W
 
         Me.KeyPreview = True 'Allows us to look for advace character from barcode
 
+        'THESE TWO LINES CONE SCANNED CHEESE FROM JOBENTRY IN TO THE FIRST ROW OF THE FORM AS WE KNOW IT IS THE CORRECT GRADE
+        txtConeBcode.Text = frmJobEntry.txtLotNumber.Text
+        prgContinue()
+
+
 
     End Sub
 
@@ -75,9 +80,6 @@ Public Class frmB_AL_AD_W
 
 
     End Sub
-
-
-
 
 
 
@@ -102,7 +104,7 @@ Public Class frmB_AL_AD_W
         For i = 0 To dgvRows - 1
 
             'CHECK FOR UNPACKED CHEESE AND ALLOCATE
-            Label20.Text = i - 1
+
             If frmDGV.DGVdata.Rows(i).Cells(36).Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i).Cells("PACKENDTM").Value) Then
 
                 'write to the local DGV grid
@@ -159,7 +161,7 @@ Public Class frmB_AL_AD_W
         'Check if all cheeses or 90 have been scanned
         endCheck()
 
-        If gridRow = 3 And gridCol < 4 Then
+        If gridRow = 31 And gridCol < 4 Then
             gridRow = 0
             gridCol = gridCol + 2
             DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
@@ -168,14 +170,7 @@ Public Class frmB_AL_AD_W
         packedFlag = 0
 
 
-        'TURN DEBUG ON
-        If My.Settings.debugSet Then
-            Label12.Text = gridRow
-            Label13.Text = gridCol
-            Label14.Text = coneCount
-            Label19.Text = dgvRows
 
-        End If
 
         txtConeBcode.Clear()
         txtConeBcode.Focus()
@@ -192,7 +187,7 @@ Public Class frmB_AL_AD_W
 
 
 
-        If coneCount = 9 Or coneCount = toAllocatedCount Then
+        If coneCount = toAllocatedCount Then
 
             jobEnd()
 

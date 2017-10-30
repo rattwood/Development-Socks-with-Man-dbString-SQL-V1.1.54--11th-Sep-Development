@@ -124,6 +124,7 @@ Public Class frmJobEntry
 
 
         Me.btnCancelReport.Visible = False
+        statusUpdate()
 
 
     End Sub
@@ -354,7 +355,7 @@ Public Class frmJobEntry
         If My.Settings.chkUseColour Or My.Settings.chkUseSort Then CheckJob()
 
         'Select Packing Routine
-        If My.Settings.chkUsePack Then PackScree1()
+        If My.Settings.chkUsePack Then APacking()
 
 
 
@@ -593,7 +594,7 @@ Public Class frmJobEntry
 
     End Sub
 
-    Private Sub PackScree1()
+    Private Sub APacking()
 
 
         'GET PRODUCT WEIGHT INFORMATION
@@ -669,7 +670,7 @@ Public Class frmJobEntry
             End If
 
 
-                Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Clear()
             Me.txtLotNumber.Focus()
 
         End If
@@ -701,6 +702,40 @@ Public Class frmJobEntry
             Me.txtLotNumber.Refresh()
             Exit Sub
         End Try
+
+        'CHECK SCANNED CHEESE IS CORREECT GRADE OTHERWISE RESCAN
+
+        Select Case txtGrade.Text
+            Case "B"
+                packGrade = txtGrade.Text
+                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8  And DEFCONE > 0 And FLT_W = 'False' And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And CONEBARLEY > 0 And PACKENDTM is Null")
+            Case "AL"
+                packGrade = txtGrade.Text
+                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAL > 0 And PACKENDTM is Null")
+            Case "AD"
+                packGrade = txtGrade.Text
+                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAD > 0 And PACKENDTM is Null")
+            Case "P15 AS", "P25 AS", "P35 AS"
+                packGrade = txtGrade.Text
+            Case "P20 BS", "P30 BS", "P35 BS"
+                packGrade = txtGrade.Text
+                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE = 8 And DEFCONE > 0  And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE = 8 And CONEBARLEY > 0 And PACKENDTM is Null  Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE = 8 And M30 > 0 And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE = 8 And P30 > 0 And PACKENDTM is Null ")
+            Case "Waste"
+                packGrade = txtGrade.Text
+                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And FLT_W = 'True' And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8  And COLWASTE > 0 And PACKENDTM is Null ")
+        End Select
+
+        If LRecordCount = 0 Then
+            MsgBox("This is NOT Grade " & "'" & txtGrade.Text & "'" & " CHEESES PLEASE RE-SCAN")
+            Me.txtTraceNum.Clear()
+            Me.txtTraceNum.Focus()
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Visible = False
+            quit = 1
+            Exit Sub
+        End If
+
+
 
         'Extract requierd Informatiom
         varProductCode = txtLotNumber.Text.Substring(2, 3)
@@ -745,30 +780,12 @@ Public Class frmJobEntry
             Case "P15 AS", "P25 AS", "P35 AS"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 9 And DEFCONE = 0 And CONEBARLEY = 0 And  PACKENDTM is Null")
-            'Case "P25 AS"
-            '    packGrade = txtGrade.Text
-            '    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 9 And MISSCONE = 0 And DEFCONE > 0 And CONEBARLEY > 0 And PACKENDTM is Null")
-            'Case "P35 AS"
-            '    packGrade = txtGrade.Text
-            '    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 9 And MISSCONE = 0 And DEFCONE > 0 And CONEBARLEY > 0 And PACKENDTM is Null")
             Case "P20 BS", "P30 BS", "P35 BS"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And DEFCONE > 0  And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And CONEBARLEY > 0 And PACKENDTM is Null  Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And M30 > 0 And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And P30 > 0 And PACKENDTM is Null ")
-            'Case "P30 BS"
-            '    packGrade = txtGrade.Text
-            '    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0  And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And CONEBARLEY > 0 And PACKENDTM is Null ")
-            'Case "P35 BS"
-            '    packGrade = txtGrade.Text
-            '    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And DEFCONE > 0  And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And MISSCONE = 0 And CONEBARLEY > 0 And PACKENDTM is Null ")
             Case "Waste"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And FLT_W = 'True' And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8  And COLWASTE > 0 And PACKENDTM is Null ")
-
-
-
-
-
-
         End Select
 
 
@@ -802,8 +819,9 @@ Public Class frmJobEntry
         frmB_AL_AD_W.Show()
 
 
-
     End Sub
+
+
 
     Private Sub DelayTM()
         Dim interval As Integer = "2000"
@@ -815,9 +833,6 @@ Public Class frmJobEntry
         sw.Stop()
 
     End Sub
-
-
-
 
 
     Private Sub btnSettings_Click_1(sender As Object, e As EventArgs)
