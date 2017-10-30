@@ -23,12 +23,6 @@ Partial Class frmB_AL_AD_W
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.CheeseNum1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CheeseAloc1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CheeseNum2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CheeseAloc2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CheeseNum3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CheeseAloc3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -45,6 +39,16 @@ Partial Class frmB_AL_AD_W
         Me.Label16 = New System.Windows.Forms.Label()
         Me.lbltotCount = New System.Windows.Forms.Label()
         Me.lbltotScan = New System.Windows.Forms.Label()
+        Me.CheeseAloc1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CheeseNum1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CheeseAloc2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CheeseNum2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CheeseAloc3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CheeseNum3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CheeseAloc4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CheeseNum4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CheeseAloc5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CheeseNum5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -52,78 +56,26 @@ Partial Class frmB_AL_AD_W
         '
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
+        Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
+        Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DataGridView1.CausesValidation = False
+        Me.DataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CheeseNum1, Me.CheeseAloc1, Me.CheeseNum2, Me.CheeseAloc2, Me.CheeseNum3, Me.CheeseAloc3})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CheeseAloc1, Me.CheeseNum1, Me.CheeseAloc2, Me.CheeseNum2, Me.CheeseAloc3, Me.CheeseNum3, Me.CheeseAloc4, Me.CheeseNum4, Me.CheeseAloc5, Me.CheeseNum5})
         Me.DataGridView1.Enabled = False
-        Me.DataGridView1.Location = New System.Drawing.Point(16, 106)
+        Me.DataGridView1.Location = New System.Drawing.Point(1, 5)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.Size = New System.Drawing.Size(496, 698)
+        Me.DataGridView1.Size = New System.Drawing.Size(792, 843)
         Me.DataGridView1.TabIndex = 0
-        '
-        'CheeseNum1
-        '
-        Me.CheeseNum1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.CheeseNum1.Frozen = True
-        Me.CheeseNum1.HeaderText = "Cheese"
-        Me.CheeseNum1.Name = "CheeseNum1"
-        Me.CheeseNum1.ReadOnly = True
-        Me.CheeseNum1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'CheeseAloc1
-        '
-        Me.CheeseAloc1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.CheeseAloc1.Frozen = True
-        Me.CheeseAloc1.HeaderText = "Number"
-        Me.CheeseAloc1.Name = "CheeseAloc1"
-        Me.CheeseAloc1.ReadOnly = True
-        Me.CheeseAloc1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.CheeseAloc1.Width = 50
-        '
-        'CheeseNum2
-        '
-        Me.CheeseNum2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.CheeseNum2.Frozen = True
-        Me.CheeseNum2.HeaderText = "Cheese"
-        Me.CheeseNum2.Name = "CheeseNum2"
-        Me.CheeseNum2.ReadOnly = True
-        Me.CheeseNum2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'CheeseAloc2
-        '
-        Me.CheeseAloc2.Frozen = True
-        Me.CheeseAloc2.HeaderText = "Number"
-        Me.CheeseAloc2.Name = "CheeseAloc2"
-        Me.CheeseAloc2.ReadOnly = True
-        Me.CheeseAloc2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.CheeseAloc2.Width = 50
-        '
-        'CheeseNum3
-        '
-        Me.CheeseNum3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.CheeseNum3.Frozen = True
-        Me.CheeseNum3.HeaderText = "Cheese"
-        Me.CheeseNum3.Name = "CheeseNum3"
-        Me.CheeseNum3.ReadOnly = True
-        Me.CheeseNum3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'CheeseAloc3
-        '
-        Me.CheeseAloc3.Frozen = True
-        Me.CheeseAloc3.HeaderText = "Number"
-        Me.CheeseAloc3.Name = "CheeseAloc3"
-        Me.CheeseAloc3.ReadOnly = True
-        Me.CheeseAloc3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.CheeseAloc3.Width = 50
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(369, 27)
+        Me.Label1.Location = New System.Drawing.Point(1052, 22)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(100, 24)
         Me.Label1.TabIndex = 1
@@ -133,7 +85,7 @@ Partial Class frmB_AL_AD_W
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(458, 23)
+        Me.Label2.Location = New System.Drawing.Point(1141, 18)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(33, 31)
         Me.Label2.TabIndex = 2
@@ -143,7 +95,7 @@ Partial Class frmB_AL_AD_W
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(12, 63)
+        Me.Label3.Location = New System.Drawing.Point(944, 84)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(174, 24)
         Me.Label3.TabIndex = 3
@@ -153,7 +105,7 @@ Partial Class frmB_AL_AD_W
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(523, 63)
+        Me.Label4.Location = New System.Drawing.Point(944, 138)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(125, 24)
         Me.Label4.TabIndex = 4
@@ -163,7 +115,7 @@ Partial Class frmB_AL_AD_W
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(212, 63)
+        Me.Label5.Location = New System.Drawing.Point(1144, 84)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(174, 24)
         Me.Label5.TabIndex = 5
@@ -173,7 +125,7 @@ Partial Class frmB_AL_AD_W
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(654, 63)
+        Me.Label6.Location = New System.Drawing.Point(1143, 138)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(174, 24)
         Me.Label6.TabIndex = 6
@@ -183,7 +135,7 @@ Partial Class frmB_AL_AD_W
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(23, 841)
+        Me.Label7.Location = New System.Drawing.Point(949, 922)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(124, 29)
         Me.Label7.TabIndex = 8
@@ -192,7 +144,7 @@ Partial Class frmB_AL_AD_W
         'txtConeBcode
         '
         Me.txtConeBcode.Font = New System.Drawing.Font("Microsoft Sans Serif", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.txtConeBcode.Location = New System.Drawing.Point(170, 817)
+        Me.txtConeBcode.Location = New System.Drawing.Point(1079, 907)
         Me.txtConeBcode.Name = "txtConeBcode"
         Me.txtConeBcode.Size = New System.Drawing.Size(433, 62)
         Me.txtConeBcode.TabIndex = 144
@@ -203,7 +155,7 @@ Partial Class frmB_AL_AD_W
         Me.Label8.AutoSize = True
         Me.Label8.BackColor = System.Drawing.Color.Red
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(680, 261)
+        Me.Label8.Location = New System.Drawing.Point(1023, 851)
         Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(119, 37)
@@ -215,10 +167,10 @@ Partial Class frmB_AL_AD_W
         '
         Me.btnDefect.BackColor = System.Drawing.Color.Yellow
         Me.btnDefect.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDefect.Location = New System.Drawing.Point(1011, 915)
+        Me.btnDefect.Location = New System.Drawing.Point(1131, 350)
         Me.btnDefect.Margin = New System.Windows.Forms.Padding(2)
         Me.btnDefect.Name = "btnDefect"
-        Me.btnDefect.Size = New System.Drawing.Size(138, 80)
+        Me.btnDefect.Size = New System.Drawing.Size(197, 80)
         Me.btnDefect.TabIndex = 177
         Me.btnDefect.Text = "Enter Defect"
         Me.btnDefect.UseVisualStyleBackColor = False
@@ -226,7 +178,7 @@ Partial Class frmB_AL_AD_W
         'btnCancel
         '
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(16, 914)
+        Me.btnCancel.Location = New System.Drawing.Point(1273, 506)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(197, 80)
         Me.btnCancel.TabIndex = 176
@@ -237,9 +189,9 @@ Partial Class frmB_AL_AD_W
         '
         Me.btnFinish.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.btnFinish.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFinish.Location = New System.Drawing.Point(392, 914)
+        Me.btnFinish.Location = New System.Drawing.Point(1015, 506)
         Me.btnFinish.Name = "btnFinish"
-        Me.btnFinish.Size = New System.Drawing.Size(372, 80)
+        Me.btnFinish.Size = New System.Drawing.Size(197, 80)
         Me.btnFinish.TabIndex = 175
         Me.btnFinish.Text = "Finish"
         Me.btnFinish.UseVisualStyleBackColor = False
@@ -248,7 +200,7 @@ Partial Class frmB_AL_AD_W
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(611, 146)
+        Me.Label15.Location = New System.Drawing.Point(954, 736)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(175, 25)
         Me.Label15.TabIndex = 185
@@ -258,7 +210,7 @@ Partial Class frmB_AL_AD_W
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(611, 184)
+        Me.Label16.Location = New System.Drawing.Point(954, 774)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(164, 25)
         Me.Label16.TabIndex = 186
@@ -268,7 +220,7 @@ Partial Class frmB_AL_AD_W
         '
         Me.lbltotCount.AutoSize = True
         Me.lbltotCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbltotCount.Location = New System.Drawing.Point(828, 146)
+        Me.lbltotCount.Location = New System.Drawing.Point(1171, 736)
         Me.lbltotCount.Name = "lbltotCount"
         Me.lbltotCount.Size = New System.Drawing.Size(0, 25)
         Me.lbltotCount.TabIndex = 187
@@ -277,15 +229,112 @@ Partial Class frmB_AL_AD_W
         '
         Me.lbltotScan.AutoSize = True
         Me.lbltotScan.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbltotScan.Location = New System.Drawing.Point(828, 184)
+        Me.lbltotScan.Location = New System.Drawing.Point(1171, 774)
         Me.lbltotScan.Name = "lbltotScan"
         Me.lbltotScan.Size = New System.Drawing.Size(0, 25)
         Me.lbltotScan.TabIndex = 188
+        '
+        'CheeseAloc1
+        '
+        Me.CheeseAloc1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.CheeseAloc1.Frozen = True
+        Me.CheeseAloc1.HeaderText = "Number"
+        Me.CheeseAloc1.Name = "CheeseAloc1"
+        Me.CheeseAloc1.ReadOnly = True
+        Me.CheeseAloc1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.CheeseAloc1.Width = 50
+        '
+        'CheeseNum1
+        '
+        Me.CheeseNum1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.CheeseNum1.Frozen = True
+        Me.CheeseNum1.HeaderText = "Cheese"
+        Me.CheeseNum1.Name = "CheeseNum1"
+        Me.CheeseNum1.ReadOnly = True
+        Me.CheeseNum1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'CheeseAloc2
+        '
+        Me.CheeseAloc2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.CheeseAloc2.Frozen = True
+        Me.CheeseAloc2.HeaderText = "Number"
+        Me.CheeseAloc2.Name = "CheeseAloc2"
+        Me.CheeseAloc2.ReadOnly = True
+        Me.CheeseAloc2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.CheeseAloc2.Width = 50
+        '
+        'CheeseNum2
+        '
+        Me.CheeseNum2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.CheeseNum2.Frozen = True
+        Me.CheeseNum2.HeaderText = "Cheese"
+        Me.CheeseNum2.Name = "CheeseNum2"
+        Me.CheeseNum2.ReadOnly = True
+        Me.CheeseNum2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'CheeseAloc3
+        '
+        Me.CheeseAloc3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.CheeseAloc3.Frozen = True
+        Me.CheeseAloc3.HeaderText = "Number"
+        Me.CheeseAloc3.Name = "CheeseAloc3"
+        Me.CheeseAloc3.ReadOnly = True
+        Me.CheeseAloc3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.CheeseAloc3.Width = 50
+        '
+        'CheeseNum3
+        '
+        Me.CheeseNum3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.CheeseNum3.Frozen = True
+        Me.CheeseNum3.HeaderText = "Cheese"
+        Me.CheeseNum3.Name = "CheeseNum3"
+        Me.CheeseNum3.ReadOnly = True
+        Me.CheeseNum3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'CheeseAloc4
+        '
+        Me.CheeseAloc4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.CheeseAloc4.Frozen = True
+        Me.CheeseAloc4.HeaderText = "Number"
+        Me.CheeseAloc4.Name = "CheeseAloc4"
+        Me.CheeseAloc4.ReadOnly = True
+        Me.CheeseAloc4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.CheeseAloc4.Width = 50
+        '
+        'CheeseNum4
+        '
+        Me.CheeseNum4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.CheeseNum4.Frozen = True
+        Me.CheeseNum4.HeaderText = "Cheese"
+        Me.CheeseNum4.Name = "CheeseNum4"
+        Me.CheeseNum4.ReadOnly = True
+        Me.CheeseNum4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'CheeseAloc5
+        '
+        Me.CheeseAloc5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.CheeseAloc5.Frozen = True
+        Me.CheeseAloc5.HeaderText = "Number"
+        Me.CheeseAloc5.Name = "CheeseAloc5"
+        Me.CheeseAloc5.ReadOnly = True
+        Me.CheeseAloc5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.CheeseAloc5.Width = 50
+        '
+        'CheeseNum5
+        '
+        Me.CheeseNum5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.CheeseNum5.Frozen = True
+        Me.CheeseNum5.HeaderText = "Cheese"
+        Me.CheeseNum5.Name = "CheeseNum5"
+        Me.CheeseNum5.ReadOnly = True
+        Me.CheeseNum5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'frmB_AL_AD_W
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(1664, 1011)
         Me.Controls.Add(Me.lbltotScan)
         Me.Controls.Add(Me.lbltotCount)
@@ -304,6 +353,7 @@ Partial Class frmB_AL_AD_W
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.DataGridView1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "frmB_AL_AD_W"
         Me.Text = "PACKING for B, AL, AD and Waste"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -325,14 +375,18 @@ Partial Class frmB_AL_AD_W
     Friend WithEvents btnDefect As Button
     Friend WithEvents btnCancel As Button
     Friend WithEvents btnFinish As Button
-    Friend WithEvents CheeseNum1 As DataGridViewTextBoxColumn
-    Friend WithEvents CheeseAloc1 As DataGridViewTextBoxColumn
-    Friend WithEvents CheeseNum2 As DataGridViewTextBoxColumn
-    Friend WithEvents CheeseAloc2 As DataGridViewTextBoxColumn
-    Friend WithEvents CheeseNum3 As DataGridViewTextBoxColumn
-    Friend WithEvents CheeseAloc3 As DataGridViewTextBoxColumn
     Friend WithEvents Label15 As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents lbltotCount As Label
     Friend WithEvents lbltotScan As Label
+    Friend WithEvents CheeseAloc1 As DataGridViewTextBoxColumn
+    Friend WithEvents CheeseNum1 As DataGridViewTextBoxColumn
+    Friend WithEvents CheeseAloc2 As DataGridViewTextBoxColumn
+    Friend WithEvents CheeseNum2 As DataGridViewTextBoxColumn
+    Friend WithEvents CheeseAloc3 As DataGridViewTextBoxColumn
+    Friend WithEvents CheeseNum3 As DataGridViewTextBoxColumn
+    Friend WithEvents CheeseAloc4 As DataGridViewTextBoxColumn
+    Friend WithEvents CheeseNum4 As DataGridViewTextBoxColumn
+    Friend WithEvents CheeseAloc5 As DataGridViewTextBoxColumn
+    Friend WithEvents CheeseNum5 As DataGridViewTextBoxColumn
 End Class

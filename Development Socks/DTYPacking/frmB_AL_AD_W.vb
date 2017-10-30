@@ -13,10 +13,10 @@ Public Class frmB_AL_AD_W
     Public packedFlag As Integer
     'Index for DGV
     Dim gridRow As Integer = 0
-    Dim gridCol As Integer = 0
+    Dim gridCol As Integer = 1
     'INDEX FOR DGV1
     Dim dgv1gridRow As Integer = 0
-    Dim dgv1gridCol As Integer = 1
+    Dim dgv1gridCol As Integer = 0
     'Index for changing input location in DGV
 
 
@@ -33,30 +33,87 @@ Public Class frmB_AL_AD_W
         Label5.Text = frmJobEntry.varProductName
         Label6.Text = frmJobEntry.varProductCode
 
+        Select Case frmJobEntry.txtGrade.Text
+            Case "B", "AL", "AD", "P35 AS", "P35 BS"
+                For i = 6 To 9
+                    DataGridView1.Columns(i).Visible = False
+                Next
+
+                'create rows 
+                DataGridView1.Rows.Add(30)
+
+                DataGridView1.RowHeadersVisible = False
+
+                'NUMBER THE 90 CELLS
+                For nums = 1 To 90
 
 
+                    DataGridView1.Rows(dgv1gridRow).Cells(dgv1gridCol).Value = nums
+                    dgv1gridRow = dgv1gridRow + 1
 
-        'create rows 
-        DataGridView1.Rows.Add(30)
+                    If dgv1gridRow = 30 And dgv1gridCol < 4 Then
+                        dgv1gridRow = 0
+                        dgv1gridCol = dgv1gridCol + 2
+                    End If
 
-        For nums = 1 To 90
+                Next
 
 
-            DataGridView1.Rows(dgv1gridRow).Cells(dgv1gridCol).Value = nums
-            dgv1gridRow = dgv1gridRow + 1
+            Case "P25 AS", "P30 BS"
+                For i = 8 To 9
+                    DataGridView1.Columns(i).Visible = False
+                Next
 
-            If dgv1gridRow = 30 And dgv1gridCol < 5 Then
-                dgv1gridRow = 0
-                dgv1gridCol = dgv1gridCol + 2
-            End If
+                'create rows 
+                DataGridView1.Rows.Add(30)
 
-        Next
+                DataGridView1.RowHeadersVisible = False
 
-        ' For i = 1 To dgvRows - 1
-        'If frmDGV.DGVdata.Rows(i - 1).Cells(78).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
-        'toAllocatedCount = toAllocatedCount + 1
-        'End If
-        ' Next
+                'NUMBER THE 120 CELLS
+                For nums = 1 To 120
+
+
+                    DataGridView1.Rows(dgv1gridRow).Cells(dgv1gridCol).Value = nums
+                    dgv1gridRow = dgv1gridRow + 1
+
+                    If dgv1gridRow = 30 And dgv1gridCol < 6 Then
+                        dgv1gridRow = 0
+                        dgv1gridCol = dgv1gridCol + 2
+                    End If
+
+                Next
+
+            Case "P15 AS", "P20 BS"
+
+                'create rows 
+                DataGridView1.Rows.Add(39)
+                DataGridView1.RowHeadersVisible = False
+
+                'NUMBER THE 195 CELLS
+                For nums = 1 To 195
+
+
+                    DataGridView1.Rows(dgv1gridRow).Cells(dgv1gridCol).Value = nums
+                    dgv1gridRow = dgv1gridRow + 1
+
+                    If dgv1gridRow = 39 And dgv1gridCol < 8 Then
+                        dgv1gridRow = 0
+                        dgv1gridCol = dgv1gridCol + 2
+                    End If
+
+                Next
+
+
+                'MAKE CELLS NOT USED BLACK
+                'For i = 30 To 38
+                '    For x = 6 To 9
+                '        DataGridView1.Rows(i).Cells(x).Style.BackColor = Color.Black
+                '    Next
+                'Next
+
+        End Select
+
+
 
         toAllocatedCount = frmDGV.DGVdata.Rows.Count
 
@@ -158,14 +215,48 @@ Public Class frmB_AL_AD_W
         'UPDATE TOTAL COUNTED
         lbltotScan.Text = coneCount
 
-        'Check if all cheeses or 90 have been scanned
+
+
+        'CHECK If ALL CHEESE on Sheet have been scanned
         endCheck()
 
-        If gridRow = 31 And gridCol < 4 Then
-            gridRow = 0
-            gridCol = gridCol + 2
-            DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
-        End If
+        'ROUTINE TO MOVE TO NEW COLUMN WHEN COLUMN IS FULL
+
+        Select Case frmJobEntry.txtGrade.Text
+            Case "B", "AL", "AD", "P35 AS", "P35 BS"
+
+                If gridRow = 31 And gridCol < 5 Then
+                    gridRow = 0
+                    gridCol = gridCol + 2
+                    DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
+                End If
+
+                If coneCount > 90 Or coneCount = toAllocatedCount Then jobEnd()
+
+            Case "P25 AS", "P30 BS"
+                If gridRow = 31 And gridCol < 7 Then
+                    gridRow = 0
+                    gridCol = gridCol + 2
+                    DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
+                End If
+
+                If coneCount > 120 Or coneCount = toAllocatedCount Then jobEnd()
+
+            Case "P15 AS", "P20 BS"
+
+                If gridRow = 39 And gridCol < 9 Then
+                    gridRow = 0
+                    gridCol = gridCol + 2
+                    DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
+                End If
+
+                If coneCount > 195 Or coneCount = toAllocatedCount Then jobEnd()
+
+        End Select
+
+
+
+
 
         packedFlag = 0
 
@@ -187,7 +278,7 @@ Public Class frmB_AL_AD_W
 
 
 
-        If coneCount = toAllocatedCount Then
+        If coneCount > 90 Or coneCount = toAllocatedCount Then
 
             jobEnd()
 

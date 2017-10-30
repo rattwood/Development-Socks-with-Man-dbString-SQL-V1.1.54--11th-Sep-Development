@@ -124,7 +124,7 @@ Public Class frmJobEntry
 
 
         Me.btnCancelReport.Visible = False
-        statusUpdate()
+
 
 
     End Sub

@@ -310,7 +310,7 @@ Public Class frmPackTodayUpdate
                     'cartonNum = (cartonNum & "-" & boxCount).ToString
 
                     'WRITE CONE NUMBER TO SHEET
-                    MsgBox("I value = " & i & " Cone Number = " & frmDGV.DGVdata.Rows(i - 1).Cells(36).Value & " nfree Value = " & nfree)
+                    ' MsgBox("I value = " & i & " Cone Number = " & frmDGV.DGVdata.Rows(i - 1).Cells(36).Value & " nfree Value = " & nfree)
                     MyTodyExcel.Cells(nfree, 4) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
 
 
