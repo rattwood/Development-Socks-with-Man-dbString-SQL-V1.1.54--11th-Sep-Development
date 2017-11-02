@@ -31,12 +31,10 @@ Partial Class frmJobEntry
         Me.ToraydbBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Toraydb = New Development_Socks.Toraydb()
         Me.btnCartReport = New System.Windows.Forms.Button()
-        Me.btnExChangeCone = New System.Windows.Forms.Button()
         Me.btnSearchCone = New System.Windows.Forms.Button()
         Me.txtBoxCartReport = New System.Windows.Forms.TextBox()
         Me.btnCancelReport = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.btnReports = New System.Windows.Forms.Button()
         Me.btnDefRep = New System.Windows.Forms.Button()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -66,12 +64,12 @@ Partial Class frmJobEntry
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblMessage = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.StatusPanel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblGrade = New System.Windows.Forms.Label()
         Me.txtGrade = New System.Windows.Forms.TextBox()
         Me.lblSelectGrade = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtTraceNum = New System.Windows.Forms.TextBox()
-        Me.StatusPanel = New System.Windows.Forms.ToolStripStatusLabel()
         CType(Me.ToraydbBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Toraydb, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
@@ -116,7 +114,7 @@ Partial Class frmJobEntry
         '
         'btnJobReport
         '
-        Me.btnJobReport.Location = New System.Drawing.Point(253, 377)
+        Me.btnJobReport.Location = New System.Drawing.Point(580, 377)
         Me.btnJobReport.Name = "btnJobReport"
         Me.btnJobReport.Size = New System.Drawing.Size(113, 47)
         Me.btnJobReport.TabIndex = 8
@@ -142,19 +140,9 @@ Partial Class frmJobEntry
         Me.btnCartReport.Text = "Create Cart Report"
         Me.btnCartReport.UseVisualStyleBackColor = True
         '
-        'btnExChangeCone
-        '
-        Me.btnExChangeCone.Location = New System.Drawing.Point(407, 324)
-        Me.btnExChangeCone.Name = "btnExChangeCone"
-        Me.btnExChangeCone.Size = New System.Drawing.Size(113, 47)
-        Me.btnExChangeCone.TabIndex = 11
-        Me.btnExChangeCone.Text = "ExChange Cheese"
-        Me.btnExChangeCone.UseVisualStyleBackColor = True
-        Me.btnExChangeCone.Visible = False
-        '
         'btnSearchCone
         '
-        Me.btnSearchCone.Location = New System.Drawing.Point(253, 324)
+        Me.btnSearchCone.Location = New System.Drawing.Point(425, 377)
         Me.btnSearchCone.Name = "btnSearchCone"
         Me.btnSearchCone.Size = New System.Drawing.Size(113, 47)
         Me.btnSearchCone.TabIndex = 12
@@ -192,19 +180,9 @@ Partial Class frmJobEntry
         Me.Label3.Text = "Label3"
         Me.Label3.Visible = False
         '
-        'btnReports
-        '
-        Me.btnReports.Location = New System.Drawing.Point(558, 350)
-        Me.btnReports.Name = "btnReports"
-        Me.btnReports.Size = New System.Drawing.Size(113, 47)
-        Me.btnReports.TabIndex = 177
-        Me.btnReports.Text = "Reports"
-        Me.btnReports.UseVisualStyleBackColor = True
-        Me.btnReports.Visible = False
-        '
         'btnDefRep
         '
-        Me.btnDefRep.Location = New System.Drawing.Point(407, 377)
+        Me.btnDefRep.Location = New System.Drawing.Point(269, 377)
         Me.btnDefRep.Name = "btnDefRep"
         Me.btnDefRep.Size = New System.Drawing.Size(113, 47)
         Me.btnDefRep.TabIndex = 178
@@ -382,7 +360,7 @@ Partial Class frmJobEntry
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.lblMessage, Me.StatusPanel})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 410)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 448)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(821, 22)
         Me.StatusStrip1.TabIndex = 180
@@ -397,6 +375,12 @@ Partial Class frmJobEntry
         '
         Me.lblMessage.Name = "lblMessage"
         Me.lblMessage.Size = New System.Drawing.Size(0, 17)
+        '
+        'StatusPanel
+        '
+        Me.StatusPanel.Name = "StatusPanel"
+        Me.StatusPanel.Size = New System.Drawing.Size(120, 17)
+        Me.StatusPanel.Text = "ToolStripStatusLabel2"
         '
         'lblGrade
         '
@@ -448,17 +432,11 @@ Partial Class frmJobEntry
         Me.txtTraceNum.TabIndex = 3
         Me.txtTraceNum.Visible = False
         '
-        'StatusPanel
-        '
-        Me.StatusPanel.Name = "StatusPanel"
-        Me.StatusPanel.Size = New System.Drawing.Size(120, 17)
-        Me.StatusPanel.Text = "ToolStripStatusLabel2"
-        '
         'frmJobEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(821, 432)
+        Me.ClientSize = New System.Drawing.Size(821, 470)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtTraceNum)
@@ -467,11 +445,9 @@ Partial Class frmJobEntry
         Me.Controls.Add(Me.lblGrade)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.btnDefRep)
-        Me.Controls.Add(Me.btnReports)
         Me.Controls.Add(Me.btnCancelReport)
         Me.Controls.Add(Me.txtBoxCartReport)
         Me.Controls.Add(Me.btnSearchCone)
-        Me.Controls.Add(Me.btnExChangeCone)
         Me.Controls.Add(Me.btnCartReport)
         Me.Controls.Add(Me.btnJobReport)
         Me.Controls.Add(Me.txtLotNumber)
@@ -503,12 +479,10 @@ Partial Class frmJobEntry
     Friend WithEvents Toraydb As Toraydb
     Friend WithEvents btnJobReport As Button
     Friend WithEvents btnCartReport As Button
-    Friend WithEvents btnExChangeCone As Button
     Friend WithEvents btnSearchCone As Button
     Friend WithEvents txtBoxCartReport As TextBox
     Friend WithEvents btnCancelReport As Button
     Friend WithEvents Label3 As Label
-    Friend WithEvents btnReports As Button
     Friend WithEvents btnDefRep As Button
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem

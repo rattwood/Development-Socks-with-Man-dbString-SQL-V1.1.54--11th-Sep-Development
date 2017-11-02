@@ -852,9 +852,9 @@ Public Class frmJobEntry
         Me.btnJobReport.Visible = False
         btnCancelReport.Visible = True
         Me.txtBoxCartReport.Focus()
+        'Me.KeyPreview = True  'Allows us to look for advance character from barcode
         cartReport = 1
-
-
+        Me.KeyPreview = True
 
     End Sub
 
@@ -948,7 +948,7 @@ Public Class frmJobEntry
 
     End Sub
 
-    Private Sub btnExChangeCone_Click(sender As Object, e As EventArgs) Handles btnExChangeCone.Click
+    Private Sub btnExChangeCone_Click(sender As Object, e As EventArgs)
 
         If txtOperator.Text = "" Then
             MsgBox("Please Enter Operator Name First")
@@ -973,7 +973,7 @@ Public Class frmJobEntry
     Private Sub frmJobEntry_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
 
 
-        If e.KeyCode = Keys.Return And txtLotNumber.Visible = True Then
+        If e.KeyCode = Keys.Return And txtLotNumber.Visible = True Or e.KeyCode = Keys.Return And txtBoxCartReport.Visible Then
 
             If cartReport = 1 Then
                 cartReportSub()
@@ -989,7 +989,7 @@ Public Class frmJobEntry
 
 
 
-    Private Sub btnReports_Click(sender As Object, e As EventArgs) Handles btnReports.Click
+    Private Sub btnReports_Click(sender As Object, e As EventArgs)
         frmPackReports.Show()
     End Sub
 

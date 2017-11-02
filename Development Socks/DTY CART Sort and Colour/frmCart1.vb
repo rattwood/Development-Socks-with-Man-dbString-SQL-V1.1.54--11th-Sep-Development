@@ -624,7 +624,7 @@ Public Class frmCart1
             Me.btnShort.Visible = False
             Me.btnNoCone.Enabled = False
             Me.btnShort.Enabled = False
-            shortC(varConeNum - coneNumOffset) = 0
+            'shortC(varConeNum - coneNumOffset) = 0
             'FAULTS FROM POY-DTY Dept
             Me.chk_K.Visible = True
             Me.chk_D.Visible = True
@@ -654,35 +654,35 @@ Public Class frmCart1
 
                 Dim fltDrow = (varConeNum - coneNumOffset) - 1
 
-                'THIS WILL CALL BACK THE FAULT DATA FROM THE DATAGRID
-                chk_K.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_K").Value.ToString
-                chk_D.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_D").Value.ToString
-                chk_F.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_F").Value.ToString
-                chk_O.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_O").Value.ToString
-                chk_T.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_T").Value.ToString
-                chk_P.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_P").Value.ToString
-                chk_S.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_S").Value.ToString
-                chk_X.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_X").Value.ToString
-                chk_N.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_N").Value.ToString
-                chk_W.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_W").Value.ToString
-                chk_H.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_H").Value.ToString
-                chk_TR.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_TR").Value.ToString
-                chk_B.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_B").Value.ToString
-                chk_C.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_C").Value.ToString
+            'THIS WILL CALL BACK THE FAULT DATA FROM THE DATAGRID
+            chk_K.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_K").Value.ToString
+            chk_D.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_D").Value.ToString
+            chk_F.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_F").Value.ToString
+            chk_O.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_O").Value.ToString
+            chk_T.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_T").Value.ToString
+            chk_P.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_P").Value.ToString
+            'chk_S.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_S").Value.ToString
+            'chk_X.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_X").Value.ToString
+            chk_N.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_N").Value.ToString
+            chk_W.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_W").Value.ToString
+            chk_H.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_H").Value.ToString
+            chk_TR.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_TR").Value.ToString
+            chk_B.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_B").Value.ToString
+            chk_C.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_C").Value.ToString
 
-                chk_DO.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_DO").Value.ToString
-                chk_DH.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_DH").Value.ToString
-                chk_CL.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_CL").Value.ToString
-                chk_FI.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_FI").Value.ToString
-                chk_YN.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_YN").Value.ToString
-                chk_HT.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_HT").Value.ToString
-                chk_LT.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_LT").Value.ToString
+            chk_DO.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_DO").Value.ToString
+            chk_DH.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_DH").Value.ToString
+            chk_CL.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_CL").Value.ToString
+            chk_FI.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_FI").Value.ToString
+            chk_YN.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_YN").Value.ToString
+            chk_HT.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_HT").Value.ToString
+            chk_LT.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_LT").Value.ToString
 
 
 
-                'End If
+            'End If
 
-                Me.btnDefectSave.Visible = True 'Show Save button when form opens
+            Me.btnDefectSave.Visible = True 'Show Save button when form opens
 
             Else
                 MsgBox("You must select a Cheese number first")

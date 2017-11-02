@@ -96,8 +96,8 @@ Public Class frmPrintCartReport
         ' MyExcel.Visible = True
 
 
-        If DGVcartReport.Rows(0).Cells(1).Value = 21 Or DGVcartReport.Rows(0).Cells(1).Value = 23 Or DGVcartReport.Rows(0).Cells(1).Value = 25 Then sp_nums = "1 - 192"
-        If DGVcartReport.Rows(0).Cells(1).Value = 22 Or DGVcartReport.Rows(0).Cells(1).Value = 24 Or DGVcartReport.Rows(0).Cells(1).Value = 26 Then sp_nums = "193 - 384"
+        If DGVcartReport.Rows(0).Cells(1).Value = 21 Or DGVcartReport.Rows(0).Cells(1).Value = 23 Or DGVcartReport.Rows(0).Cells(1).Value = 25 Or DGVcartReport.Rows(0).Cells(1).Value = 27 Then sp_nums = "1 - 192"
+        If DGVcartReport.Rows(0).Cells(1).Value = 22 Or DGVcartReport.Rows(0).Cells(1).Value = 24 Or DGVcartReport.Rows(0).Cells(1).Value = 26 Or DGVcartReport.Rows(0).Cells(1).Value = 28 Then sp_nums = "193 - 384"
 
 
 
