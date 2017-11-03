@@ -131,9 +131,6 @@ Public Class frmJobEntry
 
     Public Sub txtOperator_TextChanged(sender As Object, e As EventArgs) Handles txtOperator.TextChanged
 
-        'Select Grade type
-
-
 
 
         If My.Settings.chkUseSort Then
@@ -144,33 +141,33 @@ Public Class frmJobEntry
             PackOp = txtOperator.Text
         End If
 
-        If My.Settings.chkUsePack = False Then
-            Me.KeyPreview = True
+
+        Me.KeyPreview = True
             lblScanType.Text = "Scan Job Sheet"
             txtLotNumber.Visible = True
-        Else
-            txtTraceNum.Visible = True
-            Me.KeyPreview = True
-        End If
-        'txtLotNumber.Visible = True
 
-        'varUserName = txtOperator.Text
+        Me.txtLotNumber.Focus()
+        Me.KeyPreview = True
 
-    End Sub
 
-    Private Sub txtTraceNum_TextChanged(sender As Object, e As EventArgs) Handles txtTraceNum.TextChanged
-        txtLotNumber.Visible = True
-        'varUserName = txtOperator.Text
 
-        'Me.KeyPreview = True  'Allows us to look for advance character from barcode
-        'txtLotNumber.Focus()
-        If txtTraceNum.TextLength = 10 Then
-            txtLotNumber.Visible = True
-            Me.txtLotNumber.Focus()
-            Me.KeyPreview = True
-        End If
+        varUserName = txtOperator.Text
 
     End Sub
+
+    'Private Sub txtTraceNum_TextChanged(sender As Object, e As EventArgs) Handles txtTraceNum.TextChanged
+    '    txtLotNumber.Visible = True
+    '    'varUserName = txtOperator.Text
+
+    '    'Me.KeyPreview = True  'Allows us to look for advance character from barcode
+    '    'txtLotNumber.Focus()
+    '    If txtTraceNum.TextLength = 10 Then
+    '        txtLotNumber.Visible = True
+    '        Me.txtLotNumber.Focus()
+    '        Me.KeyPreview = True
+    '    End If
+
+    'End Sub
 
 
 
