@@ -35,7 +35,7 @@ Public Class frmB_AL_AD_W
 
         Select Case frmJobEntry.txtGrade.Text
             Case "B", "AL", "AD", "P35 AS", "P35 BS"
-                For i = 6 To 9
+                For i = 6 To 9  'Columns to Hide
                     DataGridView1.Columns(i).Visible = False
                 Next
 
@@ -60,7 +60,7 @@ Public Class frmB_AL_AD_W
 
 
             Case "P25 AS", "P30 BS"
-                For i = 8 To 9
+                For i = 8 To 9   'Columns to Hide
                     DataGridView1.Columns(i).Visible = False
                 Next
 
@@ -102,14 +102,27 @@ Public Class frmB_AL_AD_W
                     End If
 
                 Next
+            Case "ReCheck"
+
+                For i = 2 To 9   'Columns to Hide
+                    DataGridView1.Columns(i).Visible = False
+                Next
+
+                'create rows 
+                DataGridView1.Rows.Add(32)
+                DataGridView1.RowHeadersVisible = False
+
+                'NUMBER THE 195 CELLS
+                For nums = 1 To 32
 
 
-                'MAKE CELLS NOT USED BLACK
-                'For i = 30 To 38
-                '    For x = 6 To 9
-                '        DataGridView1.Rows(i).Cells(x).Style.BackColor = Color.Black
-                '    Next
-                'Next
+                    DataGridView1.Rows(dgv1gridRow).Cells(dgv1gridCol).Value = nums
+                    dgv1gridRow = dgv1gridRow + 1
+
+
+
+                Next
+
 
         End Select
 
@@ -218,11 +231,15 @@ Public Class frmB_AL_AD_W
 
 
         'CHECK If ALL CHEESE on Sheet have been scanned
-        endCheck()
+        'endCheck()
 
         'ROUTINE TO MOVE TO NEW COLUMN WHEN COLUMN IS FULL
 
         Select Case frmJobEntry.txtGrade.Text
+
+
+
+
             Case "B", "AL", "AD", "P35 AS", "P35 BS"
 
                 If gridRow = 31 And gridCol < 5 Then
@@ -251,6 +268,10 @@ Public Class frmB_AL_AD_W
                 End If
 
                 If coneCount > 195 Or coneCount = toAllocatedCount Then jobEnd()
+
+            Case "ReCheck"
+
+                If coneCount > 32 Or coneCount = toAllocatedCount Then jobEnd()
 
         End Select
 
@@ -300,8 +321,7 @@ Public Class frmB_AL_AD_W
         Me.Close()
         frmJobEntry.Show()
         frmJobEntry.txtLotNumber.Clear()
-        frmJobEntry.txtTraceNum.Clear()
-        frmJobEntry.txtTraceNum.Focus()
+
 
     End Sub
 

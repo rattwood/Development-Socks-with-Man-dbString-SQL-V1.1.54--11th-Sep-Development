@@ -24,12 +24,12 @@ Partial Class frmPackRepMain
     Private Sub InitializeComponent()
         Me.SuspendLayout()
         '
-        'frmPackRepStart
+        'frmPackRepMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
-        Me.Name = "frmPackRepStart"
+        Me.Name = "frmPackRepMain"
         Me.Text = "frmPackRepStart"
         Me.ResumeLayout(False)
 

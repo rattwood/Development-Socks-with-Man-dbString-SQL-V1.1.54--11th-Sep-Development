@@ -65,7 +65,7 @@ Partial Class frmB_AL_AD_W
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CheeseAloc1, Me.CheeseNum1, Me.CheeseAloc2, Me.CheeseNum2, Me.CheeseAloc3, Me.CheeseNum3, Me.CheeseAloc4, Me.CheeseNum4, Me.CheeseAloc5, Me.CheeseNum5})
         Me.DataGridView1.Enabled = False
-        Me.DataGridView1.Location = New System.Drawing.Point(1, 5)
+        Me.DataGridView1.Location = New System.Drawing.Point(1, 0)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.Size = New System.Drawing.Size(792, 843)
@@ -192,25 +192,25 @@ Partial Class frmB_AL_AD_W
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(799, 80)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(137, 16)
+        Me.Label3.Size = New System.Drawing.Size(49, 16)
         Me.Label3.TabIndex = 3
-        Me.Label3.Text = "PRODUCT NAME :"
+        Me.Label3.Text = "Prod :"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(799, 159)
+        Me.Label4.Location = New System.Drawing.Point(799, 106)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(102, 16)
+        Me.Label4.Size = New System.Drawing.Size(61, 16)
         Me.Label4.TabIndex = 4
-        Me.Label4.Text = "PRODUCT # :"
+        Me.Label4.Text = "Prod # :"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(799, 106)
+        Me.Label5.Location = New System.Drawing.Point(866, 80)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(129, 16)
         Me.Label5.TabIndex = 5
@@ -220,7 +220,7 @@ Partial Class frmB_AL_AD_W
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(799, 185)
+        Me.Label6.Location = New System.Drawing.Point(866, 106)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(129, 16)
         Me.Label6.TabIndex = 6
@@ -229,19 +229,19 @@ Partial Class frmB_AL_AD_W
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(949, 922)
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(875, 230)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(124, 29)
+        Me.Label7.Size = New System.Drawing.Size(99, 24)
         Me.Label7.TabIndex = 8
         Me.Label7.Text = "Cheese #"
         '
         'txtConeBcode
         '
-        Me.txtConeBcode.Font = New System.Drawing.Font("Microsoft Sans Serif", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.txtConeBcode.Location = New System.Drawing.Point(1079, 907)
+        Me.txtConeBcode.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.txtConeBcode.Location = New System.Drawing.Point(844, 268)
         Me.txtConeBcode.Name = "txtConeBcode"
-        Me.txtConeBcode.Size = New System.Drawing.Size(433, 62)
+        Me.txtConeBcode.Size = New System.Drawing.Size(171, 29)
         Me.txtConeBcode.TabIndex = 144
         Me.txtConeBcode.Tag = "1"
         '
@@ -250,7 +250,7 @@ Partial Class frmB_AL_AD_W
         Me.Label8.AutoSize = True
         Me.Label8.BackColor = System.Drawing.Color.Red
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(1023, 851)
+        Me.Label8.Location = New System.Drawing.Point(549, 134)
         Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(119, 37)
@@ -262,10 +262,10 @@ Partial Class frmB_AL_AD_W
         '
         Me.btnDefect.BackColor = System.Drawing.Color.Yellow
         Me.btnDefect.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDefect.Location = New System.Drawing.Point(798, 415)
+        Me.btnDefect.Location = New System.Drawing.Point(816, 436)
         Me.btnDefect.Margin = New System.Windows.Forms.Padding(2)
         Me.btnDefect.Name = "btnDefect"
-        Me.btnDefect.Size = New System.Drawing.Size(162, 80)
+        Me.btnDefect.Size = New System.Drawing.Size(212, 53)
         Me.btnDefect.TabIndex = 177
         Me.btnDefect.Text = "Enter Defect"
         Me.btnDefect.UseVisualStyleBackColor = False
@@ -273,20 +273,20 @@ Partial Class frmB_AL_AD_W
         'btnCancel
         '
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(798, 298)
+        Me.btnCancel.Location = New System.Drawing.Point(816, 355)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(162, 80)
+        Me.btnCancel.Size = New System.Drawing.Size(212, 53)
         Me.btnCancel.TabIndex = 176
-        Me.btnCancel.Text = "Cancel and Clear"
+        Me.btnCancel.Text = "Cancel/Clear"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'btnFinish
         '
         Me.btnFinish.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.btnFinish.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFinish.Location = New System.Drawing.Point(799, 522)
+        Me.btnFinish.Location = New System.Drawing.Point(816, 521)
         Me.btnFinish.Name = "btnFinish"
-        Me.btnFinish.Size = New System.Drawing.Size(162, 80)
+        Me.btnFinish.Size = New System.Drawing.Size(212, 53)
         Me.btnFinish.TabIndex = 175
         Me.btnFinish.Text = "Finish"
         Me.btnFinish.UseVisualStyleBackColor = False
@@ -294,39 +294,39 @@ Partial Class frmB_AL_AD_W
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(954, 736)
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(799, 134)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(175, 25)
+        Me.Label15.Size = New System.Drawing.Size(115, 16)
         Me.Label15.TabIndex = 185
         Me.Label15.Text = "Total In System"
         '
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(954, 774)
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(799, 161)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(164, 25)
+        Me.Label16.Size = New System.Drawing.Size(109, 16)
         Me.Label16.TabIndex = 186
         Me.Label16.Text = "Total Scanned"
         '
         'lbltotCount
         '
         Me.lbltotCount.AutoSize = True
-        Me.lbltotCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbltotCount.Location = New System.Drawing.Point(1171, 736)
+        Me.lbltotCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbltotCount.Location = New System.Drawing.Point(932, 134)
         Me.lbltotCount.Name = "lbltotCount"
-        Me.lbltotCount.Size = New System.Drawing.Size(0, 25)
+        Me.lbltotCount.Size = New System.Drawing.Size(0, 16)
         Me.lbltotCount.TabIndex = 187
         '
         'lbltotScan
         '
         Me.lbltotScan.AutoSize = True
-        Me.lbltotScan.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbltotScan.Location = New System.Drawing.Point(1171, 774)
+        Me.lbltotScan.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbltotScan.Location = New System.Drawing.Point(932, 161)
         Me.lbltotScan.Name = "lbltotScan"
-        Me.lbltotScan.Size = New System.Drawing.Size(0, 25)
+        Me.lbltotScan.Size = New System.Drawing.Size(0, 16)
         Me.lbltotScan.TabIndex = 188
         '
         'frmB_AL_AD_W
@@ -334,12 +334,12 @@ Partial Class frmB_AL_AD_W
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(1086, 699)
+        Me.ClientSize = New System.Drawing.Size(1086, 861)
+        Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.lbltotScan)
         Me.Controls.Add(Me.lbltotCount)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label15)
-        Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.btnDefect)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnFinish)

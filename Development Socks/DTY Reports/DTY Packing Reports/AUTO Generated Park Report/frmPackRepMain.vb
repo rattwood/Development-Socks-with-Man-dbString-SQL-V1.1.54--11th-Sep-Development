@@ -39,16 +39,9 @@ Public Class frmPackRepMain
             & frmDGV.DGVdata.Rows(0).Cells(2).Value.ToString) & " " & frmJobEntry.txtGrade.Text
 
 
-
         'CALL SUB TO GET TODAYS SAVE DIRECTORY
         todayDir()
 
-
-
-        'Create the Report name
-        'saveString = (prodNameMod & " " _
-        '    & frmDGV.DGVdata.Rows(0).Cells(7).Value.ToString & "_" _
-        '    & frmDGV.DGVdata.Rows(0).Cells(2).Value.ToString)
 
 
         'create the save name of the file
@@ -81,9 +74,8 @@ Public Class frmPackRepMain
             Case "P35 BS"
                 template = (My.Settings.dirTemplate & "\" & "Packing P35 BS Template.xlsx").ToString
             Case "ReCheck"
-                template = (My.Settings.dirTemplate & "\" & "Recheck Template.xlsx").ToString
+                template = (My.Settings.dirTemplate & "\" & "ReCheck Template.xlsx").ToString
         End Select
-
 
 
 
@@ -108,8 +100,17 @@ Public Class frmPackRepMain
 
                 Case "A"
                     frmPackTodayUpdate.TodayUpdate()
-                Case "B", "AD", "AL", "Waste", "P15 AS", "P25 AS", "P35 AS", "P20 BS", "P30 BS", "P35 BS", "ReCheck"
+                Case "B", "AD", "AL", "Waste"
                     frmPackTodayUpdate.TodayUpdateB_AL_AD()
+                Case "P35 AS", "P35 BS"
+                    frmPackTodayUpdate.TodatUpdateBS_AS_35()
+                Case "P25 AS", "P30 BS"
+                    frmPackTodayUpdate.TodayUpdateBS_AS_30()
+                Case "P15 AS", "P20 BS"
+                    frmPackTodayUpdate.TodayUpdateBS_AS_30()
+                Case "ReCheck"
+                    frmPackTodayUpdate.TodayUpdate_ReCheck()
+                    Me.Close()
             End Select
 
             'frmPackTodayUpdate.TodayUpdate()
@@ -166,5 +167,6 @@ Public Class frmPackRepMain
         End If
 
     End Sub
+
 
 End Class

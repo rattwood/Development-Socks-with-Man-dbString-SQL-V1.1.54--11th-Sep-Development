@@ -84,8 +84,8 @@ Public Class frmJobEntry
         If My.Settings.chkUsePack Then PackingGradeToolStripMenuItem.Visible = True Else PackingGradeToolStripMenuItem.Visible = False
         If My.Settings.chkUsePack Then ReportsToolStripMenuItem.Visible = True Else ReportsToolStripMenuItem.Visible = False
         If My.Settings.chkUsePack Then btnSearchCone.Visible = False Else btnSearchCone.Visible = True
-        If My.Settings.chkUsePack Then txtTraceNum.Visible = False
-        If My.Settings.chkUsePack Then Label2.Visible = True Else Label2.Visible = False
+
+
         If My.Settings.chkUsePack Then lblSelectGrade.Visible = True Else lblSelectGrade.Visible = False
         If My.Settings.chkUsePack Then lblGrade.Visible = True Else lblGrade.Visible = False
         If My.Settings.chkUsePack Then txtGrade.Visible = True Else txtGrade.Visible = False
@@ -103,7 +103,7 @@ Public Class frmJobEntry
         End If
 
         'Me.KeyPreview = True  'Allows us to look for advance character from barcode
-        Me.KeyPreview = False
+        Me.KeyPreview = True
         'Set Form Header text
         If My.Settings.chkUseSort Then
             Me.Text = "Job Entry Sorting"
@@ -142,12 +142,15 @@ Public Class frmJobEntry
         End If
 
 
-        Me.KeyPreview = True
+        If My.Settings.chkUsePack = False Then
             lblScanType.Text = "Scan Job Sheet"
             txtLotNumber.Visible = True
+        Else
 
-        Me.txtLotNumber.Focus()
-        Me.KeyPreview = True
+            txtLotNumber.Visible = True
+        End If
+
+
 
 
 
@@ -717,6 +720,9 @@ Public Class frmJobEntry
             Case "P20 BS", "P30 BS", "P35 BS"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE = 8 And DEFCONE > 0  And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE = 8 And CONEBARLEY > 0 And PACKENDTM is Null  Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE = 8 And M30 > 0 And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE = 8 And P30 > 0 And PACKENDTM is Null ")
+            Case "ReCheck"
+                packGrade = txtGrade.Text
+                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And M30 > 0 And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And P30 > 0 And PACKENDTM is Null")
             Case "Waste"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And FLT_W = 'True' And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8  And COLWASTE > 0 And PACKENDTM is Null ")
@@ -724,10 +730,9 @@ Public Class frmJobEntry
 
         If LRecordCount = 0 Then
             MsgBox("This is NOT Grade " & "'" & txtGrade.Text & "'" & " CHEESES PLEASE RE-SCAN")
-            Me.txtTraceNum.Clear()
-            Me.txtTraceNum.Focus()
             Me.txtLotNumber.Clear()
-            Me.txtLotNumber.Visible = False
+            Me.txtLotNumber.Visible = True
+            Me.txtLotNumber.Focus()
             quit = 1
             Exit Sub
         End If
@@ -780,6 +785,9 @@ Public Class frmJobEntry
             Case "P20 BS", "P30 BS", "P35 BS"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And DEFCONE > 0  And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And CONEBARLEY > 0 And PACKENDTM is Null  Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And M30 > 0 And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And P30 > 0 And PACKENDTM is Null ")
+            Case "ReCheck"
+                packGrade = txtGrade.Text
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And M30 > 0 And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And P30 > 0 And PACKENDTM is Null")
             Case "Waste"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And FLT_W = 'True' And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8  And COLWASTE > 0 And PACKENDTM is Null ")
@@ -798,8 +806,7 @@ Public Class frmJobEntry
 
         Else
             MsgBox("NO GRADE " & "'" & txtGrade.Text & "'" & " CHEESES CAN BE FOUND")
-            Me.txtTraceNum.Clear()
-            Me.txtTraceNum.Focus()
+
             Me.txtLotNumber.Clear()
             Me.txtLotNumber.Visible = False
             quit = 1
@@ -1121,5 +1128,10 @@ Public Class frmJobEntry
         lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
-
+    Private Sub ReCheckToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReCheckToolStripMenuItem.Click
+        txtGrade.Text = ReCheckToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
 End Class
