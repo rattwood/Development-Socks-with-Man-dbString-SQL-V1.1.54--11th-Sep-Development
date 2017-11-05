@@ -456,6 +456,7 @@ Public Class frmPackTodayUpdate
             For ccount = 1 To 3
                 For i = 12 To 41
                     MyTodyExcel.Cells(i, colCount) = "" 'Clear the contents of cone cells
+                    MyTodyExcel.Cells(i, colCount - 2) = "" 'Clear the contents of Carton cells
                 Next
                 If colCount < 12 Then colCount = colCount + 4
             Next
