@@ -48,11 +48,51 @@ Public Class frmPackPrvGet
                 Next
 
             Case "P25 AS", "P30 BS"
-                 'WE NEED TO CHECK ROW D12 TO D51, THEN H12 TO H51 THEN L12 TO L51
+                'WE NEED TO CHECK ROW D12 TO D51, THEN H12 TO H51 THEN L12 TO L51
+                Dim colCount As Integer = 4
 
+                For ccount = 1 To 3
+
+                    For rcount = 12 To 51
+                        If MyPrevExcel.Cells(rcount, colCount).Value > 0 Then  'C9-C40
+                            Continue For
+                        Else
+                            nfree = rcount
+                            ncfree = colCount
+                            Exit For
+                        End If
+                    Next
+                    If colCount < 12 Then colCount = colCount + 4
+                Next
             Case "P15 AS", "P20 BS"
-                 'WE NEED TO CHECK ROW D13 TO D64, THEN H13 TO H64 THEN L13 TO L64
+                'WE NEED TO CHECK ROW D13 TO D64, THEN H13 TO H64 THEN L13 TO L64
+                Dim colCount As Integer = 4
 
+                For ccount = 1 To 4
+                    If ccount < 4 Then
+                        For rcount = 14 To 66
+                            If MyPrevExcel.Cells(rcount, colCount).Value > 0 Then  'C9-C40
+                                Continue For
+                            Else
+                                nfree = rcount
+                                ncfree = colCount
+                                Exit For
+                            End If
+                        Next
+                    Else
+                        For rcount = 14 To 66
+                            If MyPrevExcel.Cells(rcount, colCount).Value > 0 Then  'C9-C40
+                                Continue For
+                            Else
+                                nfree = rcount
+                                ncfree = colCount
+                                Exit For
+                            End If
+                        Next
+                    End If
+
+                    If colCount < 16 Then colCount = colCount + 4
+                Next
             Case "ReCheck"
                 For rcount = 9 To 40
                     If MyPrevExcel.Cells(rcount, 3).Value > 0 Then  'C9-C40

@@ -31,7 +31,7 @@ Public Class frmPackRepMain
         prodNameMod = prodNameMod.Replace("/", "_")
 
         'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
-        sheetName = prodNameMod.Substring(prodNameMod.Length - 4)
+        sheetName = prodNameMod.Substring(prodNameMod.Length - 4) & "_" & frmJobEntry.txtGrade.Text
 
         'CREATE THE FULL NAME FOR SAVING THE FILE
         saveString = (prodNameMod & " " _
@@ -107,7 +107,7 @@ Public Class frmPackRepMain
                 Case "P25 AS", "P30 BS"
                     frmPackTodayUpdate.TodayUpdateBS_AS_30()
                 Case "P15 AS", "P20 BS"
-                    frmPackTodayUpdate.TodayUpdateBS_AS_30()
+                    frmPackTodayUpdate.TodayUpdateBS_AS_20()
                 Case "ReCheck"
                     frmPackTodayUpdate.TodayUpdate_ReCheck()
                     Me.Close()
