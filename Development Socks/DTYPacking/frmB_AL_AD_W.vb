@@ -112,7 +112,7 @@ Public Class frmB_AL_AD_W
                 DataGridView1.Rows.Add(32)
                 DataGridView1.RowHeadersVisible = False
 
-                'NUMBER THE 195 CELLS
+                'NUMBER THE 32 CELLS
                 For nums = 1 To 32
 
 
@@ -175,21 +175,77 @@ Public Class frmB_AL_AD_W
 
             'CHECK FOR UNPACKED CHEESE AND ALLOCATE
 
-            If frmDGV.DGVdata.Rows(i).Cells(36).Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i).Cells("PACKENDTM").Value) Then
-
+            'If frmDGV.DGVdata.Rows(i).Cells(36).Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i).Cells("PACKENDTM").Value) Then
+            If frmDGV.DGVdata.Rows(i).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i).Cells(33).Value = 0 Then
                 'write to the local DGV grid
                 DataGridView1.Rows(gridRow).Cells(gridCol).Value = frmDGV.DGVdata.Rows(i).Cells(36).Value  'Write to Grid Cone Bcode
                 DataGridView1.Rows(gridRow).Cells(gridCol).Style.BackColor = Color.LightGreen
 
+                If frmJobEntry.txtGrade.Text = "ReCheck" Then  'IF RECHK THEN SET FLAG< SET TIME AND SET NUBER 1-32
+                    frmDGV.DGVdata.Rows(i).Cells("RECHK").Value = 1
+                    frmDGV.DGVdata.Rows(i).Cells("RECHKSTARTTM").Value = DateAndTime.Today
+                    frmDGV.DGVdata.Rows(i).Cells("RECHKIDX").Value = DataGridView1.Rows(gridRow).Cells(0).Value
+
+                Else
+                    'Update DGV that Cheese has been alocated, update Packendtm
+                    frmDGV.DGVdata.Rows(i).Cells("PACKENDTM").Value = DateAndTime.Today
+                End If
                 'Update DGV that Cheese has been alocated, update Packendtm
-                frmDGV.DGVdata.Rows(i).Cells("PACKENDTM").Value = DateAndTime.Today
+                'frmDGV.DGVdata.Rows(i).Cells("PACKENDTM").Value = DateAndTime.Today
+
                 gridRow = gridRow + 1
                 coneCount = coneCount + 1
-                DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
+
+                Select Case frmJobEntry.txtGrade.Text
+
+
+
+
+                    Case "B", "AL", "AD", "P35 AS", "P35 BS"
+                        If coneCount < 90 Or coneCount = toAllocatedCount Then
+                            DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
+                        End If
+
+                    Case "P25 AS", "P30 BS"
+                        If coneCount < 120 Or coneCount = toAllocatedCount Then
+                            DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
+                        End If
+
+                    Case "P15 AS", "P20 BS"
+                        If coneCount < 195 Or coneCount = toAllocatedCount Then
+                            DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
+                        End If
+
+                    Case "ReCheck"
+                        If coneCount < 32 Or coneCount = toAllocatedCount Then
+                            DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
+                        End If
+
+                End Select
+
+
+
+
+
+                'gridRow = gridRow + 1
+                '    coneCount = coneCount + 1
+                '    DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
+
                 packedFlag = 1
+
+
                 Exit For
                 'CHECK FOR ALREADY PACKED CHEESE
-            ElseIf frmDGV.DGVdata.Rows(i).Cells(36).Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i).Cells("PACKENDTM").Value) Then
+            ElseIf frmDGV.DGVdata.Rows(i).Cells(36).Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i).Cells("PACKENDTM").Value) And frmjobentry.txtgrade.text <> "ReCheck" Then
+                Label8.Visible = True
+                Label8.Text = "Cheese already allocated"
+                DelayTM()
+                Label8.Visible = False
+                packedFlag = 0
+                txtConeBcode.Clear()
+                txtConeBcode.Focus()
+                Exit Sub
+            ElseIf frmDGV.DGVdata.Rows(i).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i).Cells(33).Value = 1 And frmjobentry.txtgrade.text = "ReCheck" Then
                 Label8.Visible = True
                 Label8.Text = "Cheese already allocated"
                 DelayTM()
@@ -218,22 +274,15 @@ Public Class frmB_AL_AD_W
 
             End If
 
-
-
-
-
-
-
         Next
         'UPDATE TOTAL COUNTED
         lbltotScan.Text = coneCount
 
 
-
-        'CHECK If ALL CHEESE on Sheet have been scanned
-        'endCheck()
-
         'ROUTINE TO MOVE TO NEW COLUMN WHEN COLUMN IS FULL
+
+        Label9.Text = coneCount
+
 
         Select Case frmJobEntry.txtGrade.Text
 
@@ -248,7 +297,7 @@ Public Class frmB_AL_AD_W
                     DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
                 End If
 
-                If coneCount > 90 Or coneCount = toAllocatedCount Then jobEnd()
+                If coneCount = 90 Or coneCount = toAllocatedCount Then jobEnd()
 
             Case "P25 AS", "P30 BS"
                 If gridRow = 31 And gridCol < 7 Then
@@ -257,7 +306,7 @@ Public Class frmB_AL_AD_W
                     DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
                 End If
 
-                If coneCount > 120 Or coneCount = toAllocatedCount Then jobEnd()
+                If coneCount = 120 Or coneCount = toAllocatedCount Then jobEnd()
 
             Case "P15 AS", "P20 BS"
 
@@ -267,11 +316,11 @@ Public Class frmB_AL_AD_W
                     DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
                 End If
 
-                If coneCount > 195 Or coneCount = toAllocatedCount Then jobEnd()
+                If coneCount = 195 Or coneCount = toAllocatedCount Then jobEnd()
 
             Case "ReCheck"
 
-                If coneCount > 32 Or coneCount = toAllocatedCount Then jobEnd()
+                If coneCount = 32 Or coneCount = toAllocatedCount Then jobEnd()
 
         End Select
 

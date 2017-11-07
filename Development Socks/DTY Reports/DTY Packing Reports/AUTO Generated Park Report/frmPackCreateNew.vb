@@ -359,10 +359,35 @@ Public Class frmPackCreateNew
         month = today.Substring(3, 2)
         year = today.Substring(6, 4)
 
-        gradeTxt = UCase(frmJobEntry.txtGrade.Text)
+
+        Select Case frmJobEntry.txtGrade.Text
+            Case "A"
+                gradeTxt = "A" 'A Grade
+            Case "B"
+                gradeTxt = "B" 'B Grade
+            Case "AL"
+                gradeTxt = "AL" 'AL Grade
+            Case "AD"
+                gradeTxt = "AD" 'AD Grade
+            Case "P35 AS"
+                gradeTxt = "P35AS" 'P35 AS Grade
+            Case "P35 BS"
+                gradeTxt = "P35BS" 'P35 BS Grade
+            Case "P25 AS"
+                gradeTxt = "P25AS" 'P25 AS Grade
+            Case "P30 BS"
+                gradeTxt = "P30BS" 'P30 BS Grade
+            Case "P15 AS"
+                gradeTxt = "P15AS" 'P15 AS Grade
+            Case "P20 BS"
+                gradeTxt = "P20BS" 'P20 BS Grade
+            Case "ReCheck"
+                gradeTxt = "RECHECK" 'ReCheck Grade
+        End Select
 
 
-        SheetCodeString = ("*" & frmJobEntry.varProductCode & year & month & day & frmPackRepMain.sheetName & gradeTxt & "0" & "*")
+
+        SheetCodeString = ("*" & frmJobEntry.varProductCode & year & month & day & gradeTxt & "0" & "*")
 
     End Sub
 

@@ -58,6 +58,7 @@ Public Class frmJobEntry
     Dim doffingNum As String
     Dim cartNum As String
     Dim quit As Integer
+    Dim reCheck As Integer = 0
     Public cartReport As Integer
 
     Public SortOP As String
@@ -182,6 +183,16 @@ Public Class frmJobEntry
             'Routine to check Barcode is TRUE
             Try
 
+            chkBCode = txtLotNumber.Text.Substring(13, 1)
+
+            If chkBCode = "R" Then
+
+                reCheck = 1
+
+                dbBarcode = txtLotNumber.Text
+
+
+            Else
                 chkBCode = txtLotNumber.Text.Substring(12, 1)
 
                 If chkBCode = "B" Then
@@ -190,10 +201,6 @@ Public Class frmJobEntry
                     Else
                         cartNum = txtLotNumber.Text.Substring(12, 2)
                     End If
-
-
-
-
                 Else
                     MsgBox("This is not a CART Barcode Please RE Scan")
                     Me.txtLotNumber.Clear()
@@ -202,8 +209,8 @@ Public Class frmJobEntry
                     Me.txtLotNumber.Refresh()
                     Exit Sub
                 End If
-
-            Catch ex As Exception
+            End If
+        Catch ex As Exception
                 MsgBox("BarCcode Is Not Valid")
                 Me.txtLotNumber.Clear()
                 Me.txtLotNumber.Focus()
@@ -461,6 +468,78 @@ Public Class frmJobEntry
 
             Me.Hide()
         End If
+
+
+
+
+    End Sub
+
+    Public Sub reCheckJob()
+
+        MsgBox("found ReCheck")
+
+        LExecQuery("SELECT * FROM jobs WHERE rechecksheetbcode = '" & dbBarcode & "'")
+
+        If LRecordCount > 0 Then
+
+            Dim result = MessageBox.Show("Edit Job Yes Or No", "JOB ALREADY EXISTS", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+
+            If result = DialogResult.Yes Then
+
+                'LOAD THE DATA FROM dB IN TO THE DATAGRID
+                frmDGV.DGVdata.DataSource = LDS.Tables(0)
+                frmDGV.DGVdata.Rows(0).Selected = True
+                Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
+
+
+                'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
+                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(87), ListSortDirection.Ascending)  'sorts On ReCheck index Number
+
+                'Dim LCB As SQLCommandBuilder = New SQLCommandBuilder(LDA)
+
+                coneValUpdate = 1
+
+                frmColReCheck.Show()
+                If My.Settings.debugSet Then frmDGV.Show()
+
+                Me.Hide()
+                Exit Sub
+            End If
+
+            If result = DialogResult.No Then
+                Me.txtLotNumber.Clear()
+                Me.txtLotNumber.Focus()
+
+            End If
+        Else
+            If My.Settings.chkUseColour Or My.Settings.chkUsePack Then
+                MsgBox("Job does not Exist, you must creat new Job from Sort Computer")
+                txtLotNumber.Clear()
+                txtLotNumber.Focus()
+                Exit Sub
+            End If
+
+
+
+            If quit Then
+                quit = 0
+                txtLotNumber.Clear()
+                txtLotNumber.Focus()
+                Exit Sub
+            End If
+            Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
+            LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
+            frmDGV.DGVdata.DataSource = LDS.Tables(0)
+            frmDGV.DGVdata.Rows(0).Selected = True
+            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
+            frmCart1.Show()
+
+            If My.Settings.debugSet Then frmDGV.Show()
+
+            Me.Hide()
+        End If
+
+
 
 
 

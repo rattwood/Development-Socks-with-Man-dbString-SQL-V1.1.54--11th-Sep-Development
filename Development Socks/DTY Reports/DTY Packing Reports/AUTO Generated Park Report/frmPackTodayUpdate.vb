@@ -11,7 +11,7 @@ Public Class frmPackTodayUpdate
     Dim nCol As Integer
     Dim ncfree As Integer
     Dim SheetCodeString As String
-
+    Dim modBarcode As String
 
 
 
@@ -1130,7 +1130,7 @@ Public Class frmPackTodayUpdate
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
         mycount = xlTodyWorkbook.Worksheets.Count
-        'boxCount = mycount + 1
+        boxCount = mycount + 1
 
         Dim totCount As Integer
 
@@ -1181,16 +1181,17 @@ Public Class frmPackTodayUpdate
 
 
         Try
-
+            createBarcode()
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
-                If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+                'If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
 
-
-
+                If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = "1" Then
+                    MsgBox("I am here")
                     'WRITE CONE NUMBER TO SHEET
                     MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
 
+                    frmDGV.DGVdata.Rows(i - 1).Cells(86).Value = modBarcode
                     nfree = nfree + 1
 
 
@@ -1305,11 +1306,42 @@ Public Class frmPackTodayUpdate
         month = today.Substring(3, 2)
         year = today.Substring(6, 4)
 
-        gradeTxt = UCase(frmJobEntry.txtGrade.Text)
+        Select Case frmJobEntry.txtGrade.Text
+            Case "A"
+                gradeTxt = "A" 'A Grade
+            Case "B"
+                gradeTxt = "B" 'B Grade
+            Case "AL"
+                gradeTxt = "AL" 'AL Grade
+            Case "AD"
+                gradeTxt = "AD" 'AD Grade
+            Case "P35 AS"
+                gradeTxt = "P35AS" 'P35 AS Grade
+            Case "P35 BS"
+                gradeTxt = "P35BS" 'P35 BS Grade
+            Case "P25 AS"
+                gradeTxt = "P25AS" 'P25 AS Grade
+            Case "P30 BS"
+                gradeTxt = "P30BS" 'P30 BS Grade
+            Case "P15 AS"
+                gradeTxt = "P15AS" 'P15 AS Grade
+            Case "P20 BS"
+                gradeTxt = "P20BS" 'P20 BS Grade
+            Case "ReCheck"
+                gradeTxt = "RECHECK" 'ReCheck Grade
+        End Select
 
 
-        SheetCodeString = ("*" & frmJobEntry.varProductCode & year & month & day & frmPackRepMain.sheetName & gradeTxt & (boxCount + 1) & "*")
+
+        SheetCodeString = ("*" & frmJobEntry.varProductCode & year & month & day & gradeTxt & boxCount & "*")
+        modBarcode = SheetCodeString.Replace("*", "")
+
+
+
 
     End Sub
 
+    Private Sub frmPackTodayUpdate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

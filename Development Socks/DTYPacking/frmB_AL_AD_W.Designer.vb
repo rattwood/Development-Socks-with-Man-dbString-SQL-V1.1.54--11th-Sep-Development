@@ -49,6 +49,7 @@ Partial Class frmB_AL_AD_W
         Me.Label16 = New System.Windows.Forms.Label()
         Me.lbltotCount = New System.Windows.Forms.Label()
         Me.lbltotScan = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -329,12 +330,22 @@ Partial Class frmB_AL_AD_W
         Me.lbltotScan.Size = New System.Drawing.Size(0, 16)
         Me.lbltotScan.TabIndex = 188
         '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(844, 646)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(39, 13)
+        Me.Label9.TabIndex = 189
+        Me.Label9.Text = "Label9"
+        '
         'frmB_AL_AD_W
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(1086, 861)
+        Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.lbltotScan)
         Me.Controls.Add(Me.lbltotCount)
@@ -389,4 +400,5 @@ Partial Class frmB_AL_AD_W
     Friend WithEvents CheeseNum4 As DataGridViewTextBoxColumn
     Friend WithEvents CheeseAloc5 As DataGridViewTextBoxColumn
     Friend WithEvents CheeseNum5 As DataGridViewTextBoxColumn
+    Friend WithEvents Label9 As Label
 End Class
