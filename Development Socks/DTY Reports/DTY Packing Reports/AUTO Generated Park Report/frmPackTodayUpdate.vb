@@ -928,14 +928,23 @@ Public Class frmPackTodayUpdate
             createBarcode()
             MyTodyExcel.Cells(1, 4) = SheetCodeString
 
-            colCount = 4
-            For ccount = 1 To 3
-                For i = 14 To 65
-                    MyTodyExcel.Cells(i, colCount) = "" 'Clear the contents of cone cells
-                    MyTodyExcel.Cells(i, colCount - 2) = "" 'Clear the contents of Carton cells
-                Next
-                If colCount < 16 Then colCount = colCount + 4
+
+            ncfree = 4
+            For nCol = 1 To 4
+                If nCol < 4 Then
+                    For x = 14 To 65
+                        MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
+                        MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
+                    Next
+                    ncfree = ncfree + 4
+                Else
+                    For x = 14 To 52
+                        MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
+                        MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
+                    Next
+                End If
             Next
+
             boxCount = boxCount + 1
             nfree = 14
             ncfree = 4
@@ -1047,7 +1056,7 @@ Public Class frmPackTodayUpdate
                         MyTodyExcel.DisplayAlerts = True
 
                         xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
-                        CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
+                        'CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
                         MyTodyExcel.Cells(9, 7) = frmDGV.DGVdata.Rows(0).Cells(52).Value
                         'Product Code
@@ -1058,13 +1067,13 @@ Public Class frmPackTodayUpdate
                         ncfree = 4
                         For nCol = 1 To 4
                             If nCol < 4 Then
-                                For x = 13 To 65
+                                For x = 14 To 65
                                     MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
                                     MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
                                 Next
                                 ncfree = ncfree + 4
                             Else
-                                For x = 13 To 52
+                                For x = 14 To 52
                                     MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
                                     MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
                                 Next
@@ -1072,7 +1081,7 @@ Public Class frmPackTodayUpdate
                         Next
 
                         'REST ROW AND COLUMN TO DEFAULT VALUES
-                        nfree = 13
+                        nfree = 14
                         ncfree = 4
                         boxCount = boxCount + 1
                     End If
