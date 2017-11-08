@@ -1187,7 +1187,7 @@ Public Class frmPackTodayUpdate
                 'If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
 
                 If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = "1" Then
-                    MsgBox("I am here")
+
                     'WRITE CONE NUMBER TO SHEET
                     MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
 
@@ -1301,10 +1301,10 @@ Public Class frmPackTodayUpdate
         Dim gradeTxt As String
 
         'Routine to get date brocken down
-        today = Convert.ToDateTime(today).ToString("dd-MM-yyyy")
+        today = Convert.ToDateTime(today).ToString("dd MM yyyy")
         day = today.Substring(0, 2)
         month = today.Substring(3, 2)
-        year = today.Substring(6, 4)
+        year = today.Substring(8, 2)
 
         Select Case frmJobEntry.txtGrade.Text
             Case "A"

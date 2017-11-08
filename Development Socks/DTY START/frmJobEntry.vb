@@ -183,7 +183,7 @@ Public Class frmJobEntry
             'Routine to check Barcode is TRUE
             Try
 
-            chkBCode = txtLotNumber.Text.Substring(13, 1)
+            chkBCode = txtLotNumber.Text.Substring(9, 1)
 
             If chkBCode = "R" Then
 
@@ -225,30 +225,31 @@ Public Class frmJobEntry
 
     Private Sub CreateJob()
 
-        If txtLotNumber.TextLength > 14 Then  ' For carts B10,11 & 12
-            machineName = ""
-            machineCode = txtLotNumber.Text.Substring(0, 2)
-            productCode = txtLotNumber.Text.Substring(2, 3)
-            year = txtLotNumber.Text.Substring(5, 2)
-            month = txtLotNumber.Text.Substring(7, 2)
-            doffingNum = txtLotNumber.Text.Substring(9, 3)
+        If Not reCheck Then
+            If txtLotNumber.TextLength > 14 Then  ' For carts B10,11 & 12
+                machineName = ""
+                machineCode = txtLotNumber.Text.Substring(0, 2)
+                productCode = txtLotNumber.Text.Substring(2, 3)
+                year = txtLotNumber.Text.Substring(5, 2)
+                month = txtLotNumber.Text.Substring(7, 2)
+                doffingNum = txtLotNumber.Text.Substring(9, 3)
 
-            cartNum = txtLotNumber.Text.Substring(12, 3)
+                cartNum = txtLotNumber.Text.Substring(12, 3)
 
 
-        Else
+            Else
                 machineName = ""                                    ' For carts B1 - 9
-            machineCode = txtLotNumber.Text.Substring(0, 2)
-            productCode = txtLotNumber.Text.Substring(2, 3)
-            year = txtLotNumber.Text.Substring(5, 2)
-            month = txtLotNumber.Text.Substring(7, 2)
-            doffingNum = txtLotNumber.Text.Substring(9, 3)
-            cartNum = txtLotNumber.Text.Substring(12, 2)
+                machineCode = txtLotNumber.Text.Substring(0, 2)
+                productCode = txtLotNumber.Text.Substring(2, 3)
+                year = txtLotNumber.Text.Substring(5, 2)
+                month = txtLotNumber.Text.Substring(7, 2)
+                doffingNum = txtLotNumber.Text.Substring(9, 3)
+                cartNum = txtLotNumber.Text.Substring(12, 2)
 
-        End If
+            End If
 
 
-        varCartBCode = txtLotNumber.Text
+            varCartBCode = txtLotNumber.Text
 
             If machineCode = 21 Then
                 machineName = "11D1"        'Left Side
@@ -356,10 +357,23 @@ Public Class frmJobEntry
             'Routine to change the scanned BARCODE to be the First CART not the secone cart and this is what will be stored in the DATABASE
 
             dbBarcode = txtLotNumber.Text.Replace(varCartNum, varCartNameA)
+        End If
 
 
-        ' Select SOrt or Colour routine
-        If My.Settings.chkUseColour Or My.Settings.chkUseSort Then CheckJob()
+
+
+
+        If reCheck Then
+            dbBarcode = txtLotNumber.Text
+            productCode = txtLotNumber.Text.Substring(0, 3)
+            year = txtLotNumber.Text.Substring(4, 2)
+            month = txtLotNumber.Text.Substring(6, 2)
+            varJobNum = txtLotNumber.Text
+            reCheckJob()
+        Else
+            ' Select SOrt or Colour routine
+            If My.Settings.chkUseColour Or My.Settings.chkUseSort Then CheckJob()
+        End If
 
         'Select Packing Routine
         If My.Settings.chkUsePack Then APacking()
@@ -476,9 +490,9 @@ Public Class frmJobEntry
 
     Public Sub reCheckJob()
 
-        MsgBox("found ReCheck")
 
-        LExecQuery("SELECT * FROM jobs WHERE rechecksheetbcode = '" & dbBarcode & "'")
+
+        LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "'")
 
         If LRecordCount > 0 Then
 
@@ -495,54 +509,34 @@ Public Class frmJobEntry
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
                 frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(87), ListSortDirection.Ascending)  'sorts On ReCheck index Number
 
-                'Dim LCB As SQLCommandBuilder = New SQLCommandBuilder(LDA)
-
-                coneValUpdate = 1
-
-                frmColReCheck.Show()
                 If My.Settings.debugSet Then frmDGV.Show()
 
-                Me.Hide()
-                Exit Sub
-            End If
+                'coneValUpdate = 1
+                If My.Settings.chkUseSort Then
+                    frmSortReCheck.Show()
+                ElseIf My.Settings.chkUseColour Then
+                    frmColReCheck.Show()
+                End If
 
-            If result = DialogResult.No Then
+
+                If My.Settings.debugSet Then frmDGV.Show()
+
+                    Me.Hide()
+                    Exit Sub
+                End If
+
+                If result = DialogResult.No Then
                 Me.txtLotNumber.Clear()
                 Me.txtLotNumber.Focus()
 
             End If
         Else
-            If My.Settings.chkUseColour Or My.Settings.chkUsePack Then
-                MsgBox("Job does not Exist, you must creat new Job from Sort Computer")
-                txtLotNumber.Clear()
-                txtLotNumber.Focus()
-                Exit Sub
-            End If
 
-
-
-            If quit Then
-                quit = 0
-                txtLotNumber.Clear()
-                txtLotNumber.Focus()
-                Exit Sub
-            End If
-            Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
-            LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
-            frmDGV.DGVdata.DataSource = LDS.Tables(0)
-            frmDGV.DGVdata.Rows(0).Selected = True
-            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
-            frmCart1.Show()
-
-            If My.Settings.debugSet Then frmDGV.Show()
-
-            Me.Hide()
+            MsgBox("Job does not Exist")
+            txtLotNumber.Clear()
+            txtLotNumber.Focus()
+            Exit Sub
         End If
-
-
-
-
-
 
     End Sub
 

@@ -32,7 +32,7 @@ Public Class frmPackCreateNew
                 'Product Code
                 MyPakExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells(2).Value        'F7
                 'DATE
-                MyPakExcel.Cells(5, 3) = Date.Now.ToString("dd_MM_yyyy")              'C5
+                MyPakExcel.Cells(5, 3) = Date.Now.ToString("dd MM yyyy")              'C5
                 'CHEESE WEIGHT
                 MyPakExcel.Cells(13, 5) = frmJobEntry.varProdWeight                   'E13
                 'PACKER NAME
@@ -56,7 +56,7 @@ Public Class frmPackCreateNew
                 'Product Code
                 MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'L6
                 'DATE
-                MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd_MM_yyyy")              'D5
+                MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D5
                 'CHEESE WEIGHT
                 MyPakExcel.Cells(12, 5) = frmJobEntry.varProdWeight                   'E12
                 'PACKER NAME
@@ -117,7 +117,7 @@ Public Class frmPackCreateNew
                 'Product Code
                 MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'L6
                 'DATE
-                MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd_MM_yyyy")              'D5
+                MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D5
                 'CHEESE WEIGHT
                 MyPakExcel.Cells(12, 5) = frmJobEntry.varProdWeight                   'E12
                 'PACKER NAME
@@ -178,7 +178,7 @@ Public Class frmPackCreateNew
                 'Product Code
                 MyPakExcel.Cells(7, 14) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'N8
                 'DATE
-                MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd_MM_yyyy")              'D6
+                MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D6
                 'CHEESE WEIGHT
                 MyPakExcel.Cells(14, 5) = frmJobEntry.varProdWeight                   'E13
                 'BARCODE IN
@@ -257,10 +257,10 @@ Public Class frmPackCreateNew
                         MyPakExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D5
                         'Product Code
                         MyPakExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'G5
-                        'DATE
-                        MyPakExcel.Cells(4, 7) = Date.Now.ToString("dd_MM_yyyy")              'G4
-                        'CHEESE WEIGHT
-                        MyPakExcel.Cells(4, 5) = frmJobEntry.varProdWeight                   'E4
+                'DATE
+                MyPakExcel.Cells(4, 7) = Date.Now.ToString("dd MM yyyy")              'G4
+                'CHEESE WEIGHT
+                MyPakExcel.Cells(4, 5) = frmJobEntry.varProdWeight                   'E4
                 'PACKER NAME
                 MyPakExcel.Cells(42, 3) = frmDGV.DGVdata.Rows(0).Cells(55).Value      'D53
 
@@ -354,11 +354,11 @@ Public Class frmPackCreateNew
         Dim gradeTxt As String
 
         'Routine to get date brocken down
-        today = Convert.ToDateTime(today).ToString("dd-MM-yyyy")
+        today = Convert.ToDateTime(today).ToString("dd MM yyyy")
         day = today.Substring(0, 2)
         month = today.Substring(3, 2)
-        year = today.Substring(6, 4)
-
+        year = today.Substring(8, 2)
+        MsgBox(year)
 
         Select Case frmJobEntry.txtGrade.Text
             Case "A"
@@ -387,7 +387,7 @@ Public Class frmPackCreateNew
 
 
 
-        SheetCodeString = ("*" & frmJobEntry.varProductCode & year & month & day & gradeTxt & "0" & "*")
+        SheetCodeString = ("*" & frmJobEntry.varProductCode & year & month & day & gradeTxt & "1" & "*")
 
     End Sub
 

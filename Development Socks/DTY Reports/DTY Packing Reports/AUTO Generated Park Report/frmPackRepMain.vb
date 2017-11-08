@@ -118,30 +118,36 @@ Public Class frmPackRepMain
             Exit Sub
         End If
 
-        If File.Exists(yestname1) Then      'ONE DAY AGO
-            prevDaysName = yestname1
-            prevDays = Date.Now.AddDays(-1).ToString("ddMMyyyy")
-            'MsgBox("I am ready to continue with sheet from Yesterday  " & prevDays)
-            frmPackPrvGet.PrvGet()
-            Me.Close()
-        ElseIf File.Exists(yestname2) Then  'TWO DAYS AGO
-            prevDaysName = yestname2
-            prevDays = Date.Now.AddDays(-2).ToString("ddMMyyyy")
-            'MsgBox("I am ready to continue with sheet from Two days ago  " & prevDays)
-            frmPackPrvGet.PrvGet()
-            Me.Close()
-        ElseIf File.Exists(yestname3) Then  'THREE DAYS AGO
-            prevDaysName = yestname3
-            prevDays = Date.Now.AddDays(-3).ToString("ddMMyyyy")
-            'MsgBox("I am ready to continue with sheet from three days ago  " & prevDays)
-            frmPackPrvGet.PrvGet()
-            Me.Close()
+        If frmJobEntry.txtGrade.Text <> "ReCheck" Then  'IF RECHECK DO NOT GET SHEETS FROM PREVIOUS DAY
+
+            If File.Exists(yestname1) Then      'ONE DAY AGO
+                prevDaysName = yestname1
+                prevDays = Date.Now.AddDays(-1).ToString("ddMMyyyy")
+                'MsgBox("I am ready to continue with sheet from Yesterday  " & prevDays)
+                frmPackPrvGet.PrvGet()
+                Me.Close()
+            ElseIf File.Exists(yestname2) Then  'TWO DAYS AGO
+                prevDaysName = yestname2
+                prevDays = Date.Now.AddDays(-2).ToString("ddMMyyyy")
+                'MsgBox("I am ready to continue with sheet from Two days ago  " & prevDays)
+                frmPackPrvGet.PrvGet()
+                Me.Close()
+            ElseIf File.Exists(yestname3) Then  'THREE DAYS AGO
+                prevDaysName = yestname3
+                prevDays = Date.Now.AddDays(-3).ToString("ddMMyyyy")
+                'MsgBox("I am ready to continue with sheet from three days ago  " & prevDays)
+                frmPackPrvGet.PrvGet()
+                Me.Close()
+            Else
+                'MsgBox("I am ready to create a new sheet")
+                frmPackCreateNew.CreateNew()
+                Me.Close()
+            End If
         Else
             'MsgBox("I am ready to create a new sheet")
             frmPackCreateNew.CreateNew()
             Me.Close()
         End If
-
 
 
     End Sub
