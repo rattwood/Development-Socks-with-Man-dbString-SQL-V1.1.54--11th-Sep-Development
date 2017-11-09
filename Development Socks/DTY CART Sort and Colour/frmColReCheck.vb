@@ -1,5 +1,6 @@
 ﻿Imports Excel = Microsoft.Office.Interop.Excel
 
+
 Public Class frmColReCheck
 
 
@@ -57,26 +58,17 @@ Public Class frmColReCheck
         'CREATE ROWS IN DGV
 
         'create rows 
-        DataGridView1.Rows.Add(31)
+        DataGridView1.Rows.Add(32)
         DataGridView1.RowHeadersVisible = False
 
 
         For i = 1 To 32
-
-
             DataGridView1.Rows(i - 1).Cells(0).Value = frmDGV.DGVdata.Rows(i - 1).Cells(88).Value
             DataGridView1.Rows(i - 1).Cells(1).Value = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
-
-
-
-
         Next
 
-
-
-
-
-        MsgBox("wait here")
+        DataGridView1.AllowUserToAddRows = False
+        Label20.Text = frmJobEntry.varProductName
 
 
     End Sub
@@ -295,6 +287,24 @@ Public Class frmColReCheck
 
     End Sub
 
+    'Private Sub CellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
+    '    MsgBox("I am here")
+    '    Dim allletters As String = "adlbw"
+    '    'If Not allletters.Contains(e.KeyChar.ToString.ToLower) Then
+
+    '    '    e.KeyChar = ChrW(0)
+    '    '    e.Handled = True
+
+    '    'End If
+    'End Sub
+
+    'Private Sub DataGridView1_CellFormmatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DataGridView1.CellValueChanged
+    '    If e.Value IsNot Nothing Then
+    '        e.Value = e.Value.ToString().ToUpper()
+    '        e.FormattingApplied = True
+    '    End If
+
+    'End Sub
 
 
     Public Sub tsbtnSave()
@@ -326,13 +336,70 @@ Public Class frmColReCheck
                     MsgBox(colname & ", Row " & i & " has no value. Please correct and try again")
                     Exit Sub
 
-                Else
-
-                    finish()
-
                 End If
 
             Next
+        Next
+
+        Dim CharRead As String
+        For x = 2 To 3
+            For i = 1 To 32
+                CharRead = DataGridView1.Rows(i - 1).Cells(x).Value
+
+                Select Case CharRead
+
+                    Case "a", "A"
+
+                        DataGridView1.Rows(i - 1).Cells(x).Style.ForeColor = Color.DarkBlue  'Grade A
+                        DataGridView1.Rows(i - 1).Cells(x).Value = "OK"
+
+                    Case "d", "D"
+                        DataGridView1.Rows(i - 1).Cells(x).Style.ForeColor = Color.Green    'Grade AD
+                        DataGridView1.Rows(i - 1).Cells(x).Value = "+"
+                    Case "l", "L"
+                        DataGridView1.Rows(i - 1).Cells(x).Style.ForeColor = Color.Blue   'Grade AL
+                        DataGridView1.Rows(i - 1).Cells(x).Value = "-"
+                    Case "b", "B"
+                        DataGridView1.Rows(i - 1).Cells(x).Style.ForeColor = Color.Red    'Grade Abnormal (B)
+                        DataGridView1.Rows(i - 1).Cells(x).Value = "@"
+                    Case "w", "W"
+                        DataGridView1.Rows(i - 1).Cells(x).Style.ForeColor = Color.Black   'Grade Waste
+                        DataGridView1.Rows(i - 1).Cells(x).Value = "*"
+
+                End Select
+            Next
+        Next
+
+        Dim tmpReChk1, tmpRechk2 As String
+
+
+
+        For i = 1 To 32
+            tmpReChk1 = DataGridView1.Rows(i - 1).Cells(2).Value
+            tmpRechk2 = DataGridView1.Rows(i - 1).Cells(3).Value
+
+            'A Grade
+            If tmpReChk1 = "OK" And tmpRechk2 = "OK" Then
+                DataGridView1.Rows(i - 1).Cells(4).Style.ForeColor = Color.DarkBlue  'Grade A
+                DataGridView1.Rows(i - 1).Cells(4).Value = "A"
+            ElseIf tmpReChk1 = "OK" And tmpRechk2 = "+" Or tmpReChk1 = "+" And tmpRechk2 = "OK" Or tmpReChk1 = "+" And tmpRechk2 = "+" Then
+                'AD Grade
+                DataGridView1.Rows(i - 1).Cells(4).Style.ForeColor = Color.Green    'Grade AD
+                DataGridView1.Rows(i - 1).Cells(4).Value = "AD"
+            ElseIf tmpReChk1 = "OK" And tmpRechk2 = "-" Or tmpReChk1 = "-" And tmpRechk2 = "OK" Or tmpReChk1 = "-" And tmpRechk2 = "-" Then
+                'AL Grade
+                DataGridView1.Rows(i - 1).Cells(4).Style.ForeColor = Color.Blue   'Grade AL
+                DataGridView1.Rows(i - 1).Cells(4).Value = "AL"
+            ElseIf tmpReChk1 = "OK" And tmpRechk2 = "@" Or tmpReChk1 = "@" And tmpRechk2 = "OK" Or tmpReChk1 = "@" And tmpRechk2 = "@" Or tmpReChk1 = "@" And tmpRechk2 = "-" Or tmpReChk1 = "-" And tmpRechk2 = "@" Or tmpReChk1 = "@" And tmpRechk2 = "+" Or tmpReChk1 = "+" And tmpRechk2 = "@" Then
+                'AB (B) Grade
+                DataGridView1.Rows(i - 1).Cells(4).Style.ForeColor = Color.Red    'Grade Abnormal (B)
+                DataGridView1.Rows(i - 1).Cells(4).Value = "B"
+            ElseIf tmpReChk1 = "Ok" And tmpRechk2 = "*" Or tmpReChk1 = "*" And tmpRechk2 = "OK" Or tmpReChk1 = "*" And tmpRechk2 = "*" Or tmpReChk1 = "*" And tmpRechk2 = "-" Or tmpReChk1 = "-" And tmpRechk2 = "*" Or tmpReChk1 = "*" And tmpRechk2 = "+" Or tmpReChk1 = "+" And tmpRechk2 = "*" Then
+                'Waste Grade
+                DataGridView1.Rows(i - 1).Cells(4).Style.ForeColor = Color.Black   'Grade Waste
+                DataGridView1.Rows(i - 1).Cells(4).Value = "W"
+            End If
+
         Next
 
 
