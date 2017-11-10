@@ -164,7 +164,8 @@ Public Class frmB_AL_AD_W
 
         bcodeScan = txtConeBcode.Text
 
-
+        Dim fmt As String = "00"
+        Dim modIdxNum As String
         Dim today As String = DateAndTime.Today
         today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
 
@@ -184,7 +185,10 @@ Public Class frmB_AL_AD_W
                 If frmJobEntry.txtGrade.Text = "ReCheck" Then  'IF RECHK THEN SET FLAG< SET TIME AND SET NUBER 1-32
                     frmDGV.DGVdata.Rows(i).Cells("RECHK").Value = 1
                     frmDGV.DGVdata.Rows(i).Cells("RECHKSTARTTM").Value = DateAndTime.Today
-                    frmDGV.DGVdata.Rows(i).Cells("RECHKIDX").Value = DataGridView1.Rows(gridRow).Cells(0).Value
+
+                    modIdxNum = i.ToString(fmt)
+
+                    frmDGV.DGVdata.Rows(i).Cells("RECHKIDX").Value = modIdxNum 'DataGridView1.Rows(gridRow).Cells(0).Value
 
                 Else
                     'Update DGV that Cheese has been alocated, update Packendtm

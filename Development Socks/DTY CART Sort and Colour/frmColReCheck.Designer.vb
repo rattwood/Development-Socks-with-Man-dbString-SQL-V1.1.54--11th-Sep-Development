@@ -22,20 +22,14 @@ Partial Class frmColReCheck
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle49 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle50 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle51 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle52 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle53 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle54 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.rechkinx = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.bocdecone = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.rechk1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.rechk2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.rechkGrade = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.rechkdef = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.btnFinish = New System.Windows.Forms.Button()
+        Me.btnResults = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -56,6 +50,16 @@ Partial Class frmColReCheck
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnFinish = New System.Windows.Forms.Button()
+        Me.rechkinx = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.bocdecone = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.rechk1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.rechk2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.rechkGrade = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.rechkdef = New System.Windows.Forms.DataGridViewComboBoxColumn()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -69,97 +73,14 @@ Partial Class frmColReCheck
         Me.DataGridView1.Size = New System.Drawing.Size(687, 773)
         Me.DataGridView1.TabIndex = 0
         '
-        'rechkinx
+        'btnResults
         '
-        Me.rechkinx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter
-        DataGridViewCellStyle49.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle49.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle49.NullValue = Nothing
-        Me.rechkinx.DefaultCellStyle = DataGridViewCellStyle49
-        Me.rechkinx.DividerWidth = 5
-        Me.rechkinx.Frozen = True
-        Me.rechkinx.HeaderText = "NO."
-        Me.rechkinx.MaxInputLength = 2
-        Me.rechkinx.Name = "rechkinx"
-        Me.rechkinx.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.rechkinx.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.rechkinx.Width = 50
-        '
-        'bocdecone
-        '
-        Me.bocdecone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle50.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle50.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bocdecone.DefaultCellStyle = DataGridViewCellStyle50
-        Me.bocdecone.DividerWidth = 5
-        Me.bocdecone.Frozen = True
-        Me.bocdecone.HeaderText = "S/P No."
-        Me.bocdecone.MaxInputLength = 16
-        Me.bocdecone.Name = "bocdecone"
-        '
-        'rechk1
-        '
-        Me.rechk1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter
-        DataGridViewCellStyle51.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.rechk1.DefaultCellStyle = DataGridViewCellStyle51
-        Me.rechk1.DividerWidth = 5
-        Me.rechk1.Frozen = True
-        Me.rechk1.HeaderText = "ReCheck 1"
-        Me.rechk1.MaxInputLength = 1
-        Me.rechk1.Name = "rechk1"
-        Me.rechk1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'rechk2
-        '
-        Me.rechk2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter
-        DataGridViewCellStyle52.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle52.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rechk2.DefaultCellStyle = DataGridViewCellStyle52
-        Me.rechk2.DividerWidth = 5
-        Me.rechk2.Frozen = True
-        Me.rechk2.HeaderText = "ReCheck 2"
-        Me.rechk2.MaxInputLength = 1
-        Me.rechk2.Name = "rechk2"
-        '
-        'rechkGrade
-        '
-        Me.rechkGrade.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter
-        DataGridViewCellStyle53.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle53.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rechkGrade.DefaultCellStyle = DataGridViewCellStyle53
-        Me.rechkGrade.DividerWidth = 5
-        Me.rechkGrade.Frozen = True
-        Me.rechkGrade.HeaderText = "Grade"
-        Me.rechkGrade.MaxInputLength = 2
-        Me.rechkGrade.Name = "rechkGrade"
-        Me.rechkGrade.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'rechkdef
-        '
-        Me.rechkdef.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter
-        DataGridViewCellStyle54.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.rechkdef.DefaultCellStyle = DataGridViewCellStyle54
-        Me.rechkdef.DividerWidth = 5
-        Me.rechkdef.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.rechkdef.Frozen = True
-        Me.rechkdef.HeaderText = "Remark"
-        Me.rechkdef.Items.AddRange(New Object() {"KEBA", "DIRTY", "FORM AB", "OVERTHROWN", "TENSION AB", "PAPERTUBE AB", "SHORT CHEESE", "X MISSING CHEESE", "NO TAIL & ABNORMAL", "WASTE", "HITTING", "TARUMI", "B GRADE BY M/C", "C GRADE BY MACHINE", "DIRTY OIL", "DIRTY NY HAND", "COLOUR AB", "FLY IN", "YARN AB", "HIGH TENSION", "LOW TENSION"})
-        Me.rechkdef.Name = "rechkdef"
-        Me.rechkdef.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'btnFinish
-        '
-        Me.btnFinish.Location = New System.Drawing.Point(862, 615)
-        Me.btnFinish.Name = "btnFinish"
-        Me.btnFinish.Size = New System.Drawing.Size(87, 23)
-        Me.btnFinish.TabIndex = 1
-        Me.btnFinish.Text = "Finish"
-        Me.btnFinish.UseVisualStyleBackColor = True
+        Me.btnResults.Location = New System.Drawing.Point(861, 393)
+        Me.btnResults.Name = "btnResults"
+        Me.btnResults.Size = New System.Drawing.Size(87, 23)
+        Me.btnResults.TabIndex = 1
+        Me.btnResults.Text = "Results"
+        Me.btnResults.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -353,7 +274,7 @@ Partial Class frmColReCheck
         '
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(803, 41)
+        Me.Label19.Location = New System.Drawing.Point(806, 101)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(81, 20)
         Me.Label19.TabIndex = 20
@@ -363,16 +284,144 @@ Partial Class frmColReCheck
         '
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(890, 41)
+        Me.Label20.Location = New System.Drawing.Point(893, 101)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(0, 20)
         Me.Label20.TabIndex = 21
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.Location = New System.Drawing.Point(893, 54)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(0, 20)
+        Me.Label21.TabIndex = 23
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label22.Location = New System.Drawing.Point(806, 54)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(77, 20)
+        Me.Label22.TabIndex = 22
+        Me.Label22.Text = "Job Ref:"
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Location = New System.Drawing.Point(953, 613)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(87, 23)
+        Me.btnCancel.TabIndex = 24
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
+        'btnFinish
+        '
+        Me.btnFinish.Location = New System.Drawing.Point(744, 613)
+        Me.btnFinish.Name = "btnFinish"
+        Me.btnFinish.Size = New System.Drawing.Size(87, 23)
+        Me.btnFinish.TabIndex = 25
+        Me.btnFinish.Text = "Finish"
+        Me.btnFinish.UseVisualStyleBackColor = True
+        Me.btnFinish.Visible = False
+        '
+        'rechkinx
+        '
+        Me.rechkinx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.NullValue = Nothing
+        Me.rechkinx.DefaultCellStyle = DataGridViewCellStyle1
+        Me.rechkinx.DividerWidth = 5
+        Me.rechkinx.Frozen = True
+        Me.rechkinx.HeaderText = "NO."
+        Me.rechkinx.MaxInputLength = 2
+        Me.rechkinx.Name = "rechkinx"
+        Me.rechkinx.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.rechkinx.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.rechkinx.Width = 50
+        '
+        'bocdecone
+        '
+        Me.bocdecone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bocdecone.DefaultCellStyle = DataGridViewCellStyle2
+        Me.bocdecone.DividerWidth = 5
+        Me.bocdecone.Frozen = True
+        Me.bocdecone.HeaderText = "S/P No."
+        Me.bocdecone.MaxInputLength = 16
+        Me.bocdecone.Name = "bocdecone"
+        Me.bocdecone.Width = 125
+        '
+        'rechk1
+        '
+        Me.rechk1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.rechk1.DefaultCellStyle = DataGridViewCellStyle3
+        Me.rechk1.DividerWidth = 5
+        Me.rechk1.Frozen = True
+        Me.rechk1.HeaderText = "ReCheck 1"
+        Me.rechk1.MaxInputLength = 1
+        Me.rechk1.Name = "rechk1"
+        Me.rechk1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'rechk2
+        '
+        Me.rechk2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rechk2.DefaultCellStyle = DataGridViewCellStyle4
+        Me.rechk2.DividerWidth = 5
+        Me.rechk2.Frozen = True
+        Me.rechk2.HeaderText = "ReCheck 2"
+        Me.rechk2.MaxInputLength = 1
+        Me.rechk2.Name = "rechk2"
+        '
+        'rechkGrade
+        '
+        Me.rechkGrade.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rechkGrade.DefaultCellStyle = DataGridViewCellStyle5
+        Me.rechkGrade.DividerWidth = 5
+        Me.rechkGrade.Frozen = True
+        Me.rechkGrade.HeaderText = "Grade"
+        Me.rechkGrade.MaxInputLength = 2
+        Me.rechkGrade.Name = "rechkGrade"
+        Me.rechkGrade.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'rechkdef
+        '
+        Me.rechkdef.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.rechkdef.DefaultCellStyle = DataGridViewCellStyle6
+        Me.rechkdef.DividerWidth = 5
+        Me.rechkdef.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.rechkdef.Frozen = True
+        Me.rechkdef.HeaderText = "Remark"
+        Me.rechkdef.Items.AddRange(New Object() {"", "BARRE", "KEBA", "DIRTY", "FORM AB", "OVERTHROWN", "TENSION AB", "PAPERTUBE AB", "SHORT CHEESE", "X MISSING CHEESE", "NO TAIL & ABNORMAL", "WASTE", "HITTING", "TARUMI", "B GRADE BY M/C", "C GRADE BY MACHINE", "DIRTY OIL", "DIRTY NY HAND", "COLOUR AB", "FLY IN", "YARN AB", "HIGH TENSION", "LOW TENSION"})
+        Me.rechkdef.Name = "rechkdef"
+        Me.rechkdef.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.rechkdef.Width = 200
         '
         'frmColReCheck
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1267, 781)
+        Me.Controls.Add(Me.btnFinish)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.Label21)
+        Me.Controls.Add(Me.Label22)
         Me.Controls.Add(Me.Label20)
         Me.Controls.Add(Me.Label19)
         Me.Controls.Add(Me.Label14)
@@ -393,7 +442,7 @@ Partial Class frmColReCheck
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.btnFinish)
+        Me.Controls.Add(Me.btnResults)
         Me.Controls.Add(Me.DataGridView1)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Name = "frmColReCheck"
@@ -404,13 +453,7 @@ Partial Class frmColReCheck
 
     End Sub
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents btnFinish As Button
-    Friend WithEvents rechkinx As DataGridViewTextBoxColumn
-    Friend WithEvents bocdecone As DataGridViewTextBoxColumn
-    Friend WithEvents rechk1 As DataGridViewTextBoxColumn
-    Friend WithEvents rechk2 As DataGridViewTextBoxColumn
-    Friend WithEvents rechkGrade As DataGridViewTextBoxColumn
-    Friend WithEvents rechkdef As DataGridViewComboBoxColumn
+    Friend WithEvents btnResults As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
@@ -431,4 +474,14 @@ Partial Class frmColReCheck
     Friend WithEvents Label18 As Label
     Friend WithEvents Label19 As Label
     Friend WithEvents Label20 As Label
+    Friend WithEvents Label21 As Label
+    Friend WithEvents Label22 As Label
+    Friend WithEvents btnCancel As Button
+    Friend WithEvents btnFinish As Button
+    Friend WithEvents rechkinx As DataGridViewTextBoxColumn
+    Friend WithEvents bocdecone As DataGridViewTextBoxColumn
+    Friend WithEvents rechk1 As DataGridViewTextBoxColumn
+    Friend WithEvents rechk2 As DataGridViewTextBoxColumn
+    Friend WithEvents rechkGrade As DataGridViewTextBoxColumn
+    Friend WithEvents rechkdef As DataGridViewComboBoxColumn
 End Class
