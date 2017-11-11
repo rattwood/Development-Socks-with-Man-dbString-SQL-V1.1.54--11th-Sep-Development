@@ -254,17 +254,17 @@ Public Class frmSortReCheck
 
                     If cl = 12 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackColor = Color.Yellow    'DEFECT
 
-                    'If cl > 12 And cl < 15 Then Continue For
+                'If cl > 12 And cl < 15 Then Continue For
 
 
-                    If cl = 15 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.Zero       'ZERO CONE
-                    If cl = 16 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.BARRE     'BARLEY
-                    If cl = 17 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M10  'M10
-                    If cl = 18 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P10     'P10
-                    If cl = 19 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M30    'M30
-                    If cl = 20 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P30   'P30
-                    If cl = 21 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M50      'M50
-                    If cl = 22 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P50     'P50
+                '  If cl = 15 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.Zero       'ZERO CONE
+                If cl = 16 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.BARRE     'BARLEY
+                'If cl = 17 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M10  'M10
+                'If cl = 18 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P10     'P10
+                'If cl = 19 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M30    'M30
+                'If cl = 20 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P30   'P30
+                'If cl = 21 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M50      'M50
+                'If cl = 22 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P50     'P50
 
 
             Next
@@ -488,15 +488,15 @@ Public Class frmSortReCheck
                         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(12).Value = 0 'defectCone
                         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(15).Value = 0 'passCone  Zero Colour Difference    
                         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(16).Value = 0 'Cone with large colour defect
-                        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(17).Value = 0   'coneM10
-                        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(18).Value = 0   'coneP10
-                        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(19).Value = 0   'coneM30
-                        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(20).Value = 0  'coneP30
-                        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(21).Value = 0   'coneM50
-                        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(22).Value = 0  'coneP50
+                    'frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(17).Value = 0   'coneM10
+                    'frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(18).Value = 0   'coneP10
+                    '    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(19).Value = 0   'coneM30
+                    '    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(20).Value = 0  'coneP30
+                    '    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(21).Value = 0   'coneM50
+                    '    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(22).Value = 0  'coneP50
 
 
-                        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_K").Value = "False"   'KEBA Fault  TODO
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_K").Value = "False"   'KEBA Fault  TODO
                         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_D").Value = "False"  'DIRTY Fault  TODO
                         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_F").Value = "False"     'FORM AB Fault  TODO
                         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_O").Value = "False"     'OVERTHROWN Fault  TODO

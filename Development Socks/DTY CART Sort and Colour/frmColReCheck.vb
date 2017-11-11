@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 Imports Excel = Microsoft.Office.Interop.Excel
-
+Imports System.ComponentModel
 
 Public Class frmColReCheck
 
@@ -67,6 +67,7 @@ Public Class frmColReCheck
             DataGridView1.Rows(i - 1).Cells(0).Value = frmDGV.DGVdata.Rows(i - 1).Cells(88).Value
             DataGridView1.Rows(i - 1).Cells(1).Value = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
 
+            If frmDGV.DGVdata.Rows(i - 1).Cells(16).Value > 0 Then DataGridView1.Rows(i - 1).Cells(5).Value = "BARRE"
             If frmDGV.DGVdata.Rows(i - 1).Cells(37).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "KEBA"
             If frmDGV.DGVdata.Rows(i - 1).Cells(38).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "DIRTY"
             If frmDGV.DGVdata.Rows(i - 1).Cells(39).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "FORM AB"
@@ -76,22 +77,23 @@ Public Class frmColReCheck
             If frmDGV.DGVdata.Rows(i - 1).Cells(43).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "SHORT CHEESE"
             If frmDGV.DGVdata.Rows(i - 1).Cells(44).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "X MISSING CHEESE"
             If frmDGV.DGVdata.Rows(i - 1).Cells(45).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "NO TAIL & ABNORMAL"
-            If frmDGV.DGVdata.Rows(i - 1).Cells(46).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "HITTING"
-            If frmDGV.DGVdata.Rows(i - 1).Cells(47).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "TARUMI"
-            If frmDGV.DGVdata.Rows(i - 1).Cells(48).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "B GRADE BY M/C"
-            If frmDGV.DGVdata.Rows(i - 1).Cells(49).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "C GRADE BY MACHINE"
-            If frmDGV.DGVdata.Rows(i - 1).Cells(50).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "DIRTY OIL"
-            If frmDGV.DGVdata.Rows(i - 1).Cells(66).Value > 0 Then DataGridView1.Rows(i - 1).Cells(5).Value = "BARRE"
-            If frmDGV.DGVdata.Rows(i - 1).Cells(67).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "DIRTY NY HAND"
-            If frmDGV.DGVdata.Rows(i - 1).Cells(68).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "COLOUR AB"
-            If frmDGV.DGVdata.Rows(i - 1).Cells(69).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "FLY IN"
-            If frmDGV.DGVdata.Rows(i - 1).Cells(70).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "YARN AB"
-            If frmDGV.DGVdata.Rows(i - 1).Cells(71).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "HIGH TENSION"
-            If frmDGV.DGVdata.Rows(i - 1).Cells(72).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "LOW TENSION"
+            If frmDGV.DGVdata.Rows(i - 1).Cells(46).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "WASTE"
+            If frmDGV.DGVdata.Rows(i - 1).Cells(47).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "HITTING"
+            If frmDGV.DGVdata.Rows(i - 1).Cells(48).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "TARUMI"
+            If frmDGV.DGVdata.Rows(i - 1).Cells(49).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "B GRADE BY M/C"
+            If frmDGV.DGVdata.Rows(i - 1).Cells(50).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "C GRADE BY MACHINE"
+            If frmDGV.DGVdata.Rows(i - 1).Cells(67).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "DIRTY OIL"
+            If frmDGV.DGVdata.Rows(i - 1).Cells(68).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "DIRTY NY HAND"
+            If frmDGV.DGVdata.Rows(i - 1).Cells(69).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "COLOUR AB"
+            If frmDGV.DGVdata.Rows(i - 1).Cells(70).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "FLY IN"
+            If frmDGV.DGVdata.Rows(i - 1).Cells(71).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "YARN AB"
+            If frmDGV.DGVdata.Rows(i - 1).Cells(72).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "HIGH TENSION"
+            If frmDGV.DGVdata.Rows(i - 1).Cells(73).Value = True Then DataGridView1.Rows(i - 1).Cells(5).Value = "LOW TENSION"
 
+            'Debug values remove before release
 
-
-
+            DataGridView1.Rows(i - 1).Cells(2).Value = "d"
+            DataGridView1.Rows(i - 1).Cells(3).Value = "d"
 
         Next
 
@@ -129,10 +131,8 @@ Public Class frmColReCheck
                 Select Case CharRead
 
                     Case "a", "A"
-
                         DataGridView1.Rows(i - 1).Cells(x).Style.ForeColor = Color.DarkBlue  'Grade A
                         DataGridView1.Rows(i - 1).Cells(x).Value = "OK"
-
                     Case "d", "D"
                         DataGridView1.Rows(i - 1).Cells(x).Style.ForeColor = Color.Green    'Grade AD
                         DataGridView1.Rows(i - 1).Cells(x).Value = "+"
@@ -219,6 +219,9 @@ Public Class frmColReCheck
 
 
         For i = 1 To 32
+
+
+
             If DataGridView1.Rows(i - 1).Cells(5).Value = "KEBA" Then frmDGV.DGVdata.Rows(i - 1).Cells(37).Value = True
             If DataGridView1.Rows(i - 1).Cells(5).Value = "DIRTY" Then frmDGV.DGVdata.Rows(i - 1).Cells(38).Value = True
             If DataGridView1.Rows(i - 1).Cells(5).Value = "FORM AB" Then frmDGV.DGVdata.Rows(i - 1).Cells(39).Value = True
@@ -228,11 +231,11 @@ Public Class frmColReCheck
             If DataGridView1.Rows(i - 1).Cells(5).Value = "SHORT CHEESE" Then frmDGV.DGVdata.Rows(i - 1).Cells(43).Value = True
             If DataGridView1.Rows(i - 1).Cells(5).Value = "X MISSING CHEESE" Then frmDGV.DGVdata.Rows(i - 1).Cells(44).Value = True
             If DataGridView1.Rows(i - 1).Cells(5).Value = "NO TAIL & ABNORMAL" Then frmDGV.DGVdata.Rows(i - 1).Cells(45).Value = True
-            If DataGridView1.Rows(i - 1).Cells(5).Value = "HITTING" Then frmDGV.DGVdata.Rows(i - 1).Cells(46).Value = True
-            If DataGridView1.Rows(i - 1).Cells(5).Value = "TARUMI" Then frmDGV.DGVdata.Rows(i - 1).Cells(47).Value = True
-            If DataGridView1.Rows(i - 1).Cells(5).Value = "B GRADE BY M/C" Then frmDGV.DGVdata.Rows(i - 1).Cells(48).Value = True
-            If DataGridView1.Rows(i - 1).Cells(5).Value = "C GRADE BY MACHINE" Then frmDGV.DGVdata.Rows(i - 1).Cells(49).Value = True
-            If DataGridView1.Rows(i - 1).Cells(5).Value = "BARRE" Then frmDGV.DGVdata.Rows(i - 1).Cells(66).Value = True
+            If DataGridView1.Rows(i - 1).Cells(5).Value = "WASTE" Then frmDGV.DGVdata.Rows(i - 1).Cells(46).Value = True
+            If DataGridView1.Rows(i - 1).Cells(5).Value = "HITTING" Then frmDGV.DGVdata.Rows(i - 1).Cells(47).Value = True
+            If DataGridView1.Rows(i - 1).Cells(5).Value = "TARUMI" Then frmDGV.DGVdata.Rows(i - 1).Cells(48).Value = True
+            If DataGridView1.Rows(i - 1).Cells(5).Value = "B GRADE BY M/C" Then frmDGV.DGVdata.Rows(i - 1).Cells(49).Value = True
+            If DataGridView1.Rows(i - 1).Cells(5).Value = "C GRADE BY MACHINE" Then frmDGV.DGVdata.Rows(i - 1).Cells(50).Value = True
             If DataGridView1.Rows(i - 1).Cells(5).Value = "DIRTY OIL" Then frmDGV.DGVdata.Rows(i - 1).Cells(67).Value = True
             If DataGridView1.Rows(i - 1).Cells(5).Value = "DIRTY NY HAND" Then frmDGV.DGVdata.Rows(i - 1).Cells(68).Value = True
             If DataGridView1.Rows(i - 1).Cells(5).Value = "COLOUR AB" Then frmDGV.DGVdata.Rows(i - 1).Cells(69).Value = True
@@ -240,66 +243,60 @@ Public Class frmColReCheck
             If DataGridView1.Rows(i - 1).Cells(5).Value = "YARN AB" Then frmDGV.DGVdata.Rows(i - 1).Cells(71).Value = True
             If DataGridView1.Rows(i - 1).Cells(5).Value = "HIGH TENSION" Then frmDGV.DGVdata.Rows(i - 1).Cells(72).Value = True
             If DataGridView1.Rows(i - 1).Cells(5).Value = "LOW TENSION" Then frmDGV.DGVdata.Rows(i - 1).Cells(73).Value = True
-            If DataGridView1.Rows(i - 1).Cells(5).Value = "LOW TENSION" Then frmDGV.DGVdata.Rows(i - 1).Cells(74).Value = True
 
-
-            'list of Array Fields to Update
-
-            frmDGV.DGVdata.Rows(i - 1).Cells(57).Value = frmJobEntry.varUserName  'operatorName   fron entry screen
+            frmDGV.DGVdata.Rows(i - 1).Cells(89).Value = frmJobEntry.varUserName  'operatorName   fron entry screen
 
 
             If DataGridView1.Rows(i - 1).Cells(5).Value = "SHORT CHEESE" Then frmDGV.DGVdata.Rows(i - 1).Cells(10).Value = 1 'shortCone
             If DataGridView1.Rows(i - 1).Cells(5).Value = "X MISSING CHEESE" Then frmDGV.DGVdata.Rows(i - 1).Cells(11).Value = 1  'missingCone
             If DataGridView1.Rows(i - 1).Cells(5).Value = "BARRE" Then frmDGV.DGVdata.Rows(i - 1).Cells(16).Value = 1 'Cone with large colour defect
 
-            If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("RECHKENDTM").Value) Then
-                frmDGV.DGVdata.Rows(i - 1).Cells("RECHKENDTM").Value = today 'COLOUR CHECK END TIME
-            End If
-
-
             frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 2   'Cone has been reChecked  so can be packed
 
+        Next
+
+
+
+        For i = 1 To 32
             'CHECK reCheck1
             Select Case DataGridView1.Rows(i - 1).Cells(2).Value
 
                 Case "OK"
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHK1").Value = "A"
-                Case "L"
+                Case "-"
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHK1").Value = "AL"
-                Case "D"
+                Case "+"
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHK1").Value = "AD"
-
-                Case "B"
+                Case "@"
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHK1").Value = "B"
-                Case "W"
+                Case "*"
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHK1").Value = "W"
             End Select
             'CHECK reCheck2
-            Select Case DataGridView1.Rows(i - 1).Cells(2).Value
+            Select Case DataGridView1.Rows(i - 1).Cells(3).Value
 
                 Case "OK"
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHK2").Value = "A"
-                Case "L"
-                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHK12").Value = "AL"
-                Case "D"
+                Case "-"
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHK2").Value = "AL"
+                Case "+"
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHK2").Value = "AD"
-                Case "B"
+                Case "@"
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHK2").Value = "B"
-                Case "W"
+                Case "*"
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHK2").Value = "W"
             End Select
 
 
-            ' frmDGV.DGVdata.Rows(i - 1).Cells("RECHK1").Value = DataGridView1.Rows(i - 1).Cells(2).Value 'WRITE RECHEECK RESULT TO DGV
-            'frmDGV.DGVdata.Rows(i - 1).Cells("RECHK2").Value = DataGridView1.Rows(i - 1).Cells(3).Value 'WRITE RECHEECK RESULT TO DGV
-            frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = DataGridView1.Rows(i - 1).Cells(4).Value 'WRITE RECHEECK RESULT TO DGV
-            frmDGV.DGVdata.Rows(i - 1).Cells("RECHKDEFCODE").Value = DataGridView1.Rows(i - 1).Cells(5).Value 'WRITE RECHEECK RESULT TO DGV
-
+            frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = DataGridView1.Rows(i - 1).Cells(4).Value 'WRITE RECHECK RESULT
+            'If Not DataGridView1.Rows(i - 1).Cells(5).Value = "" Then frmDGV.DGVdata.Rows(i - 1).Cells("RECHKDEFCODE").Value = DataGridView1.Rows(i - 1).Cells(5).Value  'WRITE RECHEECK DEFECTS
+            If DataGridView1.Rows(i - 1).Cells(4).Value = "AL" Then frmDGV.DGVdata.Rows(i - 1).Cells("CONEAL").Value = DataGridView1.Rows(i - 1).Cells(4).Value  'WRITE RECHEECK RESULT TO DGV
+            If DataGridView1.Rows(i - 1).Cells(4).Value = "AD" Then frmDGV.DGVdata.Rows(i - 1).Cells("CONEAD").Value = DataGridView1.Rows(i - 1).Cells(4).Value 'WRITE RECHEECK RESULT TO DGV
 
         Next
 
 
-        'printSheet()
+        printSheet()
 
 
 
@@ -365,12 +362,14 @@ Public Class frmColReCheck
 
         'UPDATE THE EXCEL SHEET FOR THIS JOB
 
-        Dim MyReCheckExcel As New Excel.Application
+
         Dim ReCheckworkbook As Excel.Workbook
+        Dim ReChecksheets As Excel.Worksheet
 
-        MsgBox("about to open Excel")
+
         ReCheckworkbook = MyReCheckExcel.Workbooks.Open(savename) '.Sheets(SheetNum)
-
+        ReChecksheets = ReCheckworkbook.Worksheets(SheetNum)
+        ReChecksheets.Activate()
 
 
         'CHECK TO SEE IF THERE IS ALREADY A FILE STARTED FOR PRODUCT NUMBER
@@ -379,11 +378,76 @@ Public Class frmColReCheck
             If File.Exists(savename) Then
 
 
+
+
+
+
                 For i = 1 To 32
-                    MyReCheckExcel.Cells(i - 1, 4) = DataGridView1.Rows(i - 1).Cells(2).Value
-                    MyReCheckExcel.Cells(i - 1, 5) = DataGridView1.Rows(i - 1).Cells(3).Value
-                    MyReCheckExcel.Cells(i - 1, 6) = DataGridView1.Rows(i - 1).Cells(4).Value
-                    MyReCheckExcel.Cells(i - 1, 7) = DataGridView1.Rows(i - 1).Cells(5).Value
+
+                    Select Case DataGridView1.Rows(i - 1).Cells(2).Value
+                        Case "OK"
+
+                            MyReCheckExcel.Cells(8 + i, 4).Font.Color = Color.DarkBlue  'Grade A
+                            MyReCheckExcel.Cells(8 + i, 4) = DataGridView1.Rows(i - 1).Cells(2).Value
+                        Case "+"
+                            MyReCheckExcel.Cells(8 + i, 4).Font.Color = Color.Green    'Grade AD
+                            MyReCheckExcel.Cells(8 + i, 4) = DataGridView1.Rows(i - 1).Cells(2).Value
+                        Case "-"
+                            MyReCheckExcel.Cells(8 + i, 4).Font.Color = Color.Blue   'Grade AL
+                            MyReCheckExcel.Cells(8 + i, 4) = DataGridView1.Rows(i - 1).Cells(2).Value
+                        Case "@"
+                            MyReCheckExcel.Cells(8 + i, 4).Font.Color = Color.Red    'Grade Abnormal (B)
+                            MyReCheckExcel.Cells(8 + i, 4) = DataGridView1.Rows(i - 1).Cells(2).Value
+                        Case "*"
+                            MyReCheckExcel.Cells(8 + i, 4).Font.Color = Color.Black   'Grade Waste
+                            MyReCheckExcel.Cells(8 + i, 4) = DataGridView1.Rows(i - 1).Cells(2).Value
+
+                    End Select
+
+                    Select Case DataGridView1.Rows(i - 1).Cells(3).Value
+                        Case "OK"
+                            MyReCheckExcel.Cells(8 + i, 5).Font.Color = Color.DarkBlue  'Grade A
+                            MyReCheckExcel.Cells(8 + i, 5) = DataGridView1.Rows(i - 1).Cells(3).Value
+                        Case "+"
+                            MyReCheckExcel.Cells(8 + i, 5).Font.Color = Color.Green    'Grade AD
+                            MyReCheckExcel.Cells(8 + i, 5) = DataGridView1.Rows(i - 1).Cells(3).Value
+                        Case "-"
+                            MyReCheckExcel.Cells(8 + i, 5).Font.Color = Color.Blue   'Grade AL
+                            MyReCheckExcel.Cells(8 + i, 5) = DataGridView1.Rows(i - 1).Cells(3).Value
+                        Case "@"
+                            MyReCheckExcel.Cells(8 + i, 5).Font.Color = Color.Red    'Grade Abnormal (B)
+                            MyReCheckExcel.Cells(8 + i, 5) = DataGridView1.Rows(i - 1).Cells(3).Value
+                        Case "*"
+                            MyReCheckExcel.Cells(8 + i, 5).Font.Color = Color.Black   'Grade Waste
+                            MyReCheckExcel.Cells(8 + i, 5) = DataGridView1.Rows(i - 1).Cells(3).Value
+                    End Select
+
+
+                    Select Case DataGridView1.Rows(i - 1).Cells(4).Value
+                        Case "A"
+                            MyReCheckExcel.Cells(8 + i, 6).Font.Color = Color.DarkBlue  'Grade A
+                            MyReCheckExcel.Cells(8 + i, 6) = DataGridView1.Rows(i - 1).Cells(3).Value
+                        Case "AD"
+                            MyReCheckExcel.Cells(8 + i, 6).Font.Color = Color.Green    'Grade AD
+                            MyReCheckExcel.Cells(8 + i, 6) = DataGridView1.Rows(i - 1).Cells(3).Value
+                        Case "AL"
+                            MyReCheckExcel.Cells(8 + i, 6).Font.Color = Color.Blue   'Grade AL
+                            MyReCheckExcel.Cells(8 + i, 6) = DataGridView1.Rows(i - 1).Cells(3).Value
+                        Case "B"
+                            MyReCheckExcel.Cells(8 + i, 6).Font.Color = Color.Red    'Grade Abnormal (B)
+                            MyReCheckExcel.Cells(8 + i, 6) = DataGridView1.Rows(i - 1).Cells(3).Value
+                        Case "W"
+                            MyReCheckExcel.Cells(8 + i, 6).Font.Color = Color.Black   'Grade Waste
+                            MyReCheckExcel.Cells(8 + i, 6) = DataGridView1.Rows(i - 1).Cells(3).Value
+                    End Select
+
+
+
+
+
+
+                    MyReCheckExcel.Cells(8 + i, 6) = DataGridView1.Rows(i - 1).Cells(4).Value
+                        MyReCheckExcel.Cells(8 + i, 7) = DataGridView1.Rows(i - 1).Cells(5).Value
                 Next
             End If
 
@@ -391,11 +455,13 @@ Public Class frmColReCheck
             MsgBox(ex.Message)
         End Try
 
+
+
         Try
 
             'Save changes to new file in Paking Dir
             MyReCheckExcel.DisplayAlerts = False
-            ReCheckworkbook.SaveAs(Filename:=frmPackRepMain.savename, FileFormat:=51)
+            ReCheckworkbook.SaveAs(Filename:=savename, FileFormat:=51)
 
         Catch ex As Exception
 

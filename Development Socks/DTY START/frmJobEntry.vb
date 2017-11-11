@@ -511,7 +511,7 @@ Public Class frmJobEntry
 
                 If My.Settings.debugSet Then frmDGV.Show()
 
-                'coneValUpdate = 1
+                coneValUpdate = 1
                 If My.Settings.chkUseSort Then
                     frmSortReCheck.Show()
                 ElseIf My.Settings.chkUseColour Then
