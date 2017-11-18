@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmB_AL_AD_W
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmB_AL_AD_W
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.CheeseAloc1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -49,7 +49,6 @@ Partial Class frmB_AL_AD_W
         Me.Label16 = New System.Windows.Forms.Label()
         Me.lbltotCount = New System.Windows.Forms.Label()
         Me.lbltotScan = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -251,7 +250,7 @@ Partial Class frmB_AL_AD_W
         Me.Label8.AutoSize = True
         Me.Label8.BackColor = System.Drawing.Color.Red
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(549, 134)
+        Me.Label8.Location = New System.Drawing.Point(221, 310)
         Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(119, 37)
@@ -330,22 +329,12 @@ Partial Class frmB_AL_AD_W
         Me.lbltotScan.Size = New System.Drawing.Size(0, 16)
         Me.lbltotScan.TabIndex = 188
         '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(844, 646)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(39, 13)
-        Me.Label9.TabIndex = 189
-        Me.Label9.Text = "Label9"
-        '
         'frmB_AL_AD_W
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(1086, 861)
-        Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.lbltotScan)
         Me.Controls.Add(Me.lbltotCount)
@@ -400,5 +389,4 @@ Partial Class frmB_AL_AD_W
     Friend WithEvents CheeseNum4 As DataGridViewTextBoxColumn
     Friend WithEvents CheeseAloc5 As DataGridViewTextBoxColumn
     Friend WithEvents CheeseNum5 As DataGridViewTextBoxColumn
-    Friend WithEvents Label9 As Label
 End Class

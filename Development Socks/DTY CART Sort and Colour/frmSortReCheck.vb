@@ -68,11 +68,32 @@ Public Class frmSortReCheck
 
 
         'SET CORRECT BUTTUN NUMBERS BASED ON CONE NUMBERS (SPINDEL NUMBERS)
-        For i As Integer = 1 To 32
+
+        For i = 1 To frmDGV.DGVdata.Rows.Count
+
+
+
+
 
             Me.Controls("btnCone" & i.ToString).Text = btnNum
             btnNum = btnNum + 1
 
+
+
+
+
+        Next
+
+        'ROUTINE TO AUTO POPULATE BUTTONS BASED ON ROWS OF DATA IN DGV
+
+        Dim btnCountStart As Integer = frmDGV.DGVdata.Rows.Count + 1
+
+        Dim totBtn As Integer = 31 - btnCountStart
+
+
+        For i = btnCountStart To 32
+
+            Me.Controls("btnCone" & i.ToString).Visible = False
         Next
 
 
@@ -226,35 +247,37 @@ Public Class frmSortReCheck
 
     Private Sub UpdateConeVal()
 
-            Dim cellVal As String
 
 
-            For rw As Integer = 1 To 32
 
-                For cl As Integer = 10 To 22
-
-
-                    'jump rows if not requierd
-                    If cl > 12 And cl < 15 Then Continue For
+        Dim cellVal As String
 
 
-                    cellVal = frmDGV.DGVdata.Rows(rw - 1).Cells(cl).Value.ToString
+        For rw = 1 To frmDGV.DGVdata.Rows.Count
 
-                    If cl = 10 And cellVal > 0 Then
-                        Me.Controls("btnCone" & rw).BackColor = Color.Red       'SHORT
-                        Me.Controls("btnCone" & rw).Enabled = True
-                        shortC(rw) = 1
+            For cl As Integer = 10 To 16
 
-                    End If
 
-                    If cl = 11 And cellVal > 0 Then
-                        Me.Controls("btnCone" & rw).BackColor = Color.Pink      'NOCONE
-                        Me.Controls("btnCone" & rw).Enabled = False
-                    End If
+                'jump rows if not requierd
+                If cl > 12 And cl < 16 Then Continue For
 
-                    If cl = 12 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackColor = Color.Yellow    'DEFECT
 
-                'If cl > 12 And cl < 15 Then Continue For
+                cellVal = frmDGV.DGVdata.Rows(rw - 1).Cells(cl).Value.ToString
+
+                If cl = 10 And cellVal > 0 Then
+                    Me.Controls("btnCone" & rw).BackColor = Color.Red       'SHORT
+                    Me.Controls("btnCone" & rw).Enabled = True
+                    shortC(rw) = 1
+                End If
+
+                If cl = 11 And cellVal > 0 Then
+                    Me.Controls("btnCone" & rw).BackColor = Color.Pink      'NOCONE
+                    Me.Controls("btnCone" & rw).Enabled = False
+                End If
+
+                If cl = 12 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackColor = Color.Yellow    'DEFECT
+
+
 
 
                 '  If cl = 15 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.Zero       'ZERO CONE
@@ -271,19 +294,19 @@ Public Class frmSortReCheck
 
 
 
-                'CHECK FLT_S FLAG
-                If frmDGV.DGVdata.Rows(rw - 1).Cells(43).Value = True Then
-                    Me.Controls("btnCone" & rw).BackColor = Color.Red
-                    Me.Controls("btnCone" & rw).Enabled = True
-                End If
+            'CHECK FLT_S FLAG
+            If frmDGV.DGVdata.Rows(rw - 1).Cells(43).Value = True Then
+                Me.Controls("btnCone" & rw).BackColor = Color.Red
+                Me.Controls("btnCone" & rw).Enabled = True
+            End If
 
 
-                'WASTE CELL in db
-                If frmDGV.DGVdata.Rows(rw - 1).Cells(66).Value > 0 Then Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
-                If frmDGV.DGVdata.Rows(rw - 1).Cells(46).Value = True Then Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
-            Next
+            'WASTE CELL in db
+            If frmDGV.DGVdata.Rows(rw - 1).Cells(66).Value > 0 Then Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
+            If frmDGV.DGVdata.Rows(rw - 1).Cells(46).Value = True Then Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
+        Next
 
-            txtBoxUpdates()
+        txtBoxUpdates()
 
 
         End Sub
@@ -522,7 +545,7 @@ Public Class frmSortReCheck
                         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("COLDEF").Value = 0
                         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("COLWASTE").Value = 0
 
-                        shortC(varConeNum - coneNumOffset) = 0
+                    shortC(varConeNum - coneNumOffset) = 0
                         Me.Controls("btnCone" & varConeNum - coneNumOffset).BackColor = SystemColors.ControlDark
                         Me.Controls("btnCone" & varConeNum - coneNumOffset).BackgroundImage = Nothing
                         txtBoxUpdates()
@@ -1306,96 +1329,76 @@ Public Class frmSortReCheck
             Dim cellVal As String
 
 
-            For rw As Integer = 1 To 32
+        'For rw As Integer = 1 To 32
 
-                If My.Settings.chkUseColour Then
+        '    If My.Settings.chkUseColour Then
 
-                    For cl As Integer = 10 To 22
+        '        For cl As Integer = 10 To 22
 
-                        cellVal = frmDGV.DGVdata.Rows(rw - 1).Cells(cl).Value.ToString
+        '            cellVal = frmDGV.DGVdata.Rows(rw - 1).Cells(cl).Value.ToString
 
-                        If cl = 14 Then
-                            Continue For
-                        End If
+        '            If cl = 14 Then
+        '                Continue For
+        '            End If
 
 
 
-                        If cl = 10 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"
-                            Continue For
-                        ElseIf cl = 11 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                            Continue For
-                        ElseIf cl = 12 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                            Continue For
-                        ElseIf cl = 15 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"
-                            Continue For
-                        ElseIf cl = 16 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                            Continue For
-                        ElseIf cl = 17 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                            Continue For
-                        ElseIf cl = 18 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                            Continue For
-                        ElseIf cl = 19 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                            Continue For
-                        ElseIf cl = 20 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                            Continue For
-                        ElseIf cl = 21 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                            Continue For
-                        ElseIf cl = 22 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                            Continue For
-                        End If
-                    Next
+        '            If cl = 10 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
+        '                frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"
+        '                Continue For
+        '            ElseIf cl = 11 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
+        '                frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+        '                Continue For
+        '            ElseIf cl = 12 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
+        '                frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+        '                Continue For
+        '            ElseIf cl = 15 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
+        '                frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"
+        '                Continue For
+        '            ElseIf cl = 16 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
+        '                frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+        '                Continue For
+        '            ElseIf cl = 17 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
+        '                frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+        '                Continue For
+        '            ElseIf cl = 18 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
+        '                frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+        '                Continue For
+        '            ElseIf cl = 19 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
+        '                frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+        '                Continue For
+        '            ElseIf cl = 20 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
+        '                frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+        '                Continue For
+        '            ElseIf cl = 21 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
+        '                frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+        '                Continue For
+        '            ElseIf cl = 22 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
+        '                frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+        '                Continue For
+        '            End If
+        '        Next
 
-                    cellVal = frmDGV.DGVdata.Rows(rw - 1).Cells(66).Value.ToString          'SET CONE STATE IF WASTE CONE TO 8
-                    If cellVal > 0 Then frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                    cellVal = 0
+        '        cellVal = frmDGV.DGVdata.Rows(rw - 1).Cells(66).Value.ToString          'SET CONE STATE IF WASTE CONE TO 8
+        '        If cellVal > 0 Then frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+        '        cellVal = 0
 
-                End If
+        '    End If
 
-            Next
+        'Next
 
-            For rw As Integer = 1 To 32
+        For rw = 1 To frmDGV.DGVdata.Rows.Count
 
-                If My.Settings.chkUseSort Then
-                    If frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 5 Then
-                        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "5"
-                        frmDGV.DGVdata.Rows(rw - 1).Cells(31).Value = today
-                        frmDGV.DGVdata.Rows(rw - 1).Cells(32).Value = today
-                    End If
-                End If
 
-                If My.Settings.chkUseColour And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value.ToString IsNot "8" Then
-                    If frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"  'No Faults recorded so set to 9 Unless already Packed then do not change state
-                End If
+            If frmDGV.DGVdata.Rows(rw - 1).Cells(33).Value = 1 Then    ' Update the ReCheck state
+                frmDGV.DGVdata.Rows(rw - 1).Cells(33).Value = "2"
+                frmDGV.DGVdata.Rows(rw - 1).Cells(56).Value = frmJobEntry.SortOP
+                frmDGV.DGVdata.Rows(rw - 1).Cells(8).Value = frmJobEntry.varUserName
+            End If
 
-                If My.Settings.chkUseColour Then
-                    frmDGV.DGVdata.Rows(rw - 1).Cells(57).Value = frmJobEntry.ColorOP
-                    frmDGV.DGVdata.Rows(rw - 1).Cells(32).Value = today
-                    If IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("COLENDTM").Value) Then
-                        frmDGV.DGVdata.Rows(rw - 1).Cells("COLENDTM").Value = today 'COLOUR CHECK END TIME
-                    End If
-                ElseIf My.Settings.chkUseSort Then
-                    frmDGV.DGVdata.Rows(rw - 1).Cells(56).Value = frmJobEntry.SortOP
-                    frmDGV.DGVdata.Rows(rw - 1).Cells(32).Value = today
-                    If IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("SORTENDTM").Value) Then
-                        frmDGV.DGVdata.Rows(rw - 1).Cells("SORTENDTM").Value = today 'SORT END TIME
-                    End If
+        Next
 
-                End If
-
-            Next
-
-            UpdateDatabase()
+        UpdateDatabase()
 
 
             If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
@@ -1835,15 +1838,16 @@ Public Class frmSortReCheck
                 frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(10).Value = shortCone 'shortCone
                 frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(43).Value = "True" 'Sets the SHORT fault flag
 
-                txtBoxUpdates()
 
 
 
-                'UPDATE DATABASE FROM DATAGRID AS SETTING SHORT DOES NOT DO A FULL ROW UPDATE
-                'UNTIL CONE VALUE Is ENTERED, THIS Is NEEDED AS SORT WILL BE DONE SEPERATE TO VISUAL COLOUR CHECK
-                UpdateDatabase()
 
-                If varConeNum - coneNumOffset = 1 Then
+            'UPDATE DATABASE FROM DATAGRID AS SETTING SHORT DOES NOT DO A FULL ROW UPDATE
+            'UNTIL CONE VALUE Is ENTERED, THIS Is NEEDED AS SORT WILL BE DONE SEPERATE TO VISUAL COLOUR CHECK
+            UpdateDatabase()
+            txtBoxUpdates()
+
+            If varConeNum - coneNumOffset = 1 Then
                     btnCone1.Enabled = True
                     btnCone1.BackColor = Color.Red
                     shortC(1) = 1
@@ -2511,9 +2515,9 @@ Public Class frmSortReCheck
                 shortCone = 0
                 varConeNum = 0
                 txtConeNum.Text = ""
-                endCount()
 
-            Else
+
+        Else
                 varCartEndTime = Date.Now 'ToString("dd/mm/yyy")
                 If shortCone = 2 Then shortCone = varConeNum
                 If shortCone > 0 Then Fault_S = "True" 'Else Fault_S = "False"
@@ -2562,56 +2566,27 @@ Public Class frmSortReCheck
 
 
                 txtConeNum.Text = ""
-                endCount()
-            End If
+
+        End If
 
 
 
         End Sub
 
-        ' CONE COUNT
-        Sub endCount()
-            If coneCount = 32 Then
-                'lblConeCount.Text = coneCount
-                ' lblConeCount.Refresh()
-                'lblFinished.Visible = True
-                'btnNextJob.Visible = True
-            Else
-                lblFinished.Visible = False
-                'lblConeCount.Text = coneCount
-                'lblConeCount.Refresh()
-            End If
 
-        End Sub
 
 
 
     Private Sub jobArrayUpdate()
 
 
-            'If coneZero Or coneM10 Or coneP10 Or coneM30 Or coneP30 Or coneM50 Or coneP50 > 0 Then
-            '    defect = 0    'FrmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(11).Value = 0
-
-            'End If
-
-            'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
-
-            If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("COLENDTM").Value) Then
-                For i As Integer = 1 To 32
-                    If My.Settings.chkUseColour = True Then frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = varCartEndTime 'COLOUR CHECK END TIME
-                Next
-            End If
-
-            If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("SORTENDTM").Value) Then
-                For i As Integer = 1 To 32
-                    If My.Settings.chkUseSort = True Then frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value = varCartEndTime 'SORT END TIME
-                Next
-            End If
 
 
-            'list of Array Feilds to Update
 
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(8).Value = frmJobEntry.varUserName  'operatorName   fron entry screen
+
+        'list of Array Feilds to Update
+
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(8).Value = frmJobEntry.varUserName  'operatorName   fron entry screen
 
             If My.Settings.chkUseSort Or My.Settings.chkUseColour Then
                 frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(10).Value = shortCone   'shortCone
@@ -2621,20 +2596,15 @@ Public Class frmSortReCheck
 
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(15).Value = coneZero  'passCone  Zero Colour Difference    
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(16).Value = coneBarley 'Cone with large colour defect
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(17).Value = coneM10   'coneM10
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(18).Value = coneP10   'coneP10
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(19).Value = coneM30   'coneM30
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(20).Value = coneP30  'coneP30
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(21).Value = coneM50   'coneM50
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(22).Value = coneP50  'coneP50
 
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(31).Value = varCartStartTime  'cartStratTime
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(32).Value = varCartEndTime 'cartEndTime
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(33).Value = reChecked    'Cone has been reChecked    
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(34).Value = ReCheckTime    'Cone has been reChecked  
 
-            If My.Settings.chkUseSort Or My.Settings.chkUseColour Then
-                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_K").Value = chk_K.Checked    'KEBA Fault  
+
+
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(33).Value = 2    'Cone has been reChecked  set state to 2  
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(34).Value = Today 'Cone has been reChecked  
+
+
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_K").Value = chk_K.Checked    'KEBA Fault  
                 frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_D").Value = chk_D.Checked     'DIRTY Fault 
                 frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_F").Value = chk_F.Checked     'FORM AB Fault 
                 frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_O").Value = chk_O.Checked     'OVERTHROWN Fault 
@@ -2659,14 +2629,14 @@ Public Class frmSortReCheck
 
                 frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("COLWASTE").Value = coneWaste     'COLOUR WASTE BY COLOUR DEPT
 
-            End If
 
 
 
 
 
 
-            UpdateDatabase()
+
+        UpdateDatabase()
             txtBoxUpdates()
             UpdateConeVal()
 
@@ -2707,64 +2677,64 @@ Public Class frmSortReCheck
 
 
 
-            For rw As Integer = 1 To 32
+        For rw = 1 To frmDGV.DGVdata.Rows.Count
 
 
-                If frmDGV.DGVdata.Rows(rw - 1).Cells(10).Value > 0 Then
-                    tmpConeNum = rw + coneNumOffset.ToString(fmt)
-                    shortConeID = shortConeID & tmpConeNum & ","
-                    txtShort.Text = shortConeID
-                ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(11).Value > 0 Then
-                    tmpConeNum = rw + coneNumOffset.ToString(fmt)
-                    coneMissingID = coneMissingID & tmpConeNum & ","
-                    txtMissing.Text = coneMissingID
-                ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(12).Value > 0 Then
-                    tmpConeNum = rw + coneNumOffset.ToString(fmt)
-                    coneDefectID = coneDefectID & tmpConeNum & ","
-                    txtDefect.Text = coneDefectID
-                End If
+            If frmDGV.DGVdata.Rows(rw - 1).Cells(10).Value > 0 Then
+                tmpConeNum = rw + coneNumOffset.ToString(fmt)
+                shortConeID = shortConeID & tmpConeNum & ","
+                txtShort.Text = shortConeID
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(11).Value > 0 Then
+                tmpConeNum = rw + coneNumOffset.ToString(fmt)
+                coneMissingID = coneMissingID & tmpConeNum & ","
+                txtMissing.Text = coneMissingID
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(12).Value > 0 Then
+                tmpConeNum = rw + coneNumOffset.ToString(fmt)
+                coneDefectID = coneDefectID & tmpConeNum & ","
+                txtDefect.Text = coneDefectID
+            End If
 
-                If frmDGV.DGVdata.Rows(rw - 1).Cells(15).Value > 0 Then
-                    tmpConeNum = rw + coneNumOffset.ToString(fmt)
-                    visConeZeroID = visConeZeroID & tmpConeNum & ","
-                    txtZero.Text = visConeZeroID
-                ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(16).Value > 0 Then
-                    tmpConeNum = rw + coneNumOffset.ToString(fmt)
-                    visConeBarleyID = visConeBarleyID & tmpConeNum & ","
-                    txtBarley.Text = visConeBarleyID
-                ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(17).Value > 0 Then
-                    tmpConeNum = rw + coneNumOffset.ToString(fmt)
-                    visConeM10ID = visConeM10ID & tmpConeNum & ","
-                    txtM10.Text = visConeM10ID
-                ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(18).Value > 0 Then
-                    tmpConeNum = rw + coneNumOffset.ToString(fmt)
-                    visConeP10ID = visConeP10ID & tmpConeNum & ","
-                    txtP10.Text = visConeP10ID
-                ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(19).Value > 0 Then
-                    tmpConeNum = rw + coneNumOffset.ToString(fmt)
-                    visConeM30ID = visConeM30ID & tmpConeNum & ","
-                    txtM30.Text = visConeM30ID
-                ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(20).Value > 0 Then
-                    tmpConeNum = rw + coneNumOffset.ToString(fmt)
-                    visConeP30ID = visConeP30ID & tmpConeNum & ","
-                    txtP30.Text = visConeP30ID
-                ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(21).Value > 0 Then
-                    tmpConeNum = rw + coneNumOffset.ToString(fmt)
-                    visConeM50ID = visConeM50ID & tmpConeNum & ","
-                    txtM50.Text = visConeM50ID
-                ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(22).Value > 0 Then
-                    tmpConeNum = rw + coneNumOffset.ToString(fmt)
-                    visConeP50ID = visConeP50ID & tmpConeNum & ","
-                    txtP50.Text = visConeP50ID
-                ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(66).Value > 0 Then
-                    tmpConeNum = rw + coneNumOffset.ToString(fmt)
-                    visConeWasteID = visConeWasteID & tmpConeNum & ","
-                    txtWaste.Text = visConeWasteID
-                End If
-                tmpConeNum = 0
-            Next
+            If frmDGV.DGVdata.Rows(rw - 1).Cells(15).Value > 0 Then
+                tmpConeNum = rw + coneNumOffset.ToString(fmt)
+                visConeZeroID = visConeZeroID & tmpConeNum & ","
+                txtZero.Text = visConeZeroID
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(16).Value > 0 Then
+                tmpConeNum = rw + coneNumOffset.ToString(fmt)
+                visConeBarleyID = visConeBarleyID & tmpConeNum & ","
+                txtBarley.Text = visConeBarleyID
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(17).Value > 0 Then
+                tmpConeNum = rw + coneNumOffset.ToString(fmt)
+                visConeM10ID = visConeM10ID & tmpConeNum & ","
+                txtM10.Text = visConeM10ID
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(18).Value > 0 Then
+                tmpConeNum = rw + coneNumOffset.ToString(fmt)
+                visConeP10ID = visConeP10ID & tmpConeNum & ","
+                txtP10.Text = visConeP10ID
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(19).Value > 0 Then
+                tmpConeNum = rw + coneNumOffset.ToString(fmt)
+                visConeM30ID = visConeM30ID & tmpConeNum & ","
+                txtM30.Text = visConeM30ID
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(20).Value > 0 Then
+                tmpConeNum = rw + coneNumOffset.ToString(fmt)
+                visConeP30ID = visConeP30ID & tmpConeNum & ","
+                txtP30.Text = visConeP30ID
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(21).Value > 0 Then
+                tmpConeNum = rw + coneNumOffset.ToString(fmt)
+                visConeM50ID = visConeM50ID & tmpConeNum & ","
+                txtM50.Text = visConeM50ID
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(22).Value > 0 Then
+                tmpConeNum = rw + coneNumOffset.ToString(fmt)
+                visConeP50ID = visConeP50ID & tmpConeNum & ","
+                txtP50.Text = visConeP50ID
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(66).Value > 0 Then
+                tmpConeNum = rw + coneNumOffset.ToString(fmt)
+                visConeWasteID = visConeWasteID & tmpConeNum & ","
+                txtWaste.Text = visConeWasteID
+            End If
+            tmpConeNum = 0
+        Next
 
-        End Sub
+    End Sub
 
         Public Sub tsbtnSave()
 

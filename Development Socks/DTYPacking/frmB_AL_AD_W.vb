@@ -176,26 +176,26 @@ Public Class frmB_AL_AD_W
 
             'CHECK FOR UNPACKED CHEESE AND ALLOCATE
 
-            'If frmDGV.DGVdata.Rows(i).Cells(36).Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i).Cells("PACKENDTM").Value) Then
+
             If frmDGV.DGVdata.Rows(i).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i).Cells(33).Value = 0 Then
                 'write to the local DGV grid
                 DataGridView1.Rows(gridRow).Cells(gridCol).Value = frmDGV.DGVdata.Rows(i).Cells(36).Value  'Write to Grid Cone Bcode
                 DataGridView1.Rows(gridRow).Cells(gridCol).Style.BackColor = Color.LightGreen
 
-                If frmJobEntry.txtGrade.Text = "ReCheck" Then  'IF RECHK THEN SET FLAG< SET TIME AND SET NUBER 1-32
+                If frmJobEntry.txtGrade.Text = "ReCheck" Then  'IF RECHK THEN SET FLAG=1 SET TIME AND SET NUBER 1-32
                     frmDGV.DGVdata.Rows(i).Cells("RECHK").Value = 1
                     frmDGV.DGVdata.Rows(i).Cells("RECHKSTARTTM").Value = DateAndTime.Today
+                    frmDGV.DGVdata.Rows(i).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
 
-                    modIdxNum = i.ToString(fmt)
-
-                    frmDGV.DGVdata.Rows(i).Cells("RECHKIDX").Value = modIdxNum 'DataGridView1.Rows(gridRow).Cells(0).Value
+                    Dim tmpNum As Integer = DataGridView1.Rows(gridRow).Cells(0).Value  'format first 9 cheese to have leading Zero before sending to db
+                    modIdxNum = tmpNum.ToString(fmt)
+                    frmDGV.DGVdata.Rows(i).Cells("RECHKIDX").Value = modIdxNum
 
                 Else
                     'Update DGV that Cheese has been alocated, update Packendtm
                     frmDGV.DGVdata.Rows(i).Cells("PACKENDTM").Value = DateAndTime.Today
                 End If
-                'Update DGV that Cheese has been alocated, update Packendtm
-                'frmDGV.DGVdata.Rows(i).Cells("PACKENDTM").Value = DateAndTime.Today
+
 
                 gridRow = gridRow + 1
                 coneCount = coneCount + 1
@@ -221,19 +221,12 @@ Public Class frmB_AL_AD_W
                         End If
 
                     Case "ReCheck"
-                        If coneCount < 32 Or coneCount = toAllocatedCount Then
+                        If coneCount < 32 Or coneCount = toAllocatedCount Then                 'move active cell to next available
                             DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
                         End If
 
                 End Select
 
-
-
-
-
-                'gridRow = gridRow + 1
-                '    coneCount = coneCount + 1
-                '    DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
 
                 packedFlag = 1
 
@@ -243,32 +236,37 @@ Public Class frmB_AL_AD_W
             ElseIf frmDGV.DGVdata.Rows(i).Cells(36).Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i).Cells("PACKENDTM").Value) And frmjobentry.txtgrade.text <> "ReCheck" Then
                 Label8.Visible = True
                 Label8.Text = "Cheese already allocated"
+                Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
                 DelayTM()
                 Label8.Visible = False
                 packedFlag = 0
                 txtConeBcode.Clear()
                 txtConeBcode.Focus()
+                Me.KeyPreview = True 'Allows us to look for advace character from barcode
                 Exit Sub
             ElseIf frmDGV.DGVdata.Rows(i).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i).Cells(33).Value = 1 And frmjobentry.txtgrade.text = "ReCheck" Then
                 Label8.Visible = True
                 Label8.Text = "Cheese already allocated"
+                Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
                 DelayTM()
                 Label8.Visible = False
                 packedFlag = 0
                 txtConeBcode.Clear()
                 txtConeBcode.Focus()
+                Me.KeyPreview = True 'Allows us to look for advace character from barcode
                 Exit Sub
             ElseIf i = dgvRows - 1 And packedFlag = 0 Then    'CHECK FOR WRONG CHEESE ON CART
                 Label8.Visible = True
                 Label8.Text = ("This is not a Grade " & frmJobEntry.txtGrade.Text & " Cheese")
+                Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
                 DelayTM()
                 Me.Hide()
+                Me.KeyPreview = True 'Allows us to look for advace character from barcode
                 frmRemoveCone.Show()
 
 
                 frmDGV.DGVdata.Rows(i - 1).Cells(58).Value = 1
-                frmDGV.DGVdata.Rows(i - 1).Cells(55).Value = frmJobEntry.PackOp
-                'frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "14"
+                frmDGV.DGVdata.Rows(i - 1).Cells(55).Value = frmJobEntry.txtOperator.Text
                 frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
 
                 Label8.Visible = False
@@ -285,7 +283,7 @@ Public Class frmB_AL_AD_W
 
         'ROUTINE TO MOVE TO NEW COLUMN WHEN COLUMN IS FULL
 
-        Label9.Text = coneCount
+
 
 
         Select Case frmJobEntry.txtGrade.Text
@@ -348,32 +346,46 @@ Public Class frmB_AL_AD_W
 
     End Sub
 
-    Public Sub endCheck()
 
-
-
-        If coneCount > 90 Or coneCount = toAllocatedCount Then
-
-            jobEnd()
-
-        End If
-
-    End Sub
 
 
     Private Sub jobEnd()
 
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        Label8.Visible = True
+        Label8.Text = ("This is not a Grade " & frmJobEntry.txtGrade.Text & " Cheese")
+        Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
+        Label8.Text = ("Please wait creating packing Excel sheet")
 
 
 
         frmPackRepMain.PackRepMainSub()
-        frmPackRepMain.Close()
+
+        If frmPackTodayUpdate.prtError Then
+            frmPackRepMain.Close()
+            Me.Cursor = System.Windows.Forms.Cursors.Default
+            Label8.Visible = False
+            Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
+            frmPackTodayUpdate.Close()
+            Me.Close()
+            Exit Sub
+        Else
+
+            frmPackRepMain.Close()
+            UpdateDatabase()
+            Label8.Visible = False
+            Me.Cursor = System.Windows.Forms.Cursors.Default
+            Me.Close()
+            frmJobEntry.Show()
+            frmJobEntry.txtLotNumber.Clear()
+
+        End If
+        'frmPackRepMain.Close()
         'UpdateDatabase()
-        Me.Cursor = System.Windows.Forms.Cursors.Default
-        Me.Close()
-        frmJobEntry.Show()
-        frmJobEntry.txtLotNumber.Clear()
+        'Me.Cursor = System.Windows.Forms.Cursors.Default
+        'Me.Close()
+        'frmJobEntry.Show()
+        'frmJobEntry.txtLotNumber.Clear()
 
 
     End Sub

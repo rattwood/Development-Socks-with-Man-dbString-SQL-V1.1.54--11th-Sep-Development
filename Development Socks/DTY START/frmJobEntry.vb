@@ -760,16 +760,27 @@ Public Class frmJobEntry
             chkBCode = txtLotNumber.Text.Substring(12, 1)
 
             If chkBCode = "B" Then
-                MsgBox("This is not a Valid Cheese Number")
+
+                Label3.Visible = True
+                Label3.Text = "This is not a Valid Cheese Number"
+                DelayTM()
+                Label3.Visible = False
                 Me.txtLotNumber.Clear()
                 Me.txtLotNumber.Focus()
                 Me.txtLotNumber.Refresh()
                 Exit Sub
             Else
+
+
                 cheeseBcode = txtLotNumber.Text
             End If
         Catch ex As Exception
-            MsgBox("BarCcode Is Not Valid")
+
+            Label3.Visible = True
+            Label3.Text = "BarCcode Is Not Valid"
+            DelayTM()
+            Label3.Visible = False
+
             Me.txtLotNumber.Clear()
             Me.txtLotNumber.Focus()
             Me.txtLotNumber.Refresh()
@@ -796,18 +807,46 @@ Public Class frmJobEntry
             Case "ReCheck"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And M30 > 0 And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And P30 > 0 And PACKENDTM is Null")
+                If LRecordCount > 0 Then
+                    'LOAD THE DATA FROM dB IN TO THE DATAGRID
+                    frmDGV.DGVdata.DataSource = LDS.Tables(0)
+                    frmDGV.DGVdata.Rows(0).Selected = True
+
+                    If Not frmDGV.DGVdata.Rows(0).Cells(33).Value = 0 Then  'check to see if cheese scanned has already been allocated
+                        Label3.Visible = True
+                        Label3.Text = "THIS CHEESE HAS ALREADY BEEN ALLOCATED "
+                        DelayTM()
+                        Label3.Visible = False
+                        quit = 1
+                        frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                        quit = 1
+
+                        Me.txtLotNumber.Clear()
+                        Me.txtLotNumber.Visible = True
+                        Me.txtLotNumber.Focus()
+                        Exit Sub
+
+                    End If
+                End If
+
+
             Case "Waste"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And FLT_W = 'True' And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8  And COLWASTE > 0 And PACKENDTM is Null ")
         End Select
 
         If LRecordCount = 0 Then
-            MsgBox("This is NOT Grade " & "'" & txtGrade.Text & "'" & " CHEESES PLEASE RE-SCAN")
+
+            Label3.Visible = True
+            Label3.Text = "This is NOT Grade " & "'" & txtGrade.Text & "'" & " CHEESES PLEASE RE-SCAN"
+            DelayTM()
+            Label3.Visible = False
             Me.txtLotNumber.Clear()
             Me.txtLotNumber.Visible = True
             Me.txtLotNumber.Focus()
             quit = 1
             Exit Sub
+
         End If
 
 
@@ -833,7 +872,10 @@ Public Class frmJobEntry
             frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
 
         Else
-            MsgBox("PRODUCT NUMBER " & varProductCode & " THIS PRODUCT IS NOT IN THE PRODUCT LIST")
+            Label3.Visible = True
+            Label3.Text = "PRODUCT NUMBER " & varProductCode & " THIS PRODUCT IS NOT IN THE PRODUCT LIST"
+            DelayTM()
+            Label3.Visible = False
             quit = 1
             Exit Sub
 
@@ -845,25 +887,25 @@ Public Class frmJobEntry
         Select Case txtGrade.Text
             Case "B"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8  And DEFCONE > 0 And FLT_W = 'False' And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And CONEBARLEY > 0 And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8  And DEFCONE > 0 And FLT_W = 'False' And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And CONEBARLEY > 0 And PACKENDTM is Null")
             Case "AL"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAL > 0 And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAL > 0 And PACKENDTM is Null")
             Case "AD"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAD > 0 And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAD > 0 And PACKENDTM is Null")
             Case "P15 AS", "P25 AS", "P35 AS"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 9 And DEFCONE = 0 And CONEBARLEY = 0 And  PACKENDTM is Null")
             Case "P20 BS", "P30 BS", "P35 BS"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And DEFCONE > 0  And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And CONEBARLEY > 0 And PACKENDTM is Null  Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And M30 > 0 And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And P30 > 0 And PACKENDTM is Null ")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True'  And CONESTATE = 8 And DEFCONE > 0  And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And CONEBARLEY > 0 And PACKENDTM is Null  Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And M30 > 0 And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And P30 > 0 And PACKENDTM is Null ")
             Case "ReCheck"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And M30 > 0 And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And P30 > 0 And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And M30 > 0 And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And P30 > 0 And PACKENDTM is Null")
             Case "Waste"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And FLT_W = 'True' And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8  And COLWASTE > 0 And PACKENDTM is Null ")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And FLT_W = 'True' And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8  And COLWASTE > 0 And PACKENDTM is Null ")
         End Select
 
 
@@ -877,9 +919,12 @@ Public Class frmJobEntry
             frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(0), ListSortDirection.Ascending)  'sorts On cone number
 
 
-        Else
-            MsgBox("NO GRADE " & "'" & txtGrade.Text & "'" & " CHEESES CAN BE FOUND")
 
+        Else
+            Label3.Visible = True
+            Label3.Text = "NO GRADE " & "'" & txtGrade.Text & "'" & " CHEESES CAN BE FOUND"
+            DelayTM()
+            Label3.Visible = False
             Me.txtLotNumber.Clear()
             Me.txtLotNumber.Visible = False
             quit = 1

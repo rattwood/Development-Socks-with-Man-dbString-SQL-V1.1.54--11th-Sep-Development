@@ -63,7 +63,7 @@ Public Class frmColReCheck
         DataGridView1.RowHeadersVisible = False
 
 
-        For i = 1 To 32
+        For i = 1 To frmDGV.DGVdata.Rows.Count
             DataGridView1.Rows(i - 1).Cells(0).Value = frmDGV.DGVdata.Rows(i - 1).Cells(88).Value
             DataGridView1.Rows(i - 1).Cells(1).Value = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
 
@@ -111,7 +111,7 @@ Public Class frmColReCheck
         'CHECK DATA IN CORRECTLY
         Dim colname As String
         For x = 2 To 3
-            For i = 1 To 32
+            For i = 1 To frmDGV.DGVdata.Rows.Count
 
                 If DataGridView1.Rows(i - 1).Cells(x).Value = "" Then
                     If x > 2 Then colname = "ReCheck2" Else colname = "ReCheck1"
@@ -125,7 +125,7 @@ Public Class frmColReCheck
 
         Dim CharRead As String
         For x = 2 To 3
-            For i = 1 To 32
+            For i = 1 To frmDGV.DGVdata.Rows.Count
                 CharRead = DataGridView1.Rows(i - 1).Cells(x).Value
 
                 Select Case CharRead
@@ -154,7 +154,7 @@ Public Class frmColReCheck
 
 
 
-        For i = 1 To 32
+        For i = 1 To frmDGV.DGVdata.Rows.Count
             tmpReChk1 = DataGridView1.Rows(i - 1).Cells(2).Value
             tmpRechk2 = DataGridView1.Rows(i - 1).Cells(3).Value
             tmpDef = DataGridView1.Rows(i - 1).Cells(5).Value
@@ -211,14 +211,14 @@ Public Class frmColReCheck
         'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
 
         If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("RECHKENDTM").Value) Then
-            For i As Integer = 1 To 32
+            For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
                 frmDGV.DGVdata.Rows(i - 1).Cells("RECHKENDTM").Value = today 'COLOUR CHECK END TIME
             Next
         End If
 
 
 
-        For i = 1 To 32
+        For i = 1 To frmDGV.DGVdata.Rows.Count
 
 
 
@@ -251,13 +251,13 @@ Public Class frmColReCheck
             If DataGridView1.Rows(i - 1).Cells(5).Value = "X MISSING CHEESE" Then frmDGV.DGVdata.Rows(i - 1).Cells(11).Value = 1  'missingCone
             If DataGridView1.Rows(i - 1).Cells(5).Value = "BARRE" Then frmDGV.DGVdata.Rows(i - 1).Cells(16).Value = 1 'Cone with large colour defect
 
-            frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 2   'Cone has been reChecked  so can be packed
+            frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 3   'Cone has been reChecked  so can be packed
 
         Next
 
 
 
-        For i = 1 To 32
+        For i = 1 To frmDGV.DGVdata.Rows.Count
             'CHECK reCheck1
             Select Case DataGridView1.Rows(i - 1).Cells(2).Value
 
@@ -287,9 +287,9 @@ Public Class frmColReCheck
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHK2").Value = "W"
             End Select
 
-
+            frmDGV.DGVdata.Rows(i - 1).Cells("RECHKCOLOP").Value = frmJobEntry.varUserName
             frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = DataGridView1.Rows(i - 1).Cells(4).Value 'WRITE RECHECK RESULT
-            'If Not DataGridView1.Rows(i - 1).Cells(5).Value = "" Then frmDGV.DGVdata.Rows(i - 1).Cells("RECHKDEFCODE").Value = DataGridView1.Rows(i - 1).Cells(5).Value  'WRITE RECHEECK DEFECTS
+
             If DataGridView1.Rows(i - 1).Cells(4).Value = "AL" Then frmDGV.DGVdata.Rows(i - 1).Cells("CONEAL").Value = DataGridView1.Rows(i - 1).Cells(4).Value  'WRITE RECHEECK RESULT TO DGV
             If DataGridView1.Rows(i - 1).Cells(4).Value = "AD" Then frmDGV.DGVdata.Rows(i - 1).Cells("CONEAD").Value = DataGridView1.Rows(i - 1).Cells(4).Value 'WRITE RECHEECK RESULT TO DGV
 
@@ -301,16 +301,16 @@ Public Class frmColReCheck
 
 
 
-        ' UpdateDatabase()
+        UpdateDatabase()
 
 
-        'If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
-        'frmDGV.DGVdata.ClearSelection()
-        'frmJobEntry.Show()
-        'frmJobEntry.txtLotNumber.Clear()
-        'frmJobEntry.txtLotNumber.Focus()
-        'Me.Cursor = System.Windows.Forms.Cursors.Default
-        'Me.Close()
+        If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
+        frmDGV.DGVdata.ClearSelection()
+        frmJobEntry.Show()
+        frmJobEntry.txtLotNumber.Clear()
+        frmJobEntry.txtLotNumber.Focus()
+        Me.Cursor = System.Windows.Forms.Cursors.Default
+        Me.Close()
 
 
     End Sub
@@ -353,9 +353,9 @@ Public Class frmColReCheck
         'create the save name of the file
         savename = (todaypath & "\" & saveString & ".xlsx").ToString
 
+        Dim sheetNumber As Integer = 0
 
-
-
+        sheetNumber = frmJobEntry.txtLotNumber.Text.Substring(16, 1)
 
 
 
@@ -368,7 +368,7 @@ Public Class frmColReCheck
 
 
         ReCheckworkbook = MyReCheckExcel.Workbooks.Open(savename) '.Sheets(SheetNum)
-        ReChecksheets = ReCheckworkbook.Worksheets(SheetNum)
+        ReChecksheets = ReCheckworkbook.Worksheets(sheetNumber)
         ReChecksheets.Activate()
 
 
@@ -447,8 +447,13 @@ Public Class frmColReCheck
 
 
                     MyReCheckExcel.Cells(8 + i, 6) = DataGridView1.Rows(i - 1).Cells(4).Value
-                        MyReCheckExcel.Cells(8 + i, 7) = DataGridView1.Rows(i - 1).Cells(5).Value
+                    MyReCheckExcel.Cells(8 + i, 7) = DataGridView1.Rows(i - 1).Cells(5).Value
+
                 Next
+
+                MyReCheckExcel.Cells(8 + 1, 6) = frmJobEntry.varUserName  'Puts user name on the form
+
+
             End If
 
         Catch ex As Exception

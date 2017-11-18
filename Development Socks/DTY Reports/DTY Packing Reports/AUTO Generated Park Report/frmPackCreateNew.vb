@@ -182,7 +182,7 @@ Public Class frmPackCreateNew
                 'CHEESE WEIGHT
                 MyPakExcel.Cells(14, 5) = frmJobEntry.varProdWeight                   'E13
                 'BARCODE IN
-                MyPakExcel.Cells(54, 17) = frmDGV.DGVdata.Rows(0).Cells(55).Value      'P55
+                MyPakExcel.Cells(54, 17) = frmJobEntry.txtOperator.Text    'P55
 
 
                 'THIS IS USED TO WRITE DATE IN TO USED ROWS
@@ -262,7 +262,7 @@ Public Class frmPackCreateNew
                 'CHEESE WEIGHT
                 MyPakExcel.Cells(4, 5) = frmJobEntry.varProdWeight                   'E4
                 'PACKER NAME
-                MyPakExcel.Cells(42, 3) = frmDGV.DGVdata.Rows(0).Cells(55).Value      'D53
+                MyPakExcel.Cells(42, 3) = frmJobEntry.txtOperator.Text      'D53
 
                 createBarcode()
                 MyPakExcel.Cells(1, 3) = SheetCodeString
@@ -358,7 +358,7 @@ Public Class frmPackCreateNew
         day = today.Substring(0, 2)
         month = today.Substring(3, 2)
         year = today.Substring(8, 2)
-        MsgBox(year)
+
 
         Select Case frmJobEntry.txtGrade.Text
             Case "A"

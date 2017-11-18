@@ -119,6 +119,7 @@ Public Class frmConeSearch
         'DOFFING NUMBER
         txtBoxDoff.Text = DataGridView1.Rows(0).Cells(2).Value
         'DATE
+
         dbDate = DataGridView1.Rows(0).Cells(3).Value.ToString
         dateConv()
         txtBoxPackDate.Text = datestring

@@ -12,7 +12,7 @@ Public Class frmPackTodayUpdate
     Dim ncfree As Integer
     Dim SheetCodeString As String
     Dim modBarcode As String
-
+    Public prtError As Integer
 
 
     Public Sub TodayUpdate()
@@ -1126,12 +1126,12 @@ Public Class frmPackTodayUpdate
     Public Sub todayUpdate_ReCheck()
         Dim xlTodyWorkbook As Excel.Workbook
         Dim xlTodysheets As Excel.Worksheet
-        createBarcode()
+
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
         mycount = xlTodyWorkbook.Worksheets.Count
-        boxCount = mycount + 1
-
+        createBarcode()
+        'CType(MyTodyExcel.ActiveWorkbook.Sheets(mycount), Excel.Worksheet).Select()  'Selects the last sheeet in workbook
         Dim totCount As Integer
 
 
@@ -1151,8 +1151,9 @@ Public Class frmPackTodayUpdate
 
 
 
-        'CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
+        ''CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
         If totCount = 32 Then
+
             xlTodyWorkbook.Sheets(1).Copy(After:=xlTodyWorkbook.Sheets(mycount))
             'ReName the work sheet 
             'CType(MyTodyExcel.Workbooks(1).Worksheets("Sheet1"), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
@@ -1166,7 +1167,8 @@ Public Class frmPackTodayUpdate
             MyTodyExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells(2).Value
             'Packer Name
             MyTodyExcel.Cells(42, 3) = frmDGV.DGVdata.Rows(0).Cells(55).Value
-
+            'CREATE AND WRITE NEW BARCODE TO NEW SHEET
+            mycount = mycount + 1
             createBarcode()
             MyTodyExcel.Cells(1, 4) = SheetCodeString
 
@@ -1175,13 +1177,15 @@ Public Class frmPackTodayUpdate
             For i = 9 To 40
                 MyTodyExcel.Cells(i, 3) = "" 'Clear the contents of cone cells
             Next
-
+            MyTodyExcel.Visible = True
+            MsgBox("delay")
+            MyTodyExcel.Visible = False
         End If
 
 
 
         Try
-            createBarcode()
+            ' createBarcode()
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
                 'If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
@@ -1194,7 +1198,7 @@ Public Class frmPackTodayUpdate
                     frmDGV.DGVdata.Rows(i - 1).Cells(86).Value = modBarcode
                     nfree = nfree + 1
 
-
+                    frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = "2"  'to show it has been added to the sheet and will not be read again
 
 
                     'ROUTINE IF SHEET IS FULL TO COPY SHEET AND CREATE A NEW SHEET IN THE WORKBOOK
@@ -1207,18 +1211,19 @@ Public Class frmPackTodayUpdate
                         xlTodyWorkbook.Sheets(mycount).SaveAs(Filename:=tmpsaveName, FileFormat:=51)
 
                         MyTodyExcel.DisplayAlerts = True
-
-                        xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
-                        CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
+                        xlTodyWorkbook.Sheets(1).Copy(After:=xlTodyWorkbook.Sheets(mycount))
+                        'xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
+                        'CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
                         'PRODUCT NAME
                         MyTodyExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value
                         'Product Code
                         MyTodyExcel.Cells(5, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
                         'Packer Name
-                        MyTodyExcel.Cells(42, 3) = frmDGV.DGVdata.Rows(0).Cells(55).Value
-
-                        'CREATE AND WRITE BARCODE TO NEW SHEET
+                        MyTodyExcel.Cells(42, 3) = frmJobEntry.txtOperator.Text
+                        'CREATE AND WRITE NEW BARCODE TO NEW SHEET
+                        mycount = mycount + 1
+                        createBarcode()
                         MyTodyExcel.Cells(1, 3) = SheetCodeString
 
 
@@ -1229,7 +1234,7 @@ Public Class frmPackTodayUpdate
 
                         nfree = 9
 
-                        boxCount = boxCount + 1
+                        Exit For
 
                     End If
                 End If
@@ -1242,6 +1247,7 @@ Public Class frmPackTodayUpdate
         End Try
 
         Try
+
 
             'Save changes to new file in Paking Dir
             MyTodyExcel.DisplayAlerts = False
@@ -1258,8 +1264,13 @@ Public Class frmPackTodayUpdate
             xlTodyWorkbook.Close(SaveChanges:=False)
         Catch ex As Exception
             MsgBox(ex.Message)
+            MsgBox("Please make sure excel does not have any open Excel sheets. Close then and then select Finish to retry")
+            MyTodyExcel.Quit()
+            releaseObject(xlTodysheets)
+            releaseObject(xlTodyWorkbook)
+            releaseObject(MyTodyExcel)
+            prtError = 1
         End Try
-
 
         MyTodyExcel.Quit()
         releaseObject(xlTodysheets)
@@ -1329,6 +1340,7 @@ Public Class frmPackTodayUpdate
                 gradeTxt = "P20BS" 'P20 BS Grade
             Case "ReCheck"
                 gradeTxt = "RECHECK" 'ReCheck Grade
+                boxCount = mycount
         End Select
 
 
@@ -1341,7 +1353,5 @@ Public Class frmPackTodayUpdate
 
     End Sub
 
-    Private Sub frmPackTodayUpdate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-    End Sub
 End Class
