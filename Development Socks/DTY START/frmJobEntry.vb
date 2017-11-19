@@ -196,6 +196,7 @@ Public Class frmJobEntry
                 chkBCode = txtLotNumber.Text.Substring(12, 1)
 
                 If chkBCode = "B" Then
+                    reCheck = 0
                     If txtLotNumber.TextLength > 14 Then  ' For carts B10,11 & 12
                         cartNum = txtLotNumber.Text.Substring(12, 3)
                     Else
@@ -517,7 +518,7 @@ Public Class frmJobEntry
                 ElseIf My.Settings.chkUseColour Then
                     frmColReCheck.Show()
                 ElseIf My.Settings.chkUsePack Then
-                    frmPacking.Show()
+                    nonAPacking()
                 End If
 
 
@@ -792,9 +793,12 @@ Public Class frmJobEntry
         'CHECK SCANNED CHEESE IS CORREECT GRADE OTHERWISE RESCAN
 
         Select Case txtGrade.Text
+            Case "A"
+                packGrade = txtGrade.Text
+                LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And RECHK = 4 And DEFCONE = 0 And CONEBARLEY = 0 And (CONEAL = 'AL' OR RECHKRESULT = 'A') And PACKENDTM is Null")
             Case "B"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8  And DEFCONE > 0 And FLT_W = 'False' And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And CONEBARLEY > 0 And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8  And (DEFCONE > 0 OR CONEBARLEY > 0 ) And FLT_W = 'False' And PACKENDTM is Null ")
             Case "AL"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAL = 'AL' And PACKENDTM is Null")
@@ -817,7 +821,7 @@ Public Class frmJobEntry
 
 
 
-                    If Not frmDGV.DGVdata.Rows(0).Cells(33).Value = 0 Then  'check to see if cheese scanned has already been allocated
+                    If Not frmDGV.DGVdata.Rows(0).Cells("RECHK").Value = 0 Then  'check to see if cheese scanned has already been allocated
                         Label3.Visible = True
                         Label3.Text = "THIS CHEESE HAS ALREADY BEEN ALLOCATED "
                         DelayTM()
@@ -890,6 +894,10 @@ Public Class frmJobEntry
 
         'Check for correct cheese selection
         Select Case txtGrade.Text
+
+            Case "A"
+                packGrade = txtGrade.Text
+                LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And RECHK = 4 And DEFCONE = 0 And CONEBARLEY = 0 And (CONEAL = 'AL' OR RECHKRESULT = 'A') And PACKENDTM is Null")
             Case "B"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8  And DEFCONE > 0 And FLT_W = 'False' And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And CONEBARLEY > 0 And PACKENDTM is Null")
@@ -920,8 +928,15 @@ Public Class frmJobEntry
             frmDGV.DGVdata.Rows(0).Selected = True
             Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
 
-            'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(0), ListSortDirection.Ascending)  'sorts On cone number
+            If txtGrade.Text = "A" Then
+                'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
+                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
+            Else
+                'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
+                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(0), ListSortDirection.Ascending)  'sorts On cone number
+
+            End If
+
 
 
 
@@ -941,10 +956,16 @@ Public Class frmJobEntry
 
         Me.Hide()
         If My.Settings.debugSet Then frmDGV.Show()
-        frmB_AL_AD_W.txtConeBcode.Clear()
-        frmB_AL_AD_W.txtConeBcode.Focus()
-        frmB_AL_AD_W.Show()
 
+        If txtGrade.Text = "A" Then
+            frmPackRchkA.txtConeBcode.Clear()
+            frmPackRchkA.txtConeBcode.Focus()
+            frmPackRchkA.Show()
+        Else
+            frmB_AL_AD_W.txtConeBcode.Clear()
+            frmB_AL_AD_W.txtConeBcode.Focus()
+            frmB_AL_AD_W.Show()
+        End If
 
     End Sub
 
