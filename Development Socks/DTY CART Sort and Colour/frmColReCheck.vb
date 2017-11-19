@@ -92,8 +92,8 @@ Public Class frmColReCheck
 
             'Debug values remove before release
 
-            DataGridView1.Rows(i - 1).Cells(2).Value = "d"
-            DataGridView1.Rows(i - 1).Cells(3).Value = "d"
+            ' DataGridView1.Rows(i - 1).Cells(2).Value = "d"
+            'DataGridView1.Rows(i - 1).Cells(3).Value = "d"
 
         Next
 
@@ -251,7 +251,7 @@ Public Class frmColReCheck
             If DataGridView1.Rows(i - 1).Cells(5).Value = "X MISSING CHEESE" Then frmDGV.DGVdata.Rows(i - 1).Cells(11).Value = 1  'missingCone
             If DataGridView1.Rows(i - 1).Cells(5).Value = "BARRE" Then frmDGV.DGVdata.Rows(i - 1).Cells(16).Value = 1 'Cone with large colour defect
 
-            frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 3   'Cone has been reChecked  so can be packed
+            frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 4  'Cone has been reChecked  so can be packed
 
         Next
 
@@ -446,12 +446,12 @@ Public Class frmColReCheck
 
 
 
-                    MyReCheckExcel.Cells(8 + i, 6) = DataGridView1.Rows(i - 1).Cells(4).Value
-                    MyReCheckExcel.Cells(8 + i, 7) = DataGridView1.Rows(i - 1).Cells(5).Value
+                    MyReCheckExcel.Cells(8 + i, 6) = DataGridView1.Rows(i - 1).Cells(4).Value 'GRADE RESULT
+                    MyReCheckExcel.Cells(8 + i, 7) = DataGridView1.Rows(i - 1).Cells(5).Value 'DEFECT NAME
 
                 Next
 
-                MyReCheckExcel.Cells(8 + 1, 6) = frmJobEntry.varUserName  'Puts user name on the form
+                MyReCheckExcel.Cells(43, 6) = frmJobEntry.varUserName  'Puts user name on the form
 
 
             End If

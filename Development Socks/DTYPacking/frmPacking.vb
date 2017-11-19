@@ -67,59 +67,63 @@ Public Class frmPacking
 
 
 
-    'Faults
-
-
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
         Dim btnNum As Integer
         Dim btnNums As String
 
-        btnNums = frmJobEntry.varCartSelect
+
+        If frmJobEntry.reCheck = 1 Then
+
+            btnNums = 1
+
+        Else
+            btnNums = frmJobEntry.varCartSelect
+        End If
 
         ' SELECT CONE NUMBER RANGE BASED ON CART NUMBER
         Select Case btnNums
-            Case Is = 1
-                btnNum = 1
-                coneNumOffset = 0
-            Case Is = 2
-                btnNum = 33
-                coneNumOffset = 32
-            Case Is = 3
-                btnNum = 65
-                coneNumOffset = 64
-            Case Is = 4
-                btnNum = 97
-                coneNumOffset = 96
-            Case Is = 5
-                btnNum = 129
-                coneNumOffset = 128
-            Case Is = 6
-                btnNum = 161
-                coneNumOffset = 160
-            Case Is = 7
-                btnNum = 193
-                coneNumOffset = 192
-            Case Is = 8
-                btnNum = 225
-                coneNumOffset = 224
-            Case Is = 9
-                btnNum = 257
-                coneNumOffset = 256
-            Case Is = 10
-                btnNum = 289
-                coneNumOffset = 288
-            Case Is = 11
-                btnNum = 321
-                coneNumOffset = 320
-            Case Is = 12
-                btnNum = 353
-                coneNumOffset = 352
-        End Select
+                Case Is = 1
+                    btnNum = 1
+                    coneNumOffset = 0
+                Case Is = 2
+                    btnNum = 33
+                    coneNumOffset = 32
+                Case Is = 3
+                    btnNum = 65
+                    coneNumOffset = 64
+                Case Is = 4
+                    btnNum = 97
+                    coneNumOffset = 96
+                Case Is = 5
+                    btnNum = 129
+                    coneNumOffset = 128
+                Case Is = 6
+                    btnNum = 161
+                    coneNumOffset = 160
+                Case Is = 7
+                    btnNum = 193
+                    coneNumOffset = 192
+                Case Is = 8
+                    btnNum = 225
+                    coneNumOffset = 224
+                Case Is = 9
+                    btnNum = 257
+                    coneNumOffset = 256
+                Case Is = 10
+                    btnNum = 289
+                    coneNumOffset = 288
+                Case Is = 11
+                    btnNum = 321
+                    coneNumOffset = 320
+                Case Is = 12
+                    btnNum = 353
+                    coneNumOffset = 352
+            End Select
 
         'SET CORRECT BUTTUN NUMBERS BASED ON CONE NUMBERS (SPINDEL NUMBERS)
-        For i As Integer = 1 To 32
+        For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
 
             Me.Controls("btnCone" & i.ToString).Text = btnNum
             btnNum = btnNum + 1
@@ -128,19 +132,32 @@ Public Class frmPacking
 
 
         Me.txtCartNum.Text = frmJobEntry.cartSelect
-        Me.lblJobNum.Text = frmJobEntry.varJobNum
+            Me.lblJobNum.Text = frmJobEntry.varJobNum
 
 
         'GET NUMBER OF CONES THAT NEED ALLOCATING Count agains Job Barcode
+        Dim btnCountStart As Integer = frmDGV.DGVdata.Rows.Count + 1
+        Dim totBtn As Integer = 31 - btnCountStart
+        For i = btnCountStart To 32
+            Me.Controls("btnCone" & i.ToString).Visible = False
+        Next
 
 
-        For i = 1 To 32
-            If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells(43).Value = False Then
+        For i = 1 To frmDGV.DGVdata.Rows.Count
+            If frmJobEntry.reCheck = 1 Then
+                frmDGV.DGVdata.Rows(i - 1).Cells(83).Value = "AL" Or frmDGV.DGVdata.Rows(i - 1).Cells(83).Value = "A"
+                toAllocatedCount = toAllocatedCount + 1
+            Else
+                frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells(43).Value = False
                 toAllocatedCount = toAllocatedCount + 1
             End If
+
+
+
         Next
 
         txtboxTotal.Text = toAllocatedCount
+
 
         Me.KeyPreview = True  'Allows us to look for advace character from barcode
 
@@ -148,25 +165,43 @@ Public Class frmPacking
         If frmJobEntry.coneValUpdate Then UpdateConeVal()
 
 
-        If My.Settings.debugSet Then frmDGV.Show()
+
 
 
 
     End Sub
 
     Public Sub UpdateConeVal()
-        If My.Settings.debugSet Then frmDGV.Show()
 
 
 
-        For rw As Integer = 1 To 32
 
-            If frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(rw - 1).Cells(43).Value = False Then
-                Me.Controls("btnCone" & rw).BackColor = Color.Green       'Grade A Cone
-            End If
+        For rw As Integer = 1 To frmDGV.DGVdata.Rows.Count
 
-            If frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "15" Then
-                Me.Controls("btnCone" & rw).BackColor = Color.LightGreen       'Grade A Cone
+
+
+            If frmJobEntry.reCheck Then
+
+                If (frmDGV.DGVdata.Rows(rw - 1).Cells(83).Value = "AL" Or frmDGV.DGVdata.Rows(rw - 1).Cells(83).Value = "A") And frmDGV.DGVdata.Rows(rw - 1).Cells("RECHK").Value = "4" Then
+                    Me.Controls("btnCone" & rw).BackColor = Color.Green       'Grade A Cone
+                End If
+
+                If frmDGV.DGVdata.Rows(rw - 1).Cells("RECHK").Value = "5" Then
+                    Me.Controls("btnCone" & rw).BackColor = Color.LightGreen       'Grade A Cone
+                End If
+
+
+            Else
+                If frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(rw - 1).Cells(43).Value = False Then
+                    Me.Controls("btnCone" & rw).BackColor = Color.Green       'Grade A Cone
+                End If
+
+                If frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "15" Then
+                    Me.Controls("btnCone" & rw).BackColor = Color.LightGreen       'Grade A Cone
+                End If
+
+
+
             End If
 
             Me.Controls("btnCone" & rw).Enabled = False
@@ -212,61 +247,121 @@ Public Class frmPacking
 
 
 
-        For i = 1 To 32
+        For i = 1 To frmDGV.DGVdata.Rows.Count
+
+            If frmJobEntry.reCheck Then
+
+                If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = "4" And frmDGV.DGVdata.Rows(i - 1).Cells(43).Value = False Then
+                    MsgBox(i)
+                    curcone = i
+                    Me.Controls("btnCone" & curcone.ToString).BackColor = Color.LightGreen       'Grade A Cone
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = "5"
+                    frmDGV.DGVdata.Rows(i - 1).Cells(55).Value = frmJobEntry.PackOp
+                    frmDGV.DGVdata.Rows(i - 1).Cells(8).Value = frmJobEntry.varUserName
+                    frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
+
+                    'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
+                    If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
+                        For rows As Integer = 1 To frmDGV.DGVdata.Rows.Count
+                            If My.Settings.chkUsePack = True Then frmDGV.DGVdata.Rows(rows - 1).Cells("PACKENDTM").Value = DateAndTime.Today  'PACKING CHECK END TIME.
+                        Next
+                    End If
 
 
-            If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells(43).Value = False Then
-                curcone = frmDGV.DGVdata.Rows(i - 1).Cells(6).Value
-                Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.LightGreen       'Grade A Cone
-                frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "15"
-                frmDGV.DGVdata.Rows(i - 1).Cells(55).Value = frmJobEntry.PackOp
-                frmDGV.DGVdata.Rows(i - 1).Cells(8).Value = frmJobEntry.varUserName
-                frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
+                    allocatedCount = allocatedCount + 1
+                    endCheck()
+                    curcone = 0
 
-                'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
-                If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
-                    For rows As Integer = 1 To 32
-                        If My.Settings.chkUsePack = True Then frmDGV.DGVdata.Rows(rows - 1).Cells("PACKENDTM").Value = DateAndTime.Today  'PACKING CHECK END TIME.
-                    Next
+                ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = "5" Then
+                    Label1.Visible = True
+                    Label1.Text = "Cheese already allocated"
+                    DelayTM()
+                    Label1.Visible = False
+                    'ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value < "9" Or frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells(43).Value = True Then
+                    '    curcone = frmDGV.DGVdata.Rows(i - 1).Cells(6).Value
+                    '    psorterror = 1
+                    '    Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.Red      'Wrong Cone scanned
+                    '    frmDGV.DGVdata.Rows(i - 1).Cells(58).Value = psorterror
+                    '    frmDGV.DGVdata.Rows(i - 1).Cells(55).Value = frmJobEntry.PackOp
+                    '    frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "14"
+                    '    frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
+
+                    'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
+
+                    If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
+                        For rows As Integer = 1 To frmDGV.DGVdata.Rows.Count
+                            If My.Settings.chkUseColour = True Then frmDGV.DGVdata.Rows((rows - 1) - coneNumOffset).Cells("PACKENDTM").Value = varCartEndTime 'PACKING CHECK END TIME
+                        Next
+                    End If
+
+                    Me.Hide()
+                    frmRemoveCone.Show()
+                    psorterror = 0
+                    curcone = 0
+                    Continue For
+                Else
+                    txtConeBcode.Clear()
+                    txtConeBcode.Refresh()
+                    txtConeBcode.Focus()
+
                 End If
 
-
-                allocatedCount = allocatedCount + 1
-                endCheck()
-                curcone = 0
-
-            ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "15" Then
-                Label1.Visible = True
-                Label1.Text = "Cheese already allocated"
-                DelayTM()
-                Label1.Visible = False
-            ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value < "9" Or frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells(43).Value = True Then
-                curcone = frmDGV.DGVdata.Rows(i - 1).Cells(6).Value
-                psorterror = 1
-                Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.Red      'Wrong Cone scanned
-                frmDGV.DGVdata.Rows(i - 1).Cells(58).Value = psorterror
-                frmDGV.DGVdata.Rows(i - 1).Cells(55).Value = frmJobEntry.PackOp
-                frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "14"
-                frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
-
-                'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
-
-                If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
-                    For rows As Integer = 1 To 32
-                        If My.Settings.chkUseColour = True Then frmDGV.DGVdata.Rows((rows - 1) - coneNumOffset).Cells("PACKENDTM").Value = varCartEndTime 'PACKING CHECK END TIME
-                    Next
-                End If
-
-                Me.Hide()
-                frmRemoveCone.Show()
-                psorterror = 0
-                curcone = 0
-                Continue For
             Else
-                txtConeBcode.Clear()
-                txtConeBcode.Refresh()
-                txtConeBcode.Focus()
 
+
+                If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells(43).Value = False Then
+                    curcone = frmDGV.DGVdata.Rows(i - 1).Cells(6).Value
+                    Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.LightGreen       'Grade A Cone
+                    frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "15"
+                    frmDGV.DGVdata.Rows(i - 1).Cells(55).Value = frmJobEntry.PackOp
+                    frmDGV.DGVdata.Rows(i - 1).Cells(8).Value = frmJobEntry.varUserName
+                    frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
+
+                    'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
+                    If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
+                        For rows As Integer = 1 To frmDGV.DGVdata.Rows.Count
+                            If My.Settings.chkUsePack = True Then frmDGV.DGVdata.Rows(rows - 1).Cells("PACKENDTM").Value = DateAndTime.Today  'PACKING CHECK END TIME.
+                        Next
+                    End If
+
+
+                    allocatedCount = allocatedCount + 1
+                    endCheck()
+                    curcone = 0
+
+                ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "15" Then
+                    Label1.Visible = True
+                    Label1.Text = "Cheese already allocated"
+                    DelayTM()
+                    Label1.Visible = False
+                ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value < "9" Or frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells(43).Value = True Then
+                    curcone = frmDGV.DGVdata.Rows(i - 1).Cells(6).Value
+                    psorterror = 1
+                    Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.Red      'Wrong Cone scanned
+                    frmDGV.DGVdata.Rows(i - 1).Cells(58).Value = psorterror
+                    frmDGV.DGVdata.Rows(i - 1).Cells(55).Value = frmJobEntry.PackOp
+                    frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "14"
+                    frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
+
+                    'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
+
+                    If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
+                        For rows As Integer = 1 To frmDGV.DGVdata.Rows.Count
+                            If My.Settings.chkUseColour = True Then frmDGV.DGVdata.Rows((rows - 1) - coneNumOffset).Cells("PACKENDTM").Value = varCartEndTime 'PACKING CHECK END TIME
+                        Next
+                    End If
+
+                    Me.Hide()
+                    frmRemoveCone.Show()
+                    psorterror = 0
+                    curcone = 0
+                    Continue For
+                Else
+                    txtConeBcode.Clear()
+                    txtConeBcode.Refresh()
+                    txtConeBcode.Focus()
+
+                End If
             End If
         Next
     End Sub
@@ -306,9 +401,11 @@ Public Class frmPacking
         If toAllocatedCount = allocatedCount Then
             curcone = 0
             'frmPackReport.packPrint() 'Print the packing report and go back to Job Entry for the next cart
+
+
             frmPackRepMain.PackRepMainSub()
-            frmPackRepMain.Close()
-            UpdateDatabase()
+                frmPackRepMain.Close()
+                UpdateDatabase()
 
         End If
         Me.Cursor = System.Windows.Forms.Cursors.Default

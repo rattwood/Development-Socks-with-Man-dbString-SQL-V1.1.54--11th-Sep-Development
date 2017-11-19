@@ -58,7 +58,7 @@ Public Class frmJobEntry
     Dim doffingNum As String
     Dim cartNum As String
     Dim quit As Integer
-    Dim reCheck As Integer = 0
+    Public reCheck As Integer = 0
     Public cartReport As Integer
 
     Public SortOP As String
@@ -122,7 +122,7 @@ Public Class frmJobEntry
         End If
 
 
-
+        If My.Settings.debugSet Then frmDGV.Show()
 
         Me.btnCancelReport.Visible = False
 
@@ -507,7 +507,7 @@ Public Class frmJobEntry
 
 
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(87), ListSortDirection.Ascending)  'sorts On ReCheck index Number
+                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(88), ListSortDirection.Ascending)  'sorts On ReCheck index Number
 
                 If My.Settings.debugSet Then frmDGV.Show()
 
@@ -516,12 +516,14 @@ Public Class frmJobEntry
                     frmSortReCheck.Show()
                 ElseIf My.Settings.chkUseColour Then
                     frmColReCheck.Show()
+                ElseIf My.Settings.chkUsePack Then
+                    frmPacking.Show()
                 End If
 
 
-                If My.Settings.debugSet Then frmDGV.Show()
+                'If My.Settings.debugSet Then frmDGV.Show()
 
-                    Me.Hide()
+                Me.Hide()
                     Exit Sub
                 End If
 
@@ -795,22 +797,25 @@ Public Class frmJobEntry
                 LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8  And DEFCONE > 0 And FLT_W = 'False' And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And CONEBARLEY > 0 And PACKENDTM is Null")
             Case "AL"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAL > 0 And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAL = 'AL' And PACKENDTM is Null")
             Case "AD"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAD > 0 And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAD = 'AD' And PACKENDTM is Null")
             Case "P15 AS", "P25 AS", "P35 AS"
                 packGrade = txtGrade.Text
             Case "P20 BS", "P30 BS", "P35 BS"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE = 8 And DEFCONE > 0  And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE = 8 And CONEBARLEY > 0 And PACKENDTM is Null  Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE = 8 And M30 > 0 And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE = 8 And P30 > 0 And PACKENDTM is Null ")
             Case "ReCheck"
+
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And M30 > 0 And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And P30 > 0 And PACKENDTM is Null")
                 If LRecordCount > 0 Then
                     'LOAD THE DATA FROM dB IN TO THE DATAGRID
                     frmDGV.DGVdata.DataSource = LDS.Tables(0)
                     frmDGV.DGVdata.Rows(0).Selected = True
+
+
 
                     If Not frmDGV.DGVdata.Rows(0).Cells(33).Value = 0 Then  'check to see if cheese scanned has already been allocated
                         Label3.Visible = True
@@ -890,10 +895,10 @@ Public Class frmJobEntry
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8  And DEFCONE > 0 And FLT_W = 'False' And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And CONEBARLEY > 0 And PACKENDTM is Null")
             Case "AL"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAL > 0 And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And (CONEAL = 'AL' OR RECHKRESULT = 'A')  And PACKENDTM is Null")
             Case "AD"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAD > 0 And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAD = 'AD' And PACKENDTM is Null")
             Case "P15 AS", "P25 AS", "P35 AS"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 9 And DEFCONE = 0 And CONEBARLEY = 0 And  PACKENDTM is Null")

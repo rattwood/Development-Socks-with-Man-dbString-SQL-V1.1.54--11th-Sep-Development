@@ -1390,8 +1390,9 @@ Public Class frmSortReCheck
         For rw = 1 To frmDGV.DGVdata.Rows.Count
 
 
-            If frmDGV.DGVdata.Rows(rw - 1).Cells(33).Value = 1 Then    ' Update the ReCheck state
-                frmDGV.DGVdata.Rows(rw - 1).Cells(33).Value = "2"
+            If frmDGV.DGVdata.Rows(rw - 1).Cells(33).Value = 2 Then    ' Update the ReCheck state
+                frmDGV.DGVdata.Rows(rw - 1).Cells(33).Value = "3"
+                frmDGV.DGVdata.Rows(rw - 1).Cells(34).Value = today 'Cone has been reChecked  
                 frmDGV.DGVdata.Rows(rw - 1).Cells(56).Value = frmJobEntry.SortOP
                 frmDGV.DGVdata.Rows(rw - 1).Cells(8).Value = frmJobEntry.varUserName
             End If
@@ -2600,7 +2601,7 @@ Public Class frmSortReCheck
 
 
 
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(33).Value = 2    'Cone has been reChecked  set state to 2  
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(33).Value = 3    'Cone has been reChecked  set state to 3  
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(34).Value = Today 'Cone has been reChecked  
 
 
