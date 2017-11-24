@@ -151,7 +151,7 @@ Public Class frmColReCheck
         Next
 
         Dim tmpReChk1, tmpRechk2, tmpDef As String
-
+        Dim ACount, ALCount, ADCount, BCount, WCount
 
 
         For i = 1 To frmDGV.DGVdata.Rows.Count
@@ -160,35 +160,35 @@ Public Class frmColReCheck
             tmpDef = DataGridView1.Rows(i - 1).Cells(5).Value
 
 
-            If tmpReChk1 = "*" Or tmpRechk2 = "*" Then 'tmpReChk1 = "Ok" And tmpRechk2 = "*" Or tmpReChk1 = "*" And tmpRechk2 = "OK" Or tmpReChk1 = "*" And tmpRechk2 = "*" Or tmpReChk1 = "*" And tmpRechk2 = "-" Or tmpReChk1 = "-" And tmpRechk2 = "*" Or tmpReChk1 = "*" And tmpRechk2 = "+" Or tmpReChk1 = "+" And tmpRechk2 = "*" Or tmpReChk1 = "+" And tmpRechk2 = "@" Or tmpReChk1 = "*" And tmpRechk2 = "@" Or tmpReChk1 = "@" And tmpRechk2 = "*" Then
+            If tmpReChk1 = "*" Or tmpRechk2 = "*" Then
                 'Waste Grade
                 DataGridView1.Rows(i - 1).Cells(4).Style.ForeColor = Color.Black   'Grade Waste
                 DataGridView1.Rows(i - 1).Cells(4).Value = "W"
-            ElseIf tmpReChk1 = "@" Or tmpRechk2 = "@" Then 'tmpReChk1 = "OK" And tmpRechk2 = "@" Or tmpReChk1 = "@" And tmpRechk2 = "OK" Or tmpReChk1 = "@" And tmpRechk2 = "@" Or tmpReChk1 = "@" And tmpRechk2 = "-" Or tmpReChk1 = "-" And tmpRechk2 = "@" Or tmpReChk1 = "@" And tmpRechk2 = "+" Or tmpReChk1 = "+" And tmpRechk2 = "@" Then
+                WCount = WCount + 1
+            ElseIf (tmpReChk1 = "@" Or tmpRechk2 = "@") Or (tmpReChk1 = "-" And tmpRechk2 = "+") Or (tmpReChk1 = "+" And tmpRechk2 = "-") Then
                 'AB (B) Grade
                 DataGridView1.Rows(i - 1).Cells(4).Style.ForeColor = Color.Red    'Grade Abnormal (B)
                 DataGridView1.Rows(i - 1).Cells(4).Value = "B"
-
+                BCount = BCount + 1
             ElseIf (tmpReChk1 = "OK" And tmpRechk2 = "OK") And tmpDef = "" Then
                 'A Grade
                 DataGridView1.Rows(i - 1).Cells(4).Style.ForeColor = Color.DarkBlue  'Grade A
                 DataGridView1.Rows(i - 1).Cells(4).Value = "A"
-
+                ACount = ACount + 1
             ElseIf (tmpReChk1 = "OK" And tmpRechk2 = "+" Or tmpReChk1 = "+" And tmpRechk2 = "OK" Or tmpReChk1 = "+" And tmpRechk2 = "+") And tmpDef = "" Then
                 'AD Grade
                 DataGridView1.Rows(i - 1).Cells(4).Style.ForeColor = Color.Green    'Grade AD
                 DataGridView1.Rows(i - 1).Cells(4).Value = "AD"
+                ADCount = ADCount + 1
             ElseIf (tmpReChk1 = "OK" And tmpRechk2 = "-" Or tmpReChk1 = "-" And tmpRechk2 = "OK" Or tmpReChk1 = "-" And tmpRechk2 = "-") And tmpDef = "" Then
                 'AL Grade
                 DataGridView1.Rows(i - 1).Cells(4).Style.ForeColor = Color.Blue   'Grade AL
                 DataGridView1.Rows(i - 1).Cells(4).Value = "AL"
-            ElseIf tmpReChk1 = "-" And tmpRechk2 = "+" Or tmpReChk1 = "+" And tmpRechk2 = "-" Then
-                DataGridView1.Rows(i - 1).Cells(4).Style.ForeColor = Color.Red    'If any Cheese has a defect set to Grade Abnormal (B)
-                DataGridView1.Rows(i - 1).Cells(4).Value = "ERROR"
+                ALCount = ALCount + 1
             Else
                 DataGridView1.Rows(i - 1).Cells(4).Style.ForeColor = Color.Red    'Grade Abnormal (B)
                 DataGridView1.Rows(i - 1).Cells(4).Value = "B"
-
+                BCount = BCount + 1
             End If
 
 
@@ -196,10 +196,74 @@ Public Class frmColReCheck
 
         Next
 
+        Label24.Text = ACount
+        Label26.Text = ALCount
+        Label28.Text = ADCount
+        Label30.Text = BCount
+        Label32.Text = WCount
 
+        btnReEnter.Visible = True
         btnFinish.Visible = True
 
     End Sub
+
+    Private Sub btnReEnter_Click(sender As Object, e As EventArgs) Handles btnReEnter.Click
+
+        btnReEnter.Visible = False
+        btnFinish.Visible = False
+
+        For i = 1 To frmDGV.DGVdata.Rows.Count
+
+
+
+            'Reset reCheck1 values for re entry or modification
+            Select Case DataGridView1.Rows(i - 1).Cells(2).Value
+
+                Case "OK"
+                    DataGridView1.Rows(i - 1).Cells(2).Value = "A"
+                Case "-"
+                    DataGridView1.Rows(i - 1).Cells(2).Value = "L"
+                Case "+"
+                    DataGridView1.Rows(i - 1).Cells(2).Value = "D"
+                Case "@"
+                    DataGridView1.Rows(i - 1).Cells(2).Value = "B"
+                Case "*"
+                    DataGridView1.Rows(i - 1).Cells(2).Value = "W"
+            End Select
+            'Reset reCheck2 values for re entry or modification
+            Select Case DataGridView1.Rows(i - 1).Cells(3).Value
+                Case "OK"
+                    DataGridView1.Rows(i - 1).Cells(3).Value = "A"
+                Case "-"
+                    DataGridView1.Rows(i - 1).Cells(3).Value = "L"
+                Case "+"
+                    DataGridView1.Rows(i - 1).Cells(3).Value = "D"
+                Case "@"
+                    DataGridView1.Rows(i - 1).Cells(3).Value = "B"
+                Case "*"
+                    DataGridView1.Rows(i - 1).Cells(3).Value = "W"
+
+            End Select
+            DataGridView1.Rows(i - 1).Cells(4).Value = ""
+
+        Next
+
+
+
+
+        Label24.Text = 0
+        Label26.Text = 0
+        Label28.Text = 0
+        Label30.Text = 0
+        Label32.Text = 0
+
+
+
+
+    End Sub
+
+
+
 
     Private Sub btnFinish_Click(sender As Object, e As EventArgs) Handles btnFinish.Click
 
@@ -503,6 +567,8 @@ Public Class frmColReCheck
             GC.Collect()
         End Try
     End Sub
+
+
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
 
