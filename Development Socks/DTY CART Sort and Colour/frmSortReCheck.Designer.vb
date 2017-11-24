@@ -133,6 +133,21 @@ Partial Class frmSortReCheck
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.comStdMC = New System.Windows.Forms.ComboBox()
+        Me.txtStdDoff = New System.Windows.Forms.TextBox()
+        Me.txtStdSpNum = New System.Windows.Forms.TextBox()
+        Me.txtKnitRef = New System.Windows.Forms.TextBox()
+        Me.comKnitMC = New System.Windows.Forms.ComboBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'txtWaste
@@ -517,7 +532,7 @@ Partial Class frmSortReCheck
         'btnNextJob
         '
         Me.btnNextJob.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.btnNextJob.Location = New System.Drawing.Point(423, 199)
+        Me.btnNextJob.Location = New System.Drawing.Point(429, 188)
         Me.btnNextJob.Name = "btnNextJob"
         Me.btnNextJob.Size = New System.Drawing.Size(529, 139)
         Me.btnNextJob.TabIndex = 210
@@ -1475,11 +1490,11 @@ Partial Class frmSortReCheck
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(52, 634)
+        Me.Label1.Location = New System.Drawing.Point(43, 634)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(127, 20)
+        Me.Label1.Size = New System.Drawing.Size(193, 20)
         Me.Label1.TabIndex = 244
-        Me.Label1.Text = "Product Name:"
+        Me.Label1.Text = "Cheese Product Name:"
         '
         'Label4
         '
@@ -1494,7 +1509,7 @@ Partial Class frmSortReCheck
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(52, 667)
+        Me.Label6.Location = New System.Drawing.Point(43, 667)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(150, 20)
         Me.Label6.TabIndex = 246
@@ -1509,11 +1524,171 @@ Partial Class frmSortReCheck
         Me.Label7.Size = New System.Drawing.Size(0, 20)
         Me.Label7.TabIndex = 247
         '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(14, 76)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(127, 20)
+        Me.Label8.TabIndex = 248
+        Me.Label8.Text = "Product Name:"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(15, 102)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(63, 20)
+        Me.Label9.TabIndex = 249
+        Me.Label9.Text = "Label9"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(618, 555)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(115, 20)
+        Me.Label10.TabIndex = 250
+        Me.Label10.Text = "STD. M/C no:"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(619, 597)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(114, 20)
+        Me.Label11.TabIndex = 251
+        Me.Label11.Text = "STD Doff no:"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(619, 632)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(112, 20)
+        Me.Label12.TabIndex = 252
+        Me.Label12.Text = "STD. S/P no:"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(619, 521)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(213, 20)
+        Me.Label13.TabIndex = 253
+        Me.Label13.Text = "STD Machine Information"
+        '
+        'ListView1
+        '
+        Me.ListView1.Location = New System.Drawing.Point(429, 532)
+        Me.ListView1.Name = "ListView1"
+        Me.ListView1.Size = New System.Drawing.Size(8, 8)
+        Me.ListView1.TabIndex = 255
+        Me.ListView1.UseCompatibleStateImageBehavior = False
+        '
+        'comStdMC
+        '
+        Me.comStdMC.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.comStdMC.FormattingEnabled = True
+        Me.comStdMC.Items.AddRange(New Object() {"", "11D1", "11D2", "12D1", "12D2", "21D1", "21D2", "22D1", "22D2"})
+        Me.comStdMC.Location = New System.Drawing.Point(761, 552)
+        Me.comStdMC.Name = "comStdMC"
+        Me.comStdMC.Size = New System.Drawing.Size(71, 28)
+        Me.comStdMC.TabIndex = 256
+        '
+        'txtStdDoff
+        '
+        Me.txtStdDoff.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtStdDoff.Location = New System.Drawing.Point(761, 594)
+        Me.txtStdDoff.MaxLength = 3
+        Me.txtStdDoff.Name = "txtStdDoff"
+        Me.txtStdDoff.Size = New System.Drawing.Size(40, 26)
+        Me.txtStdDoff.TabIndex = 257
+        '
+        'txtStdSpNum
+        '
+        Me.txtStdSpNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtStdSpNum.Location = New System.Drawing.Point(761, 632)
+        Me.txtStdSpNum.MaxLength = 3
+        Me.txtStdSpNum.Name = "txtStdSpNum"
+        Me.txtStdSpNum.Size = New System.Drawing.Size(40, 26)
+        Me.txtStdSpNum.TabIndex = 258
+        '
+        'txtKnitRef
+        '
+        Me.txtKnitRef.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtKnitRef.Location = New System.Drawing.Point(443, 594)
+        Me.txtKnitRef.MaxLength = 3
+        Me.txtKnitRef.Name = "txtKnitRef"
+        Me.txtKnitRef.Size = New System.Drawing.Size(40, 26)
+        Me.txtKnitRef.TabIndex = 263
+        '
+        'comKnitMC
+        '
+        Me.comKnitMC.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.comKnitMC.FormattingEnabled = True
+        Me.comKnitMC.Items.AddRange(New Object() {"", "A", "B"})
+        Me.comKnitMC.Location = New System.Drawing.Point(443, 552)
+        Me.comKnitMC.Name = "comKnitMC"
+        Me.comKnitMC.Size = New System.Drawing.Size(40, 28)
+        Me.comKnitMC.TabIndex = 262
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(301, 520)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(167, 20)
+        Me.Label14.TabIndex = 261
+        Me.Label14.Text = "Knitting Information"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(301, 597)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(134, 20)
+        Me.Label15.TabIndex = 260
+        Me.Label15.Text = "Knitting Ref no."
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(300, 555)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(136, 20)
+        Me.Label16.TabIndex = 259
+        Me.Label16.Text = "Knitting M/C no:"
+        '
         'frmSortReCheck
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1086, 699)
+        Me.Controls.Add(Me.txtKnitRef)
+        Me.Controls.Add(Me.comKnitMC)
+        Me.Controls.Add(Me.Label14)
+        Me.Controls.Add(Me.Label15)
+        Me.Controls.Add(Me.Label16)
+        Me.Controls.Add(Me.txtStdSpNum)
+        Me.Controls.Add(Me.txtStdDoff)
+        Me.Controls.Add(Me.comStdMC)
+        Me.Controls.Add(Me.ListView1)
+        Me.Controls.Add(Me.Label13)
+        Me.Controls.Add(Me.Label12)
+        Me.Controls.Add(Me.Label11)
+        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label4)
@@ -1626,7 +1801,7 @@ Partial Class frmSortReCheck
         Me.Controls.Add(Me.btnCone1)
         Me.Controls.Add(Me.btnCone4)
         Me.Name = "frmSortReCheck"
-        Me.Text = "frmColReCheck"
+        Me.Text = "Sort ReCheck"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1743,4 +1918,19 @@ Partial Class frmSortReCheck
     Friend WithEvents Label4 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label7 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents ListView1 As ListView
+    Friend WithEvents comStdMC As ComboBox
+    Friend WithEvents txtStdDoff As TextBox
+    Friend WithEvents txtStdSpNum As TextBox
+    Friend WithEvents txtKnitRef As TextBox
+    Friend WithEvents comKnitMC As ComboBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label16 As Label
 End Class

@@ -23,6 +23,7 @@ Public Class frmPackTodayUpdate
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
         mycount = xlTodyWorkbook.Worksheets.Count
+        createBarcode()
         boxCount = mycount
 
         Dim totCount As Integer = 1
@@ -209,6 +210,7 @@ Public Class frmPackTodayUpdate
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
         mycount = xlTodyWorkbook.Worksheets.Count
+        createBarcode()
         boxCount = mycount
 
         Dim totCount As Integer = 1
@@ -238,11 +240,12 @@ Public Class frmPackTodayUpdate
             'Product Code
             MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
             'Packer Name
-            MyTodyExcel.Cells(13, 8) = frmDGV.DGVdata.Rows(0).Cells(55).Value
+            MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
+            'Packer Name
+            MyTodyExcel.Cells(64, 14) = frmJobEntry.PackOp
 
-
-
-
+            createBarcode()
+            MyTodyExcel.Cells(1, 4) = SheetCodeString
 
             For i = 13 To 102
                 MyTodyExcel.Cells(nfree, 4) = "" 'Clear the contents of cone cells
@@ -345,8 +348,14 @@ Public Class frmPackTodayUpdate
                         MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value
                         'Product Code
                         MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
+                        MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
                         'Packer Name
-                        MyTodyExcel.Cells(13, 8) = frmDGV.DGVdata.Rows(0).Cells(55).Value
+                        MyTodyExcel.Cells(64, 14) = frmJobEntry.PackOp
+
+                        createBarcode()
+                        MyTodyExcel.Cells(1, 4) = SheetCodeString
+
+
 
                         For x = 13 To 102
                             MyTodyExcel.Cells(x, 4) = "" 'Clear the contents of cone cells
@@ -399,8 +408,9 @@ Public Class frmPackTodayUpdate
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
         mycount = xlTodyWorkbook.Worksheets.Count
+        createBarcode()
         boxCount = mycount
-
+        MyTodyExcel.Visible = True
         Dim totCount As Integer
         'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
 
@@ -437,7 +447,7 @@ Public Class frmPackTodayUpdate
 
             xlTodyWorkbook.Sheets(1).Copy(After:=xlTodyWorkbook.Sheets(mycount))
             'ReName the work sheet 
-            'CType(MyTodyExcel.Workbooks(1).Worksheets("Sheet1"), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
+            CType(MyTodyExcel.Workbooks(1).Worksheets("Sheet1"), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
             nfree = 12
 
@@ -446,8 +456,12 @@ Public Class frmPackTodayUpdate
             MyTodyExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value
             'Product Code
             MyTodyExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value
+
             'Packer Name
-            MyTodyExcel.Cells(43, 4) = frmDGV.DGVdata.Rows(0).Cells(55).Value
+            MyTodyExcel.Cells(43, 4) = frmJobEntry.PackOp
+
+
+
             'Add Barcode to Sheet
             createBarcode()
             MyTodyExcel.Cells(1, 4) = SheetCodeString
@@ -576,7 +590,13 @@ Public Class frmPackTodayUpdate
                         'Product Code
                         MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
                         'Packer Name
-                        MyTodyExcel.Cells(13, 8) = frmDGV.DGVdata.Rows(0).Cells(55).Value
+                        MyTodyExcel.Cells(43, 4) = frmJobEntry.PackOp
+
+
+
+                        'Add Barcode to Sheet
+                        createBarcode()
+                        MyTodyExcel.Cells(1, 4) = SheetCodeString
 
                         ncfree = 4
                         For nCol = 1 To 3
@@ -599,7 +619,7 @@ Public Class frmPackTodayUpdate
             MsgBox(ex.ToString)
 
         End Try
-
+        MyTodyExcel.Visible = False
         Try
 
             'Save changes to new file in Paking Dir
@@ -635,6 +655,7 @@ Public Class frmPackTodayUpdate
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
         mycount = xlTodyWorkbook.Worksheets.Count
+        createBarcode()
         boxCount = mycount
 
         Dim totCount As Integer
@@ -682,11 +703,16 @@ Public Class frmPackTodayUpdate
             MyTodyExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value
             'Product Code
             MyTodyExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value
+
             'Packer Name
-            MyTodyExcel.Cells(43, 4) = frmDGV.DGVdata.Rows(0).Cells(55).Value
+            MyTodyExcel.Cells(43, 4) = frmJobEntry.PackOp
+
+
+
             'Add Barcode to Sheet
             createBarcode()
             MyTodyExcel.Cells(1, 4) = SheetCodeString
+
 
             colCount = 4
             For ccount = 1 To 3
@@ -815,7 +841,13 @@ Public Class frmPackTodayUpdate
                         'Product Code
                         MyTodyExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value
                         'Packer Name
-                        MyTodyExcel.Cells(43, 4) = frmDGV.DGVdata.Rows(0).Cells(55).Value
+                        MyTodyExcel.Cells(43, 4) = frmJobEntry.PackOp
+
+
+
+                        'Add Barcode to Sheet
+                        createBarcode()
+                        MyTodyExcel.Cells(1, 4) = SheetCodeString
 
                         ncfree = 4
                         For nCol = 1 To 3
@@ -875,6 +907,7 @@ Public Class frmPackTodayUpdate
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
         mycount = xlTodyWorkbook.Worksheets.Count
+        createBarcode()
         boxCount = mycount
 
         Dim totCount As Integer
@@ -913,7 +946,7 @@ Public Class frmPackTodayUpdate
 
             xlTodyWorkbook.Sheets(1).Copy(After:=xlTodyWorkbook.Sheets(mycount))
             'ReName the work sheet 
-            'CType(MyTodyExcel.Workbooks(1).Worksheets("Sheet1"), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
+            CType(MyTodyExcel.Workbooks(1).Worksheets("Sheet1"), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
             nfree = 14
 
@@ -922,10 +955,13 @@ Public Class frmPackTodayUpdate
             MyTodyExcel.Cells(7, 9) = frmDGV.DGVdata.Rows(0).Cells(52).Value
             'Product Code
             MyTodyExcel.Cells(7, 13) = frmDGV.DGVdata.Rows(0).Cells(2).Value
+
             'Packer Name
-            MyTodyExcel.Cells(54, 17) = frmDGV.DGVdata.Rows(0).Cells(55).Value
+            MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
+
             'Add Barcode to Sheet
             createBarcode()
+
             MyTodyExcel.Cells(1, 4) = SheetCodeString
 
 
@@ -1056,13 +1092,16 @@ Public Class frmPackTodayUpdate
                         MyTodyExcel.DisplayAlerts = True
 
                         xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
-                        'CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
+                        CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
                         MyTodyExcel.Cells(9, 7) = frmDGV.DGVdata.Rows(0).Cells(52).Value
                         'Product Code
                         MyTodyExcel.Cells(13, 7) = frmDGV.DGVdata.Rows(0).Cells(2).Value
                         'Packer Name
-                        MyTodyExcel.Cells(54, 17) = frmDGV.DGVdata.Rows(0).Cells(55).Value
+                        MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
+
+                        'Add Barcode to Sheet
+                        createBarcode()
 
                         ncfree = 4
                         For nCol = 1 To 4

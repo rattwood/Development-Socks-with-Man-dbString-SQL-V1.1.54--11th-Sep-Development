@@ -172,60 +172,42 @@ Public Class frmB_AL_AD_W
 
 
 
-        For i = 0 To dgvRows - 1
+        For i = 1 To dgvRows
 
             'CHECK FOR UNPACKED CHEESE AND ALLOCATE
+            'If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = 0 And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
 
 
-            If frmDGV.DGVdata.Rows(i).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i).Cells(33).Value = 0 Then
+            If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
                 'write to the local DGV grid
-                DataGridView1.Rows(gridRow).Cells(gridCol).Value = frmDGV.DGVdata.Rows(i).Cells(36).Value  'Write to Grid Cone Bcode
+                DataGridView1.Rows(gridRow).Cells(gridCol).Value = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value  'Write to Grid Cone Bcode
                 DataGridView1.Rows(gridRow).Cells(gridCol).Style.BackColor = Color.LightGreen
 
                 If frmJobEntry.txtGrade.Text = "ReCheck" Then  'IF RECHK THEN SET FLAG=1 SET TIME AND SET NUBER 1-32
-                    frmDGV.DGVdata.Rows(i).Cells("RECHK").Value = 1
-                    frmDGV.DGVdata.Rows(i).Cells("RECHKSTARTTM").Value = DateAndTime.Today
-                    frmDGV.DGVdata.Rows(i).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 1
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Today
+                    frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
 
                     Dim tmpNum As Integer = DataGridView1.Rows(gridRow).Cells(0).Value  'format first 9 cheese to have leading Zero before sending to db
                     modIdxNum = tmpNum.ToString(fmt)
-                    frmDGV.DGVdata.Rows(i).Cells("RECHKIDX").Value = modIdxNum
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = modIdxNum
 
                 Else
                     'Update DGV that Cheese has been alocated, update Packendtm
-                    frmDGV.DGVdata.Rows(i).Cells("PACKENDTM").Value = DateAndTime.Today
+                    frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Today
                 End If
 
 
-                gridRow = gridRow + 1
-                coneCount = coneCount + 1
+                'gridRow = gridRow + 1
+                'coneCount = coneCount + 1
 
-                Select Case frmJobEntry.txtGrade.Text
+                If My.Settings.debugSet Then
+                    Label9.Text = ("Row " & gridRow)
+                    Label10.Text = ("Col " & gridCol)
+                    Label11.Text = ("Grid count i =" & i)
+                End If
 
 
-
-
-                    Case "B", "AL", "AD", "P35 AS", "P35 BS"
-                        If coneCount < 90 Or coneCount = toAllocatedCount Then
-                            DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
-                        End If
-
-                    Case "P25 AS", "P30 BS"
-                        If coneCount < 120 Or coneCount = toAllocatedCount Then
-                            DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
-                        End If
-
-                    Case "P15 AS", "P20 BS"
-                        If coneCount < 195 Or coneCount = toAllocatedCount Then
-                            DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
-                        End If
-
-                    Case "ReCheck"
-                        If coneCount < 32 Or coneCount = toAllocatedCount Then                 'move active cell to next available
-                            DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
-                        End If
-
-                End Select
 
 
                 packedFlag = 1
@@ -233,7 +215,7 @@ Public Class frmB_AL_AD_W
 
                 Exit For
                 'CHECK FOR ALREADY PACKED CHEESE
-            ElseIf frmDGV.DGVdata.Rows(i).Cells(36).Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i).Cells("PACKENDTM").Value) And frmjobentry.txtgrade.text <> "ReCheck" Then
+            ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) And Not frmJobEntry.txtGrade.Text = "ReCheck" Then
                 Label8.Visible = True
                 Label8.Text = "Cheese already allocated"
                 Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
@@ -244,7 +226,7 @@ Public Class frmB_AL_AD_W
                 txtConeBcode.Focus()
                 Me.KeyPreview = True 'Allows us to look for advace character from barcode
                 Exit Sub
-            ElseIf frmDGV.DGVdata.Rows(i).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i).Cells(33).Value = 1 And frmjobentry.txtgrade.text = "ReCheck" Then
+            ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = 1 And frmJobEntry.txtGrade.Text = "ReCheck" Then
                 Label8.Visible = True
                 Label8.Text = "Cheese already allocated"
                 Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
@@ -255,7 +237,8 @@ Public Class frmB_AL_AD_W
                 txtConeBcode.Focus()
                 Me.KeyPreview = True 'Allows us to look for advace character from barcode
                 Exit Sub
-            ElseIf i = dgvRows - 1 And packedFlag = 0 Then    'CHECK FOR WRONG CHEESE ON CART
+            ElseIf i - 1 = dgvRows - 1 And packedFlag = 0 Then    'CHECK FOR WRONG CHEESE ON CART
+                MsgBox("i = " & i - 1 & "Rows = " & dgvRows - 1)
                 Label8.Visible = True
                 Label8.Text = ("This is not a Grade " & frmJobEntry.txtGrade.Text & " Cheese")
                 Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
@@ -278,7 +261,7 @@ Public Class frmB_AL_AD_W
 
         Next
         'UPDATE TOTAL COUNTED
-        lbltotScan.Text = coneCount
+        lbltotScan.Text = coneCount + 1
 
 
         'ROUTINE TO MOVE TO NEW COLUMN WHEN COLUMN IS FULL
@@ -293,7 +276,12 @@ Public Class frmB_AL_AD_W
 
             Case "B", "AL", "AD", "P35 AS", "P35 BS"
 
-                If gridRow = 31 And gridCol < 5 Then
+                If gridRow < 29 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow + 1)
+
+                gridRow = gridRow + 1
+                coneCount = coneCount + 1
+
+                If gridRow = 30 And gridCol < 5 Then
                     gridRow = 0
                     gridCol = gridCol + 2
                     DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
@@ -302,7 +290,13 @@ Public Class frmB_AL_AD_W
                 If coneCount = 90 Or coneCount = toAllocatedCount Then jobEnd()
 
             Case "P25 AS", "P30 BS"
-                If gridRow = 31 And gridCol < 7 Then
+
+                If gridRow < 29 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow + 1)
+
+                gridRow = gridRow + 1
+                coneCount = coneCount + 1
+
+                If gridRow = 30 And gridCol < 7 Then
                     gridRow = 0
                     gridCol = gridCol + 2
                     DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
@@ -311,6 +305,12 @@ Public Class frmB_AL_AD_W
                 If coneCount = 120 Or coneCount = toAllocatedCount Then jobEnd()
 
             Case "P15 AS", "P20 BS"
+
+
+                If gridRow < 39 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow + 1)
+
+                gridRow = gridRow + 1
+                coneCount = coneCount + 1
 
                 If gridRow = 39 And gridCol < 9 Then
                     gridRow = 0
@@ -321,6 +321,8 @@ Public Class frmB_AL_AD_W
                 If coneCount = 195 Or coneCount = toAllocatedCount Then jobEnd()
 
             Case "ReCheck"
+
+                If coneCount < 32 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
 
                 If coneCount = 32 Or coneCount = toAllocatedCount Then jobEnd()
 
@@ -372,7 +374,7 @@ Public Class frmB_AL_AD_W
         Else
 
             frmPackRepMain.Close()
-            UpdateDatabase()
+            ''UpdateDatabase()
             Label8.Visible = False
             Me.Cursor = System.Windows.Forms.Cursors.Default
             Me.Close()
@@ -380,12 +382,7 @@ Public Class frmB_AL_AD_W
             frmJobEntry.txtLotNumber.Clear()
 
         End If
-        'frmPackRepMain.Close()
-        'UpdateDatabase()
-        'Me.Cursor = System.Windows.Forms.Cursors.Default
-        'Me.Close()
-        'frmJobEntry.Show()
-        'frmJobEntry.txtLotNumber.Clear()
+
 
 
     End Sub
