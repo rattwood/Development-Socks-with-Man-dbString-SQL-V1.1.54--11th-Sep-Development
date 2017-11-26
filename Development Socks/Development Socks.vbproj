@@ -308,6 +308,12 @@
     <Compile Include="DTYPacking\frmB_AL_AD_W.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmcart1backup.Designer.vb">
+      <DependentUpon>frmcart1backup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmcart1backup.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="InfoStore.Designer.vb">
       <DependentUpon>InfoStore.vb</DependentUpon>
     </Compile>
@@ -480,6 +486,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DTYPacking\frmB_AL_AD_W.resx">
       <DependentUpon>frmB_AL_AD_W.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmcart1backup.resx">
+      <DependentUpon>frmcart1backup.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoStore.resx">
       <DependentUpon>InfoStore.vb</DependentUpon>
