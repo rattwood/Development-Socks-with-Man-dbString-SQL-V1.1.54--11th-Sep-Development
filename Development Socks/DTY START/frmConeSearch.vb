@@ -18,7 +18,6 @@ Public Class frmConeSearch
         txtBoxJob.Focus()
 
 
-
     End Sub
 
 
@@ -86,21 +85,28 @@ Public Class frmConeSearch
 
     Private Sub btnConeSearch_Click(sender As Object, e As EventArgs) Handles btnConeSearch.Click
 
-        frmJobEntry.LExecQuery("SELECT MCNUM, PRODNAME, DOFFNUM, CARTENDTM, OPPACK, OPCOLOUR, DEFCONE, CONESTATE, SHORTCONE, CARTONNUM FROM jobs Where BCODECONE = '" & txtBoxConeBC.Text & "' ")
-
-        If frmJobEntry.LRecordCount > 0 Then
-            jobSearch()
-            Exit Sub
-        Else
-            MsgBox("Cone #: " & txtBoxSpindle.Text & "  Cannot be found")
+        frmJobEntry.LExecQuery("SELECT * FROM jobs Where BCODECONE = '" & txtBoxConeBC.Text & "' ")
+        Try
+            If frmJobEntry.LRecordCount > 0 Then
+                jobSearch()
+                Exit Sub
+            Else
+                MsgBox("Cheese #: " & txtBoxSpindle.Text & "  Cannot be found")
+                Me.txtBoxJob.Clear()
+                Me.txtBoxSpindle.Clear()
+                Me.btnJobSearch.Enabled = False
+                Me.txtBoxJob.Focus()
+                Me.txtBoxJob.Refresh()
+                Exit Sub
+            End If
+        Catch ex As Exception
+            MsgBox(ex.ToString)
             Me.txtBoxJob.Clear()
-            Me.txtBoxSpindle.Clear()
             Me.btnJobSearch.Enabled = False
             Me.txtBoxJob.Focus()
             Me.txtBoxJob.Refresh()
             Exit Sub
-        End If
-
+        End Try
     End Sub
 
     Private Sub jobSearch()
@@ -111,45 +117,138 @@ Public Class frmConeSearch
         DataGridView1.Rows(0).Selected = True
 
         'SORT GRIDVIEW IN TO CORRECT JOB SEQUENCE
-        DataGridView1.Sort(DataGridView1.Columns(7), ListSortDirection.Ascending)  'sorts On cone number
+        DataGridView1.Sort(DataGridView1.Columns("MERGENUM"), ListSortDirection.Ascending)  'sorts On cone number
         'frmPrintCartReport.Show()
 
         'PRODUCT NAME
-        txtBoxProdName.Text = DataGridView1.Rows(0).Cells(1).Value
+        txtBoxProdName.Text = DataGridView1.Rows(0).Cells("PRODNAME").Value
         'DOFFING NUMBER
-        txtBoxDoff.Text = DataGridView1.Rows(0).Cells(2).Value
-        'DATE
+        txtBoxDoff.Text = DataGridView1.Rows(0).Cells("DOFFNUM").Value
+        'MACHINE NUMBER
+        txtBoxMCNum.Text = DataGridView1.Rows(0).Cells("MCNUM").Value
 
-        dbDate = DataGridView1.Rows(0).Cells(3).Value.ToString
-        dateConv()
-        txtBoxPackDate.Text = datestring
+        'PACKING INFO 
+        If Not IsDBNull(DataGridView1.Rows(0).Cells("PACKENDTM").Value) Then
+            dbDate = DataGridView1.Rows(0).Cells("PACKENDTM").Value.ToString
+            dateConv()
+            txtBoxPackDate.Text = datestring
+            txtBoxCartonNum.Text = DataGridView1.Rows(0).Cells("CARTONNUM").Value
+            txtBoxPacker.Text = DataGridView1.Rows(0).Cells("OPPACK").Value
+        End If
 
 
-        'PACKER INFORMATION
-        'If DataGridView1.Rows(0).Cells(4).Value > 0 Then txtBoxPacker.Text = DataGridView1.Rows(0).Cells(4).Value.ToString Else txtBoxPacker.Text = ""
+        'SORT CHECKER INFORMATION
+        If Not DataGridView1.Rows(0).Cells("OPSORT").Value = "0" Then txtBoxPacker.Text = DataGridView1.Rows(0).Cells("OPSORT").Value Else txtBoxPacker.Text = ""
+
         'COLOR CHECKER INFO
-        txtBoxColour.Text = DataGridView1.Rows(0).Cells(5).Value
+        txtBoxColour.Text = DataGridView1.Rows(0).Cells("OPCOLOUR").Value
+
         'DEFECTS
-        If DataGridView1.Rows(0).Cells(6).Value > 0 Then txtBoxDef.Text = "Yes" Else txtBoxDef.Text = "No"
+        If DataGridView1.Rows(0).Cells("DEFCONE").Value > 0 Then txtBoxDef.Text = "Yes" Else txtBoxDef.Text = "No"
+        'ReCheck DEFECTS
+        If DataGridView1.Rows(0).Cells("RECHK").Value > 0 And Not DataGridView1.Rows(0).Cells("RECHKDEFCODE").Value = "" Then txtReChkDef.Text = "Yes" Else txtBoxDef.Text = "No"
+
         'GRADE
-        If DataGridView1.Rows(0).Cells(7).Value > 0 Then
-            Select Case DataGridView1.Rows(0).Cells(7).Value
+        If DataGridView1.Rows(0).Cells("CONESTATE").Value > 0 Then
+            Select Case DataGridView1.Rows(0).Cells("CONESTATE").Value
                 Case 8, 14, 16
-                    txtBoxGrad.Text = "Grade B"
-                    txtBoxPacker.Text = "N/A"
-                    txtBoxCartonNum.Text = "N/A"
+                    If DataGridView1.Rows(0).Cells("DEFCONE").Value > 0 And Not (DataGridView1.Rows(0).Cells("M30").Value > 0 Or DataGridView1.Rows(0).Cells("P30").Value > 0) Or DataGridView1.Rows(0).Cells("CONEBARLEY").Value Then
+                        txtBoxGrad.Text = "B"
+                    ElseIf DataGridView1.Rows(0).Cells("M30").Value > 0 Then
+                        txtBoxGrad.Text = "-30"
+                    ElseIf DataGridView1.Rows(0).Cells("P30").Value > 0 Then
+                        txtBoxGrad.Text = "+30"
+                    End If
                 Case 9, 15
                     txtBoxGrad.Text = "Grade A"
-                    txtBoxPacker.Text = DataGridView1.Rows(0).Cells(4).Value
-                    txtBoxCartonNum.Text = DataGridView1.Rows(0).Cells(9).Value.ToString
+
             End Select
         End If
         'SHORT
-        If DataGridView1.Rows(0).Cells(8).Value > 0 Then txtBoxShort.Text = "Yes" Else txtBoxShort.Text = "No"
-        'MACHINE NUMBER
-        txtBoxMCNum.Text = DataGridView1.Rows(0).Cells(0).Value
-        'If DataGridView1.Rows(0).Cells(61).Value > 0 Then txtBoxCartonNum.Text = DataGridView1.Rows(0).Cells(61).Value Else txtBoxCartonNum.Text = 0
-        'txtBoxCartonNum.Text = DataGridView1.Rows(0).Cells(8).Value.ToString
+        If DataGridView1.Rows(0).Cells("SHORTCONE").Value > 0 Or DataGridView1.Rows(0).Cells("FLT_S").Value = True Then txtBoxShort.Text = "Yes" Else txtBoxShort.Text = "No"
+
+
+
+        'ReCHECK DISPLAYS
+        If DataGridView1.Rows(0).Cells("RECHK").Value > 0 Then
+            'HIDE RECHECK INFO ON OPEN
+            Label16.Visible = True
+            Label15.Visible = True
+            Label17.Visible = True
+            Label18.Visible = True
+            Label19.Visible = True
+            Label20.Visible = True
+            Label21.Visible = True
+            Label22.Visible = True
+            Label23.Visible = True
+
+            txtReChkPackDate.Visible = True
+            txtReChkSort.Visible = True
+            txtReChkCol.Visible = True
+            txtReChkPacker.Visible = True
+            txtReChkGrade.Visible = True
+            txtReChkDef.Visible = True
+            txtBoxCartonNum2.Visible = True
+            txtTraceNum2.Visible = True
+        Else
+            Label16.Visible = False
+            Label15.Visible = False
+            Label17.Visible = False
+            Label18.Visible = False
+            Label19.Visible = False
+            Label20.Visible = False
+            Label21.Visible = False
+            Label22.Visible = False
+            Label23.Visible = False
+
+            txtReChkPackDate.Visible = False
+            txtReChkSort.Visible = False
+            txtReChkCol.Visible = False
+            txtReChkPacker.Visible = False
+            txtReChkGrade.Visible = False
+            txtReChkDef.Visible = False
+            txtBoxCartonNum2.Visible = False
+            txtTraceNum2.Visible = False
+        End If
+
+        If Not IsDBNull(DataGridView1.Rows(0).Cells("PACKENDTM").Value) Then
+            dbDate = DataGridView1.Rows(0).Cells("PACKENDTM").Value.ToString
+            dateConv()
+            txtReChkPackDate.Text = datestring
+        End If
+
+        'ReCheck SORT
+        txtReChkSort.Text = DataGridView1.Rows(0).Cells("OPSORT").Value
+
+        'ReCheck COLOUR
+        txtReChkSort.Text = DataGridView1.Rows(0).Cells("RECHKCOLOP").Value
+
+        'ReCheck PACK
+        txtReChkSort.Text = DataGridView1.Rows(0).Cells("OPPACK").Value
+
+        'RECHECK GRADES
+        txtReChkGrade.Text = DataGridView1.Rows(0).Cells("RECHKRESULT").Value
+
+        'ReCheck DEFECTS
+        If Not DataGridView1.Rows(0).Cells("RECHKDEFCODE").Value = "" Then txtReChkDef.Text = "Yes" Else txtBoxDef.Text = "No"
+
+        'ReCHECK CARTON
+        txtBoxCartonNum.Text = DataGridView1.Rows(0).Cells("CARTONNUM").Value
+
+        'ReCHECK TRACE #
+        'txtTraceNum2.Text = DataGridView1.Rows(0).Cells("").Value
+
+
+
+
+
+
+
+
+
+
+
+
 
     End Sub
 
@@ -199,4 +298,6 @@ Public Class frmConeSearch
         frmJobEntry.txtLotNumber.Clear()
         frmJobEntry.txtLotNumber.Focus()
     End Sub
+
+
 End Class
