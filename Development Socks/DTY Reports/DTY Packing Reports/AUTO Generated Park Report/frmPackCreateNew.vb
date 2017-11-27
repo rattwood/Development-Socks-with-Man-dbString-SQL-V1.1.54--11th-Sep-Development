@@ -38,6 +38,8 @@ Public Class frmPackCreateNew
                 'PACKER NAME
                 MyPakExcel.Cells(13, 8) = frmJobEntry.PackOp     'H13
 
+                createBarcode()
+                MyPakExcel.Cells(1, 4) = SheetCodeString
 
                 'THIS IS USED TO WRITE DATE IN TO USED ROWS
                 If frmPackPrvGet.nfree > 0 Then

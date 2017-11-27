@@ -67,14 +67,14 @@ Public Class frmCart1
 
 
 
-    Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmCart1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
         Dim btnNum As Integer
         Dim btnNums As String
 
         btnNums = frmJobEntry.varCartSelect
-
+        MsgBox(btnNums)
         ' SELECT CONE NUMBER RANGE BASED ON CART NUMBER
         Select Case btnNums
             Case Is = 1
@@ -116,11 +116,20 @@ Public Class frmCart1
         End Select
 
         'SET CORRECT BUTTUN NUMBERS BASED ON CONE NUMBERS (SPINDEL NUMBERS)
-        For i As Integer = 1 To 32
+        For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
 
             Me.Controls("btnCone" & i.ToString).Text = btnNum
             btnNum = btnNum + 1
 
+        Next
+
+
+        'New section to hide unused buttons
+        Dim btnEraseStart As Integer = frmDGV.DGVdata.Rows.Count + 1
+        Dim TotalBtn As Integer = 31 - btnEraseStart
+
+        For i = btnEraseStart To 32
+            Me.Controls("btnCone" & i.ToString).Visible = False
         Next
 
 
@@ -263,12 +272,6 @@ Public Class frmCart1
         If frmJobEntry.coneValUpdate Then UpdateConeVal()
 
 
-
-
-
-
-        'frmDGV.Show()            'Open Datgrid in background
-
     End Sub
 
 
@@ -277,7 +280,7 @@ Public Class frmCart1
         Dim cellVal As String
 
 
-        For rw As Integer = 1 To 32
+        For rw As Integer = 1 To frmDGV.DGVdata.Rows.Count '32
 
             For cl As Integer = 10 To 22
 
@@ -363,7 +366,7 @@ Public Class frmCart1
             btnUnlock.Text = "UNLOCK ON"
             btnUnlock.ForeColor = Color.Green
 
-            For rw As Integer = 1 To 32
+            For rw As Integer = 1 To frmDGV.DGVdata.Rows.Count
 
                 Me.Controls("btnCone" & rw).Enabled = True
                 btnDelete.Visible = True
@@ -1470,7 +1473,7 @@ Public Class frmCart1
         Dim cellVal As String
 
 
-        For rw As Integer = 1 To 32
+        For rw As Integer = 1 To frmDGV.DGVdata.Rows.Count
 
             If My.Settings.chkUseColour Then
 
@@ -1528,7 +1531,7 @@ Public Class frmCart1
 
         Next
 
-        For rw As Integer = 1 To 32
+        For rw As Integer = 1 To frmDGV.DGVdata.Rows.Count
 
             If My.Settings.chkUseSort Then
                 If frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 5 Then
@@ -2681,7 +2684,6 @@ Public Class frmCart1
             varCartEndTime = Date.Now 'ToString("dd/mm/yyy")
             If shortCone = 2 Then shortCone = varConeNum
             If shortCone > 0 Then Fault_S = "True" 'Else Fault_S = "False"
-
             jobArrayUpdate()
 
 
@@ -2833,13 +2835,13 @@ Public Class frmCart1
         'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
 
         If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("COLENDTM").Value) Then
-            For i As Integer = 1 To 32
+            For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
                 If My.Settings.chkUseColour = True Then frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = varCartEndTime 'COLOUR CHECK END TIME
             Next
         End If
 
         If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("SORTENDTM").Value) Then
-            For i As Integer = 1 To 32
+            For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
                 If My.Settings.chkUseSort = True Then frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value = varCartEndTime 'SORT END TIME
             Next
         End If
@@ -2850,7 +2852,11 @@ Public Class frmCart1
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(8).Value = frmJobEntry.varUserName  'operatorName   fron entry screen
 
         If My.Settings.chkUseSort Or My.Settings.chkUseColour Then
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(10).Value = shortCone   'shortCone
+
+            If frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(10).Value = 0 Then
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(10).Value = shortCone   'shortCone
+            End If
+
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(11).Value = NoCone  'missingCone
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(12).Value = defect  'defectCone
         End If
@@ -2876,33 +2882,37 @@ Public Class frmCart1
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_O").Value = chk_O.Checked     'OVERTHROWN Fault 
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_T").Value = chk_T.Checked     'TENSION AB. Fault 
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_P").Value = chk_P.Checked     'PAPER TUBE AB. Fault
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_S").Value = Fault_S           'SHORT CHEESE Fault
+
+            If frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_S").Value = "False" Then
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_S").Value = Fault_S       'SHORT CHEESE Fault
+            End If 'SHORT CHEESE Fault
+
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_X").Value = Fault_X           'No HAVE CHEESE Fault 
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_N").Value = chk_N.Checked     'NO TAIL & ABNORMAL Fault 
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_W").Value = chk_W.Checked     'WASTE Fault 
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_H").Value = chk_H.Checked     'HITTING Fault 
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_TR").Value = chk_TR.Checked    'TARUMI Fault 
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_B").Value = chk_B.Checked     'B- GRADE BY M/C  Fault  
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_C").Value = chk_C.Checked     'C- GRADE BY M/C  Fault  
-            'SORT Dept FAULTS
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_DO").Value = chk_DO.Checked     'DO- GRADE BY M/C  Fault  
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_DH").Value = chk_DH.Checked     'DH- GRADE BY M/C  Fault  
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_CL").Value = chk_CL.Checked     'CL- GRADE BY M/C  Fault 
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_FI").Value = chk_FI.Checked     'FI- GRADE BY M/C  Fault  
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_YN").Value = chk_YN.Checked     'YN- GRADE BY M/C  Fault 
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_HT").Value = chk_HT.Checked     'HT- GRADE BY M/C  Fault  
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_LT").Value = chk_LT.Checked     'LT- GRADE BY M/C  Fault 
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_W").Value = chk_W.Checked     'WASTE Fault 
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_H").Value = chk_H.Checked     'HITTING Fault 
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_TR").Value = chk_TR.Checked    'TARUMI Fault 
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_B").Value = chk_B.Checked     'B- GRADE BY M/C  Fault  
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_C").Value = chk_C.Checked     'C- GRADE BY M/C  Fault  
+                'SORT Dept FAULTS
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_DO").Value = chk_DO.Checked     'DO- GRADE BY M/C  Fault  
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_DH").Value = chk_DH.Checked     'DH- GRADE BY M/C  Fault  
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_CL").Value = chk_CL.Checked     'CL- GRADE BY M/C  Fault 
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_FI").Value = chk_FI.Checked     'FI- GRADE BY M/C  Fault  
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_YN").Value = chk_YN.Checked     'YN- GRADE BY M/C  Fault 
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_HT").Value = chk_HT.Checked     'HT- GRADE BY M/C  Fault  
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_LT").Value = chk_LT.Checked     'LT- GRADE BY M/C  Fault 
 
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("COLWASTE").Value = coneWaste     'COLOUR WASTE BY COLOUR DEPT
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("COLWASTE").Value = coneWaste     'COLOUR WASTE BY COLOUR DEPT
 
-        End If
-
-
+            End If
 
 
 
 
-        UpdateDatabase()
+
+
+            UpdateDatabase()
         txtBoxUpdates()
         UpdateConeVal()
 
@@ -2943,7 +2953,7 @@ Public Class frmCart1
 
 
 
-        For rw As Integer = 1 To 32
+        For rw As Integer = 1 To frmDGV.DGVdata.Rows.Count
 
 
             If frmDGV.DGVdata.Rows(rw - 1).Cells(10).Value > 0 Then

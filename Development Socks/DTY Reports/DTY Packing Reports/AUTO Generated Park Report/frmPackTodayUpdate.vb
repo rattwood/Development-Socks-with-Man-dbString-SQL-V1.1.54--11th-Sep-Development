@@ -55,7 +55,8 @@ Public Class frmPackTodayUpdate
             'Packer Name
             MyTodyExcel.Cells(13, 8) = frmDGV.DGVdata.Rows(0).Cells(55).Value
 
-
+            createBarcode()
+            MyTodyExcel.Cells(1, 4) = SheetCodeString
 
 
 
@@ -73,7 +74,7 @@ Public Class frmPackTodayUpdate
 
         Try
 
-            For i = 1 To 32
+            For i = 1 To frmDGV.DGVdata.Rows.Count
 
                 If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "15" Then
 
@@ -156,6 +157,9 @@ Public Class frmPackTodayUpdate
                         MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
                         'Packer Name
                         MyTodyExcel.Cells(13, 8) = frmDGV.DGVdata.Rows(0).Cells(55).Value
+
+                        createBarcode()
+                        MyTodyExcel.Cells(1, 4) = SheetCodeString
 
                         For x = 13 To 102
                             MyTodyExcel.Cells(x, 4) = "" 'Clear the contents of cone cells

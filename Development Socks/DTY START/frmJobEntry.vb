@@ -58,6 +58,8 @@ Public Class frmJobEntry
     Dim doffingNum As String
     Dim cartNum As String
     Dim quit As Integer
+    Dim pilotentry As Integer = 0
+    Dim pilotCount As Integer = 0
     Public reCheck As Integer = 0
     Public cartReport As Integer
 
@@ -268,6 +270,8 @@ Public Class frmJobEntry
                 machineName = "22D1"        'Left Side
             ElseIf machineCode = 28 Then
                 machineName = "22D2"        'Right Side
+            ElseIf machineCode = 29 Then
+                machineName = "Pilot"
             End If
 
             'Dim cartSelect As String
@@ -343,22 +347,33 @@ Public Class frmJobEntry
                 End If
             End If
 
+            If machineCode = 29 Then   'CHECK FOR PILOT MACHINE
+                cartSelect = 1
+                varSpNums = "001 - 032"
+                varCartNameA = "B1"
+                varCartNameB = "B2"
+            End If
+
+
+
+
+
             varMachineCode = machineCode
-            varMachineName = machineName
-            varProductCode = productCode
-            varYear = year
-            varMonth = month
-            varDoffingNum = doffingNum
-            varCartNum = cartNum
-            varCartSelect = cartSelect
+                varMachineName = machineName
+                varProductCode = productCode
+                varYear = year
+                varMonth = month
+                varDoffingNum = doffingNum
+                varCartNum = cartNum
+                varCartSelect = cartSelect
 
 
-            varJobNum = (machineName & " " & month & " " & doffingNum & " " & varCartNameA)
+                varJobNum = (machineName & " " & month & " " & doffingNum & " " & varCartNameA)
 
             'Routine to change the scanned BARCODE to be the First CART not the secone cart and this is what will be stored in the DATABASE
 
             dbBarcode = txtLotNumber.Text.Replace(varCartNum, varCartNameA)
-        End If
+            End If
 
 
 
@@ -372,7 +387,6 @@ Public Class frmJobEntry
             varJobNum = txtLotNumber.Text
             reCheckJob()
         Else
-            ' Select SOrt or Colour routine
             If My.Settings.chkUseColour Or My.Settings.chkUseSort Then CheckJob()
         End If
 
@@ -423,6 +437,8 @@ Public Class frmJobEntry
 
     Public Sub CheckJob()
 
+
+
         LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "'")
 
         If LRecordCount > 0 Then
@@ -464,6 +480,10 @@ Public Class frmJobEntry
                 Exit Sub
             End If
 
+            If My.Settings.chkUseSort And machineCode = 29 Then
+                PilCount()
+                Exit Sub
+            End If
             CreatNewJob()
 
             If quit Then
@@ -485,6 +505,24 @@ Public Class frmJobEntry
         End If
 
 
+
+
+    End Sub
+
+
+    Private Sub PilCount()
+
+
+        If machineCode = 29 And My.Settings.chkUseSort Then   'CHECK FOR PILOT MACHINE
+            cartSelect = 1
+            varSpNums = "001 - 032"
+            varCartNameA = "B1"
+            varCartNameB = "B2"
+            Label2.Visible = True
+            txtPilotCount.Visible = True
+            txtPilotCount.Focus()
+            pilotentry = 1  'Flag to keep in loop for count entry
+        End If
 
 
     End Sub
@@ -559,45 +597,55 @@ Public Class frmJobEntry
 
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
 
+
+
+
+
         ' Auto buton numbering based on Cart being measuerd
         Select Case cartSelNumber
-            Case Is = 1
-                coneNumStart = 1
-                coneNumStop = 32
+            Case Is = 1  'Little routine to only create the correct number of cheese entries for Pilot
+                If machineCode = 29 Then
+                    coneNumStart = 1
+                    coneNumStop = pilotCount
+                Else
+                    coneNumStart = 1
+                    coneNumStop = 32
+                End If
             Case Is = 2
                 coneNumStart = 33
-                coneNumStop = 64
-            Case Is = 3
-                coneNumStart = 65
-                coneNumStop = 96
-            Case Is = 4
-                coneNumStart = 97
-                coneNumStop = 128
-            Case Is = 5
-                coneNumStart = 129
-                coneNumStop = 160
-            Case Is = 6
-                coneNumStart = 161
-                coneNumStop = 192
-            Case Is = 7
-                coneNumStart = 193
-                coneNumStop = 224
-            Case Is = 8
-                coneNumStart = 225
-                coneNumStop = 256
-            Case Is = 9
-                coneNumStart = 257
-                coneNumStop = 288
-            Case Is = 10
-                coneNumStart = 289
-                coneNumStop = 320
-            Case Is = 11
-                coneNumStart = 321
-                coneNumStop = 352
-            Case Is = 12
-                coneNumStart = 353
-                coneNumStop = 384
-        End Select
+                    coneNumStop = 64
+                Case Is = 3
+                    coneNumStart = 65
+                    coneNumStop = 96
+                Case Is = 4
+                    coneNumStart = 97
+                    coneNumStop = 128
+                Case Is = 5
+                    coneNumStart = 129
+                    coneNumStop = 160
+                Case Is = 6
+                    coneNumStart = 161
+                    coneNumStop = 192
+                Case Is = 7
+                    coneNumStart = 193
+                    coneNumStop = 224
+                Case Is = 8
+                    coneNumStart = 225
+                    coneNumStop = 256
+                Case Is = 9
+                    coneNumStart = 257
+                    coneNumStop = 288
+                Case Is = 10
+                    coneNumStart = 289
+                    coneNumStop = 320
+                Case Is = 11
+                    coneNumStart = 321
+                    coneNumStop = 352
+                Case Is = 12
+                    coneNumStart = 353
+                    coneNumStop = 384
+            End Select
+
 
         'CONSTRUCT ROWS
 
@@ -662,10 +710,24 @@ Public Class frmJobEntry
 
         Me.Cursor = System.Windows.Forms.Cursors.Default
         If LRecordCount > 1 Then
-            Exit Sub
+            If machineCode = 29 Then
+                Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
+                LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
+                frmDGV.DGVdata.DataSource = LDS.Tables(0)
+                frmDGV.DGVdata.Rows(0).Selected = True
+                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
+                frmCart1.Show()
+
+                If My.Settings.debugSet Then frmDGV.Show()
+                Me.Hide()
+                Exit Sub
+            Else
+                Exit Sub
+            End If
         Else
             MsgBox("Records Not created")
         End If
+
 
 
     End Sub
@@ -823,7 +885,7 @@ Public Class frmJobEntry
 
 
 
-                    If Not frmDGV.DGVdata.Rows(0).Cells("RECHK").Value = 0 Then  'check to see if cheese scanned has already been allocated
+                    If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("RECHK").Value) Then  'check to see if cheese scanned has already been allocated
                         Label3.Visible = True
                         Label3.Text = "THIS CHEESE HAS ALREADY BEEN ALLOCATED "
                         DelayTM()
@@ -1026,8 +1088,7 @@ Public Class frmJobEntry
         LExecQuery("SELECT * FROM JOBS WHERE BCODEJOB = '" & modLotStr & "' ")
 
             If LRecordCount > 0 Then
-            'IF JOBS HAVE BEEN FOUND THEN CREATE A SORTED LIST OF THESE JOBS
-            'If LRecordCount = 192 Then
+
 
             'LOAD THE DATA FROM dB IN TO THE DATAGRID
             frmPrintCartReport.DGVcartReport.DataSource = LDS.Tables(0)
@@ -1040,19 +1101,7 @@ Public Class frmJobEntry
                 frmPrintCartReport.prtCartSheet()
                 Me.Cursor = System.Windows.Forms.Cursors.Default
 
-            'Else
-            '    MsgBox("Not all cones present Please check all carts have been checked")
 
-            '    Me.txtBoxCartReport.Visible = False
-            '    Me.btnCancelReport.Visible = False
-            '    Me.btnJobReport.Visible = True
-            '    Me.txtLotNumber.Visible = True
-            '    Me.txtLotNumber.Clear()
-            '    Me.txtLotNumber.Focus()
-            '    Me.txtLotNumber.Refresh()
-
-            '    Exit Sub
-            'End If
         Else
 
             MsgBox("No Job Found, Please check if this Job has been checked")
@@ -1122,19 +1171,41 @@ Public Class frmJobEntry
 
     Private Sub frmJobEntry_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
 
+        If pilotentry = 0 Then
+            If e.KeyCode = Keys.Return And txtLotNumber.Visible = True Or e.KeyCode = Keys.Return And txtBoxCartReport.Visible Then
 
-        If e.KeyCode = Keys.Return And txtLotNumber.Visible = True Or e.KeyCode = Keys.Return And txtBoxCartReport.Visible Then
+                If cartReport = 1 Then
+                    cartReportSub()
+                ElseIf My.Settings.chkUseSort Or My.Settings.chkUseColour Or My.Settings.chkUsePack And txtGrade.Text = "A" Then
+                    prgContinue()
 
-            If cartReport = 1 Then
-                cartReportSub()
-            ElseIf My.Settings.chkUseSort Or My.Settings.chkUseColour Or My.Settings.chkUsePack And txtGrade.Text = "A" Then
-                prgContinue()
+                ElseIf My.Settings.chkUsePack And Not txtGrade.Text = "A" And Not txtLotNumber.Text = "" Then
+                    nonAPacking()
 
-            ElseIf My.Settings.chkUsePack And Not txtGrade.Text = "A" And Not txtLotNumber.Text = "" Then
-                nonAPacking()
+                End If
+            End If
+        Else
+            If e.KeyCode = Keys.Return And pilotentry = 1 Then
 
+                Dim result = MessageBox.Show("IS NUMBER CORRECT CONTINUE ", "YES or NO", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+
+                If result = DialogResult.Yes Then
+                    'cone count = number entered and clear info from screen and continue
+                    varSpNums = "1 - " & txtPilotCount.Text
+                    pilotCount = txtPilotCount.Text
+                    pilotentry = 0
+                    Label2.Visible = False
+                    txtPilotCount.Visible = False
+                    CreatNewJob()
+                End If
+
+                If result = DialogResult.No Then
+                    Me.txtPilotCount.Clear()
+                    Me.txtPilotCount.Focus()
+                End If
             End If
         End If
+
     End Sub
 
 

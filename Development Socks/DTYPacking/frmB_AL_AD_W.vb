@@ -122,7 +122,8 @@ Public Class frmB_AL_AD_W
 
 
                 Next
-
+            Case "Waste"
+                MsgBox("not written yet")
 
         End Select
 
@@ -178,15 +179,16 @@ Public Class frmB_AL_AD_W
             'If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = 0 And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
 
 
-            If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+            If frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
                 'write to the local DGV grid
-                DataGridView1.Rows(gridRow).Cells(gridCol).Value = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value  'Write to Grid Cone Bcode
+                DataGridView1.Rows(gridRow).Cells(gridCol).Value = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value  'Write to Grid Cone Bcode
                 DataGridView1.Rows(gridRow).Cells(gridCol).Style.BackColor = Color.LightGreen
 
                 If frmJobEntry.txtGrade.Text = "ReCheck" Then  'IF RECHK THEN SET FLAG=1 SET TIME AND SET NUBER 1-32
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 1
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Today
                     frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
+                    frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
 
                     Dim tmpNum As Integer = DataGridView1.Rows(gridRow).Cells(0).Value  'format first 9 cheese to have leading Zero before sending to db
                     modIdxNum = tmpNum.ToString(fmt)
@@ -195,6 +197,8 @@ Public Class frmB_AL_AD_W
                 Else
                     'Update DGV that Cheese has been alocated, update Packendtm
                     frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Today
+                    frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
+                    frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
                 End If
 
 
@@ -226,7 +230,7 @@ Public Class frmB_AL_AD_W
                 txtConeBcode.Focus()
                 Me.KeyPreview = True 'Allows us to look for advace character from barcode
                 Exit Sub
-            ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = 1 And frmJobEntry.txtGrade.Text = "ReCheck" Then
+            ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells(33).Value) And frmJobEntry.txtGrade.Text = "ReCheck" Then
                 Label8.Visible = True
                 Label8.Text = "Cheese already allocated"
                 Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
@@ -238,7 +242,7 @@ Public Class frmB_AL_AD_W
                 Me.KeyPreview = True 'Allows us to look for advace character from barcode
                 Exit Sub
             ElseIf i - 1 = dgvRows - 1 And packedFlag = 0 Then    'CHECK FOR WRONG CHEESE ON CART
-                MsgBox("i = " & i - 1 & "Rows = " & dgvRows - 1)
+                'MsgBox("i = " & i - 1 & "Rows = " & dgvRows - 1)
                 Label8.Visible = True
                 Label8.Text = ("This is not a Grade " & frmJobEntry.txtGrade.Text & " Cheese")
                 Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
@@ -322,7 +326,11 @@ Public Class frmB_AL_AD_W
 
             Case "ReCheck"
 
-                If coneCount < 32 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
+                If coneCount < 32 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow + 1)
+
+                gridRow = gridRow + 1
+                coneCount = coneCount + 1
+
 
                 If coneCount = 32 Or coneCount = toAllocatedCount Then jobEnd()
 

@@ -68,6 +68,8 @@ Partial Class frmJobEntry
         Me.lblGrade = New System.Windows.Forms.Label()
         Me.txtGrade = New System.Windows.Forms.TextBox()
         Me.lblSelectGrade = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtPilotCount = New System.Windows.Forms.TextBox()
         CType(Me.ToraydbBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Toraydb, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
@@ -411,11 +413,34 @@ Partial Class frmJobEntry
         Me.lblSelectGrade.Text = "Please Select Grade First"
         Me.lblSelectGrade.Visible = False
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(233, 254)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(219, 20)
+        Me.Label2.TabIndex = 184
+        Me.Label2.Text = "Enter Toatal Piolt Cheese "
+        Me.Label2.Visible = False
+        '
+        'txtPilotCount
+        '
+        Me.txtPilotCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPilotCount.Location = New System.Drawing.Point(458, 251)
+        Me.txtPilotCount.MaxLength = 2
+        Me.txtPilotCount.Name = "txtPilotCount"
+        Me.txtPilotCount.Size = New System.Drawing.Size(28, 26)
+        Me.txtPilotCount.TabIndex = 185
+        Me.txtPilotCount.Visible = False
+        '
         'frmJobEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(821, 470)
+        Me.Controls.Add(Me.txtPilotCount)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.lblSelectGrade)
         Me.Controls.Add(Me.txtGrade)
@@ -493,4 +518,6 @@ Partial Class frmJobEntry
     Friend WithEvents P35BSToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblSelectGrade As Label
     Friend WithEvents StatusPanel As ToolStripStatusLabel
+    Friend WithEvents Label2 As Label
+    Friend WithEvents txtPilotCount As TextBox
 End Class
