@@ -74,7 +74,9 @@ Public Class frmPackRepMain
             Case "P35 BS"
                 template = (My.Settings.dirTemplate & "\" & "Packing P35 BS Template.xlsx").ToString
             Case "ReCheck"
-                template = (My.Settings.dirTemplate & "\" & "ReCheck Template.xlsx").ToString
+                template = (My.Settings.dirTemplate & "\" & "Recheck Template.xlsx").ToString
+            Case "Round1", "Round2", "Round3", "STD" 'FORM FOR STANDARd COMPARE FROM SORT
+                template = (My.Settings.dirTemplate & "\" & "STDCompare Template.xlsx").ToString
         End Select
 
 
@@ -109,7 +111,9 @@ Public Class frmPackRepMain
                 Case "P15 AS", "P20 BS"
                     frmPackTodayUpdate.TodayUpdateBS_AS_20()
                 Case "ReCheck"
-                    frmPackTodayUpdate.TodayUpdate_ReCheck()
+                    frmPackTodayUpdate.todayUpdate_ReCheck()
+                Case "Round1", "Round2", "Round3", "STD" 'FORM FOR STANDARE COMPARE FROM SORT
+                    frmPackTodayUpdate.todayUpdate_STD()
             End Select
 
             'frmPackTodayUpdate.TodayUpdate()
@@ -119,7 +123,7 @@ Public Class frmPackRepMain
 
         Else
 
-            If frmJobEntry.txtGrade.Text <> "ReCheck" Then  'IF RECHECK DO NOT GET SHEETS FROM PREVIOUS DAY
+            If frmJobEntry.txtGrade.Text <> "ReCheck" And frmJobEntry.txtGrade.Text <> "Round1" And frmJobEntry.txtGrade.Text <> "Round2" And frmJobEntry.txtGrade.Text <> "Round3" And frmJobEntry.txtGrade.Text <> "STD" Then  'IF RECHECK DO NOT GET SHEETS FROM PREVIOUS DAY
 
                 If File.Exists(yestname1) Then      'ONE DAY AGO
                     prevDaysName = yestname1
@@ -180,5 +184,7 @@ Public Class frmPackRepMain
 
     End Sub
 
+    Private Sub frmPackRepMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
 End Class

@@ -78,7 +78,7 @@ Partial Class frmCart1
         Me.btnM50 = New System.Windows.Forms.Button()
         Me.btnP50 = New System.Windows.Forms.Button()
         Me.btnVisGrade = New System.Windows.Forms.Button()
-        Me.btnReMeasure = New System.Windows.Forms.Button()
+        Me.btnStdCheese = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtCartNum = New System.Windows.Forms.TextBox()
         Me.txtResult = New System.Windows.Forms.TextBox()
@@ -884,19 +884,18 @@ Partial Class frmCart1
         Me.btnVisGrade.Text = "Visual Grade OFF"
         Me.btnVisGrade.UseVisualStyleBackColor = False
         '
-        'btnReMeasure
+        'btnStdCheese
         '
-        Me.btnReMeasure.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.btnReMeasure.Cursor = System.Windows.Forms.Cursors.Default
-        Me.btnReMeasure.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReMeasure.Location = New System.Drawing.Point(119, 554)
-        Me.btnReMeasure.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnReMeasure.Name = "btnReMeasure"
-        Me.btnReMeasure.Size = New System.Drawing.Size(100, 62)
-        Me.btnReMeasure.TabIndex = 80
-        Me.btnReMeasure.Text = "Re Measure"
-        Me.btnReMeasure.UseVisualStyleBackColor = False
-        Me.btnReMeasure.Visible = False
+        Me.btnStdCheese.BackColor = System.Drawing.Color.Orange
+        Me.btnStdCheese.Cursor = System.Windows.Forms.Cursors.Default
+        Me.btnStdCheese.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnStdCheese.Location = New System.Drawing.Point(219, 380)
+        Me.btnStdCheese.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnStdCheese.Name = "btnStdCheese"
+        Me.btnStdCheese.Size = New System.Drawing.Size(85, 80)
+        Me.btnStdCheese.TabIndex = 80
+        Me.btnStdCheese.Text = "Standard"
+        Me.btnStdCheese.UseVisualStyleBackColor = False
         '
         'Label2
         '
@@ -1073,7 +1072,7 @@ Partial Class frmCart1
         '
         Me.btnDefectSave.BackColor = System.Drawing.Color.Lime
         Me.btnDefectSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDefectSave.Location = New System.Drawing.Point(129, 278)
+        Me.btnDefectSave.Location = New System.Drawing.Point(123, 278)
         Me.btnDefectSave.Margin = New System.Windows.Forms.Padding(2)
         Me.btnDefectSave.Name = "btnDefectSave"
         Me.btnDefectSave.Size = New System.Drawing.Size(85, 80)
@@ -1529,7 +1528,7 @@ Partial Class frmCart1
         Me.Controls.Add(Me.txtResult)
         Me.Controls.Add(Me.txtCartNum)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.btnReMeasure)
+        Me.Controls.Add(Me.btnStdCheese)
         Me.Controls.Add(Me.btnP10)
         Me.Controls.Add(Me.btnM10)
         Me.Controls.Add(Me.btnShort)
@@ -1649,7 +1648,7 @@ Partial Class frmCart1
     Friend WithEvents btnM50 As Button
     Friend WithEvents btnP50 As Button
     Friend WithEvents btnVisGrade As Button
-    Friend WithEvents btnReMeasure As Button
+    Friend WithEvents btnStdCheese As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents txtCartNum As TextBox
     Friend WithEvents txtResult As TextBox

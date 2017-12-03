@@ -61,6 +61,13 @@ Partial Class frmJobEntry
         Me.DailyPackingReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EndOfDayReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StockToProcessReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrintFormsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CompareSTDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Round1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Round2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Round3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StdSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReCheckToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblMessage = New System.Windows.Forms.ToolStripStatusLabel()
@@ -191,7 +198,7 @@ Partial Class frmJobEntry
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.PackingGradeToolStripMenuItem, Me.ReportsToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.PackingGradeToolStripMenuItem, Me.ReportsToolStripMenuItem, Me.PrintFormsToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(821, 24)
@@ -357,6 +364,53 @@ Partial Class frmJobEntry
         Me.StockToProcessReportToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
         Me.StockToProcessReportToolStripMenuItem.Text = "Stock to Process Report"
         '
+        'PrintFormsToolStripMenuItem
+        '
+        Me.PrintFormsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompareSTDToolStripMenuItem, Me.ReCheckToolStripMenuItem1})
+        Me.PrintFormsToolStripMenuItem.Name = "PrintFormsToolStripMenuItem"
+        Me.PrintFormsToolStripMenuItem.Size = New System.Drawing.Size(76, 20)
+        Me.PrintFormsToolStripMenuItem.Text = "Sort Forms"
+        Me.PrintFormsToolStripMenuItem.Visible = False
+        '
+        'CompareSTDToolStripMenuItem
+        '
+        Me.CompareSTDToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Round1ToolStripMenuItem, Me.Round2ToolStripMenuItem, Me.Round3ToolStripMenuItem, Me.StdSheetToolStripMenuItem})
+        Me.CompareSTDToolStripMenuItem.Name = "CompareSTDToolStripMenuItem"
+        Me.CompareSTDToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CompareSTDToolStripMenuItem.Text = "Compare STD "
+        '
+        'Round1ToolStripMenuItem
+        '
+        Me.Round1ToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Round1ToolStripMenuItem.Name = "Round1ToolStripMenuItem"
+        Me.Round1ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
+        Me.Round1ToolStripMenuItem.Text = "Round1"
+        '
+        'Round2ToolStripMenuItem
+        '
+        Me.Round2ToolStripMenuItem.Name = "Round2ToolStripMenuItem"
+        Me.Round2ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
+        Me.Round2ToolStripMenuItem.Text = "Round2"
+        '
+        'Round3ToolStripMenuItem
+        '
+        Me.Round3ToolStripMenuItem.Name = "Round3ToolStripMenuItem"
+        Me.Round3ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
+        Me.Round3ToolStripMenuItem.Text = "Round3"
+        '
+        'StdSheetToolStripMenuItem
+        '
+        Me.StdSheetToolStripMenuItem.Name = "StdSheetToolStripMenuItem"
+        Me.StdSheetToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
+        Me.StdSheetToolStripMenuItem.Text = "STD"
+        '
+        'ReCheckToolStripMenuItem1
+        '
+        Me.ReCheckToolStripMenuItem1.Name = "ReCheckToolStripMenuItem1"
+        Me.ReCheckToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.ReCheckToolStripMenuItem1.Text = "ReCheck"
+        Me.ReCheckToolStripMenuItem1.Visible = False
+        '
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.lblMessage, Me.StatusPanel})
@@ -520,4 +574,11 @@ Partial Class frmJobEntry
     Friend WithEvents StatusPanel As ToolStripStatusLabel
     Friend WithEvents Label2 As Label
     Friend WithEvents txtPilotCount As TextBox
+    Friend WithEvents PrintFormsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CompareSTDToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ReCheckToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents Round1ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Round2ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Round3ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StdSheetToolStripMenuItem As ToolStripMenuItem
 End Class

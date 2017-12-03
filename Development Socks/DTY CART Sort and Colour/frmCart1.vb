@@ -46,6 +46,8 @@ Public Class frmCart1
     Dim incoming As String
     Public measureOn As String
     Public NoCone As Integer
+    Public StdCone As Integer
+    Public stdState As Integer
     Public defect As Integer
     Public shortCone As Integer
     Public varCartStartTime As String   'Record time that we started measuring
@@ -74,7 +76,7 @@ Public Class frmCart1
         Dim btnNums As String
 
         btnNums = frmJobEntry.varCartSelect
-        MsgBox(btnNums)
+
         ' SELECT CONE NUMBER RANGE BASED ON CART NUMBER
         Select Case btnNums
             Case Is = 1
@@ -150,13 +152,13 @@ Public Class frmCart1
 
         'MEASURE WITH SPECTRO BUTTONS VISABLE OR NOT
         If frmSettings.chkUseSpectro.Checked Then
-            Me.btnReMeasure.Visible = True
+
             Me.btnMeasure.Visible = True
-            Me.txtResult.Visible = True
+            '  Me.txtResult.Visible = True
         Else
-            Me.btnReMeasure.Visible = False
+
             Me.btnMeasure.Visible = False
-            Me.txtResult.Visible = False
+            ' Me.txtResult.Visible = False
         End If
 
 
@@ -260,10 +262,12 @@ Public Class frmCart1
             Me.btnNoCone.Visible = True
             Me.btnDefect.Visible = True
             Me.btnShort.Visible = True
+            If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value) Then Me.btnStdCheese.Visible = True
         Else
-            Me.btnNoCone.Visible = False
+                Me.btnNoCone.Visible = False
             Me.btnDefect.Visible = False
             Me.btnShort.Visible = False
+            'Me.btnStdCheese.Visible = True
         End If
 
 
@@ -331,6 +335,13 @@ Public Class frmCart1
 
             Next
 
+            If Not IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("STDSTATE").Value) Then
+                If frmDGV.DGVdata.Rows(rw - 1).Cells("STDSTATE").Value > 0 Then
+
+                    Me.Controls("btnCone" & rw).BackColor = Color.Orange      'NOCONE As allocated as STD
+                    Me.Controls("btnCone" & rw).Enabled = False
+                End If
+            End If
 
 
             'CHECK FLT_S FLAG
@@ -417,7 +428,7 @@ Public Class frmCart1
 
             Me.btnSave.Visible = True 'Show Save button when form opens
             Me.btnSave.Enabled = True
-            If frmSettings.chkUseSpectro.Checked Then Me.btnReMeasure.Visible = True  'Show Cancel button when form opens
+            'If frmSettings.chkUseSpectro.Checked Then Me.btnReMeasure.Visible = True  'Show Cancel button when form opens
             Me.btnVisGrade.Enabled = False
             Me.btnMeasure.Enabled = False
 
@@ -473,7 +484,7 @@ Public Class frmCart1
 
 
 
-        txtResult.Text = dC / 100  'Display dC value with rescale
+        ' txtResult.Text = dC / 100  'Display dC value with rescale
         'Blue = Blue * 2.55 
         'Green = Green * 2.55 
         'Red = Red * 2.55 
@@ -571,10 +582,12 @@ Public Class frmCart1
             Me.btnShort.Enabled = False
             Me.btnNoCone.Enabled = False
             Me.btnDefect.Enabled = False
+            Me.btnStdCheese.Enabled = False
             Me.btnDefectSave.Visible = True
             Me.btnClear.Visible = True
             shortC(varConeNum - coneNumOffset) = 0
             defect = 0
+            StdCone = 0
             shortCone = 0
             coneBarley = 0
             coneWaste = 0
@@ -620,6 +633,7 @@ Public Class frmCart1
             Me.btnDefect.BackColor = Color.Yellow
             Me.btnDefectSave.Visible = True 'Show Save button when form opens
             Me.btnClear.Visible = True  'Show Cancel button when form opens
+            Me.btnStdCheese.Enabled = False
             Me.btnDefect.Enabled = False
             Me.btnMeasure.Enabled = False
             Me.btnVisGrade.Enabled = False
@@ -647,15 +661,15 @@ Public Class frmCart1
             'ONLY SHOW IF COLOUR SORT CHECK ACTIVE
             'If My.Settings.chkUseColour Then
             Me.chk_DO.Visible = True
-                Me.chk_DH.Visible = True
-                Me.chk_CL.Visible = True
-                Me.chk_FI.Visible = True
-                Me.chk_YN.Visible = True
-                Me.chk_HT.Visible = True
-                Me.chk_LT.Visible = True
-                'End If
+            Me.chk_DH.Visible = True
+            Me.chk_CL.Visible = True
+            Me.chk_FI.Visible = True
+            Me.chk_YN.Visible = True
+            Me.chk_HT.Visible = True
+            Me.chk_LT.Visible = True
+            'End If
 
-                Dim fltDrow = (varConeNum - coneNumOffset) - 1
+            Dim fltDrow = (varConeNum - coneNumOffset) - 1
 
             'THIS WILL CALL BACK THE FAULT DATA FROM THE DATAGRID
             chk_K.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_K").Value.ToString
@@ -687,8 +701,8 @@ Public Class frmCart1
 
             Me.btnDefectSave.Visible = True 'Show Save button when form opens
 
-            Else
-                MsgBox("You must select a Cheese number first")
+        Else
+            MsgBox("You must select a Cheese number first")
         End If
 
 
@@ -707,17 +721,18 @@ Public Class frmCart1
                 If result2 = DialogResult.Yes Then
                     'ERASE CONE VALUES
 
-                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(10).Value = 0  'shortCone
-                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(11).Value = 0 'missingCone
-                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(12).Value = 0 'defectCone
-                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(15).Value = 0 'passCone  Zero Colour Difference    
-                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(16).Value = 0 'Cone with large colour defect
-                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(17).Value = 0   'coneM10
-                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(18).Value = 0   'coneP10
-                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(19).Value = 0   'coneM30
-                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(20).Value = 0  'coneP30
-                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(21).Value = 0   'coneM50
-                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(22).Value = 0  'coneP50
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("SHORTCONE").Value = 0  'shortCone
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("MISSCONE").Value = 0 'missingCone
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("DEFCONE").Value = 0 'defectCone
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDCHEESE").Value = 0 'defectCone
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CONEZERO").Value = 0 'passCone  Zero Colour Difference    
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CONEBARLEY").Value = 0 'Cone with large colour defect
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("M10").Value = 0   'coneM10
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("P10").Value = 0   'coneP10
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("M30").Value = 0   'coneM30
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("P30").Value = 0  'coneP30
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("M50").Value = 0   'coneM50
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("P50").Value = 0  'coneP50
 
 
                     frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_K").Value = "False"   'KEBA Fault  TODO
@@ -745,7 +760,7 @@ Public Class frmCart1
                     frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("DYEFLECK").Value = 0
                     frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("COLDEF").Value = 0
                     frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("COLWASTE").Value = 0
-
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDSTATE").Value = 0
                     shortC(varConeNum - coneNumOffset) = 0
                     Me.Controls("btnCone" & varConeNum - coneNumOffset).BackColor = SystemColors.ControlDark
                     Me.Controls("btnCone" & varConeNum - coneNumOffset).BackgroundImage = Nothing
@@ -788,31 +803,34 @@ Public Class frmCart1
 
 
             If varVisConeInspect = 1 Then
-                    NoCone = 0
-                    defect = 0
-                    shortCone = 0
-                    varConeNum = 0
-                    txtConeNum.Text = ""
+                NoCone = 0
+                defect = 0
+                StdCone = 0
+                stdState = 0
+                shortCone = 0
+                varConeNum = 0
+                txtConeNum.Text = ""
                 coneBarley = 0
                 coneWaste = 0
                 coneZero = 0
-                    coneM10 = 0
-                    coneP10 = 0
-                    coneM30 = 0
-                    coneP30 = 0
-                    coneM50 = 0
-                    coneP50 = 0
-                    'Me.btnNoCone.BackColor = Color.LightPink
-                    ' Me.btnDefect.BackColor = Color.Yellow
-                    ' Me.btnShort.BackColor = Color.Red
-                    Me.btnMeasure.Enabled = False
-                    Me.btnVisGrade.Enabled = True
-                    Me.btnShort.Enabled = False
-                    Me.btnNoCone.Enabled = False
-                    Me.btnDefect.Enabled = False
-                    Me.btnSave.Visible = False
-                    'Me.btnNoConeSave.Visible = False
-                    Me.btnDefectSave.Visible = False
+                coneM10 = 0
+                coneP10 = 0
+                coneM30 = 0
+                coneP30 = 0
+                coneM50 = 0
+                coneP50 = 0
+                'Me.btnNoCone.BackColor = Color.LightPink
+                ' Me.btnDefect.BackColor = Color.Yellow
+                ' Me.btnShort.BackColor = Color.Red
+                Me.btnMeasure.Enabled = False
+                Me.btnVisGrade.Enabled = True
+                Me.btnShort.Enabled = False
+                Me.btnNoCone.Enabled = False
+                Me.btnDefect.Enabled = False
+                Me.btnStdCheese.Enabled = False
+                Me.btnSave.Visible = False
+                'Me.btnNoConeSave.Visible = False
+                Me.btnDefectSave.Visible = False
                 'Me.btnShortSave.Visible = False
                 Me.btnClear.Visible = False
                 Me.chk_K.Visible = False
@@ -838,60 +856,62 @@ Public Class frmCart1
                 Me.chk_HT.Visible = False
                 Me.chk_LT.Visible = False
             Else
-                    NoCone = 0
-                    defect = 0
-                    shortCone = 0
-                    varConeNum = 0
-                    txtConeNum.Text = ""
+                NoCone = 0
+                defect = 0
+                StdCone = 0
+                shortCone = 0
+                varConeNum = 0
+                txtConeNum.Text = ""
                 coneBarley = 0
                 coneWaste = 0
                 coneZero = 0
-                    coneM10 = 0
-                    coneP10 = 0
-                    coneM30 = 0
-                    coneP30 = 0
-                    coneM50 = 0
-                    coneP50 = 0
-                    'Me.btnNoCone.BackColor = Color.LightPink
-                    ' Me.btnDefect.BackColor = Color.Yellow
-                    ' Me.btnShort.BackColor = Color.Red
-                    If frmSettings.chkUseSpectro.Checked Then Me.btnMeasure.Enabled = True
-                    Me.btnVisGrade.Enabled = True
-                    Me.btnShort.Visible = True
-                    Me.btnShort.Enabled = True
-                    Me.btnNoCone.Visible = True
-                    Me.btnNoCone.Enabled = True
-                    Me.btnDefect.Enabled = True
-                    Me.btnSave.Visible = False
-                    'Me.btnNoConeSave.Visible = False
-                    Me.btnDefectSave.Visible = False
-                    ' Me.btnShortSave.Visible = False
-                    Me.btnClear.Visible = False
-                    Me.chk_K.Visible = False
-                    Me.chk_D.Visible = False
-                    Me.chk_F.Visible = False
-                    Me.chk_O.Visible = False
-                    Me.chk_T.Visible = False
-                    Me.chk_P.Visible = False
-                    Me.chk_S.Visible = False
-                    Me.chk_X.Visible = False
-                    Me.chk_N.Visible = False
-                    Me.chk_W.Visible = False
-                    Me.chk_H.Visible = False
-                    Me.chk_TR.Visible = False
-                    Me.chk_B.Visible = False
-                    Me.chk_C.Visible = False
-                    'SORT Dept FAULTS
-                    Me.chk_DO.Visible = False
-                    Me.chk_DH.Visible = False
-                    Me.chk_CL.Visible = False
-                    Me.chk_FI.Visible = False
-                    Me.chk_YN.Visible = False
-                    Me.chk_HT.Visible = False
-                    Me.chk_LT.Visible = False
+                coneM10 = 0
+                coneP10 = 0
+                coneM30 = 0
+                coneP30 = 0
+                coneM50 = 0
+                coneP50 = 0
+                'Me.btnNoCone.BackColor = Color.LightPink
+                ' Me.btnDefect.BackColor = Color.Yellow
+                ' Me.btnShort.BackColor = Color.Red
+                If frmSettings.chkUseSpectro.Checked Then Me.btnMeasure.Enabled = True
+                Me.btnVisGrade.Enabled = True
+                Me.btnShort.Visible = True
+                Me.btnShort.Enabled = True
+                Me.btnStdCheese.Enabled = True
+                Me.btnNoCone.Visible = True
+                Me.btnNoCone.Enabled = True
+                Me.btnDefect.Enabled = True
+                Me.btnSave.Visible = False
+                'Me.btnNoConeSave.Visible = False
+                Me.btnDefectSave.Visible = False
+                ' Me.btnShortSave.Visible = False
+                Me.btnClear.Visible = False
+                Me.chk_K.Visible = False
+                Me.chk_D.Visible = False
+                Me.chk_F.Visible = False
+                Me.chk_O.Visible = False
+                Me.chk_T.Visible = False
+                Me.chk_P.Visible = False
+                Me.chk_S.Visible = False
+                Me.chk_X.Visible = False
+                Me.chk_N.Visible = False
+                Me.chk_W.Visible = False
+                Me.chk_H.Visible = False
+                Me.chk_TR.Visible = False
+                Me.chk_B.Visible = False
+                Me.chk_C.Visible = False
+                'SORT Dept FAULTS
+                Me.chk_DO.Visible = False
+                Me.chk_DH.Visible = False
+                Me.chk_CL.Visible = False
+                Me.chk_FI.Visible = False
+                Me.chk_YN.Visible = False
+                Me.chk_HT.Visible = False
+                Me.chk_LT.Visible = False
 
-                End If
-            Else
+            End If
+        Else
             MsgBox("You must select a  Cheese number first")
         End If
     End Sub
@@ -906,14 +926,15 @@ Public Class frmCart1
 
 
             Me.btnDefectSave.Visible = True 'Show Save button when form opens
-                Me.btnClear.Visible = True  'Show Cancel button when form opens
-                Me.btnDefect.Enabled = False
-                Me.btnMeasure.Enabled = False
-                Me.btnVisGrade.Enabled = False
-                Me.btnNoCone.Enabled = False
-                Me.btnShort.Enabled = False
-            Else
-                MsgBox("You must select a  Cheese number first")
+            Me.btnClear.Visible = True  'Show Cancel button when form opens
+            Me.btnDefect.Enabled = False
+            Me.btnMeasure.Enabled = False
+            Me.btnVisGrade.Enabled = False
+            Me.btnStdCheese.Enabled = False
+            Me.btnNoCone.Enabled = False
+            Me.btnShort.Enabled = False
+        Else
+            MsgBox("You must select a  Cheese number first")
         End If
     End Sub
 
@@ -1133,22 +1154,7 @@ Public Class frmCart1
         End If
     End Sub
 
-    Private Sub btnReMeasure_Click(sender As Object, e As EventArgs) Handles btnReMeasure.Click
 
-
-        If frmSettings.chkUseSpectro.Checked Then Me.btnMeasure.Enabled = True
-        Me.btnReMeasure.Visible = False
-        Me.btnSave.Visible = False
-        Me.btnVisGrade.Enabled = True
-        measureOn = 0
-        coneM10 = 0
-        coneP10 = 0
-        coneM30 = 0
-        coneP30 = 0
-        coneM50 = 0
-        coneP50 = 0
-
-    End Sub
 
     Private Sub btnCone1_Click(sender As Object, e As EventArgs) Handles btnCone1.Click
         varConeNum = btnCone1.Text
@@ -1486,45 +1492,46 @@ Public Class frmCart1
                     End If
 
 
-
-                    If cl = 10 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"
-                        Continue For
-                    ElseIf cl = 11 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        Continue For
-                    ElseIf cl = 12 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        Continue For
-                    ElseIf cl = 15 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"
-                        Continue For
-                    ElseIf cl = 16 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        Continue For
-                    ElseIf cl = 17 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        Continue For
-                    ElseIf cl = 18 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        Continue For
-                    ElseIf cl = 19 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        Continue For
-                    ElseIf cl = 20 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        Continue For
-                    ElseIf cl = 21 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        Continue For
-                    ElseIf cl = 22 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then
-                        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        Continue For
+                    If IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value) Or frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value = 0 Then
+                        If cl = 10 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
+                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"
+                            Continue For
+                        ElseIf cl = 11 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
+                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+                            Continue For
+                        ElseIf cl = 12 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
+                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+                            Continue For
+                        ElseIf cl = 15 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
+                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"
+                            Continue For
+                        ElseIf cl = 16 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
+                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+                            Continue For
+                        ElseIf cl = 17 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
+                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+                            Continue For
+                        ElseIf cl = 18 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
+                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+                            Continue For
+                        ElseIf cl = 19 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
+                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+                            Continue For
+                        ElseIf cl = 20 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
+                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+                            Continue For
+                        ElseIf cl = 21 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
+                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+                            Continue For
+                        ElseIf cl = 22 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
+                            frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+                            Continue For
+                        End If
                     End If
                 Next
 
-                cellVal = frmDGV.DGVdata.Rows(rw - 1).Cells(66).Value.ToString          'SET CONE STATE IF WASTE CONE TO 8
-                If cellVal > 0 Then frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+                cellVal = frmDGV.DGVdata.Rows(rw - 1).Cells("COLWASTE").Value.ToString          'SET CONE STATE IF WASTE CONE TO 8
+                If cellVal > 0 Then frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value = "8"
                 cellVal = 0
 
             End If
@@ -1557,7 +1564,6 @@ Public Class frmCart1
                 If IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("SORTENDTM").Value) Then
                     frmDGV.DGVdata.Rows(rw - 1).Cells("SORTENDTM").Value = today 'SORT END TIME
                 End If
-
             End If
 
         Next
@@ -1720,7 +1726,10 @@ Public Class frmCart1
         If NoCone Then
 
 
+
             Fault_X = True  'Sets the nocone fault flag
+
+
 
             If varConeNum - coneNumOffset = 1 Then
                 btnCone1.Enabled = False
@@ -1853,6 +1862,149 @@ Public Class frmCart1
             End If
 
         End If
+
+        'NO CONE Update Cone button to colour of NoCone And add the cone number to the coneMissingID string so we have a full list of missing cones
+        If StdCone Then
+
+
+
+            stdState = 1  'Sets the nocone fault flag
+
+
+
+            If varConeNum - coneNumOffset = 1 Then
+                btnCone1.Enabled = False
+                btnCone1.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 2 Then
+                btnCone2.Enabled = False
+                btnCone2.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 3 Then
+                btnCone3.Enabled = False
+                btnCone3.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 4 Then
+                btnCone4.Enabled = False
+                btnCone4.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 5 Then
+                btnCone5.Enabled = False
+                btnCone5.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 6 Then
+                btnCone6.Enabled = False
+                btnCone6.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 7 Then
+                btnCone7.Enabled = False
+                btnCone7.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 8 Then
+                btnCone8.Enabled = False
+                btnCone8.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 9 Then
+                btnCone9.Enabled = False
+                btnCone9.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 10 Then
+                btnCone10.Enabled = False
+                btnCone10.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 11 Then
+                btnCone11.Enabled = False
+                btnCone11.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 12 Then
+                btnCone12.Enabled = False
+                btnCone12.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 13 Then
+                btnCone13.Enabled = False
+                btnCone13.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 14 Then
+                btnCone14.Enabled = False
+                btnCone14.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 15 Then
+                btnCone15.Enabled = False
+                btnCone15.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 16 Then
+                btnCone16.Enabled = False
+                btnCone16.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 17 Then
+                btnCone17.Enabled = False
+                btnCone17.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 18 Then
+                btnCone18.Enabled = False
+                btnCone18.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 19 Then
+                btnCone19.Enabled = False
+                btnCone19.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 20 Then
+                btnCone20.Enabled = False
+                btnCone20.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 21 Then
+                btnCone21.Enabled = False
+                btnCone21.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 22 Then
+                btnCone22.Enabled = False
+                btnCone22.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 23 Then
+                btnCone23.Enabled = False
+                btnCone23.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 24 Then
+                btnCone24.Enabled = False
+                btnCone24.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 25 Then
+                btnCone25.Enabled = False
+                btnCone25.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 26 Then
+                btnCone26.Enabled = False
+                btnCone26.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 27 Then
+                btnCone27.Enabled = False
+                btnCone27.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 28 Then
+                btnCone28.Enabled = False
+                btnCone28.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 29 Then
+                btnCone29.Enabled = False
+                btnCone29.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 30 Then
+                btnCone30.Enabled = False
+                btnCone30.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 31 Then
+                btnCone31.Enabled = False
+                btnCone31.BackColor = Color.Orange
+                StdCone = varConeNum
+            ElseIf varConeNum - coneNumOffset = 32 Then
+                btnCone32.Enabled = False
+                btnCone32.BackColor = Color.Orange
+                StdCone = varConeNum
+            End If
+
+        End If
+
+
 
         If defect Then
             'Routine to Set Cone color to defect and update cone numbers with defects
@@ -1999,8 +2151,8 @@ Public Class frmCart1
 
             'THIS IS THE SHORT CONE TEMP UPDATE ALL OTHER CONES ARE FINISHED WHEN SAVED BUT SHORT CONE NEEDS A TEMP UPDATE TO WORK FOR SORTING DEPT
 
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(10).Value = shortCone 'shortCone
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(43).Value = "True" 'Sets the SHORT fault flag
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("SHORTCONE").Value = shortCone 'shortCone
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_S").Value = "True" 'Sets the SHORT fault flag
 
             txtBoxUpdates()
 
@@ -2645,7 +2797,7 @@ Public Class frmCart1
             btnDelete.Visible = False
             'Me.btnShortSave.Visible = False
             Me.btnClear.Visible = False
-            Me.btnReMeasure.Visible = False
+            Me.btnStdCheese.Visible = False
             If shortCone = 1 Then coneCount = coneCount Else coneCount = coneCount + 1  'if Short being set do not add to cone count
             'lblConeCount.Text = coneCount
 
@@ -2658,12 +2810,13 @@ Public Class frmCart1
             Me.btnNoCone.Visible = True
             Me.btnNoCone.Enabled = True
             Me.btnDefect.Enabled = True
+            Me.btnStdCheese.Visible = True
+            Me.btnStdCheese.Enabled = True
             Me.btnSave.Visible = False
             'Me.btnNoConeSave.Visible = False
             Me.btnDefectSave.Visible = False
             'Me.btnShortSave.Visible = False
             Me.btnClear.Visible = False
-            Me.btnReMeasure.Visible = False
             If shortCone = 1 Then coneCount = coneCount Else coneCount = coneCount + 1  'if Short being set do not add to cone count
             'lblConeCount.Text = coneCount
 
@@ -2678,7 +2831,7 @@ Public Class frmCart1
             shortCone = 0
             varConeNum = 0
             txtConeNum.Text = ""
-            endCount()
+
 
         Else
             varCartEndTime = Date.Now 'ToString("dd/mm/yyy")
@@ -2688,6 +2841,7 @@ Public Class frmCart1
 
 
             NoCone = 0
+            StdCone = 0
             defect = 0
             shortCone = 0
             varConeNum = 0
@@ -2728,32 +2882,70 @@ Public Class frmCart1
 
 
             txtConeNum.Text = ""
-                endCount()
-            End If
+
+        End If
 
 
 
     End Sub
 
-    ' CONE COUNT
-    Sub endCount()
-        If coneCount = 32 Then
-            'lblConeCount.Text = coneCount
-            ' lblConeCount.Refresh()
-            'lblFinished.Visible = True
-            'btnNextJob.Visible = True
+    Private Sub btnStdCheese_Click(sender As Object, e As EventArgs) Handles btnStdCheese.Click
+        If varConeNum > 0 Then
+
+            StdCone = 1
+            stdState = 1
+
+            Me.btnMeasure.Enabled = False
+            Me.btnVisGrade.Enabled = False
+            Me.btnShort.Enabled = False
+            Me.btnNoCone.Enabled = False
+            Me.btnDefect.Enabled = False
+            Me.btnDefectSave.Visible = True
+            Me.btnClear.Visible = True
+            shortC(varConeNum - coneNumOffset) = 0
+            defect = 0
+            NoCone = 0
+            shortCone = 0
+            coneBarley = 0
+            coneWaste = 0
+            coneZero = 0
+            coneM10 = 0
+            coneP10 = 0
+            coneM30 = 0
+            coneP30 = 0
+            coneM50 = 0
+            coneP50 = 0
+
+            Me.chk_K.Visible = False
+            Me.chk_D.Visible = False
+            Me.chk_F.Visible = False
+            Me.chk_O.Visible = False
+            Me.chk_T.Visible = False
+            Me.chk_P.Visible = False
+            Me.chk_S.Visible = False
+            Me.chk_X.Visible = False
+            Me.chk_N.Visible = False
+            Me.chk_W.Visible = False
+            Me.chk_H.Visible = False
+            Me.chk_TR.Visible = False
+            Me.chk_B.Visible = False
+            Me.chk_C.Visible = False
+            'SORT Dept FAULTS
+            Me.chk_DO.Visible = False
+            Me.chk_DH.Visible = False
+            Me.chk_CL.Visible = False
+            Me.chk_FI.Visible = False
+            Me.chk_YN.Visible = False
+            Me.chk_HT.Visible = False
+            Me.chk_LT.Visible = False
         Else
-            lblFinished.Visible = False
-            'lblConeCount.Text = coneCount
-            'lblConeCount.Refresh()
+            MsgBox("You must select a Cheese number first")
         End If
 
     End Sub
 
 
     'Routines to control Vericolor Solo
-
-    'Delegate Sub DataDelegate(ByVal sdata As String)
 
     Delegate Sub DataDelegate(ByVal sdata As String)
 
@@ -2853,27 +3045,29 @@ Public Class frmCart1
 
         If My.Settings.chkUseSort Or My.Settings.chkUseColour Then
 
-            If frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(10).Value = 0 Then
-                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(10).Value = shortCone   'shortCone
+            If frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("SHORTCONE").Value = 0 Then
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("SHORTCONE").Value = shortCone   'shortCone
             End If
 
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(11).Value = NoCone  'missingCone
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(12).Value = defect  'defectCone
-        End If
 
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(15).Value = coneZero  'passCone  Zero Colour Difference    
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(16).Value = coneBarley 'Cone with large colour defect
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(17).Value = coneM10   'coneM10
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(18).Value = coneP10   'coneP10
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(19).Value = coneM30   'coneM30
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(20).Value = coneP30  'coneP30
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(21).Value = coneM50   'coneM50
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(22).Value = coneP50  'coneP50
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("MISSCONE").Value = NoCone  'missingCone
 
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(31).Value = varCartStartTime  'cartStratTime
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(32).Value = varCartEndTime 'cartEndTime
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(33).Value = reChecked    'Cone has been reChecked    
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(34).Value = ReCheckTime    'Cone has been reChecked  
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("DEFCONE").Value = defect  'defectCone
+            End If
+
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CONEZERO").Value = coneZero  'passCone  Zero Colour Difference    
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CONEBARLEY").Value = coneBarley 'Cone with large colour defect
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("M10").Value = coneM10   'coneM10
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("P10").Value = coneP10   'coneP10
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("M30").Value = coneM30   'coneM30
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("P30").Value = coneP30  'coneP30
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("M50").Value = coneM50   'coneM50
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("P50").Value = coneP50  'coneP50
+
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CARTSTARTTM").Value = varCartStartTime  'cartStratTime
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CARTENDTM").Value = varCartEndTime 'cartEndTime
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("RECHK").Value = reChecked    'Cone has been reChecked    
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("RECHKTM").Value = ReCheckTime    'Cone has been reChecked  
 
         If My.Settings.chkUseSort Or My.Settings.chkUseColour Then
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_K").Value = chk_K.Checked    'KEBA Fault  
@@ -2886,6 +3080,7 @@ Public Class frmCart1
             If frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_S").Value = "False" Then
                 frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_S").Value = Fault_S       'SHORT CHEESE Fault
             End If 'SHORT CHEESE Fault
+
 
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_X").Value = Fault_X           'No HAVE CHEESE Fault 
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_N").Value = chk_N.Checked     'NO TAIL & ABNORMAL Fault 
@@ -2904,6 +3099,12 @@ Public Class frmCart1
                 frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_LT").Value = chk_LT.Checked     'LT- GRADE BY M/C  Fault 
 
                 frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("COLWASTE").Value = coneWaste     'COLOUR WASTE BY COLOUR DEPT
+
+
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDCHEESE").Value = StdCone      'sets cheese number using nocone routine
+
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDSTATE").Value = stdState
+
 
             End If
 
@@ -2956,53 +3157,53 @@ Public Class frmCart1
         For rw As Integer = 1 To frmDGV.DGVdata.Rows.Count
 
 
-            If frmDGV.DGVdata.Rows(rw - 1).Cells(10).Value > 0 Then
+            If frmDGV.DGVdata.Rows(rw - 1).Cells("SHORTCONE").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 shortConeID = shortConeID & tmpConeNum & ","
                 txtShort.Text = shortConeID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(11).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("MISSCONE").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 coneMissingID = coneMissingID & tmpConeNum & ","
                 txtMissing.Text = coneMissingID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(12).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("DEFCONE").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 coneDefectID = coneDefectID & tmpConeNum & ","
                 txtDefect.Text = coneDefectID
             End If
 
-            If frmDGV.DGVdata.Rows(rw - 1).Cells(15).Value > 0 Then
+            If frmDGV.DGVdata.Rows(rw - 1).Cells("CONEZERO").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeZeroID = visConeZeroID & tmpConeNum & ","
                 txtZero.Text = visConeZeroID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(16).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("CONEBARLEY").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeBarleyID = visConeBarleyID & tmpConeNum & ","
                 txtBarley.Text = visConeBarleyID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(17).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("M10").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeM10ID = visConeM10ID & tmpConeNum & ","
                 txtM10.Text = visConeM10ID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(18).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("P10").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeP10ID = visConeP10ID & tmpConeNum & ","
                 txtP10.Text = visConeP10ID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(19).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("M30").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeM30ID = visConeM30ID & tmpConeNum & ","
                 txtM30.Text = visConeM30ID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(20).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("P30").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeP30ID = visConeP30ID & tmpConeNum & ","
                 txtP30.Text = visConeP30ID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(21).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("M50").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeM50ID = visConeM50ID & tmpConeNum & ","
                 txtM50.Text = visConeM50ID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(22).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("P50").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeP50ID = visConeP50ID & tmpConeNum & ","
                 txtP50.Text = visConeP50ID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(66).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("COLWASTE").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeWasteID = visConeWasteID & tmpConeNum & ","
                 txtWaste.Text = visConeWasteID

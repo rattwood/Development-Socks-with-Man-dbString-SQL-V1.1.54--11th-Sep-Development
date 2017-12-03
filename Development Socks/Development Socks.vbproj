@@ -146,6 +146,12 @@
     <Compile Include="DTY CART Sort and Colour\frmSortReCheck.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DTY CART Sort and Colour\frmSTDColChk.Designer.vb">
+      <DependentUpon>frmSTDColChk.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY CART Sort and Colour\frmSTDColChk.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DTY Reports\DTY Colour Check Reports\frmCheeseError.Designer.vb">
       <DependentUpon>frmCheeseError.vb</DependentUpon>
     </Compile>
@@ -314,6 +320,12 @@
     <Compile Include="frmcart1backup.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DTY CART Sort and Colour\frmStdCreate.Designer.vb">
+      <DependentUpon>frmStdCreate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY CART Sort and Colour\frmStdCreate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="InfoStore.Designer.vb">
       <DependentUpon>InfoStore.vb</DependentUpon>
     </Compile>
@@ -409,6 +421,9 @@
     <EmbeddedResource Include="DTY CART Sort and Colour\frmSortReCheck.resx">
       <DependentUpon>frmSortReCheck.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DTY CART Sort and Colour\frmSTDColChk.resx">
+      <DependentUpon>frmSTDColChk.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DTY Reports\DTY Colour Check Reports\frmCheeseError.resx">
       <DependentUpon>frmCheeseError.vb</DependentUpon>
     </EmbeddedResource>
@@ -489,6 +504,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmcart1backup.resx">
       <DependentUpon>frmcart1backup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY CART Sort and Colour\frmStdCreate.resx">
+      <DependentUpon>frmStdCreate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoStore.resx">
       <DependentUpon>InfoStore.vb</DependentUpon>

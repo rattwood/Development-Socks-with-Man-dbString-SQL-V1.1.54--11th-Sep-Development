@@ -1220,9 +1220,7 @@ Public Class frmPackTodayUpdate
             For i = 9 To 40
                 MyTodyExcel.Cells(i, 3) = "" 'Clear the contents of cone cells
             Next
-            MyTodyExcel.Visible = True
-            MsgBox("delay")
-            MyTodyExcel.Visible = False
+
         End If
 
 
@@ -1322,6 +1320,196 @@ Public Class frmPackTodayUpdate
         Me.Close()
     End Sub
 
+    'ROUTINE TO CREATE STD SHEET
+
+    Public Sub todayUpdate_STD()
+        Dim xlTodyWorkbook As Excel.Workbook
+        Dim xlTodysheets As Excel.Worksheet
+
+        xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
+        mycount = xlTodyWorkbook.Worksheets.Count
+        createBarcode()
+        'CType(MyTodyExcel.ActiveWorkbook.Sheets(mycount), Excel.Worksheet).Select()  'Selects the last sheeet in workbook
+        Dim totCount As Integer
+
+
+
+        'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
+        For rcount = 9 To 40
+
+            ' Only single Column to look at
+            If MyTodyExcel.Cells(rcount, 3).Value > 0 Then
+                totCount = totCount + 1
+                Continue For
+            Else
+                nfree = rcount
+                Exit For
+            End If
+        Next
+
+
+
+        ''CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
+        If totCount = 32 Then
+
+            xlTodyWorkbook.Sheets(1).Copy(After:=xlTodyWorkbook.Sheets(mycount))
+            'ReName the work sheet 
+            'CType(MyTodyExcel.Workbooks(1).Worksheets("Sheet1"), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
+
+            nfree = 9
+
+
+            'Product Name
+            MyTodyExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value
+            'Product Code
+            MyTodyExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells(2).Value
+            'Packer Name
+            MyTodyExcel.Cells(42, 3) = frmDGV.DGVdata.Rows(0).Cells(55).Value
+            'CREATE AND WRITE NEW BARCODE TO NEW SHEET
+            mycount = mycount + 1
+            createBarcode()
+            MyTodyExcel.Cells(1, 4) = SheetCodeString
+
+
+
+            For i = 9 To 40
+                MyTodyExcel.Cells(i, 3) = "" 'Clear the contents of cone cells
+
+                MyTodyExcel.Cells(i, 2) = (i - 8) + 32  ' set secon sheet to start row numbers from 33
+            Next
+        End If
+
+
+        Dim sheetToUse As Integer = 0
+
+        Try
+            ' createBarcode()
+            For i = 1 To frmDGV.DGVdata.Rows.Count
+
+
+                Select Case frmJobEntry.txtGrade.Text
+                    Case "Round1"
+                        'WRITE CONE NUMBER TO SHEET
+                        If frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 2 Then
+                            MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
+                            frmDGV.DGVdata.Rows(i - 1).Cells(86).Value = modBarcode
+                            nfree = nfree + 1
+                        End If
+                    Case "Round2"
+                        'WRITE CONE NUMBER TO SHEET
+                        If frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 4 Then
+                            MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
+                            frmDGV.DGVdata.Rows(i - 1).Cells(86).Value = modBarcode
+                            nfree = nfree + 1
+                        End If
+                    Case "Round3"
+                        'WRITE CONE NUMBER TO SHEET
+                        If frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 6 Then
+                            MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
+                            frmDGV.DGVdata.Rows(i - 1).Cells(86).Value = modBarcode
+                            nfree = nfree + 1
+                        End If
+                    Case "STD"
+                        'WRITE CONE NUMBER TO SHEET
+                        If frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 7 Then
+                            MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
+                            frmDGV.DGVdata.Rows(i - 1).Cells(86).Value = modBarcode
+                            nfree = nfree + 1
+                        End If
+                End Select
+
+
+
+
+
+
+
+
+                'ROUTINE IF SHEET IS FULL TO COPY SHEET AND CREATE A NEW SHEET IN THE WORKBOOK
+
+                If nfree = 41 Then
+                        Dim tmpsaveName As String
+
+                        tmpsaveName = (frmPackRepMain.finPath & "\" & frmPackRepMain.sheetName & "_" & mycount & ".xlsx")
+                        MyTodyExcel.DisplayAlerts = False
+                        xlTodyWorkbook.Sheets(mycount).SaveAs(Filename:=tmpsaveName, FileFormat:=51)
+
+                        MyTodyExcel.DisplayAlerts = True
+                        xlTodyWorkbook.Sheets(1).Copy(After:=xlTodyWorkbook.Sheets(mycount))
+                        'xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
+                        'CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
+
+                        'PRODUCT NAME
+                        MyTodyExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value
+                        'Product Code
+                        MyTodyExcel.Cells(5, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
+                        'Packer Name
+                        MyTodyExcel.Cells(42, 3) = frmJobEntry.txtOperator.Text
+                        'CREATE AND WRITE NEW BARCODE TO NEW SHEET
+                        mycount = mycount + 1
+                        createBarcode()
+                        MyTodyExcel.Cells(1, 3) = SheetCodeString
+
+
+
+                        For x = 9 To 40
+                        MyTodyExcel.Cells(x, 3) = "" 'Clear the contents of cone cells
+                        MyTodyExcel.Cells(x, 2) = ((x - 8) + 32).ToString  ' set secon sheet to start row numbers from 33
+
+                    Next
+
+                        nfree = 9
+
+                        Exit For
+
+                    End If
+
+            Next
+
+        Catch ex As Exception
+
+            MsgBox(ex.ToString)
+
+        End Try
+
+        Try
+
+
+            'Save changes to new file in Paking Dir
+            MyTodyExcel.DisplayAlerts = False
+            xlTodyWorkbook.SaveAs(Filename:=frmPackRepMain.savename, FileFormat:=51)
+
+        Catch ex As Exception
+
+            MsgBox(ex.Message)
+
+        End Try
+
+        Try
+            'Close template file but do not save updates to it
+            xlTodyWorkbook.Close(SaveChanges:=False)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            MsgBox("Please make sure excel does not have any open Excel sheets. Close then and then select Finish to retry")
+            MyTodyExcel.Quit()
+            releaseObject(xlTodysheets)
+            releaseObject(xlTodyWorkbook)
+            releaseObject(MyTodyExcel)
+            prtError = 1
+        End Try
+
+        MyTodyExcel.Quit()
+        releaseObject(xlTodysheets)
+        releaseObject(xlTodyWorkbook)
+        releaseObject(MyTodyExcel)
+        Me.Close()
+    End Sub
+
+
+
+
+
+
     Private Sub releaseObject(ByVal obj As Object)
 
         Try
@@ -1384,6 +1572,19 @@ Public Class frmPackTodayUpdate
             Case "ReCheck"
                 gradeTxt = "RECHECK" 'ReCheck Grade
                 boxCount = mycount
+            Case "Round1"
+                gradeTxt = "R1" 'ReCheck Grade
+                boxCount = mycount
+            Case "Round2"
+                gradeTxt = "R2" 'ReCheck Grade
+                boxCount = mycount
+            Case "Round3"
+                gradeTxt = "R3" 'ReCheck Grade
+                boxCount = mycount
+            Case "STD"
+                gradeTxt = "STD" 'ReCheck Grade
+                boxCount = mycount
+
         End Select
 
 
@@ -1396,5 +1597,7 @@ Public Class frmPackTodayUpdate
 
     End Sub
 
+    Private Sub frmPackTodayUpdate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
 End Class

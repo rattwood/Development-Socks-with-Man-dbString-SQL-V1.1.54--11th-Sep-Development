@@ -60,6 +60,7 @@ Public Class frmJobEntry
     Dim quit As Integer
     Dim pilotentry As Integer = 0
     Dim pilotCount As Integer = 0
+    Public stdcheck As Integer = 0
     Public reCheck As Integer = 0
     Public cartReport As Integer
 
@@ -82,7 +83,10 @@ Public Class frmJobEntry
         If My.Settings.chkUseColour Then btnCartReport.Visible = True Else btnCartReport.Visible = False
         If My.Settings.chkUseColour Then btnJobReport.Visible = True Else btnJobReport.Visible = False
         If My.Settings.chkUseColour Then btnDefRep.Visible = True Else btnDefRep.Visible = False
+
+
         'NEW PACKING MENU ITEMS
+
         If My.Settings.chkUsePack Then ToolsToolStripMenuItem.Visible = True Else ToolsToolStripMenuItem.Visible = False
         If My.Settings.chkUsePack Then PackingGradeToolStripMenuItem.Visible = True Else PackingGradeToolStripMenuItem.Visible = False
         If My.Settings.chkUsePack Then ReportsToolStripMenuItem.Visible = True Else ReportsToolStripMenuItem.Visible = False
@@ -93,7 +97,9 @@ Public Class frmJobEntry
         If My.Settings.chkUsePack Then lblGrade.Visible = True Else lblGrade.Visible = False
         If My.Settings.chkUsePack Then txtGrade.Visible = True Else txtGrade.Visible = False
 
+        If My.Settings.chkUseSort Or My.Settings.chkUsePack Then PrintFormsToolStripMenuItem.Visible = True Else PrintFormsToolStripMenuItem.Visible = False
 
+        If My.Settings.chkUseSort Then ReCheckToolStripMenuItem1.Visible = True
 
         'If My.Settings.chkUsePack Then btnExChangeCone.Visible = True Else btnExChangeCone.Visible = False
         'If My.Settings.chkUsePack Then btnSearchCone.Visible = True Else btnSearchCone.Visible = False
@@ -145,15 +151,15 @@ Public Class frmJobEntry
         End If
 
 
-        If My.Settings.chkUsePack = False Then
+        If My.Settings.chkUsePack = False Or stdcheck = 0 Then
             lblScanType.Text = "Scan Job Sheet"
             txtLotNumber.Visible = True
         Else
-
+            lblScanType.Text = "Scan First Cheese on Cart"
             txtLotNumber.Visible = True
         End If
 
-
+        If stdcheck Then lblScanType.Text = "Scan First Cheese on Cart"
 
 
 
@@ -182,17 +188,23 @@ Public Class frmJobEntry
 
 
         Dim chkBCode As String
-            'Routine to check Barcode is TRUE
-            Try
+        Dim chkBCode2 As String
+        'Routine to check Barcode is TRUE
+        Try
 
             chkBCode = txtLotNumber.Text.Substring(9, 1)
+            chkBCode2 = txtLotNumber.Text.Substring(9, 3)
 
-            If chkBCode = "R" Then
+
+
+            If chkBCode2 = "R11" Or chkBCode2 = "R12" Or chkBCode2 = "R21" Or chkBCode2 = "R31" Or chkBCode2 = "STD" Then  ' we must check this way first otherwise we will always get R and use recheck
+                stdcheck = 1
+                dbBarcode = txtLotNumber.Text
+            ElseIf chkBCode = "R" Then
 
                 reCheck = 1
 
                 dbBarcode = txtLotNumber.Text
-
 
             Else
                 chkBCode = txtLotNumber.Text.Substring(12, 1)
@@ -228,7 +240,7 @@ Public Class frmJobEntry
 
     Private Sub CreateJob()
 
-        If Not reCheck Then
+        If reCheck = 0 And stdcheck = 0 Then
             If txtLotNumber.TextLength > 14 Then  ' For carts B10,11 & 12
                 machineName = ""
                 machineCode = txtLotNumber.Text.Substring(0, 2)
@@ -359,31 +371,31 @@ Public Class frmJobEntry
 
 
             varMachineCode = machineCode
-                varMachineName = machineName
-                varProductCode = productCode
-                varYear = year
-                varMonth = month
-                varDoffingNum = doffingNum
-                varCartNum = cartNum
-                varCartSelect = cartSelect
+            varMachineName = machineName
+            varProductCode = productCode
+            varYear = year
+            varMonth = month
+            varDoffingNum = doffingNum
+            varCartNum = cartNum
+            varCartSelect = cartSelect
 
 
-                varJobNum = (machineName & " " & month & " " & doffingNum & " " & varCartNameA)
+            varJobNum = (machineName & " " & month & " " & doffingNum & " " & varCartNameA)
 
             'Routine to change the scanned BARCODE to be the First CART not the secone cart and this is what will be stored in the DATABASE
 
             dbBarcode = txtLotNumber.Text.Replace(varCartNum, varCartNameA)
-            End If
+        End If
 
 
 
 
 
-        If reCheck Then
+        If reCheck Or stdcheck Then
             dbBarcode = txtLotNumber.Text
             productCode = txtLotNumber.Text.Substring(0, 3)
-            year = txtLotNumber.Text.Substring(4, 2)
-            month = txtLotNumber.Text.Substring(6, 2)
+            year = txtLotNumber.Text.Substring(3, 2)
+            month = txtLotNumber.Text.Substring(5, 2)
             varJobNum = txtLotNumber.Text
             reCheckJob()
         Else
@@ -529,11 +541,26 @@ Public Class frmJobEntry
 
     Public Sub reCheckJob()
 
+        If stdcheck Then
+            Select Case txtLotNumber.Text.Substring(9, 3)
+                Case "R11", "R12"
+                    LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 2")
+                Case "R21"
+                    LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 4")
+                Case "R31"
+                    LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 6")
+            End Select
+        ElseIf My.Settings.chkUseSort And txtGrade.Text = "ReCheck" Then
+            LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 10")
+
+        Else
+            LExecQuery("SELECT * FROM jobs WHERE BCODECONE = '" & dbBarcode & "' and (M30 > 0 Or P30 > 0) ")
+        End If
 
 
-        LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "'")
 
         If LRecordCount > 0 Then
+
 
             Dim result = MessageBox.Show("Edit Job Yes Or No", "JOB ALREADY EXISTS", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
 
@@ -546,7 +573,7 @@ Public Class frmJobEntry
 
 
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(88), ListSortDirection.Ascending)  'sorts On ReCheck index Number
+                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On ReCheck index Number
 
                 If My.Settings.debugSet Then frmDGV.Show()
                 varProductName = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value.ToString
@@ -554,7 +581,8 @@ Public Class frmJobEntry
                 If My.Settings.chkUseSort Then
                     frmSortReCheck.Show()
                 ElseIf My.Settings.chkUseColour Then
-                    frmColReCheck.Show()
+
+                    If stdcheck Then frmSTDColChk.Show() Else frmColReCheck.Show()
                 ElseIf My.Settings.chkUsePack Then
                     nonAPacking()
                 End If
@@ -563,10 +591,10 @@ Public Class frmJobEntry
                 'If My.Settings.debugSet Then frmDGV.Show()
 
                 Me.Hide()
-                    Exit Sub
-                End If
+                Exit Sub
+            End If
 
-                If result = DialogResult.No Then
+            If result = DialogResult.No Then
                 Me.txtLotNumber.Clear()
                 Me.txtLotNumber.Focus()
 
@@ -815,6 +843,270 @@ Public Class frmJobEntry
 
     End Sub
 
+    Private Sub STDCreate()
+        'Check Barcode is a valid Chees number, it must be 15 characters and no "B" in it
+        Dim chkBCode As String
+
+        Try
+
+            chkBCode = txtLotNumber.Text.Substring(12, 1)
+
+            If chkBCode = "B" Then
+
+                Label3.Visible = True
+                Label3.Text = "This is not a Valid Cheese Number"
+                DelayTM()
+                Label3.Visible = False
+                Me.txtLotNumber.Clear()
+                Me.txtLotNumber.Focus()
+                Me.txtLotNumber.Refresh()
+                Exit Sub
+            Else
+
+
+                cheeseBcode = txtLotNumber.Text
+            End If
+
+        Catch ex As Exception
+
+            Label3.Visible = True
+            Label3.Text = "BarCcode Is Not Valid"
+            DelayTM()
+            Label3.Visible = False
+
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Focus()
+            Me.txtLotNumber.Refresh()
+            Exit Sub
+        End Try
+
+
+
+
+
+        LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' ")
+        If LRecordCount > 0 Then
+            'LOAD THE DATA FROM dB IN TO THE DATAGRID
+            frmDGV.DGVdata.DataSource = LDS.Tables(0)
+            frmDGV.DGVdata.Rows(0).Selected = True
+
+
+
+            If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("STDCHEESE").Value) Then  'check to see if cheese scanned has already been allocated
+                Label3.Visible = True
+                Label3.Text = "THIS CHEESE IS NOT A 'STD' CHEESE "
+                DelayTM()
+                Label3.Visible = False
+                quit = 1
+                frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                quit = 1
+
+                Me.txtLotNumber.Clear()
+                Me.txtLotNumber.Visible = True
+                Me.txtLotNumber.Focus()
+                Exit Sub
+            ElseIf frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value > 7 Then
+                Label3.Visible = True
+                Label3.Text = "THIS CHEESE IS ALREADY SET FOR RECHECK"
+                DelayTM()
+                Label3.Visible = False
+                quit = 1
+                frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                quit = 1
+
+                Me.txtLotNumber.Clear()
+                Me.txtLotNumber.Visible = True
+                Me.txtLotNumber.Focus()
+                Exit Sub
+            Else
+                Select Case txtGrade.Text
+                    Case "Round1"
+                        If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 1 Then
+                            Label3.Visible = True
+                            Label3.Text = "THIS CHEESE IS CANNOT BE USED"
+                            DelayTM()
+                            Label3.Visible = False
+                            quit = 1
+                            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                            quit = 1
+
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Visible = True
+                            Me.txtLotNumber.Focus()
+                            Exit Sub
+                        End If
+                    Case "Round2"
+                        If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 3 Then
+                            Label3.Visible = True
+                            Label3.Text = "THIS CHEESE IS CANNOT BE USED"
+                            DelayTM()
+                            Label3.Visible = False
+                            quit = 1
+                            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                            quit = 1
+
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Visible = True
+                            Me.txtLotNumber.Focus()
+                            Exit Sub
+                        End If
+                    Case "Round3"
+                        If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 5 Then
+                            Label3.Visible = True
+                            Label3.Text = "THIS CHEESE IS CANNOT BE USED"
+                            DelayTM()
+                            Label3.Visible = False
+                            quit = 1
+                            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                            quit = 1
+
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Visible = True
+                            Me.txtLotNumber.Focus()
+                            Exit Sub
+                        End If
+                    Case "STD"
+                        If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 7 Then
+                            Label3.Visible = True
+                            Label3.Text = "THIS CHEESE IS CANNOT BE USED"
+                            DelayTM()
+                            Label3.Visible = False
+                            quit = 1
+                            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                            quit = 1
+
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Visible = True
+                            Me.txtLotNumber.Focus()
+                            Exit Sub
+                        End If
+                End Select
+            End If
+        End If
+
+        'Extract requierd Informatiom
+        varProductCode = txtLotNumber.Text.Substring(2, 3)
+        year = txtLotNumber.Text.Substring(5, 2)
+        month = txtLotNumber.Text.Substring(7, 2)
+        doffingNum = txtLotNumber.Text.Substring(9, 3)
+        machineCode = txtLotNumber.Text.Substring(0, 2)
+
+
+
+        Select Case machineCode
+            Case 21
+                varMachineName = "11D1"        'Left Side
+            Case 22
+                varMachineName = "11D2"        'Right Side
+            Case 23
+                varMachineName = "12D1"        'Left Side
+            Case 24
+                varMachineName = "12D2"        'Right Side
+            Case 25
+                varMachineName = "21D1"        'Left Side
+            Case 26
+                varMachineName = "21D2"        'Right Side
+            Case 27
+                varMachineName = "22D1"        'Left Side
+            Case 28
+                varMachineName = "22D2"        'Right Side
+            Case 29
+                varMachineName = "Pilot"
+        End Select
+
+
+
+
+        'GET PRODUCT WEIGHT INFORMATION
+        LExecQuery("SELECT PRODNAME,PRODWEIGHT,WEIGHTCODE FROM PRODUCT WHERE PRNUM = '" & varProductCode & "'")
+
+        If LRecordCount > 0 Then
+            'LOAD THE DATA FROM dB IN TO THE DATAGRID
+            frmDGV.DGVdata.DataSource = LDS.Tables(0)
+            frmDGV.DGVdata.Rows(0).Selected = True
+
+            varProductName = frmDGV.DGVdata.Rows(0).Cells(0).Value.ToString
+            varProdWeight = frmDGV.DGVdata.Rows(0).Cells(1).Value.ToString
+            varweightcode = frmDGV.DGVdata.Rows(0).Cells(2).Value.ToString
+
+
+            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+
+        Else
+            Label3.Visible = True
+            Label3.Text = "PRODUCT NUMBER " & varProductCode & " THIS PRODUCT IS NOT IN THE PRODUCT LIST"
+            DelayTM()
+            Label3.Visible = False
+            quit = 1
+            Exit Sub
+
+        End If
+
+
+
+        Select Case txtGrade.Text
+            Case "Round1"
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 1 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' AND DOFFNUM = '" & doffingNum & "'")
+            Case "Round2"
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 3 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' AND DOFFNUM = '" & doffingNum & "'")
+            Case "Round3"
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 5 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' AND DOFFNUM = '" & doffingNum & "'")
+            Case "STD"
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 7 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' AND DOFFNUM = '" & doffingNum & "'")
+
+
+        End Select
+
+
+
+
+
+
+
+        If LRecordCount > 0 Then
+            'LOAD THE DATA FROM dB IN TO THE DATAGRID
+            frmDGV.DGVdata.DataSource = LDS.Tables(0)
+            frmDGV.DGVdata.Rows(0).Selected = True
+            Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
+
+            IsDBNull(frmDGV.DGVdata.Rows(0).Cells("BCODECONE").Value)
+
+            'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
+            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("BCODECONE"), ListSortDirection.Ascending)  'sorts On cone number
+
+
+
+
+
+            Else
+                Label3.Visible = True
+            Label3.Text = "NO GRADE " & "'" & txtGrade.Text & "'" & " CHEESES CAN BE FOUND"
+            DelayTM()
+            Label3.Visible = False
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Visible = True
+            quit = 1
+            Exit Sub
+
+        End If
+
+
+
+        Me.Hide()
+        If My.Settings.debugSet Then frmDGV.Show()
+
+
+        frmStdCreate.txtConeBcode.Clear()
+        frmStdCreate.txtConeBcode.Focus()
+        frmStdCreate.Show()
+
+        'frmB_AL_AD_W.txtConeBcode.Clear()
+        '    frmB_AL_AD_W.txtConeBcode.Focus()
+        '    frmB_AL_AD_W.Show()
+
+
+    End Sub
+
     Private Sub nonAPacking()
 
         'Check Barcode is a valid Chees number, it must be 15 characters and no "B" in it
@@ -993,7 +1285,7 @@ Public Class frmJobEntry
             Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
 
             If txtGrade.Text = "A" Then
-                'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
+                'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE by our own index
                 frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
             Else
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
@@ -1176,11 +1468,12 @@ Public Class frmJobEntry
 
                 If cartReport = 1 Then
                     cartReportSub()
-                ElseIf My.Settings.chkUseSort Or My.Settings.chkUseColour Or My.Settings.chkUsePack And txtGrade.Text = "A" Then
+                ElseIf My.Settings.chkUseSort And stdcheck = 0 Or My.Settings.chkUseColour Or My.Settings.chkUsePack And txtGrade.Text = "A" Then
                     prgContinue()
-
+                ElseIf My.Settings.chkUseSort And stdcheck Then
+                    STDCreate()
                 ElseIf My.Settings.chkUsePack And Not txtGrade.Text = "A" And Not txtLotNumber.Text = "" Then
-                    nonAPacking()
+                        nonAPacking()
 
                 End If
             End If
@@ -1351,4 +1644,40 @@ Public Class frmJobEntry
         txtOperator.Visible = True
         lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
+
+
+
+    Private Sub Round1ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Round1ToolStripMenuItem.Click
+        txtGrade.Text = Round1ToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan First Cheese on Cart"
+        stdcheck = 1
+    End Sub
+
+    Private Sub Round2ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Round2ToolStripMenuItem.Click
+        txtGrade.Text = Round2ToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan First Cheese on Cart"
+        stdcheck = 1
+    End Sub
+
+    Private Sub Round3ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Round3ToolStripMenuItem.Click
+        txtGrade.Text = Round3ToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan First Cheese on Cart"
+        stdcheck = 1
+    End Sub
+
+    Private Sub StdSheetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StdSheetToolStripMenuItem.Click
+        txtGrade.Text = StdSheetToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan First Cheese on Cart"
+        stdcheck = 1
+    End Sub
+
+
 End Class

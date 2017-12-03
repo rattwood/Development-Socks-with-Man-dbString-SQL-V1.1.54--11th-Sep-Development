@@ -260,8 +260,8 @@ Public Class frmPackCreateNew
                         createBarcode()
                         MyPakExcel.Cells(1, 4) = SheetCodeString
 
-                    Case "ReCheck"
-                        nfree = 9
+            Case "ReCheck"
+                nfree = 9
                         'Product Name
                         MyPakExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D5
                         'Product Code
@@ -274,9 +274,44 @@ Public Class frmPackCreateNew
                         MyPakExcel.Cells(42, 3) = frmJobEntry.txtOperator.Text      'D53
 
                         createBarcode()
-                        MyPakExcel.Cells(1, 3) = SheetCodeString
+                MyPakExcel.Cells(1, 3) = SheetCodeString
 
+            Case "Round1", "Round2", "Round3", "STD"
+                nfree = 9
+                'Product Name
+                MyPakExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D5
+                'Product Code
+                MyPakExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'G5
+                'DATE
+                MyPakExcel.Cells(4, 7) = Date.Now.ToString("dd MM yyyy")              'G4
+                'CHEESE WEIGHT
+                MyPakExcel.Cells(4, 5) = frmJobEntry.varProdWeight                   'E4
+                'PACKER NAME
+                MyPakExcel.Cells(42, 3) = frmJobEntry.txtOperator.Text      'D53
+                'Machine Number
+                MyPakExcel.Cells(4, 3) = frmJobEntry.varMachineName
+
+                Select Case frmJobEntry.txtGrade.Text
+                    Case "Round1"
+                        'Sheet Name
+                        MyPakExcel.Cells(2, 2) = "Compare STD 1"
+                    Case "Round2"
+                        'Sheet Name
+                        MyPakExcel.Cells(2, 2) = "Compare STD 2"
+                    Case "Round3"
+                        'Sheet Name
+                        MyPakExcel.Cells(2, 2) = "Compare STD 3"
+                    Case "STD"
+                        'Sheet Name
+                        MyPakExcel.Cells(2, 2) = "Compare STD"
                 End Select
+
+
+                createBarcode()
+                MyPakExcel.Cells(1, 3) = SheetCodeString
+
+
+        End Select
 
 
                 If boxCount = 0 Then boxCount = 1
@@ -329,8 +364,10 @@ Public Class frmPackCreateNew
                 Case "P15 AS", "P20 BS"
                     frmPackTodayUpdate.TodayUpdateBS_AS_20()
                 Case "ReCheck"
-                    frmPackTodayUpdate.todayUpdate_ReCheck()
-            End Select
+                frmPackTodayUpdate.todayUpdate_ReCheck()
+            Case "Round1", "Round2", "Round3", "STD"
+                frmPackTodayUpdate.todayUpdate_STD()
+        End Select
 
 
 
@@ -392,6 +429,14 @@ Public Class frmPackCreateNew
                 gradeTxt = "P20BS" 'P20 BS Grade
             Case "ReCheck"
                 gradeTxt = "RECHECK" 'ReCheck Grade
+            Case "Round1"
+                gradeTxt = "R1" 'ReCheck Grade
+            Case "Round2"
+                gradeTxt = "R2" 'ReCheck Grade
+            Case "Round3"
+                gradeTxt = "R3" 'ReCheck Grade
+            Case "STD"
+                gradeTxt = "STD" 'ReCheck Grade
         End Select
 
 
@@ -400,4 +445,7 @@ Public Class frmPackCreateNew
 
     End Sub
 
+    Private Sub frmPackCreateNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

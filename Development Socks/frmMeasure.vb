@@ -370,7 +370,7 @@
 
             Me.btnMeasure.Enabled = True
             frmCart1.coneCount = 1 + frmCart1.coneCount
-            frmCart1.endCount()
+            'frmCart1.endCount()
             'frmCart1.lblConeCount.Text = frmCart1.coneCount
             frmCart1.Show()
             Me.Close()

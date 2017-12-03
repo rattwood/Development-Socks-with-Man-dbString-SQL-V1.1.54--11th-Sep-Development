@@ -275,6 +275,11 @@ Public Class frmSortReCheck
 
     Private Sub UpdateConeVal()
 
+        If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("KNITMC").Value) Then comKnitMC.Text = frmDGV.DGVdata.Rows(0).Cells("KNITMC").Value Else comKnitMC.Text = ""
+        If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("KNITREF").Value) Then txtKnitRef.Text = frmDGV.DGVdata.Rows(0).Cells("KNITREF").Value Else txtKnitRef.Text = ""
+        If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("RECHKSTD").Value) Then comStdMC.Text = frmDGV.DGVdata.Rows(0).Cells("RECHKSTD").Value Else comStdMC.Text = ""
+        If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("RECHKSTDDOFF").Value) Then txtStdDoff.Text = frmDGV.DGVdata.Rows(0).Cells("RECHKSTDDOFF").Value Else txtStdDoff.Text = ""
+        If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("RECHKSTDSP").Value) Then txtStdSpNum.Text = frmDGV.DGVdata.Rows(0).Cells("RECHKSTDSP").Value Else txtStdSpNum.Text = ""
 
 
 

@@ -52,8 +52,8 @@ Public Class frmPrintCartReport
         Dim exP10Val = 0
         Dim exM50Val = 0
         Dim exP50Val = 0
-
-
+        Dim exSTDVal = 0
+        Dim STDFLAG As Integer = 0
 
         Dim savename As String
 
@@ -153,9 +153,29 @@ Public Class frmPrintCartReport
                 End If
             End If
 
+            If Not IsDBNull(DGVcartReport.Rows(dgvRW - 1).Cells(96).Value) Then
+                If DGVcartReport.Rows(dgvRW - 1).Cells(96).Value > "0" Then exSTDVal = DGVcartReport.Rows(dgvRW - 1).Cells("CONENUM").Value 'STD Cheese
+            End If
+            If exSTDVal > 0 Then
+                STDFLAG = 1
+                MyExcel.Cells(exNcRw, exNcCl).interior.color = Color.Orange
+                MyExcel.Cells(exNcRw, exNcCl) = exSTDVal
+                If exNcRw = 12 Then
+                    exNcCl = exNcCl + 1
+                    missCount = missCount + 1
+                    exNcRw = 9
+                Else
+                    exNcRw = exNcRw + 1
+                    missCount = missCount + 1
+                End If
+            End If
+
+
+
+
             'LINE TO GET WASTE CONES FOUND IN SORTING AND REPORT IN MISSING CONE SECTION
 
-            If DGVcartReport.Rows(dgvRW - 1).Cells(46).Value = True Then  'CHECK FOR WATE CONE CHECKED
+            If DGVcartReport.Rows(dgvRW - 1).Cells(46).Value = True And Not STDFLAG Then  'CHECK FOR WATE CONE CHECKED
                 exWasVal = DGVcartReport.Rows(dgvRW - 1).Cells(12).Value.ToString  'GET CONE NUMBER
 
                 If exWasVal > 0 Then
@@ -174,7 +194,7 @@ Public Class frmPrintCartReport
 
             'line to get row/colum dat from DatGridView for M30 and write to Excel Sheet 
             exM30Val = DGVcartReport.Rows(dgvRW - 1).Cells(19).Value
-            If exM30Val > 0 Then
+            If exM30Val > 0 And Not STDFLAG Then
                 MyExcel.Cells(exM30Rw, exM30Cl) = exM30Val
                 If DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = True Then MyExcel.Cells(exM30Rw, exM30Cl).interior.color = Color.LightSalmon
                 If exM30Rw = 22 Then   'Original value 17
@@ -189,7 +209,7 @@ Public Class frmPrintCartReport
 
             'line to get row/colum dat from DatGridView for P30 and write to Excel Sheet 
             exP30Val = DGVcartReport.Rows(dgvRW - 1).Cells(20).Value
-            If exP30Val > 0 Then
+            If exP30Val > 0 And Not STDFLAG Then
                 MyExcel.Cells(exP30Rw, exP30Cl) = exP30Val
                 If DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = True Then MyExcel.Cells(exP30Rw, exP30Cl).interior.color = Color.LightSalmon
                 If exP30Rw = 17 Then    'Original 22
@@ -203,18 +223,18 @@ Public Class frmPrintCartReport
             End If
 
             'line to get row/colum dat from DatGridView for AB (Barley) Or Defect Cones and write to Excel Sheet 
-            If DGVcartReport.Rows(dgvRW - 1).Cells(16).Value > 0 Then   'Barley
+            If DGVcartReport.Rows(dgvRW - 1).Cells(16).Value > 0 And Not STDFLAG Then   'Barley
                 exABVal = DGVcartReport.Rows(dgvRW - 1).Cells(6).Value
                 'ElseIf DGVcartReport.Rows(dgvRW - 1).Cells(49).Value = True Then 'GRADE B
                 'exABVal = DGVcartReport.Rows(dgvRW - 1).Cells(6).Value
-            ElseIf DGVcartReport.Rows(dgvRW - 1).Cells(21).Value > 0 Then  'M50
+            ElseIf DGVcartReport.Rows(dgvRW - 1).Cells(21).Value > 0 And Not STDFLAG Then  'M50
                 exABVal = DGVcartReport.Rows(dgvRW - 1).Cells(6).Value
-            ElseIf DGVcartReport.Rows(dgvRW - 1).Cells(22).Value > 0 Then  'P50
+            ElseIf DGVcartReport.Rows(dgvRW - 1).Cells(22).Value > 0 And Not STDFLAG Then  'P50
                 exABVal = DGVcartReport.Rows(dgvRW - 1).Cells(6).Value
             End If
 
 
-            If exABVal > 0 Then
+            If exABVal > 0 And Not STDFLAG Then
                 MyExcel.Cells(exABRw, exABCl) = exABVal
                 If DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = True Then MyExcel.Cells(exABRw, exABCl).interior.color = Color.LightSalmon
                 If exABRw = 27 Then
@@ -232,7 +252,7 @@ Public Class frmPrintCartReport
             'line to get row/colum dat from DatGridView for Waste (Dyefect) > 50 and write to Excel Sheet 
 
 
-            If DGVcartReport.Rows(dgvRW - 1).Cells(66).Value > 0 Then
+            If DGVcartReport.Rows(dgvRW - 1).Cells(66).Value > 0 And Not STDFLAG Then
                 exDfVal = DGVcartReport.Rows(dgvRW - 1).Cells(6).Value ' Colour Waste
 
             End If
@@ -240,7 +260,7 @@ Public Class frmPrintCartReport
 
 
 
-            If exDfVal > 0 Then
+            If exDfVal > 0 And Not STDFLAG Then
                 MyExcel.Cells(exDfRw, exDfCl) = exDfVal
                 If DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = True Then MyExcel.Cells(exDfRw, exDfCl).interior.color = Color.LightSalmon
                 If exDfRw = 32 Then
@@ -368,8 +388,8 @@ Public Class frmPrintCartReport
             exP50Val = 0
             exABVal = 0
             exDfVal = 0
-
-
+            STDFLAG = 0
+            exSTDVal = 0
 
 
         Next
