@@ -93,9 +93,9 @@ Public Class frmJobEntry
         If My.Settings.chkUsePack Then btnSearchCone.Visible = False Else btnSearchCone.Visible = True
 
 
-        If My.Settings.chkUsePack Then lblSelectGrade.Visible = True Else lblSelectGrade.Visible = False
-        If My.Settings.chkUsePack Then lblGrade.Visible = True Else lblGrade.Visible = False
-        If My.Settings.chkUsePack Then txtGrade.Visible = True Else txtGrade.Visible = False
+        If My.Settings.chkUsePack Or My.Settings.chkUseSort Then lblSelectGrade.Visible = True Else lblSelectGrade.Visible = False
+        If My.Settings.chkUsePack Or My.Settings.chkUseSort Then lblGrade.Visible = True Else lblGrade.Visible = False
+        If My.Settings.chkUsePack Or My.Settings.chkUseSort Then txtGrade.Visible = True Else txtGrade.Visible = False
 
         If My.Settings.chkUseSort Or My.Settings.chkUsePack Then PrintFormsToolStripMenuItem.Visible = True Else PrintFormsToolStripMenuItem.Visible = False
 
@@ -116,7 +116,7 @@ Public Class frmJobEntry
         'Set Form Header text
         If My.Settings.chkUseSort Then
             Me.Text = "Job Entry Sorting"
-            txtOperator.Visible = True
+            txtOperator.Visible = False
         End If
         If My.Settings.chkUseColour Then
             Me.Text = "Job Entry Colour"
@@ -190,26 +190,39 @@ Public Class frmJobEntry
         Dim chkBCode As String
         Dim chkBCode2 As String
         'Routine to check Barcode is TRUE
-        Try
+
+        'Check to see if PILOT Cheese, if it is force operatoer to select correct packing grade.
+        If My.Settings.chkUsePack = True And txtLotNumber.Text.Substring(0, 2) = "29" Then
+            If txtGrade.Text.Substring(0, 5) <> "Pilot" Then
+                MsgBox("This is a PILOT Machine job Please select correct" & vbCrLf & "Packing grade from Menu and Try Again")
+                txtLotNumber.Clear()
+                txtLotNumber.Focus()
+                Exit Sub
+            End If
+        End If
+
+
+            Try
 
             chkBCode = txtLotNumber.Text.Substring(9, 1)
-            chkBCode2 = txtLotNumber.Text.Substring(9, 3)
+                chkBCode2 = txtLotNumber.Text.Substring(9, 3)
 
 
 
             If chkBCode2 = "R11" Or chkBCode2 = "R12" Or chkBCode2 = "R21" Or chkBCode2 = "R31" Or chkBCode2 = "STD" Then  ' we must check this way first otherwise we will always get R and use recheck
+                reCheck = 0
                 stdcheck = 1
                 dbBarcode = txtLotNumber.Text
             ElseIf chkBCode = "R" Then
-
+                stdcheck = 0
                 reCheck = 1
-
                 dbBarcode = txtLotNumber.Text
-
-            Else
+                MsgBox(txtLotNumber.Text.Substring(12, 1))
+            ElseIf txtLotNumber.Text.Substring(12, 1) = "B" Then
                 chkBCode = txtLotNumber.Text.Substring(12, 1)
-
-                If chkBCode = "B" Then
+                '
+                ' If chkBCode = "B" Then
+                stdcheck = 0
                     reCheck = 0
                     If txtLotNumber.TextLength > 14 Then  ' For carts B10,11 & 12
                         cartNum = txtLotNumber.Text.Substring(12, 3)
@@ -224,7 +237,7 @@ Public Class frmJobEntry
                     Me.txtLotNumber.Refresh()
                     Exit Sub
                 End If
-            End If
+
         Catch ex As Exception
                 MsgBox("BarCcode Is Not Valid")
                 Me.txtLotNumber.Clear()
@@ -1679,5 +1692,10 @@ Public Class frmJobEntry
         stdcheck = 1
     End Sub
 
-
+    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
+        txtGrade.Text = ToolStripMenuItem1.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan Job Sheet"
+    End Sub
 End Class

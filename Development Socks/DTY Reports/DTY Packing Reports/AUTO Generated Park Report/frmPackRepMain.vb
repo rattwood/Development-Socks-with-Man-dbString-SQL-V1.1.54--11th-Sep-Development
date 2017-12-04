@@ -77,6 +77,13 @@ Public Class frmPackRepMain
                 template = (My.Settings.dirTemplate & "\" & "Recheck Template.xlsx").ToString
             Case "Round1", "Round2", "Round3", "STD" 'FORM FOR STANDARd COMPARE FROM SORT
                 template = (My.Settings.dirTemplate & "\" & "STDCompare Template.xlsx").ToString
+            Case "Pilot 6Ch"
+                template = (My.Settings.dirTemplate & "\" & "PILOT 6Ch..xlsx").ToString
+            Case "Pilot 15Ch"
+                template = (My.Settings.dirTemplate & "\" & "PILOT 15Ch..xlsx").ToString
+            Case "Pilot 20Ch"
+                template = (My.Settings.dirTemplate & "\" & "PILOT 20Ch..xlsx").ToString
+
         End Select
 
 
@@ -114,9 +121,15 @@ Public Class frmPackRepMain
                     frmPackTodayUpdate.todayUpdate_ReCheck()
                 Case "Round1", "Round2", "Round3", "STD" 'FORM FOR STANDARE COMPARE FROM SORT
                     frmPackTodayUpdate.todayUpdate_STD()
+                Case "Pilot Ch6"
+                    frmPackTodayUpdate.todayUpdate_pilot6()
+                Case "Pilot Ch15"
+                    frmPackTodayUpdate.todayUpdate_pilot15()
+                Case "Pilot Ch20"
+                    frmPackTodayUpdate.todayUpdate_pilot20()
+
             End Select
 
-            'frmPackTodayUpdate.TodayUpdate()
             frmPackTodayUpdate.Close()
             Exit Sub
 

@@ -102,7 +102,63 @@ Public Class frmPackPrvGet
                         Exit For
                     End If
                 Next
+            Case "Pilot Ch6"
+                For rcount = 12 To 102
+                    If MyPrevExcel.Cells(rcount, 4).Value > 0 Then
+                        Continue For
+                    Else
+                        nfree = rcount
+                        Exit For
+                    End If
+                Next
+            Case "Pilot Ch15"
+                'WE NEED TO CHECK ROW D13 TO D64, THEN H13 TO H64 THEN L13 TO L64
+                Dim colCount As Integer = 4
 
+                For ccount = 1 To 4
+                    If ccount < 4 Then
+                        For rcount = 12 To 71
+                            If MyPrevExcel.Cells(rcount, colCount).Value > 0 Then  'C9-C40
+                                Continue For
+                            Else
+                                nfree = rcount
+                                ncfree = colCount
+                                Exit For
+                            End If
+                        Next
+                    Else
+                        For rcount = 12 To 56
+                            If MyPrevExcel.Cells(rcount, colCount).Value > 0 Then  'C9-C40
+                                Continue For
+                            Else
+                                nfree = rcount
+                                ncfree = colCount
+                                Exit For
+                            End If
+                        Next
+                    End If
+
+                    If colCount < 16 Then colCount = colCount + 4
+                Next
+            Case "Pilot Ch20"
+                'WE NEED TO CHECK ROW D13 TO D64, THEN H13 TO H64 THEN L13 TO L64
+                Dim colCount As Integer = 5
+
+                For ccount = 1 To 5
+
+                    For rcount = 12 To 71
+                            If MyPrevExcel.Cells(rcount, colCount).Value > 0 Then  'C9-C40
+                                Continue For
+                            Else
+                                nfree = rcount
+                                ncfree = colCount
+                                Exit For
+                            End If
+                        Next
+
+
+                    If colCount < 20 Then colCount = colCount + 4
+                Next
         End Select
 
 

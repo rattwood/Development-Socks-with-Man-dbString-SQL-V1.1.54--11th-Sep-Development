@@ -309,6 +309,33 @@ Public Class frmPackCreateNew
 
                 createBarcode()
                 MyPakExcel.Cells(1, 3) = SheetCodeString
+            Case "Pilot 6Ch"
+                nfree = 13
+                'Product Name
+                MyPakExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D7
+                'Product Code
+                MyPakExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells(2).Value        'F7
+                'DATE
+                MyPakExcel.Cells(5, 3) = Date.Now.ToString("dd MM yyyy")              'C5
+                'CHEESE WEIGHT
+                MyPakExcel.Cells(13, 6) = frmJobEntry.varProdWeight                   'E13
+                'Barcode In
+                MyPakExcel.Cells(61, 14) = frmJobEntry.PackOp
+
+                createBarcode()
+                MyPakExcel.Cells(1, 3) = SheetCodeString
+
+                'THIS IS USED TO WRITE DATE IN TO USED ROWS
+                If frmPackPrvGet.nfree > 0 Then
+                    nfree = frmPackPrvGet.nfree
+                    For usedrow = 13 To nfree - 1
+                        MyPakExcel.Cells(usedrow, 4) = frmPackRepMain.prevDays
+                    Next
+
+                End If
+            Case "Pilot Ch15"
+                frmPackTodayUpdate.todayUpdate_pilot15()
+            Case "Pilot Ch20"
 
 
         End Select
@@ -367,6 +394,13 @@ Public Class frmPackCreateNew
                 frmPackTodayUpdate.todayUpdate_ReCheck()
             Case "Round1", "Round2", "Round3", "STD"
                 frmPackTodayUpdate.todayUpdate_STD()
+            Case "Pilot Ch6"
+                frmPackTodayUpdate.todayUpdate_pilot6()
+            Case "Pilot Ch15"
+                frmPackTodayUpdate.todayUpdate_pilot15()
+            Case "Pilot Ch20"
+                frmPackTodayUpdate.todayUpdate_pilot20()
+
         End Select
 
 
@@ -437,6 +471,13 @@ Public Class frmPackCreateNew
                 gradeTxt = "R3" 'ReCheck Grade
             Case "STD"
                 gradeTxt = "STD" 'ReCheck Grade
+            Case "Pilot Ch6"
+                gradeTxt = "P06" 'A Grade 6 Cheese per box
+            Case "Pilot Ch15"
+                gradeTxt = "P15" 'A Grade 15 Cheese per box
+            Case "Pilot Ch20"
+                gradeTxt = "P20" 'A Grade 20 Cheese per box
+
         End Select
 
 
@@ -445,7 +486,5 @@ Public Class frmPackCreateNew
 
     End Sub
 
-    Private Sub frmPackCreateNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-    End Sub
 End Class

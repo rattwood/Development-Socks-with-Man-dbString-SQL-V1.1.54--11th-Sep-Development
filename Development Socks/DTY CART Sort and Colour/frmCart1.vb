@@ -1492,7 +1492,7 @@ Public Class frmCart1
                     End If
 
 
-                    If IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value) Or frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value = 0 Then
+                    If IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value) Then
                         If cl = 10 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
                             frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"
                             Continue For
