@@ -310,6 +310,7 @@ Public Class frmPackCreateNew
                 createBarcode()
                 MyPakExcel.Cells(1, 3) = SheetCodeString
             Case "Pilot 6Ch"
+
                 nfree = 13
                 'Product Name
                 MyPakExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D7
@@ -333,9 +334,35 @@ Public Class frmPackCreateNew
                     Next
 
                 End If
-            Case "Pilot Ch15"
-                frmPackTodayUpdate.todayUpdate_pilot15()
-            Case "Pilot Ch20"
+            Case "Pilot 15Ch"
+                'Product Name
+                MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value
+                'Product Code
+                MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value
+                'Packer Name
+                MyPakExcel.Cells(73, 4) = frmJobEntry.PackOp
+                'DATE
+                MyPakExcel.Cells(4, 4) = Date.Now.ToString("dd MM yyyy")
+                'CHEESE WEIGHT
+                MyPakExcel.Cells(12, 5) = frmJobEntry.varProdWeight
+                'Add Barcode to Sheet
+                createBarcode()
+                MyPakExcel.Cells(1, 4) = SheetCodeString
+
+            Case "Pilot 20Ch"
+                'Product Name
+                MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value
+                'Product Code
+                MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value
+                'Packer Name
+                MyPakExcel.Cells(73, 4) = frmJobEntry.PackOp
+                'DATE
+                MyPakExcel.Cells(4, 4) = Date.Now.ToString("dd MM yyyy")
+                'CHEESE WEIGHT
+                MyPakExcel.Cells(12, 5) = frmJobEntry.varProdWeight
+                'Add Barcode to Sheet
+                createBarcode()
+                MyPakExcel.Cells(1, 4) = SheetCodeString
 
 
         End Select
@@ -394,11 +421,11 @@ Public Class frmPackCreateNew
                 frmPackTodayUpdate.todayUpdate_ReCheck()
             Case "Round1", "Round2", "Round3", "STD"
                 frmPackTodayUpdate.todayUpdate_STD()
-            Case "Pilot Ch6"
+            Case "Pilot 6Ch"
                 frmPackTodayUpdate.todayUpdate_pilot6()
-            Case "Pilot Ch15"
+            Case "Pilot 15Ch"
                 frmPackTodayUpdate.todayUpdate_pilot15()
-            Case "Pilot Ch20"
+            Case "Pilot 20Ch"
                 frmPackTodayUpdate.todayUpdate_pilot20()
 
         End Select
@@ -471,12 +498,12 @@ Public Class frmPackCreateNew
                 gradeTxt = "R3" 'ReCheck Grade
             Case "STD"
                 gradeTxt = "STD" 'ReCheck Grade
-            Case "Pilot Ch6"
-                gradeTxt = "P06" 'A Grade 6 Cheese per box
-            Case "Pilot Ch15"
-                gradeTxt = "P15" 'A Grade 15 Cheese per box
-            Case "Pilot Ch20"
-                gradeTxt = "P20" 'A Grade 20 Cheese per box
+            Case "Pilot 6Ch"
+                gradeTxt = "PI06" 'A Grade 6 Cheese per box
+            Case "Pilot 15Ch"
+                gradeTxt = "PI15" 'A Grade 15 Cheese per box
+            Case "Pilot 20Ch"
+                gradeTxt = "PI20" 'A Grade 20 Cheese per box
 
         End Select
 
@@ -486,5 +513,7 @@ Public Class frmPackCreateNew
 
     End Sub
 
+    Private Sub frmPackCreateNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
 End Class

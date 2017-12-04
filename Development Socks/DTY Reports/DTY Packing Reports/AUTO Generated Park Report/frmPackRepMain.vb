@@ -121,11 +121,11 @@ Public Class frmPackRepMain
                     frmPackTodayUpdate.todayUpdate_ReCheck()
                 Case "Round1", "Round2", "Round3", "STD" 'FORM FOR STANDARE COMPARE FROM SORT
                     frmPackTodayUpdate.todayUpdate_STD()
-                Case "Pilot Ch6"
+                Case "Pilot 6Ch"
                     frmPackTodayUpdate.todayUpdate_pilot6()
-                Case "Pilot Ch15"
+                Case "Pilot 15Ch"
                     frmPackTodayUpdate.todayUpdate_pilot15()
-                Case "Pilot Ch20"
+                Case "Pilot 20Ch"
                     frmPackTodayUpdate.todayUpdate_pilot20()
 
             End Select

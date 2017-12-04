@@ -102,8 +102,8 @@ Public Class frmPackPrvGet
                         Exit For
                     End If
                 Next
-            Case "Pilot Ch6"
-                For rcount = 12 To 102
+            Case "Pilot 6Ch"
+                For rcount = 13 To 102
                     If MyPrevExcel.Cells(rcount, 4).Value > 0 Then
                         Continue For
                     Else
@@ -111,7 +111,7 @@ Public Class frmPackPrvGet
                         Exit For
                     End If
                 Next
-            Case "Pilot Ch15"
+            Case "Pilot 15Ch"
                 'WE NEED TO CHECK ROW D13 TO D64, THEN H13 TO H64 THEN L13 TO L64
                 Dim colCount As Integer = 4
 
@@ -140,7 +140,7 @@ Public Class frmPackPrvGet
 
                     If colCount < 16 Then colCount = colCount + 4
                 Next
-            Case "Pilot Ch20"
+            Case "Pilot 20Ch"
                 'WE NEED TO CHECK ROW D13 TO D64, THEN H13 TO H64 THEN L13 TO L64
                 Dim colCount As Integer = 5
 

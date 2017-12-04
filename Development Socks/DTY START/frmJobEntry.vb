@@ -193,7 +193,7 @@ Public Class frmJobEntry
 
         'Check to see if PILOT Cheese, if it is force operatoer to select correct packing grade.
         If My.Settings.chkUsePack = True And txtLotNumber.Text.Substring(0, 2) = "29" Then
-            If txtGrade.Text.Substring(0, 5) <> "Pilot" Then
+            If txtGrade.Text.Substring(0, 1) = "" Or txtGrade.Text.Substring(0, 5) <> "Pilot" Then
                 MsgBox("This is a PILOT Machine job Please select correct" & vbCrLf & "Packing grade from Menu and Try Again")
                 txtLotNumber.Clear()
                 txtLotNumber.Focus()
@@ -726,11 +726,11 @@ Public Class frmJobEntry
 
         For i As Integer = coneNumStart To coneNumStop
 
-            If x <= 16 Then cartName = varCartNameA Else cartName = varCartNameB  'SETS CORRECT CART NUMBER
+            If x <= 16 Then cartName= varCartNameA Else cartName= varCartNameB  'SETS CORRECT CART NUMBER
 
             x = x + 1
-            modConeNum = i.ToString(fmt)   'FORMATS THE CONE NUMBER TO 3 DIGITS
-            coneBarcode = modLotStr & modConeNum   'CREATE THE CONE BARCODE NUMBER
+            modConeNum = i.ToString(fmt)   ' FORMATS THE CONE NUMBER TO 3 DIGITS
+            coneBarcode= modLotStr & modConeNum   'CREATE THE CONE BARCODE NUMBER
             JobBarcode = modLotStr
 
 
@@ -740,9 +740,9 @@ Public Class frmJobEntry
                & "MCNAME, PRODNAME, BCODEJOB,OPPACKSORT,OPPACK,OPSORT,PSORTERROR,WEIGHTERROR,WEIGHT,CARTONNUM,SORTERROR,COLOURERROR,DYEFLECK," _
                & "COLDEF, COLWASTE, FLT_DO, FLT_DH, FLT_CL, FLT_FI, FLT_YN, FLT_HT, FLT_LT, CONEAD, CONEAL) " _
               & "VALUES ('" & varMachineCode & "', '" & varProductCode & "','" & varYear & "','" & varMonth & "','" & varDoffingNum & "','" & modConeNum & "'," _
-              & "'" & mergeNum & "',  ' ', '0', '0', '0', '0', '" & varCartSelect & "','" & cartName & "', '0', '0', '0', '0', '0', '0', '0', '0','" & today & "','" & dbBarcode & "','" & coneBarcode & "'," _
-             & "'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', '" & varMachineName & "','" & varProductName & "', '" & JobBarcode & "'," _
-             & "'0','0','0','0','0','0','0','0','0','0','0','0','False','False','False','False','False','False','False','0','0')")
+              & "'" & mergeNum & "',  ' ', ' 0', ' 0', ' 0', ' 0', '" & varCartSelect & "','" & cartName & "', ' 0', ' 0', ' 0', ' 0', ' 0', ' 0', ' 0', ' 0','" & today & "','" & dbBarcode & "','" & coneBarcode & "'," _
+             & "' False', ' False', ' False', ' False', ' False', ' False', ' False', ' False', ' False', ' False', ' False', ' False', ' False', ' False', '" & varMachineName & "','" & varProductName & "', '" & JobBarcode & "'," _
+             & "' 0',' 0',' 0',' 0',' 0',' 0',' 0',' 0',' 0',' 0',' 0',' 0',' False',' False',' False',' False',' False',' False',' False',' 0',' 0')")
 
 
         Next
@@ -756,7 +756,7 @@ Public Class frmJobEntry
                 LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
                 frmDGV.DGVdata.DataSource = LDS.Tables(0)
                 frmDGV.DGVdata.Rows(0).Selected = True
-                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
+                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  ' sorts On cone number
                 frmCart1.Show()
 
                 If My.Settings.debugSet Then frmDGV.Show()
@@ -1481,7 +1481,9 @@ Public Class frmJobEntry
 
                 If cartReport = 1 Then
                     cartReportSub()
-                ElseIf My.Settings.chkUseSort And stdcheck = 0 Or My.Settings.chkUseColour Or My.Settings.chkUsePack And txtGrade.Text = "A" Then
+                ElseIf My.Settings.chkUseSort And stdcheck = 0 Or My.Settings.chkUseColour Then
+                    prgContinue()
+                ElseIf My.Settings.chkUsePack And txtGrade.Text.Substring(0, 1) = "A" Or My.Settings.chkUsePack And txtGrade.Text.Substring(0, 1) = "P" Then
                     prgContinue()
                 ElseIf My.Settings.chkUseSort And stdcheck Then
                     STDCreate()
@@ -1698,4 +1700,27 @@ Public Class frmJobEntry
         txtOperator.Visible = True
         lblScanType.Text = "Scan Job Sheet"
     End Sub
+
+    Private Sub Pilot6ChToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Pilot6ChToolStripMenuItem.Click
+        txtGrade.Text = Pilot6ChToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan Job Sheet"
+    End Sub
+
+    Private Sub Pilot15ChToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Pilot15ChToolStripMenuItem.Click
+        txtGrade.Text = Pilot15ChToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan Job Sheet"
+    End Sub
+
+    Private Sub Pilot20ChToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Pilot20ChToolStripMenuItem.Click
+        txtGrade.Text = Pilot20ChToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan Job Sheet"
+    End Sub
+
+
 End Class

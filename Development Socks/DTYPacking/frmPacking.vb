@@ -227,12 +227,13 @@ Public Class frmPacking
                 curcone = frmDGV.DGVdata.Rows(i - 1).Cells(6).Value
                 Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.LightGreen       'Grade A Cone
                 frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "15"
-                frmDGV.DGVdata.Rows(i - 1).Cells(55).Value = frmJobEntry.PackOp
-                frmDGV.DGVdata.Rows(i - 1).Cells(8).Value = frmJobEntry.varUserName
-                frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
+                frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
+                frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.varUserName
+                frmDGV.DGVdata.Rows(i - 1).Cells("CARTENDTM").Value = today
+
 
                 'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
-                If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
+                If IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
                     If My.Settings.chkUsePack = True Then frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Today  'PACKING CHECK END TIME.
                 End If
 

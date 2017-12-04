@@ -66,7 +66,7 @@ Public Class frmPrintCartReport
         Dim saveString As String
         Dim sp_nums As String
 
-        saveString = DGVcartReport.Rows(0).Cells(53).Value.ToString  'gets the BCODEJOB Value
+        saveString = DGVcartReport.Rows(0).Cells("BCODEJOB").Value.ToString  'gets the BCODEJOB Value
 
         savename = (My.Settings.dirCarts & "\" & saveString & ".xlsx").ToString
 
@@ -96,9 +96,9 @@ Public Class frmPrintCartReport
         ' MyExcel.Visible = True
 
 
-        If DGVcartReport.Rows(0).Cells(1).Value = 21 Or DGVcartReport.Rows(0).Cells(1).Value = 23 Or DGVcartReport.Rows(0).Cells(1).Value = 25 Or DGVcartReport.Rows(0).Cells(1).Value = 27 Then sp_nums = "1 - 192"
-        If DGVcartReport.Rows(0).Cells(1).Value = 22 Or DGVcartReport.Rows(0).Cells(1).Value = 24 Or DGVcartReport.Rows(0).Cells(1).Value = 26 Or DGVcartReport.Rows(0).Cells(1).Value = 28 Then sp_nums = "193 - 384"
-        If DGVcartReport.Rows(0).Cells(1).Value = 29 Then sp_nums = "1 - 32"
+        If DGVcartReport.Rows(0).Cells("MCNUM").Value = 21 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 23 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 25 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 27 Then sp_nums = "1 - 192"
+        If DGVcartReport.Rows(0).Cells("MCNUM").Value = 22 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 24 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 26 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 28 Then sp_nums = "193 - 384"
+        If DGVcartReport.Rows(0).Cells("MCNUM").Value = 29 Then sp_nums = "1 - 32"
 
 
 
@@ -110,14 +110,14 @@ Public Class frmPrintCartReport
         'Date and Time
         MyExcel.Cells(3, 18) = DateAndTime.Now.ToString("dd MM yyy")
         'MachineName
-        MyExcel.Cells(4, 2) = DGVcartReport.Rows(0).Cells(51).Value
+        MyExcel.Cells(4, 2) = DGVcartReport.Rows(0).Cells("MCNAME").Value
         'ProductName
-        MyExcel.Cells(4, 5) = DGVcartReport.Rows(0).Cells(52).Value
+        MyExcel.Cells(4, 5) = DGVcartReport.Rows(0).Cells("PRODNAME").Value
         'MERGE #
-        MyExcel.Cells(4, 9) = DGVcartReport.Rows(0).Cells(7).Value
+        MyExcel.Cells(4, 9) = DGVcartReport.Rows(0).Cells("MERGENUM").Value
 
         'DoffingNum
-        MyExcel.Cells(4, 12) = DGVcartReport.Rows(0).Cells(5).Value
+        MyExcel.Cells(4, 12) = DGVcartReport.Rows(0).Cells("DOFFNUM").Value
         'sp_nums RANGE
         'sp_nums = ((DGVcartReport.Rows(0).Cells(6).Value) & "-" & DGVcartReport.Rows(191).Cells(6).Value)
         MyExcel.Cells(4, 15) = sp_nums
@@ -139,7 +139,7 @@ Public Class frmPrintCartReport
             'Routine for Spindles
 
             'line to get row/colum dat from DatGridView for NoCone and write to Excel Sheet 
-            exNcVal = DGVcartReport.Rows(dgvRW - 1).Cells(11).Value  'Missing Cheese
+            exNcVal = DGVcartReport.Rows(dgvRW - 1).Cells("MISSCONE").Value  'Missing Cheese
 
             If exNcVal > 0 Then
                 MyExcel.Cells(exNcRw, exNcCl) = exNcVal
@@ -153,8 +153,8 @@ Public Class frmPrintCartReport
                 End If
             End If
 
-            If Not IsDBNull(DGVcartReport.Rows(dgvRW - 1).Cells(96).Value) Then
-                If DGVcartReport.Rows(dgvRW - 1).Cells(96).Value > "0" Then exSTDVal = DGVcartReport.Rows(dgvRW - 1).Cells("CONENUM").Value 'STD Cheese
+            If Not IsDBNull(DGVcartReport.Rows(dgvRW - 1).Cells("STDSTATE").Value) Then
+                If DGVcartReport.Rows(dgvRW - 1).Cells("STDSTATE").Value > "0" Then exSTDVal = DGVcartReport.Rows(dgvRW - 1).Cells("CONENUM").Value 'STD Cheese
             End If
             If exSTDVal > 0 Then
                 STDFLAG = 1
@@ -175,8 +175,8 @@ Public Class frmPrintCartReport
 
             'LINE TO GET WASTE CONES FOUND IN SORTING AND REPORT IN MISSING CONE SECTION
 
-            If DGVcartReport.Rows(dgvRW - 1).Cells(46).Value = True And Not STDFLAG Then  'CHECK FOR WATE CONE CHECKED
-                exWasVal = DGVcartReport.Rows(dgvRW - 1).Cells(12).Value.ToString  'GET CONE NUMBER
+            If DGVcartReport.Rows(dgvRW - 1).Cells("FLT_W").Value = True And Not STDFLAG Then  'CHECK FOR WASTE CONE CHECKED
+                exWasVal = DGVcartReport.Rows(dgvRW - 1).Cells("CONENUM").Value.ToString  'GET CONE NUMBER
 
                 If exWasVal > 0 Then
                     MyExcel.Cells(exNcRw, exNcCl) = (exWasVal & "W")
@@ -193,10 +193,10 @@ Public Class frmPrintCartReport
 
 
             'line to get row/colum dat from DatGridView for M30 and write to Excel Sheet 
-            exM30Val = DGVcartReport.Rows(dgvRW - 1).Cells(19).Value
+            exM30Val = DGVcartReport.Rows(dgvRW - 1).Cells("M30").Value
             If exM30Val > 0 And Not STDFLAG Then
                 MyExcel.Cells(exM30Rw, exM30Cl) = exM30Val
-                If DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = True Then MyExcel.Cells(exM30Rw, exM30Cl).interior.color = Color.LightSalmon
+                If DGVcartReport.Rows(dgvRW - 1).Cells("FLT_S").Value = True Then MyExcel.Cells(exM30Rw, exM30Cl).interior.color = Color.LightSalmon
                 If exM30Rw = 22 Then   'Original value 17
                     exM30Cl = exM30Cl + 1
                     JudCount = JudCount + 1
@@ -208,10 +208,10 @@ Public Class frmPrintCartReport
             End If
 
             'line to get row/colum dat from DatGridView for P30 and write to Excel Sheet 
-            exP30Val = DGVcartReport.Rows(dgvRW - 1).Cells(20).Value
+            exP30Val = DGVcartReport.Rows(dgvRW - 1).Cells("P30").Value
             If exP30Val > 0 And Not STDFLAG Then
                 MyExcel.Cells(exP30Rw, exP30Cl) = exP30Val
-                If DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = True Then MyExcel.Cells(exP30Rw, exP30Cl).interior.color = Color.LightSalmon
+                If DGVcartReport.Rows(dgvRW - 1).Cells("FLT_S").Value = True Then MyExcel.Cells(exP30Rw, exP30Cl).interior.color = Color.LightSalmon
                 If exP30Rw = 17 Then    'Original 22
                     exP30Cl = exP30Cl + 1
                     JudCount = JudCount + 1
@@ -223,20 +223,20 @@ Public Class frmPrintCartReport
             End If
 
             'line to get row/colum dat from DatGridView for AB (Barley) Or Defect Cones and write to Excel Sheet 
-            If DGVcartReport.Rows(dgvRW - 1).Cells(16).Value > 0 And Not STDFLAG Then   'Barley
+            If DGVcartReport.Rows(dgvRW - 1).Cells("CONEBARLEY").Value > 0 And Not STDFLAG Then   'Barley
                 exABVal = DGVcartReport.Rows(dgvRW - 1).Cells(6).Value
                 'ElseIf DGVcartReport.Rows(dgvRW - 1).Cells(49).Value = True Then 'GRADE B
                 'exABVal = DGVcartReport.Rows(dgvRW - 1).Cells(6).Value
-            ElseIf DGVcartReport.Rows(dgvRW - 1).Cells(21).Value > 0 And Not STDFLAG Then  'M50
+            ElseIf DGVcartReport.Rows(dgvRW - 1).Cells("M50").Value > 0 And Not STDFLAG Then  'M50
                 exABVal = DGVcartReport.Rows(dgvRW - 1).Cells(6).Value
-            ElseIf DGVcartReport.Rows(dgvRW - 1).Cells(22).Value > 0 And Not STDFLAG Then  'P50
+            ElseIf DGVcartReport.Rows(dgvRW - 1).Cells("P50").Value > 0 And Not STDFLAG Then  'P50
                 exABVal = DGVcartReport.Rows(dgvRW - 1).Cells(6).Value
             End If
 
 
             If exABVal > 0 And Not STDFLAG Then
                 MyExcel.Cells(exABRw, exABCl) = exABVal
-                If DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = True Then MyExcel.Cells(exABRw, exABCl).interior.color = Color.LightSalmon
+                If DGVcartReport.Rows(dgvRW - 1).Cells("FLT_S").Value = True Then MyExcel.Cells(exABRw, exABCl).interior.color = Color.LightSalmon
                 If exABRw = 27 Then
                     exABCl = exABCl + 1
                     JudCount = JudCount + 1
@@ -252,8 +252,8 @@ Public Class frmPrintCartReport
             'line to get row/colum dat from DatGridView for Waste (Dyefect) > 50 and write to Excel Sheet 
 
 
-            If DGVcartReport.Rows(dgvRW - 1).Cells(66).Value > 0 And Not STDFLAG Then
-                exDfVal = DGVcartReport.Rows(dgvRW - 1).Cells(6).Value ' Colour Waste
+            If DGVcartReport.Rows(dgvRW - 1).Cells("COLWASTE").Value > 0 And Not STDFLAG Then
+                exDfVal = DGVcartReport.Rows(dgvRW - 1).Cells("CONENUM").Value ' Colour Waste
 
             End If
 
@@ -262,7 +262,7 @@ Public Class frmPrintCartReport
 
             If exDfVal > 0 And Not STDFLAG Then
                 MyExcel.Cells(exDfRw, exDfCl) = exDfVal
-                If DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = True Then MyExcel.Cells(exDfRw, exDfCl).interior.color = Color.LightSalmon
+                If DGVcartReport.Rows(dgvRW - 1).Cells("FLT_S").Value = True Then MyExcel.Cells(exDfRw, exDfCl).interior.color = Color.LightSalmon
                 If exDfRw = 32 Then
                     exDfCl = exDfCl + 1
                     JudCount = JudCount + 1
@@ -351,27 +351,27 @@ Public Class frmPrintCartReport
             'End If
 
             'COUNT GRADE A CONES
-            If DGVcartReport.Rows(dgvRW - 1).Cells(9).Value = 9 And DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = False Or
-                    DGVcartReport.Rows(dgvRW - 1).Cells(9).Value = 15 And DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = False Then gradeACount = gradeACount + 1
+            If DGVcartReport.Rows(dgvRW - 1).Cells("CONESTATE").Value = 9 And DGVcartReport.Rows(dgvRW - 1).Cells("FLT_S").Value = False Or
+                    DGVcartReport.Rows(dgvRW - 1).Cells("CONESTATE").Value = 15 And DGVcartReport.Rows(dgvRW - 1).Cells("FLT_S").Value = False Then gradeACount = gradeACount + 1
             'COUNT GRADE AS CONES
-            If DGVcartReport.Rows(dgvRW - 1).Cells(9).Value = 9 And DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = True Or
-                DGVcartReport.Rows(dgvRW - 1).Cells(9).Value = 15 And DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = True Then gradeASCount = gradeASCount + 1
+            If DGVcartReport.Rows(dgvRW - 1).Cells("CONESTATE").Value = 9 And DGVcartReport.Rows(dgvRW - 1).Cells("FLT_S").Value = True Or
+                DGVcartReport.Rows(dgvRW - 1).Cells("CONESTATE").Value = 15 And DGVcartReport.Rows(dgvRW - 1).Cells("FLT_S").Value = True Then gradeASCount = gradeASCount + 1
 
 
 
             'COUNT SORT DEFECT CONES
-            If DGVcartReport.Rows(dgvRW - 1).Cells(12).Value > 0 And DGVcartReport.Rows(dgvRW - 1).Cells(16).Value = 0 Then
-                If DGVcartReport.Rows(dgvRW - 1).Cells(37).Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells(38).Value = True Or
-                        DGVcartReport.Rows(dgvRW - 1).Cells(39).Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells(40).Value = True Or
-                        DGVcartReport.Rows(dgvRW - 1).Cells(41).Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells(42).Value = True Or
-                        DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells(44).Value = True Or
-                        DGVcartReport.Rows(dgvRW - 1).Cells(45).Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells(46).Value = True Or
-                        DGVcartReport.Rows(dgvRW - 1).Cells(47).Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells(48).Value = True Or
-                        DGVcartReport.Rows(dgvRW - 1).Cells(49).Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells(50).Value = True Or
-                        DGVcartReport.Rows(dgvRW - 1).Cells(67).Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells(68).Value = True Or
-                        DGVcartReport.Rows(dgvRW - 1).Cells(69).Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells(70).Value = True Or
-                        DGVcartReport.Rows(dgvRW - 1).Cells(71).Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells(72).Value = True Or
-                        DGVcartReport.Rows(dgvRW - 1).Cells(73).Value = True Then
+            If DGVcartReport.Rows(dgvRW - 1).Cells("DEFCONE").Value > 0 And DGVcartReport.Rows(dgvRW - 1).Cells("CONEBARLEY").Value = 0 Then
+                If DGVcartReport.Rows(dgvRW - 1).Cells("FLT_K").Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells("FLT_D").Value = True Or
+                        DGVcartReport.Rows(dgvRW - 1).Cells("FLT_F").Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells("FLT_O").Value = True Or
+                        DGVcartReport.Rows(dgvRW - 1).Cells("FLT_T").Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells("FLT_P").Value = True Or
+                        DGVcartReport.Rows(dgvRW - 1).Cells("FLT_S").Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells("FLT_X").Value = True Or
+                        DGVcartReport.Rows(dgvRW - 1).Cells("FLT_N").Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells("FLT_W").Value = True Or
+                        DGVcartReport.Rows(dgvRW - 1).Cells("FLT_H").Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells("FLT_TR").Value = True Or
+                        DGVcartReport.Rows(dgvRW - 1).Cells("FLT_B").Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells("FLT_C").Value = True Or
+                        DGVcartReport.Rows(dgvRW - 1).Cells("FLT_DO").Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells("FLT_DH").Value = True Or
+                        DGVcartReport.Rows(dgvRW - 1).Cells("FLT_CL").Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells("FLT_FI").Value = True Or
+                        DGVcartReport.Rows(dgvRW - 1).Cells("FLT_YN").Value = True Or DGVcartReport.Rows(dgvRW - 1).Cells("FLT_HT").Value = True Or
+                        DGVcartReport.Rows(dgvRW - 1).Cells("FLT_LT").Value = True Then
 
                     gradeDefCount = gradeDefCount + 1
                 End If

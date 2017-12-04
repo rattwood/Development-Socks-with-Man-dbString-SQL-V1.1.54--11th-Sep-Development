@@ -55,6 +55,10 @@ Partial Class frmJobEntry
         Me.P20BSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.P30BSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.P35BSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Pilot6ChToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Pilot15ChToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Pilot20ChToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReCheckToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WasteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -62,6 +66,10 @@ Partial Class frmJobEntry
         Me.EndOfDayReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StockToProcessReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PrintFormsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
         Me.CompareSTDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Round1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Round2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -77,14 +85,6 @@ Partial Class frmJobEntry
         Me.lblSelectGrade = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtPilotCount = New System.Windows.Forms.TextBox()
-        Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Pilot15ChToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Pilot20ChToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.ToraydbBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Toraydb, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
@@ -294,19 +294,19 @@ Partial Class frmJobEntry
         'BToolStripMenuItem
         '
         Me.BToolStripMenuItem.Name = "BToolStripMenuItem"
-        Me.BToolStripMenuItem.Size = New System.Drawing.Size(90, 22)
+        Me.BToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.BToolStripMenuItem.Text = "B"
         '
         'ALToolStripMenuItem
         '
         Me.ALToolStripMenuItem.Name = "ALToolStripMenuItem"
-        Me.ALToolStripMenuItem.Size = New System.Drawing.Size(90, 22)
+        Me.ALToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ALToolStripMenuItem.Text = "AL"
         '
         'ADToolStripMenuItem
         '
         Me.ADToolStripMenuItem.Name = "ADToolStripMenuItem"
-        Me.ADToolStripMenuItem.Size = New System.Drawing.Size(90, 22)
+        Me.ADToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ADToolStripMenuItem.Text = "AD"
         '
         'BSGradesToolStripMenuItem
@@ -319,20 +319,45 @@ Partial Class frmJobEntry
         'P20BSToolStripMenuItem
         '
         Me.P20BSToolStripMenuItem.Name = "P20BSToolStripMenuItem"
-        Me.P20BSToolStripMenuItem.Size = New System.Drawing.Size(109, 22)
+        Me.P20BSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.P20BSToolStripMenuItem.Text = "P20 BS"
         '
         'P30BSToolStripMenuItem
         '
         Me.P30BSToolStripMenuItem.Name = "P30BSToolStripMenuItem"
-        Me.P30BSToolStripMenuItem.Size = New System.Drawing.Size(109, 22)
+        Me.P30BSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.P30BSToolStripMenuItem.Text = "P30 BS"
         '
         'P35BSToolStripMenuItem
         '
         Me.P35BSToolStripMenuItem.Name = "P35BSToolStripMenuItem"
-        Me.P35BSToolStripMenuItem.Size = New System.Drawing.Size(109, 22)
+        Me.P35BSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.P35BSToolStripMenuItem.Text = "P35 BS"
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Pilot6ChToolStripMenuItem, Me.Pilot15ChToolStripMenuItem, Me.Pilot20ChToolStripMenuItem})
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(156, 22)
+        Me.ToolStripMenuItem2.Text = "PILOT Grades"
+        '
+        'Pilot6ChToolStripMenuItem
+        '
+        Me.Pilot6ChToolStripMenuItem.Name = "Pilot6ChToolStripMenuItem"
+        Me.Pilot6ChToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Pilot6ChToolStripMenuItem.Text = "Pilot 6Ch"
+        '
+        'Pilot15ChToolStripMenuItem
+        '
+        Me.Pilot15ChToolStripMenuItem.Name = "Pilot15ChToolStripMenuItem"
+        Me.Pilot15ChToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Pilot15ChToolStripMenuItem.Text = "Pilot 15Ch"
+        '
+        'Pilot20ChToolStripMenuItem
+        '
+        Me.Pilot20ChToolStripMenuItem.Name = "Pilot20ChToolStripMenuItem"
+        Me.Pilot20ChToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Pilot20ChToolStripMenuItem.Text = "Pilot 20Ch"
         '
         'ReCheckToolStripMenuItem
         '
@@ -380,6 +405,28 @@ Partial Class frmJobEntry
         Me.PrintFormsToolStripMenuItem.Text = "Sort Grades"
         Me.PrintFormsToolStripMenuItem.Visible = False
         '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(160, 22)
+        Me.ToolStripMenuItem1.Text = "Normal"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(157, 6)
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(157, 6)
+        '
+        'ToolStripTextBox1
+        '
+        Me.ToolStripTextBox1.Name = "ToolStripTextBox1"
+        Me.ToolStripTextBox1.Size = New System.Drawing.Size(100, 23)
+        Me.ToolStripTextBox1.Text = "STANDARDS"
+        '
         'CompareSTDToolStripMenuItem
         '
         Me.CompareSTDToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Round1ToolStripMenuItem, Me.Round2ToolStripMenuItem, Me.Round3ToolStripMenuItem, Me.StdSheetToolStripMenuItem})
@@ -391,25 +438,25 @@ Partial Class frmJobEntry
         '
         Me.Round1ToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Round1ToolStripMenuItem.Name = "Round1ToolStripMenuItem"
-        Me.Round1ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Round1ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.Round1ToolStripMenuItem.Text = "Round1"
         '
         'Round2ToolStripMenuItem
         '
         Me.Round2ToolStripMenuItem.Name = "Round2ToolStripMenuItem"
-        Me.Round2ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Round2ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.Round2ToolStripMenuItem.Text = "Round2"
         '
         'Round3ToolStripMenuItem
         '
         Me.Round3ToolStripMenuItem.Name = "Round3ToolStripMenuItem"
-        Me.Round3ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Round3ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.Round3ToolStripMenuItem.Text = "Round3"
         '
         'StdSheetToolStripMenuItem
         '
         Me.StdSheetToolStripMenuItem.Name = "StdSheetToolStripMenuItem"
-        Me.StdSheetToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.StdSheetToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.StdSheetToolStripMenuItem.Text = "STD"
         '
         'ReCheckToolStripMenuItem1
@@ -495,53 +542,6 @@ Partial Class frmJobEntry
         Me.txtPilotCount.Size = New System.Drawing.Size(28, 26)
         Me.txtPilotCount.TabIndex = 185
         Me.txtPilotCount.Visible = False
-        '
-        'ToolStripTextBox1
-        '
-        Me.ToolStripTextBox1.Name = "ToolStripTextBox1"
-        Me.ToolStripTextBox1.Size = New System.Drawing.Size(100, 23)
-        Me.ToolStripTextBox1.Text = "STANDARDS"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(157, 6)
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(157, 6)
-        '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(160, 22)
-        Me.ToolStripMenuItem1.Text = "Normal"
-        '
-        'ToolStripMenuItem2
-        '
-        Me.ToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PToolStripMenuItem, Me.Pilot15ChToolStripMenuItem, Me.Pilot20ChToolStripMenuItem})
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(156, 22)
-        Me.ToolStripMenuItem2.Text = "PILOT Grades"
-        '
-        'PToolStripMenuItem
-        '
-        Me.PToolStripMenuItem.Name = "PToolStripMenuItem"
-        Me.PToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.PToolStripMenuItem.Text = "Pilot 6Ch"
-        '
-        'Pilot15ChToolStripMenuItem
-        '
-        Me.Pilot15ChToolStripMenuItem.Name = "Pilot15ChToolStripMenuItem"
-        Me.Pilot15ChToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.Pilot15ChToolStripMenuItem.Text = "Pilot 15Ch"
-        '
-        'Pilot20ChToolStripMenuItem
-        '
-        Me.Pilot20ChToolStripMenuItem.Name = "Pilot20ChToolStripMenuItem"
-        Me.Pilot20ChToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.Pilot20ChToolStripMenuItem.Text = "Pilot 20Ch"
         '
         'frmJobEntry
         '
@@ -641,7 +641,7 @@ Partial Class frmJobEntry
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ToolStripTextBox1 As ToolStripTextBox
     Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
-    Friend WithEvents PToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Pilot6ChToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Pilot15ChToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Pilot20ChToolStripMenuItem As ToolStripMenuItem
 End Class
