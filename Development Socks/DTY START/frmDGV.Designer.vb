@@ -83,7 +83,6 @@ Partial Class frmDGV
         Me.DGVdata.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGVdata.Location = New System.Drawing.Point(3, 104)
         Me.DGVdata.Name = "DGVdata"
-        Me.DGVdata.ReadOnly = True
         Me.DGVdata.Size = New System.Drawing.Size(932, 425)
         Me.DGVdata.TabIndex = 6
         '

@@ -1,11 +1,13 @@
 ﻿
 
-Imports System.ComponentModel
+
+
+
 Imports System.Data.SqlClient
 
 
 
-Public Class frmPackRchkA
+Public Class frmbackupRechkAdata
 
     Private SQL As New SQLConn
 
@@ -64,12 +66,11 @@ Public Class frmPackRchkA
     Public coneState As String
     Public packingActive = 0
 
-
-
+    Public Sub New()
+    End Sub
 
     Private Sub frmPackRchkA_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        frmDGV.DGVdata.ClearSelection()
-        frmDGV.Close()
+
 
         Dim btnNum As Integer
         Dim btnNums As String
@@ -86,36 +87,6 @@ Public Class frmPackRchkA
 
 
 
-
-        LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & frmJobEntry.txtLotNumber.Text & "' And  RECHK = 4  And PACKENDTM is Null")
-
-        ''If LRecordCount > 0 Then
-        ''LOAD THE DATA FROM dB IN TO THE DATAGRID
-        'frmDGV.DGVdata.DataSource = LDS.Tables(0)
-        '    frmDGV.DGVdata.Rows(0).Selected = True
-        '    Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
-
-        '    'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE by our own index
-        '    frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
-
-
-        'If LRecordCount > 0 Then
-        'LOAD THE DATA FROM dB IN TO THE DATAGRID
-        DataGridView1.DataSource = LDS.Tables(0)
-        DataGridView1.Rows(0).Selected = True
-        Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
-
-        'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE by our own index
-        DataGridView1.Sort(DataGridView1.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
-
-
-
-
-        frmDGV.Show()
-
-
-        MsgBox("I am here")
-
         'SET CORRECT BUTTUN NUMBERS BASED ON CONE NUMBERS (SPINDEL NUMBERS)
         For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
 
@@ -126,15 +97,15 @@ Public Class frmPackRchkA
 
 
         Me.txtCartNum.Text = frmJobEntry.cartSelect
-            Me.lblJobNum.Text = frmJobEntry.varJobNum
+        Me.lblJobNum.Text = frmJobEntry.varJobNum
 
 
         'GET NUMBER OF CONES THAT NEED ALLOCATING Count agains Job Barcode
         Dim btnCountStart As Integer = frmDGV.DGVdata.Rows.Count + 1
         Dim totBtn As Integer = 31 - btnCountStart
-            For i = btnCountStart To 32
-                Me.Controls("btnCone" & i.ToString).Visible = False
-            Next
+        For i = btnCountStart To 32
+            Me.Controls("btnCone" & i.ToString).Visible = False
+        Next
 
 
         For i = 1 To frmDGV.DGVdata.Rows.Count
@@ -149,12 +120,12 @@ Public Class frmPackRchkA
 
 
 
-            'IF THIS IS AN EXISTING JOB THEN CALL BACK VALUES FROM DATABASE
-            If frmJobEntry.coneValUpdate Then UpdateConeVal()
+        'IF THIS IS AN EXISTING JOB THEN CALL BACK VALUES FROM DATABASE
+        If frmJobEntry.coneValUpdate Then UpdateConeVal()
 
 
-            'Me.KeyPreview = True  'Allows us to look for advance character from barcode
-            Me.KeyPreview = True
+        'Me.KeyPreview = True  'Allows us to look for advance character from barcode
+        Me.KeyPreview = True
 
 
 
@@ -189,7 +160,7 @@ Public Class frmPackRchkA
                 Me.Controls("btnCone" & rw).BackColor = Color.LightGreen       'Grade A Cone
             End If
 
-            'Me.Controls("btnCone" & rw).Enabled = False
+            Me.Controls("btnCone" & rw).Enabled = False
 
 
         Next
@@ -341,14 +312,7 @@ Public Class frmPackRchkA
 
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        If LConn.State = ConnectionState.Open Then LConn.Close()
-        If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
-        frmDGV.DGVdata.ClearSelection()
-        frmDGV.DGVdata.ClearSelection()
-        frmJobEntry.Show()
-        frmJobEntry.txtLotNumber.Clear()
-        frmJobEntry.txtLotNumber.Focus()
-        Me.Close()
+
     End Sub
 
 
@@ -395,10 +359,9 @@ Public Class frmPackRchkA
             MsgBox("Update Error: " & vbNewLine & ex.Message)
         End Try
 
-        If LConn.State = ConnectionState.Open Then LConn.Close()
+
 
         If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
-        frmDGV.DGVdata.ClearSelection()
         frmDGV.DGVdata.ClearSelection()
         frmJobEntry.txtLotNumber.Clear()
         frmJobEntry.txtLotNumber.Focus()
@@ -425,11 +388,8 @@ Public Class frmPackRchkA
 
 
 
-
-
     'THIS LOOKS FOR ENTER key to be pressed or received via barcode
-
-    Private Sub frmJobEntry_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown, btnCone4.KeyDown
+    Private Sub frmPackRchkA_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
 
         If e.KeyCode = Keys.Return Then
 
@@ -442,6 +402,11 @@ Public Class frmPackRchkA
 
 
 End Class
+
+
+
+
+
 
 
 

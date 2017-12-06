@@ -254,6 +254,12 @@
     <Compile Include="DTY Reports\DTY Def Report\DGVDefReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DTYPacking\frmbackupRechkAdata.Designer.vb">
+      <DependentUpon>frmbackupRechkAdata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTYPacking\frmbackupRechkAdata.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DTYPacking\frmExChangeCone.Designer.vb">
       <DependentUpon>frmExChangeCone.vb</DependentUpon>
     </Compile>
@@ -474,6 +480,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DTY Reports\DTY Def Report\DGVDefReport.resx">
       <DependentUpon>DGVDefReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTYPacking\frmbackupRechkAdata.resx">
+      <DependentUpon>frmbackupRechkAdata.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DTYPacking\frmExChangeCone.resx">
       <DependentUpon>frmExChangeCone.vb</DependentUpon>

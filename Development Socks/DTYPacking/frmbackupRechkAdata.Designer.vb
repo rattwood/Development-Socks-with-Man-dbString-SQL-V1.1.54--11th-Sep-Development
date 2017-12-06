@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmPackRchkA
+Partial Class frmbackupRechkAdata
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,6 +22,7 @@ Partial Class frmPackRchkA
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.txtboxTotal = New System.Windows.Forms.TextBox()
         Me.lblCheese = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -66,30 +67,37 @@ Partial Class frmPackRchkA
         Me.btnCone2 = New System.Windows.Forms.Button()
         Me.btnCone1 = New System.Windows.Forms.Button()
         Me.btnCone4 = New System.Windows.Forms.Button()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(-590, 265)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(240, 150)
+        Me.DataGridView1.TabIndex = 267
         '
         'txtboxTotal
         '
         Me.txtboxTotal.Enabled = False
         Me.txtboxTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.txtboxTotal.Location = New System.Drawing.Point(73, 207)
+        Me.txtboxTotal.Location = New System.Drawing.Point(-568, -93)
         Me.txtboxTotal.Name = "txtboxTotal"
         Me.txtboxTotal.ReadOnly = True
         Me.txtboxTotal.Size = New System.Drawing.Size(112, 62)
-        Me.txtboxTotal.TabIndex = 221
+        Me.txtboxTotal.TabIndex = 266
         Me.txtboxTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblCheese
         '
         Me.lblCheese.AutoSize = True
         Me.lblCheese.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCheese.Location = New System.Drawing.Point(70, 174)
+        Me.lblCheese.Location = New System.Drawing.Point(-571, -126)
         Me.lblCheese.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblCheese.Name = "lblCheese"
         Me.lblCheese.Size = New System.Drawing.Size(115, 20)
-        Me.lblCheese.TabIndex = 220
+        Me.lblCheese.TabIndex = 265
         Me.lblCheese.Text = "Total Cheese"
         '
         'Label1
@@ -97,11 +105,11 @@ Partial Class frmPackRchkA
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.Red
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(538, 332)
+        Me.Label1.Location = New System.Drawing.Point(-103, 32)
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(117, 37)
-        Me.Label1.TabIndex = 219
+        Me.Label1.TabIndex = 264
         Me.Label1.Text = "Label1"
         Me.Label1.Visible = False
         '
@@ -109,30 +117,30 @@ Partial Class frmPackRchkA
         '
         Me.btnDefect.BackColor = System.Drawing.Color.Yellow
         Me.btnDefect.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDefect.Location = New System.Drawing.Point(933, 693)
+        Me.btnDefect.Location = New System.Drawing.Point(292, 393)
         Me.btnDefect.Margin = New System.Windows.Forms.Padding(2)
         Me.btnDefect.Name = "btnDefect"
         Me.btnDefect.Size = New System.Drawing.Size(138, 80)
-        Me.btnDefect.TabIndex = 218
+        Me.btnDefect.TabIndex = 263
         Me.btnDefect.Text = "Enter Defect"
         Me.btnDefect.UseVisualStyleBackColor = False
         '
         'btnBack
         '
-        Me.btnBack.Location = New System.Drawing.Point(76, 768)
+        Me.btnBack.Location = New System.Drawing.Point(-565, 468)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(197, 80)
-        Me.btnBack.TabIndex = 217
+        Me.btnBack.TabIndex = 262
         Me.btnBack.Text = "Go Back"
         Me.btnBack.UseVisualStyleBackColor = True
         '
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Button1.Location = New System.Drawing.Point(445, 805)
+        Me.Button1.Location = New System.Drawing.Point(-196, 505)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(372, 43)
-        Me.Button1.TabIndex = 216
+        Me.Button1.TabIndex = 261
         Me.Button1.Text = "Continue"
         Me.Button1.UseVisualStyleBackColor = False
         Me.Button1.Visible = False
@@ -141,61 +149,61 @@ Partial Class frmPackRchkA
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label5.Location = New System.Drawing.Point(72, 13)
+        Me.Label5.Location = New System.Drawing.Point(-569, -287)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(87, 24)
-        Me.Label5.TabIndex = 215
+        Me.Label5.TabIndex = 260
         Me.Label5.Text = "Job Ref:"
         '
         'lblJobNum
         '
         Me.lblJobNum.AutoSize = True
         Me.lblJobNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblJobNum.Location = New System.Drawing.Point(165, 13)
+        Me.lblJobNum.Location = New System.Drawing.Point(-476, -287)
         Me.lblJobNum.Name = "lblJobNum"
         Me.lblJobNum.Size = New System.Drawing.Size(72, 24)
-        Me.lblJobNum.TabIndex = 214
+        Me.lblJobNum.TabIndex = 259
         Me.lblJobNum.Text = "Label4"
         '
         'txtCartNum
         '
         Me.txtCartNum.Enabled = False
         Me.txtCartNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.txtCartNum.Location = New System.Drawing.Point(73, 88)
+        Me.txtCartNum.Location = New System.Drawing.Point(-568, -212)
         Me.txtCartNum.Name = "txtCartNum"
         Me.txtCartNum.ReadOnly = True
         Me.txtCartNum.Size = New System.Drawing.Size(112, 62)
-        Me.txtCartNum.TabIndex = 213
+        Me.txtCartNum.TabIndex = 258
         Me.txtCartNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(70, 57)
+        Me.Label2.Location = New System.Drawing.Point(-571, -243)
         Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(110, 20)
-        Me.Label2.TabIndex = 212
+        Me.Label2.TabIndex = 257
         Me.Label2.Text = "Cart Number"
         '
         'txtConeBcode
         '
         Me.txtConeBcode.Font = New System.Drawing.Font("Microsoft Sans Serif", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.txtConeBcode.Location = New System.Drawing.Point(406, 693)
+        Me.txtConeBcode.Location = New System.Drawing.Point(-235, 393)
         Me.txtConeBcode.Name = "txtConeBcode"
         Me.txtConeBcode.Size = New System.Drawing.Size(433, 62)
-        Me.txtConeBcode.TabIndex = 211
+        Me.txtConeBcode.TabIndex = 256
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(328, 712)
+        Me.Label3.Location = New System.Drawing.Point(-313, 412)
         Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(73, 20)
-        Me.Label3.TabIndex = 210
+        Me.Label3.TabIndex = 255
         Me.Label3.Text = "CONE #"
         '
         'btnCone32
@@ -204,11 +212,11 @@ Partial Class frmPackRchkA
         Me.btnCone32.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone32.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone32.ForeColor = System.Drawing.Color.Black
-        Me.btnCone32.Location = New System.Drawing.Point(200, 516)
+        Me.btnCone32.Location = New System.Drawing.Point(-441, 216)
         Me.btnCone32.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone32.Name = "btnCone32"
         Me.btnCone32.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone32.TabIndex = 209
+        Me.btnCone32.TabIndex = 254
         Me.btnCone32.Text = "32"
         Me.btnCone32.UseVisualStyleBackColor = False
         '
@@ -218,11 +226,11 @@ Partial Class frmPackRchkA
         Me.btnCone24.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone24.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone24.ForeColor = System.Drawing.Color.Black
-        Me.btnCone24.Location = New System.Drawing.Point(200, 361)
+        Me.btnCone24.Location = New System.Drawing.Point(-441, 61)
         Me.btnCone24.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone24.Name = "btnCone24"
         Me.btnCone24.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone24.TabIndex = 201
+        Me.btnCone24.TabIndex = 246
         Me.btnCone24.Text = "24"
         Me.btnCone24.UseVisualStyleBackColor = False
         '
@@ -232,11 +240,11 @@ Partial Class frmPackRchkA
         Me.btnCone16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone16.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone16.ForeColor = System.Drawing.Color.Black
-        Me.btnCone16.Location = New System.Drawing.Point(200, 206)
+        Me.btnCone16.Location = New System.Drawing.Point(-441, -94)
         Me.btnCone16.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone16.Name = "btnCone16"
         Me.btnCone16.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone16.TabIndex = 193
+        Me.btnCone16.TabIndex = 238
         Me.btnCone16.Text = "16"
         Me.btnCone16.UseVisualStyleBackColor = False
         '
@@ -246,11 +254,11 @@ Partial Class frmPackRchkA
         Me.btnCone29.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone29.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone29.ForeColor = System.Drawing.Color.Black
-        Me.btnCone29.Location = New System.Drawing.Point(695, 515)
+        Me.btnCone29.Location = New System.Drawing.Point(54, 215)
         Me.btnCone29.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone29.Name = "btnCone29"
         Me.btnCone29.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone29.TabIndex = 206
+        Me.btnCone29.TabIndex = 251
         Me.btnCone29.Text = "29"
         Me.btnCone29.UseVisualStyleBackColor = False
         '
@@ -260,11 +268,11 @@ Partial Class frmPackRchkA
         Me.btnCone8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone8.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone8.ForeColor = System.Drawing.Color.Black
-        Me.btnCone8.Location = New System.Drawing.Point(200, 51)
+        Me.btnCone8.Location = New System.Drawing.Point(-441, -249)
         Me.btnCone8.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone8.Name = "btnCone8"
         Me.btnCone8.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone8.TabIndex = 185
+        Me.btnCone8.TabIndex = 230
         Me.btnCone8.Text = "8"
         Me.btnCone8.UseVisualStyleBackColor = False
         '
@@ -274,11 +282,11 @@ Partial Class frmPackRchkA
         Me.btnCone30.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone30.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone30.ForeColor = System.Drawing.Color.Black
-        Me.btnCone30.Location = New System.Drawing.Point(529, 513)
+        Me.btnCone30.Location = New System.Drawing.Point(-112, 213)
         Me.btnCone30.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone30.Name = "btnCone30"
         Me.btnCone30.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone30.TabIndex = 207
+        Me.btnCone30.TabIndex = 252
         Me.btnCone30.Text = "30"
         Me.btnCone30.UseVisualStyleBackColor = False
         '
@@ -288,11 +296,11 @@ Partial Class frmPackRchkA
         Me.btnCone31.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone31.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone31.ForeColor = System.Drawing.Color.Black
-        Me.btnCone31.Location = New System.Drawing.Point(365, 516)
+        Me.btnCone31.Location = New System.Drawing.Point(-276, 216)
         Me.btnCone31.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone31.Name = "btnCone31"
         Me.btnCone31.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone31.TabIndex = 208
+        Me.btnCone31.TabIndex = 253
         Me.btnCone31.Text = "31"
         Me.btnCone31.UseVisualStyleBackColor = False
         '
@@ -302,11 +310,11 @@ Partial Class frmPackRchkA
         Me.btnCone27.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone27.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone27.ForeColor = System.Drawing.Color.Black
-        Me.btnCone27.Location = New System.Drawing.Point(1025, 514)
+        Me.btnCone27.Location = New System.Drawing.Point(384, 214)
         Me.btnCone27.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone27.Name = "btnCone27"
         Me.btnCone27.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone27.TabIndex = 204
+        Me.btnCone27.TabIndex = 249
         Me.btnCone27.Text = "27"
         Me.btnCone27.UseVisualStyleBackColor = False
         '
@@ -316,11 +324,11 @@ Partial Class frmPackRchkA
         Me.btnCone26.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone26.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone26.ForeColor = System.Drawing.Color.Black
-        Me.btnCone26.Location = New System.Drawing.Point(1190, 515)
+        Me.btnCone26.Location = New System.Drawing.Point(549, 215)
         Me.btnCone26.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone26.Name = "btnCone26"
         Me.btnCone26.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone26.TabIndex = 203
+        Me.btnCone26.TabIndex = 248
         Me.btnCone26.Text = "26"
         Me.btnCone26.UseVisualStyleBackColor = False
         '
@@ -330,11 +338,11 @@ Partial Class frmPackRchkA
         Me.btnCone28.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone28.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone28.ForeColor = System.Drawing.Color.Black
-        Me.btnCone28.Location = New System.Drawing.Point(860, 514)
+        Me.btnCone28.Location = New System.Drawing.Point(219, 214)
         Me.btnCone28.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone28.Name = "btnCone28"
         Me.btnCone28.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone28.TabIndex = 205
+        Me.btnCone28.TabIndex = 250
         Me.btnCone28.Text = "28"
         Me.btnCone28.UseVisualStyleBackColor = False
         '
@@ -344,11 +352,11 @@ Partial Class frmPackRchkA
         Me.btnCone25.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone25.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone25.ForeColor = System.Drawing.Color.Black
-        Me.btnCone25.Location = New System.Drawing.Point(1355, 515)
+        Me.btnCone25.Location = New System.Drawing.Point(714, 215)
         Me.btnCone25.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone25.Name = "btnCone25"
         Me.btnCone25.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone25.TabIndex = 202
+        Me.btnCone25.TabIndex = 247
         Me.btnCone25.Text = "25"
         Me.btnCone25.UseVisualStyleBackColor = False
         '
@@ -358,11 +366,11 @@ Partial Class frmPackRchkA
         Me.btnCone21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone21.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone21.ForeColor = System.Drawing.Color.Black
-        Me.btnCone21.Location = New System.Drawing.Point(695, 361)
+        Me.btnCone21.Location = New System.Drawing.Point(54, 61)
         Me.btnCone21.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone21.Name = "btnCone21"
         Me.btnCone21.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone21.TabIndex = 198
+        Me.btnCone21.TabIndex = 243
         Me.btnCone21.Text = "21"
         Me.btnCone21.UseVisualStyleBackColor = False
         '
@@ -372,11 +380,11 @@ Partial Class frmPackRchkA
         Me.btnCone22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone22.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone22.ForeColor = System.Drawing.Color.Black
-        Me.btnCone22.Location = New System.Drawing.Point(529, 359)
+        Me.btnCone22.Location = New System.Drawing.Point(-112, 59)
         Me.btnCone22.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone22.Name = "btnCone22"
         Me.btnCone22.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone22.TabIndex = 199
+        Me.btnCone22.TabIndex = 244
         Me.btnCone22.Text = "22"
         Me.btnCone22.UseVisualStyleBackColor = False
         '
@@ -386,11 +394,11 @@ Partial Class frmPackRchkA
         Me.btnCone23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone23.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone23.ForeColor = System.Drawing.Color.Black
-        Me.btnCone23.Location = New System.Drawing.Point(365, 361)
+        Me.btnCone23.Location = New System.Drawing.Point(-276, 61)
         Me.btnCone23.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone23.Name = "btnCone23"
         Me.btnCone23.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone23.TabIndex = 200
+        Me.btnCone23.TabIndex = 245
         Me.btnCone23.Text = "23"
         Me.btnCone23.UseVisualStyleBackColor = False
         '
@@ -400,11 +408,11 @@ Partial Class frmPackRchkA
         Me.btnCone19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone19.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone19.ForeColor = System.Drawing.Color.Black
-        Me.btnCone19.Location = New System.Drawing.Point(1025, 360)
+        Me.btnCone19.Location = New System.Drawing.Point(384, 60)
         Me.btnCone19.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone19.Name = "btnCone19"
         Me.btnCone19.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone19.TabIndex = 196
+        Me.btnCone19.TabIndex = 241
         Me.btnCone19.Text = "19"
         Me.btnCone19.UseVisualStyleBackColor = False
         '
@@ -414,11 +422,11 @@ Partial Class frmPackRchkA
         Me.btnCone18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone18.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone18.ForeColor = System.Drawing.Color.Black
-        Me.btnCone18.Location = New System.Drawing.Point(1190, 360)
+        Me.btnCone18.Location = New System.Drawing.Point(549, 60)
         Me.btnCone18.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone18.Name = "btnCone18"
         Me.btnCone18.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone18.TabIndex = 195
+        Me.btnCone18.TabIndex = 240
         Me.btnCone18.Text = "18"
         Me.btnCone18.UseVisualStyleBackColor = False
         '
@@ -428,11 +436,11 @@ Partial Class frmPackRchkA
         Me.btnCone17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone17.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone17.ForeColor = System.Drawing.Color.Black
-        Me.btnCone17.Location = New System.Drawing.Point(1355, 361)
+        Me.btnCone17.Location = New System.Drawing.Point(714, 61)
         Me.btnCone17.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone17.Name = "btnCone17"
         Me.btnCone17.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone17.TabIndex = 194
+        Me.btnCone17.TabIndex = 239
         Me.btnCone17.Text = "17"
         Me.btnCone17.UseVisualStyleBackColor = False
         '
@@ -442,11 +450,11 @@ Partial Class frmPackRchkA
         Me.btnCone20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone20.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone20.ForeColor = System.Drawing.Color.Black
-        Me.btnCone20.Location = New System.Drawing.Point(860, 360)
+        Me.btnCone20.Location = New System.Drawing.Point(219, 60)
         Me.btnCone20.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone20.Name = "btnCone20"
         Me.btnCone20.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone20.TabIndex = 197
+        Me.btnCone20.TabIndex = 242
         Me.btnCone20.Text = "20"
         Me.btnCone20.UseVisualStyleBackColor = False
         '
@@ -456,11 +464,11 @@ Partial Class frmPackRchkA
         Me.btnCone13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone13.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone13.ForeColor = System.Drawing.Color.Black
-        Me.btnCone13.Location = New System.Drawing.Point(695, 207)
+        Me.btnCone13.Location = New System.Drawing.Point(54, -93)
         Me.btnCone13.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone13.Name = "btnCone13"
         Me.btnCone13.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone13.TabIndex = 190
+        Me.btnCone13.TabIndex = 235
         Me.btnCone13.Text = "13"
         Me.btnCone13.UseVisualStyleBackColor = False
         '
@@ -470,11 +478,11 @@ Partial Class frmPackRchkA
         Me.btnCone14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone14.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone14.ForeColor = System.Drawing.Color.Black
-        Me.btnCone14.Location = New System.Drawing.Point(529, 205)
+        Me.btnCone14.Location = New System.Drawing.Point(-112, -95)
         Me.btnCone14.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone14.Name = "btnCone14"
         Me.btnCone14.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone14.TabIndex = 191
+        Me.btnCone14.TabIndex = 236
         Me.btnCone14.Text = "14"
         Me.btnCone14.UseVisualStyleBackColor = False
         '
@@ -484,11 +492,11 @@ Partial Class frmPackRchkA
         Me.btnCone15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone15.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone15.ForeColor = System.Drawing.Color.Black
-        Me.btnCone15.Location = New System.Drawing.Point(365, 206)
+        Me.btnCone15.Location = New System.Drawing.Point(-276, -94)
         Me.btnCone15.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone15.Name = "btnCone15"
         Me.btnCone15.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone15.TabIndex = 192
+        Me.btnCone15.TabIndex = 237
         Me.btnCone15.Text = "15"
         Me.btnCone15.UseVisualStyleBackColor = False
         '
@@ -498,11 +506,11 @@ Partial Class frmPackRchkA
         Me.btnCone11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone11.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone11.ForeColor = System.Drawing.Color.Black
-        Me.btnCone11.Location = New System.Drawing.Point(1025, 207)
+        Me.btnCone11.Location = New System.Drawing.Point(384, -93)
         Me.btnCone11.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone11.Name = "btnCone11"
         Me.btnCone11.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone11.TabIndex = 188
+        Me.btnCone11.TabIndex = 233
         Me.btnCone11.Text = "11"
         Me.btnCone11.UseVisualStyleBackColor = False
         '
@@ -512,11 +520,11 @@ Partial Class frmPackRchkA
         Me.btnCone10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone10.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone10.ForeColor = System.Drawing.Color.Black
-        Me.btnCone10.Location = New System.Drawing.Point(1190, 207)
+        Me.btnCone10.Location = New System.Drawing.Point(549, -93)
         Me.btnCone10.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone10.Name = "btnCone10"
         Me.btnCone10.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone10.TabIndex = 187
+        Me.btnCone10.TabIndex = 232
         Me.btnCone10.Text = "10"
         Me.btnCone10.UseVisualStyleBackColor = False
         '
@@ -526,11 +534,11 @@ Partial Class frmPackRchkA
         Me.btnCone9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone9.ForeColor = System.Drawing.Color.Black
-        Me.btnCone9.Location = New System.Drawing.Point(1355, 207)
+        Me.btnCone9.Location = New System.Drawing.Point(714, -93)
         Me.btnCone9.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone9.Name = "btnCone9"
         Me.btnCone9.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone9.TabIndex = 186
+        Me.btnCone9.TabIndex = 231
         Me.btnCone9.Text = "9"
         Me.btnCone9.UseVisualStyleBackColor = False
         '
@@ -540,11 +548,11 @@ Partial Class frmPackRchkA
         Me.btnCone12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone12.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone12.ForeColor = System.Drawing.Color.Black
-        Me.btnCone12.Location = New System.Drawing.Point(860, 206)
+        Me.btnCone12.Location = New System.Drawing.Point(219, -94)
         Me.btnCone12.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone12.Name = "btnCone12"
         Me.btnCone12.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone12.TabIndex = 189
+        Me.btnCone12.TabIndex = 234
         Me.btnCone12.Text = "12"
         Me.btnCone12.UseVisualStyleBackColor = False
         '
@@ -554,11 +562,11 @@ Partial Class frmPackRchkA
         Me.btnCone5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone5.ForeColor = System.Drawing.Color.Black
-        Me.btnCone5.Location = New System.Drawing.Point(695, 51)
+        Me.btnCone5.Location = New System.Drawing.Point(54, -249)
         Me.btnCone5.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone5.Name = "btnCone5"
         Me.btnCone5.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone5.TabIndex = 182
+        Me.btnCone5.TabIndex = 227
         Me.btnCone5.Text = "5"
         Me.btnCone5.UseVisualStyleBackColor = False
         '
@@ -568,11 +576,11 @@ Partial Class frmPackRchkA
         Me.btnCone6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone6.ForeColor = System.Drawing.Color.Black
-        Me.btnCone6.Location = New System.Drawing.Point(530, 51)
+        Me.btnCone6.Location = New System.Drawing.Point(-111, -249)
         Me.btnCone6.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone6.Name = "btnCone6"
         Me.btnCone6.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone6.TabIndex = 183
+        Me.btnCone6.TabIndex = 228
         Me.btnCone6.Text = "6"
         Me.btnCone6.UseVisualStyleBackColor = False
         '
@@ -582,11 +590,11 @@ Partial Class frmPackRchkA
         Me.btnCone7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone7.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone7.ForeColor = System.Drawing.Color.Black
-        Me.btnCone7.Location = New System.Drawing.Point(365, 51)
+        Me.btnCone7.Location = New System.Drawing.Point(-276, -249)
         Me.btnCone7.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone7.Name = "btnCone7"
         Me.btnCone7.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone7.TabIndex = 184
+        Me.btnCone7.TabIndex = 229
         Me.btnCone7.Text = "7"
         Me.btnCone7.UseVisualStyleBackColor = False
         '
@@ -596,11 +604,11 @@ Partial Class frmPackRchkA
         Me.btnCone3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone3.ForeColor = System.Drawing.Color.Black
-        Me.btnCone3.Location = New System.Drawing.Point(1025, 51)
+        Me.btnCone3.Location = New System.Drawing.Point(384, -249)
         Me.btnCone3.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone3.Name = "btnCone3"
         Me.btnCone3.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone3.TabIndex = 180
+        Me.btnCone3.TabIndex = 225
         Me.btnCone3.Text = "3"
         Me.btnCone3.UseVisualStyleBackColor = False
         '
@@ -610,11 +618,11 @@ Partial Class frmPackRchkA
         Me.btnCone2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone2.ForeColor = System.Drawing.Color.Black
-        Me.btnCone2.Location = New System.Drawing.Point(1190, 51)
+        Me.btnCone2.Location = New System.Drawing.Point(549, -249)
         Me.btnCone2.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone2.Name = "btnCone2"
         Me.btnCone2.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone2.TabIndex = 179
+        Me.btnCone2.TabIndex = 224
         Me.btnCone2.Text = "2"
         Me.btnCone2.UseVisualStyleBackColor = False
         '
@@ -624,11 +632,11 @@ Partial Class frmPackRchkA
         Me.btnCone1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone1.ForeColor = System.Drawing.Color.Black
-        Me.btnCone1.Location = New System.Drawing.Point(1355, 51)
+        Me.btnCone1.Location = New System.Drawing.Point(714, -249)
         Me.btnCone1.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone1.Name = "btnCone1"
         Me.btnCone1.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone1.TabIndex = 178
+        Me.btnCone1.TabIndex = 223
         Me.btnCone1.Text = "1"
         Me.btnCone1.UseVisualStyleBackColor = False
         '
@@ -638,27 +646,19 @@ Partial Class frmPackRchkA
         Me.btnCone4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCone4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone4.ForeColor = System.Drawing.Color.Black
-        Me.btnCone4.Location = New System.Drawing.Point(860, 51)
+        Me.btnCone4.Location = New System.Drawing.Point(219, -249)
         Me.btnCone4.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone4.Name = "btnCone4"
         Me.btnCone4.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone4.TabIndex = 181
+        Me.btnCone4.TabIndex = 226
         Me.btnCone4.Text = "4"
         Me.btnCone4.UseVisualStyleBackColor = False
         '
-        'DataGridView1
-        '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(945, 712)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(240, 150)
-        Me.DataGridView1.TabIndex = 222
-        '
-        'frmPackRchkA
+        'frmbackupRechkAdata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1584, 861)
+        Me.ClientSize = New System.Drawing.Size(284, 261)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.txtboxTotal)
         Me.Controls.Add(Me.lblCheese)
@@ -704,16 +704,15 @@ Partial Class frmPackRchkA
         Me.Controls.Add(Me.btnCone2)
         Me.Controls.Add(Me.btnCone1)
         Me.Controls.Add(Me.btnCone4)
-        Me.Name = "frmPackRchkA"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "ReCheck A Packing"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        Me.Name = "frmbackupRechkAdata"
+        Me.Text = "frmbackupRechkAdata"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
+    Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents txtboxTotal As TextBox
     Friend WithEvents lblCheese As Label
     Friend WithEvents Label1 As Label
@@ -758,5 +757,4 @@ Partial Class frmPackRchkA
     Friend WithEvents btnCone2 As Button
     Friend WithEvents btnCone1 As Button
     Friend WithEvents btnCone4 As Button
-    Friend WithEvents DataGridView1 As DataGridView
 End Class
