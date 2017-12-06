@@ -382,7 +382,7 @@ Public Class frmB_AL_AD_W
         Else
 
             frmPackRepMain.Close()
-            'UpdateDatabase()
+            UpdateDatabase()
             Label8.Visible = False
             Me.Cursor = System.Windows.Forms.Cursors.Default
             Me.Close()

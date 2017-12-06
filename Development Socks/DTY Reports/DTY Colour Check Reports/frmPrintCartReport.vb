@@ -134,7 +134,7 @@ Public Class frmPrintCartReport
         Dim JudCount As Integer = 0
         Dim gradeACount, gradeASCount, gradeDefCount As Integer
 
-        For dgvRW As Integer = 1 To frmJobEntry.LRecordCount
+        For dgvRW As Integer = 1 To DGVcartReport.Rows.Count
 
             'Routine for Spindles
 

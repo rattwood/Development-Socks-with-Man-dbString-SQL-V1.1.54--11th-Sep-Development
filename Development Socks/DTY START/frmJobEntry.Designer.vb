@@ -294,19 +294,19 @@ Partial Class frmJobEntry
         'BToolStripMenuItem
         '
         Me.BToolStripMenuItem.Name = "BToolStripMenuItem"
-        Me.BToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.BToolStripMenuItem.Size = New System.Drawing.Size(90, 22)
         Me.BToolStripMenuItem.Text = "B"
         '
         'ALToolStripMenuItem
         '
         Me.ALToolStripMenuItem.Name = "ALToolStripMenuItem"
-        Me.ALToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ALToolStripMenuItem.Size = New System.Drawing.Size(90, 22)
         Me.ALToolStripMenuItem.Text = "AL"
         '
         'ADToolStripMenuItem
         '
         Me.ADToolStripMenuItem.Name = "ADToolStripMenuItem"
-        Me.ADToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ADToolStripMenuItem.Size = New System.Drawing.Size(90, 22)
         Me.ADToolStripMenuItem.Text = "AD"
         '
         'BSGradesToolStripMenuItem
@@ -319,19 +319,19 @@ Partial Class frmJobEntry
         'P20BSToolStripMenuItem
         '
         Me.P20BSToolStripMenuItem.Name = "P20BSToolStripMenuItem"
-        Me.P20BSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.P20BSToolStripMenuItem.Size = New System.Drawing.Size(109, 22)
         Me.P20BSToolStripMenuItem.Text = "P20 BS"
         '
         'P30BSToolStripMenuItem
         '
         Me.P30BSToolStripMenuItem.Name = "P30BSToolStripMenuItem"
-        Me.P30BSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.P30BSToolStripMenuItem.Size = New System.Drawing.Size(109, 22)
         Me.P30BSToolStripMenuItem.Text = "P30 BS"
         '
         'P35BSToolStripMenuItem
         '
         Me.P35BSToolStripMenuItem.Name = "P35BSToolStripMenuItem"
-        Me.P35BSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.P35BSToolStripMenuItem.Size = New System.Drawing.Size(109, 22)
         Me.P35BSToolStripMenuItem.Text = "P35 BS"
         '
         'ToolStripMenuItem2
@@ -344,19 +344,19 @@ Partial Class frmJobEntry
         'Pilot6ChToolStripMenuItem
         '
         Me.Pilot6ChToolStripMenuItem.Name = "Pilot6ChToolStripMenuItem"
-        Me.Pilot6ChToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Pilot6ChToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
         Me.Pilot6ChToolStripMenuItem.Text = "Pilot 6Ch"
         '
         'Pilot15ChToolStripMenuItem
         '
         Me.Pilot15ChToolStripMenuItem.Name = "Pilot15ChToolStripMenuItem"
-        Me.Pilot15ChToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Pilot15ChToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
         Me.Pilot15ChToolStripMenuItem.Text = "Pilot 15Ch"
         '
         'Pilot20ChToolStripMenuItem
         '
         Me.Pilot20ChToolStripMenuItem.Name = "Pilot20ChToolStripMenuItem"
-        Me.Pilot20ChToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Pilot20ChToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
         Me.Pilot20ChToolStripMenuItem.Text = "Pilot 20Ch"
         '
         'ReCheckToolStripMenuItem
@@ -525,21 +525,21 @@ Partial Class frmJobEntry
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(233, 254)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(219, 20)
+        Me.Label2.Size = New System.Drawing.Size(363, 33)
         Me.Label2.TabIndex = 184
-        Me.Label2.Text = "Enter Toatal Piolt Cheese "
+        Me.Label2.Text = "Enter Total Piolt Cheese "
         Me.Label2.Visible = False
         '
         'txtPilotCount
         '
-        Me.txtPilotCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPilotCount.Location = New System.Drawing.Point(458, 251)
+        Me.txtPilotCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPilotCount.Location = New System.Drawing.Point(592, 249)
         Me.txtPilotCount.MaxLength = 2
         Me.txtPilotCount.Name = "txtPilotCount"
-        Me.txtPilotCount.Size = New System.Drawing.Size(28, 26)
+        Me.txtPilotCount.Size = New System.Drawing.Size(44, 44)
         Me.txtPilotCount.TabIndex = 185
         Me.txtPilotCount.Visible = False
         '

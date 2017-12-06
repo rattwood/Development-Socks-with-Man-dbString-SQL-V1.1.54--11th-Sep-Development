@@ -188,7 +188,7 @@ Public Class frmCart1
             btnP30.Enabled = True
             btnP50.Enabled = True
             btnWaste.Visible = True
-
+            btnStdCheese.Visible = False
             lblBarley.Visible = True
             lblWaste.Visible = True
             lblZero.Visible = True
@@ -236,7 +236,7 @@ Public Class frmCart1
             btnP10.Visible = False
             btnP30.Visible = False
             btnP50.Visible = False
-
+            btnStdCheese.Visible = False
             lblBarley.Visible = False
             lblWaste.Visible = False
             lblZero.Visible = False
@@ -344,7 +344,7 @@ Public Class frmCart1
             End If
 
 
-            'CHECK FLT_S FLAG
+            'CHECK FLT_S FLA
             If frmDGV.DGVdata.Rows(rw - 1).Cells(43).Value = True Then
                 Me.Controls("btnCone" & rw).BackColor = Color.Red
                 Me.Controls("btnCone" & rw).Enabled = True
@@ -672,6 +672,7 @@ Public Class frmCart1
             Dim fltDrow = (varConeNum - coneNumOffset) - 1
 
             'THIS WILL CALL BACK THE FAULT DATA FROM THE DATAGRID
+
             chk_K.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_K").Value.ToString
             chk_D.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_D").Value.ToString
             chk_F.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_F").Value.ToString
@@ -2886,6 +2887,7 @@ Public Class frmCart1
 
             NoCone = 0
             StdCone = 0
+            stdState = 0
             defect = 0
             shortCone = 0
             varConeNum = 0

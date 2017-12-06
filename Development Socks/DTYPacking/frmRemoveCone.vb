@@ -11,7 +11,7 @@ Public Class frmRemoveCone
 
             chkBCode = TextBox1.Text
 
-            If frmJobEntry.txtGrade.Text = "A" Then
+            If frmJobEntry.txtGrade.Text = "Normal" Then
                 If chkBCode = frmPacking.bcodeScan Then
 
                     btnContinue.Enabled = True
@@ -28,7 +28,7 @@ Public Class frmRemoveCone
 
 
 
-            If frmJobEntry.txtGrade.Text <> "A" Then
+            If frmJobEntry.txtGrade.Text <> "Normal" Then
                 'Routine for non Grade A cheese
                 If chkBCode = frmB_AL_AD_W.bcodeScan Then
 
@@ -81,7 +81,7 @@ Public Class frmRemoveCone
             Label1.Text = "Not Grade " & "'" & frmJobEntry.txtGrade.Text & "'" & " Cheese"
             Me.Label5.Text = frmB_AL_AD_W.bcodeScan
         End If
-        Label1.Text = "Not Grade " & frmJobEntry.txtGrade.Text & " Cheese"
+
         Me.btnContinue.Enabled = False
         Me.KeyPreview = True  'Allows us to look for advace character from barcode
 

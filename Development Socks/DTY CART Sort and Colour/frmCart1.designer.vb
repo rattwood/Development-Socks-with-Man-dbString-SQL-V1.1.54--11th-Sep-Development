@@ -921,13 +921,14 @@ Partial Class frmCart1
         '
         'txtResult
         '
+        Me.txtResult.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtResult.Cursor = System.Windows.Forms.Cursors.Default
         Me.txtResult.Enabled = False
         Me.txtResult.Font = New System.Drawing.Font("Microsoft Sans Serif", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.txtResult.Location = New System.Drawing.Point(238, 554)
         Me.txtResult.Name = "txtResult"
         Me.txtResult.ReadOnly = True
-        Me.txtResult.Size = New System.Drawing.Size(87, 62)
+        Me.txtResult.Size = New System.Drawing.Size(87, 55)
         Me.txtResult.TabIndex = 83
         Me.txtResult.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '

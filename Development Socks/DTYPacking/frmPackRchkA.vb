@@ -10,24 +10,24 @@ Public Class frmPackRchkA
 
     '---------------------------------------    SETTING UP LOCAL INSTANCE FOR SQL LINK FOR DATAGRID TO SYNC CORRECTLY WITH SQL -------------------------------------
     Public LConn As New SqlConnection(My.Settings.SQLConn) 'This need to be changed in Project/Propertie/Settings
-        Private LCmd As SqlCommand
+    Private LCmd As SqlCommand
 
-        'SQL CONNECTORS
-        Public LDA As SqlDataAdapter
-        Public LDS As DataSet
-        Public LDT As DataTable
-        Public LCB As SqlCommandBuilder
+    'SQL CONNECTORS
+    Public LDA As SqlDataAdapter
+    Public LDS As DataSet
+    Public LDT As DataTable
+    Public LCB As SqlCommandBuilder
 
-        Public LRecordCount As Integer
-        Private LException As String
-        ' SQL QUERY PARAMETERS
-        Public LParams As New List(Of SqlParameter)
-        '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
+    Public LRecordCount As Integer
+    Private LException As String
+    ' SQL QUERY PARAMETERS
+    Public LParams As New List(Of SqlParameter)
+    '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-        Dim psorterror As String = 0
+
+
+    Dim psorterror As String = 0
         Dim varVisConeInspect As String
         Dim coneBarley As String = 0
         Dim coneZero As String = 0
@@ -107,7 +107,7 @@ Public Class frmPackRchkA
 
         For i = 1 To frmDGV.DGVdata.Rows.Count
 
-            If frmDGV.DGVdata.Rows(i - 1).Cells(83).Value = "AL" Or frmDGV.DGVdata.Rows(i - 1).Cells(83).Value = "A" Then toAllocatedCount = toAllocatedCount + 1
+            If frmDGV.DGVdata.Rows(i - 1).Cells(83).Value = "A" Then toAllocatedCount = toAllocatedCount + 1
 
         Next
 
@@ -119,28 +119,27 @@ Public Class frmPackRchkA
 
         'IF THIS IS AN EXISTING JOB THEN CALL BACK VALUES FROM DATABASE
         If frmJobEntry.coneValUpdate Then UpdateConeVal()
-        prgContinue()
-        Test()
 
-        Me.KeyPreview = True  'Allows us to look for advace character from barcode
+
+        'Me.KeyPreview = True  'Allows us to look for advance character from barcode
+        Me.KeyPreview = True
+
+
+
+
+
         txtConeBcode.Clear()
         txtConeBcode.Refresh()
         txtConeBcode.Focus()
 
     End Sub
 
-    Private Sub Test()
-
-        MsgBox("I am here")
-
-
-    End Sub
 
 
 
-    Private Sub UpdateConeVal()
+    Public Sub UpdateConeVal()
 
-        If My.Settings.debugSet Then frmDGV.Show()
+
 
 
         For rw As Integer = 1 To frmDGV.DGVdata.Rows.Count
@@ -148,7 +147,9 @@ Public Class frmPackRchkA
 
 
 
-            If (frmDGV.DGVdata.Rows(rw - 1).Cells(83).Value = "AL" Or frmDGV.DGVdata.Rows(rw - 1).Cells(83).Value = "A") And frmDGV.DGVdata.Rows(rw - 1).Cells("RECHK").Value = "4" Then
+            ' If (frmDGV.DGVdata.Rows(rw - 1).Cells(83).Value = "AL" Or frmDGV.DGVdata.Rows(rw - 1).Cells(83).Value = "A") And frmDGV.DGVdata.Rows(rw - 1).Cells("RECHK").Value = "4" Then
+
+            If (frmDGV.DGVdata.Rows(rw - 1).Cells(83).Value = "A") And frmDGV.DGVdata.Rows(rw - 1).Cells("RECHK").Value = "4" Then
                 Me.Controls("btnCone" & rw).BackColor = Color.Green       'Grade A Cone
             End If
 
@@ -157,6 +158,8 @@ Public Class frmPackRchkA
             End If
 
             Me.Controls("btnCone" & rw).Enabled = False
+
+
         Next
 
 
@@ -191,9 +194,9 @@ Public Class frmPackRchkA
         Dim today As String = DateAndTime.Today
         today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
 
+        MsgBox(txtConeBcode.Text & " I have arrived")
 
-
-        Dim endval = frmDGV.DGVdata.Rows.Count
+        Dim endval As Integer = frmDGV.DGVdata.Rows.Count
 
 
         For i = 1 To endval 'frmDGV.DGVdata.Rows.Count
@@ -219,7 +222,7 @@ Public Class frmPackRchkA
                 allocatedCount = allocatedCount + 1
                 endCheck()
                 curcone = 0
-
+                Exit For
             ElseIf frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = "5" Then
                 Label1.Visible = True
                 Label1.Text = "Cheese already allocated"
@@ -242,17 +245,17 @@ Public Class frmPackRchkA
                 'psorterror = 0
                 'curcone = 0
                 'Continue For
-            Else
-                txtConeBcode.Clear()
-                txtConeBcode.Refresh()
-                txtConeBcode.Focus()
+
 
             End If
 
-
-
-
         Next
+
+        txtConeBcode.Clear()
+        txtConeBcode.Refresh()
+        txtConeBcode.Focus()
+
+
     End Sub
 
     Private Sub DelayTM()
@@ -267,14 +270,10 @@ Public Class frmPackRchkA
         End Sub
 
 
-        Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-            'frmPackReport.Hide()
-
-        End Sub
 
 
-        Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
             If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
             frmDGV.DGVdata.ClearSelection()
             frmJobEntry.Show()
@@ -294,7 +293,7 @@ Public Class frmPackRchkA
 
                 frmPackRepMain.PackRepMainSub()
                 frmPackRepMain.Close()
-            'UpdateDatabase()
+            UpdateDatabase()
 
         End If
             Me.Cursor = System.Windows.Forms.Cursors.Default

@@ -1392,7 +1392,7 @@ Public Class frmPackTodayUpdate
                         Continue For
                     Else
                         nfree = rcount
-                        ncfree = colCount
+                        ncfree = colCount * ccount
                         Exit For
                     End If
                 Next
@@ -1402,13 +1402,14 @@ Public Class frmPackTodayUpdate
                         Continue For
                     Else
                         nfree = rcount
-                        ncfree = colCount
+                        ncfree = colCount * ccount
                         Exit For
                     End If
                 Next
             End If
         Next
 
+        MsgBox(colCount)
 
 
         'CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
@@ -1547,6 +1548,8 @@ Public Class frmPackTodayUpdate
                     MyTodyExcel.Cells(cellNum, ncfree - 2) = cartonNum
                     frmDGV.DGVdata.Rows(i - 1).Cells(61).Value = cartonNum
                     nfree = nfree + 1
+
+
                     'Increment the Col Number
                     If nfree = 72 And ncfree < 16 Then
                         ncfree = ncfree + 4
@@ -1940,53 +1943,54 @@ Public Class frmPackTodayUpdate
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
                 'If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+                If Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells(33).Value) Then
+                    If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = "1" Then
 
-                If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = "1" Then
+                        'WRITE CONE NUMBER TO SHEET
+                        MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
 
-                    'WRITE CONE NUMBER TO SHEET
-                    MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
+                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = modBarcode
+                        nfree = nfree + 1
 
-                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = modBarcode
-                    nfree = nfree + 1
-
-                    frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = "2"  'to show it has been added to the sheet and will not be read again
-
-
-                    'ROUTINE IF SHEET IS FULL TO COPY SHEET AND CREATE A NEW SHEET IN THE WORKBOOK
-
-                    If nfree = 41 Then
-                        Dim tmpsaveName As String
-
-                        tmpsaveName = (frmPackRepMain.finPath & "\" & frmPackRepMain.sheetName & "_" & mycount & ".xlsx")
-                        MyTodyExcel.DisplayAlerts = False
-                        xlTodyWorkbook.Sheets(mycount).SaveAs(Filename:=tmpsaveName, FileFormat:=51)
-
-                        MyTodyExcel.DisplayAlerts = True
-                        xlTodyWorkbook.Sheets(1).Copy(After:=xlTodyWorkbook.Sheets(mycount))
-                        'xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
-                        'CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
-
-                        'PRODUCT NAME
-                        MyTodyExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value
-                        'Product Code
-                        MyTodyExcel.Cells(5, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
-                        'Packer Name
-                        MyTodyExcel.Cells(42, 3) = frmJobEntry.txtOperator.Text
-                        'CREATE AND WRITE NEW BARCODE TO NEW SHEET
-                        mycount = mycount + 1
-                        createBarcode()
-                        MyTodyExcel.Cells(1, 3) = SheetCodeString
+                        frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = "2"  'to show it has been added to the sheet and will not be read again
 
 
+                        'ROUTINE IF SHEET IS FULL TO COPY SHEET AND CREATE A NEW SHEET IN THE WORKBOOK
 
-                        For x = 9 To 40
-                            MyTodyExcel.Cells(x, 3) = "" 'Clear the contents of cone cells
-                        Next
+                        If nfree = 41 Then
+                            Dim tmpsaveName As String
 
-                        nfree = 9
+                            tmpsaveName = (frmPackRepMain.finPath & "\" & frmPackRepMain.sheetName & "_" & mycount & ".xlsx")
+                            MyTodyExcel.DisplayAlerts = False
+                            xlTodyWorkbook.Sheets(mycount).SaveAs(Filename:=tmpsaveName, FileFormat:=51)
 
-                        Exit For
+                            MyTodyExcel.DisplayAlerts = True
+                            xlTodyWorkbook.Sheets(1).Copy(After:=xlTodyWorkbook.Sheets(mycount))
+                            'xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
+                            'CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
+                            'PRODUCT NAME
+                            MyTodyExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value
+                            'Product Code
+                            MyTodyExcel.Cells(5, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
+                            'Packer Name
+                            MyTodyExcel.Cells(42, 3) = frmJobEntry.txtOperator.Text
+                            'CREATE AND WRITE NEW BARCODE TO NEW SHEET
+                            mycount = mycount + 1
+                            createBarcode()
+                            MyTodyExcel.Cells(1, 3) = SheetCodeString
+
+
+
+                            For x = 9 To 40
+                                MyTodyExcel.Cells(x, 3) = "" 'Clear the contents of cone cells
+                            Next
+
+                            nfree = 9
+
+                            Exit For
+
+                        End If
                     End If
                 End If
             Next

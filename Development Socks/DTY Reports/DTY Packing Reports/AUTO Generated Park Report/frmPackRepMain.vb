@@ -26,6 +26,11 @@ Public Class frmPackRepMain
 
     Public Sub PackRepMainSub()
 
+        If My.Settings.debugSet Then
+            frmPackTodayUpdate.Show()
+        End If
+
+
         'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
         prodNameMod = frmDGV.DGVdata.Rows(0).Cells(52).Value.ToString
         prodNameMod = prodNameMod.Replace("/", "_")

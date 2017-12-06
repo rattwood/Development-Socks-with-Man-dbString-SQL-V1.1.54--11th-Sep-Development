@@ -159,7 +159,7 @@ Public Class frmJobEntry
             txtLotNumber.Visible = True
         End If
 
-        If stdcheck Then lblScanType.Text = "Scan First Cheese on Cart"
+        If stdcheck Or txtGrade.Text = "ReCheck" Then lblScanType.Text = "Scan First Cheese on Cart"
 
 
 
@@ -217,7 +217,7 @@ Public Class frmJobEntry
                 stdcheck = 0
                 reCheck = 1
                 dbBarcode = txtLotNumber.Text
-                MsgBox(txtLotNumber.Text.Substring(12, 1))
+
             ElseIf txtLotNumber.Text.Substring(12, 1) = "B" Then
                 chkBCode = txtLotNumber.Text.Substring(12, 1)
                 '
@@ -410,6 +410,7 @@ Public Class frmJobEntry
             year = txtLotNumber.Text.Substring(3, 2)
             month = txtLotNumber.Text.Substring(5, 2)
             varJobNum = txtLotNumber.Text
+
             reCheckJob()
         Else
             If My.Settings.chkUseColour Or My.Settings.chkUseSort Then CheckJob()
@@ -565,11 +566,13 @@ Public Class frmJobEntry
             End Select
         ElseIf My.Settings.chkUseSort And txtGrade.Text = "ReCheck" Then
             LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 10")
-
         Else
-            LExecQuery("SELECT * FROM jobs WHERE BCODECONE = '" & dbBarcode & "' and (M30 > 0 Or P30 > 0) ")
+            LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "'  ")
         End If
 
+        'If reCheck Then
+        '    LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' ")
+        'End If
 
 
         If LRecordCount > 0 Then
@@ -740,9 +743,9 @@ Public Class frmJobEntry
                & "MCNAME, PRODNAME, BCODEJOB,OPPACKSORT,OPPACK,OPSORT,PSORTERROR,WEIGHTERROR,WEIGHT,CARTONNUM,SORTERROR,COLOURERROR,DYEFLECK," _
                & "COLDEF, COLWASTE, FLT_DO, FLT_DH, FLT_CL, FLT_FI, FLT_YN, FLT_HT, FLT_LT, CONEAD, CONEAL) " _
               & "VALUES ('" & varMachineCode & "', '" & varProductCode & "','" & varYear & "','" & varMonth & "','" & varDoffingNum & "','" & modConeNum & "'," _
-              & "'" & mergeNum & "',  ' ', ' 0', ' 0', ' 0', ' 0', '" & varCartSelect & "','" & cartName & "', ' 0', ' 0', ' 0', ' 0', ' 0', ' 0', ' 0', ' 0','" & today & "','" & dbBarcode & "','" & coneBarcode & "'," _
-             & "' False', ' False', ' False', ' False', ' False', ' False', ' False', ' False', ' False', ' False', ' False', ' False', ' False', ' False', '" & varMachineName & "','" & varProductName & "', '" & JobBarcode & "'," _
-             & "' 0',' 0',' 0',' 0',' 0',' 0',' 0',' 0',' 0',' 0',' 0',' 0',' False',' False',' False',' False',' False',' False',' False',' 0',' 0')")
+              & "'" & mergeNum & "',  ' ', '0', '0', '0', '0', '" & varCartSelect & "','" & cartName & "', '0', '0', '0', '0', '0', '0', '0', '0','" & today & "','" & dbBarcode & "','" & coneBarcode & "'," _
+             & "'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', '" & varMachineName & "','" & varProductName & "', '" & JobBarcode & "'," _
+             & "'0','0','0','0','0','0','0','0','0','0','0','0','False','False','False','False','False','False','False',' 0',' 0')")
 
 
         Next
@@ -1162,7 +1165,7 @@ Public Class frmJobEntry
         Select Case txtGrade.Text
             Case "A"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And RECHK = 4 And DEFCONE = 0 And CONEBARLEY = 0 And (CONEAL = 'AL' OR RECHKRESULT = 'A') And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & txtLotNumber.Text & "'  And RECHK = 4 And  PACKENDTM is Null")
             Case "B"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8  And (DEFCONE > 0 OR CONEBARLEY > 0 ) And FLT_W = 'False' And PACKENDTM is Null ")
@@ -1266,13 +1269,13 @@ Public Class frmJobEntry
 
             Case "A"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And RECHK = 4 And DEFCONE = 0 And CONEBARLEY = 0 And (CONEAL = 'AL' OR RECHKRESULT = 'A') And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & txtLotNumber.Text & "' And  RECHK = 4  And PACKENDTM is Null")
             Case "B"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8  And DEFCONE > 0 And FLT_W = 'False' And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And CONEBARLEY > 0 And PACKENDTM is Null")
             Case "AL"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And (CONEAL = 'AL' OR RECHKRESULT = 'A')  And RECHK = 4 And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAL = 'AL'   And RECHK = 4 And PACKENDTM is Null")
             Case "AD"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAD = 'AD' And RECHK = 4 And PACKENDTM is Null")
@@ -1300,6 +1303,7 @@ Public Class frmJobEntry
             If txtGrade.Text = "A" Then
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE by our own index
                 frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
+
             Else
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
                 frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(0), ListSortDirection.Ascending)  'sorts On cone number
@@ -1323,8 +1327,8 @@ Public Class frmJobEntry
 
 
 
-        Me.Hide()
-        If My.Settings.debugSet Then frmDGV.Show()
+
+
 
         If txtGrade.Text = "A" Then
             frmPackRchkA.txtConeBcode.Clear()
