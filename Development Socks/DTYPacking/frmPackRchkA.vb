@@ -7,23 +7,23 @@ Imports System.Data.SqlClient
 
 Public Class frmPackRchkA
 
-    Private SQL As New SQLConn
+    'Private SQL As New SQLConn
 
-    '---------------------------------------    SETTING UP LOCAL INSTANCE FOR SQL LINK FOR DATAGRID TO SYNC CORRECTLY WITH SQL -------------------------------------
-    Public LConn As New SqlConnection(My.Settings.SQLConn) 'This need to be changed in Project/Propertie/Settings
-    Private LCmd As SqlCommand
+    ''---------------------------------------    SETTING UP LOCAL INSTANCE FOR SQL LINK FOR DATAGRID TO SYNC CORRECTLY WITH SQL -------------------------------------
+    'Public LConn As New SqlConnection(My.Settings.SQLConn) 'This need to be changed in Project/Propertie/Settings
+    'Private LCmd As SqlCommand
 
-    'SQL CONNECTORS
-    Public LDA As SqlDataAdapter
-    Public LDS As DataSet
-    Public LDT As DataTable
-    Public LCB As SqlCommandBuilder
+    ''SQL CONNECTORS
+    'Public LDA As SqlDataAdapter
+    'Public LDS As DataSet
+    'Public LDT As DataTable
+    'Public LCB As SqlCommandBuilder
 
-    Public LRecordCount As Integer
-    Private LException As String
-    ' SQL QUERY PARAMETERS
-    Public LParams As New List(Of SqlParameter)
-    '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    'Public LRecordCount As Integer
+    'Private LException As String
+    '' SQL QUERY PARAMETERS
+    'Public LParams As New List(Of SqlParameter)
+    ''-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -68,8 +68,8 @@ Public Class frmPackRchkA
 
 
     Private Sub frmPackRchkA_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        frmDGV.DGVdata.ClearSelection()
-        frmDGV.Close()
+        'frmDGV.DGVdata.ClearSelection()
+        'frmDGV.Close()
 
         Dim btnNum As Integer
         Dim btnNums As String
@@ -87,7 +87,7 @@ Public Class frmPackRchkA
 
 
 
-        LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & frmJobEntry.txtLotNumber.Text & "' And  RECHK = 4  And PACKENDTM is Null")
+        'LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & frmJobEntry.txtLotNumber.Text & "' And  RECHK = 4  And PACKENDTM is Null")
 
         ''If LRecordCount > 0 Then
         ''LOAD THE DATA FROM dB IN TO THE DATAGRID
@@ -101,17 +101,17 @@ Public Class frmPackRchkA
 
         'If LRecordCount > 0 Then
         'LOAD THE DATA FROM dB IN TO THE DATAGRID
-        DataGridView1.DataSource = LDS.Tables(0)
-        DataGridView1.Rows(0).Selected = True
-        Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
+        ' DataGridView1.DataSource = LDS.Tables(0)
+        'DataGridView1.Rows(0).Selected = True
+        ' Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
 
         'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE by our own index
-        DataGridView1.Sort(DataGridView1.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
+        ' DataGridView1.Sort(DataGridView1.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
 
 
 
 
-        frmDGV.Show()
+        'frmDGV.Show()
 
 
         MsgBox("I am here")
@@ -200,42 +200,42 @@ Public Class frmPackRchkA
 
     End Sub
 
-    Public Sub LExecQuery(Query As String)
-        ' RESET QUERY STATISTCIS
-        LRecordCount = 0
-        LException = ""
+    'Public Sub LExecQuery(Query As String)
+    '    ' RESET QUERY STATISTCIS
+    '    LRecordCount = 0
+    '    LException = ""
 
 
-        If LConn.State = ConnectionState.Open Then LConn.Close()
-        Try
+    '    If LConn.State = ConnectionState.Open Then LConn.Close()
+    '    Try
 
-            'OPEN SQL DATABSE CONNECTION
-            LConn.Open()
+    '        'OPEN SQL DATABSE CONNECTION
+    '        LConn.Open()
 
-            'CREATE SQL COMMAND
-            LCmd = New SqlCommand(Query, LConn)
+    '        'CREATE SQL COMMAND
+    '        LCmd = New SqlCommand(Query, LConn)
 
-            'LOAD PARAMETER INTO SQL COMMAND
-            LParams.ForEach(Sub(p) LCmd.Parameters.Add(p))
+    '        'LOAD PARAMETER INTO SQL COMMAND
+    '        LParams.ForEach(Sub(p) LCmd.Parameters.Add(p))
 
-            'CLEAR PARAMETER LIST
-            LParams.Clear()
+    '        'CLEAR PARAMETER LIST
+    '        LParams.Clear()
 
-            'EXECUTE COMMAND AND FILL DATASET
-            LDS = New DataSet
-            LDT = New DataTable
-            LDA = New SqlDataAdapter(LCmd)
+    '        'EXECUTE COMMAND AND FILL DATASET
+    '        LDS = New DataSet
+    '        LDT = New DataTable
+    '        LDA = New SqlDataAdapter(LCmd)
 
-            LRecordCount = LDA.Fill(LDS)
+    '        LRecordCount = LDA.Fill(LDS)
 
-        Catch ex As Exception
+    '    Catch ex As Exception
 
-            LException = "ExecQuery Error: " & vbNewLine & ex.Message
-            MsgBox(LException)
+    '        LException = "ExecQuery Error: " & vbNewLine & ex.Message
+    '        MsgBox(LException)
 
-        End Try
+    '    End Try
 
-    End Sub
+    'End Sub
 
 
 
@@ -250,7 +250,7 @@ Public Class frmPackRchkA
 
 
 
-    Public Sub prgContinue()
+    Private Sub prgContinue()
 
 
 
@@ -341,8 +341,8 @@ Public Class frmPackRchkA
 
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        If LConn.State = ConnectionState.Open Then LConn.Close()
-        If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
+        'If LConn.State = ConnectionState.Open Then LConn.Close()
+        ' If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
         frmDGV.DGVdata.ClearSelection()
         frmDGV.DGVdata.ClearSelection()
         frmJobEntry.Show()
@@ -395,7 +395,7 @@ Public Class frmPackRchkA
             MsgBox("Update Error: " & vbNewLine & ex.Message)
         End Try
 
-        If LConn.State = ConnectionState.Open Then LConn.Close()
+        'If LConn.State = ConnectionState.Open Then LConn.Close()
 
         If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
         frmDGV.DGVdata.ClearSelection()

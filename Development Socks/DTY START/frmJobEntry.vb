@@ -151,15 +151,40 @@ Public Class frmJobEntry
         End If
 
 
-        If My.Settings.chkUsePack = False Or stdcheck = 0 Then
-            lblScanType.Text = "Scan Job Sheet"
-            txtLotNumber.Visible = True
-        Else
-            lblScanType.Text = "Scan First Cheese on Cart"
-            txtLotNumber.Visible = True
-        End If
+        'If My.Settings.chkUsePack = False Or stdcheck = 0 Then
+        '    lblScanType.Text = "Scan Job Sheet"
+        '    txtLotNumber.Visible = True
+        'Else
+        '    lblScanType.Text = "Scan First Cheese on Cart"
+        '    txtLotNumber.Visible = True
+        'End If
 
-        If stdcheck Or txtGrade.Text = "ReCheck" Then lblScanType.Text = "Scan First Cheese on Cart"
+        'If stdcheck Or txtGrade.Text = "ReCheck" Then lblScanType.Text = "Scan First Cheese on Cart"
+        If My.Settings.chkUseColour Then txtGrade.Text = "Normal"  'Fix grade value for colour check
+
+        'New section to display correct text for scan type
+        Select Case txtGrade.Text
+            Case "A", "Normal", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch"
+                lblScanType.Text = "Scan Job Sheet"
+                txtLotNumber.Visible = True
+            Case "P15 AS", "P25 AS", "P35 AS"
+                lblScanType.Text = "Scan First Cheese on Cart"
+                txtLotNumber.Visible = True
+            Case "P20 BS", "P30 BS", "P35 BS"
+                lblScanType.Text = "Scan First Cheese on Cart"
+                txtLotNumber.Visible = True
+            Case "B", "AL", "AD"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "ReCheck" 'And My.Settings.chkUsePack
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "Round1", "Round2", "Round3", "STD"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+        End Select
+
+
 
 
 
@@ -189,12 +214,13 @@ Public Class frmJobEntry
 
         Dim chkBCode As String
         Dim chkBCode2 As String
-        'Routine to check Barcode is TRUE
 
+
+        'Routine to check Barcode is TRUE
         'Check to see if PILOT Cheese, if it is force operatoer to select correct packing grade.
         If My.Settings.chkUsePack = True And txtLotNumber.Text.Substring(0, 2) = "29" Then
             If txtGrade.Text.Substring(0, 1) = "" Or txtGrade.Text.Substring(0, 5) <> "Pilot" Then
-                MsgBox("This is a PILOT Machine job Please select correct" & vbCrLf & "Packing grade from Menu and Try Again")
+                MsgBox("This Is a PILOT Machine job Please Select correct" & vbCrLf & "Packing grade from Menu And Try Again")
                 txtLotNumber.Clear()
                 txtLotNumber.Focus()
                 Exit Sub
@@ -202,10 +228,10 @@ Public Class frmJobEntry
         End If
 
 
-            Try
+        Try
 
             chkBCode = txtLotNumber.Text.Substring(9, 1)
-                chkBCode2 = txtLotNumber.Text.Substring(9, 3)
+            chkBCode2 = txtLotNumber.Text.Substring(9, 3)
 
 
 
@@ -223,30 +249,119 @@ Public Class frmJobEntry
                 '
                 ' If chkBCode = "B" Then
                 stdcheck = 0
-                    reCheck = 0
-                    If txtLotNumber.TextLength > 14 Then  ' For carts B10,11 & 12
-                        cartNum = txtLotNumber.Text.Substring(12, 3)
-                    Else
-                        cartNum = txtLotNumber.Text.Substring(12, 2)
-                    End If
+                reCheck = 0
+                If txtLotNumber.TextLength > 14 Then  ' For carts B10,11 & 12
+                    cartNum = txtLotNumber.Text.Substring(12, 3)
                 Else
-                    MsgBox("This is not a CART Barcode Please RE Scan")
-                    Me.txtLotNumber.Clear()
-
-                    Me.txtLotNumber.Focus()
-                    Me.txtLotNumber.Refresh()
-                    Exit Sub
+                    cartNum = txtLotNumber.Text.Substring(12, 2)
                 End If
-
-        Catch ex As Exception
-                MsgBox("BarCcode Is Not Valid")
+            Else
+                MsgBox("This Is Not a CART Barcode Please RE Scan")
                 Me.txtLotNumber.Clear()
+
                 Me.txtLotNumber.Focus()
                 Me.txtLotNumber.Refresh()
                 Exit Sub
-            End Try
+            End If
 
-            CreateJob()
+        Catch ex As Exception
+            MsgBox("BarCcode Is Not Valid")
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Focus()
+            Me.txtLotNumber.Refresh()
+            Exit Sub
+        End Try
+
+
+
+
+
+        'New section to display correct text for scan type
+        'Select Case txtGrade.Text
+        '    Case "A", "Normal", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch"
+        '        chkBCode = txtLotNumber.Text.Substring(12, 1)
+
+        '        'ROUTINE TO CHECK IF CORRECT FORM IS SELECTED FOR PACKING PILOT CHEESE
+        '        If My.Settings.chkUsePack = True And txtLotNumber.Text.Substring(0, 2) = "29" Then
+        '            If txtGrade.Text.Substring(0, 1) = "" Or txtGrade.Text.Substring(0, 5) <> "Pilot" Then
+        '                MsgBox("This Is a PILOT Machine job Please Select correct" & vbCrLf & "Packing grade from Menu And Try Again")
+        '                txtLotNumber.Clear()
+        '                txtLotNumber.Focus()
+        '                Exit Sub
+        '            End If
+        '        End If
+
+        '        If chkBCode = "B" Then
+        '            stdcheck = 0
+        '            reCheck = 0
+        '            If txtLotNumber.TextLength > 14 Then  ' For carts B10,11 & 12
+        '                cartNum = txtLotNumber.Text.Substring(12, 3)
+        '            Else
+        '                cartNum = txtLotNumber.Text.Substring(12, 2)
+        '            End If
+        '        Else
+        '            MsgBox("This Is Not a CART Barcode Please RE Scan")
+        '            Me.txtLotNumber.Clear()
+        '            Me.txtLotNumber.Focus()
+        '            Me.txtLotNumber.Refresh()
+        '            Exit Sub
+        '        End If
+
+
+
+
+        '    Case "P15 AS", "P25 AS", "P35 AS"   'This only relates to Packing
+        '        chkBCode = txtLotNumber.Text.Substring(12, 1)
+
+        '    Case "P20 BS", "P30 BS", "P35 BS" 'This only relates to Packing
+        '        chkBCode = txtLotNumber.Text.Substring(12, 1)
+
+        '    Case "B", "AL", "AD" 'This only relates to Packing
+        '        chkBCode = txtLotNumber.Text.Substring(12, 1)
+
+        '    Case "ReCheck" And My.Settings.chkUsePack
+        '        chkBCode = txtLotNumber.Text.Substring(9, 1)
+        '        If chkBCode = "R" Then
+        '            stdcheck = 0
+        '            reCheck = 1
+        '            dbBarcode = txtLotNumber.Text
+        '        End If
+
+        '   ' Case "ReCheck"
+
+        '    Case "Round1", "Round2", "Round3", "STD"
+        '        chkBCode = txtLotNumber.Text.Substring(9, 1)
+        '        chkBCode2 = txtLotNumber.Text.Substring(9, 3)
+
+        '        If chkBCode2 = "R11" Or chkBCode2 = "R12" Or chkBCode2 = "R21" Or chkBCode2 = "R31" Or chkBCode2 = "STD" Then  ' we must check this way first otherwise we will always get R and use recheck
+        '            reCheck = 0
+        '            stdcheck = 1
+        '            dbBarcode = txtLotNumber.Text
+        '        Else
+        '            MsgBox("BarCcode Is Not Valid")
+        '            Me.txtLotNumber.Clear()
+        '            Me.txtLotNumber.Focus()
+        '            Me.txtLotNumber.Refresh()
+        '            Exit Sub
+        '        End If
+
+        'End Select
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        CreateJob()
 
 
     End Sub
@@ -510,6 +625,7 @@ Public Class frmJobEntry
                 PilCount()
                 Exit Sub
             End If
+
             CreatNewJob()
 
             If quit Then
@@ -1657,6 +1773,7 @@ Public Class frmJobEntry
         lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
+    'THIS IS THE PACKING RECHECK CREATE RECHECK FORM OPTION
     Private Sub ReCheckToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReCheckToolStripMenuItem.Click
         txtGrade.Text = ReCheckToolStripMenuItem.Text
         lblSelectGrade.Visible = False
