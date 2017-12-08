@@ -131,6 +131,7 @@ Public Class frmPrintCartReport
 
 
         Dim missCount As Integer = 0   'VAR TO COUNT MISSING CONES
+        Dim stdCount As Integer = 0   ' VAR TO COUNT STD CHEESE
         Dim JudCount As Integer = 0
         Dim gradeACount, gradeASCount, gradeDefCount As Integer
 
@@ -162,11 +163,11 @@ Public Class frmPrintCartReport
                 MyExcel.Cells(exNcRw, exNcCl) = exSTDVal
                 If exNcRw = 12 Then
                     exNcCl = exNcCl + 1
-                    missCount = missCount + 1
+                    stdCount = stdCount + 1
                     exNcRw = 9
                 Else
                     exNcRw = exNcRw + 1
-                    missCount = missCount + 1
+                    stdCount = stdCount + 1
                 End If
             End If
 
@@ -395,15 +396,16 @@ Public Class frmPrintCartReport
         Next
 
         'TOTALMISSING CONES
-        MyExcel.Cells(6, 18) = JudCount
+        MyExcel.Cells(5, 18) = JudCount
         'TOTAL OF CONES ON CART  192 LESS MISSING CONES
-        MyExcel.Cells(8, 19) = (frmJobEntry.LRecordCount - missCount)
+        MyExcel.Cells(7, 19) = (frmJobEntry.LRecordCount - missCount)
         'TOTAL OF GRADE A FULL CONES
-        MyExcel.Cells(35, 9) = gradeACount
+        MyExcel.Cells(35, 9) = gradeACount - stdCount
         'TOTAL SHORT GRADE A CONES
         MyExcel.Cells(36, 9) = gradeASCount
         'TOTAL SORT DEFECT CONES
         MyExcel.Cells(37, 9) = gradeDefCount
+        MyExcel.Cells(38, 9) = stdCount
 
         'Routine to get the product weight
         Dim prNum As String = DGVcartReport.Rows(0).Cells(2).Value.ToString
