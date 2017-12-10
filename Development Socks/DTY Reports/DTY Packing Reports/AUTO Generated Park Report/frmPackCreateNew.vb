@@ -77,27 +77,27 @@ Public Class frmPackCreateNew
                                 'This will write date to the first two cone columns
                                 colcount = 4
                                 For ccount = 1 To 2
-                                    For rcount = 11 To 41
-                                        MyPakExcel.Cells(rcount, colcount) = frmPackRepMain.prevDays
-                                    Next
-                                    colcount = colcount + 4
+                            For rcount = 12 To 41
+                                MyPakExcel.Cells(rcount, colcount) = frmPackRepMain.prevDays
+                            Next
+                            colcount = colcount + 4
                                 Next
 
                                 If frmPackPrvGet.nfree > 0 Then
                                     nfree = frmPackPrvGet.nfree
-                                    For usedrow = 11 To nfree - 1
-                                        MyPakExcel.Cells(usedrow, 12) = frmPackRepMain.prevDays
-                                    Next
+                            For usedrow = 12 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 12) = frmPackRepMain.prevDays
+                            Next
 
-                                End If
+                        End If
                             Case 8
-                                'This will write date to the first One cone columns
-                                For rcount = 11 To 41
-                                    MyPakExcel.Cells(rcount, 4) = frmPackRepMain.prevDays
-                                Next
+                        'This will write date to the first One cone columns
+                        For rcount = 12 To 41
+                            MyPakExcel.Cells(rcount, 4) = frmPackRepMain.prevDays
+                        Next
 
 
-                                If frmPackPrvGet.nfree > 0 Then
+                        If frmPackPrvGet.nfree > 0 Then
                                     nfree = frmPackPrvGet.nfree
                                     For usedrow = 11 To nfree - 1
                                         MyPakExcel.Cells(usedrow, 8) = frmPackRepMain.prevDays
@@ -108,10 +108,10 @@ Public Class frmPackCreateNew
 
                                 If frmPackPrvGet.nfree > 0 Then
                                     nfree = frmPackPrvGet.nfree
-                                    For usedrow = 11 To nfree - 1
-                                        MyPakExcel.Cells(usedrow, 4) = frmPackRepMain.prevDays
-                                    Next
-                                End If
+                            For usedrow = 12 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 4) = frmPackRepMain.prevDays
+                            Next
+                        End If
                         End Select
 
                         createBarcode()
@@ -147,33 +147,33 @@ Public Class frmPackCreateNew
 
                                 If frmPackPrvGet.nfree > 0 Then
                                     nfree = frmPackPrvGet.nfree
-                                    For usedrow = 11 To nfree - 1
-                                        MyPakExcel.Cells(usedrow, 12) = frmPackRepMain.prevDays
-                                    Next
+                            For usedrow = 12 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 12) = frmPackRepMain.prevDays
+                            Next
 
-                                End If
+                        End If
                             Case 8
-                                'This will write date to the first One cone columns
-                                For rcount = 11 To 51
-                                    MyPakExcel.Cells(rcount, 4) = frmPackRepMain.prevDays
-                                Next
+                        'This will write date to the first One cone columns
+                        For rcount = 12 To 51
+                            MyPakExcel.Cells(rcount, 4) = frmPackRepMain.prevDays
+                        Next
 
 
-                                If frmPackPrvGet.nfree > 0 Then
+                        If frmPackPrvGet.nfree > 0 Then
                                     nfree = frmPackPrvGet.nfree
-                                    For usedrow = 11 To nfree - 1
-                                        MyPakExcel.Cells(usedrow, 8) = frmPackRepMain.prevDays
-                                    Next
+                            For usedrow = 12 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 8) = frmPackRepMain.prevDays
+                            Next
 
-                                End If
+                        End If
                             Case 4
 
                                 If frmPackPrvGet.nfree > 0 Then
                                     nfree = frmPackPrvGet.nfree
-                                    For usedrow = 11 To nfree - 1
-                                        MyPakExcel.Cells(usedrow, 4) = frmPackRepMain.prevDays
-                                    Next
-                                End If
+                            For usedrow = 12 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 4) = frmPackRepMain.prevDays
+                            Next
+                        End If
                         End Select
 
 
@@ -200,60 +200,60 @@ Public Class frmPackCreateNew
                                 'This will write date to the first three cone columns
                                 colcount = 4
                                 For ccount = 1 To 3
-                                    For rcount = 13 To 66
-                                        MyPakExcel.Cells(rcount, colcount) = frmPackRepMain.prevDays
-                                    Next
-                                    colcount = colcount + 4
+                            For rcount = 14 To 52
+                                MyPakExcel.Cells(rcount, colcount) = frmPackRepMain.prevDays
+                            Next
+                            colcount = colcount + 4
                                 Next
 
                                 If frmPackPrvGet.nfree > 0 Then
                                     nfree = frmPackPrvGet.nfree
-                                    For usedrow = 13 To nfree - 1
-                                        MyPakExcel.Cells(usedrow, 16) = frmPackRepMain.prevDays
-                                    Next
+                            For usedrow = 14 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 16) = frmPackRepMain.prevDays
+                            Next
 
-                                End If
+                        End If
 
                             Case 12
                                 colcount = 4
                                 For ccount = 1 To 2
-                                    For rcount = 13 To 66
-                                        MyPakExcel.Cells(rcount, colcount) = frmPackRepMain.prevDays
-                                    Next
-                                    colcount = colcount + 4
+                            For rcount = 14 To 65
+                                MyPakExcel.Cells(rcount, colcount) = frmPackRepMain.prevDays
+                            Next
+                            colcount = colcount + 4
                                 Next
 
                                 If frmPackPrvGet.nfree > 0 Then
                                     nfree = frmPackPrvGet.nfree
-                                    For usedrow = 13 To nfree - 1
-                                        MyPakExcel.Cells(usedrow, 16) = frmPackRepMain.prevDays
-                                    Next
+                            For usedrow = 14 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 16) = frmPackRepMain.prevDays
+                            Next
 
-                                End If
+                        End If
 
 
                             Case 8
-                                'This will write date to the first One cone columns
-                                For rcount = 13 To 66
-                                    MyPakExcel.Cells(rcount, 4) = frmPackRepMain.prevDays
-                                Next
+                        'This will write date to the first One cone columns
+                        For rcount = 14 To 65
+                            MyPakExcel.Cells(rcount, 4) = frmPackRepMain.prevDays
+                        Next
 
 
-                                If frmPackPrvGet.nfree > 0 Then
+                        If frmPackPrvGet.nfree > 0 Then
                                     nfree = frmPackPrvGet.nfree
-                                    For usedrow = 13 To nfree - 1
-                                        MyPakExcel.Cells(usedrow, 8) = frmPackRepMain.prevDays
-                                    Next
+                            For usedrow = 14 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 8) = frmPackRepMain.prevDays
+                            Next
 
-                                End If
+                        End If
                             Case 4
 
                                 If frmPackPrvGet.nfree > 0 Then
                                     nfree = frmPackPrvGet.nfree
-                                    For usedrow = 13 To nfree - 1
-                                        MyPakExcel.Cells(usedrow, 4) = frmPackRepMain.prevDays
-                                    Next
-                                End If
+                            For usedrow = 14 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 4) = frmPackRepMain.prevDays
+                            Next
+                        End If
                         End Select
 
 
@@ -334,7 +334,9 @@ Public Class frmPackCreateNew
                     Next
 
                 End If
+
             Case "Pilot 15Ch"
+                nfree = 12
                 'Product Name
                 MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value
                 'Product Code
@@ -348,6 +350,70 @@ Public Class frmPackCreateNew
                 'Add Barcode to Sheet
                 createBarcode()
                 MyPakExcel.Cells(1, 4) = SheetCodeString
+
+                'THIS IS USED TO WRITE DATE IN TO USED ROWS
+                Select Case frmPackPrvGet.ncfree
+                    Case 16
+                        'This will write date to the first three cone columns
+                        colcount = 4
+                        For ccount = 1 To 3
+                            For rcount = 12 To 71
+                                MyPakExcel.Cells(rcount, colcount) = frmPackRepMain.prevDays
+                            Next
+                            colcount = colcount + 4
+                        Next
+
+                        If frmPackPrvGet.nfree > 0 Then
+                            nfree = frmPackPrvGet.nfree
+                            For usedrow = 12 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 16) = frmPackRepMain.prevDays
+                            Next
+
+                        End If
+
+                    Case 12
+                        colcount = 4
+                        For ccount = 1 To 2
+                            For rcount = 12 To 71
+                                MyPakExcel.Cells(rcount, colcount) = frmPackRepMain.prevDays
+                            Next
+                            colcount = colcount + 4
+                        Next
+
+                        If frmPackPrvGet.nfree > 0 Then
+                            nfree = frmPackPrvGet.nfree
+                            For usedrow = 12 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 12) = frmPackRepMain.prevDays
+                            Next
+
+                        End If
+
+
+                    Case 8
+                        'This will write date to the first One cone columns
+                        For rcount = 12 To 71
+                            MyPakExcel.Cells(rcount, 4) = frmPackRepMain.prevDays
+                        Next
+
+
+                        If frmPackPrvGet.nfree > 0 Then
+                            nfree = frmPackPrvGet.nfree
+                            For usedrow = 12 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 8) = frmPackRepMain.prevDays
+                            Next
+
+                        End If
+                    Case 4
+
+                        If frmPackPrvGet.nfree > 0 Then
+                            nfree = frmPackPrvGet.nfree
+                            For usedrow = 12 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 4) = frmPackRepMain.prevDays
+                            Next
+                        End If
+                End Select
+
+
 
             Case "Pilot 20Ch"
                 'Product Name
@@ -364,6 +430,87 @@ Public Class frmPackCreateNew
                 createBarcode()
                 MyPakExcel.Cells(1, 4) = SheetCodeString
 
+                'THIS IS USED TO WRITE DATE IN TO USED ROWS
+                Select Case frmPackPrvGet.ncfree
+
+                    Case 20
+                        'This will write date to the first three cone columns
+                        colcount = 4
+                        For ccount = 1 To 4
+                            For rcount = 12 To 71
+                                MyPakExcel.Cells(rcount, colcount) = frmPackRepMain.prevDays
+                            Next
+                            colcount = colcount + 4
+                        Next
+
+                        If frmPackPrvGet.nfree > 0 Then
+                            nfree = frmPackPrvGet.nfree
+                            For usedrow = 12 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 20) = frmPackRepMain.prevDays
+                            Next
+
+                        End If
+                    Case 16
+                        'This will write date to the first three cone columns
+                        colcount = 4
+                        For ccount = 1 To 3
+                            For rcount = 12 To 71
+                                MyPakExcel.Cells(rcount, colcount) = frmPackRepMain.prevDays
+                            Next
+                            colcount = colcount + 4
+                        Next
+
+                        If frmPackPrvGet.nfree > 0 Then
+                            nfree = frmPackPrvGet.nfree
+                            For usedrow = 12 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 16) = frmPackRepMain.prevDays
+                            Next
+
+                        End If
+
+                    Case 12
+                        colcount = 4
+                        For ccount = 1 To 2
+                            For rcount = 12 To 71
+                                MyPakExcel.Cells(rcount, colcount) = frmPackRepMain.prevDays
+                            Next
+                            colcount = colcount + 4
+                        Next
+
+                        If frmPackPrvGet.nfree > 0 Then
+                            nfree = frmPackPrvGet.nfree
+                            For usedrow = 12 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 12) = frmPackRepMain.prevDays
+                            Next
+
+                        End If
+
+
+                    Case 8
+                        'This will write date to the first One cone columns
+                        For rcount = 13 To 66
+                            MyPakExcel.Cells(rcount, 4) = frmPackRepMain.prevDays
+                        Next
+
+
+                        If frmPackPrvGet.nfree > 0 Then
+                            nfree = frmPackPrvGet.nfree
+                            For usedrow = 12 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 8) = frmPackRepMain.prevDays
+                            Next
+
+                        End If
+                    Case 4
+
+                        If frmPackPrvGet.nfree > 0 Then
+                            nfree = frmPackPrvGet.nfree
+                            For usedrow = 12 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 4) = frmPackRepMain.prevDays
+                            Next
+                        End If
+                End Select
+
+
 
         End Select
 
@@ -371,16 +518,6 @@ Public Class frmPackCreateNew
                 If boxCount = 0 Then boxCount = 1
 
 
-        'THIS IS USED TO WRITE DATE IN TO USED ROWS
-        If frmPackPrvGet.nfree > 0 Then
-            nfree = frmPackPrvGet.nfree
-            For usedrow = 13 To nfree - 1
-                MyPakExcel.Cells(usedrow, 4) = frmPackRepMain.prevDays
-            Next
-
-        End If
-
-        'SAVE THE FILE (THIS FILE WILL NOT HAVE ANY CONES ADDED TO IT)
         Try
 
             'Save changes to new file in Paking Dir

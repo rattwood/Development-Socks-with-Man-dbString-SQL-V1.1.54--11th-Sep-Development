@@ -26,9 +26,7 @@ Public Class frmPackRepMain
 
     Public Sub PackRepMainSub()
 
-        If My.Settings.debugSet Then
-            frmPackTodayUpdate.Show()
-        End If
+
 
 
         'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE

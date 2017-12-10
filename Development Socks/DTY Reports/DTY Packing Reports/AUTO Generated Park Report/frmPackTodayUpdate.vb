@@ -930,7 +930,7 @@ Public Class frmPackTodayUpdate
 
         For ccount = 1 To 4  'Three sets of columns
             For rcount = 14 To 65
-                If MyTodyExcel.Cells(rcount, colCount).Value > 0 Then  'C9-C40
+                If MyTodyExcel.Cells(rcount, colCount).Value > "0" Then  'C9-C40
                     totCount = totCount + 1
                     Continue For
                 Else
@@ -1382,34 +1382,46 @@ Public Class frmPackTodayUpdate
         'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
 
         Dim colCount As Integer = 4
+        Dim endloop As Integer
 
-
-
-        For ccount = 1 To 4
+        For ccount = 1 To 4  'Three sets of columns
             If ccount < 4 Then
                 For rcount = 12 To 71
-                    If MyTodyExcel.Cells(rcount, colCount).Value > 0 Then  'C9-C40
+                    If MyTodyExcel.Cells(rcount, colCount).Value > 0 Then
+                        totCount = totCount + 1
                         Continue For
                     Else
                         nfree = rcount
-                        ncfree = colCount * ccount
+                        ncfree = colCount
+                        endloop = 1
                         Exit For
                     End If
                 Next
             Else
                 For rcount = 12 To 56
-                    If MyTodyExcel.Cells(rcount, colCount).Value > 0 Then  'C9-C40
+                    If MyTodyExcel.Cells(rcount, colCount).Value > "0" Then
+                        totCount = totCount + 1
                         Continue For
                     Else
                         nfree = rcount
-                        ncfree = colCount * ccount
+                        ncfree = colCount
+                        endloop = 1
                         Exit For
                     End If
                 Next
             End If
+
+
+            If endloop Then
+                Exit For
+            Else
+                If colCount < 16 Then colCount = colCount + 4
+            End If
         Next
 
-        MsgBox(colCount)
+
+
+
 
 
         'CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
@@ -1439,24 +1451,52 @@ Public Class frmPackTodayUpdate
 
 
             ncfree = 4
-            For nCol = 1 To 4
-                If nCol < 4 Then
-                    For x = 12 To 71
-                        MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
-                        MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
+
+
+            For ncfree = 1 To 4  'Three sets of columns
+                If ncfree < 4 Then
+                    For rcount = 12 To 71
+                        MyTodyExcel.Cells(rcount, ncfree) = "" 'Clear the contents of cone cells
+                        MyTodyExcel.Cells(rcount, ncfree - 2) = "" 'Clear the contents of Carton cells
                     Next
                     ncfree = ncfree + 4
                 Else
-                    For x = 12 To 56
-                        MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
-                        MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
+                    For rcount = 12 To 56
+                        MyTodyExcel.Cells(rcount, ncfree) = "" 'Clear the contents of cone cells
+                        MyTodyExcel.Cells(rcount, ncfree - 2) = "" 'Clear the contents of Carton cells
                     Next
                 End If
+
             Next
 
             nfree = 12
-            'ncfree = 4
+            ncfree = 4
+
         End If
+
+
+
+
+
+        ''    ncfree = 4
+        ''    For nCol = 1 To 4
+        ''        If nCol < 4 Then
+        ''            For x = 12 To 71
+        ''                MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
+        ''                MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
+        ''            Next
+        ''            ncfree = ncfree + 4
+        ''        Else
+        ''            For x = 12 To 56
+        ''                MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
+        ''                MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
+        ''            Next
+        ''        End If
+        ''    Next
+
+        ''    nfree = 12
+        ''    'ncfree = 4
+        ''End If
 
 
         'Routine to go through the rows and extract Grade A cones plus keep count
@@ -1582,12 +1622,12 @@ Public Class frmPackTodayUpdate
                         ncfree = 4
                         For nCol = 1 To 4
                             If nCol < 4 Then
-                                For x = 12 To 71
-                                    MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
-                                    MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
-                                Next
-                                ncfree = ncfree + 4
-                            Else
+                                    For x = 12 To 71
+                                        MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
+                                        MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
+                                    Next
+                                    ncfree = ncfree + 4
+                                Else
                                 For x = 12 To 56
                                     MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
                                     MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
@@ -1651,12 +1691,12 @@ Public Class frmPackTodayUpdate
         Dim totCount As Integer
         'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
 
-        Dim colCount As Integer = 5
+        Dim colCount As Integer = 4
         Dim endloop As Integer
 
         For ccount = 1 To 5  'Three sets of columns
             For rcount = 12 To 71
-                If MyTodyExcel.Cells(rcount, colCount).Value > 0 Then  'C9-C40
+                If MyTodyExcel.Cells(rcount, colCount).Value > "0" Then  'C9-C40
                     totCount = totCount + 1
                     Continue For
                 Else
@@ -1749,34 +1789,43 @@ Public Class frmPackTodayUpdate
                             ElseIf ncfree = 16 Then
                                 cartonNum = 10
                                 cellNum = 12
+                            ElseIf ncfree = 20 Then
+                                cartonNum = 13
+                                cellNum = 12
                             End If
                         Case 32 To 51
                             If ncfree = 4 Then
                                 cartonNum = 2
                                 cellNum = 27
                             ElseIf ncfree = 8 Then
-                                cartonNum = 6
+                                cartonNum = 5
                                 cellNum = 27
                             ElseIf ncfree = 12 Then
-                                cartonNum = 10
+                                cartonNum = 8
                                 cellNum = 27
                             ElseIf ncfree = 16 Then
-                                cartonNum = 14
+                                cartonNum = 11
                                 cellNum = 27
+                            ElseIf ncfree = 20 Then
+                                cartonNum = 14
+                                cellNum = 12
                             End If
                         Case 52 To 71
                             If ncfree = 4 Then
                                 cartonNum = 3
                                 cellNum = 40
                             ElseIf ncfree = 8 Then
-                                cartonNum = 7
+                                cartonNum = 6
                                 cellNum = 40
                             ElseIf ncfree = 12 Then
-                                cartonNum = 11
+                                cartonNum = 9
                                 cellNum = 40
                             ElseIf ncfree = 16 Then
-                                cartonNum = 15
+                                cartonNum = 12
                                 cellNum = 40
+                            ElseIf ncfree = 20 Then
+                                cartonNum = 15
+                                cellNum = 12
                             End If
 
                     End Select
@@ -1797,13 +1846,13 @@ Public Class frmPackTodayUpdate
                     frmDGV.DGVdata.Rows(i - 1).Cells(61).Value = cartonNum
                     nfree = nfree + 1
                     'Increment the Col Number
-                    If nfree = 72 And ncfree < 16 Then
+                    If nfree = 72 And ncfree < 20 Then
                         ncfree = ncfree + 4
                         nfree = 12
                     End If
 
                     'ROUTINE IF SHEET IS FULL TO COPY SHEET AND CREATE A NEW SHEET IN THE WORKBOOK
-                    If nfree = 72 And ncfree = 16 Then
+                    If nfree = 72 And ncfree = 20 Then
                         Dim tmpsaveName As String
 
                         tmpsaveName = (frmPackRepMain.finPath & "\" & frmPackRepMain.sheetName & "_" & mycount & ".xlsx")
@@ -1827,7 +1876,7 @@ Public Class frmPackTodayUpdate
                         MyTodyExcel.Cells(1, 4) = SheetCodeString
 
                         ncfree = 4
-                        For nCol = 1 To 4
+                        For nCol = 1 To 5
                             For x = 12 To 71
                                 MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
                                 MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells

@@ -1603,12 +1603,13 @@ Public Class frmJobEntry
                     cartReportSub()
                 ElseIf My.Settings.chkUseSort And stdcheck = 0 Or My.Settings.chkUseColour Then
                     prgContinue()
-                ElseIf My.Settings.chkUsePack And txtGrade.Text.Substring(0, 1) = "A" Or My.Settings.chkUsePack And txtGrade.Text.Substring(0, 1) = "P" Then
+                ElseIf (My.Settings.chkUsePack And txtGrade.Text = "A") Or (My.Settings.chkUsePack And (txtGrade.Text = "Pilot 6Ch" Or txtGrade.Text = "Pilot 15Ch" Or txtGrade.Text = "Pilot 20Ch")) Then
                     prgContinue()
                 ElseIf My.Settings.chkUseSort And stdcheck Then
                     STDCreate()
-                ElseIf My.Settings.chkUsePack And Not txtGrade.Text = "A" And Not txtLotNumber.Text = "" Then
-                        nonAPacking()
+                Else  'If My.Settings.chkUsePack And (txtGrade.Text.Substring(0, 1) <> "A" Or txtGrade.Text.Substring(0, 1) <> "P") Then
+
+                    nonAPacking()
 
                 End If
             End If
