@@ -44,16 +44,16 @@
 
         'THIS CHECKS CONE ROW NUMBER IN DGV
 
-        For i = 1 To 32
-                If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = chkBcode Then
+        For i = 1 To frmDGV.DGVdata.Rows.Count
+            If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = chkBcode Then
                 changeConeNum = i
                 coneNum = frmDGV.DGVdata.Rows(i - 1).Cells(6).Value   'GET THE ACTUAL CONE NUMBER
             End If
-            Next
+        Next
 
-            If changeConeNum = 0 Then
+        If changeConeNum = 0 Then
                 Label3.Visible = True
-            Label3.Text = "This is not a Cheese from this Cart. Please Re Scan"
+            Label3.Text = "This Cheese is not the correct grade"
             DelayTM()
                 Label3.Visible = False
 
@@ -359,12 +359,23 @@
         Me.chk_TR.Visible = False
         Me.chk_B.Visible = False
         Me.chk_C.Visible = False
-        frmPacking.UpdateConeVal()
-        frmPacking.Show()
-        frmPacking.txtConeBcode.Clear()
-        frmPacking.txtConeBcode.Focus()
-        frmPacking.endCheck()   'CHECK TO SEE IF THIS WAS THE LAST CHEESE 
-        Me.Close()
+
+        If frmPacking.packingActive Then
+            frmPacking.UpdateConeVal()
+            frmPacking.Show()
+            frmPacking.txtConeBcode.Clear()
+            frmPacking.txtConeBcode.Focus()
+            frmPacking.endCheck()   'CHECK TO SEE IF THIS WAS THE LAST CHEESE 
+            Me.Close()
+        End If
+        If frmB_AL_AD_W.gradePackActive Then
+            frmB_AL_AD_W.Show()
+            frmB_AL_AD_W.txtConeBcode.Clear()
+            frmB_AL_AD_W.txtConeBcode.Focus()
+            Me.Close()
+        End If
+
+
 
     End Sub
 

@@ -279,8 +279,8 @@ Public Class frmDailyPackProduction
         Me.Cursor = System.Windows.Forms.Cursors.Default
         Label2.Visible = False
         MsgBox("Daily Packing Report " & savename & " Created")
-        frmPackReports.Show()
-            Me.Close()
+        frmJobEntry.Show()
+        Me.Close()
 
 
         End Sub
@@ -297,34 +297,6 @@ Public Class frmDailyPackProduction
             End Try
         End Sub
 
-    Private Sub MonthCalendar1_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
-        'Routine to get date range
-        Label5.Text = MonthCalendar1.SelectionRange.Start.ToString("dd/MMM/yyyy")
 
-
-        'STRIPOUT / Characters from date so that they are not used in the file name
-
-        packDate = Label5.Text.Replace("/", "")
-
-        btnCreate.Enabled = True
-    End Sub
-
-    Private Sub frmDailyPackProduction_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
-    Private Sub btnCreate_Click(sender As Object, e As EventArgs) Handles btnCreate.Click
-        If packDate = "" Then
-            MsgBox("Please select valid Date")
-
-        Else
-            Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
-            Label2.Visible = True
-            Label2.Text = "Please wait Creating Daily Production Report"
-            processReport()
-            Me.Cursor = System.Windows.Forms.Cursors.Default
-
-        End If
-    End Sub
 
 End Class

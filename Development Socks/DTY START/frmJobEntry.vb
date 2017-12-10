@@ -1388,7 +1388,7 @@ Public Class frmJobEntry
                 LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & txtLotNumber.Text & "' And  RECHK = 4  And PACKENDTM is Null")
             Case "B"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8  And DEFCONE > 0 And FLT_W = 'False' And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And CONEBARLEY > 0 And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8  And (DEFCONE > 0 Or CONEBARLEY > 0  And FLT_W = 'False') and COLWASTE > 0 And PACKENDTM is Null ")
             Case "AL"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAL = 'AL'   And RECHK = 4 And PACKENDTM is Null")
@@ -1400,13 +1400,13 @@ Public Class frmJobEntry
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 9 And DEFCONE = 0 And CONEBARLEY = 0 And  PACKENDTM is Null")
             Case "P20 BS", "P30 BS", "P35 BS"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True'  And CONESTATE = 8 And DEFCONE > 0  And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And CONEBARLEY > 0 And PACKENDTM is Null  Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And M30 > 0 And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 8 And P30 > 0 And PACKENDTM is Null ")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True'  And CONESTATE = 8 And (DEFCONE > 0 Or CONEBARLEY > 0 Or M30 > 0 Or P30 > 0) And PACKENDTM is Null  ")
             Case "ReCheck"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And M30 > 0 And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And P30 > 0 And PACKENDTM is Null")
             Case "Waste"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And FLT_W = 'True' And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8  And COLWASTE > 0 And PACKENDTM is Null ")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "'  (CONESTATE = 8 Or CONESTATE = 14) And (FLT_W = 'True' Or COLWASTE > 0) And PACKENDTM is Null ")
         End Select
 
 
@@ -1662,11 +1662,9 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub StockToProcessReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StockToProcessReportToolStripMenuItem.Click
-        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        lblMessage.Text = "Please wait Creating Work in Process Report"
-        frmProdStockWork.processReport()
-        Me.Cursor = System.Windows.Forms.Cursors.Default
-        lblMessage.Text = ""
+        Me.Hide()
+        frmProdStockWork.Show()
+
 
     End Sub
 

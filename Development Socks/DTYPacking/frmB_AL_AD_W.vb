@@ -11,6 +11,8 @@ Public Class frmB_AL_AD_W
     Public allocatedCount As Integer 'count of cones scanned
     Public varCartEndTime As String
     Public packedFlag As Integer
+
+    Public gradePackActive As Integer = 1
     'Index for DGV
     Dim gridRow As Integer = 0
     Dim gridCol As Integer = 1
@@ -377,6 +379,7 @@ Public Class frmB_AL_AD_W
             Label8.Visible = False
             Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
             frmPackTodayUpdate.Close()
+            gradePackActive = 0
             Me.Close()
             Exit Sub
         Else
@@ -385,6 +388,7 @@ Public Class frmB_AL_AD_W
             UpdateDatabase()
             Label8.Visible = False
             Me.Cursor = System.Windows.Forms.Cursors.Default
+            gradePackActive = 0
             Me.Close()
             frmJobEntry.Show()
             frmJobEntry.txtLotNumber.Clear()
@@ -419,6 +423,7 @@ Public Class frmB_AL_AD_W
         frmJobEntry.Show()
         frmJobEntry.txtLotNumber.Clear()
         frmJobEntry.txtLotNumber.Focus()
+        gradePackActive = 0
         Me.Close()
     End Sub
 
@@ -459,6 +464,7 @@ Public Class frmB_AL_AD_W
         frmJobEntry.txtLotNumber.Clear()
         frmJobEntry.txtLotNumber.Focus()
         frmJobEntry.Show()
+        gradePackActive = 0
         Me.Close()
 
 

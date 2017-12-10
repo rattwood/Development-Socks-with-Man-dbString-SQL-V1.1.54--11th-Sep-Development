@@ -26,7 +26,8 @@ Public Class frmProdStockWork
 
     Private jobcount As Integer = Nothing
     Private count As Integer = Nothing
-
+    Public startDate As String
+    Public endDate As String
 
 
     Dim sp_nums As String
@@ -230,11 +231,47 @@ Public Class frmProdStockWork
         releaseObject(MyWRExcel)
         frmPackReports.lblMessage.Text = Nothing
         MsgBox("STOCK Work in Process Report " & savename & " Created")
-        frmPackReports.Show()
-        Me.Close()
+
 
 
     End Sub
+
+
+    Private Sub MonthCalendar1_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
+        'Routine to get date range
+        Label5.Text = MonthCalendar1.SelectionRange.Start.ToString("dd/MMM/yyyy")
+        Label6.Text = MonthCalendar1.SelectionRange.End.ToString("dd/MMM/yyyy")
+
+        'STRIPOUT / Characters from date so that they are not used in the file name
+
+        startDate = Label5.Text.Replace("/", "")
+        endDate = Label6.Text.Replace("/", "")
+
+        btnCreate.Enabled = True
+    End Sub
+
+
+
+    Private Sub btnCreate_Click(sender As Object, e As EventArgs) Handles btnCreate.Click
+        If startDate = "" Or endDate = "" Then
+            MsgBox("Please select valid Date")
+
+        Else
+            Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+            Label2.Visible = True
+            Label2.Text = "Please wait Creating Stock to process Report"
+            processReport()
+            Me.Cursor = System.Windows.Forms.Cursors.Default
+            frmJobEntry.Show()
+            Me.Close()
+        End If
+
+    End Sub
+
+
+
+
+
 
     Private Sub releaseObject(ByVal obj As Object)
 
