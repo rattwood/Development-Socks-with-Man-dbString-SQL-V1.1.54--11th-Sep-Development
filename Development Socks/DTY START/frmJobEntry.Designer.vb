@@ -266,21 +266,21 @@ Partial Class frmJobEntry
         '
         Me.P15ASToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.P15ASToolStripMenuItem.Name = "P15ASToolStripMenuItem"
-        Me.P15ASToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.P15ASToolStripMenuItem.Size = New System.Drawing.Size(110, 22)
         Me.P15ASToolStripMenuItem.Text = "P15 AS"
         '
         'P25ASToolStripMenuItem
         '
         Me.P25ASToolStripMenuItem.BackColor = System.Drawing.Color.Yellow
         Me.P25ASToolStripMenuItem.Name = "P25ASToolStripMenuItem"
-        Me.P25ASToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.P25ASToolStripMenuItem.Size = New System.Drawing.Size(110, 22)
         Me.P25ASToolStripMenuItem.Text = "P25 AS"
         '
         'P35ASToolStripMenuItem
         '
         Me.P35ASToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.P35ASToolStripMenuItem.Name = "P35ASToolStripMenuItem"
-        Me.P35ASToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.P35ASToolStripMenuItem.Size = New System.Drawing.Size(110, 22)
         Me.P35ASToolStripMenuItem.Text = "P35 AS"
         '
         'BALADGradeToolStripMenuItem
@@ -294,19 +294,19 @@ Partial Class frmJobEntry
         'BToolStripMenuItem
         '
         Me.BToolStripMenuItem.Name = "BToolStripMenuItem"
-        Me.BToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.BToolStripMenuItem.Size = New System.Drawing.Size(90, 22)
         Me.BToolStripMenuItem.Text = "B"
         '
         'ALToolStripMenuItem
         '
         Me.ALToolStripMenuItem.Name = "ALToolStripMenuItem"
-        Me.ALToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ALToolStripMenuItem.Size = New System.Drawing.Size(90, 22)
         Me.ALToolStripMenuItem.Text = "AL"
         '
         'ADToolStripMenuItem
         '
         Me.ADToolStripMenuItem.Name = "ADToolStripMenuItem"
-        Me.ADToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ADToolStripMenuItem.Size = New System.Drawing.Size(90, 22)
         Me.ADToolStripMenuItem.Text = "AD"
         '
         'BSGradesToolStripMenuItem
@@ -319,19 +319,19 @@ Partial Class frmJobEntry
         'P20BSToolStripMenuItem
         '
         Me.P20BSToolStripMenuItem.Name = "P20BSToolStripMenuItem"
-        Me.P20BSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.P20BSToolStripMenuItem.Size = New System.Drawing.Size(109, 22)
         Me.P20BSToolStripMenuItem.Text = "P20 BS"
         '
         'P30BSToolStripMenuItem
         '
         Me.P30BSToolStripMenuItem.Name = "P30BSToolStripMenuItem"
-        Me.P30BSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.P30BSToolStripMenuItem.Size = New System.Drawing.Size(109, 22)
         Me.P30BSToolStripMenuItem.Text = "P30 BS"
         '
         'P35BSToolStripMenuItem
         '
         Me.P35BSToolStripMenuItem.Name = "P35BSToolStripMenuItem"
-        Me.P35BSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.P35BSToolStripMenuItem.Size = New System.Drawing.Size(109, 22)
         Me.P35BSToolStripMenuItem.Text = "P35 BS"
         '
         'ToolStripMenuItem2
@@ -344,19 +344,19 @@ Partial Class frmJobEntry
         'Pilot6ChToolStripMenuItem
         '
         Me.Pilot6ChToolStripMenuItem.Name = "Pilot6ChToolStripMenuItem"
-        Me.Pilot6ChToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Pilot6ChToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
         Me.Pilot6ChToolStripMenuItem.Text = "Pilot 6Ch"
         '
         'Pilot15ChToolStripMenuItem
         '
         Me.Pilot15ChToolStripMenuItem.Name = "Pilot15ChToolStripMenuItem"
-        Me.Pilot15ChToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Pilot15ChToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
         Me.Pilot15ChToolStripMenuItem.Text = "Pilot 15Ch"
         '
         'Pilot20ChToolStripMenuItem
         '
         Me.Pilot20ChToolStripMenuItem.Name = "Pilot20ChToolStripMenuItem"
-        Me.Pilot20ChToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Pilot20ChToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
         Me.Pilot20ChToolStripMenuItem.Text = "Pilot 20Ch"
         '
         'ReCheckToolStripMenuItem
@@ -438,25 +438,25 @@ Partial Class frmJobEntry
         '
         Me.Round1ToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Round1ToolStripMenuItem.Name = "Round1ToolStripMenuItem"
-        Me.Round1ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Round1ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.Round1ToolStripMenuItem.Text = "Round1"
         '
         'Round2ToolStripMenuItem
         '
         Me.Round2ToolStripMenuItem.Name = "Round2ToolStripMenuItem"
-        Me.Round2ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Round2ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.Round2ToolStripMenuItem.Text = "Round2"
         '
         'Round3ToolStripMenuItem
         '
         Me.Round3ToolStripMenuItem.Name = "Round3ToolStripMenuItem"
-        Me.Round3ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Round3ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.Round3ToolStripMenuItem.Text = "Round3"
         '
         'StdSheetToolStripMenuItem
         '
         Me.StdSheetToolStripMenuItem.Name = "StdSheetToolStripMenuItem"
-        Me.StdSheetToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.StdSheetToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.StdSheetToolStripMenuItem.Text = "STD"
         '
         'ReCheckToolStripMenuItem1

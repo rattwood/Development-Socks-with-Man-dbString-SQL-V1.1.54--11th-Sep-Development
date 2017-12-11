@@ -64,6 +64,7 @@ Public Class frmJobEntry
     Public reCheck As Integer = 0
     Public cartReport As Integer
 
+    Public stdReChk As Integer = 0
     Public SortOP As String
     Public PackOp As String
     Public ColorOP As String
@@ -99,7 +100,7 @@ Public Class frmJobEntry
 
         If My.Settings.chkUseSort Or My.Settings.chkUsePack Then PrintFormsToolStripMenuItem.Visible = True Else PrintFormsToolStripMenuItem.Visible = False
 
-        If My.Settings.chkUseSort Then ReCheckToolStripMenuItem1.Visible = True
+        If My.Settings.chkUseSort Or My.Settings.chkUsePack Then ReCheckToolStripMenuItem1.Visible = True
 
         'If My.Settings.chkUsePack Then btnExChangeCone.Visible = True Else btnExChangeCone.Visible = False
         'If My.Settings.chkUsePack Then btnSearchCone.Visible = True Else btnSearchCone.Visible = False
@@ -176,7 +177,7 @@ Public Class frmJobEntry
             Case "B", "AL", "AD"
                 lblScanType.Text = "Scan First Cheese On Cart"
                 txtLotNumber.Visible = True
-            Case "ReCheck" 'And My.Settings.chkUsePack
+            Case "ReCheck"
                 lblScanType.Text = "Scan First Cheese On Cart"
                 txtLotNumber.Visible = True
             Case "Round1", "Round2", "Round3", "STD"
@@ -1301,33 +1302,41 @@ Public Class frmJobEntry
             Case "ReCheck"
 
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And M30 > 0 And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And P30 > 0 And PACKENDTM is Null")
-                If LRecordCount > 0 Then
-                    'LOAD THE DATA FROM dB IN TO THE DATAGRID
-                    frmDGV.DGVdata.DataSource = LDS.Tables(0)
-                    frmDGV.DGVdata.Rows(0).Selected = True
+                If stdReChk = 0 Then
 
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null ")
+                Else
 
-
-                    If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("RECHK").Value) Then  'check to see if cheese scanned has already been allocated
-                        Label3.Visible = True
-                        Label3.Text = "THIS CHEESE HAS ALREADY BEEN ALLOCATED "
-                        DelayTM()
-                        Label3.Visible = False
-                        quit = 1
-                        frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
-                        quit = 1
-
-                        Me.txtLotNumber.Clear()
-                        Me.txtLotNumber.Visible = True
-                        Me.txtLotNumber.Focus()
-                        Exit Sub
-
-                    End If
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 9 And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null And STDSTATE = 10 ")
                 End If
 
 
-            Case "Waste"
+                If LRecordCount > 0 Then
+                        'LOAD THE DATA FROM dB IN TO THE DATAGRID
+                        frmDGV.DGVdata.DataSource = LDS.Tables(0)
+                        frmDGV.DGVdata.Rows(0).Selected = True
+
+
+
+                        If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("RECHK").Value) Then  'check to see if cheese scanned has already been allocated
+                            Label3.Visible = True
+                            Label3.Text = "THIS CHEESE HAS ALREADY BEEN ALLOCATED "
+                            DelayTM()
+                            Label3.Visible = False
+                            quit = 1
+                            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                            quit = 1
+
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Visible = True
+                            Me.txtLotNumber.Focus()
+                            Exit Sub
+
+                        End If
+                    End If
+
+
+                    Case "Waste"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And FLT_W = 'True' And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8  And COLWASTE > 0 And PACKENDTM is Null ")
         End Select
@@ -1403,12 +1412,22 @@ Public Class frmJobEntry
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True'  And CONESTATE = 8 And (DEFCONE > 0 Or CONEBARLEY > 0 Or M30 > 0 Or P30 > 0) And PACKENDTM is Null  ")
             Case "ReCheck"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And M30 > 0 And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And P30 > 0 And PACKENDTM is Null")
+                If stdReChk = 0 Then
+                    '  LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And M30 > 0 And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And P30 > 0 And PACKENDTM is Null")
+                    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null ")
+                Else
+                    'ReCheck creation for std cheese  state 10
+                    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 9 And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null And STDSTATE = 10 and RECHK is Null")
+
+                End If
+
+
             Case "Waste"
-                packGrade = txtGrade.Text
+                    packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "'  (CONESTATE = 8 Or CONESTATE = 14) And (FLT_W = 'True' Or COLWASTE > 0) And PACKENDTM is Null ")
         End Select
 
+        MsgBox(LRecordCount)
 
         If LRecordCount > 0 Then
             'LOAD THE DATA FROM dB IN TO THE DATAGRID
@@ -1694,6 +1713,7 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub AGradeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AGradeToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = AGradeToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1701,6 +1721,7 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub P15ASToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles P15ASToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = P15ASToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1715,6 +1736,7 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub P35ASToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles P35ASToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = P35ASToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1724,6 +1746,7 @@ Public Class frmJobEntry
 
 
     Private Sub WasteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WasteToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = WasteToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1731,6 +1754,7 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub BToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = BToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1738,6 +1762,7 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub ALToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ALToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = ALToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1745,6 +1770,7 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub ADToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ADToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = ADToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1752,6 +1778,7 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub P20BSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles P20BSToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = P20BSToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1759,6 +1786,7 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub P30BSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles P30BSToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = P30BSToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1766,6 +1794,7 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub P35BSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles P35BSToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = P35BSToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1774,6 +1803,7 @@ Public Class frmJobEntry
 
     'THIS IS THE PACKING RECHECK CREATE RECHECK FORM OPTION
     Private Sub ReCheckToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReCheckToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = ReCheckToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1783,6 +1813,7 @@ Public Class frmJobEntry
 
 
     Private Sub Round1ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Round1ToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = Round1ToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1791,6 +1822,7 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub Round2ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Round2ToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = Round2ToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1799,6 +1831,7 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub Round3ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Round3ToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = Round3ToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1807,6 +1840,7 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub StdSheetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StdSheetToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = StdSheetToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1815,6 +1849,7 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
+        stdReChk = 0
         txtGrade.Text = ToolStripMenuItem1.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1822,6 +1857,7 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub Pilot6ChToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Pilot6ChToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = Pilot6ChToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1829,6 +1865,7 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub Pilot15ChToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Pilot15ChToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = Pilot15ChToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
@@ -1836,11 +1873,18 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub Pilot20ChToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Pilot20ChToolStripMenuItem.Click
+        stdReChk = 0
         txtGrade.Text = Pilot20ChToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
         lblScanType.Text = "Scan Job Sheet"
     End Sub
 
-
+    Private Sub ReCheckToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ReCheckToolStripMenuItem1.Click
+        stdReChk = 1
+        txtGrade.Text = ReCheckToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
 End Class

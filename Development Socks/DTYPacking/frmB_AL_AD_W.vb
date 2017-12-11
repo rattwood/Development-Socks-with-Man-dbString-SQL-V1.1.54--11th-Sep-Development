@@ -181,12 +181,14 @@ Public Class frmB_AL_AD_W
             'If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = 0 And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
 
 
-            If frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+            If frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) And frmJobEntry.txtGrade.Text <> "ReCheck" Or
+                frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) And frmJobEntry.txtGrade.Text = "ReCheck" And
+                IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value) Then
                 'write to the local DGV grid
                 DataGridView1.Rows(gridRow).Cells(gridCol).Value = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value  'Write to Grid Cone Bcode
                 DataGridView1.Rows(gridRow).Cells(gridCol).Style.BackColor = Color.LightGreen
 
-                If frmJobEntry.txtGrade.Text = "ReCheck" Then  'IF RECHK THEN SET FLAG=1 SET TIME AND SET NUBER 1-32
+                If frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk = 0 Then  'IF RECHK THEN SET FLAG=1 SET TIME AND SET NUBER 1-32
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 1
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Today
                     frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
@@ -195,7 +197,16 @@ Public Class frmB_AL_AD_W
                     Dim tmpNum As Integer = DataGridView1.Rows(gridRow).Cells(0).Value  'format first 9 cheese to have leading Zero before sending to db
                     modIdxNum = tmpNum.ToString(fmt)
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = modIdxNum
+                ElseIf frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk Then
+                    frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 11
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 1
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Today
+                    frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
+                    frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
 
+                    Dim tmpNum As Integer = DataGridView1.Rows(gridRow).Cells(0).Value  'format first 9 cheese to have leading Zero before sending to db
+                    modIdxNum = tmpNum.ToString(fmt)
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = modIdxNum
                 Else
                     'Update DGV that Cheese has been alocated, update Packendtm
                     frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Today
@@ -365,7 +376,7 @@ Public Class frmB_AL_AD_W
 
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         Label8.Visible = True
-        Label8.Text = ("This is not a Grade " & frmJobEntry.txtGrade.Text & " Cheese")
+        ' Label8.Text = ("This is not a Grade " & frmJobEntry.txtGrade.Text & " Cheese")
         Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
         Label8.Text = ("Please wait creating packing Excel sheet")
 

@@ -1993,7 +1993,8 @@ Public Class frmPackTodayUpdate
 
                 'If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
                 If Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells(33).Value) Then
-                    If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = "1" Then
+                    If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = "1" Or
+                        frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = "1" Then
 
                         'WRITE CONE NUMBER TO SHEET
                         MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
