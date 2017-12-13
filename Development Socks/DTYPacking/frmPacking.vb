@@ -63,6 +63,7 @@ Public Class frmPacking
     Private coneCount As Integer
     Public coneState As String
     Public packingActive = 0
+    Private rowendcount As Integer
 
 
 
@@ -72,11 +73,21 @@ Public Class frmPacking
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        'SET VRIABLE NUMBER OF BUTTONS IF PILOT MC
+        If frmJobEntry.varMachineCode = 29 Then rowendcount = frmDGV.DGVdata.Rows.Count Else rowendcount = 32
+
+
+
 
         Dim btnNum As Integer
         Dim btnNums As String
 
-        btnNums = frmJobEntry.varCartSelect
+        If frmJobEntry.varMachineCode = 29 Then
+            btnNums = 1
+        Else
+            btnNums = frmJobEntry.varCartSelect
+        End If
+        ''btnNums = frmJobEntry.varCartSelect
 
         ' SELECT CONE NUMBER RANGE BASED ON CART NUMBER
         Select Case btnNums
@@ -118,27 +129,57 @@ Public Class frmPacking
                 coneNumOffset = 352
         End Select
 
-        'SET CORRECT BUTTUN NUMBERS BASED ON CONE NUMBERS (SPINDEL NUMBERS)
-        For i As Integer = 1 To 32
-
-            Me.Controls("btnCone" & i.ToString).Text = btnNum
-            btnNum = btnNum + 1
-
-        Next
 
 
-        Me.txtCartNum.Text = frmJobEntry.cartSelect
+
+        For i As Integer = 1 To rowendcount
+
+                Me.Controls("btnCone" & i.ToString).Text = btnNum
+                btnNum = btnNum + 1
+            Next
+
+
+
+            '''SET CORRECT BUTTUN NUMBERS BASED ON CONE NUMBERS (SPINDEL NUMBERS)
+            ''For i As Integer = 1 To 32
+
+            ''    Me.Controls("btnCone" & i.ToString).Text = btnNum
+            ''    btnNum = btnNum + 1
+
+            ''Next
+
+
+            Me.txtCartNum.Text = frmJobEntry.cartSelect
         Me.lblJobNum.Text = frmJobEntry.varJobNum
 
 
         'GET NUMBER OF CONES THAT NEED ALLOCATING Count agains Job Barcode
 
 
-        For i = 1 To 32
+        For i = 1 To rowendcount
             If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells("FLT_S").Value = "False" Then
                 toAllocatedCount = toAllocatedCount + 1
             End If
         Next
+
+
+
+        ''For i = 1 To 32
+        ''    If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells("FLT_S").Value = "False" Then
+        ''        toAllocatedCount = toAllocatedCount + 1
+        ''    End If
+        ''Next
+
+        'GET NUMBER OF CONES THAT NEED ALLOCATING Count agains Job Barcode
+        If frmJobEntry.varMachineCode = 29 Then
+            Dim btnCountStart As Integer = rowendcount + 1
+            Dim totBtn As Integer = 31 - btnCountStart
+            For i = btnCountStart To 32
+                Me.Controls("btnCone" & i.ToString).Visible = False
+            Next
+        End If
+
+
 
         txtboxTotal.Text = toAllocatedCount
 
@@ -150,6 +191,8 @@ Public Class frmPacking
 
         If My.Settings.debugSet Then frmDGV.Show()
 
+        Me.txtConeBcode.Clear()
+        Me.txtConeBcode.Focus()
 
 
     End Sub
@@ -159,7 +202,7 @@ Public Class frmPacking
 
 
 
-        For rw As Integer = 1 To 32
+        For rw As Integer = 1 To rowendcount
 
             If frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(rw - 1).Cells("FLT_S").Value = False Then
                 Me.Controls("btnCone" & rw).BackColor = Color.Green       'Grade A Cone
@@ -212,7 +255,7 @@ Public Class frmPacking
 
 
 
-        For i = 1 To 32
+        For i = 1 To rowendcount
 
 
             If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells(43).Value = False Then
@@ -225,7 +268,7 @@ Public Class frmPacking
 
                 'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
                 If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
-                    For rows As Integer = 1 To 32
+                    For rows As Integer = 1 To rowendcount
                         If My.Settings.chkUsePack = True Then frmDGV.DGVdata.Rows(rows - 1).Cells("PACKENDTM").Value = DateAndTime.Today  'PACKING CHECK END TIME.
                     Next
                 End If
@@ -252,7 +295,7 @@ Public Class frmPacking
                 'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
 
                 If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
-                    For rows As Integer = 1 To 32
+                    For rows As Integer = 1 To rowendcount
                         If My.Settings.chkUseColour = True Then frmDGV.DGVdata.Rows((rows - 1) - coneNumOffset).Cells("PACKENDTM").Value = varCartEndTime 'PACKING CHECK END TIME
                     Next
                 End If

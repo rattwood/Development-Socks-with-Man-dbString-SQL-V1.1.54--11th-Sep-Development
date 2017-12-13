@@ -504,7 +504,8 @@ Public Class frmPackTodayUpdate
 
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
-                If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+                If frmJobEntry.txtGrade.Text = "P35 AS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Or
+                     frmJobEntry.txtGrade.Text = "P35 AS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
                     frmDGV.DGVdata.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
 
@@ -754,7 +755,8 @@ Public Class frmPackTodayUpdate
 
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
-                If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+                If frmJobEntry.txtGrade.Text = "P30 BS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Or
+                    frmJobEntry.txtGrade.Text = "P25 AS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
                     frmDGV.DGVdata.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
 
@@ -934,27 +936,42 @@ Public Class frmPackTodayUpdate
         Dim colCount As Integer = 4
         Dim endloop As Integer
 
-        For ccount = 1 To 4  'Three sets of columns
-            For rcount = 14 To 65
-                If MyTodyExcel.Cells(rcount, colCount).Value > "0" Then  'C9-C40
-                    totCount = totCount + 1
-                    Continue For
-                Else
-                    nfree = rcount
-                    ncfree = colCount
-                    endloop = 1
-                    Exit For
-                End If
-            Next
-            If endloop Then
 
+
+        For ccount = 1 To 4  'Three sets of columns
+            If ccount < 4 Then
+                For rcount = 14 To 65
+                    If MyTodyExcel.Cells(rcount, colCount).Value > 0 Then
+                        totCount = totCount + 1
+                        Continue For
+                    Else
+                        nfree = rcount
+                        ncfree = colCount
+                        endloop = 1
+                        Exit For
+                    End If
+                Next
+            Else
+                For rcount = 12 To 52
+                    If MyTodyExcel.Cells(rcount, colCount).Value > "0" Then
+                        totCount = totCount + 1
+                        Continue For
+                    Else
+                        nfree = rcount
+                        ncfree = colCount
+                        endloop = 1
+                        Exit For
+                    End If
+                Next
+            End If
+
+
+            If endloop Then
                 Exit For
             Else
-                colCount = colCount + 4
+                If colCount < 16 Then colCount = colCount + 4
             End If
         Next
-
-
 
 
 
@@ -972,7 +989,7 @@ Public Class frmPackTodayUpdate
             'Product Name
             MyTodyExcel.Cells(7, 9) = frmDGV.DGVdata.Rows(0).Cells(52).Value
             'Product Code
-            MyTodyExcel.Cells(7, 13) = frmDGV.DGVdata.Rows(0).Cells(2).Value
+            MyTodyExcel.Cells(7, 14) = frmDGV.DGVdata.Rows(0).Cells(2).Value
 
             'Packer Name
             MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
@@ -984,27 +1001,28 @@ Public Class frmPackTodayUpdate
             MyTodyExcel.Cells(1, 4) = SheetCodeString
 
 
+
             ncfree = 4
-            For nCol = 1 To 4
+            For nCol = 1 To 4  'Three sets of columns
                 If nCol < 4 Then
-                    For x = 14 To 65
-                        MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
-                        MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
+                    For rcount = 14 To 65
+                        MyTodyExcel.Cells(rcount, ncfree) = "" 'Clear the contents of cone cells
+                        MyTodyExcel.Cells(rcount, ncfree - 2) = "" 'Clear the contents of Carton cells
                     Next
                     ncfree = ncfree + 4
                 Else
-                    For x = 14 To 52
-                        MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
-                        MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
+                    For rcount = 14 To 52
+                        MyTodyExcel.Cells(rcount, ncfree) = "" 'Clear the contents of cone cells
+                        MyTodyExcel.Cells(rcount, ncfree - 2) = "" 'Clear the contents of Carton cells
                     Next
                 End If
-            Next
 
+            Next
 
             nfree = 14
             ncfree = 4
-        End If
 
+        End If
 
         'Routine to go through the rows and extract Grade A cones plus keep count
         Dim cartonNum As String = ""
@@ -1015,10 +1033,9 @@ Public Class frmPackTodayUpdate
 
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
-                If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+                If frmJobEntry.txtGrade.Text = "P20 BS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Or
+                    frmJobEntry.txtGrade.Text = "P15 AS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
                     frmDGV.DGVdata.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
-
-
 
 
                     'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
@@ -1115,7 +1132,7 @@ Public Class frmPackTodayUpdate
 
                         MyTodyExcel.Cells(9, 7) = frmDGV.DGVdata.Rows(0).Cells(52).Value
                         'Product Code
-                        MyTodyExcel.Cells(13, 7) = frmDGV.DGVdata.Rows(0).Cells(2).Value
+                        MyTodyExcel.Cells(14, 7) = frmDGV.DGVdata.Rows(0).Cells(2).Value
                         'Packer Name
                         MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
 
@@ -1124,28 +1141,33 @@ Public Class frmPackTodayUpdate
                         createBarcode()
                         MyTodyExcel.Cells(1, 4) = SheetCodeString
 
+
+
                         ncfree = 4
-                        For nCol = 1 To 4
+
+                        For nCol = 1 To 4  'Three sets of columns
                             If nCol < 4 Then
-                                For x = 14 To 65
-                                    MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
-                                    MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
+                                For rcount = 12 To 65
+                                    MyTodyExcel.Cells(rcount, ncfree) = "" 'Clear the contents of cone cells
+                                    MyTodyExcel.Cells(rcount, ncfree - 2) = "" 'Clear the contents of Carton cells
                                 Next
                                 ncfree = ncfree + 4
                             Else
-                                For x = 14 To 52
-                                    MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
-                                    MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
+                                For rcount = 12 To 52
+                                    MyTodyExcel.Cells(rcount, ncfree) = "" 'Clear the contents of cone cells
+                                    MyTodyExcel.Cells(rcount, ncfree - 2) = "" 'Clear the contents of Carton cells
                                 Next
                             End If
+
                         Next
 
-                        'REST ROW AND COLUMN TO DEFAULT VALUES
-                        nfree = 14
+                        nfree = 12
                         ncfree = 4
 
                     End If
+
                 End If
+
             Next
 
         Catch ex As Exception

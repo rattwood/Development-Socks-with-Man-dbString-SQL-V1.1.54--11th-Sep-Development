@@ -341,19 +341,19 @@ Partial Class frmJobEntry
         'P20BSToolStripMenuItem
         '
         Me.P20BSToolStripMenuItem.Name = "P20BSToolStripMenuItem"
-        Me.P20BSToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
+        Me.P20BSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.P20BSToolStripMenuItem.Text = "P20 BS"
         '
         'P30BSToolStripMenuItem
         '
         Me.P30BSToolStripMenuItem.Name = "P30BSToolStripMenuItem"
-        Me.P30BSToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
+        Me.P30BSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.P30BSToolStripMenuItem.Text = "P30 BS"
         '
         'P35BSToolStripMenuItem
         '
         Me.P35BSToolStripMenuItem.Name = "P35BSToolStripMenuItem"
-        Me.P35BSToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
+        Me.P35BSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.P35BSToolStripMenuItem.Text = "P35 BS"
         '
         'ToolStripMenuItem2

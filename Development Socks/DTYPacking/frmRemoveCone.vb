@@ -5,7 +5,9 @@ Public Class frmRemoveCone
 
         btnContinue.Visible = False
 
-        If frmJobEntry.txtGrade.Text = "A" Or frmJobEntry.txtGrade.Text = "Normal" Then
+        If frmJobEntry.txtGrade.Text = "A" Or frmJobEntry.txtGrade.Text = "Normal" Or frmJobEntry.txtGrade.Text = "Pilot 6Ch" Or frmJobEntry.txtGrade.Text = "Pilot 15Ch" Or
+            frmJobEntry.txtGrade.Text = "Pilot 20Ch" Then
+
             Label1.Text = "Not Grade 'A' Cheese"
             Me.Label5.Text = frmPacking.bcodeScan
 
@@ -32,7 +34,8 @@ Public Class frmRemoveCone
             chkBCode = TextBox1.Text
 
             Select Case frmJobEntry.txtGrade.Text
-                Case "Normal", "A"
+                Case "Normal", "A", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch"
+
                     If chkBCode = frmPacking.bcodeScan Then
                         btnContinue.Visible = True
                         btnContinue.Enabled = True
@@ -139,7 +142,8 @@ Public Class frmRemoveCone
 
     Private Sub btnContinue_Click(sender As Object, e As EventArgs) Handles btnContinue.Click
 
-        If frmJobEntry.txtGrade.Text = "A" Or frmJobEntry.txtGrade.Text = "Normal" Then
+        If frmJobEntry.txtGrade.Text = "A" Or frmJobEntry.txtGrade.Text = "Normal" Or frmJobEntry.txtGrade.Text = "Pilot 6Ch" Or frmJobEntry.txtGrade.Text = "Pilot 15Ch" Or
+                frmJobEntry.txtGrade.Text = "Pilot 20Ch" Then
             frmPacking.txtConeBcode.Clear()
             frmPacking.txtConeBcode.Focus()
             frmPacking.Show()
