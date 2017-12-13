@@ -360,20 +360,45 @@
         Me.chk_B.Visible = False
         Me.chk_C.Visible = False
 
-        If frmPacking.packingActive Then
-            frmPacking.UpdateConeVal()
-            frmPacking.Show()
-            frmPacking.txtConeBcode.Clear()
-            frmPacking.txtConeBcode.Focus()
-            frmPacking.endCheck()   'CHECK TO SEE IF THIS WAS THE LAST CHEESE 
-            Me.Close()
-        End If
-        If frmB_AL_AD_W.gradePackActive Then
-            frmB_AL_AD_W.Show()
-            frmB_AL_AD_W.txtConeBcode.Clear()
-            frmB_AL_AD_W.txtConeBcode.Focus()
-            Me.Close()
-        End If
+        Select Case frmJobEntry.txtGrade.Text
+            Case "A"
+                If frmPacking.packingActive Then
+                    frmPacking.UpdateConeVal()
+                    frmPacking.Show()
+                    frmPacking.txtConeBcode.Clear()
+                    frmPacking.txtConeBcode.Focus()
+                    frmPacking.endCheck()   'CHECK TO SEE IF THIS WAS THE LAST CHEESE 
+                    Me.Close()
+                End If
+            Case "ReCheckA"
+                If frmPackRchkA.packingActive Then
+                    frmPackRchkA.Show()
+                    frmPackRchkA.txtConeBcode.Clear()
+                    frmPackRchkA.txtConeBcode.Focus()
+                    Me.Close()
+                End If
+            Case "B", "AL", "AD", "PS20 BS", "PS30 BS", "PS35 BS", "PS15 AS", "PS25 AS", "PS35 AS", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch"
+                frmB_AL_AD_W.Show()
+                frmB_AL_AD_W.txtConeBcode.Clear()
+                frmB_AL_AD_W.txtConeBcode.Focus()
+                Me.Close()
+        End Select
+
+
+        'If frmPacking.packingActive Then
+        '    frmPacking.UpdateConeVal()
+        '    frmPacking.Show()
+        '    frmPacking.txtConeBcode.Clear()
+        '    frmPacking.txtConeBcode.Focus()
+        '    frmPacking.endCheck()   'CHECK TO SEE IF THIS WAS THE LAST CHEESE 
+        '    Me.Close()
+        'End If
+        'If frmB_AL_AD_W.gradePackActive Then
+        '    frmB_AL_AD_W.Show()
+        '    frmB_AL_AD_W.txtConeBcode.Clear()
+        '    frmB_AL_AD_W.txtConeBcode.Focus()
+        '    Me.Close()
+        'End If
 
 
 
@@ -382,17 +407,40 @@
 
     Private Sub btnGoBack_Click(sender As Object, e As EventArgs) Handles btnGoBack.Click
 
-        If frmPacking.packingActive Then
-            Me.Close()
-            frmPacking.Show()
-            frmPacking.txtConeBcode.Clear()
-            frmPacking.txtConeBcode.Focus()
-        Else 'we have come from job entry screen
-            Me.Close()
-            frmJobEntry.Show()
-            frmJobEntry.txtLotNumber.Clear()
-            frmJobEntry.txtLotNumber.Focus()
-        End If
+        Select Case frmJobEntry.txtGrade.Text
+            Case "A" And frmPacking.packingActive
+                Me.Close()
+                frmPacking.Show()
+                frmPacking.txtConeBcode.Clear()
+                frmPacking.txtConeBcode.Focus()
+            Case "ReCheckA" And frmPackRchkA.packingActive
+                Me.Close()
+                frmPackRchkA.Show()
+                frmPackRchkA.txtConeBcode.Clear()
+                frmPackRchkA.txtConeBcode.Focus()
+            Case "B", "AL", "AD", "PS20 BS", "PS30 BS", "PS35 BS", "PS15 AS", "PS25 AS", "PS35 AS", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch"
+                Me.Close()
+                frmB_AL_AD_W.Show()
+                frmB_AL_AD_W.txtConeBcode.Clear()
+                frmB_AL_AD_W.txtConeBcode.Focus()
+                Me.Close()
+        End Select
+
+
+
+
+
+        'If frmPacking.packingActive Then
+        '    Me.Close()
+        '    frmPacking.Show()
+        '    frmPacking.txtConeBcode.Clear()
+        '    frmPacking.txtConeBcode.Focus()
+        'Else 'we have come from job entry screen
+        '    Me.Close()
+        '    frmJobEntry.Show()
+        '    frmJobEntry.txtLotNumber.Clear()
+        '    frmJobEntry.txtLotNumber.Focus()
+        'End If
 
 
     End Sub

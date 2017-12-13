@@ -42,7 +42,9 @@ Partial Class frmJobEntry
         Me.ExChangeCheeseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FindCheeseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PackingGradeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripTextBox3 = New System.Windows.Forms.ToolStripTextBox()
         Me.AGradeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReCheckAToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ASGradeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.P15ASToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.P25ASToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -59,8 +61,10 @@ Partial Class frmJobEntry
         Me.Pilot6ChToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Pilot15ChToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Pilot20ChToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReCheckToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WasteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripTextBox2 = New System.Windows.Forms.ToolStripTextBox()
+        Me.ReCheckToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DailyPackingReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EndOfDayReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -241,135 +245,169 @@ Partial Class frmJobEntry
         '
         'PackingGradeToolStripMenuItem
         '
-        Me.PackingGradeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AGradeToolStripMenuItem, Me.ASGradeToolStripMenuItem, Me.BALADGradeToolStripMenuItem, Me.BSGradesToolStripMenuItem, Me.ToolStripMenuItem2, Me.ReCheckToolStripMenuItem, Me.WasteToolStripMenuItem})
+        Me.PackingGradeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox3, Me.AGradeToolStripMenuItem, Me.ReCheckAToolStripMenuItem4, Me.ASGradeToolStripMenuItem, Me.BALADGradeToolStripMenuItem, Me.BSGradesToolStripMenuItem, Me.ToolStripMenuItem2, Me.WasteToolStripMenuItem, Me.ToolStripSeparator3, Me.ToolStripTextBox2, Me.ReCheckToolStripMenuItem})
         Me.PackingGradeToolStripMenuItem.Name = "PackingGradeToolStripMenuItem"
         Me.PackingGradeToolStripMenuItem.Size = New System.Drawing.Size(95, 20)
         Me.PackingGradeToolStripMenuItem.Text = "Packing Grade"
         Me.PackingGradeToolStripMenuItem.Visible = False
         '
+        'ToolStripTextBox3
+        '
+        Me.ToolStripTextBox3.Font = New System.Drawing.Font("Segoe UI Black", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ToolStripTextBox3.Name = "ToolStripTextBox3"
+        Me.ToolStripTextBox3.Size = New System.Drawing.Size(125, 28)
+        Me.ToolStripTextBox3.Text = "PACKING TYPE"
+        '
         'AGradeToolStripMenuItem
         '
         Me.AGradeToolStripMenuItem.BackColor = System.Drawing.Color.White
+        Me.AGradeToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AGradeToolStripMenuItem.Name = "AGradeToolStripMenuItem"
-        Me.AGradeToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.AGradeToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.AGradeToolStripMenuItem.Text = "A"
+        '
+        'ReCheckAToolStripMenuItem4
+        '
+        Me.ReCheckAToolStripMenuItem4.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ReCheckAToolStripMenuItem4.Name = "ReCheckAToolStripMenuItem4"
+        Me.ReCheckAToolStripMenuItem4.Size = New System.Drawing.Size(185, 22)
+        Me.ReCheckAToolStripMenuItem4.Text = "ReCheckA"
         '
         'ASGradeToolStripMenuItem
         '
         Me.ASGradeToolStripMenuItem.BackColor = System.Drawing.Color.White
         Me.ASGradeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.P15ASToolStripMenuItem, Me.P25ASToolStripMenuItem, Me.P35ASToolStripMenuItem})
+        Me.ASGradeToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ASGradeToolStripMenuItem.Name = "ASGradeToolStripMenuItem"
-        Me.ASGradeToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.ASGradeToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.ASGradeToolStripMenuItem.Text = "AS"
         '
         'P15ASToolStripMenuItem
         '
         Me.P15ASToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.P15ASToolStripMenuItem.Name = "P15ASToolStripMenuItem"
-        Me.P15ASToolStripMenuItem.Size = New System.Drawing.Size(110, 22)
+        Me.P15ASToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
         Me.P15ASToolStripMenuItem.Text = "P15 AS"
         '
         'P25ASToolStripMenuItem
         '
         Me.P25ASToolStripMenuItem.BackColor = System.Drawing.Color.Yellow
         Me.P25ASToolStripMenuItem.Name = "P25ASToolStripMenuItem"
-        Me.P25ASToolStripMenuItem.Size = New System.Drawing.Size(110, 22)
+        Me.P25ASToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
         Me.P25ASToolStripMenuItem.Text = "P25 AS"
         '
         'P35ASToolStripMenuItem
         '
         Me.P35ASToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.P35ASToolStripMenuItem.Name = "P35ASToolStripMenuItem"
-        Me.P35ASToolStripMenuItem.Size = New System.Drawing.Size(110, 22)
+        Me.P35ASToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
         Me.P35ASToolStripMenuItem.Text = "P35 AS"
         '
         'BALADGradeToolStripMenuItem
         '
         Me.BALADGradeToolStripMenuItem.BackColor = System.Drawing.Color.White
         Me.BALADGradeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BToolStripMenuItem, Me.ALToolStripMenuItem, Me.ADToolStripMenuItem})
+        Me.BALADGradeToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BALADGradeToolStripMenuItem.Name = "BALADGradeToolStripMenuItem"
-        Me.BALADGradeToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.BALADGradeToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.BALADGradeToolStripMenuItem.Text = "B AL AD Grades"
         '
         'BToolStripMenuItem
         '
         Me.BToolStripMenuItem.Name = "BToolStripMenuItem"
-        Me.BToolStripMenuItem.Size = New System.Drawing.Size(90, 22)
+        Me.BToolStripMenuItem.Size = New System.Drawing.Size(91, 22)
         Me.BToolStripMenuItem.Text = "B"
         '
         'ALToolStripMenuItem
         '
         Me.ALToolStripMenuItem.Name = "ALToolStripMenuItem"
-        Me.ALToolStripMenuItem.Size = New System.Drawing.Size(90, 22)
+        Me.ALToolStripMenuItem.Size = New System.Drawing.Size(91, 22)
         Me.ALToolStripMenuItem.Text = "AL"
         '
         'ADToolStripMenuItem
         '
         Me.ADToolStripMenuItem.Name = "ADToolStripMenuItem"
-        Me.ADToolStripMenuItem.Size = New System.Drawing.Size(90, 22)
+        Me.ADToolStripMenuItem.Size = New System.Drawing.Size(91, 22)
         Me.ADToolStripMenuItem.Text = "AD"
         '
         'BSGradesToolStripMenuItem
         '
         Me.BSGradesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.P20BSToolStripMenuItem, Me.P30BSToolStripMenuItem, Me.P35BSToolStripMenuItem})
+        Me.BSGradesToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BSGradesToolStripMenuItem.Name = "BSGradesToolStripMenuItem"
-        Me.BSGradesToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.BSGradesToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.BSGradesToolStripMenuItem.Text = "BS Grades"
         '
         'P20BSToolStripMenuItem
         '
         Me.P20BSToolStripMenuItem.Name = "P20BSToolStripMenuItem"
-        Me.P20BSToolStripMenuItem.Size = New System.Drawing.Size(109, 22)
+        Me.P20BSToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
         Me.P20BSToolStripMenuItem.Text = "P20 BS"
         '
         'P30BSToolStripMenuItem
         '
         Me.P30BSToolStripMenuItem.Name = "P30BSToolStripMenuItem"
-        Me.P30BSToolStripMenuItem.Size = New System.Drawing.Size(109, 22)
+        Me.P30BSToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
         Me.P30BSToolStripMenuItem.Text = "P30 BS"
         '
         'P35BSToolStripMenuItem
         '
         Me.P35BSToolStripMenuItem.Name = "P35BSToolStripMenuItem"
-        Me.P35BSToolStripMenuItem.Size = New System.Drawing.Size(109, 22)
+        Me.P35BSToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
         Me.P35BSToolStripMenuItem.Text = "P35 BS"
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Pilot6ChToolStripMenuItem, Me.Pilot15ChToolStripMenuItem, Me.Pilot20ChToolStripMenuItem})
+        Me.ToolStripMenuItem2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(156, 22)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(185, 22)
         Me.ToolStripMenuItem2.Text = "PILOT Grades"
         '
         'Pilot6ChToolStripMenuItem
         '
         Me.Pilot6ChToolStripMenuItem.Name = "Pilot6ChToolStripMenuItem"
-        Me.Pilot6ChToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.Pilot6ChToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
         Me.Pilot6ChToolStripMenuItem.Text = "Pilot 6Ch"
         '
         'Pilot15ChToolStripMenuItem
         '
         Me.Pilot15ChToolStripMenuItem.Name = "Pilot15ChToolStripMenuItem"
-        Me.Pilot15ChToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.Pilot15ChToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
         Me.Pilot15ChToolStripMenuItem.Text = "Pilot 15Ch"
         '
         'Pilot20ChToolStripMenuItem
         '
         Me.Pilot20ChToolStripMenuItem.Name = "Pilot20ChToolStripMenuItem"
-        Me.Pilot20ChToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.Pilot20ChToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
         Me.Pilot20ChToolStripMenuItem.Text = "Pilot 20Ch"
-        '
-        'ReCheckToolStripMenuItem
-        '
-        Me.ReCheckToolStripMenuItem.Name = "ReCheckToolStripMenuItem"
-        Me.ReCheckToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
-        Me.ReCheckToolStripMenuItem.Text = "ReCheck"
         '
         'WasteToolStripMenuItem
         '
+        Me.WasteToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.WasteToolStripMenuItem.Name = "WasteToolStripMenuItem"
-        Me.WasteToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.WasteToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.WasteToolStripMenuItem.Text = "Waste"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(182, 6)
+        '
+        'ToolStripTextBox2
+        '
+        Me.ToolStripTextBox2.Font = New System.Drawing.Font("Segoe UI Black", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ToolStripTextBox2.MaxLength = 11
+        Me.ToolStripTextBox2.Name = "ToolStripTextBox2"
+        Me.ToolStripTextBox2.Size = New System.Drawing.Size(110, 28)
+        Me.ToolStripTextBox2.Text = "FORM CREATE"
+        '
+        'ReCheckToolStripMenuItem
+        '
+        Me.ReCheckToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ReCheckToolStripMenuItem.Name = "ReCheckToolStripMenuItem"
+        Me.ReCheckToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.ReCheckToolStripMenuItem.Text = "ReCheck"
         '
         'ReportsToolStripMenuItem
         '
@@ -507,15 +545,16 @@ Partial Class frmJobEntry
         Me.txtGrade.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.txtGrade.Location = New System.Drawing.Point(281, 29)
         Me.txtGrade.Name = "txtGrade"
-        Me.txtGrade.Size = New System.Drawing.Size(142, 44)
+        Me.txtGrade.Size = New System.Drawing.Size(169, 44)
         Me.txtGrade.TabIndex = 1
+        Me.txtGrade.Text = " "
         '
         'lblSelectGrade
         '
         Me.lblSelectGrade.AutoSize = True
         Me.lblSelectGrade.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSelectGrade.ForeColor = System.Drawing.Color.Red
-        Me.lblSelectGrade.Location = New System.Drawing.Point(429, 41)
+        Me.lblSelectGrade.Location = New System.Drawing.Point(456, 41)
         Me.lblSelectGrade.Name = "lblSelectGrade"
         Me.lblSelectGrade.Size = New System.Drawing.Size(282, 25)
         Me.lblSelectGrade.TabIndex = 183
@@ -644,4 +683,8 @@ Partial Class frmJobEntry
     Friend WithEvents Pilot6ChToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Pilot15ChToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Pilot20ChToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ReCheckAToolStripMenuItem4 As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents ToolStripTextBox2 As ToolStripTextBox
+    Friend WithEvents ToolStripTextBox3 As ToolStripTextBox
 End Class

@@ -25,7 +25,7 @@ Public Class frmPackCreateNew
 
         'CREATE CORRECT HEADER FOR SHEET
         Select Case frmJobEntry.txtGrade.Text
-            Case "A", "B", "AL", "AD"
+            Case "A", "B", "AL", "AD", "ReCheckA"
                 nfree = 13
                 'Product Name
                 MyPakExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D7
@@ -544,17 +544,17 @@ Public Class frmPackCreateNew
 
 
         Select Case frmJobEntry.txtGrade.Text
-                Case "A"
-                    frmPackTodayUpdate.TodayUpdate()
-                Case "B", "AL", "AD"
-                    frmPackTodayUpdate.TodayUpdateB_AL_AD()
-                Case "P35 AS", "P35 BS"
-                    frmPackTodayUpdate.TodatUpdateBS_AS_35()
-                Case "P25 AS", "P30 BS"
-                    frmPackTodayUpdate.TodayUpdateBS_AS_30()
-                Case "P15 AS", "P20 BS"
-                    frmPackTodayUpdate.TodayUpdateBS_AS_20()
-                Case "ReCheck"
+            Case "A", "ReCheckA"
+                frmPackTodayUpdate.TodayUpdate()
+            Case "B", "AL", "AD"
+                frmPackTodayUpdate.TodayUpdateB_AL_AD()
+            Case "P35 AS", "P35 BS"
+                frmPackTodayUpdate.TodatUpdateBS_AS_35()
+            Case "P25 AS", "P30 BS"
+                frmPackTodayUpdate.TodayUpdateBS_AS_30()
+            Case "P15 AS", "P20 BS"
+                frmPackTodayUpdate.TodayUpdateBS_AS_20()
+            Case "ReCheck"
                 frmPackTodayUpdate.todayUpdate_ReCheck()
             Case "Round1", "Round2", "Round3", "STD"
                 frmPackTodayUpdate.todayUpdate_STD()
@@ -571,7 +571,8 @@ Public Class frmPackCreateNew
 
 
 
-            Me.Close()
+
+        Me.Close()
 
     End Sub
 

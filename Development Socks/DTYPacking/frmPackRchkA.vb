@@ -1,245 +1,90 @@
 ﻿
 
-Imports System.ComponentModel
-Imports System.Data.SqlClient
-
-
-
 Public Class frmPackRchkA
 
-    'Private SQL As New SQLConn
-
-    ''---------------------------------------    SETTING UP LOCAL INSTANCE FOR SQL LINK FOR DATAGRID TO SYNC CORRECTLY WITH SQL -------------------------------------
-    'Public LConn As New SqlConnection(My.Settings.SQLConn) 'This need to be changed in Project/Propertie/Settings
-    'Private LCmd As SqlCommand
-
-    ''SQL CONNECTORS
-    'Public LDA As SqlDataAdapter
-    'Public LDS As DataSet
-    'Public LDT As DataTable
-    'Public LCB As SqlCommandBuilder
-
-    'Public LRecordCount As Integer
-    'Private LException As String
-    '' SQL QUERY PARAMETERS
-    'Public LParams As New List(Of SqlParameter)
-    ''-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-
-
-    Dim psorterror As String = 0
-    Dim varVisConeInspect As String
-    Dim coneBarley As String = 0
-    Dim coneZero As String = 0
-    Dim coneM10 As String = 0
-    Dim coneP10 As String = 0
-    Dim coneM30 As String = 0
-    Dim coneP30 As String = 0
-    Dim coneM50 As String = 0
-    Dim coneP50 As String = 0
-    Dim btnImage As Image
-    Dim keepDefcodes As Integer
+    Public packingActive = 0
     Public bcodeScan As String = ""
-    Dim clr As String = ""
-    Public curcone As String = 0
     Public toAllocatedCount As Integer 'count of cones requierd to be scanned
     Public allocatedCount As Integer 'count of cones scanned
-    Public itemCount As Integer = 0
-    'ReCheck Params
-    Dim reChecked, ReCheckTime As String
-    Public removeChar() As Char = {"<", "0", "0", ">", vbCrLf}
-    Dim incoming As String
-    Public measureOn As String
-    Public NoCone As Integer
-    Public defect As Integer
-
-    Public varCartStartTime As String   'Record time that we started measuring
     Public varCartEndTime As String
-    Public coneNumOffset As Integer
-    Dim varConeBCode As String
-    Dim fileActive As Integer
-    Public varConeNum As Integer
-    Private coneCount As Integer
-    Public coneState As String
-    Public packingActive = 0
+    Public packedFlag As Integer
+
+    Public gradePackActive As Integer = 1
+    'Index for DGV
+    Dim gridRow As Integer = 0
+    Dim gridCol As Integer = 1
+    'INDEX FOR DGV1
+    Dim dgv1gridRow As Integer = 0
+    Dim dgv1gridCol As Integer = 0
+    'Index for changing input location in DGV
+
+
+    Dim coneCount As Integer = 0
+
+    Dim dgvRows As Integer
 
 
 
 
     Private Sub frmPackRchkA_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'frmDGV.DGVdata.ClearSelection()
-        'frmDGV.Close()
-
-        Dim btnNum As Integer
-        Dim btnNums As String
 
 
-        btnNums = 1
-
-
-        ' SELECT CONE NUMBER RANGE BASED ON CART NUMBER
-
-
-        btnNum = 1
-        coneNumOffset = 0
-
-
-
-
-        'LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & frmJobEntry.txtLotNumber.Text & "' And  RECHK = 4  And PACKENDTM is Null")
-
-        ''If LRecordCount > 0 Then
-        ''LOAD THE DATA FROM dB IN TO THE DATAGRID
-        'frmDGV.DGVdata.DataSource = LDS.Tables(0)
-        '    frmDGV.DGVdata.Rows(0).Selected = True
-        '    Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
-
-        '    'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE by our own index
-        '    frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
-
-
-        'If LRecordCount > 0 Then
-        'LOAD THE DATA FROM dB IN TO THE DATAGRID
-        ' DataGridView1.DataSource = LDS.Tables(0)
-        'DataGridView1.Rows(0).Selected = True
-        ' Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
-
-        'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE by our own index
-        ' DataGridView1.Sort(DataGridView1.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
-
-
-
-
-        'frmDGV.Show()
-
-
-        MsgBox("I am here")
-
-        'SET CORRECT BUTTUN NUMBERS BASED ON CONE NUMBERS (SPINDEL NUMBERS)
-        For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
-
-            Me.Controls("btnCone" & i.ToString).Text = btnNum
-            btnNum = btnNum + 1
-
-        Next
-
-
-        Me.txtCartNum.Text = frmJobEntry.cartSelect
-            Me.lblJobNum.Text = frmJobEntry.varJobNum
-
-
-        'GET NUMBER OF CONES THAT NEED ALLOCATING Count agains Job Barcode
-        Dim btnCountStart As Integer = frmDGV.DGVdata.Rows.Count + 1
-        Dim totBtn As Integer = 31 - btnCountStart
-            For i = btnCountStart To 32
-                Me.Controls("btnCone" & i.ToString).Visible = False
-            Next
-
-
-        For i = 1 To frmDGV.DGVdata.Rows.Count
-
-            If frmDGV.DGVdata.Rows(i - 1).Cells(83).Value = "A" Then toAllocatedCount = toAllocatedCount + 1
-
-        Next
-
-        txtboxTotal.Text = toAllocatedCount
-
-
-
-
-
-            'IF THIS IS AN EXISTING JOB THEN CALL BACK VALUES FROM DATABASE
-            If frmJobEntry.coneValUpdate Then UpdateConeVal()
-
-
-            'Me.KeyPreview = True  'Allows us to look for advance character from barcode
-            Me.KeyPreview = True
-
-
-
-
-
-        txtConeBcode.Clear()
-        txtConeBcode.Refresh()
         txtConeBcode.Focus()
 
-    End Sub
+        'Header Information
+        Label2.Text = frmJobEntry.txtGrade.Text
+        Label5.Text = frmJobEntry.varProductName
+        Label6.Text = frmJobEntry.varProductCode
 
 
+        For i = 2 To 9  'Columns to Hide
+            DataGridView1.Columns(i).Visible = False
+        Next
+
+        'create rows 
+        DataGridView1.Rows.Add(32)
+
+        DataGridView1.RowHeadersVisible = False
+
+        'NUMBER THE 90 CELLS
+        For nums = 1 To 32
 
 
-    Public Sub UpdateConeVal()
+            DataGridView1.Rows(dgv1gridRow).Cells(dgv1gridCol).Value = nums
+            dgv1gridRow = dgv1gridRow + 1
 
-
-
-
-        For rw As Integer = 1 To frmDGV.DGVdata.Rows.Count
-
-
-
-
-            ' If (frmDGV.DGVdata.Rows(rw - 1).Cells(83).Value = "AL" Or frmDGV.DGVdata.Rows(rw - 1).Cells(83).Value = "A") And frmDGV.DGVdata.Rows(rw - 1).Cells("RECHK").Value = "4" Then
-
-            If (frmDGV.DGVdata.Rows(rw - 1).Cells(83).Value = "A") And frmDGV.DGVdata.Rows(rw - 1).Cells("RECHK").Value = "4" Then
-                Me.Controls("btnCone" & rw).BackColor = Color.Green       'Grade A Cone
-            End If
-
-            If frmDGV.DGVdata.Rows(rw - 1).Cells("RECHK").Value = "5" Then
-                Me.Controls("btnCone" & rw).BackColor = Color.LightGreen       'Grade A Cone
-            End If
-
-            'Me.Controls("btnCone" & rw).Enabled = False
-
+            'If dgv1gridRow = 31 And dgv1gridCol < 4 Then
+            '    dgv1gridRow = 0
+            '    dgv1gridCol = dgv1gridCol + 2
+            'End If
 
         Next
 
+        'SET FOCUS ON TO INPUT COLUMN IN DGV
 
+        DataGridView1.CurrentCell = DataGridView1(1, 0)
+
+        toAllocatedCount = frmDGV.DGVdata.Rows.Count
+
+        lbltotCount.Text = toAllocatedCount
+
+        Me.KeyPreview = True 'Allows us to look for advace character from barcode
+
+        'THESE TWO LINES CONE SCANNED CHEESE FROM JOBENTRY IN TO THE FIRST ROW OF THE FORM AS WE KNOW IT IS THE CORRECT GRADE
+        'txtConeBcode.Text = frmJobEntry.txtLotNumber.Text
+        'prgContinue()
 
 
 
     End Sub
 
-    'Public Sub LExecQuery(Query As String)
-    '    ' RESET QUERY STATISTCIS
-    '    LRecordCount = 0
-    '    LException = ""
-
-
-    '    If LConn.State = ConnectionState.Open Then LConn.Close()
-    '    Try
-
-    '        'OPEN SQL DATABSE CONNECTION
-    '        LConn.Open()
-
-    '        'CREATE SQL COMMAND
-    '        LCmd = New SqlCommand(Query, LConn)
-
-    '        'LOAD PARAMETER INTO SQL COMMAND
-    '        LParams.ForEach(Sub(p) LCmd.Parameters.Add(p))
-
-    '        'CLEAR PARAMETER LIST
-    '        LParams.Clear()
-
-    '        'EXECUTE COMMAND AND FILL DATASET
-    '        LDS = New DataSet
-    '        LDT = New DataTable
-    '        LDA = New SqlDataAdapter(LCmd)
-
-    '        LRecordCount = LDA.Fill(LDS)
-
-    '    Catch ex As Exception
-
-    '        LException = "ExecQuery Error: " & vbNewLine & ex.Message
-    '        MsgBox(LException)
-
-    '    End Try
-
-    'End Sub
 
 
 
-    Private Sub btnDefect_Click(sender As Object, e As EventArgs) Handles btnDefect.Click
+
+    Private Sub btnDefect_Click(sender As Object, e As EventArgs)
         Me.Hide()
         packingActive = 1
 
@@ -248,82 +93,165 @@ Public Class frmPackRchkA
 
     End Sub
 
+    Public Sub prgContinue()
 
 
-    Private Sub prgContinue()
 
-
+        dgvRows = toAllocatedCount
 
 
         bcodeScan = txtConeBcode.Text
-        Dim curcone As String
-        Dim coneCount As Integer = 0
+
+        Dim fmt As String = "00"
+        Dim modIdxNum As String
         Dim today As String = DateAndTime.Today
         today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
 
-        MsgBox(txtConeBcode.Text & " I have arrived")
-
-        Dim endval As Integer = frmDGV.DGVdata.Rows.Count
 
 
-        For i = 1 To endval 'frmDGV.DGVdata.Rows.Count
+
+        For i = 1 To dgvRows
 
 
-            If frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = "4" And frmDGV.DGVdata.Rows(i - 1).Cells("FLT_S").Value = False Then
+            If frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
 
-                curcone = i
-                Me.Controls("btnCone" & curcone.ToString).BackColor = Color.LightGreen       'Grade A Cone
+                'write to the local DGV grid
+                DataGridView1.Rows(gridRow).Cells(gridCol).Value = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value  'Write to Grid Cone Bcode
+                DataGridView1.Rows(gridRow).Cells(gridCol).Style.BackColor = Color.LightGreen
+
+
+                'Update DGV that Cheese has been alocated, update Packendtm
+                frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Today
+                frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
+                frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
                 frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = "5"
-                frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
-                frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.varUserName
-                frmDGV.DGVdata.Rows(i - 1).Cells("CARTENDTM").Value = today
-
-                'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
-                If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
-                    For rows As Integer = 1 To frmDGV.DGVdata.Rows.Count
-                        If My.Settings.chkUsePack = True Then frmDGV.DGVdata.Rows(rows - 1).Cells("PACKENDTM").Value = DateAndTime.Today  'PACKING CHECK END TIME.
-                    Next
-                End If
+                frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "15"
+                packedFlag = 1
 
 
-                allocatedCount = allocatedCount + 1
-                endCheck()
-                curcone = 0
                 Exit For
-            ElseIf frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = "5" Then
-                Label1.Visible = True
-                Label1.Text = "Cheese already allocated"
+                'CHECK FOR ALREADY PACKED CHEESE
+            ElseIf frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+                Label8.Visible = True
+                Label8.Text = "Cheese already allocated"
+                Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
                 DelayTM()
-                Label1.Visible = False
-                'ElseIf frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(CONESTATE).Value < "9" Or frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells(43).Value = True Then
-                '    curcone = frmDGV.DGVdata.Rows(i - 1).Cells(6).Value
-                '    psorterror = 1
-                '    Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.Red      'Wrong Cone scanned
-                '    frmDGV.DGVdata.Rows(i - 1).Cells(58).Value = psorterror
-                '    frmDGV.DGVdata.Rows(i - 1).Cells(55).Value = frmJobEntry.PackOp
-                '    frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "14"
-                '    frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
+                Label8.Visible = False
+                packedFlag = 0
+                txtConeBcode.Clear()
+                txtConeBcode.Focus()
+                Me.KeyPreview = True 'Allows us to look for advace character from barcode
+                Exit Sub
+
+            ElseIf i - 1 = dgvRows - 1 And packedFlag = 0 Then    'CHECK FOR WRONG CHEESE ON CART
+                'MsgBox("i = " & i - 1 & "Rows = " & dgvRows - 1)
+                Label8.Visible = True
+                Label8.Text = ("This is not a Grade " & frmJobEntry.txtGrade.Text & " Cheese")
+                Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
+                DelayTM()
+                Me.Hide()
+                Me.KeyPreview = True 'Allows us to look for advace character from barcode
+                frmRemoveCone.Show()
 
 
+                frmDGV.DGVdata.Rows(i - 1).Cells(58).Value = 1
+                frmDGV.DGVdata.Rows(i - 1).Cells(55).Value = frmJobEntry.txtOperator.Text
+                frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
 
-
-                'Me.Hide()
-                'frmRemoveCone.Show()
-                'psorterror = 0
-                'curcone = 0
-                'Continue For
-
+                Label8.Visible = False
+                txtConeBcode.Clear()
+                txtConeBcode.Focus()
+                Exit Sub
 
             End If
 
         Next
+        'UPDATE TOTAL COUNTED
+        lbltotScan.Text = coneCount + 1
+
+
+        'ROUTINE TO MOVE TO NEW COLUMN WHEN COLUMN IS FULL
+
+        'If gridRow < 29 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow + 1)
+
+        '' gridRow = gridRow + 1
+        'coneCount = coneCount + 1
+
+        'If gridRow = 30 And gridCol < 5 Then
+        '    gridRow = 0
+        '    gridCol = gridCol + 2
+        '    DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
+        'End If
+
+
+        'CHECK FOR END OF COUNT
+        If coneCount < 32 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow + 1)
+
+        gridRow = gridRow + 1
+        coneCount = coneCount + 1
+
+
+        If coneCount = 32 Or coneCount = toAllocatedCount Then jobEnd()
+
+
+
+        packedFlag = 0
+
+
+
 
         txtConeBcode.Clear()
-        txtConeBcode.Refresh()
         txtConeBcode.Focus()
 
 
+
+
+
+
+
     End Sub
+
+
+
+
+    Private Sub jobEnd()
+
+        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        Label8.Visible = True
+        Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
+        Label8.Text = ("Please wait creating packing Excel sheet")
+
+
+
+        frmPackRepMain.PackRepMainSub()
+
+        If frmPackTodayUpdate.prtError Then
+            frmPackRepMain.Close()
+            Me.Cursor = System.Windows.Forms.Cursors.Default
+            Label8.Visible = False
+            Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
+            frmPackTodayUpdate.Close()
+            gradePackActive = 0
+            Me.Close()
+            Exit Sub
+        Else
+
+            frmPackRepMain.Close()
+            UpdateDatabase()
+            Label8.Visible = False
+            Me.Cursor = System.Windows.Forms.Cursors.Default
+            gradePackActive = 0
+            Me.Close()
+            frmJobEntry.Show()
+            frmJobEntry.txtLotNumber.Clear()
+
+        End If
+
+
+
+    End Sub
+
+
 
     Private Sub DelayTM()
         Dim interval As Integer = "2000"
@@ -340,33 +268,22 @@ Public Class frmPackRchkA
 
 
 
-    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        'If LConn.State = ConnectionState.Open Then LConn.Close()
-        ' If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
-        frmDGV.DGVdata.ClearSelection()
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        ' TODO WRITE CURRENT SCANNED CONES TO THE PRINT FORM AND ALLOCATE PACKED VALUES TO THE DATABASE
+        coneCount = 0
+        toAllocatedCount = 0
+        DataGridView1.ClearSelection()
+        If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
         frmDGV.DGVdata.ClearSelection()
         frmJobEntry.Show()
         frmJobEntry.txtLotNumber.Clear()
         frmJobEntry.txtLotNumber.Focus()
+        gradePackActive = 0
         Me.Close()
     End Sub
 
 
 
-    Public Sub endCheck()
-        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        If toAllocatedCount = allocatedCount Then
-            curcone = 0
-            'frmPackReport.packPrint() 'Print the packing report and go back to Job Entry for the next cart
-
-
-            frmPackRepMain.PackRepMainSub()
-            frmPackRepMain.Close()
-            UpdateDatabase()
-
-        End If
-        Me.Cursor = System.Windows.Forms.Cursors.Default
-    End Sub
 
 
 
@@ -395,14 +312,14 @@ Public Class frmPackRchkA
             MsgBox("Update Error: " & vbNewLine & ex.Message)
         End Try
 
-        'If LConn.State = ConnectionState.Open Then LConn.Close()
+
 
         If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
-        frmDGV.DGVdata.ClearSelection()
         frmDGV.DGVdata.ClearSelection()
         frmJobEntry.txtLotNumber.Clear()
         frmJobEntry.txtLotNumber.Focus()
         frmJobEntry.Show()
+        gradePackActive = 0
         Me.Close()
 
 
@@ -423,13 +340,8 @@ Public Class frmPackRchkA
 
     End Sub
 
-
-
-
-
     'THIS LOOKS FOR ENTER key to be pressed or received via barcode
-
-    Private Sub frmJobEntry_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown, btnCone4.KeyDown
+    Private Sub frmJobEntry_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
 
         If e.KeyCode = Keys.Return Then
 
@@ -440,7 +352,17 @@ Public Class frmPackRchkA
 
     End Sub
 
+    Private Sub btnFinish_Click(sender As Object, e As EventArgs) Handles btnFinish.Click
 
+        jobEnd()
+
+    End Sub
+
+    Private Sub btnDefect_Click_1(sender As Object, e As EventArgs) Handles btnDefect.Click
+        Me.Hide()
+        packingActive = 1
+        frmPackingFault.Show()
+    End Sub
 End Class
 
 

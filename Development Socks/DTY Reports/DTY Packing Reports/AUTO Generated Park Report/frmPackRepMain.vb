@@ -33,13 +33,31 @@ Public Class frmPackRepMain
         prodNameMod = frmDGV.DGVdata.Rows(0).Cells(52).Value.ToString
         prodNameMod = prodNameMod.Replace("/", "_")
 
-        'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
-        sheetName = prodNameMod.Substring(prodNameMod.Length - 4) & "_" & frmJobEntry.txtGrade.Text
+        If frmJobEntry.txtGrade.Text = "ReCheckA" Then
 
-        'CREATE THE FULL NAME FOR SAVING THE FILE
-        saveString = (prodNameMod & " " _
-            & frmDGV.DGVdata.Rows(0).Cells(7).Value.ToString & "_" _
-            & frmDGV.DGVdata.Rows(0).Cells(2).Value.ToString) & " " & frmJobEntry.txtGrade.Text
+            'CREATE THE SHEET NAME But as this Cheese is from ReCheck we will assign to A grade sheet
+            sheetName = prodNameMod.Substring(prodNameMod.Length - 4) & "_A"
+
+            'CREATE THE FULL NAME FOR SAVING THE FILE
+            saveString = (prodNameMod & " " _
+                & frmDGV.DGVdata.Rows(0).Cells(7).Value.ToString & "_" _
+                & frmDGV.DGVdata.Rows(0).Cells(2).Value.ToString) & " A"
+        Else
+            'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+            sheetName = prodNameMod.Substring(prodNameMod.Length - 4) & "_" & frmJobEntry.txtGrade.Text
+
+            'CREATE THE FULL NAME FOR SAVING THE FILE
+            saveString = (prodNameMod & " " _
+                & frmDGV.DGVdata.Rows(0).Cells(7).Value.ToString & "_" _
+                & frmDGV.DGVdata.Rows(0).Cells(2).Value.ToString) & " " & frmJobEntry.txtGrade.Text
+        End If
+
+
+
+        ''CREATE THE FULL NAME FOR SAVING THE FILE
+        'saveString = (prodNameMod & " " _
+        '    & frmDGV.DGVdata.Rows(0).Cells(7).Value.ToString & "_" _
+        '    & frmDGV.DGVdata.Rows(0).Cells(2).Value.ToString) & " " & frmJobEntry.txtGrade.Text
 
 
         'CALL SUB TO GET TODAYS SAVE DIRECTORY
@@ -54,7 +72,7 @@ Public Class frmPackRepMain
         'SELECT CORRECT PRINT TEMPLATE
 
         Select Case frmJobEntry.txtGrade.Text
-            Case "A"
+            Case "A", "ReCheckA"
                 template = (My.Settings.dirTemplate & "\" & "PackingTemplate.xlsx").ToString
             Case "B"
                 template = (My.Settings.dirTemplate & "\" & "Packing Template Grade B.xlsx").ToString
@@ -110,7 +128,7 @@ Public Class frmPackRepMain
 
             Select Case frmJobEntry.txtGrade.Text
 
-                Case "A"
+                Case "A", "ReCheckA"
                     frmPackTodayUpdate.TodayUpdate()
                 Case "B", "AD", "AL", "Waste"
                     frmPackTodayUpdate.TodayUpdateB_AL_AD()

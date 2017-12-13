@@ -324,7 +324,7 @@ Public Class frmB_AL_AD_W
             Case "P15 AS", "P20 BS"
 
 
-                If gridRow < 39 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow + 1)
+                If gridRow < 38 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow + 1)
 
                 gridRow = gridRow + 1
                 coneCount = coneCount + 1
