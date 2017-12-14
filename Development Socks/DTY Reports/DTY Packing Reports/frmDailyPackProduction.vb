@@ -43,8 +43,34 @@ Public Class frmDailyPackProduction
     Dim prodWeight As String
     Dim lineCount As Integer = 0
     Dim reCheckCount As Integer = 0 'COUNT OF ReCHECK CONES
+    Dim startDate As Date
 
 
+
+    Private Sub MonthCalendar1_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
+        'Routine to get date range
+        Label5.Text = MonthCalendar1.SelectionRange.Start.ToString("dd/MMM/yyyy")
+
+
+        'STRIPOUT / Characters from date so that they are not used in the file name
+
+        startDate = Label5.Text.Replace("/", "")
+
+
+        btnCreate.Enabled = True
+    End Sub
+
+    Private Sub btnCreate_Click(sender As Object, e As EventArgs) Handles btnCreate.Click
+
+        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+            Label2.Visible = True
+            Label2.Text = "Please wait Creating Stock to process Report"
+            processReport()
+            Me.Cursor = System.Windows.Forms.Cursors.Default
+            frmJobEntry.Show()
+            Me.Close()
+
+    End Sub
 
     Public Sub processReport()
             'Excel Items
@@ -296,7 +322,6 @@ Public Class frmDailyPackProduction
                 GC.Collect()
             End Try
         End Sub
-
 
 
 End Class

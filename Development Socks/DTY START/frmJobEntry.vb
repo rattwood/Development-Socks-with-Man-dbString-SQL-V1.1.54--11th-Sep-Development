@@ -1722,9 +1722,12 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub StockToProcessReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StockToProcessReportToolStripMenuItem.Click
-        Me.Hide()
-        frmProdStockWork.Show()
-
+        ''Me.Hide()
+        ''frmProdStockWork.Show()
+        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        lblMessage.Text = "Please Wait Creating Work in Progress Report"
+        frmProdStockWork.processReport()
+        Me.Cursor = System.Windows.Forms.Cursors.Default
 
     End Sub
 
@@ -1936,4 +1939,6 @@ Public Class frmJobEntry
         txtOperator.Visible = True
         lblScanType.Text = "Scan Job Sheet"
     End Sub
+
+
 End Class

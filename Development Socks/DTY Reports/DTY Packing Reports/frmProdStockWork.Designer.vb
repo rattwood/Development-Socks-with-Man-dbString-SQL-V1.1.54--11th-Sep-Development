@@ -82,9 +82,10 @@ Partial Class frmProdStockWork
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(242, 54)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(176, 20)
+        Me.Label1.Size = New System.Drawing.Size(236, 20)
         Me.Label1.TabIndex = 19
-        Me.Label1.Text = "Daily Packing Report"
+        Me.Label1.Text = "Stock Ready to Pack Report"
+        Me.Label1.Visible = False
         '
         'btnCreate
         '
@@ -95,6 +96,7 @@ Partial Class frmProdStockWork
         Me.btnCreate.TabIndex = 18
         Me.btnCreate.Text = "Create Report"
         Me.btnCreate.UseVisualStyleBackColor = True
+        Me.btnCreate.Visible = False
         '
         'Label6
         '
@@ -104,6 +106,7 @@ Partial Class frmProdStockWork
         Me.Label6.Size = New System.Drawing.Size(10, 13)
         Me.Label6.TabIndex = 25
         Me.Label6.Text = " "
+        Me.Label6.Visible = False
         '
         'Label5
         '
@@ -113,6 +116,7 @@ Partial Class frmProdStockWork
         Me.Label5.Size = New System.Drawing.Size(10, 13)
         Me.Label5.TabIndex = 24
         Me.Label5.Text = " "
+        Me.Label5.Visible = False
         '
         'Label4
         '
@@ -122,6 +126,7 @@ Partial Class frmProdStockWork
         Me.Label4.Size = New System.Drawing.Size(52, 13)
         Me.Label4.TabIndex = 23
         Me.Label4.Text = "End Date"
+        Me.Label4.Visible = False
         '
         'Label3
         '
@@ -131,6 +136,7 @@ Partial Class frmProdStockWork
         Me.Label3.Size = New System.Drawing.Size(55, 13)
         Me.Label3.TabIndex = 22
         Me.Label3.Text = "Start Date"
+        Me.Label3.Visible = False
         '
         'MonthCalendar1
         '
@@ -139,6 +145,7 @@ Partial Class frmProdStockWork
         Me.MonthCalendar1.Name = "MonthCalendar1"
         Me.MonthCalendar1.ShowWeekNumbers = True
         Me.MonthCalendar1.TabIndex = 21
+        Me.MonthCalendar1.Visible = False
         '
         'frmProdStockWork
         '

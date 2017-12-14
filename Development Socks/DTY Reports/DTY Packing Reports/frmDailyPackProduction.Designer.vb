@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmDailyPackProduction
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmDailyPackProduction
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.DGVJobsData = New System.Windows.Forms.DataGridView()
         Me.DGVProdData = New System.Windows.Forms.DataGridView()
@@ -73,7 +73,7 @@ Partial Class frmDailyPackProduction
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(381, 82)
+        Me.Label5.Location = New System.Drawing.Point(393, 85)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(11, 13)
         Me.Label5.TabIndex = 12
@@ -83,7 +83,7 @@ Partial Class frmDailyPackProduction
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(289, 82)
+        Me.Label3.Location = New System.Drawing.Point(289, 85)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(88, 13)
         Me.Label3.TabIndex = 10
@@ -91,6 +91,7 @@ Partial Class frmDailyPackProduction
         '
         'btnCreate
         '
+        Me.btnCreate.Enabled = False
         Me.btnCreate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCreate.Location = New System.Drawing.Point(312, 120)
         Me.btnCreate.Name = "btnCreate"
@@ -112,13 +113,10 @@ Partial Class frmDailyPackProduction
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(47, 222)
+        Me.Label2.Location = New System.Drawing.Point(93, 235)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(63, 20)
+        Me.Label2.Size = New System.Drawing.Size(0, 13)
         Me.Label2.TabIndex = 15
-        Me.Label2.Text = "Label2"
-        Me.Label2.Visible = False
         '
         'frmDailyPackProduction
         '
