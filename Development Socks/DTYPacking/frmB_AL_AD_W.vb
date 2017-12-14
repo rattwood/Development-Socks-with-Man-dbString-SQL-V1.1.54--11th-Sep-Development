@@ -179,7 +179,9 @@ Public Class frmB_AL_AD_W
 
             'CHECK FOR UNPACKED CHEESE AND ALLOCATE
             'If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = 0 And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
-
+            If Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value) Then
+                If frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 0 Then frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = Nothing
+            End If
 
             If frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) And frmJobEntry.txtGrade.Text <> "ReCheck" Or
                 frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) And frmJobEntry.txtGrade.Text = "ReCheck" And

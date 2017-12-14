@@ -1293,7 +1293,7 @@ Public Class frmJobEntry
                 LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9  And (DEFCONE > 0 OR CONEBARLEY > 0 Or RECHKRESULT = 'B') And FLT_W = 'False' And PACKENDTM is Null ")
             Case "AL"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9 And DEFCONE = 0 And CONEBARLEY = 0 And RECHKRESULT 'AL' And RECHK = 4 And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9 And DEFCONE = 0 And CONEBARLEY = 0 And RECHKRESULT = 'AL' And RECHK = 4 And PACKENDTM is Null")
             Case "AD"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9 And DEFCONE = 0 And CONEBARLEY = 0 And RECHKRESULT = 'AD' And RECHK = 4 And PACKENDTM is Null")
@@ -1323,7 +1323,8 @@ Public Class frmJobEntry
 
 
 
-                        If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("RECHK").Value) Then  'check to see if cheese scanned has already been allocated
+                    If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("RECHK").Value) Then  'check to see if cheese scanned has already been allocated
+                        If frmDGV.DGVdata.Rows(0).Cells("RECHK").Value <> "0" Then
                             Label3.Visible = True
                             Label3.Text = "THIS CHEESE HAS ALREADY BEEN ALLOCATED "
                             DelayTM()
@@ -1339,6 +1340,7 @@ Public Class frmJobEntry
 
                         End If
                     End If
+                End If
 
 
                     Case "Waste"
@@ -1420,7 +1422,7 @@ Public Class frmJobEntry
             Case "AL"
                 packGrade = txtGrade.Text
                 ' LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 9 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAL = 'AL'   And RECHK = 4 And PACKENDTM is Null")
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9 And DEFCONE = 0 And CONEBARLEY = 0 And RECHKRESULT 'AL' And RECHK = 4 And PACKENDTM is Null")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9 And DEFCONE = 0 And CONEBARLEY = 0 And RECHKRESULT = 'AL' And RECHK = 4 And PACKENDTM is Null")
             Case "AD"
                 packGrade = txtGrade.Text
                 'LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 9 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAD = 'AD' And RECHK = 4 And PACKENDTM is Null")
