@@ -1995,7 +1995,11 @@ Public Class frmPackTodayUpdate
 
 
             'Product Name
-            MyTodyExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value
+            Dim prodTf As String
+
+            prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+
+            MyTodyExcel.Cells(5, 4) = prodTf 'frmDGV.DGVdata.Rows(0).Cells(52).Value
             'Product Code
             MyTodyExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells(2).Value
             'Packer Name

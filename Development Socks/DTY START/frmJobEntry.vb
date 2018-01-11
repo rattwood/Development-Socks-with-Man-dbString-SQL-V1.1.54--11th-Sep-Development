@@ -620,7 +620,7 @@ Public Class frmJobEntry
             End If
         Else
             If My.Settings.chkUseColour Or My.Settings.chkUsePack Then
-                MsgBox("Job does not Exist, you must creat new Job from Sort Computer")
+                MsgBox("Job does not Exist, you must create new Job from Sort Computer")
                 txtLotNumber.Clear()
                 txtLotNumber.Focus()
                 Exit Sub
@@ -933,7 +933,7 @@ Public Class frmJobEntry
 
 
             'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(5), ListSortDirection.Ascending)  'sorts On cone number
+            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
 
             coneValUpdate = 1
             Me.Hide()

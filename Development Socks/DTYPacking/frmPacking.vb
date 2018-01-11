@@ -267,10 +267,10 @@ Public Class frmPacking
                 frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
 
                 'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
-                If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
-                    For rows As Integer = 1 To rowendcount
-                        If My.Settings.chkUsePack = True Then frmDGV.DGVdata.Rows(rows - 1).Cells("PACKENDTM").Value = DateAndTime.Today  'PACKING CHECK END TIME.
-                    Next
+                If IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+                    'For rows As Integer = 1 To rowendcount
+                    If My.Settings.chkUsePack = True Then frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Today  'PACKING CHECK END TIME.
+                    'Next
                 End If
 
 
@@ -294,11 +294,11 @@ Public Class frmPacking
 
                 'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
 
-                If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
-                    For rows As Integer = 1 To rowendcount
-                        If My.Settings.chkUseColour = True Then frmDGV.DGVdata.Rows((rows - 1) - coneNumOffset).Cells("PACKENDTM").Value = varCartEndTime 'PACKING CHECK END TIME
-                    Next
-                End If
+                'If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
+                '    For rows As Integer = 1 To rowendcount
+                '        If My.Settings.chkUseColour = True Then frmDGV.DGVdata.Rows((rows - 1) - coneNumOffset).Cells("PACKENDTM").Value = varCartEndTime 'PACKING CHECK END TIME
+                '    Next
+                'End If
 
                 Me.Hide()
                 frmRemoveCone.Show()

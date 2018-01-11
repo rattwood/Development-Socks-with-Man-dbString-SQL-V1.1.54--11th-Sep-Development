@@ -341,7 +341,7 @@ Public Class frmB_AL_AD_W
 
             Case "ReCheck"
 
-                If coneCount < 32 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow + 1)
+                If coneCount < 31 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow + 1)
 
                 gridRow = gridRow + 1
                 coneCount = coneCount + 1
