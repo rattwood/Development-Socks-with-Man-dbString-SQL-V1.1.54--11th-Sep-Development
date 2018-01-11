@@ -140,16 +140,16 @@ Public Class frmPacking
 
 
 
-            '''SET CORRECT BUTTUN NUMBERS BASED ON CONE NUMBERS (SPINDEL NUMBERS)
-            ''For i As Integer = 1 To 32
+        ''SET CORRECT BUTTUN NUMBERS BASED ON CONE NUMBERS (SPINDEL NUMBERS)
+        'For i As Integer = 1 To 32
 
-            ''    Me.Controls("btnCone" & i.ToString).Text = btnNum
-            ''    btnNum = btnNum + 1
+        '    Me.Controls("btnCone" & i.ToString).Text = btnNum
+        '    btnNum = btnNum + 1
 
-            ''Next
+        'Next
 
 
-            Me.txtCartNum.Text = frmJobEntry.cartSelect
+        Me.txtCartNum.Text = frmJobEntry.cartSelect
         Me.lblJobNum.Text = frmJobEntry.varJobNum
 
 

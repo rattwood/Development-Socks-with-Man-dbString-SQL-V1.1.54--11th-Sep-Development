@@ -103,7 +103,7 @@ Public Class frmPackRchkA
         bcodeScan = txtConeBcode.Text
 
         Dim fmt As String = "00"
-        Dim modIdxNum As String
+        'Dim modIdxNum As String
         Dim today As String = DateAndTime.Today
         today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
 
