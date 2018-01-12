@@ -1309,7 +1309,8 @@ Public Class frmJobEntry
                 packGrade = txtGrade.Text
                 If stdReChk = 0 Then
 
-                    LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null ")
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null And RECHKSTARTTM Is Null ")
+
                 Else
 
                     LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 9 And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null And STDSTATE = 10 ")
@@ -1324,7 +1325,7 @@ Public Class frmJobEntry
 
 
                     If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("RECHK").Value) Then  'check to see if cheese scanned has already been allocated
-                        If frmDGV.DGVdata.Rows(0).Cells("RECHK").Value <> "0" Then
+                        If frmDGV.DGVdata.Rows(0).Cells("RECHK").Value > "0" Then
                             Label3.Visible = True
                             Label3.Text = "THIS CHEESE HAS ALREADY BEEN ALLOCATED "
                             DelayTM()
@@ -1437,7 +1438,7 @@ Public Class frmJobEntry
                 packGrade = txtGrade.Text
                 If stdReChk = 0 Then
                     '  LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And M30 > 0 And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And P30 > 0 And PACKENDTM is Null")
-                    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null ")
+                    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null And RECHKSTARTTM is Null ")
                 Else
                     'ReCheck creation for std cheese  state 10
                     LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 9 And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null And STDSTATE = 10 and RECHK is Null")
