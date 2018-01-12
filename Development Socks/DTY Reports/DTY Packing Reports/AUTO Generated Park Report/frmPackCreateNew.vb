@@ -262,10 +262,15 @@ Public Class frmPackCreateNew
 
             Case "ReCheck"
                 nfree = 9
-                        'Product Name
-                        MyPakExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D5
-                        'Product Code
-                        MyPakExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'G5
+
+                Dim prodTf As String
+
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                'PRODUCT NAME
+                MyPakExcel.Cells(5, 4) = prodTf 'frmDGV.DGVdata.Rows(0).Cells(52).Value     'D5
+
+                'Product Code
+                MyPakExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'G5
                         'DATE
                         MyPakExcel.Cells(4, 7) = Date.Now.ToString("dd MM yyyy")              'G4
                         'CHEESE WEIGHT

@@ -36,7 +36,7 @@ Public Class frmPackRepMain
         If frmJobEntry.txtGrade.Text = "ReCheckA" Then
 
             'CREATE THE SHEET NAME But as this Cheese is from ReCheck we will assign to A grade sheet
-            sheetName = prodNameMod.Substring(prodNameMod.Length - 4) & "_A"
+            sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
 
             'CREATE THE FULL NAME FOR SAVING THE FILE
             saveString = (prodNameMod & " " _
@@ -44,7 +44,7 @@ Public Class frmPackRepMain
                 & frmDGV.DGVdata.Rows(0).Cells(2).Value.ToString) & " A"
         Else
             'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
-            sheetName = prodNameMod.Substring(prodNameMod.Length - 4) & "_" & frmJobEntry.txtGrade.Text
+            sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_" & frmJobEntry.txtGrade.Text
 
             'CREATE THE FULL NAME FOR SAVING THE FILE
             saveString = (prodNameMod & " " _
