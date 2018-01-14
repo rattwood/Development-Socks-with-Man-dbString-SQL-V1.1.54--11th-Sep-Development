@@ -258,6 +258,7 @@ Public Class frmPacking
         For i = 1 To rowendcount
 
 
+
             If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells(43).Value = False Then
                 curcone = frmDGV.DGVdata.Rows(i - 1).Cells(6).Value
                 Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.LightGreen       'Grade A Cone
@@ -292,7 +293,7 @@ Public Class frmPacking
                 frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "14"
                 frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
 
-                'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
+                'UPDATE ALL CHEESE ON CART AS PROCESSED TODAY FOR DAILY PACKING REPORT TO WORK
 
                 'If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
                 '    For rows As Integer = 1 To rowendcount
@@ -348,6 +349,16 @@ Public Class frmPacking
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         If toAllocatedCount = allocatedCount Then
             curcone = 0
+
+            '**************************************************************************************************************
+            'UPDATE ALL CHEESE ON CART AS PROCESSED TODAY FOR DAILY PACKING REPORT TO WORK
+            If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKCARTTM").Value) Then
+                For rows As Integer = 1 To rowendcount
+                    If My.Settings.chkUseColour = True Then frmDGV.DGVdata.Rows((rows - 1) - coneNumOffset).Cells("PACKCARTTM").Value = varCartEndTime 'PACKING CHECK END TIME
+                Next
+            End If
+            '**************************************************************************************************************
+
             'frmPackReport.packPrint() 'Print the packing report and go back to Job Entry for the next cart
             frmPackRepMain.PackRepMainSub()
             frmPackRepMain.Close()
