@@ -875,6 +875,7 @@ Public Class frmJobEntry
 
         Me.Cursor = System.Windows.Forms.Cursors.Default
         If LRecordCount > 1 Then
+
             If machineCode = 29 Then
                 Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
                 LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
