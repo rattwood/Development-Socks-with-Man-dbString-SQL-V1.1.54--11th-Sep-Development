@@ -46,8 +46,8 @@ Public Class frmCart1
     Dim incoming As String
     Public measureOn As String
     Public NoCone As Integer
-    Public StdCone As Integer
-    Public stdState As Integer
+    Public StdCone As Integer = Nothing
+    Public stdStateVar As Integer = Nothing
     Public defect As Integer
     Public shortCone As Integer
     Public varCartStartTime As String   'Record time that we started measuring
@@ -65,8 +65,6 @@ Public Class frmCart1
 
 
     Private SQL As New SQLConn
-
-
 
 
     Private Sub frmCart1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -264,7 +262,7 @@ Public Class frmCart1
             Me.btnShort.Visible = True
             If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value) Then Me.btnStdCheese.Visible = True
         Else
-                Me.btnNoCone.Visible = False
+            Me.btnNoCone.Visible = False
             Me.btnDefect.Visible = False
             Me.btnShort.Visible = False
             'Me.btnStdCheese.Visible = True
@@ -336,7 +334,7 @@ Public Class frmCart1
             Next
 
             If Not IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("STDSTATE").Value) Then
-                If frmDGV.DGVdata.Rows(rw - 1).Cells("STDSTATE").Value > 0 Then
+                If frmDGV.DGVdata.Rows(rw - 1).Cells("STDSTATE").Value > "0" Then
 
                     Me.Controls("btnCone" & rw).BackColor = Color.Orange      'NOCONE As allocated as STD
                     Me.Controls("btnCone" & rw).Enabled = False
@@ -344,8 +342,8 @@ Public Class frmCart1
             End If
 
 
-            'CHECK FLT_S FLA
-            If frmDGV.DGVdata.Rows(rw - 1).Cells(43).Value = True Then
+                'CHECK FLT_S FLA
+                If frmDGV.DGVdata.Rows(rw - 1).Cells(43).Value = True Then
                 Me.Controls("btnCone" & rw).BackColor = Color.Red
                 Me.Controls("btnCone" & rw).Enabled = True
             End If
@@ -587,7 +585,8 @@ Public Class frmCart1
             Me.btnClear.Visible = True
             shortC(varConeNum - coneNumOffset) = 0
             defect = 0
-            StdCone = 0
+            StdCone = Nothing
+            stdStateVar = Nothing
             shortCone = 0
             coneBarley = 0
             coneWaste = 0
@@ -621,6 +620,8 @@ Public Class frmCart1
             Me.chk_YN.Visible = False
             Me.chk_HT.Visible = False
             Me.chk_LT.Visible = False
+            StdCone = Nothing
+            stdStateVar = Nothing
         Else
             MsgBox("You must select a Cheese number first")
         End If
@@ -695,12 +696,12 @@ Public Class frmCart1
             chk_YN.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_YN").Value.ToString
             chk_HT.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_HT").Value.ToString
             chk_LT.Checked = frmDGV.DGVdata.Rows(fltDrow).Cells("FLT_LT").Value.ToString
-
-
-
+            StdCone = Nothing
+            stdStateVar = Nothing
             'End If
 
             Me.btnDefectSave.Visible = True 'Show Save button when form opens
+
 
         Else
             MsgBox("You must select a Cheese number first")
@@ -725,7 +726,6 @@ Public Class frmCart1
                     frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("SHORTCONE").Value = 0  'shortCone
                     frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("MISSCONE").Value = 0 'missingCone
                     frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("DEFCONE").Value = 0 'defectCone
-                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDCHEESE").Value = 0 'defectCone
                     frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CONEZERO").Value = 0 'passCone  Zero Colour Difference    
                     frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CONEBARLEY").Value = 0 'Cone with large colour defect
                     frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("M10").Value = 0   'coneM10
@@ -761,7 +761,10 @@ Public Class frmCart1
                     frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("DYEFLECK").Value = 0
                     frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("COLDEF").Value = 0
                     frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("COLWASTE").Value = 0
-                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDSTATE").Value = 0
+                    StdCone = Nothing
+                    stdStateVar = Nothing
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDCHEESE").Value = Nothing 'stdcheese
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDSTATE").Value = Nothing
                     shortC(varConeNum - coneNumOffset) = 0
                     Me.Controls("btnCone" & varConeNum - coneNumOffset).BackColor = SystemColors.ControlDark
                     Me.Controls("btnCone" & varConeNum - coneNumOffset).BackgroundImage = Nothing
@@ -806,8 +809,8 @@ Public Class frmCart1
             If varVisConeInspect = 1 Then
                 NoCone = 0
                 defect = 0
-                StdCone = 0
-                stdState = 0
+                StdCone = Nothing
+                stdStateVar = Nothing
                 shortCone = 0
                 varConeNum = 0
                 txtConeNum.Text = ""
@@ -859,7 +862,10 @@ Public Class frmCart1
             Else
                 NoCone = 0
                 defect = 0
-                StdCone = 0
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDCHEESE").Value = Nothing 'stdcheese
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDSTATE").Value = Nothing
+                StdCone = Nothing
+                stdStateVar = Nothing
                 shortCone = 0
                 varConeNum = 0
                 txtConeNum.Text = ""
@@ -934,6 +940,8 @@ Public Class frmCart1
             Me.btnStdCheese.Enabled = False
             Me.btnNoCone.Enabled = False
             Me.btnShort.Enabled = False
+            StdCone = Nothing
+            stdStateVar = Nothing
         Else
             MsgBox("You must select a  Cheese number first")
         End If
@@ -1435,6 +1443,14 @@ Public Class frmCart1
         Me.chk_HT.Visible = False
         Me.chk_LT.Visible = False
 
+
+        If btnUnlock.Text = "UNLOCK ON" Then
+            btnUnlock.Text = "UNLOCK OFF"
+            btnUnlock.ForeColor = Color.Red
+            btnDelete.Visible = False
+
+        End If
+
         readsave()
     End Sub
 
@@ -1913,7 +1929,7 @@ Public Class frmCart1
 
 
 
-            stdState = 1  'Sets the nocone fault flag
+            stdStateVar = 1  'Sets the stdsate  flag
 
 
 
@@ -2874,6 +2890,8 @@ Public Class frmCart1
             NoCone = 0
             defect = 0
             shortCone = 0
+            StdCone = Nothing
+            stdStateVar = Nothing
             varConeNum = 0
             txtConeNum.Text = ""
 
@@ -2886,8 +2904,8 @@ Public Class frmCart1
 
 
             NoCone = 0
-            StdCone = 0
-            stdState = 0
+            StdCone = Nothing
+            stdStateVar = Nothing
             defect = 0
             shortCone = 0
             varConeNum = 0
@@ -2939,7 +2957,7 @@ Public Class frmCart1
         If varConeNum > 0 Then
 
             StdCone = 1
-            stdState = 1
+
 
             Me.btnMeasure.Enabled = False
             Me.btnVisGrade.Enabled = False
@@ -3099,9 +3117,9 @@ Public Class frmCart1
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("MISSCONE").Value = NoCone  'missingCone
 
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("DEFCONE").Value = defect  'defectCone
-            End If
+        End If
 
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CONEZERO").Value = coneZero  'passCone  Zero Colour Difference    
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CONEZERO").Value = coneZero  'passCone  Zero Colour Difference    
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CONEBARLEY").Value = coneBarley 'Cone with large colour defect
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("M10").Value = coneM10   'coneM10
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("P10").Value = coneP10   'coneP10
@@ -3130,29 +3148,36 @@ Public Class frmCart1
 
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_X").Value = Fault_X           'No HAVE CHEESE Fault 
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_N").Value = chk_N.Checked     'NO TAIL & ABNORMAL Fault 
-                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_W").Value = chk_W.Checked     'WASTE Fault 
-                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_H").Value = chk_H.Checked     'HITTING Fault 
-                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_TR").Value = chk_TR.Checked    'TARUMI Fault 
-                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_B").Value = chk_B.Checked     'B- GRADE BY M/C  Fault  
-                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_C").Value = chk_C.Checked     'C- GRADE BY M/C  Fault  
-                'SORT Dept FAULTS
-                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_DO").Value = chk_DO.Checked     'DO- GRADE BY M/C  Fault  
-                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_DH").Value = chk_DH.Checked     'DH- GRADE BY M/C  Fault  
-                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_CL").Value = chk_CL.Checked     'CL- GRADE BY M/C  Fault 
-                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_FI").Value = chk_FI.Checked     'FI- GRADE BY M/C  Fault  
-                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_YN").Value = chk_YN.Checked     'YN- GRADE BY M/C  Fault 
-                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_HT").Value = chk_HT.Checked     'HT- GRADE BY M/C  Fault  
-                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_LT").Value = chk_LT.Checked     'LT- GRADE BY M/C  Fault 
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_W").Value = chk_W.Checked     'WASTE Fault 
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_H").Value = chk_H.Checked     'HITTING Fault 
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_TR").Value = chk_TR.Checked    'TARUMI Fault 
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_B").Value = chk_B.Checked     'B- GRADE BY M/C  Fault  
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_C").Value = chk_C.Checked     'C- GRADE BY M/C  Fault  
+            'SORT Dept FAULTS
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_DO").Value = chk_DO.Checked     'DO- GRADE BY M/C  Fault  
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_DH").Value = chk_DH.Checked     'DH- GRADE BY M/C  Fault  
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_CL").Value = chk_CL.Checked     'CL- GRADE BY M/C  Fault 
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_FI").Value = chk_FI.Checked     'FI- GRADE BY M/C  Fault  
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_YN").Value = chk_YN.Checked     'YN- GRADE BY M/C  Fault 
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_HT").Value = chk_HT.Checked     'HT- GRADE BY M/C  Fault  
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_LT").Value = chk_LT.Checked     'LT- GRADE BY M/C  Fault 
 
-                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("COLWASTE").Value = coneWaste     'COLOUR WASTE BY COLOUR DEPT
-
-
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDCHEESE").Value = StdCone      'sets cheese number using nocone routine
-
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDSTATE").Value = stdState
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("COLWASTE").Value = coneWaste     'COLOUR WASTE BY COLOUR DEPT
 
 
+            'IF STDSTATE IS ZERO THEN WRITE NULL TO db OTHERWISE WRITE VALUE
+            If StdCone > 0 Then
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDCHEESE").Value = StdCone      'sets cheese number 
+
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDSTATE").Value = stdStateVar
+            Else
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDCHEESE").Value = Nothing     'sets cheese number 
+
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDSTATE").Value = Nothing
             End If
+
+
+        End If
 
 
 
