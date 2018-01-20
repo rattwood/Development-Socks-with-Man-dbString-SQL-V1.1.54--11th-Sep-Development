@@ -1462,7 +1462,7 @@ Public Class frmJobEntry
 
             If txtGrade.Text = "ReCheckA" Then
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE by our own index
-                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(0), ListSortDirection.Ascending)  'sorts On cone number
+                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
 
             Else
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE

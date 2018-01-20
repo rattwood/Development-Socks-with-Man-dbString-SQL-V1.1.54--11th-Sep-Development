@@ -32,4 +32,7 @@
         Copyright.Text = My.Application.Info.Copyright
     End Sub
 
+    Private Sub Copyright_Click(sender As Object, e As EventArgs) Handles Copyright.Click
+
+    End Sub
 End Class

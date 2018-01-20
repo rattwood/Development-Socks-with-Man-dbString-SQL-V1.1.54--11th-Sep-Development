@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Software solution for tracking DTY cones from Sort, Colour check and Packing")>
 <Assembly: AssemblyCompany("Tecknoserve Co., Ltd")>
 <Assembly: AssemblyProduct("DTYTrack_MSSQL")>
-<Assembly: AssemblyCopyright("Copyright © Tecknoserve Co., Ltd 2017")>
+<Assembly: AssemblyCopyright("Copyright © Tecknoserve Co., Ltd 2018")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(true)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("1.0.0.0")>
+<Assembly: AssemblyVersion("2.0.0.0")>
+<Assembly: AssemblyFileVersion("2.0.0.0")>
