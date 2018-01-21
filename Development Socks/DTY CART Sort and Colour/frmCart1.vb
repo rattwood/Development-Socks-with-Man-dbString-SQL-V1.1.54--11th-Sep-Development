@@ -1545,7 +1545,7 @@ Public Class frmCart1
                             frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
                             Continue For
                         End If
-                    ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value = "0" Then
+                    ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value = "0" Or frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value = Nothing Then
                         If cl = 10 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
                             frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"
                             Continue For
@@ -1607,6 +1607,13 @@ Public Class frmCart1
                     frmDGV.DGVdata.Rows(rw - 1).Cells(31).Value = today
                     frmDGV.DGVdata.Rows(rw - 1).Cells(32).Value = today
                 End If
+
+
+
+
+
+
+
             End If
 
             If My.Settings.chkUseColour And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value.ToString IsNot "8" Then
@@ -1629,6 +1636,8 @@ Public Class frmCart1
 
         Next
 
+        chkConeState()
+
         UpdateDatabase()
 
 
@@ -1642,6 +1651,26 @@ Public Class frmCart1
 
     End Sub
 
+    Private Sub chkConeState()
+
+
+        For i = 1 To frmDGV.DGVdata.Rows.Count
+            If My.Settings.chkUseSort Then
+                'Check to see if all DGV rows have been updated correctly if not update before dbUpdate
+                If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value < 5 Then
+                    frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "5"
+                    frmDGV.DGVdata.Rows(i - 1).Cells(31).Value = Today
+                    frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = Today
+                End If
+            End If
+
+        Next
+
+
+
+
+
+    End Sub
 
     Private Sub readsave()
 
@@ -3171,9 +3200,9 @@ Public Class frmCart1
 
                 frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDSTATE").Value = stdStateVar
             Else
-                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDCHEESE").Value = Nothing     'sets cheese number 
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDCHEESE").Value = DBNull.Value    'sets cheese number 
 
-                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDSTATE").Value = Nothing
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("STDSTATE").Value = DBNull.Value
             End If
 
 
