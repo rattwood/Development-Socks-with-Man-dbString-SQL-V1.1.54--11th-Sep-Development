@@ -354,7 +354,7 @@ Public Class frmPacking
             'UPDATE ALL CHEESE ON CART AS PROCESSED TODAY FOR DAILY PACKING REPORT TO WORK
             If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKCARTTM").Value) Then
                 For rows As Integer = 1 To rowendcount
-                    If My.Settings.chkUseColour = True Then frmDGV.DGVdata.Rows((rows - 1) - coneNumOffset).Cells("PACKCARTTM").Value = varCartEndTime 'PACKING CHECK END TIME
+                    frmDGV.DGVdata.Rows((rows - 1) - coneNumOffset).Cells("PACKCARTTM").Value = varCartEndTime 'PACKING CHECK END TIME
                 Next
             End If
             '**************************************************************************************************************
