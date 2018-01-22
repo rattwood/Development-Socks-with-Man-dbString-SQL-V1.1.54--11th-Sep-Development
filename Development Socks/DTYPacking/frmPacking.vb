@@ -352,9 +352,11 @@ Public Class frmPacking
 
             '**************************************************************************************************************
             'UPDATE ALL CHEESE ON CART AS PROCESSED TODAY FOR DAILY PACKING REPORT TO WORK
+
+
             If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKCARTTM").Value) Then
-                For rows As Integer = 1 To rowendcount
-                    frmDGV.DGVdata.Rows((rows - 1) - coneNumOffset).Cells("PACKCARTTM").Value = varCartEndTime 'PACKING CHECK END TIME
+                For x As Integer = 1 To 32
+                    frmDGV.DGVdata.Rows(x - 1).Cells("PACKCARTTM").Value = Today 'PACKING CHECK END TIME
                 Next
             End If
             '**************************************************************************************************************
