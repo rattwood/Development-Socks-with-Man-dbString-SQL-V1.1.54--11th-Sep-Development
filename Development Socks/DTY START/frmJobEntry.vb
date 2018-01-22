@@ -1304,7 +1304,7 @@ Public Class frmJobEntry
 
             Case "P20 BS", "P30 BS", "P35 BS"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE = 8 And (DEFCONE > 0 Or CONEBARLEY > 0) And PACKENDTM is Null  ")
+                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE = 8 And (DEFCONE > 0 Or CONEBARLEY > 0 Or m30 > 0 Or P30 >0) And PACKENDTM is Null  ")
             Case "ReCheck"
 
                 packGrade = txtGrade.Text
