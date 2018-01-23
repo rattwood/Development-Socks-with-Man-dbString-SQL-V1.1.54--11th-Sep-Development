@@ -572,7 +572,7 @@ Public Class frmPackTodayUpdate
                     cartonNum = (boxCount & "-" & cartonNum).ToString  'Sheet then Box number
 
                     'WRITE CONE NUMBER TO SHEET
-
+                    MsgBox("nfree = " & nfree & " & ncfree = " & ncfree)
                     MyTodyExcel.Cells(nfree, ncfree) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
 
 

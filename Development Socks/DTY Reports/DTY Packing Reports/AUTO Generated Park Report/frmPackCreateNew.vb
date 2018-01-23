@@ -27,8 +27,15 @@ Public Class frmPackCreateNew
         Select Case frmJobEntry.txtGrade.Text
             Case "A", "B", "AL", "AD", "ReCheckA"
                 nfree = 13
-                'Product Name
-                MyPakExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D7
+
+                Dim prodTf As String
+
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                'PRODUCT NAME
+                MyPakExcel.Cells(7, 4) = prodTf
+
+                ''Product Name
+                'MyPakExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D7
                 'Product Code
                 MyPakExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells(2).Value        'F7
                 'DATE
@@ -59,11 +66,18 @@ Public Class frmPackCreateNew
                 End Select
 
             Case "P35 AS", "P35 BS"
-                        nfree = 12
-                        'Product Name
-                        MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'H6
-                        'Product Code
-                        MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'L6
+                nfree = 12
+
+                Dim prodTf As String
+
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                'PRODUCT NAME
+                MyPakExcel.Cells(6, 8) = prodTf
+
+                ''Product Name
+                'MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'H6
+                'Product Code
+                MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'L6
                         'DATE
                         MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D5
                         'CHEESE WEIGHT
@@ -120,11 +134,18 @@ Public Class frmPackCreateNew
 
 
                     Case "P25 AS", "P30 BS"
-                        nfree = 13
-                        'Product Name
-                        MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'H6
-                        'Product Code
-                        MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'L6
+                nfree = 13
+
+                Dim prodTf As String
+
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                'PRODUCT NAME
+                MyPakExcel.Cells(6, 8) = prodTf
+
+                ''Product Name
+                'MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'H6
+                'Product Code
+                MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'L6
                         'DATE
                         MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D5
                         'CHEESE WEIGHT
@@ -181,11 +202,17 @@ Public Class frmPackCreateNew
                         MyPakExcel.Cells(1, 4) = SheetCodeString
 
                     Case "P15 AS", "P20 BS"
-                        nfree = 14
-                        'Product Name
-                        MyPakExcel.Cells(7, 9) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'E8
-                        'Product Code
-                        MyPakExcel.Cells(7, 14) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'N8
+                nfree = 14
+                Dim prodTf As String
+
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                'PRODUCT NAME
+                MyPakExcel.Cells(7, 9) = prodTf
+
+                ''Product Name
+                'MyPakExcel.Cells(7, 9) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'E8
+                'Product Code
+                MyPakExcel.Cells(7, 14) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'N8
                         'DATE
                         MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D6
                         'CHEESE WEIGHT
@@ -283,8 +310,14 @@ Public Class frmPackCreateNew
 
             Case "Round1", "Round2", "Round3", "STD"
                 nfree = 9
-                'Product Name
-                MyPakExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D5
+                Dim prodTf As String
+
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                'PRODUCT NAME
+                MyPakExcel.Cells(5, 4) = prodTf
+
+                ''Product Name
+                'MyPakExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D5
                 'Product Code
                 MyPakExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'G5
                 'DATE
@@ -317,8 +350,14 @@ Public Class frmPackCreateNew
             Case "Pilot 6Ch"
 
                 nfree = 13
-                'Product Name
-                MyPakExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D7
+                Dim prodTf As String
+
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                'PRODUCT NAME
+                MyPakExcel.Cells(7, 4) = prodTf
+
+                ''Product Name
+                'MyPakExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D7
                 'Product Code
                 MyPakExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells(2).Value        'F7
                 'DATE
@@ -342,8 +381,15 @@ Public Class frmPackCreateNew
 
             Case "Pilot 15Ch"
                 nfree = 12
-                'Product Name
-                MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value
+
+                Dim prodTf As String
+
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                'PRODUCT NAME
+                MyPakExcel.Cells(6, 8) = prodTf
+
+                ''Product Name
+                'MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value
                 'Product Code
                 MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value
                 'Packer Name
@@ -421,8 +467,14 @@ Public Class frmPackCreateNew
 
 
             Case "Pilot 20Ch"
-                'Product Name
-                MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value
+                Dim prodTf As String
+
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                'PRODUCT NAME
+                MyPakExcel.Cells(6, 8) = prodTf
+
+                ''Product Name
+                'MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value
                 'Product Code
                 MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value
                 'Packer Name

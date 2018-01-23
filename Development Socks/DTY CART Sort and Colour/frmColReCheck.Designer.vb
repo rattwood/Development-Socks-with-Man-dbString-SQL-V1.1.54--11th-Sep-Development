@@ -22,12 +22,12 @@ Partial Class frmColReCheck
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.rechkinx = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bocdecone = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -79,7 +79,7 @@ Partial Class frmColReCheck
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.rechkinx, Me.bocdecone, Me.rechk1, Me.rechk2, Me.rechkGrade, Me.rechkdef})
-        Me.DataGridView1.Location = New System.Drawing.Point(37, 12)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 1)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(687, 773)
         Me.DataGridView1.TabIndex = 0
@@ -87,11 +87,11 @@ Partial Class frmColReCheck
         'rechkinx
         '
         Me.rechkinx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter
-        DataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle25.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle25.NullValue = Nothing
-        Me.rechkinx.DefaultCellStyle = DataGridViewCellStyle25
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.NullValue = Nothing
+        Me.rechkinx.DefaultCellStyle = DataGridViewCellStyle7
         Me.rechkinx.DividerWidth = 5
         Me.rechkinx.Frozen = True
         Me.rechkinx.HeaderText = "NO."
@@ -104,10 +104,10 @@ Partial Class frmColReCheck
         'bocdecone
         '
         Me.bocdecone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bocdecone.DefaultCellStyle = DataGridViewCellStyle26
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bocdecone.DefaultCellStyle = DataGridViewCellStyle8
         Me.bocdecone.DividerWidth = 5
         Me.bocdecone.Frozen = True
         Me.bocdecone.HeaderText = "S/P No."
@@ -118,9 +118,9 @@ Partial Class frmColReCheck
         'rechk1
         '
         Me.rechk1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.rechk1.DefaultCellStyle = DataGridViewCellStyle27
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.rechk1.DefaultCellStyle = DataGridViewCellStyle9
         Me.rechk1.DividerWidth = 5
         Me.rechk1.Frozen = True
         Me.rechk1.HeaderText = "ReCheck 1"
@@ -131,10 +131,10 @@ Partial Class frmColReCheck
         'rechk2
         '
         Me.rechk2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle28.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rechk2.DefaultCellStyle = DataGridViewCellStyle28
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rechk2.DefaultCellStyle = DataGridViewCellStyle10
         Me.rechk2.DividerWidth = 5
         Me.rechk2.Frozen = True
         Me.rechk2.HeaderText = "ReCheck 2"
@@ -144,10 +144,10 @@ Partial Class frmColReCheck
         'rechkGrade
         '
         Me.rechkGrade.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter
-        DataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle29.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rechkGrade.DefaultCellStyle = DataGridViewCellStyle29
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter
+        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rechkGrade.DefaultCellStyle = DataGridViewCellStyle11
         Me.rechkGrade.DividerWidth = 5
         Me.rechkGrade.Frozen = True
         Me.rechkGrade.HeaderText = "Grade"
@@ -158,9 +158,9 @@ Partial Class frmColReCheck
         'rechkdef
         '
         Me.rechkdef.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.rechkdef.DefaultCellStyle = DataGridViewCellStyle30
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.rechkdef.DefaultCellStyle = DataGridViewCellStyle12
         Me.rechkdef.DividerWidth = 5
         Me.rechkdef.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.rechkdef.Frozen = True
@@ -172,7 +172,7 @@ Partial Class frmColReCheck
         '
         'btnResults
         '
-        Me.btnResults.Location = New System.Drawing.Point(964, 387)
+        Me.btnResults.Location = New System.Drawing.Point(892, 333)
         Me.btnResults.Name = "btnResults"
         Me.btnResults.Size = New System.Drawing.Size(88, 23)
         Me.btnResults.TabIndex = 1
@@ -183,7 +183,7 @@ Partial Class frmColReCheck
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(807, 157)
+        Me.Label1.Location = New System.Drawing.Point(735, 103)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(55, 13)
         Me.Label1.TabIndex = 2
@@ -193,7 +193,7 @@ Partial Class frmColReCheck
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(870, 157)
+        Me.Label2.Location = New System.Drawing.Point(798, 103)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(57, 13)
         Me.Label2.TabIndex = 3
@@ -203,7 +203,7 @@ Partial Class frmColReCheck
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(937, 157)
+        Me.Label3.Location = New System.Drawing.Point(865, 103)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(50, 13)
         Me.Label3.TabIndex = 4
@@ -213,7 +213,7 @@ Partial Class frmColReCheck
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(807, 195)
+        Me.Label4.Location = New System.Drawing.Point(735, 141)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(23, 13)
         Me.Label4.TabIndex = 5
@@ -224,7 +224,7 @@ Partial Class frmColReCheck
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(807, 227)
+        Me.Label5.Location = New System.Drawing.Point(735, 173)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(23, 13)
         Me.Label5.TabIndex = 6
@@ -234,7 +234,7 @@ Partial Class frmColReCheck
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(807, 262)
+        Me.Label6.Location = New System.Drawing.Point(735, 208)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(22, 13)
         Me.Label6.TabIndex = 7
@@ -244,7 +244,7 @@ Partial Class frmColReCheck
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(807, 301)
+        Me.Label7.Location = New System.Drawing.Point(735, 247)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(24, 13)
         Me.Label7.TabIndex = 8
@@ -254,7 +254,7 @@ Partial Class frmColReCheck
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(807, 341)
+        Me.Label8.Location = New System.Drawing.Point(735, 287)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(27, 13)
         Me.Label8.TabIndex = 9
@@ -265,7 +265,7 @@ Partial Class frmColReCheck
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.Label9.Location = New System.Drawing.Point(881, 341)
+        Me.Label9.Location = New System.Drawing.Point(809, 287)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(24, 24)
         Me.Label9.TabIndex = 14
@@ -276,7 +276,7 @@ Partial Class frmColReCheck
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.Color.Green
-        Me.Label10.Location = New System.Drawing.Point(881, 301)
+        Me.Label10.Location = New System.Drawing.Point(809, 247)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(28, 24)
         Me.Label10.TabIndex = 13
@@ -287,7 +287,7 @@ Partial Class frmColReCheck
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label11.Location = New System.Drawing.Point(881, 262)
+        Me.Label11.Location = New System.Drawing.Point(809, 208)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(27, 25)
         Me.Label11.TabIndex = 12
@@ -298,7 +298,7 @@ Partial Class frmColReCheck
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Label12.Location = New System.Drawing.Point(881, 227)
+        Me.Label12.Location = New System.Drawing.Point(809, 173)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(27, 13)
         Me.Label12.TabIndex = 11
@@ -309,7 +309,7 @@ Partial Class frmColReCheck
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label13.Location = New System.Drawing.Point(881, 195)
+        Me.Label13.Location = New System.Drawing.Point(809, 141)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(32, 13)
         Me.Label13.TabIndex = 10
@@ -320,7 +320,7 @@ Partial Class frmColReCheck
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(950, 341)
+        Me.Label14.Location = New System.Drawing.Point(878, 287)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(59, 13)
         Me.Label14.TabIndex = 19
@@ -330,7 +330,7 @@ Partial Class frmColReCheck
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(950, 301)
+        Me.Label15.Location = New System.Drawing.Point(878, 247)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(32, 13)
         Me.Label15.TabIndex = 18
@@ -340,7 +340,7 @@ Partial Class frmColReCheck
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(950, 262)
+        Me.Label16.Location = New System.Drawing.Point(878, 208)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(30, 13)
         Me.Label16.TabIndex = 17
@@ -350,7 +350,7 @@ Partial Class frmColReCheck
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(950, 227)
+        Me.Label17.Location = New System.Drawing.Point(878, 173)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(51, 13)
         Me.Label17.TabIndex = 16
@@ -360,7 +360,7 @@ Partial Class frmColReCheck
         '
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(950, 195)
+        Me.Label18.Location = New System.Drawing.Point(878, 141)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(23, 13)
         Me.Label18.TabIndex = 15
@@ -371,7 +371,7 @@ Partial Class frmColReCheck
         '
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(806, 101)
+        Me.Label19.Location = New System.Drawing.Point(734, 47)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(81, 20)
         Me.Label19.TabIndex = 20
@@ -381,7 +381,7 @@ Partial Class frmColReCheck
         '
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(893, 101)
+        Me.Label20.Location = New System.Drawing.Point(821, 47)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(0, 20)
         Me.Label20.TabIndex = 21
@@ -390,7 +390,7 @@ Partial Class frmColReCheck
         '
         Me.Label21.AutoSize = True
         Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.Location = New System.Drawing.Point(893, 54)
+        Me.Label21.Location = New System.Drawing.Point(821, 0)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(0, 20)
         Me.Label21.TabIndex = 23
@@ -399,7 +399,7 @@ Partial Class frmColReCheck
         '
         Me.Label22.AutoSize = True
         Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label22.Location = New System.Drawing.Point(806, 54)
+        Me.Label22.Location = New System.Drawing.Point(734, 0)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(77, 20)
         Me.Label22.TabIndex = 22
@@ -407,7 +407,7 @@ Partial Class frmColReCheck
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(953, 613)
+        Me.btnCancel.Location = New System.Drawing.Point(893, 559)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(87, 23)
         Me.btnCancel.TabIndex = 24
@@ -416,7 +416,7 @@ Partial Class frmColReCheck
         '
         'btnFinish
         '
-        Me.btnFinish.Location = New System.Drawing.Point(744, 613)
+        Me.btnFinish.Location = New System.Drawing.Point(703, 559)
         Me.btnFinish.Name = "btnFinish"
         Me.btnFinish.Size = New System.Drawing.Size(87, 23)
         Me.btnFinish.TabIndex = 25
@@ -426,7 +426,7 @@ Partial Class frmColReCheck
         '
         'btnReEnter
         '
-        Me.btnReEnter.Location = New System.Drawing.Point(774, 387)
+        Me.btnReEnter.Location = New System.Drawing.Point(702, 333)
         Me.btnReEnter.Name = "btnReEnter"
         Me.btnReEnter.Size = New System.Drawing.Size(88, 23)
         Me.btnReEnter.TabIndex = 26
@@ -437,7 +437,7 @@ Partial Class frmColReCheck
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(838, 448)
+        Me.Label23.Location = New System.Drawing.Point(766, 394)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(48, 13)
         Me.Label23.TabIndex = 27
@@ -446,7 +446,7 @@ Partial Class frmColReCheck
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(924, 448)
+        Me.Label24.Location = New System.Drawing.Point(852, 394)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(14, 13)
         Me.Label24.TabIndex = 28
@@ -455,7 +455,7 @@ Partial Class frmColReCheck
         'Label25
         '
         Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(838, 477)
+        Me.Label25.Location = New System.Drawing.Point(766, 423)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(55, 13)
         Me.Label25.TabIndex = 29
@@ -464,7 +464,7 @@ Partial Class frmColReCheck
         'Label26
         '
         Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(924, 477)
+        Me.Label26.Location = New System.Drawing.Point(852, 423)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(14, 13)
         Me.Label26.TabIndex = 30
@@ -473,7 +473,7 @@ Partial Class frmColReCheck
         'Label27
         '
         Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(838, 505)
+        Me.Label27.Location = New System.Drawing.Point(807, 502)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(57, 13)
         Me.Label27.TabIndex = 31
@@ -482,7 +482,7 @@ Partial Class frmColReCheck
         'Label28
         '
         Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(924, 505)
+        Me.Label28.Location = New System.Drawing.Point(893, 502)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(14, 13)
         Me.Label28.TabIndex = 32
@@ -491,7 +491,7 @@ Partial Class frmColReCheck
         'Label29
         '
         Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(838, 529)
+        Me.Label29.Location = New System.Drawing.Point(766, 475)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(48, 13)
         Me.Label29.TabIndex = 33
@@ -500,7 +500,7 @@ Partial Class frmColReCheck
         'Label30
         '
         Me.Label30.AutoSize = True
-        Me.Label30.Location = New System.Drawing.Point(924, 529)
+        Me.Label30.Location = New System.Drawing.Point(852, 475)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(14, 13)
         Me.Label30.TabIndex = 34
@@ -509,7 +509,7 @@ Partial Class frmColReCheck
         'Label31
         '
         Me.Label31.AutoSize = True
-        Me.Label31.Location = New System.Drawing.Point(838, 556)
+        Me.Label31.Location = New System.Drawing.Point(766, 502)
         Me.Label31.Name = "Label31"
         Me.Label31.Size = New System.Drawing.Size(76, 13)
         Me.Label31.TabIndex = 35
@@ -518,7 +518,7 @@ Partial Class frmColReCheck
         'Label32
         '
         Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(924, 556)
+        Me.Label32.Location = New System.Drawing.Point(852, 502)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(14, 13)
         Me.Label32.TabIndex = 36
@@ -528,7 +528,7 @@ Partial Class frmColReCheck
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1267, 781)
+        Me.ClientSize = New System.Drawing.Size(1008, 729)
         Me.Controls.Add(Me.Label32)
         Me.Controls.Add(Me.Label31)
         Me.Controls.Add(Me.Label30)
