@@ -416,9 +416,9 @@ Public Class frmPackTodayUpdate
     End Sub
 
     Public Sub TodatUpdateBS_AS_35()
+
         Dim xlTodyWorkbook As Excel.Workbook
         Dim xlTodysheets As Excel.Worksheet
-
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
         mycount = xlTodyWorkbook.Worksheets.Count
@@ -501,11 +501,14 @@ Public Class frmPackTodayUpdate
 
 
         Try
+            Label2.Text = nfree
+            Label4.Text = ncfree
 
+            MsgBox("pause")
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
-                If frmJobEntry.txtGrade.Text = "P35 AS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Or
-                     frmJobEntry.txtGrade.Text = "P35 AS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+                If frmJobEntry.txtGrade.Text = "P35 AS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Or
+                     frmJobEntry.txtGrade.Text = "P35 AS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
                     frmDGV.DGVdata.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
 
@@ -2412,5 +2415,7 @@ Public Class frmPackTodayUpdate
 
     End Sub
 
+    Private Sub frmPackTodayUpdate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
 End Class
