@@ -93,11 +93,13 @@ Public Class frmDailyPackProduction
         ' Dim searchdate As String
         ' searchdate = "2017-07-21"
         'Dim searchdate As Date = Date.Today                  ' xxxxxxxxxxxxxxxxxxxxxx  needed for final version
-        Dim searchdate As Date = MonthCalendar1.SelectionRange.Start.ToString("yyy-MM-dd")
-
+        Dim searchdate As Date = MonthCalendar1.SelectionRange.Start.ToString("dd/MMM/yyyy")
+        'Dim searchdate As Date = "2018-01-24"
 
         'GET LIST OF PRODUCTS TO BE PROCESSED AS OF NOW
         SQL.ExecQuery("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM,DOFFNUM,MCNUM FROM JOBS WHERE PACKENDTM = '" & searchdate & "' and CONESTATE >= 8") 'OR  PACKENDTM = '" & searchdate & "' and CONESTATE = 8 ")
+
+        ' MsgBox("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM,DOFFNUM,MCNUM FROM JOBS WHERE PACKENDTM = '" & searchdate & "' and CONESTATE >= 8")
 
         jobcount = SQL.RecordCount
 
@@ -168,16 +170,16 @@ Public Class frmDailyPackProduction
             Dim totalDF = SQL.RecordCount
 
             'COUNT NUMBER OF ReCHECK CONES
-            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM = '" & searchdate & "' And CONESTATE = 8 And FLT_S = 'False' And (M30 > 0 OR P30 > 0) And (CONEAD = 0 And CONEAL = 0) ")
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM = '" & searchdate & "' And CONESTATE = 8 And FLT_S = 'False' And (M30 > 0 OR P30 > 0) And (CONEAD = '0' And CONEAL = '0') ")
             Dim totalRC = SQL.RecordCount
 
             'COUNT NUMBER OR AL CONES
-            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM = '" & searchdate & "' And CONESTATE = 8 And FLT_S = 'False'  And CONEAL > 0 ")
-            Dim totalAL = SQL.RecordCount
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM = '" & searchdate & "' And CONESTATE = 8 And FLT_S = 'False'  And RECHKRESULT = 'AL' ")
+            Dim totalAL = SQL.RecordCount.ToString
 
             'COUNT NUMBER OF AD CONES
-            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM = '" & searchdate & "' And CONESTATE = 8 And FLT_S = 'False'  And CONEAD > 0  ")
-            Dim totalAD = SQL.RecordCount
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM = '" & searchdate & "' And CONESTATE = 8 And FLT_S = 'False'  And RECHKRESULT = 'AD' ")
+            Dim totalAD = SQL.RecordCount.ToString
 
 
 
@@ -217,18 +219,18 @@ Public Class frmDailyPackProduction
                 DGVJobData.Sort(DGVJobData.Columns("PRODNAME"), ListSortDirection.Ascending)  'sorts On cone number
 
             Else
-                MsgBox("No Jobs Found, Please select new date range")
+                'MsgBox("No Jobs Found, Please select new date range")
                 DGVJobData.ClearSelection()
-                Exit Sub
+                Continue For
             End If
             Dim mcName As String = DGVJobData.Rows(0).Cells("MCNAME").Value.ToString
 
-
+            'MsgBox("prodname " & prodName & "   merge #  " & mergeNum & "   McName " & mcName & "   doffNum" & doffNum & "  AL " & totalAL & "   AD " & totalAD)
 
             Dim totalMD = 0 'GRADE MD CONES
             Dim totalML = 0 'GRADE ML CONES
             'Dim totalAD = 0 'GRADE AD CONES
-            'Dim totalAL = 0 'GRADE AL CONES
+            ' Dim totalAL = 0 'GRADE AL CONES
 
             lineCount = lineCount + 1
 
