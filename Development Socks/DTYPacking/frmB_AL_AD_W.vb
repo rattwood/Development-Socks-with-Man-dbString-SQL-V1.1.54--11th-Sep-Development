@@ -382,7 +382,7 @@ Public Class frmB_AL_AD_W
         Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
         Label8.Text = ("Please wait creating packing Excel sheet")
 
-        If My.Settings.debugSet = True Then frmPackTodayUpdate.Show()
+
 
         frmPackRepMain.PackRepMainSub()
 

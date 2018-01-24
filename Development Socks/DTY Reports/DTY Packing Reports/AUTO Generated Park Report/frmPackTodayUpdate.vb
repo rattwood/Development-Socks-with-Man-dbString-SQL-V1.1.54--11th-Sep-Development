@@ -424,7 +424,7 @@ Public Class frmPackTodayUpdate
         mycount = xlTodyWorkbook.Worksheets.Count
         createBarcode()
         boxCount = mycount
-        MyTodyExcel.Visible = True
+
         Dim totCount As Integer
         'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
 
@@ -489,7 +489,7 @@ Public Class frmPackTodayUpdate
                 Next
                 If colCount < 12 Then colCount = colCount + 4
             Next
-            boxCount = boxCount + 1
+            'boxCount = boxCount + 1
             nfree = 12
             ncfree = 4
         End If
@@ -504,11 +504,11 @@ Public Class frmPackTodayUpdate
             Label2.Text = nfree
             Label4.Text = ncfree
 
-            MsgBox("pause")
+
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
-                If frmJobEntry.txtGrade.Text = "P35 AS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Or
-                     frmJobEntry.txtGrade.Text = "P35 AS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+                If frmJobEntry.txtGrade.Text = "P35 BS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Or
+                     frmJobEntry.txtGrade.Text = "P35 AS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
                     frmDGV.DGVdata.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
 
@@ -575,7 +575,7 @@ Public Class frmPackTodayUpdate
                     cartonNum = (boxCount & "-" & cartonNum).ToString  'Sheet then Box number
 
                     'WRITE CONE NUMBER TO SHEET
-                    MsgBox("nfree = " & nfree & " & ncfree = " & ncfree)
+
                     MyTodyExcel.Cells(nfree, ncfree) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
 
 
@@ -639,7 +639,7 @@ Public Class frmPackTodayUpdate
             MsgBox(ex.ToString)
 
         End Try
-        MyTodyExcel.Visible = False
+
         Try
 
             'Save changes to new file in Paking Dir
