@@ -342,8 +342,8 @@ Public Class frmCart1
             End If
 
 
-                'CHECK FLT_S FLA
-                If frmDGV.DGVdata.Rows(rw - 1).Cells(43).Value = True Then
+            'CHECK FLT_S FLA
+            If frmDGV.DGVdata.Rows(rw - 1).Cells(43).Value = True Then
                 Me.Controls("btnCone" & rw).BackColor = Color.Red
                 Me.Controls("btnCone" & rw).Enabled = True
             End If
@@ -3213,7 +3213,7 @@ Public Class frmCart1
 
 
 
-            UpdateDatabase()
+        'UpdateDatabase()
         txtBoxUpdates()
         UpdateConeVal()
 
