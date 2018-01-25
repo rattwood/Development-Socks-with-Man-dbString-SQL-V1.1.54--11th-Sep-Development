@@ -210,6 +210,10 @@ Public Class frmB_AL_AD_W
                     modIdxNum = tmpNum.ToString(fmt)
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = modIdxNum
                 Else
+                    'ROUTINE TO CREATE INDEX OF SCAN ORDER OF CHEESE FOR PRINTING IN SAME ORDER
+                    Dim tmpNum As Integer = DataGridView1.Rows(gridRow).Cells(gridCol - 1).Value  'GET SHEET CHEESE POSITION NUMBER 
+                    modIdxNum = tmpNum.ToString(fmt)
+                    frmDGV.DGVdata.Rows(i - 1).Cells("PACKIDX").Value = modIdxNum
                     'Update DGV that Cheese has been alocated, update Packendtm
                     frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Today
                     frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
@@ -383,8 +387,16 @@ Public Class frmB_AL_AD_W
         Label8.Text = ("Please wait creating packing Excel sheet")
 
 
+        'Change the number to the column index that you want to sort
+        If frmJobEntry.txtGrade.Text <> "ReCheck" Then
+            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("PACKIDX"), System.ComponentModel.ListSortDirection.Ascending)
+        End If
+
 
         frmPackRepMain.PackRepMainSub()
+
+
+        frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
 
         If frmPackTodayUpdate.prtError Then
             frmPackRepMain.Close()

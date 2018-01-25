@@ -509,6 +509,7 @@ Public Class frmPackTodayUpdate
 
                 If frmJobEntry.txtGrade.Text = "P35 BS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Or
                      frmJobEntry.txtGrade.Text = "P35 AS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+
                     frmDGV.DGVdata.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
 
@@ -575,6 +576,7 @@ Public Class frmPackTodayUpdate
                     cartonNum = (boxCount & "-" & cartonNum).ToString  'Sheet then Box number
 
                     'WRITE CONE NUMBER TO SHEET
+
 
                     MyTodyExcel.Cells(nfree, ncfree) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
 
