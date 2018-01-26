@@ -1949,7 +1949,7 @@ Public Class frmSortReCheck
 
             'UPDATE DATABASE FROM DATAGRID AS SETTING SHORT DOES NOT DO A FULL ROW UPDATE
             'UNTIL CONE VALUE Is ENTERED, THIS Is NEEDED AS SORT WILL BE DONE SEPERATE TO VISUAL COLOUR CHECK
-            UpdateDatabase()
+            ' UpdateDatabase()
             txtBoxUpdates()
 
             If varConeNum - coneNumOffset = 1 Then
@@ -2741,7 +2741,7 @@ Public Class frmSortReCheck
 
 
 
-        UpdateDatabase()
+        'UpdateDatabase()
         txtBoxUpdates()
         UpdateConeVal()
 

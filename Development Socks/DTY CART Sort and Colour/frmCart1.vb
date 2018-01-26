@@ -3427,7 +3427,7 @@ Public Class frmCart1
 
         'If My.Settings.chkUseColour Then frmFaultTrend.DefTrend()
 
-        directDBUpdate()
+        'directDBUpdate()
 
     End Sub
 
