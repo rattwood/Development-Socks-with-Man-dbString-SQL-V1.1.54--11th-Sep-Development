@@ -2250,7 +2250,7 @@ Public Class frmCart1
 
             'UPDATE DATABASE FROM DATAGRID AS SETTING SHORT DOES NOT DO A FULL ROW UPDATE
             'UNTIL CONE VALUE Is ENTERED, THIS Is NEEDED AS SORT WILL BE DONE SEPERATE TO VISUAL COLOUR CHECK
-            UpdateDatabase()
+            ' UpdateDatabase()
 
             If varConeNum - coneNumOffset = 1 Then
                 btnCone1.Enabled = True
@@ -3112,12 +3112,7 @@ Public Class frmCart1
     Private Sub jobArrayUpdate()
 
 
-        'If coneZero Or coneM10 Or coneP10 Or coneM30 Or coneP30 Or coneM50 Or coneP50 > 0 Then
-        '    defect = 0    'FrmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(11).Value = 0
 
-        'End If
-
-        'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
 
         If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("COLENDTM").Value) Then
             For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
@@ -3216,6 +3211,80 @@ Public Class frmCart1
         'UpdateDatabase()
         txtBoxUpdates()
         UpdateConeVal()
+
+
+    End Sub
+
+    Private Sub directDBUpdate()
+
+        Dim coneRef
+
+        For rows = 1 To frmDGV.DGVdata.Rows.Count
+
+            coneref = frmDGV.DGVdata.Rows(rows - 1).Cells("BCODECONE").Value
+
+
+            If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("COLENDTM").Value) Then
+                For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
+                    If My.Settings.chkUseColour = True Then
+                        frmJobEntry.LExecQuery("UPDATE jobs SET colendtm = '" & varCartEndTime & "' Where bcodecone = '" & coneRef & "' ")
+                        'frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = varCartEndTime 'COLOUR CHECK END TIME
+                    End If
+                Next
+            End If
+
+            If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("SORTENDTM").Value) Then
+                For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
+                    If My.Settings.chkUseSort = True Then
+                        frmJobEntry.LExecQuery("UPDATE jobs SET sortendtm = '" & varCartEndTime & "' Where bcodecone = '" & coneRef & "' ")
+                    End If
+                Next
+            End If
+
+
+            'list of Array Feilds to Update
+
+            frmJobEntry.LExecQuery("UPDATE jobs SET opname = '" & frmJobEntry.varUserName & "' Where bcodecone = '" & coneRef & "' ")
+
+
+            frmJobEntry.LExecQuery("UPDATE jobs SET shortcone = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("SHORTCONE").Value & "' Where bcodecone = '" & coneRef & "' ")
+
+            frmJobEntry.LExecQuery("UPDATE jobs SET misscone = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("MISSCONE").Value & "' Where bcodecone = '" & coneRef & "' ")
+
+            frmJobEntry.LExecQuery("UPDATE jobs SET defcone = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("DEFCONE").Value & "' Where bcodecone = '" & coneRef & "' ")
+
+
+
+
+
+
+            frmJobEntry.LExecQuery("UPDATE jobs SET CONEZERO = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("CONEZERO").Value & "', CONEBARLEY = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("CONEBARLEY").Value & "', M10 = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("M10").Value & "', P10 = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("P10").Value & "', M30 = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("M30").Value & "', P30 = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("P30").Value & "', M50 = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("M50").Value & "'," _
+              & " P50 = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("P50").Value & "', CARTSTARTTM = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("CARTSTARTTM").Value & "', CARTENDTM = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("CARTENDTM").Value & "', RECHK = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("RECHK").Value & "', RECHKTM = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("RECHKTM").Value & "', FLT_K = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_K").Value & "', FLT_D = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_D").Value & "', FLT_F = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_F").Value & "'," _
+              & " FLT_O = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_O").Value & "', FLT_T = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_T").Value & "', FLT_P = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_P").Value & "', FLT_X = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_X").Value & "', FLT_N = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_N").Value & "', FLT_W = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_W").Value & "', FLT_H = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_H").Value & "', FLT_TR = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_TR").Value & "', " _
+              & " FLT_B = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_B").Value & "', FLT_C = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_C").Value & "', FLT_DO = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_DO").Value & "', FLT_DH = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_DH").Value & "', FLT_CL = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_CL").Value & "', FLT_FI = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_FI").Value & "' , FLT_YN = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_YN").Value & "', " _
+              & " FLT_HT ='" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_HT").Value & "',FLT_LT = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_LT").Value & "', COLWASTE = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("COLWASTE").Value & "'  WHERE bcodecone = '" & coneRef & "' ")
+
+
+
+            If frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_S").Value = "False" Then
+                frmJobEntry.LExecQuery("UPDATE jobs SET flt_s = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("FLT_S").Value & "' Where bcodecone = '" & coneRef & "'")
+            End If 'SHORT CHEESE Fault
+
+
+            'IF STDSTATE IS ZERO THEN WRITE NULL TO db OTHERWISE WRITE VALUE
+            If StdCone > 0 Then
+                frmJobEntry.LExecQuery("UPDATE jobs SET stdcheese = '" & frmDGV.DGVdata.Rows(rows).Cells("STDCHEESE").Value & "' Where bcodecone = '" & coneRef & "' ")
+                frmJobEntry.LExecQuery("UPDATE jobs SET stdstate = '" & frmDGV.DGVdata.Rows(rows).Cells("STDSTATE").Value & "' Where bcodecone = '" & coneRef & "' ")
+            Else
+                frmJobEntry.LExecQuery("UPDATE jobs SET stdcheese = NULL Where bcodecone = '" & coneRef & "' ")
+                frmJobEntry.LExecQuery("UPDATE jobs SET stdstate = NULL Where bcodecone = '" & coneRef & "' ")
+            End If
+
+
+
+        Next
+
+
 
 
     End Sub
@@ -3358,7 +3427,7 @@ Public Class frmCart1
 
         'If My.Settings.chkUseColour Then frmFaultTrend.DefTrend()
 
-
+        directDBUpdate()
 
     End Sub
 
