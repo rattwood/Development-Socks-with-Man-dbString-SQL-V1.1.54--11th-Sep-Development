@@ -59,6 +59,9 @@ Public Class frmCart1
     'Public batchNum As String
     Public coneCount As Integer
     Public coneState As String
+    Dim fltconeNum As String
+    Dim csvRowNum As Integer
+
 
 
 
@@ -1608,12 +1611,6 @@ Public Class frmCart1
                     frmDGV.DGVdata.Rows(rw - 1).Cells(32).Value = today
                 End If
 
-
-
-
-
-
-
             End If
 
             If My.Settings.chkUseColour And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value.ToString IsNot "8" Then
@@ -1651,7 +1648,7 @@ Public Class frmCart1
 
     End Sub
 
-    Private Sub chkConeState()
+    Private Sub chkState()
 
 
         For i = 1 To frmDGV.DGVdata.Rows.Count
@@ -3071,11 +3068,18 @@ Public Class frmCart1
 
     Private Sub CSV()
 
-
-
+        Dim today As String = DateAndTime.Now
+        Dim csvFile As String
         'Check to see if file exists, if it does not creat the file, otherwise add data to the file
-        Dim dataOut As String = String.Concat(frmJobEntry.varMachineCode, ",", frmJobEntry.varMachineName, ",", frmJobEntry.varProductCode, ",", frmJobEntry.varProductName, ",", frmJobEntry.varYear, ",", frmJobEntry.varMonth, ",", frmJobEntry.varDoffingNum, ",", varConeNum, ",", "Null", ",", frmJobEntry.varUserName, ",", coneState, ",", shortCone, ",", NoCone, ",", defect, ",", frmJobEntry.varCartNum, ",", frmJobEntry.varCartSelect, ",", "Null", ",", coneM10, ",", coneP10, ",", coneM30, ",", coneP30, ",", coneM50, ",", coneP50, ",", varLedR, ",", varLedG, ",", varLedB, ",", varCIE_L, ",", varCIE_a, ",", varCIE_b, ",", varCIE_dL, ",", varCIE_dE, ",", varCartStartTime, ",", varCartEndTime)
-        Dim csvFile As String = My.Application.Info.DirectoryPath & ("\" & (frmJobEntry.varJobNum) & ".csv")
+        Dim dataOut As String = String.Concat(frmJobEntry.varMachineCode, ",", frmJobEntry.varMachineName, ",", frmJobEntry.varYear, ",", frmJobEntry.varMonth, ",", frmJobEntry.varDoffingNum, ",", fltconeNum, ",", frmJobEntry.mergeNum, ",", frmJobEntry.varUserName, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("CONESTATE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("SHORTCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("MISSCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("DEFCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("BCODECART").Value, ",", coneM30, ",", coneP30, ",", varCartStartTime, ",", varCartEndTime, ",", today & Environment.NewLine)
+
+        If My.Settings.chkUseSort Then
+            csvFile = My.Settings.dirCarts & ("\" & frmDGV.DGVdata.Rows(csvRowNum).Cells("BCODECART").Value.ToString & "SortLog.csv")
+        ElseIf My.Settings.chkUseColour Then
+            csvFile = My.Settings.dirCarts & ("\" & frmDGV.DGVdata.Rows(csvRowNum).Cells("BCODECART").Value.ToString & "ColLog.csv")
+        End If
+
+
 
 
 
@@ -3088,11 +3092,9 @@ Public Class frmCart1
             outFile.Close()
 
         Else
-
-
             'If fileActive = False Then
             Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, False)
-            outFile.WriteLine("M/C Code, M/C Name, Prod Code, Prod Name, YY, MM, Doff #, Cone #, Merge #,User, Cone State, Short, NoCone, Defect, Cart Name, Cart Num, Cone Pass, -10, +10, -30, +30, -50, +50,ledR, ledG, ledB, CIE L, CIE a, CIE b, CIE dL, CIE dE, Start, End ")
+            outFile.WriteLine("M/C Code, M/C Name, YY, MM, Doff #, Cone #, Merge #,User, Cone State, Short, NoCone, Defect, Cart Name, -30, +30,Start, End, Fault time ")
 
             outFile.WriteLine(dataOut)
             outFile.Close()
@@ -3215,6 +3217,41 @@ Public Class frmCart1
 
     End Sub
 
+    Private Sub chkConeState()
+
+
+        For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
+
+            If My.Settings.chkUseColour = True Then
+                If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "8" Or frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "9" Or frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "14" Or frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
+
+                Else
+                    MsgBox("Data not updated correctly for Cheese # " & frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString & " Please reopen this cart form And save again")
+                    fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
+                    csvRowNum = i - 1
+                    CSV()
+                End If
+            End If
+
+
+            If My.Settings.chkUseSort = True Then
+                If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value <> "5" Then
+                    MsgBox("Data not updated correctly for Cheese # " & frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString & " Please reopen this cart form And save again")
+                    fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
+                    csvRowNum = i - 1
+                    CSV()
+                End If
+            End If
+
+        Next
+
+
+
+    End Sub
+
+
+
+
     Private Sub directDBUpdate()
 
         Dim coneRef
@@ -3228,8 +3265,8 @@ Public Class frmCart1
                 For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
                     If My.Settings.chkUseColour = True Then
                         frmJobEntry.LExecQuery("UPDATE jobs SET colendtm = '" & varCartEndTime & "' Where bcodecone = '" & coneRef & "' ")
-                        'frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = varCartEndTime 'COLOUR CHECK END TIME
-                    End If
+                    'frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = varCartEndTime 'COLOUR CHECK END TIME
+                End If
                 Next
             End If
 
@@ -3427,7 +3464,7 @@ Public Class frmCart1
 
         'If My.Settings.chkUseColour Then frmFaultTrend.DefTrend()
 
-        directDBUpdate()
+        'directDBUpdate()
 
     End Sub
 
