@@ -2041,9 +2041,13 @@ Public Class frmPackTodayUpdate
                     '    If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "8" And frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = "1" Or
                     '        frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = "1" Then
                     If Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value) Then
-                        If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "8" And frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = chkIdx Or
-                            frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = chkIdx Then
+                        'Temp mod to try and get around the error when re check and no cone state
 
+                        'If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "8" And frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = chkIdx Or
+                        '    frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = chkIdx Then
+                        '******************************************************************
+                        If frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = chkIdx Then
+                            '******************************************************************
                             'WRITE CONE NUMBER TO SHEET
                             MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
 
