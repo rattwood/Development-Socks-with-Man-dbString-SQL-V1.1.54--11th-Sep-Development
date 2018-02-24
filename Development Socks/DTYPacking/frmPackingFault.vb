@@ -409,12 +409,12 @@
     Private Sub btnGoBack_Click(sender As Object, e As EventArgs) Handles btnGoBack.Click
 
         Select Case frmJobEntry.txtGrade.Text
-            Case "A" And frmPacking.packingActive
+            Case "A" 'And frmPacking.packingActive
                 Me.Close()
                 frmPacking.Show()
                 frmPacking.txtConeBcode.Clear()
                 frmPacking.txtConeBcode.Focus()
-            Case "ReCheckA" And frmPackRchkA.packingActive
+            Case "ReCheckA" 'And frmPackRchkA.packingActive
                 Me.Close()
                 frmPackRchkA.Show()
                 frmPackRchkA.txtConeBcode.Clear()
