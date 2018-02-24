@@ -28,7 +28,7 @@
     <ProductName>DTYTrack</ProductName>
     <PublisherName>Tecknoserve Co., Ltd</PublisherName>
     <SuiteName>DTY</SuiteName>
-    <ApplicationRevision>22</ApplicationRevision>
+    <ApplicationRevision>23</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
