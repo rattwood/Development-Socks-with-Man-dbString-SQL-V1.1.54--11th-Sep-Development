@@ -1291,7 +1291,7 @@ Public Class frmJobEntry
                 LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & txtLotNumber.Text & "'  And RECHK = 4 And  PACKENDTM is Null And RECHKRESULT = 'A' ")
             Case "B"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9  And (DEFCONE > 0 OR CONEBARLEY > 0 Or RECHKRESULT = 'B') And FLT_W = 'False' And PACKENDTM is Null ")
+                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 14  And (DEFCONE > 0 OR CONEBARLEY > 0 Or RECHKRESULT = 'B') And FLT_W = 'False' And PACKENDTM is Null ")
             Case "AL"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9 And DEFCONE = 0 And CONEBARLEY = 0 And RECHKRESULT = 'AL' And RECHK = 4 And PACKENDTM is Null")
@@ -1310,7 +1310,7 @@ Public Class frmJobEntry
                 packGrade = txtGrade.Text
                 If stdReChk = 0 Then
 
-                    LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null And RECHKSTARTTM Is Null ")
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 14  And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null And RECHKSTARTTM Is Null ")
 
                 Else
 
