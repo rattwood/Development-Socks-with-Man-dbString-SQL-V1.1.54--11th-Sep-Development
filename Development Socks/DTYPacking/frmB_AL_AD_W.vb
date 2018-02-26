@@ -388,7 +388,7 @@ Public Class frmB_AL_AD_W
 
 
         'Change the number to the column index that you want to sort
-        If frmJobEntry.txtGrade.Text <> "ReCheck" Then
+        If frmJobEntry.txtGrade.Text IsNot "ReCheck" Then
             frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("PACKIDX"), System.ComponentModel.ListSortDirection.Ascending)
         End If
 
