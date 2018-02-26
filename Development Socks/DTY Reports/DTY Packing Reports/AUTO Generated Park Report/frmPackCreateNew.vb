@@ -80,10 +80,10 @@ Public Class frmPackCreateNew
                 MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'L6
                         'DATE
                         MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D5
-                        'CHEESE WEIGHT
-                        MyPakExcel.Cells(12, 5) = frmJobEntry.varProdWeight                   'E12
-                        'PACKER NAME
-                        MyPakExcel.Cells(43, 4) = frmDGV.DGVdata.Rows(0).Cells(55).Value      'D43
+                'CHEESE WEIGHT
+                ' MyPakExcel.Cells(12, 5) = frmJobEntry.varProdWeight                   'E12
+                'PACKER NAME
+                MyPakExcel.Cells(43, 4) = frmDGV.DGVdata.Rows(0).Cells(55).Value      'D43
 
                         'THIS IS USED TO WRITE DATE IN TO USED ROWS
                         Select Case frmPackPrvGet.ncfree
@@ -148,10 +148,10 @@ Public Class frmPackCreateNew
                 MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'L6
                         'DATE
                         MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D5
-                        'CHEESE WEIGHT
-                        MyPakExcel.Cells(12, 5) = frmJobEntry.varProdWeight                   'E12
-                        'PACKER NAME
-                        MyPakExcel.Cells(53, 4) = frmDGV.DGVdata.Rows(0).Cells(55).Value      'D53
+                'CHEESE WEIGHT
+                'MyPakExcel.Cells(12, 5) = frmJobEntry.varProdWeight                   'E12
+                'PACKER NAME
+                MyPakExcel.Cells(53, 4) = frmDGV.DGVdata.Rows(0).Cells(55).Value      'D53
 
 
                         'THIS IS USED TO WRITE DATE IN TO USED ROWS
@@ -215,10 +215,10 @@ Public Class frmPackCreateNew
                 MyPakExcel.Cells(7, 14) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'N8
                         'DATE
                         MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D6
-                        'CHEESE WEIGHT
-                        MyPakExcel.Cells(14, 5) = frmJobEntry.varProdWeight                   'E13
-                        'BARCODE IN
-                        MyPakExcel.Cells(54, 17) = frmJobEntry.txtOperator.Text    'P55
+                'CHEESE WEIGHT
+                'MyPakExcel.Cells(14, 5) = frmJobEntry.varProdWeight                   'E13
+                'BARCODE IN
+                MyPakExcel.Cells(54, 17) = frmJobEntry.txtOperator.Text    'P55
 
 
                         'THIS IS USED TO WRITE DATE IN TO USED ROWS
