@@ -2008,7 +2008,7 @@ Public Class frmPackTodayUpdate
             'Product Code
             MyTodyExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells(2).Value
             'Packer Name
-            MyTodyExcel.Cells(42, 3) = frmDGV.DGVdata.Rows(0).Cells(55).Value
+            MyTodyExcel.Cells(42, 3) = frmJobEntry.txtOperator.Text
             'CREATE AND WRITE NEW BARCODE TO NEW SHEET
             mycount = mycount + 1
             createBarcode()
@@ -2025,7 +2025,8 @@ Public Class frmPackTodayUpdate
 
 
         Try
-
+            'Packer Name
+            MyTodyExcel.Cells(42, 3) = frmJobEntry.txtOperator.Text
             'New routine to print ReCheck cones in order they were scanned
             Dim fmt As String = "00"
             Dim idxCount As Integer = 1
