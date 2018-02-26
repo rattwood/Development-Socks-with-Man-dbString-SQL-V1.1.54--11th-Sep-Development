@@ -1497,133 +1497,59 @@ Public Class frmCart1
 
 
         Dim cellVal As String
-
+        Dim oldval As String
+        Dim newvalue As String
 
         For rw As Integer = 1 To frmDGV.DGVdata.Rows.Count
 
             If My.Settings.chkUseColour Then
 
-                For cl As Integer = 10 To 22
+                For colcount As Integer = 10 To 22
 
-                    cellVal = frmDGV.DGVdata.Rows(rw - 1).Cells(cl).Value.ToString
+                    cellVal = frmDGV.DGVdata.Rows(rw - 1).Cells(colcount).Value
 
-                    ''Routine to skip CARTNUM and CARTNAME
-                    'If cl = 13 Or cl = 14 Then
-                    '    Continue For
-                    'End If
 
-                    'MsgBox(frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value.ToString)
 
-                    If (IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value)) Or (frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value.ToString = "0" Or frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value Is Nothing) Then
 
-                        Select Case cl
-                            Case 10
-                                If cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"
-                            Case 11
-                                If cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                            Case 12
-                                If cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                            Case 15
-                                If cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"
-                            Case 16
-                                If cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                            Case 17
-                                If cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                            Case 18
-                                If cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                            Case 19
-                                If cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                            Case 20
-                                If cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                            Case 21
-                                If cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                            Case 22
-                                If cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
+                    If IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value) Then
+
+                        Select Case colcount
+                            Case 10, 15
+                                If cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
+                                    oldval = frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value
+                                    frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value = "9"
+                                    newvalue = frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value
+                                    MsgBox("Cone Num = " & cellVal & "  Old State = " & oldval & "  New State = " & newvalue)
+                                End If
+                            Case 11, 12, 16, 17, 18, 19, 20, 21, 22
+                                If cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
+                                    oldval = frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value
+                                    frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value = "8"
+                                    newvalue = frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value
+                                    MsgBox("Cone Num = " & cellVal & "  Old State = " & oldval & "  New State = " & newvalue & "Col Num = " & colcount)
+                                End If
+
                         End Select
-
-
-
-
-                        'If cl = 10 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '    frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"
-                        '    Continue For
-                        'ElseIf cl = 11 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '    frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '    Continue For
-                        'ElseIf cl = 12 And cellVal <> 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '    frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '    MsgBox("In Defect")
-                        '    Continue For
-                        'ElseIf cl = 15 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '    frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"
-                        '    Continue For
-                        'ElseIf cl = 16 And cellVal <> 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '    frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '    MsgBox("In Barley")
-                        '    Continue For
-                        'ElseIf cl = 17 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '    frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '    Continue For
-                        'ElseIf cl = 18 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '    frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '    Continue For
-                        'ElseIf cl = 19 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '    frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '    Continue For
-                        'ElseIf cl = 20 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '    frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '    Continue For
-                        'ElseIf cl = 21 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '    frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '    Continue For
-                        'ElseIf cl = 22 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '    frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '    Continue For
-                        'End If
-                        'ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value = "0" Or frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value = Nothing Then
-                        '    If cl = 10 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"
-                        '        Continue For
-                        '    ElseIf cl = 11 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '        Continue For
-                        '    ElseIf cl = 12 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '        Continue For
-                        '    ElseIf cl = 15 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"
-                        '        Continue For
-                        '    ElseIf cl = 16 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '        Continue For
-                        '    ElseIf cl = 17 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '        Continue For
-                        '    ElseIf cl = 18 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '        Continue For
-                        '    ElseIf cl = 19 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '        Continue For
-                        '    ElseIf cl = 20 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '        Continue For
-                        '    ElseIf cl = 21 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '        Continue For
-                        '    ElseIf cl = 22 And cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
-                        '        frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "8"
-                        '        Continue For
-                        '    End If
-
-
-
-
                     End If
 
-
-
-
+                    If Not IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value) Then
+                        If frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value = "0" Or frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value = Nothing Then
+                            Select Case colcount
+                                Case 10, 15
+                                    If cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
+                                        oldval = frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value
+                                        frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value = "9"
+                                        newvalue = frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value
+                                    End If
+                                Case 11, 12, 16, 17, 18, 19, 20, 21, 22
+                                    If cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
+                                        oldval = frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value
+                                        frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value = "8"
+                                        newvalue = frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value
+                                    End If
+                            End Select
+                        End If
+                    End If
                 Next
 
                 cellVal = frmDGV.DGVdata.Rows(rw - 1).Cells("COLWASTE").Value.ToString          'SET CONE STATE IF WASTE CONE TO 8
@@ -1637,7 +1563,7 @@ Public Class frmCart1
         For rw As Integer = 1 To frmDGV.DGVdata.Rows.Count
 
             If My.Settings.chkUseSort Then
-                If frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 5 Then
+                If frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < "5" Then
                     frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "5"
                     frmDGV.DGVdata.Rows(rw - 1).Cells(31).Value = today
                     frmDGV.DGVdata.Rows(rw - 1).Cells(32).Value = today
@@ -1680,26 +1606,7 @@ Public Class frmCart1
 
     End Sub
 
-    Private Sub chkState()
 
-
-        For i = 1 To frmDGV.DGVdata.Rows.Count
-            If My.Settings.chkUseSort Then
-                'Check to see if all DGV rows have been updated correctly if not update before dbUpdate
-                If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value < 5 Then
-                    frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "5"
-                    frmDGV.DGVdata.Rows(i - 1).Cells(31).Value = Today
-                    frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = Today
-                End If
-            End If
-
-        Next
-
-
-
-
-
-    End Sub
 
     Private Sub readsave()
 
@@ -2410,7 +2317,7 @@ Public Class frmCart1
         End If
 
         If coneBarley = 1 Then
-            'Routine to Set Cone color to defect and update cone numbers with defects
+            'Routine to Set Cone color to barley and update cone numbers with defects
 
 
 
@@ -3251,7 +3158,7 @@ Public Class frmCart1
         For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
 
             If My.Settings.chkUseColour = True Then
-                If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "8" Or frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "9" Or frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "14" Or frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
+                If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8 Or frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 9 Or frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 14 Or frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 15 Then
 
                 Else
                     MsgBox("Data not updated correctly for Cheese # " & frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString & " Please reopen this cart form And save again")
@@ -3263,7 +3170,7 @@ Public Class frmCart1
 
 
             If My.Settings.chkUseSort = True Then
-                If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value <> "5" Then
+                If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value < 5 Then
                     MsgBox("Data not updated correctly for Cheese # " & frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString & " Please reopen this cart form And save again")
                     fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
                     csvRowNum = i - 1

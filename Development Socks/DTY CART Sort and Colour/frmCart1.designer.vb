@@ -1073,7 +1073,7 @@ Partial Class frmCart1
         '
         Me.btnDefectSave.BackColor = System.Drawing.Color.Lime
         Me.btnDefectSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDefectSave.Location = New System.Drawing.Point(123, 278)
+        Me.btnDefectSave.Location = New System.Drawing.Point(130, 278)
         Me.btnDefectSave.Margin = New System.Windows.Forms.Padding(2)
         Me.btnDefectSave.Name = "btnDefectSave"
         Me.btnDefectSave.Size = New System.Drawing.Size(85, 80)
