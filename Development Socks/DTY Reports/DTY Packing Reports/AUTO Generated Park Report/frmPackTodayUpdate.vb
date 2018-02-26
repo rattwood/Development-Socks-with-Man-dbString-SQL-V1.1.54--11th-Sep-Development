@@ -53,7 +53,7 @@ Public Class frmPackTodayUpdate
             'Product Code
             MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
             'Packer Name
-            MyTodyExcel.Cells(13, 8) = frmDGV.DGVdata.Rows(0).Cells(55).Value
+            MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
             'Barcode in by
             MyTodyExcel.Cells(61, 13) = frmDGV.DGVdata.Rows(0).Cells(55).Value
 
@@ -76,6 +76,9 @@ Public Class frmPackTodayUpdate
 
 
         Try
+
+            'Packer Name
+            MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
 
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
@@ -137,6 +140,8 @@ Public Class frmPackTodayUpdate
                     'WRITE CONE NUMBER TO SHEET
                     MyTodyExcel.Cells(nfree, 4) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
 
+
+
                     'WRITE CARTON NUMBER TO SHEET AND PUT IN DGV
                     MyTodyExcel.Cells(cellNum, 2) = cartonNum
                     frmDGV.DGVdata.Rows(i - 1).Cells(61).Value = cartonNum
@@ -159,7 +164,7 @@ Public Class frmPackTodayUpdate
                         'Product Code
                         MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
                         'Packer Name
-                        MyTodyExcel.Cells(13, 8) = frmDGV.DGVdata.Rows(0).Cells(55).Value
+                        MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
 
                         boxCount = boxCount + 1
                         createBarcode()
@@ -269,7 +274,10 @@ Public Class frmPackTodayUpdate
 
 
         Try
-
+            'Packer Name
+            MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
+            'Packer Name
+            MyTodyExcel.Cells(61, 14) = frmJobEntry.PackOp
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
                 Select Case frmDGV.DGVdata.Rows(i - 1).Cells(9).Value
@@ -360,9 +368,10 @@ Public Class frmPackTodayUpdate
                                 MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value
                                 'Product Code
                                 MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
+                                'Packer Name
                                 MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
                                 'Packer Name
-                                MyTodyExcel.Cells(64, 14) = frmJobEntry.PackOp
+                                MyTodyExcel.Cells(61, 14) = frmJobEntry.PackOp
 
                                 boxCount = boxCount + 1
                                 createBarcode()
@@ -501,8 +510,10 @@ Public Class frmPackTodayUpdate
 
 
         Try
-            Label2.Text = nfree
-            Label4.Text = ncfree
+            ' Label2.Text = nfree
+            ' Label4.Text = ncfree
+            'Packer Name
+            MyTodyExcel.Cells(43, 4) = frmJobEntry.PackOp
 
 
             For i = 1 To frmDGV.DGVdata.Rows.Count
@@ -579,6 +590,7 @@ Public Class frmPackTodayUpdate
 
 
                     MyTodyExcel.Cells(nfree, ncfree) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
+
 
 
 
@@ -757,7 +769,8 @@ Public Class frmPackTodayUpdate
 
 
         Try
-
+            'Packer Name
+            MyTodyExcel.Cells(43, 4) = frmJobEntry.PackOp
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
                 If frmJobEntry.txtGrade.Text = "P30 BS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Or
@@ -1035,7 +1048,8 @@ Public Class frmPackTodayUpdate
 
 
         Try
-
+            'Packer Name
+            MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
                 If frmJobEntry.txtGrade.Text = "P20 BS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Or
@@ -1107,6 +1121,7 @@ Public Class frmPackTodayUpdate
                     'WRITE CONE NUMBER TO SHEET
 
                     MyTodyExcel.Cells(nfree, ncfree) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
+
 
 
 
@@ -1245,7 +1260,7 @@ Public Class frmPackTodayUpdate
             'Product Code
             MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
             'Packer Name
-            MyTodyExcel.Cells(61, 14) = frmDGV.DGVdata.Rows(0).Cells(55).Value
+            MyTodyExcel.Cells(61, 14) = frmJobEntry.PackOp
 
             boxCount = boxCount + 1
             createBarcode()
@@ -1266,7 +1281,8 @@ Public Class frmPackTodayUpdate
 
 
         Try
-
+            'Packer Name
+            MyTodyExcel.Cells(61, 14) = frmJobEntry.PackOp
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
                 If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "15" Then
@@ -1351,7 +1367,7 @@ Public Class frmPackTodayUpdate
                         'Product Code
                         MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
                         'Packer Name
-                        MyTodyExcel.Cells(14, 61) = frmDGV.DGVdata.Rows(0).Cells(55).Value
+                        MyTodyExcel.Cells(61, 14) = frmJobEntry.PackOp
 
                         boxCount = boxCount + 1
                         createBarcode()
@@ -1538,7 +1554,8 @@ Public Class frmPackTodayUpdate
 
 
         Try
-
+            'Packer Name
+            MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
                 If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "15" Then
@@ -1646,7 +1663,7 @@ Public Class frmPackTodayUpdate
                         'Product Code
                         MyTodyExcel.Cells(6, 11) = frmDGV.DGVdata.Rows(0).Cells(2).Value
                         'Packer Name
-                        ' MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
+                        MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
 
                         'Add Barcode to Sheet
                         boxCount = boxCount + 1
@@ -1798,7 +1815,8 @@ Public Class frmPackTodayUpdate
 
 
         Try
-
+            'Packer Name
+            MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
                 If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "15" Then
@@ -2008,7 +2026,7 @@ Public Class frmPackTodayUpdate
             'Product Code
             MyTodyExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells(2).Value
             'Packer Name
-            MyTodyExcel.Cells(42, 3) = frmJobEntry.txtOperator.Text
+            MyTodyExcel.Cells(42, 3) = frmJobEntry.PackOp
             'CREATE AND WRITE NEW BARCODE TO NEW SHEET
             mycount = mycount + 1
             createBarcode()
@@ -2026,7 +2044,7 @@ Public Class frmPackTodayUpdate
 
         Try
             'Packer Name
-            MyTodyExcel.Cells(42, 3) = frmJobEntry.txtOperator.Text
+            MyTodyExcel.Cells(42, 3) = frmJobEntry.PackOp
             'New routine to print ReCheck cones in order they were scanned
             Dim fmt As String = "00"
             Dim idxCount As Integer = 1
@@ -2080,7 +2098,7 @@ Public Class frmPackTodayUpdate
                                 'Product Code
                                 MyTodyExcel.Cells(5, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
                                 'Packer Name
-                                MyTodyExcel.Cells(42, 3) = frmJobEntry.txtOperator.Text
+                                MyTodyExcel.Cells(42, 3) = frmJobEntry.PackOp
                                 'CREATE AND WRITE NEW BARCODE TO NEW SHEET
                                 mycount = mycount + 1
                                 createBarcode()
@@ -2183,7 +2201,7 @@ Public Class frmPackTodayUpdate
             'Product Code
             MyTodyExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells(2).Value
             'Packer Name
-            MyTodyExcel.Cells(42, 3) = frmDGV.DGVdata.Rows(0).Cells(55).Value
+            MyTodyExcel.Cells(42, 3) = frmJobEntry.PackOp
             'CREATE AND WRITE NEW BARCODE TO NEW SHEET
             mycount = mycount + 1
             createBarcode()
@@ -2202,6 +2220,9 @@ Public Class frmPackTodayUpdate
         Dim sheetToUse As Integer = 0
 
         Try
+
+            'Packer Name
+            MyTodyExcel.Cells(42, 3) = frmJobEntry.PackOp
             ' createBarcode()
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
@@ -2263,7 +2284,7 @@ Public Class frmPackTodayUpdate
                     'Product Code
                     MyTodyExcel.Cells(5, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
                     'Packer Name
-                    MyTodyExcel.Cells(42, 3) = frmJobEntry.txtOperator.Text
+                    MyTodyExcel.Cells(42, 3) = frmJobEntry.PackOp
                     'CREATE AND WRITE NEW BARCODE TO NEW SHEET
                     mycount = mycount + 1
                     createBarcode()
