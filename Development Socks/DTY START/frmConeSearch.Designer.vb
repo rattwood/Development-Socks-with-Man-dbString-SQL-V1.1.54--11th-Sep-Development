@@ -129,6 +129,7 @@ Partial Class frmConeSearch
         Me.Label4.Size = New System.Drawing.Size(84, 20)
         Me.Label4.TabIndex = 6
         Me.Label4.Text = "Spindle #"
+        Me.Label4.Visible = False
         '
         'btnJobSearch
         '
@@ -154,6 +155,7 @@ Partial Class frmConeSearch
         Me.txtBoxSpindle.Name = "txtBoxSpindle"
         Me.txtBoxSpindle.Size = New System.Drawing.Size(71, 26)
         Me.txtBoxSpindle.TabIndex = 9
+        Me.txtBoxSpindle.Visible = False
         '
         'Label5
         '
@@ -299,8 +301,9 @@ Partial Class frmConeSearch
         Me.DataGridView1.Location = New System.Drawing.Point(12, 12)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.Size = New System.Drawing.Size(153, 83)
+        Me.DataGridView1.Size = New System.Drawing.Size(1386, 579)
         Me.DataGridView1.TabIndex = 27
+        Me.DataGridView1.VirtualMode = True
         Me.DataGridView1.Visible = False
         '
         'btnHome
@@ -547,7 +550,8 @@ Partial Class frmConeSearch
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(835, 667)
+        Me.ClientSize = New System.Drawing.Size(1410, 667)
+        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.txtTraceNum)
         Me.Controls.Add(Me.Label25)
         Me.Controls.Add(Me.TextBox1)
@@ -574,7 +578,6 @@ Partial Class frmConeSearch
         Me.Controls.Add(Me.txtBoxMCNum)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.btnHome)
-        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.txtBoxShort)
         Me.Controls.Add(Me.txtBoxGrad)
         Me.Controls.Add(Me.txtBoxDef)
