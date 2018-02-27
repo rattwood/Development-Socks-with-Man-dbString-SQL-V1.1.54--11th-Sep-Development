@@ -1563,7 +1563,7 @@ Public Class frmCart1
         For rw As Integer = 1 To frmDGV.DGVdata.Rows.Count
 
             If My.Settings.chkUseSort Then
-                If frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < "5" Then
+                If frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "0" Then
                     frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "5"
                     frmDGV.DGVdata.Rows(rw - 1).Cells(31).Value = today
                     frmDGV.DGVdata.Rows(rw - 1).Cells(32).Value = today
