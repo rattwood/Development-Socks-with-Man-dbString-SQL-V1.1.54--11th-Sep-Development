@@ -1519,14 +1519,14 @@ Public Class frmCart1
                                     oldval = frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value
                                     frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value = "9"
                                     newvalue = frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value
-                                    MsgBox("Cone Num = " & cellVal & "  Old State = " & oldval & "  New State = " & newvalue)
+                                    'MsgBox("Cone Num = " & cellVal & "  Old State = " & oldval & "  New State = " & newvalue)
                                 End If
                             Case 11, 12, 16, 17, 18, 19, 20, 21, 22
                                 If cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
                                     oldval = frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value
                                     frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value = "8"
                                     newvalue = frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value
-                                    MsgBox("Cone Num = " & cellVal & "  Old State = " & oldval & "  New State = " & newvalue & "Col Num = " & colcount)
+                                    'MsgBox("Cone Num = " & cellVal & "  Old State = " & oldval & "  New State = " & newvalue & "Col Num = " & colcount)
                                 End If
 
                         End Select
