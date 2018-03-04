@@ -1,6 +1,6 @@
 ﻿
 Imports Excel = Microsoft.Office.Interop.Excel
-
+Imports System.ComponentModel
 
 
 Public Class frmCart1
@@ -1591,10 +1591,29 @@ Public Class frmCart1
 
         Next
 
-        chkConeState()
+        'chkConeState()
 
         UpdateDatabase()
 
+        If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
+        frmDGV.DGVdata.ClearSelection()
+
+
+        'RE Load Database and then save again to try and get correct conestates
+
+        frmJobEntry.LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & frmJobEntry.dbBarcode & "'")
+
+        'LOAD THE DATA FROM dB IN TO THE DATAGRID
+        frmDGV.DGVdata.DataSource = frmJobEntry.LDS.Tables(0)
+        frmDGV.DGVdata.Rows(0).Selected = True
+        ' Dim LCB As frmJobEntry.SqlCommandBuilder = New SqlCommandBuilder(LDA)
+
+
+        'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
+        frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
+
+
+        UpdateDatabase()
 
         If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
         frmDGV.DGVdata.ClearSelection()
@@ -3158,9 +3177,7 @@ Public Class frmCart1
         For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
 
             If My.Settings.chkUseColour = True Then
-                If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8 Or frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 9 Or frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 14 Or frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 15 Then
-
-                Else
+                If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 0 Or frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 5 Then
                     MsgBox("Data not updated correctly for Cheese # " & frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString & " Please reopen this cart form And save again")
                     fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
                     csvRowNum = i - 1
@@ -3170,7 +3187,7 @@ Public Class frmCart1
 
 
             If My.Settings.chkUseSort = True Then
-                If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value < 5 Then
+                If Not frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 5 Then
                     MsgBox("Data not updated correctly for Cheese # " & frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString & " Please reopen this cart form And save again")
                     fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
                     csvRowNum = i - 1
