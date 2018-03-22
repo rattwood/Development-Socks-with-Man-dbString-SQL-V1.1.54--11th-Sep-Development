@@ -64,6 +64,8 @@ Public Class frmPacking
     Public coneState As String
     Public packingActive = 0
     Private rowendcount As Integer
+    Dim fltconeNum As String
+    Dim csvRowNum As String
 
 
 
@@ -75,7 +77,6 @@ Public Class frmPacking
 
         'SET VRIABLE NUMBER OF BUTTONS IF PILOT MC
         If frmJobEntry.varMachineCode = 29 Then rowendcount = frmDGV.DGVdata.Rows.Count Else rowendcount = 32
-
 
 
 
@@ -134,9 +135,9 @@ Public Class frmPacking
 
         For i As Integer = 1 To rowendcount
 
-                Me.Controls("btnCone" & i.ToString).Text = btnNum
-                btnNum = btnNum + 1
-            Next
+            Me.Controls("btnCone" & i.ToString).Text = btnNum
+            btnNum = btnNum + 1
+        Next
 
 
 
@@ -152,9 +153,58 @@ Public Class frmPacking
         Me.txtCartNum.Text = frmJobEntry.cartSelect
         Me.lblJobNum.Text = frmJobEntry.varJobNum
 
+        'CHECK THAT WE HAVE CORRECT VALUES FOR CONESTATES
+        Dim cstate As String
+        For i = 1 To rowendcount
+            cstate = frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value
+
+            Select Case cstate
+
+                Case Is = 0, 5
+                    If frmDGV.DGVdata.Rows(i - 1).Cells("MISSCONE").Value > 0 Or
+                       frmDGV.DGVdata.Rows(i - 1).Cells("DEFCONE").Value > 0 Or
+                       frmDGV.DGVdata.Rows(i - 1).Cells("CONEBARLEY").Value > 0 Or
+                       frmDGV.DGVdata.Rows(i - 1).Cells("M30").Value > 0 Or
+                       frmDGV.DGVdata.Rows(i - 1).Cells("P30").Value > 0 Or
+                       frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
+                       frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
+                       frmDGV.DGVdata.Rows(i - 1).Cells("DYEFLECK").Value > 0 Or
+                       frmDGV.DGVdata.Rows(i - 1).Cells("COLDEF").Value > 0 Or
+                       frmDGV.DGVdata.Rows(i - 1).Cells("COLWASTE").Value > 0 Then
+                        'frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AD" Or
+                        '  frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AL" Then
+
+                        frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8
+                        frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
+
+                        'INFORMATION FOT CSV LOG FILE
+                        fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
+                        csvRowNum = i - 1
+                        CSV()
+                    Else
+
+                        frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 9
+                        frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
+
+                        'INFORMATION FOT CSV LOG FILE
+                        fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
+                        csvRowNum = i - 1
+                        CSV()
+                    End If
+
+                Case Else
+
+                    Continue For
+
+            End Select
+
+
+        Next
+
+
+
 
         'GET NUMBER OF CONES THAT NEED ALLOCATING Count agains Job Barcode
-
 
         For i = 1 To rowendcount
             If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells("FLT_S").Value = "False" Then
@@ -193,6 +243,46 @@ Public Class frmPacking
 
         Me.txtConeBcode.Clear()
         Me.txtConeBcode.Focus()
+
+
+    End Sub
+
+
+    'Create csv file
+
+    Private Sub CSV()
+
+        Dim today As String = DateAndTime.Now
+        Dim csvFile As String
+        'Check to see if file exists, if it does not creat the file, otherwise add data to the file
+        Dim dataOut As String = String.Concat(frmJobEntry.varMachineCode, ",", frmJobEntry.varMachineName, ",", frmJobEntry.varYear, ",", frmJobEntry.varMonth, ",", frmJobEntry.varDoffingNum, ",", fltconeNum, ",", frmJobEntry.mergeNum, ",", frmJobEntry.varUserName, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("CONESTATE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("SHORTCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("MISSCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("DEFCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("BCODECART").Value, ",", coneM30, ",", coneP30, ",", varCartStartTime, ",", varCartEndTime, ",", today & Environment.NewLine)
+
+
+        csvFile = My.Settings.dirCarts & ("\" & frmDGV.DGVdata.Rows(csvRowNum).Cells("BCODECART").Value.ToString & "PackLog.csv")
+
+
+        If fileActive Then
+
+            Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, True)
+            outFile.WriteLine(dataOut)
+            outFile.Close()
+
+        Else
+            'If fileActive = False Then
+            Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, False)
+            outFile.WriteLine("M/C Code, M/C Name, YY, MM, Doff #, Cone #, Merge #,User, Cone State, Short, NoCone, Defect, Cart Name, -30, +30,Start, End, Fault time ")
+
+            outFile.WriteLine(dataOut)
+            outFile.Close()
+            fileActive = True
+
+
+        End If
+
+
+
+
+
 
 
     End Sub

@@ -45,7 +45,6 @@ Partial Class frmProdStockWork
         Me.DGVNextJobsData.Name = "DGVNextJobsData"
         Me.DGVNextJobsData.Size = New System.Drawing.Size(240, 150)
         Me.DGVNextJobsData.TabIndex = 0
-        Me.DGVNextJobsData.Visible = False
         '
         'DGVOutputData
         '
@@ -54,7 +53,6 @@ Partial Class frmProdStockWork
         Me.DGVOutputData.Name = "DGVOutputData"
         Me.DGVOutputData.Size = New System.Drawing.Size(240, 150)
         Me.DGVOutputData.TabIndex = 1
-        Me.DGVOutputData.Visible = False
         '
         'DGVPackWeight
         '
@@ -63,7 +61,6 @@ Partial Class frmProdStockWork
         Me.DGVPackWeight.Name = "DGVPackWeight"
         Me.DGVPackWeight.Size = New System.Drawing.Size(240, 150)
         Me.DGVPackWeight.TabIndex = 2
-        Me.DGVPackWeight.Visible = False
         '
         'Label2
         '

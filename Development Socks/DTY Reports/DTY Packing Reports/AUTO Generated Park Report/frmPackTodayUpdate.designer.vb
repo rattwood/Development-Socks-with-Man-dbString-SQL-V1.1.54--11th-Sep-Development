@@ -26,6 +26,7 @@ Partial Class frmPackTodayUpdate
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.SuspendLayout()
         '
         'Label1
@@ -64,6 +65,9 @@ Partial Class frmPackTodayUpdate
         Me.Label4.TabIndex = 3
         Me.Label4.Text = "Label4"
         '
+        'PrintDocument1
+        '
+        '
         'frmPackTodayUpdate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -84,4 +88,5 @@ Partial Class frmPackTodayUpdate
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
+    Friend WithEvents PrintDocument1 As Printing.PrintDocument
 End Class

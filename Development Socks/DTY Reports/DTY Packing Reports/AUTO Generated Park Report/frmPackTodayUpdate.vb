@@ -1,4 +1,5 @@
-﻿Imports Excel = Microsoft.Office.Interop.Excel
+﻿'Imports Microsoft.Office.Interop.Excel
+Imports Excel = Microsoft.Office.Interop.Excel
 
 Public Class frmPackTodayUpdate
 
@@ -13,6 +14,17 @@ Public Class frmPackTodayUpdate
     Dim SheetCodeString As String
     Dim modBarcode As String
     Public prtError As Integer
+    'Public xlPrintSheet As String
+
+
+    'PRINT USAGE
+    ' Dim instance As _Worksheet
+    'Dim Copies As Object
+    ' Dim Preview As Object
+    'Dim ActivePrinter As Object
+    'Dim PrintToFile As Object
+    'Dim Collate As Object
+    'Dim PrToFileName As Object
 
 
     Public Sub TodayUpdate()
@@ -153,9 +165,29 @@ Public Class frmPackTodayUpdate
 
                         tmpsaveName = (frmPackRepMain.finPath & "\" & frmPackRepMain.sheetName & "_" & mycount & ".xlsx")
                         MyTodyExcel.DisplayAlerts = False
+
+                        'xlPrintSheet = tmpsaveName   'This loads the temp save name in to Public variable for print form can use it
+                        'PrintOut()
+
                         xlTodyWorkbook.Sheets(mycount).SaveAs(Filename:=tmpsaveName, FileFormat:=51)
 
                         MyTodyExcel.DisplayAlerts = True
+
+                        'ROUTINE TO ASK IF OPERATER WISHES TO PRINT RESULTS OR CONTINUE
+                        ' Me.Visible = True  'open screen so we can see message
+                        ' Dim result = MessageBox.Show("Edit Job Yes Or No", "Print Excel Sheet ?", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+
+                        'If result = DialogResult.Yes Then
+
+                        'LOAD THE EXCEl SHEET NAME TO OPEN
+                        'xlPrintSheet = tmpsaveName   'This loads the temp save name in to Public variable for print form can use it
+                        'PrintOut()
+                        ' Me.Visible = False ' close screen
+
+                        'End If
+
+                        'If result = DialogResult.No Then  
+
 
                         xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                         CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
@@ -1672,12 +1704,12 @@ Public Class frmPackTodayUpdate
                         ncfree = 4
                         For nCol = 1 To 4
                             If nCol < 4 Then
-                                    For x = 12 To 71
-                                        MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
-                                        MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
-                                    Next
-                                    ncfree = ncfree + 4
-                                Else
+                                For x = 12 To 71
+                                    MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
+                                    MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
+                                Next
+                                ncfree = ncfree + 4
+                            Else
                                 For x = 12 To 56
                                     MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
                                     MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
@@ -2363,16 +2395,16 @@ Public Class frmPackTodayUpdate
     End Sub
 
 
-    Private Sub DelayTM()
-        Dim interval As Integer = "2000"
-        Dim sw As New Stopwatch
-        sw.Start()
-        Do While sw.ElapsedMilliseconds < interval
-            Application.DoEvents()
-        Loop
-        sw.Stop()
+    'Private Sub DelayTM()
+    '    Dim interval As Integer = "2000"
+    '    Dim sw As New Stopwatch
+    '    sw.Start()
+    '    Do While sw.ElapsedMilliseconds < interval
+    '        Application.DoEvents()
+    '    Loop
+    '    sw.Stop()
 
-    End Sub
+    'End Sub
 
     Public Sub createBarcode()
 
@@ -2446,4 +2478,23 @@ Public Class frmPackTodayUpdate
     Private Sub frmPackTodayUpdate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
+    ' Private Sub PrintOut()
+    'From As Object,
+    'To As Object,
+    ' Copies As Object,
+    'Preview As Object,
+    'ActivePrinter As Object,
+    'PrintToFile As Object,
+    'Collate As Object,
+    'PrToFileName As Object
+    ')
+
+
+    'Globals.mycount.PrintOut(From:=1, To:=1, Copies:=2, Preview:=True)
+
+
+    'xlPrintSheet.PrintOut(mycount, mycount, 1, False,
+    '     ActivePrinter)
+    'End Sub
 End Class
