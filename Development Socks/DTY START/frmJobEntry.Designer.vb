@@ -69,6 +69,8 @@ Partial Class frmJobEntry
         Me.DailyPackingReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EndOfDayReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StockToProcessReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FullStockToProccessReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SortAndColourToProcessReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PrintFormsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripTextBox4 = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
@@ -94,8 +96,6 @@ Partial Class frmJobEntry
         Me.lblSelectGrade = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtPilotCount = New System.Windows.Forms.TextBox()
-        Me.FullStockToProccessReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SortAndColourToProcessReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.ToraydbBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Toraydb, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
@@ -443,6 +443,18 @@ Partial Class frmJobEntry
         Me.StockToProcessReportToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
         Me.StockToProcessReportToolStripMenuItem.Text = "Stock to Process Report"
         '
+        'FullStockToProccessReportToolStripMenuItem
+        '
+        Me.FullStockToProccessReportToolStripMenuItem.Name = "FullStockToProccessReportToolStripMenuItem"
+        Me.FullStockToProccessReportToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
+        Me.FullStockToProccessReportToolStripMenuItem.Text = "Full Stock to Proccess Report"
+        '
+        'SortAndColourToProcessReportToolStripMenuItem
+        '
+        Me.SortAndColourToProcessReportToolStripMenuItem.Name = "SortAndColourToProcessReportToolStripMenuItem"
+        Me.SortAndColourToProcessReportToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
+        Me.SortAndColourToProcessReportToolStripMenuItem.Text = "Sort and Colour to Process Report"
+        '
         'PrintFormsToolStripMenuItem
         '
         Me.PrintFormsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox4, Me.ToolStripSeparator6, Me.ToolStripMenuItem1, Me.ToolStripSeparator2, Me.ToolStripSeparator1, Me.ToolStripTextBox1, Me.ToolStripSeparator4, Me.CompareSTDToolStripMenuItem, Me.ToolStripTextBox5, Me.ToolStripSeparator5, Me.ReCheckToolStripMenuItem1})
@@ -621,18 +633,6 @@ Partial Class frmJobEntry
         Me.txtPilotCount.Size = New System.Drawing.Size(44, 44)
         Me.txtPilotCount.TabIndex = 185
         Me.txtPilotCount.Visible = False
-        '
-        'FullStockToProccessReportToolStripMenuItem
-        '
-        Me.FullStockToProccessReportToolStripMenuItem.Name = "FullStockToProccessReportToolStripMenuItem"
-        Me.FullStockToProccessReportToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
-        Me.FullStockToProccessReportToolStripMenuItem.Text = "Full Stock to Proccess Report"
-        '
-        'SortAndColourToProcessReportToolStripMenuItem
-        '
-        Me.SortAndColourToProcessReportToolStripMenuItem.Name = "SortAndColourToProcessReportToolStripMenuItem"
-        Me.SortAndColourToProcessReportToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
-        Me.SortAndColourToProcessReportToolStripMenuItem.Text = "Sort and Colour to Process Report"
         '
         'frmJobEntry
         '
