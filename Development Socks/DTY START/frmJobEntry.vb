@@ -640,16 +640,16 @@ Public Class frmJobEntry
                 Exit Sub
             End If
 
-            'Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
-            'LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
-            'frmDGV.DGVdata.DataSource = LDS.Tables(0)
-            'frmDGV.DGVdata.Rows(0).Selected = True
-            'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
-            'frmCart1.Show()
+            Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
+            LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
+            frmDGV.DGVdata.DataSource = LDS.Tables(0)
+            frmDGV.DGVdata.Rows(0).Selected = True
+            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
+            frmCart1.Show()
 
             'If My.Settings.debugSet Then frmDGV.Show()
 
-            'Me.Hide()
+            Me.Hide()
         End If
 
 
