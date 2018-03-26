@@ -67,7 +67,7 @@ Public Class frmCart1
 
 
 
-    Private SQL As New SQLConn
+    'Private SQL As New SQLConn
 
 
     Private Sub frmCart1_Load(sender As Object, e As EventArgs) Handles MyBase.Load

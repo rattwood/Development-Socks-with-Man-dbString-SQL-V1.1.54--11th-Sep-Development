@@ -71,15 +71,19 @@ Partial Class frmJobEntry
         Me.StockToProcessReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PrintFormsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripTextBox4 = New System.Windows.Forms.ToolStripTextBox()
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.CompareSTDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Round1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Round2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Round3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StdSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripTextBox5 = New System.Windows.Forms.ToolStripTextBox()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ReCheckToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
@@ -90,10 +94,8 @@ Partial Class frmJobEntry
         Me.lblSelectGrade = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtPilotCount = New System.Windows.Forms.TextBox()
-        Me.ToolStripTextBox5 = New System.Windows.Forms.ToolStripTextBox()
-        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.FullStockToProccessReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SortAndColourToProcessReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.ToraydbBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Toraydb, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
@@ -436,6 +438,7 @@ Partial Class frmJobEntry
         '
         'StockToProcessReportToolStripMenuItem
         '
+        Me.StockToProcessReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FullStockToProccessReportToolStripMenuItem, Me.SortAndColourToProcessReportToolStripMenuItem})
         Me.StockToProcessReportToolStripMenuItem.Name = "StockToProcessReportToolStripMenuItem"
         Me.StockToProcessReportToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
         Me.StockToProcessReportToolStripMenuItem.Text = "Stock to Process Report"
@@ -455,6 +458,11 @@ Partial Class frmJobEntry
         Me.ToolStripTextBox4.ReadOnly = True
         Me.ToolStripTextBox4.Size = New System.Drawing.Size(100, 28)
         Me.ToolStripTextBox4.Text = "Cart Forms"
+        '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(267, 6)
         '
         'ToolStripMenuItem1
         '
@@ -480,6 +488,11 @@ Partial Class frmJobEntry
         Me.ToolStripTextBox1.Size = New System.Drawing.Size(210, 28)
         Me.ToolStripTextBox1.Text = "CREATE STANDARD FORMS"
         '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(267, 6)
+        '
         'CompareSTDToolStripMenuItem
         '
         Me.CompareSTDToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Round1ToolStripMenuItem, Me.Round2ToolStripMenuItem, Me.Round3ToolStripMenuItem, Me.StdSheetToolStripMenuItem})
@@ -491,26 +504,38 @@ Partial Class frmJobEntry
         '
         Me.Round1ToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Round1ToolStripMenuItem.Name = "Round1ToolStripMenuItem"
-        Me.Round1ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Round1ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.Round1ToolStripMenuItem.Text = "Round1"
         '
         'Round2ToolStripMenuItem
         '
         Me.Round2ToolStripMenuItem.Name = "Round2ToolStripMenuItem"
-        Me.Round2ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Round2ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.Round2ToolStripMenuItem.Text = "Round2"
         '
         'Round3ToolStripMenuItem
         '
         Me.Round3ToolStripMenuItem.Name = "Round3ToolStripMenuItem"
-        Me.Round3ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Round3ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.Round3ToolStripMenuItem.Text = "Round3"
         '
         'StdSheetToolStripMenuItem
         '
         Me.StdSheetToolStripMenuItem.Name = "StdSheetToolStripMenuItem"
-        Me.StdSheetToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.StdSheetToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.StdSheetToolStripMenuItem.Text = "STD"
+        '
+        'ToolStripTextBox5
+        '
+        Me.ToolStripTextBox5.Font = New System.Drawing.Font("Segoe UI Black", 11.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ToolStripTextBox5.Name = "ToolStripTextBox5"
+        Me.ToolStripTextBox5.Size = New System.Drawing.Size(208, 28)
+        Me.ToolStripTextBox5.Text = "Create Std ReCheck Form"
+        '
+        'ToolStripSeparator5
+        '
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(267, 6)
         '
         'ReCheckToolStripMenuItem1
         '
@@ -597,27 +622,17 @@ Partial Class frmJobEntry
         Me.txtPilotCount.TabIndex = 185
         Me.txtPilotCount.Visible = False
         '
-        'ToolStripTextBox5
+        'FullStockToProccessReportToolStripMenuItem
         '
-        Me.ToolStripTextBox5.Font = New System.Drawing.Font("Segoe UI Black", 11.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ToolStripTextBox5.Name = "ToolStripTextBox5"
-        Me.ToolStripTextBox5.Size = New System.Drawing.Size(208, 28)
-        Me.ToolStripTextBox5.Text = "Create Std ReCheck Form"
+        Me.FullStockToProccessReportToolStripMenuItem.Name = "FullStockToProccessReportToolStripMenuItem"
+        Me.FullStockToProccessReportToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
+        Me.FullStockToProccessReportToolStripMenuItem.Text = "Full Stock to Proccess Report"
         '
-        'ToolStripSeparator4
+        'SortAndColourToProcessReportToolStripMenuItem
         '
-        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(267, 6)
-        '
-        'ToolStripSeparator5
-        '
-        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(267, 6)
-        '
-        'ToolStripSeparator6
-        '
-        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(267, 6)
+        Me.SortAndColourToProcessReportToolStripMenuItem.Name = "SortAndColourToProcessReportToolStripMenuItem"
+        Me.SortAndColourToProcessReportToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
+        Me.SortAndColourToProcessReportToolStripMenuItem.Text = "Sort and Colour to Process Report"
         '
         'frmJobEntry
         '
@@ -729,4 +744,6 @@ Partial Class frmJobEntry
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents ToolStripTextBox5 As ToolStripTextBox
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
+    Friend WithEvents FullStockToProccessReportToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SortAndColourToProcessReportToolStripMenuItem As ToolStripMenuItem
 End Class

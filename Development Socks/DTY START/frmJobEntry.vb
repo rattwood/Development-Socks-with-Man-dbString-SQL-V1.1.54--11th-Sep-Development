@@ -597,17 +597,17 @@ Public Class frmJobEntry
                 frmDGV.DGVdata.DataSource = LDS.Tables(0)
                 frmDGV.DGVdata.Rows(0).Selected = True
                 Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
-
+                LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
 
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
+                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone numberchimera4260
 
-                'Dim LCB As SQLCommandBuilder = New SQLCommandBuilder(LDA)
+
 
                 coneValUpdate = 1
 
                 frmCart1.Show()
-                If My.Settings.debugSet Then frmDGV.Show()
+
 
                 Me.Hide()
                 Exit Sub
@@ -639,16 +639,17 @@ Public Class frmJobEntry
                 txtLotNumber.Focus()
                 Exit Sub
             End If
-            Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
-            LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
-            frmDGV.DGVdata.DataSource = LDS.Tables(0)
-            frmDGV.DGVdata.Rows(0).Selected = True
-            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
-            frmCart1.Show()
 
-            If My.Settings.debugSet Then frmDGV.Show()
+            'Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
+            'LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
+            'frmDGV.DGVdata.DataSource = LDS.Tables(0)
+            'frmDGV.DGVdata.Rows(0).Selected = True
+            'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
+            'frmCart1.Show()
 
-            Me.Hide()
+            'If My.Settings.debugSet Then frmDGV.Show()
+
+            'Me.Hide()
         End If
 
 
@@ -1723,15 +1724,15 @@ Public Class frmJobEntry
         frmEODReport.Show()
     End Sub
 
-    Private Sub StockToProcessReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StockToProcessReportToolStripMenuItem.Click
-        ''Me.Hide()
-        ''frmProdStockWork.Show()
-        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        lblMessage.Text = "Please Wait Creating Work in Progress Report"
-        frmProdStockWork.processReport()
-        Me.Cursor = System.Windows.Forms.Cursors.Default
+    'Private Sub StockToProcessReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StockToProcessReportToolStripMenuItem.Click
+    '      ''Me.Hide()
+    '      ''frmProdStockWork.Show()
+    '      Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+    '      lblMessage.Text = "Please Wait Creating Work in Progress Report"
+    '      frmProdStockWork.processReport()
+    '      Me.Cursor = System.Windows.Forms.Cursors.Default
 
-    End Sub
+    '  End Sub
 
     Private Sub DailyPackingReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DailyPackingReportToolStripMenuItem.Click
         frmDailyPackProduction.Show()
@@ -1940,6 +1941,20 @@ Public Class frmJobEntry
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
         lblScanType.Text = "Scan Job Sheet"
+    End Sub
+
+    Private Sub FullStockToProccessReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FullStockToProccessReportToolStripMenuItem.Click
+        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        lblMessage.Text = "Please Wait Creating Full Work in Progress Report"
+        frmProdStockWork.processReport()
+        Me.Cursor = System.Windows.Forms.Cursors.Default
+    End Sub
+
+    Private Sub SortAndColourToProcessReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortAndColourToProcessReportToolStripMenuItem.Click
+        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        lblMessage.Text = "Please Wait Creating Sort and Colour Work in Progress Report"
+        frmProdStockWork.processShortReport()
+        Me.Cursor = System.Windows.Forms.Cursors.Default
     End Sub
 
 
