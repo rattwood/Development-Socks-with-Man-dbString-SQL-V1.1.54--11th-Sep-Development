@@ -1951,7 +1951,8 @@ Public Class frmJobEntry
     Private Sub SortAndColourToProcessReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortAndColourToProcessReportToolStripMenuItem.Click
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         lblMessage.Text = "Please Wait Creating Sort and Colour Work in Progress Report"
-        frmProdStockWork.processShortReport()
+        'frmProdStockWork.processShortReport()
+        frmProdStockWork.Show()
         Me.Cursor = System.Windows.Forms.Cursors.Default
     End Sub
 
