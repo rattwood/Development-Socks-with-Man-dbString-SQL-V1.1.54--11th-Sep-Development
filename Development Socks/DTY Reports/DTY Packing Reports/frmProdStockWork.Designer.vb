@@ -113,6 +113,7 @@ Partial Class frmProdStockWork
         Me.lblMessage.Name = "lblMessage"
         Me.lblMessage.Size = New System.Drawing.Size(0, 20)
         Me.lblMessage.TabIndex = 22
+        Me.lblMessage.Visible = False
         '
         'frmProdStockWork
         '

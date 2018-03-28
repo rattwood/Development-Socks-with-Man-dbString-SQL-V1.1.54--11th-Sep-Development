@@ -61,7 +61,7 @@ Public Class frmProdStockWork
 
 
         'GET LIST OF PRODUCTS TO BE PROCESSED AS OF NOW
-        SQL.ExecQuery("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM FROM JOBS WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And CONESTATE Between 5 And  9  ")
+        SQL.ExecQuery("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM FROM JOBS WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' ")
 
         jobcount = SQL.RecordCount
 
@@ -74,7 +74,7 @@ Public Class frmProdStockWork
             DGVNextJobsData.Rows(0).Selected = True
 
             'SORT GRIDVIEW IN TO CORRECT JOB SEQUENCE
-            DGVNextJobsData.Sort(DGVNextJobsData.Columns("PRODNAME"), ListSortDirection.Ascending)  'sorts On cone number
+            DGVNextJobsData.Sort(DGVNextJobsData.Columns("PRNUM"), ListSortDirection.Ascending)  'sorts On cone number
 
         Else
             MsgBox("No Jobs Found, Please select new date range")
@@ -87,38 +87,52 @@ Public Class frmProdStockWork
         workbookWR = MyWRExcel.Workbooks.Open(template)
 
         Dim lineCount As Integer = 0
+        Dim reCheckCount As Integer = 0 'COUNT OF ReCHECK CONES
         Dim fullCount As Integer = 0
-        Dim reCheckCount As Integer 'COUNT OF ReCHECK CONES
+        Dim shortCone As Integer = 0
+        Dim tblOpen As Integer = 0
+
 
         'SERIES OF COUNTS FROM DATABASE TO GET VALUES NEEDED FOR REPORT
         For count As Integer = 1 To jobcount 'DGVSort.Rows.Count
             prodnum = DGVNextJobsData.Rows(count - 1).Cells("PRNUM").Value.ToString
 
             'COUNT NUMBER OF CONES THAT ARE FULL INCLUDING WASTE OR COLOUR WASTE CHEESE
-            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And  PRNUM = '" & prodnum & "' And CONESTATE Between  5 and  9 And FLT_S = 'False' AND PACKENDTM IS NULL")
-            lineCount = lineCount + 1
-            Dim conecount = SQL.RecordCount
+            'SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And  PRNUM = '" & prodnum & "' And CONESTATE Between  5 and  14 And FLT_S = 'False' AND PACKENDTM IS NULL")
+            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And  PRNUM = '" & prodnum & "' And CONESTATE Between  5 and  14 And FLT_S = 'False' and SHORTCONE = 0 And FLT_W = 'False' And COLWASTE = 0 And  RECHK = 0 AND MISSCONE = 0 And PACKENDTM IS NULL")
 
-            If conecount > 0 Then
+            fullCount = SQL.RecordCount
+
+            If fullCount Then
                 DGVOutputData.DataSource = SQL.SQLDS.Tables(0)
                 DGVOutputData.Rows(0).Selected = True
-            Else
-                Continue For
+                lineCount = lineCount + 1
+                tblOpen = 1
             End If
 
 
+
             'COUNT MISSING CONES
-            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And PRNUM = '" & prodnum & "' And  MISSCONE > 0 ")
-            Dim missCone = SQL.RecordCount
+            'SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And PRNUM = '" & prodnum & "' And  MISSCONE > 0 ")
+            'Dim missCone = SQL.RecordCount
 
 
             'COUNT NUMBER OF CONE THAT ARE SHORT
-            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And PRNUM = '" & prodnum & "' And CONESTATE Between  5 And  9 and FLT_S = 'TRUE' And FLT_W = 'False' And COLWASTE = 0  And PACKENDTM IS NULL ")
-            Dim shortCone = SQL.RecordCount
+            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And PRNUM = '" & prodnum & "' And CONESTATE Between  5 And  14 and FLT_S = 'TRUE' And FLT_W = 'False' And COLWASTE = 0  And PACKENDTM IS NULL ")
+            shortCone = SQL.RecordCount
+
+            If shortCone > 0 And Not tblOpen Then
+                DGVOutputData.DataSource = SQL.SQLDS.Tables(0)
+                DGVOutputData.Rows(0).Selected = True
+                lineCount = lineCount + 1
+                tblOpen = 1
+
+            End If
+
 
             'COUNT WASTE CONES
-            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And PRNUM = '" & prodnum & "' And CONESTATE Between  5 And  9 and (FLT_W = 'TRUE' Or  COLWASTE > 0) And PACKENDTM IS NULL ")
-            Dim wasteCone = SQL.RecordCount
+            'SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And PRNUM = '" & prodnum & "' And CONESTATE Between  5 And  9 and (FLT_W = 'TRUE' Or  COLWASTE > 0) And PACKENDTM IS NULL ")
+            'Dim wasteCone = SQL.RecordCount
 
 
 
@@ -132,7 +146,6 @@ Public Class frmProdStockWork
 
             prodName = DGVOutputData.Rows(0).Cells("PRODNAME").Value.ToString
 
-            fullCount = conecount - (wasteCone + missCone + reCheckCount)
 
 
             'GET PRODUCT WEIGHT INFORMATION
@@ -174,6 +187,10 @@ Public Class frmProdStockWork
             MyWRExcel.Cells(count + 7, 10) = shortCone 'SHORT CONES
             MyWRExcel.Cells(count + 7, 11) = shortCone 'SHORT CONES
             MyWRExcel.Cells(count + 7, 12) = shortCone * 2.7 'TOTAL SHORT CONE WEIGHT
+            reCheckCount = 0
+            fullCount = 0
+            shortCone = 0
+            tblOpen = 0
 
 
 
@@ -232,9 +249,8 @@ Public Class frmProdStockWork
 
         releaseObject(workbookWR)
         releaseObject(MyWRExcel)
-        'frmPackReports.lblMessage.Text = Nothing
         MsgBox("Full Stock Work in Process Report " & savename & " Created")
-        Me.Close()
+
 
 
     End Sub
@@ -302,8 +318,7 @@ Public Class frmProdStockWork
 
 
 
-            'lineCount = lineCount + 1
-            'Dim conecount = SQL.RecordCount
+
             fullCount = SQL.RecordCount
 
 
@@ -314,14 +329,6 @@ Public Class frmProdStockWork
                 tblOpen = 1
 
             End If
-
-            'If conecount > 0 Then
-            '    DGVOutputData.DataSource = SQL.SQLDS.Tables(0)
-            '    DGVOutputData.Rows(0).Selected = True
-            'Else
-            '    Continue For
-            'End If
-
 
 
 
@@ -369,8 +376,6 @@ Public Class frmProdStockWork
 
             prodName = DGVOutputData.Rows(0).Cells("PRODNAME").Value.ToString
 
-            'fullCount = conecount - (missCone + wasteCone + reCheckCount)
-
 
             'GET PRODUCT WEIGHT INFORMATION
             SQL.ExecQuery("SELECT * FROM Product WHERE PRNUM = '" & prodnum & "' ")
@@ -392,9 +397,6 @@ Public Class frmProdStockWork
 
 
             prodWeight = DGVPackWeight.Rows(0).Cells("PRODWEIGHT").Value.ToString
-
-
-            'MsgBox("Total =" & fullCount & "  Full =" & fullCount & "   ReCheck =" & reCheckCount & "   Short =" & shortCone)
 
 
 
@@ -446,6 +448,8 @@ Public Class frmProdStockWork
             DGVOutputData.Dispose()
             DGVNextJobsData.Dispose()
             DGVPackWeight.Dispose()
+
+
             Me.Close()
             Exit Sub
         End Try
@@ -472,9 +476,8 @@ Public Class frmProdStockWork
 
         releaseObject(workbookWR)
         releaseObject(MyWRExcel)
-        'frmPackReports.lblMessage.Text = Nothing
         MsgBox("Short Stock Work in Process Report " & savename & " Created")
-        'Me.Close()
+
 
 
     End Sub
@@ -503,6 +506,8 @@ Public Class frmProdStockWork
         processShortReport()
         lblmessage.Visible = False
         Me.Cursor = System.Windows.Forms.Cursors.Default
+        frmJobEntry.Show()
+        Me.Close()
 
     End Sub
 
@@ -515,7 +520,8 @@ Public Class frmProdStockWork
         processReport()
         lblmessage.Visible = False
         Me.Cursor = System.Windows.Forms.Cursors.Default
-
+        frmJobEntry.Show()
+        Me.Close()
 
     End Sub
 
@@ -524,15 +530,5 @@ Public Class frmProdStockWork
         Me.Close()
     End Sub
 
-    Private Sub lblMessage_Click(sender As Object, e As EventArgs) Handles lblMessage.Click
 
-    End Sub
-
-    Private Sub DGVPackWeight_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVPackWeight.CellContentClick
-
-    End Sub
-
-    Private Sub DGVNextJobsData_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVNextJobsData.CellContentClick
-
-    End Sub
 End Class
