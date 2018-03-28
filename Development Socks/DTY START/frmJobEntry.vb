@@ -1941,20 +1941,8 @@ Public Class frmJobEntry
         lblScanType.Text = "Scan Job Sheet"
     End Sub
 
-    Private Sub FullStockToProccessReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FullStockToProccessReportToolStripMenuItem.Click
-        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        lblMessage.Text = "Please Wait Creating Full Work in Progress Report"
-        frmProdStockWork.processReport()
-        Me.Cursor = System.Windows.Forms.Cursors.Default
-    End Sub
-
-    Private Sub SortAndColourToProcessReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortAndColourToProcessReportToolStripMenuItem.Click
-        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        lblMessage.Text = "Please Wait Creating Sort and Colour Work in Progress Report"
-        'frmProdStockWork.processShortReport()
+    Private Sub StockToProcessReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StockToProcessReportToolStripMenuItem.Click
         frmProdStockWork.Show()
-        Me.Cursor = System.Windows.Forms.Cursors.Default
+
     End Sub
-
-
 End Class
