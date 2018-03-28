@@ -292,12 +292,6 @@
     <Compile Include="DTYPacking\frmPackRchkA.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DTYPacking\frmPackReports.Designer.vb">
-      <DependentUpon>frmPackReports.vb</DependentUpon>
-    </Compile>
-    <Compile Include="DTYPacking\frmPackReports.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="DTYPacking\frmPackSort.Designer.vb">
       <DependentUpon>frmPackSort.vb</DependentUpon>
     </Compile>
@@ -503,9 +497,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DTYPacking\frmPackRchkA.resx">
       <DependentUpon>frmPackRchkA.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DTYPacking\frmPackReports.resx">
-      <DependentUpon>frmPackReports.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DTYPacking\frmPackSort.resx">
       <DependentUpon>frmPackSort.vb</DependentUpon>
