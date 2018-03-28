@@ -232,7 +232,7 @@ Public Class frmProdStockWork
 
         releaseObject(workbookWR)
         releaseObject(MyWRExcel)
-        frmPackReports.lblMessage.Text = Nothing
+        'frmPackReports.lblMessage.Text = Nothing
         MsgBox("Full Stock Work in Process Report " & savename & " Created")
         Me.Close()
 
@@ -431,7 +431,7 @@ Public Class frmProdStockWork
 
         releaseObject(workbookWR)
         releaseObject(MyWRExcel)
-        frmPackReports.lblMessage.Text = Nothing
+        'frmPackReports.lblMessage.Text = Nothing
         MsgBox("Short Stock Work in Process Report " & savename & " Created")
         Me.Close()
 

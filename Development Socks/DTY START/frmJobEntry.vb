@@ -1702,9 +1702,9 @@ Public Class frmJobEntry
 
 
 
-    Private Sub btnReports_Click(sender As Object, e As EventArgs)
-        frmPackReports.Show()
-    End Sub
+    'Private Sub btnReports_Click(sender As Object, e As EventArgs)
+    '    frmPackReports.Show()
+    'End Sub
 
     Private Sub btnDefRep_Click(sender As Object, e As EventArgs) Handles btnDefRep.Click
         DGVDefReport.Show()
@@ -1716,9 +1716,7 @@ Public Class frmJobEntry
 
 
 
-    Private Sub ReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReportsToolStripMenuItem.Click
 
-    End Sub
 
     Private Sub EndOfDayReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EndOfDayReportToolStripMenuItem.Click
         frmEODReport.Show()

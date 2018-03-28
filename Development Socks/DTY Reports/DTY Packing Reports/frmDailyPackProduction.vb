@@ -281,10 +281,10 @@ Public Class frmDailyPackProduction
             DGVJobData.Dispose()
             DGVProdData.Dispose()
             MyPRExcel.Quit()
-            frmPackReports.lblMessage.Text = Nothing
+            ' frmPackReports.lblMessage.Text = Nothing
             releaseObject(workbookPR)
             releaseObject(MyPRExcel)
-            frmPackReports.Show()
+            frmJobEntry.Show()
             Me.Close()
             Exit Sub
         End Try
@@ -312,7 +312,7 @@ Public Class frmDailyPackProduction
 
         releaseObject(workbookPR)
         releaseObject(MyPRExcel)
-        frmPackReports.lblMessage.Text = Nothing
+        'frmPackReports.lblMessage.Text = Nothing
         Me.Cursor = System.Windows.Forms.Cursors.Default
         Label2.Visible = False
         MsgBox("Daily Packing Report " & savename & " Created")
