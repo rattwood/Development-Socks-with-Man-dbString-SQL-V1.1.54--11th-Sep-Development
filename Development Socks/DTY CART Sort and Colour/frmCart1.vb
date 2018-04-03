@@ -3210,15 +3210,15 @@ Public Class frmCart1
 
         For rows = 1 To frmDGV.DGVdata.Rows.Count
 
-            coneref = frmDGV.DGVdata.Rows(rows - 1).Cells("BCODECONE").Value
+            coneRef = frmDGV.DGVdata.Rows(rows - 1).Cells("BCODECONE").Value
 
 
             If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("COLENDTM").Value) Then
                 For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
                     If My.Settings.chkUseColour = True Then
                         frmJobEntry.LExecQuery("UPDATE jobs SET colendtm = '" & varCartEndTime & "' Where bcodecone = '" & coneRef & "' ")
-                    'frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = varCartEndTime 'COLOUR CHECK END TIME
-                End If
+                        'frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = varCartEndTime 'COLOUR CHECK END TIME
+                    End If
                 Next
             End If
 
