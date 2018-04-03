@@ -103,13 +103,12 @@ Public Class frmProdStockWork
 
             fullCount = SQL.RecordCount
 
-            If fullCount Then
+            If fullCount > 0 Then
                 DGVOutputData.DataSource = SQL.SQLDS.Tables(0)
                 DGVOutputData.Rows(0).Selected = True
                 lineCount = lineCount + 1
                 tblOpen = 1
             End If
-
 
 
             'COUNT MISSING CONES
@@ -121,14 +120,12 @@ Public Class frmProdStockWork
             SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And PRNUM = '" & prodnum & "' And CONESTATE Between  5 And  14 and FLT_S = 'TRUE' And FLT_W = 'False' And COLWASTE = 0  And PACKENDTM IS NULL ")
             shortCone = SQL.RecordCount
 
-            If shortCone > 0 And Not tblOpen Then
+            If shortCone > 0 And tblOpen = 0 Then
                 DGVOutputData.DataSource = SQL.SQLDS.Tables(0)
                 DGVOutputData.Rows(0).Selected = True
                 lineCount = lineCount + 1
                 tblOpen = 1
-
             End If
-
 
             'COUNT WASTE CONES
             'SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And PRNUM = '" & prodnum & "' And CONESTATE Between  5 And  9 and (FLT_W = 'TRUE' Or  COLWASTE > 0) And PACKENDTM IS NULL ")
@@ -141,6 +138,15 @@ Public Class frmProdStockWork
             SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And PRNUM = '" & prodnum & "' And  RECHK Between 2 and 4 And  PACKENDTM IS NULL")
             reCheckCount = SQL.RecordCount
 
+
+            If reCheckCount > 0 And tblOpen = 0 Then
+                DGVOutputData.DataSource = SQL.SQLDS.Tables(0)
+                DGVOutputData.Rows(0).Selected = True
+                lineCount = lineCount + 1
+                tblOpen = 1
+            End If
+
+            If tblOpen = 0 Then Continue For  'IF Table is not open then no cones have been found in any Catagory so continue next product search
 
             Dim mergenum = DGVOutputData.Rows(0).Cells("MERGENUM").Value.ToString
 
@@ -277,7 +283,7 @@ Public Class frmProdStockWork
 
 
         'GET LIST OF PRODUCTS TO BE PROCESSED AS OF NOW
-        SQL.ExecQuery("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM FROM JOBS WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And CONESTATE Between 5 And  9 And (PACKCARTTM is Null Or RECHK between 2 and 4) ")
+        SQL.ExecQuery("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM FROM JOBS WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "'  ") ' And CONESTATE Between 5 And  9 And (PACKCARTTM is Null Or RECHK between 2 and 4)
 
         jobcount = SQL.RecordCount
 
@@ -315,20 +321,18 @@ Public Class frmProdStockWork
             'COUNT NUMBER OF CONES THAT ARE FULL
             'SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And  PRNUM = '" & prodnum & "' And CONESTATE Between  5 and  9 And FLT_S = 'False' And PACKCARTTM IS NULL ")
             SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And  PRNUM = '" & prodnum & "' And CONESTATE Between  5 and  9 And FLT_S = 'False' and SHORTCONE = 0 And FLT_W = 'False' And COLWASTE = 0 And  RECHK = 0 AND MISSCONE = 0 And PACKCARTTM IS NULL")
-
-
-
-
             fullCount = SQL.RecordCount
 
 
-            If fullCount Then
+
+
+            If fullCount > 0 Then
                 DGVOutputData.DataSource = SQL.SQLDS.Tables(0)
                 DGVOutputData.Rows(0).Selected = True
                 lineCount = lineCount + 1
                 tblOpen = 1
-
             End If
+
 
 
 
@@ -342,7 +346,7 @@ Public Class frmProdStockWork
             SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And PRNUM = '" & prodnum & "' And CONESTATE Between  5 And  9 and (FLT_S = 'TRUE' Or SHORTCONE > 0) And FLT_W = 'False' And COLWASTE = 0  And  PACKCARTTM IS NULL ")
             shortCone = SQL.RecordCount
 
-            If shortCone > 0 And Not tblOpen Then
+            If shortCone > 0 And tblOpen = 0 Then
                 DGVOutputData.DataSource = SQL.SQLDS.Tables(0)
                 DGVOutputData.Rows(0).Selected = True
                 lineCount = lineCount + 1
@@ -358,19 +362,16 @@ Public Class frmProdStockWork
 
             'COUNT ReCheck
             SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And PRNUM = '" & prodnum & "' And  RECHK Between 2 and 4 And  PACKENDTM IS NULL")
-
             reCheckCount = SQL.RecordCount
 
-            If reCheckCount > 0 And Not tblOpen Then
+            If reCheckCount > 0 And tblOpen = 0 Then
                 DGVOutputData.DataSource = SQL.SQLDS.Tables(0)
                 DGVOutputData.Rows(0).Selected = True
                 lineCount = lineCount + 1
                 tblOpen = 1
-            Else
-                Continue For
             End If
 
-
+            If tblOpen = 0 Then Continue For  'IF Table is not open then no cones have been found in any Catagory so continue next product search
 
             Dim mergenum = DGVOutputData.Rows(0).Cells("MERGENUM").Value.ToString
 
