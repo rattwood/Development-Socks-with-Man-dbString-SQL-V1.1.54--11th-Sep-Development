@@ -56,6 +56,12 @@ Public Class frmProdStockWork
         Dim startDate = Date.Today
         Dim endDate = Date.Today.AddDays(-3)
 
+        If My.Settings.debugSet Then
+            Label2.Visible = True
+            Label3.Visible = True
+            Label2.Text = startDate
+            Label3.Text = endDate
+        End If
 
         savename = (My.Settings.dirPackReports & "\" & "StockWorkFullReport" & "_" & Date.Today.ToString("dd_MM_yyy") & ".xlsx").ToString
 
@@ -99,7 +105,7 @@ Public Class frmProdStockWork
 
             'COUNT NUMBER OF CONES THAT ARE FULL INCLUDING WASTE OR COLOUR WASTE CHEESE
             'SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And  PRNUM = '" & prodnum & "' And CONESTATE Between  5 and  14 And FLT_S = 'False' AND PACKENDTM IS NULL")
-            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And  PRNUM = '" & prodnum & "' And CONESTATE Between  5 and  14 And FLT_S = 'False' and SHORTCONE = 0 And FLT_W = 'False' And COLWASTE = 0 And  RECHK = 0 AND MISSCONE = 0 And PACKENDTM IS NULL")
+            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And  PRNUM = '" & prodnum & "' And CONESTATE Between  5 and  14 And FLT_S = 'False' and SHORTCONE = 0 And FLT_W = 'False' And COLWASTE = 0 And  (RECHK = 0 OR RECHK Is Null) AND MISSCONE = 0 And PACKENDTM IS NULL")
 
             fullCount = SQL.RecordCount
 
@@ -278,6 +284,12 @@ Public Class frmProdStockWork
         Dim startDate = Date.Today
         Dim endDate = Date.Today.AddDays(-3)
 
+        If My.Settings.debugSet Then
+            Label2.Visible = True
+            Label3.Visible = True
+            Label2.Text = startDate
+            Label3.Text = endDate
+        End If
 
         savename = (My.Settings.dirPackReports & "\" & "StockWorkShortReport" & "_" & Date.Today.ToString("dd_MM_yyy") & ".xlsx").ToString
 
@@ -320,7 +332,7 @@ Public Class frmProdStockWork
 
             'COUNT NUMBER OF CONES THAT ARE FULL
             'SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And  PRNUM = '" & prodnum & "' And CONESTATE Between  5 and  9 And FLT_S = 'False' And PACKCARTTM IS NULL ")
-            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And  PRNUM = '" & prodnum & "' And CONESTATE Between  5 and  9 And FLT_S = 'False' and SHORTCONE = 0 And FLT_W = 'False' And COLWASTE = 0 And  RECHK = 0 AND MISSCONE = 0 And PACKCARTTM IS NULL")
+            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And  PRNUM = '" & prodnum & "' And CONESTATE Between  5 and  9 And FLT_S = 'False' and SHORTCONE = 0 And FLT_W = 'False' And COLWASTE = 0 And  (RECHK = 0 OR RECHK Is Null) AND MISSCONE = 0 And PACKCARTTM IS NULL")
             fullCount = SQL.RecordCount
 
 
