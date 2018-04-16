@@ -97,7 +97,7 @@ Public Class frmDailyPackProduction
         'Dim searchdate As Date = "2018-01-24"
 
         'GET LIST OF PRODUCTS TO BE PROCESSED AS OF NOW
-        SQL.ExecQuery("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM,DOFFNUM,MCNUM FROM JOBS WHERE PACKENDTM = '" & searchdate & "' and CONESTATE >= 8") 'OR  PACKENDTM = '" & searchdate & "' and CONESTATE = 8 ")
+        SQL.ExecQuery("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM,DOFFNUM,MCNUM FROM JOBS WHERE PACKENDTM = '" & searchdate & "' ") 'OR  PACKENDTM = '" & searchdate & "' and CONESTATE = 8 ")
 
         ' MsgBox("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM,DOFFNUM,MCNUM FROM JOBS WHERE PACKENDTM = '" & searchdate & "' and CONESTATE >= 8")
 
@@ -114,10 +114,10 @@ Public Class frmDailyPackProduction
             DGVJobsData.Sort(DGVJobsData.Columns("PRODNAME"), ListSortDirection.Ascending)  'sorts On cone number
 
         Else
-                MsgBox("No Jobs Found, Please select new date range")
+            MsgBox("No Jobs Found, Please select new date range")
             DGVJobsData.ClearSelection()
             Exit Sub
-            End If
+        End If
 
 
 
@@ -170,7 +170,7 @@ Public Class frmDailyPackProduction
             Dim totalDF = SQL.RecordCount
 
             'COUNT NUMBER OF ReCHECK CONES
-            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM = '" & searchdate & "' And CONESTATE = 8 And FLT_S = 'False' And (M30 > 0 OR P30 > 0) And (CONEAD = '0' And CONEAL = '0') ")
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM = '" & searchdate & "' And CONESTATE = 8 And FLT_S = 'False' And (M30 > 0 OR P30 > 0) And (RECHK is NULL Or RECHK = '') ")
             Dim totalRC = SQL.RecordCount
 
             'COUNT NUMBER OR AL CONES
