@@ -6,7 +6,7 @@ Imports System.ComponentModel  'Allows function of Datagridview sorting and filt
 
 Public Class frmJobEntry
     'THIS CREATS LOCAL INSTANCE TO REFRENCE THE SQL CLASS FORM, NOT USED WHEN WORKING WITH DATAGRIDVIEW
-    Private SQL As New SQLConn
+    'Private SQL As New SQLConn
 
 
     '---------------------------------------    SETTING UP LOCAL INSTANCE FOR SQL LINK FOR DATAGRID TO SYNC CORRECTLY WITH SQL -------------------------------------
@@ -926,16 +926,16 @@ Public Class frmJobEntry
         LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '9' and FLT_S = 'False'")
 
         If LRecordCount > 0 Then
-            LExecQuery("Select * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ;")
+            'LExecQuery("Select * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ;")
 
-            'LOAD THE DATA FROM dB IN TO THE DATAGRID
-            frmDGV.DGVdata.DataSource = LDS.Tables(0)
-            frmDGV.DGVdata.Rows(0).Selected = True
-            Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
+            ''LOAD THE DATA FROM dB IN TO THE DATAGRID
+            'frmDGV.DGVdata.DataSource = LDS.Tables(0)
+            'frmDGV.DGVdata.Rows(0).Selected = True
+            'Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
 
 
-            'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
+            ''SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
+            'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
 
             coneValUpdate = 1
             Me.Hide()
