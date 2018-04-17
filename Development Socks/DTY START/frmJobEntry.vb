@@ -74,6 +74,20 @@ Public Class frmJobEntry
     Public time As DateTime = DateTime.Now
     Public Format As String = "dd mm yyyy  HH:mm"
 
+    Dim fltconeNum As String
+    Dim csvRowNum As String
+    Dim fileActive As Integer
+    Public varCartStartTime As String   'Record time that we started measuring
+    Public varCartEndTime As String
+    Dim coneBarley As String = 0
+    Dim coneZero As String = 0
+    Dim coneM10 As String = 0
+    Dim coneP10 As String = 0
+    Dim coneM30 As String = 0
+    Dim coneP30 As String = 0
+    Dim coneM50 As String = 0
+    Dim coneP50 As String = 0
+
 
 
     Private Sub frmJobEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -926,17 +940,77 @@ Public Class frmJobEntry
         LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '9' and FLT_S = 'False'")
 
         If LRecordCount > 0 Then
-            'LExecQuery("Select * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ;")
+            LExecQuery("Select * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ;")
 
-            ''LOAD THE DATA FROM dB IN TO THE DATAGRID
-            'frmDGV.DGVdata.DataSource = LDS.Tables(0)
-            'frmDGV.DGVdata.Rows(0).Selected = True
-            'Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
+            'LOAD THE DATA FROM dB IN TO THE DATAGRID
+            frmDGV.DGVdata.DataSource = LDS.Tables(0)
+            frmDGV.DGVdata.Rows(0).Selected = True
+            Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
 
 
-            ''SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-            'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
+            'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
+            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
 
+            '***********************************************************************************************************************************
+            '*********************           CHECK THAT WE HAVE CORRECT VALUES FOR CONESTATES AND CHAGE IF REQUIERD     ************************
+            '***********************************************************************************************************************************
+            Dim cstate As String
+
+
+            For i = 1 To LRecordCount
+                cstate = frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value
+
+                Select Case cstate
+
+                    Case Is = 0, 5
+                        If frmDGV.DGVdata.Rows(i - 1).Cells("MISSCONE").Value > 0 Or
+                             frmDGV.DGVdata.Rows(i - 1).Cells("DEFCONE").Value > 0 Or
+                             frmDGV.DGVdata.Rows(i - 1).Cells("CONEBARLEY").Value > 0 Or
+                             frmDGV.DGVdata.Rows(i - 1).Cells("M30").Value > 0 Or
+                             frmDGV.DGVdata.Rows(i - 1).Cells("P30").Value > 0 Or
+                             frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
+                             frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
+                             frmDGV.DGVdata.Rows(i - 1).Cells("DYEFLECK").Value > 0 Or
+                             frmDGV.DGVdata.Rows(i - 1).Cells("COLDEF").Value > 0 Or
+                             frmDGV.DGVdata.Rows(i - 1).Cells("COLWASTE").Value > 0 Then
+                            '  frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AD" Or
+                            '    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AL" Then
+
+                            LExecQuery("UPDATE Jobs Set conestate = 8, COLENDTM = '" & frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value & "' WHERE BCODECONE = '" & frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value.ToString & "' ")
+
+                            ' frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8
+                            ' frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
+
+                            'INFORMATION FOT CSV LOG FILE
+                            fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
+                            csvRowNum = i - 1
+                            CSV()
+
+                        Else
+
+                            'frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 9
+                            'frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
+                            LExecQuery("UPDATE Jobs Set conestate = 9, COLENDTM = '" & frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value & "' WHERE BCODECONE = '" & frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value.ToString & "' ")
+
+
+                            'INFORMATION FOT CSV LOG FILE
+                            fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
+                            csvRowNum = i - 1
+                            CSV()
+
+                        End If
+
+                    Case Else
+
+                        Continue For
+
+                End Select
+            Next
+
+            'Close local DGv connection and clead dgv
+            If LConn.State = ConnectionState.Open Then LConn.Close()
+            frmDGV.DGVdata.ClearSelection()
+            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
             coneValUpdate = 1
             Me.Hide()
             frmPacking.Show()
@@ -946,41 +1020,84 @@ Public Class frmJobEntry
             LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '15'")
 
             If LRecordCount > 0 Then
-                Label3.Visible = True
+                                Label3.Visible = True
 
-                Label3.Text = "Cart has already been allocated"
+                                Label3.Text = "Cart has already been allocated"
 
-                DelayTM()
-                Label3.Visible = False
+                                DelayTM()
+                                Label3.Visible = False
 
-            Else
-                LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '5'")
-                If LRecordCount > 0 Then
+                            Else
+                                LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '5'")
+                                If LRecordCount > 0 Then
 
-                    Label3.Visible = True
+                                    Label3.Visible = True
 
-                    Label3.Text = "Cart Has not been COLOUR CHECKED"
+                                    Label3.Text = "Cart Has not been COLOUR CHECKED"
 
-                    DelayTM()
-                    Label3.Visible = False
-                Else
-                    Label3.Visible = True
+                                    DelayTM()
+                                    Label3.Visible = False
+                                Else
+                                    Label3.Visible = True
 
-                    Label3.Text = "Cart Has No Grade 'A' Cheese"
-
-
-                    DelayTM()
-                    Label3.Visible = False
-                End If
-            End If
+                                    Label3.Text = "Cart Has No Grade 'A' Cheese"
 
 
-            Me.txtLotNumber.Clear()
-            Me.txtLotNumber.Focus()
+                                    DelayTM()
+                                    Label3.Visible = False
+                                End If
+                            End If
+
+
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Focus()
+
+                        End If
+
+    End Sub
+
+    'Create csv file
+
+    Private Sub CSV()
+
+        Dim today As String = DateAndTime.Now
+        Dim csvFile As String
+        'Check to see if file exists, if it does not creat the file, otherwise add data to the file
+        Dim dataOut As String = String.Concat(varMachineCode, ",", varMachineName, ",", varYear, ",", varMonth, ",", varDoffingNum, ",", fltconeNum, ",", mergeNum, ",", varUserName, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("CONESTATE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("SHORTCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("MISSCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("DEFCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("BCODECART").Value, ",", coneM30, ",", coneP30, ",", varCartStartTime, ",", varCartEndTime, ",", today & Environment.NewLine)
+
+
+        csvFile = My.Settings.dirCarts & ("\" & frmDGV.DGVdata.Rows(csvRowNum).Cells("BCODECART").Value.ToString & "PackLog.csv")
+
+
+        If fileActive Then
+
+            Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, True)
+            outFile.WriteLine(dataOut)
+            outFile.Close()
+
+        Else
+            'If fileActive = False Then
+            Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, False)
+            outFile.WriteLine("M/C Code, M/C Name, YY, MM, Doff #, Cone #, Merge #,User, Cone State, Short, NoCone, Defect, Cart Name, -30, +30,Start, End, Fault time ")
+
+            outFile.WriteLine(dataOut)
+            outFile.Close()
+            fileActive = True
+
 
         End If
 
+
+
+
+
+
+
     End Sub
+
+
+
+
 
     Private Sub STDCreate()
         'Check Barcode is a valid Chees number, it must be 15 characters and no "B" in it
@@ -1217,8 +1334,8 @@ Public Class frmJobEntry
 
 
 
-            Else
-                Label3.Visible = True
+        Else
+            Label3.Visible = True
             Label3.Text = "NO GRADE " & "'" & txtGrade.Text & "'" & " CHEESES CAN BE FOUND"
             DelayTM()
             Label3.Visible = False
@@ -1945,4 +2062,6 @@ Public Class frmJobEntry
         frmProdStockWork.Show()
 
     End Sub
+
+
 End Class
