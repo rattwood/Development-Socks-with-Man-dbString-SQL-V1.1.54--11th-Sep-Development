@@ -66,6 +66,8 @@ Partial Class frmPacking
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtboxTotal = New System.Windows.Forms.TextBox()
         Me.lblCheese = New System.Windows.Forms.Label()
+        Me.DGVPakingA = New System.Windows.Forms.DataGridView()
+        CType(Me.DGVPakingA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label5
@@ -644,11 +646,23 @@ Partial Class frmPacking
         Me.lblCheese.TabIndex = 176
         Me.lblCheese.Text = "Total Cheese"
         '
+        'DGVPakingA
+        '
+        Me.DGVPakingA.AllowUserToAddRows = False
+        Me.DGVPakingA.AllowUserToDeleteRows = False
+        Me.DGVPakingA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGVPakingA.Location = New System.Drawing.Point(57, 2)
+        Me.DGVPakingA.Name = "DGVPakingA"
+        Me.DGVPakingA.Size = New System.Drawing.Size(683, 545)
+        Me.DGVPakingA.TabIndex = 178
+        Me.DGVPakingA.Visible = False
+        '
         'frmPacking
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1584, 861)
+        Me.Controls.Add(Me.DGVPakingA)
         Me.Controls.Add(Me.txtboxTotal)
         Me.Controls.Add(Me.lblCheese)
         Me.Controls.Add(Me.Label1)
@@ -697,6 +711,7 @@ Partial Class frmPacking
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmPacking"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        CType(Me.DGVPakingA, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -745,4 +760,5 @@ Partial Class frmPacking
     Friend WithEvents Label1 As Label
     Friend WithEvents txtboxTotal As TextBox
     Friend WithEvents lblCheese As Label
+    Friend WithEvents DGVPakingA As DataGridView
 End Class

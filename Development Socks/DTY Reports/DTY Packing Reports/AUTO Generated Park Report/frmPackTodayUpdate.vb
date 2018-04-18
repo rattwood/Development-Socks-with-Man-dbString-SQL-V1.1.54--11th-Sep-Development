@@ -61,13 +61,13 @@ Public Class frmPackTodayUpdate
 
 
             'Product Name
-            MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value
+            MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
             'Product Code
-            MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
+            MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
             'Packer Name
             MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
             'Barcode in by
-            MyTodyExcel.Cells(61, 13) = frmDGV.DGVdata.Rows(0).Cells(55).Value
+            MyTodyExcel.Cells(61, 13) = frmDGV.DGVdata.Rows(0).Cells("OPPACK").Value
 
             boxCount = boxCount + 1
             createBarcode()
@@ -94,7 +94,7 @@ Public Class frmPackTodayUpdate
 
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
-                If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "15" Then
+                If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
                     frmDGV.DGVdata.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
                     'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED

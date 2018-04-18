@@ -7,22 +7,22 @@ Imports System.Text
 
 
 Public Class frmPacking
-    Private SQL As New SQLConn
+    'Private SQL As New SQLConn
 
     '---------------------------------------    SETTING UP LOCAL INSTANCE FOR SQL LINK FOR DATAGRID TO SYNC CORRECTLY WITH SQL -------------------------------------
-    Public LConn As New SqlConnection(My.Settings.SQLConn) 'This need to be changed in Project/Propertie/Settings
-    Private LCmd As SqlCommand
+    Private PConn As New SqlConnection(My.Settings.SQLConn) 'This need to be changed in Project/Propertie/Settings
+    Private PCmd As SqlCommand
 
     'SQL CONNECTORS
-    Public LDA As SqlDataAdapter
-    Public LDS As DataSet
-    Public LDT As DataTable
-    Public LCB As SqlCommandBuilder
+    Private PDA As SqlDataAdapter
+    Private PDS As DataSet
+    Private PDT As DataTable
+    Private PCB As SqlCommandBuilder
 
-    Public LRecordCount As Integer
-    Private LException As String
+    Private PRecordCount As Integer
+    Private PException As String
     ' SQL QUERY PARAMETERS
-    Public LParams As New List(Of SqlParameter)
+    Private PParams As New List(Of SqlParameter)
     '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -74,6 +74,21 @@ Public Class frmPacking
 
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
+        PExecQuery("Select * FROM jobs WHERE bcodecart = '" & frmJobEntry.dbBarcode & "' ;")
+
+        'LOAD THE DATA FROM dB IN TO THE DATAGRID
+        frmDGV.DGVdata.DataSource = PDS.Tables(0)
+        frmDGV.DGVdata.Rows(0).Selected = True
+        Dim PCB As SqlCommandBuilder = New SqlCommandBuilder(PDA)
+
+
+        'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
+        frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("CONENUM"), ListSortDirection.Ascending)  'sorts On cone number
+
+
+
 
         'SET VRIABLE NUMBER OF BUTTONS IF PILOT MC
         If frmJobEntry.varMachineCode = 29 Then rowendcount = frmDGV.DGVdata.Rows.Count Else rowendcount = 32
@@ -153,53 +168,53 @@ Public Class frmPacking
         Me.txtCartNum.Text = frmJobEntry.cartSelect
         Me.lblJobNum.Text = frmJobEntry.varJobNum
 
-        'CHECK THAT WE HAVE CORRECT VALUES FOR CONESTATES
-        Dim cstate As String
-        For i = 1 To rowendcount
-            cstate = frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value
+        ''''CHECK THAT WE HAVE CORRECT VALUES FOR CONESTATES
+        '''Dim cstate As String
+        '''For i = 1 To rowendcount
+        '''    cstate = frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value
 
-            Select Case cstate
+        '''    Select Case cstate
 
-                Case Is = 0, 5
-                    If frmDGV.DGVdata.Rows(i - 1).Cells("MISSCONE").Value > 0 Or
-                       frmDGV.DGVdata.Rows(i - 1).Cells("DEFCONE").Value > 0 Or
-                       frmDGV.DGVdata.Rows(i - 1).Cells("CONEBARLEY").Value > 0 Or
-                       frmDGV.DGVdata.Rows(i - 1).Cells("M30").Value > 0 Or
-                       frmDGV.DGVdata.Rows(i - 1).Cells("P30").Value > 0 Or
-                       frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
-                       frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
-                       frmDGV.DGVdata.Rows(i - 1).Cells("DYEFLECK").Value > 0 Or
-                       frmDGV.DGVdata.Rows(i - 1).Cells("COLDEF").Value > 0 Or
-                       frmDGV.DGVdata.Rows(i - 1).Cells("COLWASTE").Value > 0 Then
-                        'frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AD" Or
-                        '  frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AL" Then
+        '''        Case Is = 0, 5
+        '''            If frmDGV.DGVdata.Rows(i - 1).Cells("MISSCONE").Value > 0 Or
+        '''                frmDGV.DGVdata.Rows(i - 1).Cells("DEFCONE").Value > 0 Or
+        '''                frmDGV.DGVdata.Rows(i - 1).Cells("CONEBARLEY").Value > 0 Or
+        '''                frmDGV.DGVdata.Rows(i - 1).Cells("M30").Value > 0 Or
+        '''                frmDGV.DGVdata.Rows(i - 1).Cells("P30").Value > 0 Or
+        '''                frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
+        '''                frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
+        '''                frmDGV.DGVdata.Rows(i - 1).Cells("DYEFLECK").Value > 0 Or
+        '''                frmDGV.DGVdata.Rows(i - 1).Cells("COLDEF").Value > 0 Or
+        '''                frmDGV.DGVdata.Rows(i - 1).Cells("COLWASTE").Value > 0 Then
+        '''                ' frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AD" Or
+        '''                '   frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AL" Then
 
-                        frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8
-                        frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
+        '''                frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8
+        '''                frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
 
-                        'INFORMATION FOT CSV LOG FILE
-                        fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
-                        csvRowNum = i - 1
-                        CSV()
-                    Else
+        '''                'INFORMATION FOT CSV LOG FILE
+        '''                fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
+        '''                csvRowNum = i - 1
+        '''                CSV()
+        '''            Else
 
-                        frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 9
-                        frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
+        '''                frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 9
+        '''                frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
 
-                        'INFORMATION FOT CSV LOG FILE
-                        fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
-                        csvRowNum = i - 1
-                        CSV()
-                    End If
+        '''                'INFORMATION FOT CSV LOG FILE
+        '''                fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
+        '''                csvRowNum = i - 1
+        '''                CSV()
+        '''            End If
 
-                Case Else
+        '''        Case Else
 
-                    Continue For
+        '''            Continue For
 
-            End Select
+        '''    End Select
 
 
-        Next
+        '''Next
 
 
 
@@ -215,7 +230,7 @@ Public Class frmPacking
 
 
         ''For i = 1 To 32
-        ''    If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells("FLT_S").Value = "False" Then
+        ''    If  frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And  frmDGV.DGVdata.Rows(i - 1).Cells("FLT_S").Value = "False" Then
         ''        toAllocatedCount = toAllocatedCount + 1
         ''    End If
         ''Next
@@ -239,11 +254,49 @@ Public Class frmPacking
         If frmJobEntry.coneValUpdate Then UpdateConeVal()
 
 
-        If My.Settings.debugSet Then frmDGV.Show()
+        If My.Settings.debugSet Then frmDGV.DGVdata.Visible = True
 
         Me.txtConeBcode.Clear()
         Me.txtConeBcode.Focus()
 
+
+    End Sub
+
+
+    Public Sub PExecQuery(Query As String)
+        ' RESET QUERY STATISTCIS
+        PRecordCount = 0
+        PException = ""
+
+
+        If PConn.State = ConnectionState.Open Then PConn.Close()
+        Try
+
+            'OPEN SQL DATABSE CONNECTION
+            PConn.Open()
+
+            'CREATE SQL COMMAND
+            PCmd = New SqlCommand(Query, PConn)
+
+            'LOAD PARAMETER INTO SQL COMMAND
+            PParams.ForEach(Sub(p) PCmd.Parameters.Add(p))
+
+            'CLEAR PARAMETER LIST
+            PParams.Clear()
+
+            'EXECUTE COMMAND AND FILL DATASET
+            PDS = New DataSet
+            PDT = New DataTable
+            PDA = New SqlDataAdapter(PCmd)
+
+            PRecordCount = PDA.Fill(PDS)
+
+        Catch ex As Exception
+
+            PException = "ExecQuery Error: " & vbNewLine & ex.Message
+            MsgBox(PException)
+
+        End Try
 
     End Sub
 
@@ -349,18 +402,18 @@ Public Class frmPacking
 
 
 
-            If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells(43).Value = False Then
-                curcone = frmDGV.DGVdata.Rows(i - 1).Cells(6).Value
+            If frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells("FLT_S").Value = False Then
+                curcone = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value
                 Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.LightGreen       'Grade A Cone
-                frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "15"
-                frmDGV.DGVdata.Rows(i - 1).Cells(55).Value = frmJobEntry.PackOp
-                frmDGV.DGVdata.Rows(i - 1).Cells(8).Value = frmJobEntry.varUserName
-                frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
+                frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "15"
+                frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
+                frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.varUserName
+                frmDGV.DGVdata.Rows(i - 1).Cells("CARTENDTM").Value = today
 
                 'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
                 If IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
                     'For rows As Integer = 1 To rowendcount
-                    If My.Settings.chkUsePack = True Then frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Today  'PACKING CHECK END TIME.
+                    frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Today  'PACKING CHECK END TIME.
                     'Next
                 End If
 
@@ -369,25 +422,25 @@ Public Class frmPacking
                 endCheck()
                 curcone = 0
 
-            ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "15" Then
+            ElseIf frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
                 Label1.Visible = True
                 Label1.Text = "Cheese already allocated"
                 DelayTM()
                 Label1.Visible = False
-            ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value < "9" Or frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells(43).Value = True Then
-                curcone = frmDGV.DGVdata.Rows(i - 1).Cells(6).Value
+            ElseIf frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value < "9" Or frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells("FLT_S").Value = True Then
+                curcone = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value
                 psorterror = 1
                 Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.Red      'Wrong Cone scanned
-                frmDGV.DGVdata.Rows(i - 1).Cells(58).Value = psorterror
-                frmDGV.DGVdata.Rows(i - 1).Cells(55).Value = frmJobEntry.PackOp
-                frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "14"
-                frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
+                frmDGV.DGVdata.Rows(i - 1).Cells("PSORTERROR").Value = psorterror
+                frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
+                frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "14"
+                frmDGV.DGVdata.Rows(i - 1).Cells("CARTENDTM").Value = today
 
                 'UPDATE ALL CHEESE ON CART AS PROCESSED TODAY FOR DAILY PACKING REPORT TO WORK
 
-                'If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
+                'If IsDBNull( frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
                 '    For rows As Integer = 1 To rowendcount
-                '        If My.Settings.chkUseColour = True Then frmDGV.DGVdata.Rows((rows - 1) - coneNumOffset).Cells("PACKENDTM").Value = varCartEndTime 'PACKING CHECK END TIME
+                '        If My.Settings.chkUseColour = True Then  frmDGV.DGVdata.Rows((rows - 1) - coneNumOffset).Cells("PACKENDTM").Value = varCartEndTime 'PACKING CHECK END TIME
                 '    Next
                 'End If
 
@@ -425,8 +478,9 @@ Public Class frmPacking
 
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
+        If PConn.State = ConnectionState.Open Then PConn.Close()
         frmDGV.DGVdata.ClearSelection()
+        frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
         frmJobEntry.Show()
         frmJobEntry.txtLotNumber.Clear()
         frmJobEntry.txtLotNumber.Focus()
@@ -474,12 +528,12 @@ Public Class frmPacking
 
         Try
 
-            If frmJobEntry.LDS.HasChanges Then
+            If PDS.HasChanges Then
 
 
                 'LDA.UpdateCommand = New Oracle.ManagedDataAccess.Client.OracleCommandBuilder(frmJobEntry.LDA).GetUpdateCommand
 
-                frmJobEntry.LDA.Update(frmJobEntry.LDS.Tables(0))
+                PDA.Update(PDS.Tables(0))
 
             End If
         Catch ex As Exception
@@ -489,8 +543,9 @@ Public Class frmPacking
 
 
 
-        If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
+        If PConn.State = ConnectionState.Open Then PConn.Close()
         frmDGV.DGVdata.ClearSelection()
+        frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
         frmJobEntry.txtLotNumber.Clear()
         frmJobEntry.txtLotNumber.Focus()
         frmJobEntry.Show()
@@ -504,7 +559,7 @@ Public Class frmPacking
 
 
         Dim bAddState As Boolean = frmDGV.DGVdata.AllowUserToAddRows
-        'Dim iRow As Integer = frmDGV.DGVdata.CurrentRow.Index
+        'Dim iRow As Integer =  frmDGV.DGVdata.CurrentRow.Index
         frmDGV.DGVdata.AllowUserToAddRows = True
         frmDGV.DGVdata.CurrentCell = frmDGV.DGVdata.Rows(frmDGV.DGVdata.Rows.Count - 1).Cells(0) ' move to add row
         frmDGV.DGVdata.CurrentCell = frmDGV.DGVdata.Rows(0).Cells(0) ' move back to current row  Changed Rows(iRow) to (0)
