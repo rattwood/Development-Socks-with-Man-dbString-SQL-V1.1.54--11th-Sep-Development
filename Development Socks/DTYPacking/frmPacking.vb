@@ -168,53 +168,49 @@ Public Class frmPacking
         Me.txtCartNum.Text = frmJobEntry.cartSelect
         Me.lblJobNum.Text = frmJobEntry.varJobNum
 
-        ''''CHECK THAT WE HAVE CORRECT VALUES FOR CONESTATES
-        '''Dim cstate As String
-        '''For i = 1 To rowendcount
-        '''    cstate = frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value
+        'CHECK THAT WE HAVE CORRECT VALUES FOR CONESTATES
+        Dim cstate As String
+        For i = 1 To rowendcount
+            cstate = frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value
 
-        '''    Select Case cstate
+            Select Case cstate
 
-        '''        Case Is = 0, 5
-        '''            If frmDGV.DGVdata.Rows(i - 1).Cells("MISSCONE").Value > 0 Or
-        '''                frmDGV.DGVdata.Rows(i - 1).Cells("DEFCONE").Value > 0 Or
-        '''                frmDGV.DGVdata.Rows(i - 1).Cells("CONEBARLEY").Value > 0 Or
-        '''                frmDGV.DGVdata.Rows(i - 1).Cells("M30").Value > 0 Or
-        '''                frmDGV.DGVdata.Rows(i - 1).Cells("P30").Value > 0 Or
-        '''                frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
-        '''                frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
-        '''                frmDGV.DGVdata.Rows(i - 1).Cells("DYEFLECK").Value > 0 Or
-        '''                frmDGV.DGVdata.Rows(i - 1).Cells("COLDEF").Value > 0 Or
-        '''                frmDGV.DGVdata.Rows(i - 1).Cells("COLWASTE").Value > 0 Then
-        '''                ' frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AD" Or
-        '''                '   frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AL" Then
+                Case Is = 0, 5
+                    If frmDGV.DGVdata.Rows(i - 1).Cells("MISSCONE").Value > 0 Or
+                        frmDGV.DGVdata.Rows(i - 1).Cells("DEFCONE").Value > 0 Or
+                        frmDGV.DGVdata.Rows(i - 1).Cells("CONEBARLEY").Value > 0 Or
+                        frmDGV.DGVdata.Rows(i - 1).Cells("M30").Value > 0 Or
+                        frmDGV.DGVdata.Rows(i - 1).Cells("P30").Value > 0 Or
+                        frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
+                        frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
+                        frmDGV.DGVdata.Rows(i - 1).Cells("DYEFLECK").Value > 0 Or
+                        frmDGV.DGVdata.Rows(i - 1).Cells("COLDEF").Value > 0 Or
+                        frmDGV.DGVdata.Rows(i - 1).Cells("COLWASTE").Value > 0 Then
+                        ' frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AD" Or
+                        '   frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AL" Then
 
-        '''                frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8
-        '''                frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
+                        frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8
+                        frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
 
-        '''                'INFORMATION FOT CSV LOG FILE
-        '''                fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
-        '''                csvRowNum = i - 1
-        '''                CSV()
-        '''            Else
+                        'INFORMATION FOT CSV LOG FILE
+                        fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
+                        csvRowNum = i - 1
+                        CSV()
+                    Else
 
-        '''                frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 9
-        '''                frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
+                        frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 9
+                        frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
 
-        '''                'INFORMATION FOT CSV LOG FILE
-        '''                fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
-        '''                csvRowNum = i - 1
-        '''                CSV()
-        '''            End If
+                        'INFORMATION FOT CSV LOG FILE
+                        fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
+                        csvRowNum = i - 1
+                        CSV()
+                    End If
 
-        '''        Case Else
-
-        '''            Continue For
-
-        '''    End Select
+            End Select
 
 
-        '''Next
+        Next
 
 
 
