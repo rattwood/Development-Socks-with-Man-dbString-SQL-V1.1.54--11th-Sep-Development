@@ -73,7 +73,7 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>52C30E5E654231B90A9D2B07F0594311B59768A3</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>6DAE74CB32DFEFFA21152A18136EAFFB4D90A97B</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>
@@ -87,6 +87,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\ts_final_logo_yk_FSc_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.SqlServer.ManagedConnections, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
@@ -316,6 +319,12 @@
     <Compile Include="DTYPacking\frmB_AL_AD_W.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DTYPacking\liveGraph.designer.vb">
+      <DependentUpon>liveGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTYPacking\liveGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmcart1backup.Designer.vb">
       <DependentUpon>frmcart1backup.vb</DependentUpon>
     </Compile>
@@ -509,6 +518,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DTYPacking\frmB_AL_AD_W.resx">
       <DependentUpon>frmB_AL_AD_W.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTYPacking\liveGraph.resx">
+      <DependentUpon>liveGraph.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmcart1backup.resx">
       <DependentUpon>frmcart1backup.vb</DependentUpon>

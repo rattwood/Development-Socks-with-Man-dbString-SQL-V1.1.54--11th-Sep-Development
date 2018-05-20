@@ -2063,5 +2063,7 @@ Public Class frmJobEntry
 
     End Sub
 
-
+    Private Sub StatisticsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StatisticsToolStripMenuItem.Click
+        liveGraph.Show()
+    End Sub
 End Class

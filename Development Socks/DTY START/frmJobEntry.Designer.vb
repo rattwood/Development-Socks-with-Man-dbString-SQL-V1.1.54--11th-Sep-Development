@@ -94,6 +94,7 @@ Partial Class frmJobEntry
         Me.lblSelectGrade = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtPilotCount = New System.Windows.Forms.TextBox()
+        Me.StatisticsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.ToraydbBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Toraydb, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
@@ -416,7 +417,7 @@ Partial Class frmJobEntry
         '
         'ReportsToolStripMenuItem
         '
-        Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DailyPackingReportToolStripMenuItem, Me.EndOfDayReportToolStripMenuItem, Me.StockToProcessReportToolStripMenuItem})
+        Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DailyPackingReportToolStripMenuItem, Me.EndOfDayReportToolStripMenuItem, Me.StockToProcessReportToolStripMenuItem, Me.StatisticsToolStripMenuItem})
         Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
         Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(59, 20)
         Me.ReportsToolStripMenuItem.Text = "Reports"
@@ -619,6 +620,12 @@ Partial Class frmJobEntry
         Me.txtPilotCount.TabIndex = 185
         Me.txtPilotCount.Visible = False
         '
+        'StatisticsToolStripMenuItem
+        '
+        Me.StatisticsToolStripMenuItem.Name = "StatisticsToolStripMenuItem"
+        Me.StatisticsToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
+        Me.StatisticsToolStripMenuItem.Text = "Statistics"
+        '
         'frmJobEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
@@ -729,4 +736,5 @@ Partial Class frmJobEntry
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents ToolStripTextBox5 As ToolStripTextBox
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
+    Friend WithEvents StatisticsToolStripMenuItem As ToolStripMenuItem
 End Class
