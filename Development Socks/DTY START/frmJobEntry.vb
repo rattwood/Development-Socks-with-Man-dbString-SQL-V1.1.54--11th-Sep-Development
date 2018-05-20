@@ -1866,12 +1866,12 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub FindCheeseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FindCheeseToolStripMenuItem.Click
-        If txtOperator.Text = "" Then
-            MsgBox("Please Enter Operator Name First")
-        Else
-            Me.Hide()
+        ' If txtOperator.Text = "" Then
+        'MsgBox("Please Enter Operator Name First")
+        'Else
+        Me.Hide()
             frmConeSearch.Show()
-        End If
+        'End If
     End Sub
 
     Private Sub AGradeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AGradeToolStripMenuItem.Click
