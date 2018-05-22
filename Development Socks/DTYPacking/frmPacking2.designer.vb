@@ -652,7 +652,7 @@ Partial Class frmPacking2
         Me.DGVPakingRecA.AllowUserToDeleteRows = False
         Me.DGVPakingRecA.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.DGVPakingRecA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVPakingRecA.Location = New System.Drawing.Point(57, 2)
+        Me.DGVPakingRecA.Location = New System.Drawing.Point(57, -54)
         Me.DGVPakingRecA.Name = "DGVPakingRecA"
         Me.DGVPakingRecA.Size = New System.Drawing.Size(683, 545)
         Me.DGVPakingRecA.TabIndex = 178
@@ -662,7 +662,7 @@ Partial Class frmPacking2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1584, 861)
+        Me.ClientSize = New System.Drawing.Size(1584, 749)
         Me.Controls.Add(Me.DGVPakingRecA)
         Me.Controls.Add(Me.txtboxTotal)
         Me.Controls.Add(Me.lblCheese)
