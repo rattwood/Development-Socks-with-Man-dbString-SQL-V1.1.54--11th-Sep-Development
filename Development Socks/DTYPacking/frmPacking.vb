@@ -29,28 +29,12 @@ Public Class frmPacking
 
 
     Dim psorterror As String = 0
-    Dim varVisConeInspect As String
-    Dim coneBarley As String = 0
-    Dim coneZero As String = 0
-    Dim coneM10 As String = 0
-    Dim coneP10 As String = 0
-    Dim coneM30 As String = 0
-    Dim coneP30 As String = 0
-    Dim coneM50 As String = 0
-    Dim coneP50 As String = 0
-    Dim btnImage As Image
-    Dim keepDefcodes As Integer
     Public bcodeScan As String = ""
-    Dim clr As String = ""
     Public curcone As String = 0
     Public toAllocatedCount As Integer 'count of cones requierd to be scanned
     Public allocatedCount As Integer 'count of cones scanned
-    Public itemCount As Integer = 0
-    'ReCheck Params
     Dim reChecked, ReCheckTime As String
     Public removeChar() As Char = {"<", "0", "0", ">", vbCrLf}
-    Dim incoming As String
-    Public measureOn As String
     Public NoCone As Integer
     Public defect As Integer
 

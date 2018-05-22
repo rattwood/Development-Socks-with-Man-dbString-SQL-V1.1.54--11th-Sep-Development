@@ -30,7 +30,7 @@ Public Class frmPackRepMain
 
 
         'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
-        prodNameMod = frmDGV.DGVdata.Rows(0).Cells(52).Value.ToString
+        prodNameMod = frmPacking2.DGVPakingRecA.Rows(0).Cells(52).Value.ToString
         prodNameMod = prodNameMod.Replace("/", "_")
 
         If frmJobEntry.txtGrade.Text = "ReCheckA" Then
@@ -40,24 +40,24 @@ Public Class frmPackRepMain
 
             'CREATE THE FULL NAME FOR SAVING THE FILE
             saveString = (prodNameMod & " " _
-                & frmDGV.DGVdata.Rows(0).Cells(7).Value.ToString & "_" _
-                & frmDGV.DGVdata.Rows(0).Cells(2).Value.ToString) & " A"
+                & frmPacking2.DGVPakingRecA.Rows(0).Cells(7).Value.ToString & "_" _
+                & frmPacking2.DGVPakingRecA.Rows(0).Cells(2).Value.ToString) & " A"
         Else
             'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
             sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_" & frmJobEntry.txtGrade.Text
 
             'CREATE THE FULL NAME FOR SAVING THE FILE
             saveString = (prodNameMod & " " _
-                & frmDGV.DGVdata.Rows(0).Cells(7).Value.ToString & "_" _
-                & frmDGV.DGVdata.Rows(0).Cells(2).Value.ToString) & " " & frmJobEntry.txtGrade.Text
+                & frmPacking2.DGVPakingRecA.Rows(0).Cells(7).Value.ToString & "_" _
+                & frmPacking2.DGVPakingRecA.Rows(0).Cells(2).Value.ToString) & " " & frmJobEntry.txtGrade.Text
         End If
 
 
 
         ''CREATE THE FULL NAME FOR SAVING THE FILE
         'saveString = (prodNameMod & " " _
-        '    & frmDGV.DGVdata.Rows(0).Cells(7).Value.ToString & "_" _
-        '    & frmDGV.DGVdata.Rows(0).Cells(2).Value.ToString) & " " & frmJobEntry.txtGrade.Text
+        '    & frmPacking2.DGVPakingRecA.Rows(0).Cells(7).Value.ToString & "_" _
+        '    & frmPacking2.DGVPakingRecA.Rows(0).Cells(2).Value.ToString) & " " & frmJobEntry.txtGrade.Text
 
 
         'CALL SUB TO GET TODAYS SAVE DIRECTORY

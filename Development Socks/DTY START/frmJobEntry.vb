@@ -1593,10 +1593,11 @@ Public Class frmJobEntry
                 coneValUpdate = 1
                 varCartSelect = 1
                 Me.Hide()
-                'frmPacking.Show()
-                frmPackRchkA.txtConeBcode.Clear()
-                frmPackRchkA.txtConeBcode.Focus()
-                frmPackRchkA.Show()
+                frmPacking2.Show()
+                'Original before new Recheck A form
+                'frmPackRchkA.txtConeBcode.Clear()
+                'frmPackRchkA.txtConeBcode.Focus()
+                'frmPackRchkA.Show()
             Else
                 frmB_AL_AD_W.txtConeBcode.Clear()
                 frmB_AL_AD_W.txtConeBcode.Focus()

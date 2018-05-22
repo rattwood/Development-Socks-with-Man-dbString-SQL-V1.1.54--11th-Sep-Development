@@ -286,6 +286,12 @@
     <Compile Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmPackReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DTYPacking\frmPacking2.designer.vb">
+      <DependentUpon>frmPacking2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTYPacking\frmPacking2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DTYPacking\frmPackRchkA.Designer.vb">
       <DependentUpon>frmPackRchkA.vb</DependentUpon>
     </Compile>
@@ -494,6 +500,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmPackReport.resx">
       <DependentUpon>frmPackReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTYPacking\frmPacking2.resx">
+      <DependentUpon>frmPacking2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DTYPacking\frmPackRchkA.resx">
       <DependentUpon>frmPackRchkA.vb</DependentUpon>
