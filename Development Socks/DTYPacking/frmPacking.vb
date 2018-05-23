@@ -329,7 +329,7 @@ Public Class frmPacking
 
         For rw As Integer = 1 To rowendcount
 
-            If DGVPakingA.Rows(rw - 1).Cells(9).Value = "9" And DGVPakingA.Rows(rw - 1).Cells("FLT_S").Value = False And IsDBNull(DGVPakingA.Rows(rw - 1).Cells("STDSTATE").Value) Then
+            If DGVPakingA.Rows(rw - 1).Cells(9).Value = "9" And DGVPakingA.Rows(rw - 1).Cells("FLT_S").Value = False And (IsDBNull(DGVPakingA.Rows(rw - 1).Cells("STDSTATE").Value) Or DGVPakingA.Rows(rw - 1).Cells("STDSTATE").Value = "") Then
 
                 Me.Controls("btnCone" & rw).BackColor = Color.Green       'Grade A Cone
             End If
@@ -402,7 +402,7 @@ Public Class frmPacking
 
 
                 allocatedCount = allocatedCount + 1
-                endCheck()
+
                 curcone = 0
 
             ElseIf DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
@@ -439,6 +439,8 @@ Public Class frmPacking
 
             End If
         Next
+        endCheck()
+
     End Sub
 
     Private Sub DelayTM()
@@ -473,10 +475,10 @@ Public Class frmPacking
 
 
     Public Sub endCheck()
-        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+
         If toAllocatedCount = allocatedCount Then
             curcone = 0
-
+            Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
             '**************************************************************************************************************
             'UPDATE ALL CHEESE ON CART AS PROCESSED TODAY FOR DAILY PACKING REPORT TO WORK
 
@@ -492,6 +494,13 @@ Public Class frmPacking
             frmPackRepMain.PackRepMainSub()
             frmPackRepMain.Close()
             UpdateDatabase()
+            Me.Cursor = System.Windows.Forms.Cursors.Default
+            frmJobEntry.Show()
+            frmJobEntry.txtLotNumber.Clear()
+            frmJobEntry.txtLotNumber.Focus()
+            Me.Close()
+
+
 
         End If
         Me.Cursor = System.Windows.Forms.Cursors.Default

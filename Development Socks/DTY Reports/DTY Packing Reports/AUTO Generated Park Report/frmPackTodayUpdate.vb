@@ -1,4 +1,5 @@
 ﻿'Imports Microsoft.Office.Interop.Excel
+Imports System.IO
 Imports Excel = Microsoft.Office.Interop.Excel
 
 Public Class frmPackTodayUpdate
@@ -25,6 +26,7 @@ Public Class frmPackTodayUpdate
     'Dim PrintToFile As Object
     'Dim Collate As Object
     'Dim PrToFileName As Object
+
 
 
     Public Sub TodayUpdate()
@@ -63,13 +65,13 @@ Public Class frmPackTodayUpdate
 
 
                     'Product Name
-                    MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
+                    MyTodyExcel.Cells(7, 4) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
                     'Product Code
-                    MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+                    MyTodyExcel.Cells(7, 5) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
                     'Packer Name
                     MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
                     'Barcode in by
-                    MyTodyExcel.Cells(61, 13) = frmDGV.DGVdata.Rows(0).Cells("OPPACK").Value
+                    MyTodyExcel.Cells(61, 13) = frmPacking.DGVPakingA.Rows(0).Cells("OPPACK").Value
 
                     boxCount = boxCount + 1
                     createBarcode()
@@ -94,10 +96,10 @@ Public Class frmPackTodayUpdate
                     'Packer Name
                     MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
 
-                    For i = 1 To frmDGV.DGVdata.Rows.Count
+                    For i = 1 To frmPacking.DGVPakingA.Rows.Count
 
-                        If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
-                            frmDGV.DGVdata.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
+                        If frmPacking.DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
+                            frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
                             'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
                             Select Case nfree
@@ -152,13 +154,13 @@ Public Class frmPackTodayUpdate
                             cartonNum = (cartonNum & "-" & boxCount).ToString
 
                             'WRITE CONE NUMBER TO SHEET
-                            MyTodyExcel.Cells(nfree, 4) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
+                            MyTodyExcel.Cells(nfree, 4) = frmPacking.DGVPakingA.Rows(i - 1).Cells(36).Value
 
 
 
                             'WRITE CARTON NUMBER TO SHEET AND PUT IN DGV
                             MyTodyExcel.Cells(cellNum, 2) = cartonNum
-                            frmDGV.DGVdata.Rows(i - 1).Cells(61).Value = cartonNum
+                            frmPacking.DGVPakingA.Rows(i - 1).Cells(61).Value = cartonNum
                             nfree = nfree + 1
 
                             'ROUTINE IF SHEET IS FULL TO COPY SHEET AND CREATE A NEW SHEET IN THE WORKBOOK
@@ -168,35 +170,19 @@ Public Class frmPackTodayUpdate
                                 tmpsaveName = (frmPackRepMain.finPath & "\" & frmPackRepMain.sheetName & "_" & mycount & ".xlsx")
                                 MyTodyExcel.DisplayAlerts = False
 
-                                'xlPrintSheet = tmpsaveName   'This loads the temp save name in to Public variable for print form can use it
-                                'PrintOut()
 
                                 xlTodyWorkbook.Sheets(mycount).SaveAs(Filename:=tmpsaveName, FileFormat:=51)
 
                                 MyTodyExcel.DisplayAlerts = True
 
-                                'ROUTINE TO ASK IF OPERATER WISHES TO PRINT RESULTS OR CONTINUE
-                                ' Me.Visible = True  'open screen so we can see message
-                                ' Dim result = MessageBox.Show("Edit Job Yes Or No", "Print Excel Sheet ?", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
-
-                                'If result = DialogResult.Yes Then
-
-                                'LOAD THE EXCEl SHEET NAME TO OPEN
-                                'xlPrintSheet = tmpsaveName   'This loads the temp save name in to Public variable for print form can use it
-                                'PrintOut()
-                                ' Me.Visible = False ' close screen
-
-                                'End If
-
-                                'If result = DialogResult.No Then  
 
 
                                 xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                                 CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
-                                MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value
+                                MyTodyExcel.Cells(7, 4) = frmPacking.DGVPakingA.Rows(0).Cells(52).Value
                                 'Product Code
-                                MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
+                                MyTodyExcel.Cells(7, 5) = frmPacking.DGVPakingA.Rows(0).Cells(2).Value
                                 'Packer Name
                                 MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
 
@@ -231,13 +217,13 @@ Public Class frmPackTodayUpdate
 
 
                     'Product Name
-                    MyTodyExcel.Cells(7, 4) = frmPacking2.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value
+                    MyTodyExcel.Cells(7, 4) = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value
                     'Product Code
-                    MyTodyExcel.Cells(7, 5) = frmPacking2.DGVPakingRecA.Rows(0).Cells("PRNUM").Value
+                    MyTodyExcel.Cells(7, 5) = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value
                     'Packer Name
                     MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
                     'Barcode in by
-                    MyTodyExcel.Cells(61, 13) = frmPacking2.DGVPakingRecA.Rows(0).Cells("OPPACK").Value
+                    MyTodyExcel.Cells(61, 13) = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("OPPACK").Value
 
                     boxCount = boxCount + 1
                     createBarcode()
@@ -262,10 +248,10 @@ Public Class frmPackTodayUpdate
                     'Packer Name
                     MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
 
-                    For i = 1 To frmPacking2.DGVPakingRecA.Rows.Count
+                    For i = 1 To frmPackRchkA.DGVPakingRecA.Rows.Count
 
-                        If frmPacking2.DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
-                            frmPacking2.DGVPakingRecA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
+                        If frmPackRchkA.DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
+                            frmPackRchkA.DGVPakingRecA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
                             'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
                             Select Case nfree
@@ -320,13 +306,13 @@ Public Class frmPackTodayUpdate
                             cartonNum = (cartonNum & "-" & boxCount).ToString
 
                             'WRITE CONE NUMBER TO SHEET
-                            MyTodyExcel.Cells(nfree, 4) = frmPacking2.DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value
+                            MyTodyExcel.Cells(nfree, 4) = frmPackRchkA.DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value
 
 
 
                             'WRITE CARTON NUMBER TO SHEET AND PUT IN DGV
                             MyTodyExcel.Cells(cellNum, 2) = cartonNum
-                            frmPacking2.DGVPakingRecA.Rows(i - 1).Cells("CARTONNUM").Value = cartonNum
+                            frmPackRchkA.DGVPakingRecA.Rows(i - 1).Cells("CARTONNUM").Value = cartonNum
                             nfree = nfree + 1
 
                             'ROUTINE IF SHEET IS FULL TO COPY SHEET AND CREATE A NEW SHEET IN THE WORKBOOK
@@ -336,35 +322,16 @@ Public Class frmPackTodayUpdate
                                 tmpsaveName = (frmPackRepMain.finPath & "\" & frmPackRepMain.sheetName & "_" & mycount & ".xlsx")
                                 MyTodyExcel.DisplayAlerts = False
 
-                                'xlPrintSheet = tmpsaveName   'This loads the temp save name in to Public variable for print form can use it
-                                'PrintOut()
-
                                 xlTodyWorkbook.Sheets(mycount).SaveAs(Filename:=tmpsaveName, FileFormat:=51)
 
                                 MyTodyExcel.DisplayAlerts = True
 
-                                'ROUTINE TO ASK IF OPERATER WISHES TO PRINT RESULTS OR CONTINUE
-                                ' Me.Visible = True  'open screen so we can see message
-                                ' Dim result = MessageBox.Show("Edit Job Yes Or No", "Print Excel Sheet ?", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
-
-                                'If result = DialogResult.Yes Then
-
-                                'LOAD THE EXCEl SHEET NAME TO OPEN
-                                'xlPrintSheet = tmpsaveName   'This loads the temp save name in to Public variable for print form can use it
-                                'PrintOut()
-                                ' Me.Visible = False ' close screen
-
-                                'End If
-
-                                'If result = DialogResult.No Then  
-
-
                                 xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                                 CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
-                                MyTodyExcel.Cells(7, 4) = frmPacking2.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value
+                                MyTodyExcel.Cells(7, 4) = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value
                                 'Product Code
-                                MyTodyExcel.Cells(7, 5) = frmPacking2.DGVPakingRecA.Rows(0).Cells("PRNUM").Value
+                                MyTodyExcel.Cells(7, 5) = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value
                                 'Packer Name
                                 MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
 
@@ -393,174 +360,6 @@ Public Class frmPackTodayUpdate
 
 
         End Select
-
-
-        ''CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
-        'If totCount = 90 Then
-        '    xlTodyWorkbook.Sheets(1).Copy(After:=xlTodyWorkbook.Sheets(mycount))
-        '    'ReName the work sheet 
-        '    CType(MyTodyExcel.Workbooks(1).Worksheets("Sheet1"), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
-
-        '    nfree = 13
-
-
-        '    'Product Name
-        '    MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
-        '    'Product Code
-        '    MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
-        '    'Packer Name
-        '    MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
-        '    'Barcode in by
-        '    MyTodyExcel.Cells(61, 13) = frmDGV.DGVdata.Rows(0).Cells("OPPACK").Value
-
-        '    boxCount = boxCount + 1
-        '    createBarcode()
-        '    MyTodyExcel.Cells(1, 4) = SheetCodeString
-
-
-
-        '    For i = 13 To 102
-        '        MyTodyExcel.Cells(nfree, 4) = "" 'Clear the contents of cone cells
-        '    Next
-        '    boxCount = boxCount + 1
-        'End If
-
-
-        ''Routine to go through the rows and extract Grade A cones plus keep count
-        'Dim cartonNum As String = ""
-        'Dim cellNum As Integer
-
-
-        'Try
-
-        '    'Packer Name
-        '    MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
-
-        '    For i = 1 To frmDGV.DGVdata.Rows.Count
-
-        '        If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
-        '            frmDGV.DGVdata.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
-
-        '            'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
-        '            Select Case nfree
-        '                Case 13 To 18
-        '                    cartonNum = 1
-        '                    cellNum = 13
-        '                Case 19 To 24
-        '                    cartonNum = 2
-        '                    cellNum = 19
-        '                Case 25 To 30
-        '                    cartonNum = 3
-        '                    cellNum = 25
-        '                Case 31 To 36
-        '                    cartonNum = 4
-        '                    cellNum = 31
-        '                Case 37 To 42
-        '                    cartonNum = 5
-        '                    cellNum = 37
-        '                Case 43 To 48
-        '                    cartonNum = 6
-        '                    cellNum = 43
-        '                Case 49 To 54
-        '                    cartonNum = 7
-        '                    cellNum = 49
-        '                Case 55 To 60
-        '                    cartonNum = 8
-        '                    cellNum = 55
-        '                Case 61 To 66
-        '                    cartonNum = 9
-        '                    cellNum = 61
-        '                Case 67 To 72
-        '                    cartonNum = 10
-        '                    cellNum = 67
-        '                Case 73 To 78
-        '                    cartonNum = 11
-        '                    cellNum = 73
-        '                Case 79 To 84
-        '                    cartonNum = 12
-        '                    cellNum = 79
-        '                Case 85 To 90
-        '                    cartonNum = 13
-        '                    cellNum = 85
-        '                Case 91 To 96
-        '                    cartonNum = 14
-        '                    cellNum = 91
-        '                Case 97 To 102
-        '                    cartonNum = 15
-        '                    cellNum = 97
-        '            End Select
-
-
-        '            cartonNum = (cartonNum & "-" & boxCount).ToString
-
-        '            'WRITE CONE NUMBER TO SHEET
-        '            MyTodyExcel.Cells(nfree, 4) = frmDGV.DGVdata.Rows(i - 1).Cells(36).Value
-
-
-
-        '            'WRITE CARTON NUMBER TO SHEET AND PUT IN DGV
-        '            MyTodyExcel.Cells(cellNum, 2) = cartonNum
-        '            frmDGV.DGVdata.Rows(i - 1).Cells(61).Value = cartonNum
-        '            nfree = nfree + 1
-
-        '            'ROUTINE IF SHEET IS FULL TO COPY SHEET AND CREATE A NEW SHEET IN THE WORKBOOK
-        '            If nfree = 103 Then
-        '                Dim tmpsaveName As String
-
-        '                tmpsaveName = (frmPackRepMain.finPath & "\" & frmPackRepMain.sheetName & "_" & mycount & ".xlsx")
-        '                MyTodyExcel.DisplayAlerts = False
-
-        '                'xlPrintSheet = tmpsaveName   'This loads the temp save name in to Public variable for print form can use it
-        '                'PrintOut()
-
-        '                xlTodyWorkbook.Sheets(mycount).SaveAs(Filename:=tmpsaveName, FileFormat:=51)
-
-        '                MyTodyExcel.DisplayAlerts = True
-
-        '                'ROUTINE TO ASK IF OPERATER WISHES TO PRINT RESULTS OR CONTINUE
-        '                ' Me.Visible = True  'open screen so we can see message
-        '                ' Dim result = MessageBox.Show("Edit Job Yes Or No", "Print Excel Sheet ?", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
-
-        '                'If result = DialogResult.Yes Then
-
-        '                'LOAD THE EXCEl SHEET NAME TO OPEN
-        '                'xlPrintSheet = tmpsaveName   'This loads the temp save name in to Public variable for print form can use it
-        '                'PrintOut()
-        '                ' Me.Visible = False ' close screen
-
-        '                'End If
-
-        '                'If result = DialogResult.No Then  
-
-
-        '                xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
-        '                CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
-
-        '                MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value
-        '                'Product Code
-        '                MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells(2).Value
-        '                'Packer Name
-        '                MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
-
-        '                boxCount = boxCount + 1
-        '                createBarcode()
-        '                MyTodyExcel.Cells(1, 4) = SheetCodeString
-
-        '                For x = 13 To 102
-        '                    MyTodyExcel.Cells(x, 4) = "" 'Clear the contents of cone cells
-        '                Next
-
-        '                nfree = 13
-
-        '            End If
-        '        End If
-        '    Next
-
-        'Catch ex As Exception
-
-        '    MsgBox(ex.ToString)
-
-        'End Try
 
         Try
 

@@ -3023,7 +3023,7 @@ Public Class frmCart1
     Private Sub CSV()
 
         Dim today As String = DateAndTime.Now
-        Dim csvFile As String
+        Dim csvFile As String = ""
         'Check to see if file exists, if it does not creat the file, otherwise add data to the file
         Dim dataOut As String = String.Concat(frmJobEntry.varMachineCode, ",", frmJobEntry.varMachineName, ",", frmJobEntry.varYear, ",", frmJobEntry.varMonth, ",", frmJobEntry.varDoffingNum, ",", fltconeNum, ",", frmJobEntry.mergeNum, ",", frmJobEntry.varUserName, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("CONESTATE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("SHORTCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("MISSCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("DEFCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("BCODECART").Value, ",", coneM30, ",", coneP30, ",", varCartStartTime, ",", varCartEndTime, ",", today & Environment.NewLine)
 

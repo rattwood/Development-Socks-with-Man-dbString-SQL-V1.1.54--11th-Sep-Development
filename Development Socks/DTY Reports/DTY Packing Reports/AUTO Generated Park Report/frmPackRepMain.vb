@@ -29,27 +29,35 @@ Public Class frmPackRepMain
 
 
 
-        'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
-        prodNameMod = frmPacking2.DGVPakingRecA.Rows(0).Cells(52).Value.ToString
-        prodNameMod = prodNameMod.Replace("/", "_")
+        ''CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+        'prodNameMod = frmPackRchkA.DGVPakingRecA.Rows(0).Cells(52).Value.ToString
+        'prodNameMod = prodNameMod.Replace("/", "_")
 
         If frmJobEntry.txtGrade.Text = "ReCheckA" Then
+
+            'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+            prodNameMod = frmPackRchkA.DGVPakingRecA.Rows(0).Cells(52).Value.ToString
+            prodNameMod = prodNameMod.Replace("/", "_")
 
             'CREATE THE SHEET NAME But as this Cheese is from ReCheck we will assign to A grade sheet
             sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
 
             'CREATE THE FULL NAME FOR SAVING THE FILE
             saveString = (prodNameMod & " " _
-                & frmPacking2.DGVPakingRecA.Rows(0).Cells(7).Value.ToString & "_" _
-                & frmPacking2.DGVPakingRecA.Rows(0).Cells(2).Value.ToString) & " A"
+                & frmPackRchkA.DGVPakingRecA.Rows(0).Cells(7).Value.ToString & "_" _
+                & frmPackRchkA.DGVPakingRecA.Rows(0).Cells(2).Value.ToString) & " A"
         Else
+            'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+            prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells(52).Value.ToString
+            prodNameMod = prodNameMod.Replace("/", "_")
+
             'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
             sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_" & frmJobEntry.txtGrade.Text
 
             'CREATE THE FULL NAME FOR SAVING THE FILE
             saveString = (prodNameMod & " " _
-                & frmPacking2.DGVPakingRecA.Rows(0).Cells(7).Value.ToString & "_" _
-                & frmPacking2.DGVPakingRecA.Rows(0).Cells(2).Value.ToString) & " " & frmJobEntry.txtGrade.Text
+                & frmPacking.DGVPakingA.Rows(0).Cells(7).Value.ToString & "_" _
+                & frmPacking.DGVPakingA.Rows(0).Cells(2).Value.ToString) & " " & frmJobEntry.txtGrade.Text
         End If
 
 
