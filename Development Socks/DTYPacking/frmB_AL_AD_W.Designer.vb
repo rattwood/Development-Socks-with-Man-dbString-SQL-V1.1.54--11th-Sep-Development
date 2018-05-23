@@ -22,6 +22,7 @@ Partial Class frmB_AL_AD_W
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -270,6 +271,8 @@ Partial Class frmB_AL_AD_W
         'CheeseAloc1
         '
         Me.CheeseAloc1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheeseAloc1.DefaultCellStyle = DataGridViewCellStyle1
         Me.CheeseAloc1.Frozen = True
         Me.CheeseAloc1.HeaderText = "Number"
         Me.CheeseAloc1.Name = "CheeseAloc1"
@@ -368,7 +371,7 @@ Partial Class frmB_AL_AD_W
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(1086, 861)
+        Me.ClientSize = New System.Drawing.Size(1086, 749)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label9)

@@ -20,7 +20,7 @@ Public Class frmB_AL_AD_W
     Dim dgv1gridRow As Integer = 0
     Dim dgv1gridCol As Integer = 0
     'Index for changing input location in DGV
-
+    Dim tmpNum As Integer
 
     Dim coneCount As Integer = 0
 
@@ -170,14 +170,24 @@ Public Class frmB_AL_AD_W
             .GridColor = Color.Black
             .RowHeadersVisible = False
 
+
+            '.Columns(1).DefaultCellStyle.Font =
+            'New Font(Me.DataGridView1.DefaultCellStyle.Font, FontStyle.Bold)
+            '.Columns(2).DefaultCellStyle.Font =
+            'New Font(Me.DataGridView1.DefaultCellStyle.Font, FontStyle.Bold)
+            '.Columns(3).DefaultCellStyle.Font =
+            'New Font(Me.DataGridView1.DefaultCellStyle.Font, FontStyle.Bold)
+            '.Columns(4).DefaultCellStyle.Font =
+            'New Font(Me.DataGridView1.DefaultCellStyle.Font, FontStyle.Bold)
+
             .Columns(1).DefaultCellStyle.Font =
-            New Font(Me.DataGridView1.DefaultCellStyle.Font, FontStyle.Bold)
+           New Font("Microsoft Sans Serif", 10, FontStyle.Bold)
             .Columns(2).DefaultCellStyle.Font =
-            New Font(Me.DataGridView1.DefaultCellStyle.Font, FontStyle.Bold)
+            New Font("Microsoft Sans Serif", 16, FontStyle.Bold)
             .Columns(3).DefaultCellStyle.Font =
-            New Font(Me.DataGridView1.DefaultCellStyle.Font, FontStyle.Bold)
+           New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
             .Columns(4).DefaultCellStyle.Font =
-            New Font(Me.DataGridView1.DefaultCellStyle.Font, FontStyle.Bold)
+            New Font("Microsoft Sans Serif", 24, FontStyle.Bold)
 
 
         End With
@@ -252,23 +262,30 @@ Public Class frmB_AL_AD_W
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Today
                     frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
                     frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
-
-                    Dim tmpNum As Integer = DataGridView1.Rows(gridRow).Cells(0).Value  'format first 9 cheese to have leading Zero before sending to db
-                    modIdxNum = tmpNum.ToString(fmt)
+                    '************************************************************************************************************
+                    ' routine to get index count from second column
+                    If gridCol = 1 Then
+                        tmpNum = DataGridView1.Rows(gridRow).Cells(0).Value  'format first 9 cheese to have leading Zero before sending to db
+                        modIdxNum = tmpNum.ToString(fmt)
+                    Else
+                        tmpNum = DataGridView1.Rows(gridRow).Cells(2).Value  'format first 9 cheese to have leading Zero before sending to db
+                        modIdxNum = tmpNum.ToString(fmt)
+                    End If
+                    '**************************************************************************************************************
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = modIdxNum
-                ElseIf frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk Then
-                    frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 11
-                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 1
-                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Today
-                    frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
-                    frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
+                    ElseIf frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk Then
+                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 11
+                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 1
+                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Today
+                        frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
+                        frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
 
-                    Dim tmpNum As Integer = DataGridView1.Rows(gridRow).Cells(0).Value  'format first 9 cheese to have leading Zero before sending to db
-                    modIdxNum = tmpNum.ToString(fmt)
-                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = modIdxNum
-                Else
-                    'ROUTINE TO CREATE INDEX OF SCAN ORDER OF CHEESE FOR PRINTING IN SAME ORDER
-                    Dim tmpNum As Integer = DataGridView1.Rows(gridRow).Cells(gridCol - 1).Value  'GET SHEET CHEESE POSITION NUMBER 
+                        tmpNum = DataGridView1.Rows(gridRow).Cells(0).Value  'format first 9 cheese to have leading Zero before sending to db
+                        modIdxNum = tmpNum.ToString(fmt)
+                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = modIdxNum
+                    Else
+                        'ROUTINE TO CREATE INDEX OF SCAN ORDER OF CHEESE FOR PRINTING IN SAME ORDER
+                        tmpNum = DataGridView1.Rows(gridRow).Cells(gridCol - 1).Value  'GET SHEET CHEESE POSITION NUMBER 
                     modIdxNum = tmpNum.ToString(fmt)
                     frmDGV.DGVdata.Rows(i - 1).Cells("PACKIDX").Value = modIdxNum
                     'Update DGV that Cheese has been alocated, update Packendtm
