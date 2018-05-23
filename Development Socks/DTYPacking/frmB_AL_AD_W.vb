@@ -106,12 +106,12 @@ Public Class frmB_AL_AD_W
                 Next
             Case "ReCheck"
 
-                For i = 2 To 9   'Columns to Hide
+                For i = 4 To 9   'Columns to Hide
                     DataGridView1.Columns(i).Visible = False
                 Next
 
                 'create rows 
-                DataGridView1.Rows.Add(32)
+                DataGridView1.Rows.Add(16)
                 DataGridView1.RowHeadersVisible = False
 
                 'NUMBER THE 32 CELLS
@@ -121,7 +121,13 @@ Public Class frmB_AL_AD_W
                     DataGridView1.Rows(dgv1gridRow).Cells(dgv1gridCol).Value = nums
                     dgv1gridRow = dgv1gridRow + 1
 
+                    If dgv1gridRow = 16 And dgv1gridCol < 4 Then
+                        dgv1gridRow = 0
+                        dgv1gridCol = dgv1gridCol + 2
+                    End If
 
+
+                    SetupDGV()
 
                 Next
             Case "Waste"
@@ -144,6 +150,57 @@ Public Class frmB_AL_AD_W
 
 
     End Sub
+
+    Private Sub SetupDGV()
+
+
+
+
+        With DataGridView1.ColumnHeadersDefaultCellStyle
+            .BackColor = Color.Navy
+            .ForeColor = Color.White
+            .Font = New Font(DataGridView1.Font, FontStyle.Bold)
+        End With
+
+        With DataGridView1
+            .Name = " DataGridView1"
+            .AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
+            .ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised
+            .CellBorderStyle = DataGridViewCellBorderStyle.Single
+            .GridColor = Color.Black
+            .RowHeadersVisible = False
+
+            .Columns(1).DefaultCellStyle.Font =
+            New Font(Me.DataGridView1.DefaultCellStyle.Font, FontStyle.Bold)
+            .Columns(2).DefaultCellStyle.Font =
+            New Font(Me.DataGridView1.DefaultCellStyle.Font, FontStyle.Bold)
+            .Columns(3).DefaultCellStyle.Font =
+            New Font(Me.DataGridView1.DefaultCellStyle.Font, FontStyle.Bold)
+            .Columns(4).DefaultCellStyle.Font =
+            New Font(Me.DataGridView1.DefaultCellStyle.Font, FontStyle.Bold)
+
+
+        End With
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    End Sub
+
+
+
+
 
     Private Sub btnDefect_Click(sender As Object, e As EventArgs) Handles btnDefect.Click
         Me.Hide()
@@ -345,10 +402,16 @@ Public Class frmB_AL_AD_W
 
             Case "ReCheck"
 
-                If coneCount < 31 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow + 1)
+                If coneCount < 15 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow + 1)
 
                 gridRow = gridRow + 1
                 coneCount = coneCount + 1
+
+                If gridRow = 16 And gridCol < 3 Then
+                    gridRow = 0
+                    gridCol = gridCol + 2
+                    DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow)
+                End If
 
 
                 If coneCount = 32 Or coneCount = toAllocatedCount Then jobEnd()
