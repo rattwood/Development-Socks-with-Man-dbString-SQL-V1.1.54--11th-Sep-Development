@@ -22,7 +22,6 @@ Partial Class frmB_AL_AD_W
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -270,25 +269,21 @@ Partial Class frmB_AL_AD_W
         '
         'CheeseAloc1
         '
-        Me.CheeseAloc1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CheeseAloc1.DefaultCellStyle = DataGridViewCellStyle1
+        Me.CheeseAloc1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.CheeseAloc1.Frozen = True
         Me.CheeseAloc1.HeaderText = "Number"
         Me.CheeseAloc1.Name = "CheeseAloc1"
         Me.CheeseAloc1.ReadOnly = True
         Me.CheeseAloc1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.CheeseAloc1.Width = 5
         '
         'CheeseNum1
         '
-        Me.CheeseNum1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader
+        Me.CheeseNum1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.CheeseNum1.Frozen = True
         Me.CheeseNum1.HeaderText = "Cheese"
         Me.CheeseNum1.Name = "CheeseNum1"
         Me.CheeseNum1.ReadOnly = True
         Me.CheeseNum1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.CheeseNum1.Width = 5
         '
         'CheeseAloc2
         '

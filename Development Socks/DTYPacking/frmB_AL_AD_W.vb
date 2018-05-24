@@ -159,35 +159,47 @@ Public Class frmB_AL_AD_W
         With DataGridView1.ColumnHeadersDefaultCellStyle
             .BackColor = Color.Navy
             .ForeColor = Color.White
-            .Font = New Font(DataGridView1.Font, FontStyle.Bold)
+            .Font = New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
         End With
 
         With DataGridView1
             .Name = " DataGridView1"
-            .AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
-            .ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised
+            ' .AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+            .BorderStyle = BorderStyle.Fixed3D
+
+
+            '.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader
+            '.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised
             .CellBorderStyle = DataGridViewCellBorderStyle.Single
             .GridColor = Color.Black
             .RowHeadersVisible = False
 
 
-            '.Columns(1).DefaultCellStyle.Font =
-            'New Font(Me.DataGridView1.DefaultCellStyle.Font, FontStyle.Bold)
-            '.Columns(2).DefaultCellStyle.Font =
-            'New Font(Me.DataGridView1.DefaultCellStyle.Font, FontStyle.Bold)
-            '.Columns(3).DefaultCellStyle.Font =
-            'New Font(Me.DataGridView1.DefaultCellStyle.Font, FontStyle.Bold)
-            '.Columns(4).DefaultCellStyle.Font =
-            'New Font(Me.DataGridView1.DefaultCellStyle.Font, FontStyle.Bold)
+
+
+            .Columns(0).DefaultCellStyle.Font =
+           New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
+            .Columns(0).Width = 125
+            .Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
             .Columns(1).DefaultCellStyle.Font =
-           New Font("Microsoft Sans Serif", 10, FontStyle.Bold)
+            New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
+            .Columns(1).Width = 235
+            .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
             .Columns(2).DefaultCellStyle.Font =
-            New Font("Microsoft Sans Serif", 16, FontStyle.Bold)
-            .Columns(3).DefaultCellStyle.Font =
            New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
-            .Columns(4).DefaultCellStyle.Font =
+            .Columns(2).Width = 125
+            .Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+            .Columns(3).DefaultCellStyle.Font =
             New Font("Microsoft Sans Serif", 24, FontStyle.Bold)
+            .Columns(3).Width = 235
+            .Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
 
         End With
@@ -273,19 +285,19 @@ Public Class frmB_AL_AD_W
                     End If
                     '**************************************************************************************************************
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = modIdxNum
-                    ElseIf frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk Then
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 11
-                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 1
-                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Today
-                        frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
-                        frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
+                ElseIf frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk Then
+                    frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 11
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 1
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Today
+                    frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
+                    frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
 
-                        tmpNum = DataGridView1.Rows(gridRow).Cells(0).Value  'format first 9 cheese to have leading Zero before sending to db
-                        modIdxNum = tmpNum.ToString(fmt)
-                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = modIdxNum
-                    Else
-                        'ROUTINE TO CREATE INDEX OF SCAN ORDER OF CHEESE FOR PRINTING IN SAME ORDER
-                        tmpNum = DataGridView1.Rows(gridRow).Cells(gridCol - 1).Value  'GET SHEET CHEESE POSITION NUMBER 
+                    tmpNum = DataGridView1.Rows(gridRow).Cells(0).Value  'format first 9 cheese to have leading Zero before sending to db
+                    modIdxNum = tmpNum.ToString(fmt)
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = modIdxNum
+                Else
+                    'ROUTINE TO CREATE INDEX OF SCAN ORDER OF CHEESE FOR PRINTING IN SAME ORDER
+                    tmpNum = DataGridView1.Rows(gridRow).Cells(gridCol - 1).Value  'GET SHEET CHEESE POSITION NUMBER 
                     modIdxNum = tmpNum.ToString(fmt)
                     frmDGV.DGVdata.Rows(i - 1).Cells("PACKIDX").Value = modIdxNum
                     'Update DGV that Cheese has been alocated, update Packendtm
@@ -419,7 +431,7 @@ Public Class frmB_AL_AD_W
 
             Case "ReCheck"
 
-                If coneCount < 15 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow + 1)
+                If gridRow < 15 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow + 1)
 
                 gridRow = gridRow + 1
                 coneCount = coneCount + 1
