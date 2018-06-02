@@ -329,7 +329,7 @@ Public Class frmPacking
 
         For rw As Integer = 1 To rowendcount
 
-            If DGVPakingA.Rows(rw - 1).Cells(9).Value = "9" And DGVPakingA.Rows(rw - 1).Cells("FLT_S").Value = False And (IsDBNull(DGVPakingA.Rows(rw - 1).Cells("STDSTATE").Value) Or DGVPakingA.Rows(rw - 1).Cells("STDSTATE").Value = "") Then
+            If DGVPakingA.Rows(rw - 1).Cells(9).Value = "9" And DGVPakingA.Rows(rw - 1).Cells("FLT_S").Value = False And (IsDBNull(DGVPakingA.Rows(rw - 1).Cells("STDSTATE").Value)) Then
 
                 Me.Controls("btnCone" & rw).BackColor = Color.Green       'Grade A Cone
             End If

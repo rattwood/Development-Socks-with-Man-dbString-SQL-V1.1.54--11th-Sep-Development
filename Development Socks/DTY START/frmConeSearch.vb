@@ -161,15 +161,23 @@ Public Class frmConeSearch
             If DataGridView1.Rows(0).Cells("CONESTATE").Value > "0" Then
                 Select Case DataGridView1.Rows(0).Cells("CONESTATE").Value
                     Case 8, 14, 16
-                        If DataGridView1.Rows(0).Cells("DEFCONE").Value > "0" And Not (DataGridView1.Rows(0).Cells("M30").Value > "0" Or DataGridView1.Rows(0).Cells("P30").Value > "0") Or DataGridView1.Rows(0).Cells("CONEBARLEY").Value > "0" Then
-                            txtBoxGrad.Text = "B"
+                        If DataGridView1.Rows(0).Cells("DEFCONE").Value > "0" And Not (DataGridView1.Rows(0).Cells("M30").Value > "0" Or DataGridView1.Rows(0).Cells("P30").Value > "0") Or DataGridView1.Rows(0).Cells("CONEBARLEY").Value > "0" Or DataGridView1.Rows(0).Cells("COLWASTE").Value > "0" Then
+
+                            If DataGridView1.Rows(0).Cells("FLT_W").Value = "True" Or DataGridView1.Rows(0).Cells("COLWASTE").Value > "0" Then
+                                txtBoxGrad.Text = "Waste"
+                            Else
+                                txtBoxGrad.Text = "B"
+                            End If
                         ElseIf DataGridView1.Rows(0).Cells("M30").Value > "0" Then
                             txtBoxGrad.Text = "-30"
                         ElseIf DataGridView1.Rows(0).Cells("P30").Value > "0" Then
                             txtBoxGrad.Text = "+30"
                         End If
+
+                        If DataGridView1.Rows(0).Cells("FLT_X").Value = "True" Then txtBoxGrad.Text = "Missing"
                     Case 9, 15
-                        txtBoxGrad.Text = "Grade A"
+
+                        If DataGridView1.Rows(0).Cells("STDSTATE").Value > 0 And DataGridView1.Rows(0).Cells("STDSTATE").Value < 10 Then txtBoxGrad.Text = "Standard" Else txtBoxGrad.Text = "Grade A"
 
                 End Select
             End If
