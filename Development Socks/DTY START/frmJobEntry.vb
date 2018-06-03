@@ -1078,7 +1078,7 @@ Public Class frmJobEntry
                     Case "Round2"
                         If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 3 Then
                             Label3.Visible = True
-                            Label3.Text = "THIS CHEESE IS CANNOT BE USED"
+                            Label3.Text = "THIS CHEESE CANNOT BE USED"
                             DelayTM()
                             Label3.Visible = False
                             quit = 1
@@ -1093,7 +1093,7 @@ Public Class frmJobEntry
                     Case "Round3"
                         If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 5 Then
                             Label3.Visible = True
-                            Label3.Text = "THIS CHEESE IS CANNOT BE USED"
+                            Label3.Text = "THIS CHEESE CANNOT BE USED"
                             DelayTM()
                             Label3.Visible = False
                             quit = 1
@@ -1108,7 +1108,7 @@ Public Class frmJobEntry
                     Case "STD"
                         If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 7 Then
                             Label3.Visible = True
-                            Label3.Text = "THIS CHEESE IS CANNOT BE USED"
+                            Label3.Text = "THIS CHEESE CANNOT BE USED"
                             DelayTM()
                             Label3.Visible = False
                             quit = 1
@@ -1670,7 +1670,7 @@ Public Class frmJobEntry
                     prgContinue()
                 ElseIf (My.Settings.chkUsePack And txtGrade.Text = "A") Or (My.Settings.chkUsePack And (txtGrade.Text = "Pilot 6Ch" Or txtGrade.Text = "Pilot 15Ch" Or txtGrade.Text = "Pilot 20Ch")) Then
                     prgContinue()
-                ElseIf My.Settings.chkUseSort And stdcheck Then
+                ElseIf My.Settings.chkUseSort And stdcheck Or My.Settings.chkUsePack And stdcheck Then
                     STDCreate()
                 Else  'If My.Settings.chkUsePack And (txtGrade.Text.Substring(0, 1) <> "A" Or txtGrade.Text.Substring(0, 1) <> "P") Then
 
