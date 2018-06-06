@@ -551,6 +551,7 @@ Partial Class frmConeSearch
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1410, 667)
+        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.txtTraceNum)
         Me.Controls.Add(Me.Label25)
         Me.Controls.Add(Me.TextBox1)
@@ -602,7 +603,6 @@ Partial Class frmConeSearch
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.DataGridView1)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Margin = New System.Windows.Forms.Padding(5)
         Me.Name = "frmConeSearch"
