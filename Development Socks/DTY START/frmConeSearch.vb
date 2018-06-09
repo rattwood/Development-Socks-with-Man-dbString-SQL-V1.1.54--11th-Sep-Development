@@ -176,8 +176,12 @@ Public Class frmConeSearch
 
                         If DataGridView1.Rows(0).Cells("FLT_X").Value = "True" Then txtBoxGrad.Text = "Missing"
                     Case 9, 15
+                        If Not IsDBNull(DataGridView1.Rows(0).Cells("STDSTATE").Value) Then
 
-                        If DataGridView1.Rows(0).Cells("STDSTATE").Value > 0 And DataGridView1.Rows(0).Cells("STDSTATE").Value < 10 Then txtBoxGrad.Text = "Standard" Else txtBoxGrad.Text = "Grade A"
+                            If DataGridView1.Rows(0).Cells("STDSTATE").Value > 0 And DataGridView1.Rows(0).Cells("STDSTATE").Value < 10 Then txtBoxGrad.Text = "Standard"
+                        Else
+                            txtBoxGrad.Text = "Grade A"
+                        End If
 
                 End Select
             End If

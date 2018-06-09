@@ -36,7 +36,7 @@ Public Class frmPackRepMain
         If frmJobEntry.txtGrade.Text = "ReCheckA" Then
 
             'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
-            prodNameMod = frmPackRchkA.DGVPakingRecA.Rows(0).Cells(52).Value.ToString
+            prodNameMod = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value.ToString
             prodNameMod = prodNameMod.Replace("/", "_")
 
             'CREATE THE SHEET NAME But as this Cheese is from ReCheck we will assign to A grade sheet
@@ -44,11 +44,11 @@ Public Class frmPackRepMain
 
             'CREATE THE FULL NAME FOR SAVING THE FILE
             saveString = (prodNameMod & " " _
-                & frmPackRchkA.DGVPakingRecA.Rows(0).Cells(7).Value.ToString & "_" _
-                & frmPackRchkA.DGVPakingRecA.Rows(0).Cells(2).Value.ToString) & " A"
+                & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString) & " A"
         ElseIf frmJobEntry.txtGrade.Text = "A" Then
             'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
-            prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells(52).Value.ToString
+            prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
             prodNameMod = prodNameMod.Replace("/", "_")
 
             'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
@@ -56,11 +56,11 @@ Public Class frmPackRepMain
 
             'CREATE THE FULL NAME FOR SAVING THE FILE
             saveString = (prodNameMod & " " _
-                & frmPacking.DGVPakingA.Rows(0).Cells(7).Value.ToString & "_" _
-                & frmPacking.DGVPakingA.Rows(0).Cells(2).Value.ToString) & " " & frmJobEntry.txtGrade.Text
+                & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & " " & frmJobEntry.txtGrade.Text
         Else
             'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
-            prodNameMod = frmDGV.DGVdata.Rows(0).Cells(52).Value.ToString
+            prodNameMod = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value.ToString
             prodNameMod = prodNameMod.Replace("/", "_")
 
             'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
@@ -68,8 +68,8 @@ Public Class frmPackRepMain
 
             'CREATE THE FULL NAME FOR SAVING THE FILE
             saveString = (prodNameMod & " " _
-                & frmDGV.DGVdata.Rows(0).Cells(7).Value.ToString & "_" _
-                & frmDGV.DGVdata.Rows(0).Cells(2).Value.ToString) & " " & frmJobEntry.txtGrade.Text
+                & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                & frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString) & " " & frmJobEntry.txtGrade.Text
         End If
 
 

@@ -499,6 +499,7 @@ Public Class frmJobEntry
                 Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
                 LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
 
+
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
                 frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone numberchimera4260
 
@@ -1209,7 +1210,7 @@ Public Class frmJobEntry
             frmDGV.DGVdata.Rows(0).Selected = True
             Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
 
-            IsDBNull(frmDGV.DGVdata.Rows(0).Cells("BCODECONE").Value)
+            'IsDBNull(frmDGV.DGVdata.Rows(0).Cells("BCODECONE").Value)
 
             'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
             frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("BCODECONE"), ListSortDirection.Ascending)  'sorts On cone number

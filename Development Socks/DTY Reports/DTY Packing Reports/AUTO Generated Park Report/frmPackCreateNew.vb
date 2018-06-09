@@ -31,14 +31,14 @@ Public Class frmPackCreateNew
 
                 Dim prodTf As String
 
-                prodTf = (frmPacking.DGVPakingA.Rows(0).Cells(52).Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells(7).Value)
+                prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
                 MyPakExcel.Cells(7, 4) = prodTf
 
                 ''Product Name
                 'MyPakExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D7
                 'Product Code
-                MyPakExcel.Cells(7, 6) = frmPacking.DGVPakingA.Rows(0).Cells(2).Value        'F7
+                MyPakExcel.Cells(7, 6) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value        'F7
                 'DATE
                 MyPakExcel.Cells(5, 3) = Date.Now.ToString("dd MM yyyy")              'C5
                 'CHEESE WEIGHT
@@ -63,14 +63,14 @@ Public Class frmPackCreateNew
 
                 Dim prodTf As String
 
-                prodTf = (frmPackRchkA.DGVPakingRecA.Rows(0).Cells(52).Value & "  " & frmPackRchkA.DGVPakingRecA.Rows(0).Cells(7).Value)
+                prodTf = (frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value & "  " & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
                 MyPakExcel.Cells(7, 4) = prodTf
 
                 ''Product Name
                 'MyPakExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D7
                 'Product Code
-                MyPakExcel.Cells(7, 6) = frmPackRchkA.DGVPakingRecA.Rows(0).Cells(2).Value        'F7
+                MyPakExcel.Cells(7, 6) = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value        'F7
                 'DATE
                 MyPakExcel.Cells(5, 3) = Date.Now.ToString("dd MM yyyy")              'C5
                 'CHEESE WEIGHT
@@ -96,14 +96,14 @@ Public Class frmPackCreateNew
 
                 Dim prodTf As String
 
-                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
                 MyPakExcel.Cells(7, 4) = prodTf
 
                 ''Product Name
                 'MyPakExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D7
                 'Product Code
-                MyPakExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells(2).Value        'F7
+                MyPakExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value        'F7
                 'DATE
                 MyPakExcel.Cells(5, 3) = Date.Now.ToString("dd MM yyyy")              'C5
                 'CHEESE WEIGHT
@@ -136,14 +136,14 @@ Public Class frmPackCreateNew
 
                 Dim prodTf As String
 
-                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
                 MyPakExcel.Cells(6, 8) = prodTf
 
                 ''Product Name
                 'MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'H6
                 'Product Code
-                MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'L6
+                MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value       'L6
                 'DATE
                 MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D5
                 'CHEESE WEIGHT
@@ -204,14 +204,14 @@ Public Class frmPackCreateNew
 
                 Dim prodTf As String
 
-                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
                 MyPakExcel.Cells(6, 8) = prodTf
 
                 ''Product Name
                 'MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'H6
                 'Product Code
-                MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'L6
+                MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value       'L6
                 'DATE
                 MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D5
                 'CHEESE WEIGHT
@@ -271,14 +271,14 @@ Public Class frmPackCreateNew
                 nfree = 14
                 Dim prodTf As String
 
-                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
                 MyPakExcel.Cells(7, 9) = prodTf
 
                 ''Product Name
                 'MyPakExcel.Cells(7, 9) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'E8
                 'Product Code
-                MyPakExcel.Cells(7, 14) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'N8
+                MyPakExcel.Cells(7, 14) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value       'N8
                 'DATE
                 MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D6
                 'CHEESE WEIGHT
@@ -358,12 +358,12 @@ Public Class frmPackCreateNew
 
                 Dim prodTf As String
 
-                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
                 MyPakExcel.Cells(5, 4) = prodTf 'frmDGV.DGVdata.Rows(0).Cells(52).Value     'D5
 
                 'Product Code
-                MyPakExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'G5
+                MyPakExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value       'G5
                 'DATE
                 MyPakExcel.Cells(4, 7) = Date.Now.ToString("dd MM yyyy")              'G4
                 'CHEESE WEIGHT
@@ -378,14 +378,14 @@ Public Class frmPackCreateNew
                 nfree = 9
                 Dim prodTf As String
 
-                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
                 MyPakExcel.Cells(5, 4) = prodTf
 
                 ''Product Name
                 'MyPakExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D5
                 'Product Code
-                MyPakExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells(2).Value       'G5
+                MyPakExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value       'G5
                 'DATE
                 MyPakExcel.Cells(4, 7) = Date.Now.ToString("dd MM yyyy")              'G4
                 'CHEESE WEIGHT
@@ -418,14 +418,14 @@ Public Class frmPackCreateNew
                 nfree = 13
                 Dim prodTf As String
 
-                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
                 MyPakExcel.Cells(7, 4) = prodTf
 
                 ''Product Name
                 'MyPakExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D7
                 'Product Code
-                MyPakExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells(2).Value        'F7
+                MyPakExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value        'F7
                 'DATE
                 MyPakExcel.Cells(5, 3) = Date.Now.ToString("dd MM yyyy")              'C5
                 'CHEESE WEIGHT
@@ -450,14 +450,14 @@ Public Class frmPackCreateNew
 
                 Dim prodTf As String
 
-                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
                 MyPakExcel.Cells(6, 8) = prodTf
 
                 ''Product Name
                 'MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value
                 'Product Code
-                MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value
+                MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
                 'Packer Name
                 MyPakExcel.Cells(73, 4) = frmJobEntry.PackOp
                 'DATE
@@ -535,14 +535,14 @@ Public Class frmPackCreateNew
             Case "Pilot 20Ch"
                 Dim prodTf As String
 
-                prodTf = (frmDGV.DGVdata.Rows(0).Cells(52).Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
                 MyPakExcel.Cells(6, 8) = prodTf
 
                 ''Product Name
                 'MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value
                 'Product Code
-                MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells(2).Value
+                MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
                 'Packer Name
                 MyPakExcel.Cells(73, 4) = frmJobEntry.PackOp
                 'DATE
