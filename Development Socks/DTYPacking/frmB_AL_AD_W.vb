@@ -185,7 +185,7 @@ Public Class frmB_AL_AD_W
 
             .Columns(1).DefaultCellStyle.Font =
             New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
-            .Columns(1).Width = 235
+            .Columns(1).Width = 500
             .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
@@ -197,7 +197,7 @@ Public Class frmB_AL_AD_W
 
             .Columns(3).DefaultCellStyle.Font =
             New Font("Microsoft Sans Serif", 24, FontStyle.Bold)
-            .Columns(3).Width = 235
+            .Columns(3).Width = 500
             .Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
@@ -305,17 +305,6 @@ Public Class frmB_AL_AD_W
                     frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
                     frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
                 End If
-
-
-                'gridRow = gridRow + 1
-                'coneCount = coneCount + 1
-
-                If My.Settings.debugSet Then
-                    Label9.Text = ("Row " & gridRow)
-                    Label10.Text = ("Col " & gridCol)
-                    Label11.Text = ("Grid count i =" & i)
-                End If
-
 
 
 
@@ -488,7 +477,7 @@ Public Class frmB_AL_AD_W
         frmPackRepMain.PackRepMainSub()
 
 
-        frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
+        frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(0), System.ComponentModel.ListSortDirection.Ascending)  ' Is this needed ?
 
         If frmPackTodayUpdate.prtError Then
             frmPackRepMain.Close()

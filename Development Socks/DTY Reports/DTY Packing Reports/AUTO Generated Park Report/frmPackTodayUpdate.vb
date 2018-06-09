@@ -2239,7 +2239,10 @@ Public Class frmPackTodayUpdate
 
                     'If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "8" And frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = chkIdx Or
                     '    frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = chkIdx Then
+
                     '******************************************************************
+                    If IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value) Then Continue For
+
                     If frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = chkIdx Then
                             '******************************************************************
                             'WRITE CONE NUMBER TO SHEET
