@@ -1171,7 +1171,7 @@ Public Class frmPackSort
             frmDGV.DGVdata.CurrentCell = frmDGV.DGVdata.Rows(frmDGV.DGVdata.Rows.Count - 1).Cells(0) ' move to add row
             frmDGV.DGVdata.CurrentCell = frmDGV.DGVdata.Rows(iRow).Cells(0) ' move back to current row
         frmDGV.DGVdata.AllowUserToAddRows = bAddState
-        frmDGV.DGVdata.EndEdit()
+        'frmDGV.DGVdata.EndEdit()
 
     End Sub
 

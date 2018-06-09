@@ -2852,7 +2852,7 @@ Public Class frmSortReCheck
         frmDGV.DGVdata.CurrentCell = frmDGV.DGVdata.Rows(frmDGV.DGVdata.Rows.Count - 1).Cells(0) ' move to add row
         frmDGV.DGVdata.CurrentCell = frmDGV.DGVdata.Rows(0).Cells(0) ' move back to current row  Changed Rows(iRow) to (0)
         frmDGV.DGVdata.AllowUserToAddRows = bAddState
-        frmDGV.DGVdata.EndEdit()
+        'frmDGV.DGVdata.EndEdit()
 
 
 

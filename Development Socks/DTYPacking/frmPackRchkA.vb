@@ -430,7 +430,7 @@ Public Class frmPackRchkA
         DGVPakingRecA.CurrentCell = DGVPakingRecA.Rows(DGVPakingRecA.Rows.Count - 1).Cells(0) ' move to add row
         DGVPakingRecA.CurrentCell = DGVPakingRecA.Rows(0).Cells(0) ' move back to current row  Changed Rows(iRow) to (0)
         DGVPakingRecA.AllowUserToAddRows = bAddState
-        DGVPakingRecA.EndEdit()
+        'DGVPakingRecA.EndEdit()
 
 
     End Sub

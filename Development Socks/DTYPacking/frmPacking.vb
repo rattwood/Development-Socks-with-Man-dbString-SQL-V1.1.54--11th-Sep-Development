@@ -556,7 +556,7 @@ Public Class frmPacking
         DGVPakingA.CurrentCell = DGVPakingA.Rows(DGVPakingA.Rows.Count - 1).Cells(0) ' move to add row
         DGVPakingA.CurrentCell = DGVPakingA.Rows(0).Cells(0) ' move back to current row  Changed Rows(iRow) to (0)
         DGVPakingA.AllowUserToAddRows = bAddState
-        DGVPakingA.EndEdit()
+        'DGVPakingA.EndEdit()
 
 
     End Sub
