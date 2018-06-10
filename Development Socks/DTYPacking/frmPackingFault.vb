@@ -46,71 +46,71 @@
 
 
         Select Case frmJobEntry.txtGrade.Text
-                Case "A" 'And frmPacking.packingActive
-                    For i = 1 To frmPacking.DGVPakingA.Rows.Count
-                        If frmPacking.DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = chkBcode Then
-                            changeConeNum = i
-                            coneNum = frmPacking.DGVPakingA.Rows(i - 1).Cells("CONENUM").Value   'GET THE ACTUAL CONE NUMBER
-                        End If
-                    Next
-                Case "ReCheckA" 'And frmPackRchkA.packingActive
-                    For i = 1 To frmPackRchkA.DGVPakingRecA.Rows.Count
-                        If frmPackRchkA.DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = chkBcode Then
-                            changeConeNum = i
-                            coneNum = frmPackRchkA.DGVPakingRecA.Rows(i - 1).Cells("CONENUM").Value   'GET THE ACTUAL CONE NUMBER
-                        End If
-                    Next
-                Case "B", "AL", "AD", "PS20 BS", "PS30 BS", "PS35 BS", "PS15 AS", "PS25 AS", "PS35 AS", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch", "ReCheck"
-                    For i = 1 To frmDGV.DGVdata.Rows.Count
-                        If frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = chkBcode Then
-                            changeConeNum = i
-                            coneNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value   'GET THE ACTUAL CONE NUMBER
-                        End If
-                    Next
-            End Select
+            Case "A" 'And frmPacking.packingActive
+                For i = 1 To frmPacking.DGVPakingA.Rows.Count
+                    If frmPacking.DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = chkBcode Then
+                        changeConeNum = i
+                        coneNum = frmPacking.DGVPakingA.Rows(i - 1).Cells("CONENUM").Value   'GET THE ACTUAL CONE NUMBER
+                    End If
+                Next
+            Case "ReCheckA" 'And frmPackRchkA.packingActive
+                For i = 1 To frmPackRchkA.DGVPakingRecA.Rows.Count
+                    If frmPackRchkA.DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = chkBcode Then
+                        changeConeNum = i
+                        coneNum = frmPackRchkA.DGVPakingRecA.Rows(i - 1).Cells("CONENUM").Value   'GET THE ACTUAL CONE NUMBER
+                    End If
+                Next
+            Case "B", "AL", "AD", "PS20 BS", "PS30 BS", "PS35 BS", "PS15 AS", "PS25 AS", "PS35 AS", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch", "ReCheck"
+                For i = 1 To frmDGV.DGVdata.Rows.Count
+                    If frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = chkBcode Then
+                        changeConeNum = i
+                        coneNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value   'GET THE ACTUAL CONE NUMBER
+                    End If
+                Next
+        End Select
 
-            If changeConeNum = 0 Then
-                Label3.Visible = True
-                Label3.Text = "This Cheese is not the correct grade"
-                DelayTM()
-                Label3.Visible = False
-
-
+        If changeConeNum = 0 Then
+            Label3.Visible = True
+            Label3.Text = "This Cheese is not the correct grade"
+            DelayTM()
+            Label3.Visible = False
 
 
 
 
 
-                'MsgBox("This is not a Cone from this Cart. Please Re Scan")
 
-                defectCone = 0
-                shortCone = 0
 
-                Me.btnContinue.Visible = False 'Show Save button when form opens
-                Me.btnClear.Visible = False  'Show Cancel button when form opens
-                Me.btnDefect.Enabled = False
-                Me.btnShort.Enabled = False
+            'MsgBox("This is not a Cone from this Cart. Please Re Scan")
 
-                Me.chk_K.Visible = False
-                Me.chk_D.Visible = False
-                Me.chk_F.Visible = False
-                Me.chk_O.Visible = False
-                Me.chk_T.Visible = False
-                Me.chk_P.Visible = False
-                Me.chk_N.Visible = False
-                Me.chk_W.Visible = False
-                Me.chk_H.Visible = False
-                Me.chk_TR.Visible = False
-                Me.chk_B.Visible = False
-                Me.chk_C.Visible = False
-                Me.TextBox1.Clear()
-                Me.TextBox1.Focus()
-                Me.TextBox1.Refresh()
-                Exit Sub
-            Else
-                'ENABLE KEYS IF CONE NUMBER VALID
-                Me.btnDefect.Enabled = True
-                Me.btnShort.Enabled = True
+            defectCone = 0
+            shortCone = 0
+
+            Me.btnContinue.Visible = False 'Show Save button when form opens
+            Me.btnClear.Visible = False  'Show Cancel button when form opens
+            Me.btnDefect.Enabled = False
+            Me.btnShort.Enabled = False
+
+            Me.chk_K.Visible = False
+            Me.chk_D.Visible = False
+            Me.chk_F.Visible = False
+            Me.chk_O.Visible = False
+            Me.chk_T.Visible = False
+            Me.chk_P.Visible = False
+            Me.chk_N.Visible = False
+            Me.chk_W.Visible = False
+            Me.chk_H.Visible = False
+            Me.chk_TR.Visible = False
+            Me.chk_B.Visible = False
+            Me.chk_C.Visible = False
+            Me.TextBox1.Clear()
+            Me.TextBox1.Focus()
+            Me.TextBox1.Refresh()
+            Exit Sub
+        Else
+            'ENABLE KEYS IF CONE NUMBER VALID
+            Me.btnDefect.Enabled = True
+            Me.btnShort.Enabled = True
             Me.btnReSetShort.Enabled = True
 
         End If
@@ -181,17 +181,17 @@
 
 
         Me.chk_K.Visible = True
-            Me.chk_D.Visible = True
-            Me.chk_F.Visible = True
-            Me.chk_O.Visible = True
-            Me.chk_T.Visible = True
-            Me.chk_P.Visible = True
-            Me.chk_N.Visible = True
-            Me.chk_W.Visible = True
-            Me.chk_H.Visible = True
-            Me.chk_TR.Visible = True
-            Me.chk_B.Visible = True
-            Me.chk_C.Visible = True
+        Me.chk_D.Visible = True
+        Me.chk_F.Visible = True
+        Me.chk_O.Visible = True
+        Me.chk_T.Visible = True
+        Me.chk_P.Visible = True
+        Me.chk_N.Visible = True
+        Me.chk_W.Visible = True
+        Me.chk_H.Visible = True
+        Me.chk_TR.Visible = True
+        Me.chk_B.Visible = True
+        Me.chk_C.Visible = True
 
         If changeConeNum Then
 
