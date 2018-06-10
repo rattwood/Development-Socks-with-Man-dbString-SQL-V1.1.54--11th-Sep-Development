@@ -91,47 +91,6 @@ Public Class frmPackRchkA
         coneNumOffset = 0
 
 
-        '' SELECT CONE NUMBER RANGE BASED ON CART NUMBER
-        'Select Case btnNums
-        '    Case Is = 1
-        '        btnNum = 1
-        '        coneNumOffset = 0
-        '    Case Is = 2
-        '        btnNum = 33
-        '        coneNumOffset = 32
-        '    Case Is = 3
-        '        btnNum = 65
-        '        coneNumOffset = 64
-        '    Case Is = 4
-        '        btnNum = 97
-        '        coneNumOffset = 96
-        '    Case Is = 5
-        '        btnNum = 129
-        '        coneNumOffset = 128
-        '    Case Is = 6
-        '        btnNum = 161
-        '        coneNumOffset = 160
-        '    Case Is = 7
-        '        btnNum = 193
-        '        coneNumOffset = 192
-        '    Case Is = 8
-        '        btnNum = 225
-        '        coneNumOffset = 224
-        '    Case Is = 9
-        '        btnNum = 257
-        '        coneNumOffset = 256
-        '    Case Is = 10
-        '        btnNum = 289
-        '        coneNumOffset = 288
-        '    Case Is = 11
-        '        btnNum = 321
-        '        coneNumOffset = 320
-        '    Case Is = 12
-        '        btnNum = 353
-        '        coneNumOffset = 352
-        'End Select
-
-
 
 
         For i = 1 To 32
@@ -150,18 +109,11 @@ Public Class frmPackRchkA
         'GET NUMBER OF CONES THAT NEED ALLOCATING Count agains Job Barcode
 
         For i As Integer = 1 To 32
+            If DGVPakingRecA.Rows(i - 1).Cells(9).Value = "8" And IsDBNull(DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value) Then Continue For
             If DGVPakingRecA.Rows(i - 1).Cells(9).Value = "8" And DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value = "A" Then
                 toAllocatedCount = toAllocatedCount + 1
             End If
         Next
-
-
-
-        ''For i = 1 To 32
-        ''    If  DGVPakingA.Rows(i - 1).Cells(9).Value = "9" And  DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = "False" Then
-        ''        toAllocatedCount = toAllocatedCount + 1
-        ''    End If
-        ''Next
 
 
 
@@ -227,6 +179,7 @@ Public Class frmPackRchkA
 
 
         For rw As Integer = 1 To 32
+            If DGVPakingRecA.Rows(rw - 1).Cells(9).Value = "8" And IsDBNull(DGVPakingRecA.Rows(rw - 1).Cells("RECHKRESULT").Value) Then Continue For
 
             If DGVPakingRecA.Rows(rw - 1).Cells(9).Value = "8" And DGVPakingRecA.Rows(rw - 1).Cells("RECHKRESULT").Value = "A" Then
                 Me.Controls("btnCone" & rw).BackColor = Color.Green       'Grade A Cone
@@ -273,6 +226,7 @@ Public Class frmPackRchkA
         For i = 1 To 32
 
 
+            If DGVPakingRecA.Rows(i - 1).Cells(9).Value = "8" And IsDBNull(DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value) Then Continue For
 
             If DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "8" And DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value = "A" Then
                 curcone = DGVPakingRecA.Rows(i - 1).Cells("RECHKIDX").Value

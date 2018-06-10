@@ -651,7 +651,7 @@ Partial Class frmPacking
         Me.DGVPakingA.AllowUserToAddRows = False
         Me.DGVPakingA.AllowUserToDeleteRows = False
         Me.DGVPakingA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVPakingA.Location = New System.Drawing.Point(815, 642)
+        Me.DGVPakingA.Location = New System.Drawing.Point(308, 777)
         Me.DGVPakingA.Name = "DGVPakingA"
         Me.DGVPakingA.Size = New System.Drawing.Size(757, 220)
         Me.DGVPakingA.TabIndex = 178
