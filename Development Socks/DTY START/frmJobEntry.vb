@@ -678,38 +678,38 @@ Public Class frmJobEntry
                 End If
             Case Is = 2
                 coneNumStart = 33
-                    coneNumStop = 64
-                Case Is = 3
-                    coneNumStart = 65
-                    coneNumStop = 96
-                Case Is = 4
-                    coneNumStart = 97
-                    coneNumStop = 128
-                Case Is = 5
-                    coneNumStart = 129
-                    coneNumStop = 160
-                Case Is = 6
-                    coneNumStart = 161
-                    coneNumStop = 192
-                Case Is = 7
-                    coneNumStart = 193
-                    coneNumStop = 224
-                Case Is = 8
-                    coneNumStart = 225
-                    coneNumStop = 256
-                Case Is = 9
-                    coneNumStart = 257
-                    coneNumStop = 288
-                Case Is = 10
-                    coneNumStart = 289
-                    coneNumStop = 320
-                Case Is = 11
-                    coneNumStart = 321
-                    coneNumStop = 352
-                Case Is = 12
-                    coneNumStart = 353
-                    coneNumStop = 384
-            End Select
+                coneNumStop = 64
+            Case Is = 3
+                coneNumStart = 65
+                coneNumStop = 96
+            Case Is = 4
+                coneNumStart = 97
+                coneNumStop = 128
+            Case Is = 5
+                coneNumStart = 129
+                coneNumStop = 160
+            Case Is = 6
+                coneNumStart = 161
+                coneNumStop = 192
+            Case Is = 7
+                coneNumStart = 193
+                coneNumStop = 224
+            Case Is = 8
+                coneNumStart = 225
+                coneNumStop = 256
+            Case Is = 9
+                coneNumStart = 257
+                coneNumStop = 288
+            Case Is = 10
+                coneNumStart = 289
+                coneNumStop = 320
+            Case Is = 11
+                coneNumStart = 321
+                coneNumStop = 352
+            Case Is = 12
+                coneNumStart = 353
+                coneNumStop = 384
+        End Select
 
 
         'CONSTRUCT ROWS
@@ -750,11 +750,11 @@ Public Class frmJobEntry
 
         For i As Integer = coneNumStart To coneNumStop
 
-            If x <= 16 Then cartName= varCartNameA Else cartName= varCartNameB  'SETS CORRECT CART NUMBER
+            If x <= 16 Then cartName = varCartNameA Else cartName = varCartNameB  'SETS CORRECT CART NUMBER
 
             x = x + 1
             modConeNum = i.ToString(fmt)   ' FORMATS THE CONE NUMBER TO 3 DIGITS
-            coneBarcode= modLotStr & modConeNum   'CREATE THE CONE BARCODE NUMBER
+            coneBarcode = modLotStr & modConeNum   'CREATE THE CONE BARCODE NUMBER
             JobBarcode = modLotStr
 
 
@@ -905,39 +905,39 @@ Public Class frmJobEntry
             LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '15'")
 
             If LRecordCount > 0 Then
-                                Label3.Visible = True
+                Label3.Visible = True
 
-                                Label3.Text = "Cart has already been allocated"
+                Label3.Text = "Cart has already been allocated"
 
-                                DelayTM()
-                                Label3.Visible = False
+                DelayTM()
+                Label3.Visible = False
 
-                            Else
-                                LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '5'")
-                                If LRecordCount > 0 Then
+            Else
+                LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '5'")
+                If LRecordCount > 0 Then
 
-                                    Label3.Visible = True
+                    Label3.Visible = True
 
-                                    Label3.Text = "Cart Has not been COLOUR CHECKED"
+                    Label3.Text = "Cart Has not been COLOUR CHECKED"
 
-                                    DelayTM()
-                                    Label3.Visible = False
-                                Else
-                                    Label3.Visible = True
+                    DelayTM()
+                    Label3.Visible = False
+                Else
+                    Label3.Visible = True
 
-                                    Label3.Text = "Cart Has No Grade 'A' Cheese"
-
-
-                                    DelayTM()
-                                    Label3.Visible = False
-                                End If
-                            End If
+                    Label3.Text = "Cart Has No Grade 'A' Cheese"
 
 
-                            Me.txtLotNumber.Clear()
-                            Me.txtLotNumber.Focus()
+                    DelayTM()
+                    Label3.Visible = False
+                End If
+            End If
 
-                        End If
+
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Focus()
+
+        End If
 
     End Sub
 
@@ -1322,9 +1322,9 @@ Public Class frmJobEntry
 
 
                 If LRecordCount > 0 Then
-                        'LOAD THE DATA FROM dB IN TO THE DATAGRID
-                        frmDGV.DGVdata.DataSource = LDS.Tables(0)
-                        frmDGV.DGVdata.Rows(0).Selected = True
+                    'LOAD THE DATA FROM dB IN TO THE DATAGRID
+                    frmDGV.DGVdata.DataSource = LDS.Tables(0)
+                    frmDGV.DGVdata.Rows(0).Selected = True
 
 
 
@@ -1348,7 +1348,7 @@ Public Class frmJobEntry
                 End If
 
 
-                    Case "Waste"
+            Case "Waste"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And FLT_W = 'True' And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8  And COLWASTE > 0 And PACKENDTM is Null ")
         End Select
@@ -1451,7 +1451,7 @@ Public Class frmJobEntry
 
 
             Case "Waste"
-                    packGrade = txtGrade.Text
+                packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "'  (CONESTATE = 8 Or CONESTATE = 14) And (FLT_W = 'True' Or COLWASTE > 0) And PACKENDTM is Null ")
         End Select
 
