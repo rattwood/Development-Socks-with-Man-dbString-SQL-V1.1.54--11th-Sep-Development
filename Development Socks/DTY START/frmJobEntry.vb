@@ -588,9 +588,9 @@ Public Class frmJobEntry
                     LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 6")
             End Select
         ElseIf My.Settings.chkUseSort And txtGrade.Text = "ReCheck" Then
-            LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 10")
+            LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 10 Order")
         Else
-            LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "'  ")
+            LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' ORDER BY RECHKIDX ")
         End If
 
 
@@ -610,7 +610,7 @@ Public Class frmJobEntry
 
 
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On ReCheck index Number
+                'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On ReCheck index Number
 
                 If My.Settings.debugSet Then frmDGV.Show()
                 varProductName = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value.ToString
