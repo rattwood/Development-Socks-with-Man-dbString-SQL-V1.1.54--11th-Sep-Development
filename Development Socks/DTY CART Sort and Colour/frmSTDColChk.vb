@@ -313,7 +313,7 @@ Public Class frmSTDColChk
         Next
 
 
-            printSheet()
+        printSheet()
 
 
 
@@ -322,18 +322,18 @@ Public Class frmSTDColChk
 
 
         If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
-            frmDGV.DGVdata.ClearSelection()
-            frmJobEntry.Show()
-            frmJobEntry.txtLotNumber.Clear()
-            frmJobEntry.txtLotNumber.Focus()
-            Me.Cursor = System.Windows.Forms.Cursors.Default
-            Me.Close()
+        frmDGV.DGVdata.ClearSelection()
+        frmJobEntry.Show()
+        frmJobEntry.txtLotNumber.Clear()
+        frmJobEntry.txtLotNumber.Focus()
+        Me.Cursor = System.Windows.Forms.Cursors.Default
+        Me.Close()
 
 
-        End Sub
+    End Sub
 
 
-        Private Sub printSheet()
+    Private Sub printSheet()
 
         'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
         prodNameMod = frmDGV.DGVdata.Rows(0).Cells(52).Value.ToString
@@ -396,17 +396,17 @@ Public Class frmSTDColChk
 
 
         Dim ReCheckworkbook As Excel.Workbook
-            Dim ReChecksheets As Excel.Worksheet
+        Dim ReChecksheets As Excel.Worksheet
 
 
-            ReCheckworkbook = MyReCheckExcel.Workbooks.Open(savename) '.Sheets(SheetNum)
-            ReChecksheets = ReCheckworkbook.Worksheets(sheetNumber)
-            ReChecksheets.Activate()
+        ReCheckworkbook = MyReCheckExcel.Workbooks.Open(savename) '.Sheets(SheetNum)
+        ReChecksheets = ReCheckworkbook.Worksheets(sheetNumber)
+        ReChecksheets.Activate()
 
 
-            'CHECK TO SEE IF THERE IS ALREADY A FILE STARTED FOR PRODUCT NUMBER
-            'IN TODATY DIRECTORY
-            Try
+        'CHECK TO SEE IF THERE IS ALREADY A FILE STARTED FOR PRODUCT NUMBER
+        'IN TODATY DIRECTORY
+        Try
             If File.Exists(savename) Then
 
                 For i = 1 To frmDGV.DGVdata.Rows.Count
@@ -474,38 +474,38 @@ Public Class frmSTDColChk
 
             End If
 
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
 
 
-            Try
+        Try
 
-                'Save changes to new file in Paking Dir
-                MyReCheckExcel.DisplayAlerts = False
-                ReCheckworkbook.SaveAs(Filename:=savename, FileFormat:=51)
+            'Save changes to new file in Paking Dir
+            MyReCheckExcel.DisplayAlerts = False
+            ReCheckworkbook.SaveAs(Filename:=savename, FileFormat:=51)
 
-            Catch ex As Exception
+        Catch ex As Exception
 
-                MsgBox(ex.Message)
+            MsgBox(ex.Message)
 
-            End Try
+        End Try
 
-            Try
-                'Close template file but do not save updates to it
-                ReCheckworkbook.Close(SaveChanges:=False)
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
+        Try
+            'Close template file but do not save updates to it
+            ReCheckworkbook.Close(SaveChanges:=False)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
 
-            MyReCheckExcel.Quit()
-            releaseObject(ReCheckworkbook)
-            releaseObject(MyReCheckExcel)
-            Me.Close()
+        MyReCheckExcel.Quit()
+        releaseObject(ReCheckworkbook)
+        releaseObject(MyReCheckExcel)
+        Me.Close()
 
-        End Sub
+    End Sub
 
     Private Sub todayDir()
 
@@ -525,107 +525,107 @@ Public Class frmSTDColChk
 
     Private Sub releaseObject(ByVal obj As Object)
 
-            Try
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj)
-                obj = Nothing
-            Catch ex As Exception
-                obj = Nothing
-            Finally
-                GC.Collect()
-            End Try
-        End Sub
+        Try
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(obj)
+            obj = Nothing
+        Catch ex As Exception
+            obj = Nothing
+        Finally
+            GC.Collect()
+        End Try
+    End Sub
 
 
 
-        Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
 
-            If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
-            frmDGV.DGVdata.ClearSelection()
-            frmJobEntry.Show()
-            frmJobEntry.txtLotNumber.Clear()
-            frmJobEntry.txtLotNumber.Focus()
-            Me.Cursor = System.Windows.Forms.Cursors.Default
-            Me.Close()
+        If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
+        frmDGV.DGVdata.ClearSelection()
+        frmJobEntry.Show()
+        frmJobEntry.txtLotNumber.Clear()
+        frmJobEntry.txtLotNumber.Focus()
+        Me.Cursor = System.Windows.Forms.Cursors.Default
+        Me.Close()
 
-        End Sub
-
-
-
-
-
-        'Private Sub CellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
-
-
-
-        '    MsgBox("I am here")
-        '    Dim allletters As String = "adlbw"
-        '    'If Not allletters.Contains(e.KeyChar.ToString.ToLower) Then
-
-        '    '    e.KeyChar = ChrW(0)
-        '    '    e.Handled = True
-
-        '    'End If
-        'End Sub
-
-        'Private Sub DataGridView1_CellFormmatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DataGridView1.CellValueChanged
-        '    If e.Value IsNot Nothing Then
-        '        e.Value = e.Value.ToString().ToUpper()
-        '        e.FormattingApplied = True
-        '    End If
-
-        'End Sub
+    End Sub
 
 
 
 
 
-
-        Private Sub UpdateDatabase()
-
-            tsbtnSave()
+    'Private Sub CellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
 
 
 
+    '    MsgBox("I am here")
+    '    Dim allletters As String = "adlbw"
+    '    'If Not allletters.Contains(e.KeyChar.ToString.ToLower) Then
 
+    '    '    e.KeyChar = ChrW(0)
+    '    '    e.Handled = True
 
-            '******************   THIS WILL WRITE ANY CHANGES MADE TO THE DATAGRID BACK TO THE DATABASE ******************
+    '    'End If
+    'End Sub
 
-            Try
+    'Private Sub DataGridView1_CellFormmatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DataGridView1.CellValueChanged
+    '    If e.Value IsNot Nothing Then
+    '        e.Value = e.Value.ToString().ToUpper()
+    '        e.FormattingApplied = True
+    '    End If
 
-                If frmJobEntry.LDS.HasChanges Then
-
-
-                    'frmJobEntry.LDA.UpdateCommand = New Oracle.ManagedDataAccess.Client.OracleCommandBuilder(frmJobEntry.LDA).GetUpdateCommand
-
-                    frmJobEntry.LDA.Update(frmJobEntry.LDS.Tables(0))
-
-                End If
-            Catch ex As Exception
-
-                MsgBox("Update Error: " & vbNewLine & ex.Message)
-            End Try
+    'End Sub
 
 
 
 
 
 
-        End Sub
+    Private Sub UpdateDatabase()
+
+        tsbtnSave()
 
 
 
 
-        Public Sub tsbtnSave()
+
+        '******************   THIS WILL WRITE ANY CHANGES MADE TO THE DATAGRID BACK TO THE DATABASE ******************
+
+        Try
+
+            If frmJobEntry.LDS.HasChanges Then
+
+
+                'frmJobEntry.LDA.UpdateCommand = New Oracle.ManagedDataAccess.Client.OracleCommandBuilder(frmJobEntry.LDA).GetUpdateCommand
+
+                frmJobEntry.LDA.Update(frmJobEntry.LDS.Tables(0))
+
+            End If
+        Catch ex As Exception
+
+            MsgBox("Update Error: " & vbNewLine & ex.Message)
+        End Try
 
 
 
 
-            Dim bAddState As Boolean = frmDGV.DGVdata.AllowUserToAddRows
-            'Dim iRow As Integer = frmDGV.DGVdata.CurrentRow.Index
-            frmDGV.DGVdata.AllowUserToAddRows = True
-            frmDGV.DGVdata.CurrentCell = frmDGV.DGVdata.Rows(frmDGV.DGVdata.Rows.Count - 1).Cells(0) ' move to add row
-            frmDGV.DGVdata.CurrentCell = frmDGV.DGVdata.Rows(0).Cells(0) ' move back to current row  Changed Rows(iRow) to (0)
-            frmDGV.DGVdata.AllowUserToAddRows = bAddState
+
+
+    End Sub
+
+
+
+
+    Public Sub tsbtnSave()
+
+
+
+
+        Dim bAddState As Boolean = frmDGV.DGVdata.AllowUserToAddRows
+        'Dim iRow As Integer = frmDGV.DGVdata.CurrentRow.Index
+        frmDGV.DGVdata.AllowUserToAddRows = True
+        frmDGV.DGVdata.CurrentCell = frmDGV.DGVdata.Rows(frmDGV.DGVdata.Rows.Count - 1).Cells(0) ' move to add row
+        frmDGV.DGVdata.CurrentCell = frmDGV.DGVdata.Rows(0).Cells(0) ' move back to current row  Changed Rows(iRow) to (0)
+        frmDGV.DGVdata.AllowUserToAddRows = bAddState
         'frmDGV.DGVdata.EndEdit()
 
 
@@ -633,5 +633,5 @@ Public Class frmSTDColChk
     End Sub
 
 
-    End Class
+End Class
 

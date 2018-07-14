@@ -284,6 +284,10 @@ Public Class frmColReCheck
 
         For i = 1 To frmDGV.DGVdata.Rows.Count
 
+            If IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHKENDTM").Value) Then frmDGV.DGVdata.Rows(i - 1).Cells("RECHKENDTM").Value = today 'COLOUR CHECK END TIME
+
+
+
 
 
             If DataGridView1.Rows(i - 1).Cells(5).Value = "KEBA" Then frmDGV.DGVdata.Rows(i - 1).Cells(37).Value = True
