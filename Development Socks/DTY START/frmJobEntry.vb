@@ -485,7 +485,7 @@ Public Class frmJobEntry
 
 
 
-        LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "'")
+        LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ORDER BY CONENUM")
 
         If LRecordCount > 0 Then
 
@@ -581,14 +581,14 @@ Public Class frmJobEntry
         If stdcheck Then
             Select Case txtLotNumber.Text.Substring(9, 3)
                 Case "R11", "R12"
-                    LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 2")
+                    LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 2  ORDER BY RECHKIDX   ")
                 Case "R21"
-                    LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 4")
+                    LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 4  ORDER BY RECHKIDX")
                 Case "R31"
-                    LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 6")
+                    LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 6  ORDER BY RECHKIDX")
             End Select
         ElseIf My.Settings.chkUseSort And txtGrade.Text = "ReCheck" Then
-            LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 10 Order")
+            LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 10 ORDER BY RECHKIDX")
         Else
             LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' ORDER BY RECHKIDX ")
         End If
@@ -771,7 +771,7 @@ Public Class frmJobEntry
 
         Next
 
-        LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "'")
+        LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ORDER BY CONENUM")
 
         Me.Cursor = System.Windows.Forms.Cursors.Default
         If LRecordCount > 1 Then
@@ -822,10 +822,10 @@ Public Class frmJobEntry
 
         End If
 
-        LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '9' and FLT_S = 'False'")
+        LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '9' and FLT_S = 'False' ")
 
         If LRecordCount > 0 Then
-            LExecQuery("Select * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ;")
+            LExecQuery("Select * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ORDER BY CONENUM")
 
             'LOAD THE DATA FROM dB IN TO THE DATAGRID
             frmDGV.DGVdata.DataSource = LDS.Tables(0)
