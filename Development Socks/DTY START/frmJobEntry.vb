@@ -581,11 +581,11 @@ Public Class frmJobEntry
         If stdcheck Then
             Select Case txtLotNumber.Text.Substring(9, 3)
                 Case "R11", "R12"
-                    LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 2")
+                    LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 2 ORDER BY RECHKIDX ")
                 Case "R21"
-                    LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 4")
+                    LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 4 ORDER BY RECHKIDX ")
                 Case "R31"
-                    LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 6")
+                    LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 6 ORDER BY RECHKIDX ")
             End Select
         ElseIf My.Settings.chkUseSort And txtGrade.Text = "ReCheck" Then
             LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 10 Order")
