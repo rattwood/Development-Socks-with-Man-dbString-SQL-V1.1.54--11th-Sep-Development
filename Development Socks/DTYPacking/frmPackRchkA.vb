@@ -108,7 +108,7 @@ Public Class frmPackRchkA
 
         'GET NUMBER OF CONES THAT NEED ALLOCATING Count agains Job Barcode
 
-        For i As Integer = 1 To 32
+        For i As Integer = 1 To PRecordCount
             If DGVPakingRecA.Rows(i - 1).Cells(9).Value = "8" And IsDBNull(DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value) Then Continue For
             If DGVPakingRecA.Rows(i - 1).Cells(9).Value = "8" And DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value = "A" Then
                 toAllocatedCount = toAllocatedCount + 1
@@ -178,7 +178,7 @@ Public Class frmPackRchkA
 
 
 
-        For rw As Integer = 1 To 32
+        For rw As Integer = 1 To PRecordCount
             If DGVPakingRecA.Rows(rw - 1).Cells(9).Value = "8" And IsDBNull(DGVPakingRecA.Rows(rw - 1).Cells("RECHKRESULT").Value) Then Continue For
 
             If DGVPakingRecA.Rows(rw - 1).Cells(9).Value = "8" And DGVPakingRecA.Rows(rw - 1).Cells("RECHKRESULT").Value = "A" Then
@@ -223,7 +223,7 @@ Public Class frmPackRchkA
 
 
 
-        For i = 1 To 32
+        For i = 1 To PRecordCount
 
 
             If DGVPakingRecA.Rows(i - 1).Cells(9).Value = "8" And IsDBNull(DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value) Then Continue For
@@ -315,7 +315,7 @@ Public Class frmPackRchkA
 
 
             If IsDBNull(DGVPakingRecA.Rows(0).Cells("PACKCARTTM").Value) Then
-                For x As Integer = 1 To 32
+                For x As Integer = 1 To PRecordCount
                     DGVPakingRecA.Rows(x - 1).Cells("PACKCARTTM").Value = Today 'PACKING CHECK END TIME
                 Next
             End If
