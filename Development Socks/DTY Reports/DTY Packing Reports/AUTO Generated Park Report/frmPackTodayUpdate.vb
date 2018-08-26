@@ -208,7 +208,7 @@ Public Class frmPackTodayUpdate
 
             Case "ReCheckA"
                 'CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
-                If totCount = 90 Then
+                If totCount > 0 Then
                     xlTodyWorkbook.Sheets(1).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                     'ReName the work sheet 
                     CType(MyTodyExcel.Workbooks(1).Worksheets("Sheet1"), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
@@ -2183,7 +2183,7 @@ Public Class frmPackTodayUpdate
 
 
         ''CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
-        If totCount = 32 Then
+        If totCount > 0 Then
 
             xlTodyWorkbook.Sheets(1).Copy(After:=xlTodyWorkbook.Sheets(mycount))
             'ReName the work sheet 
@@ -2321,7 +2321,7 @@ Public Class frmPackTodayUpdate
             xlTodyWorkbook.Close(SaveChanges:=False)
         Catch ex As Exception
             MsgBox(ex.Message)
-            MsgBox("Please make sure excel does not have any open Excel sheets. Close then and then select Finish to retry")
+            MsgBox("Please make sure excel does not have any open Excel sheets. Close and then select Finish to retry")
             MyTodyExcel.Quit()
             releaseObject(xlTodysheets)
             releaseObject(xlTodyWorkbook)
@@ -2390,7 +2390,7 @@ Public Class frmPackTodayUpdate
             For i = 9 To 40
                 MyTodyExcel.Cells(i, 3) = "" 'Clear the contents of cone cells
 
-                MyTodyExcel.Cells(i, 2) = (i - 8) + 32  ' set secon sheet to start row numbers from 33
+                MyTodyExcel.Cells(i, 2) = (i - 8) + 32  ' set next sheet to start row numbers from 33
             Next
         End If
 
