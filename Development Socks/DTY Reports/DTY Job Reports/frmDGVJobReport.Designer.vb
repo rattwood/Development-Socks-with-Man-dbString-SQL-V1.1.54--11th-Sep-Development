@@ -45,9 +45,9 @@ Partial Class frmDGVJobReport
         '
         Me.DGVReportData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGVReportData.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.DGVReportData.Location = New System.Drawing.Point(0, -87)
+        Me.DGVReportData.Location = New System.Drawing.Point(0, 35)
         Me.DGVReportData.Name = "DGVReportData"
-        Me.DGVReportData.Size = New System.Drawing.Size(414, 350)
+        Me.DGVReportData.Size = New System.Drawing.Size(782, 350)
         Me.DGVReportData.TabIndex = 0
         Me.DGVReportData.Visible = False
         '
@@ -138,7 +138,7 @@ Partial Class frmDGVJobReport
         'DGVSort
         '
         Me.DGVSort.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVSort.Location = New System.Drawing.Point(453, 24)
+        Me.DGVSort.Location = New System.Drawing.Point(12, 235)
         Me.DGVSort.Name = "DGVSort"
         Me.DGVSort.Size = New System.Drawing.Size(240, 150)
         Me.DGVSort.TabIndex = 11
@@ -147,7 +147,7 @@ Partial Class frmDGVJobReport
         'DGVJob
         '
         Me.DGVJob.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVJob.Location = New System.Drawing.Point(474, 56)
+        Me.DGVJob.Location = New System.Drawing.Point(500, 223)
         Me.DGVJob.Name = "DGVJob"
         Me.DGVJob.Size = New System.Drawing.Size(240, 150)
         Me.DGVJob.TabIndex = 12
@@ -171,7 +171,7 @@ Partial Class frmDGVJobReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(414, 263)
+        Me.ClientSize = New System.Drawing.Size(782, 385)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.DGVJob)
         Me.Controls.Add(Me.DGVSort)

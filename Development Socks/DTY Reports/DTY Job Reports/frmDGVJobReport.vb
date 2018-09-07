@@ -29,7 +29,8 @@ Public Class frmDGVJobReport
     Private count As Integer = Nothing
     Public startDate As String
     Public endDate As String
-
+    Public fileStartDate As String
+    Public fileEndDate As String
 
     Dim sp_nums As String
     Dim template As String
@@ -75,7 +76,11 @@ Public Class frmDGVJobReport
         DGVReportData.Columns(20).Name = "Medium Colour Ratio"  'Med Colour Ratio
 
 
-        If My.Settings.debugSet Then DGVReportData.Show()
+        If My.Settings.debugSet Then
+            DGVReportData.Show()
+            DGVJob.Show()
+            DGVSort.Show()
+        End If
 
     End Sub
 
@@ -96,13 +101,18 @@ Public Class frmDGVJobReport
     Private Sub MonthCalendar1_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
 
         'Routine to get date range
-        Label5.Text = MonthCalendar1.SelectionRange.Start.ToString("dd/MMM/yyyy")
-        Label6.Text = MonthCalendar1.SelectionRange.End.ToString("dd/MMM/yyyy")
+        Label5.Text = MonthCalendar1.SelectionRange.Start.ToString("yyyy/MM/dd")
+        Label6.Text = MonthCalendar1.SelectionRange.End.ToString("yyyy/MM/dd")
+        fileStartDate = MonthCalendar1.SelectionRange.Start.ToString("dd-MMM-yyyy")
+        fileEndDate = MonthCalendar1.SelectionRange.End.ToString("dd-MMM-yyyy")
 
         'STRIPOUT / Characters from date so that they are not used in the file name
 
-        startDate = Label5.Text.Replace("/", "")
-        endDate = Label6.Text.Replace("/", "")
+        startDate = Label5.Text.Replace("/", "-")
+        endDate = Label6.Text.Replace("/", "-")
+
+
+
         btnLoadData.Enabled = True
     End Sub
 
@@ -125,8 +135,9 @@ Public Class frmDGVJobReport
         Dim workbook As Excel.Workbook
         Dim sheet As Excel.Worksheets
 
+        MyExcel.Visible = True
 
-        savename = (My.Settings.dirJobs & "\" & startDate & "_" & endDate & ".xlsx").ToString
+        savename = (My.Settings.dirJobs & "\" & fileStartDate & "_" & fileEndDate & ".xlsx").ToString
 
 
 
@@ -226,13 +237,13 @@ Public Class frmDGVJobReport
                         DGVReportData.Rows(count).Cells(16 + x).Value = "0S  " '& coneNumStart + x
                         DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.Green
                         countShort0 = countShort0 + 1
-                        MyExcel.Cells(count + 2, (23 + x)) = "0S  " '& coneNumStart + x
-                        MyExcel.Cells(count + 2, (23 + x)).interior.color = Color.Green
+                        MyExcel.Cells(count + 2, (22 + x)) = "0S  " '& coneNumStart + x
+                        MyExcel.Cells(count + 2, (22 + x)).interior.color = Color.Green
                     Else
                         DGVReportData.Rows(count).Cells(16 + x).Value = "0  " '& coneNumStart + x
                         DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.Green
-                        MyExcel.Cells(count + 2, (23 + x)) = "0  " '& coneNumStart + x
-                        MyExcel.Cells(count + 2, (23 + x)).interior.color = Color.Green
+                        MyExcel.Cells(count + 2, (22 + x)) = "0  " '& coneNumStart + x
+                        MyExcel.Cells(count + 2, (22 + x)).interior.color = Color.Green
                     End If
                 End If
 
@@ -242,13 +253,13 @@ Public Class frmDGVJobReport
                         DGVReportData.Rows(count).Cells(16 + x).Value = "-S  " '& coneNumStart + x
                         DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.Green
                         countShortM10 = countShortM10 + 1
-                        MyExcel.Cells(count + 2, (23 + x)) = "-S  " '& coneNumStart + x
-                        MyExcel.Cells(count + 2, (23 + x)).interior.color = Color.Green
+                        MyExcel.Cells(count + 2, (22 + x)) = "-S  " '& coneNumStart + x
+                        MyExcel.Cells(count + 2, (22 + x)).interior.color = Color.Green
                     Else
                         DGVReportData.Rows(count).Cells(16 + x).Value = "-10  " '& coneNumStart + x
                         DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.Green
-                        MyExcel.Cells(count + 2, (23 + x)) = "-10  " '& coneNumStart + x
-                        MyExcel.Cells(count + 2, (23 + x)).interior.color = Color.Green
+                        MyExcel.Cells(count + 2, (22 + x)) = "-10  " '& coneNumStart + x
+                        MyExcel.Cells(count + 2, (22 + x)).interior.color = Color.Green
                     End If
                 End If
 
@@ -258,13 +269,13 @@ Public Class frmDGVJobReport
                         DGVReportData.Rows(count).Cells(16 + x).Value = "+S  " '& coneNumStart + x
                         DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.Green
                         countShortP10 = countShortP10 + 1
-                        MyExcel.Cells(count + 2, (23 + x)) = "+S  " '& coneNumStart + x
-                        MyExcel.Cells(count + 2, (23 + x)).interior.color = Color.Green
+                        MyExcel.Cells(count + 2, (22 + x)) = "+S  " '& coneNumStart + x
+                        MyExcel.Cells(count + 2, (22 + x)).interior.color = Color.Green
                     Else
                         DGVReportData.Rows(count).Cells(16 + x).Value = "+10  " '& coneNumStart + x
                         DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.Green
-                        MyExcel.Cells(count + 2, (23 + x)) = "+10  " '& coneNumStart + x
-                        MyExcel.Cells(count + 2, (23 + x)).interior.color = Color.Green
+                        MyExcel.Cells(count + 2, (22 + x)) = "+10  " '& coneNumStart + x
+                        MyExcel.Cells(count + 2, (22 + x)).interior.color = Color.Green
                     End If
                 End If
 
@@ -274,14 +285,14 @@ Public Class frmDGVJobReport
                         DGVReportData.Rows(count).Cells(16 + x).Value = "-S  " '& coneNumStart + x
                         DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.LightBlue
                         countShortM30 = countShortM30 + 1
-                        MyExcel.Cells(count + 2, (23 + x)) = "-S  " '& coneNumStart + x
-                        MyExcel.Cells(count + 2, (23 + x)).interior.color = Color.LightBlue
+                        MyExcel.Cells(count + 2, (22 + x)) = "-S  " '& coneNumStart + x
+                        MyExcel.Cells(count + 2, (22 + x)).interior.color = Color.LightBlue
 
                     Else
                         DGVReportData.Rows(count).Cells(16 + x).Value = "-30  " '& coneNumStart + x
                         DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.LightBlue
-                        MyExcel.Cells(count + 2, (23 + x)) = "-30  " '& coneNumStart + x
-                        MyExcel.Cells(count + 2, (23 + x)).interior.color = Color.LightBlue
+                        MyExcel.Cells(count + 2, (22 + x)) = "-30  " '& coneNumStart + x
+                        MyExcel.Cells(count + 2, (22 + x)).interior.color = Color.LightBlue
                     End If
                 End If
 
@@ -291,13 +302,13 @@ Public Class frmDGVJobReport
                         DGVReportData.Rows(count).Cells(16 + x).Value = "+S  " '& coneNumStart + x
                         DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.LightSalmon
                         countShortP30 = countShortP30 + 1
-                        MyExcel.Cells(count + 2, (23 + x)) = "+S  " '& coneNumStart + x
-                        MyExcel.Cells(count + 2, (23 + x)).interior.color = Color.LightSalmon
+                        MyExcel.Cells(count + 2, (22 + x)) = "+S  " '& coneNumStart + x
+                        MyExcel.Cells(count + 2, (22 + x)).interior.color = Color.LightSalmon
                     Else
                         DGVReportData.Rows(count).Cells(16 + x).Value = "+30  " '& coneNumStart + x
                         DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.LightSalmon
-                        MyExcel.Cells(count + 2, (23 + x)) = "+30  " '& coneNumStart + x
-                        MyExcel.Cells(count + 2, (23 + x)).interior.color = Color.LightSalmon
+                        MyExcel.Cells(count + 2, (22 + x)) = "+30  " '& coneNumStart + x
+                        MyExcel.Cells(count + 2, (22 + x)).interior.color = Color.LightSalmon
                     End If
                 End If
 
@@ -308,13 +319,13 @@ Public Class frmDGVJobReport
                         DGVReportData.Rows(count).Cells(16 + x).Value = "-50S  " '& coneNumStart + x
                         DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.LightSalmon
                         countShortM50 = countShortM50 + 1
-                        MyExcel.Cells(count + 2, (23 + x)) = "ABS  " '& coneNumStart + x
-                        MyExcel.Cells(count + 2, (23 + x)).interior.color = Color.LightSalmon
+                        MyExcel.Cells(count + 2, (22 + x)) = "ABS  " '& coneNumStart + x
+                        MyExcel.Cells(count + 2, (22 + x)).interior.color = Color.LightSalmon
                     Else
                         DGVReportData.Rows(count).Cells(16 + x).Value = "-50  " '& coneNumStart + x
                         DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.Yellow
-                        MyExcel.Cells(count + 2, (23 + x)) = "AB  " '& coneNumStart + x
-                        MyExcel.Cells(count + 2, (23 + x)).interior.color = Color.Yellow
+                        MyExcel.Cells(count + 2, (22 + x)) = "AB  " '& coneNumStart + x
+                        MyExcel.Cells(count + 2, (22 + x)).interior.color = Color.Yellow
                     End If
                 End If
 
@@ -324,13 +335,13 @@ Public Class frmDGVJobReport
                         DGVReportData.Rows(count).Cells(16 + x).Value = "+50S  " '& coneNumStart + x
                         DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.LightSalmon
                         countShortP50 = countShortP50 + 1
-                        MyExcel.Cells(count + 2, (23 + x)) = "ABS  " '& coneNumStart + x
-                        MyExcel.Cells(count + 2, (23 + x)).interior.color = Color.LightSalmon
+                        MyExcel.Cells(count + 2, (22 + x)) = "ABS  " '& coneNumStart + x
+                        MyExcel.Cells(count + 2, (22 + x)).interior.color = Color.LightSalmon
                     Else
                         DGVReportData.Rows(count).Cells(16 + x).Value = "+50  " '& coneNumStart + x
                         DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.Yellow
-                        MyExcel.Cells(count + 2, (23 + x)) = "AB  " '& coneNumStart + x
-                        MyExcel.Cells(count + 2, (23 + x)).interior.color = Color.Yellow
+                        MyExcel.Cells(count + 2, (22 + x)) = "AB  " '& coneNumStart + x
+                        MyExcel.Cells(count + 2, (22 + x)).interior.color = Color.Yellow
                     End If
                 End If
 
@@ -340,7 +351,7 @@ Public Class frmDGVJobReport
 
                     DGVReportData.Rows(count).Cells(16 + x).Value = "MISS    " '& coneNumStart + x
                     DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.Black
-                    MyExcel.Cells(count + 2, (23 + x)) = "MISS  " '& coneNumStart + x
+                    MyExcel.Cells(count + 2, (22 + x)) = "MISS  " '& coneNumStart + x
 
                 End If
 
@@ -349,8 +360,8 @@ Public Class frmDGVJobReport
 
                 '    DGVReportData.Rows(count).Cells(16 + x).Value = "AB " '& coneNumStart + x
                 '    DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.Yellow
-                '    MyExcel.Cells(count + 2, (23 + x)) = "AB  " '& coneNumStart + x
-                '    MyExcel.Cells(count + 2, (23 + x)).interior.color = Color.Yellow
+                '    MyExcel.Cells(count + 2, (22 + x)) = "AB  " '& coneNumStart + x
+                '    MyExcel.Cells(count + 2, (22 + x)).interior.color = Color.Yellow
 
                 'End If
 
@@ -358,8 +369,8 @@ Public Class frmDGVJobReport
                     countBarley = countBarley + 1
                     DGVReportData.Rows(count).Cells(16 + x).Value = "AB " '& coneNumStart + x
                     DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.Yellow
-                    MyExcel.Cells(count + 2, (23 + x)) = "AB  " '& coneNumStart + x
-                    MyExcel.Cells(count + 2, (23 + x)).interior.color = Color.Yellow
+                    MyExcel.Cells(count + 2, (22 + x)) = "AB  " '& coneNumStart + x
+                    MyExcel.Cells(count + 2, (22 + x)).interior.color = Color.Yellow
 
                 End If
 
@@ -367,8 +378,8 @@ Public Class frmDGVJobReport
                     countColWaste = countColWaste + 1
                     DGVReportData.Rows(count).Cells(16 + x).Value = "CW " '& coneNumStart + x
                     DGVReportData.Rows(count).Cells(16 + x).Style.BackColor = Color.Purple
-                    MyExcel.Cells(count + 2, (23 + x)) = "CW  " '& coneNumStart + x
-                    MyExcel.Cells(count + 2, (23 + x)).interior.color = Color.Purple
+                    MyExcel.Cells(count + 2, (22 + x)) = "CW  " '& coneNumStart + x
+                    MyExcel.Cells(count + 2, (22 + x)).interior.color = Color.Purple
 
                 End If
 
@@ -431,6 +442,7 @@ Public Class frmDGVJobReport
             MyExcel.Cells(count + 2, 6) = DGVJob.Rows(count).Cells("MERGENUM").Value
 
             'DOFFING NUMBER
+            '************************ small routine to format DOFF number correctly os it displays corectly ************************************
             DGVReportData.Rows(count).Cells("Doff #").Value = DGVJob.Rows(count).Cells("DOFFNUM").Value
             MyExcel.Cells(count + 2, 7) = DGVJob.Rows(count).Cells("DOFFNUM").Value
 
@@ -472,8 +484,8 @@ Public Class frmDGVJobReport
             MyExcel.Cells(count + 2, 16) = totalSmall
 
             'TOTAL FULL
-            DGVReportData.Rows(count).Cells("Total Full").Value = totalFull
-            MyExcel.Cells(count + 2, 17) = totalFull
+            DGVReportData.Rows(count).Cells("Total Full").Value = totalfull
+            MyExcel.Cells(count + 2, 17) = totalfull
 
             'DARK RATIO
             DGVReportData.Rows(count).Cells("Dark Ratio").Value = ((totalP / totalCart) * 100)
