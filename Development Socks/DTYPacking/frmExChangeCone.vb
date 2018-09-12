@@ -121,16 +121,16 @@ Public Class frmExChangeCone
                     If dcProdNum = rcProdNum Then
 
                         btnShort.Enabled = True
-                            btnDefect.Enabled = True
-                            btnClear.Visible = True
-                            btnClear.Enabled = True
-                            replacementCone = 2
+                        btnDefect.Enabled = True
+                        btnClear.Visible = True
+                        btnClear.Enabled = True
+                        replacementCone = 2
 
-                        Else
-                            replacementCone = 0
-                            txtReplaceCone.Clear()
-                            txtReplaceCone.Focus()
-                            replacementCone = 0
+                    Else
+                        replacementCone = 0
+                        txtReplaceCone.Clear()
+                        txtReplaceCone.Focus()
+                        replacementCone = 0
                         MsgBox("2 CHEESES CANNOT BE EXCHANGED" & vbCr & "Defective Product:     " & dcProdNum & "  Doff #:  " & dcDoffNum & vbCr _
                            & "Replacment Product:  " & rcProdNum & "Doff #:  " & rcDoffNum)
 
