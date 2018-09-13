@@ -24,7 +24,6 @@ Partial Class frmExChangeCone
     Private Sub InitializeComponent()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtReplaceCone = New System.Windows.Forms.TextBox()
-        Me.btnGoBack = New System.Windows.Forms.Button()
         Me.btnClear = New System.Windows.Forms.Button()
         Me.chk_C = New System.Windows.Forms.CheckBox()
         Me.chk_B = New System.Windows.Forms.CheckBox()
@@ -48,6 +47,9 @@ Partial Class frmExChangeCone
         Me.txtWeight = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.btnRemoveCheeese = New System.Windows.Forms.Button()
+        Me.btnExChangeCheese = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label3
@@ -70,16 +72,6 @@ Partial Class frmExChangeCone
         Me.txtReplaceCone.TabIndex = 168
         Me.txtReplaceCone.Visible = False
         '
-        'btnGoBack
-        '
-        Me.btnGoBack.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGoBack.Location = New System.Drawing.Point(110, 404)
-        Me.btnGoBack.Name = "btnGoBack"
-        Me.btnGoBack.Size = New System.Drawing.Size(134, 42)
-        Me.btnGoBack.TabIndex = 167
-        Me.btnGoBack.Text = "GO Back"
-        Me.btnGoBack.UseVisualStyleBackColor = True
-        '
         'btnClear
         '
         Me.btnClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -89,6 +81,7 @@ Partial Class frmExChangeCone
         Me.btnClear.TabIndex = 166
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
+        Me.btnClear.Visible = False
         '
         'chk_C
         '
@@ -235,6 +228,7 @@ Partial Class frmExChangeCone
         Me.btnShort.TabIndex = 153
         Me.btnShort.Text = "Short"
         Me.btnShort.UseVisualStyleBackColor = False
+        Me.btnShort.Visible = False
         '
         'btnDefect
         '
@@ -248,6 +242,7 @@ Partial Class frmExChangeCone
         Me.btnDefect.TabIndex = 152
         Me.btnDefect.Text = "Defect"
         Me.btnDefect.UseVisualStyleBackColor = False
+        Me.btnDefect.Visible = False
         '
         'Label4
         '
@@ -257,6 +252,7 @@ Partial Class frmExChangeCone
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(0, 20)
         Me.Label4.TabIndex = 151
+        Me.Label4.Visible = False
         '
         'btnContinue
         '
@@ -279,6 +275,7 @@ Partial Class frmExChangeCone
         Me.Label2.Size = New System.Drawing.Size(151, 20)
         Me.Label2.TabIndex = 149
         Me.Label2.Text = "Scan Faulty Cone"
+        Me.Label2.Visible = False
         '
         'txtRemoveCone
         '
@@ -287,6 +284,7 @@ Partial Class frmExChangeCone
         Me.txtRemoveCone.Name = "txtRemoveCone"
         Me.txtRemoveCone.Size = New System.Drawing.Size(244, 26)
         Me.txtRemoveCone.TabIndex = 148
+        Me.txtRemoveCone.Visible = False
         '
         'Label1
         '
@@ -329,17 +327,51 @@ Partial Class frmExChangeCone
         Me.Label6.Text = "Kg"
         Me.Label6.Visible = False
         '
+        'btnRemoveCheeese
+        '
+        Me.btnRemoveCheeese.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRemoveCheeese.Location = New System.Drawing.Point(170, 72)
+        Me.btnRemoveCheeese.Name = "btnRemoveCheeese"
+        Me.btnRemoveCheeese.Size = New System.Drawing.Size(134, 80)
+        Me.btnRemoveCheeese.TabIndex = 173
+        Me.btnRemoveCheeese.Text = "Remove Cheese"
+        Me.btnRemoveCheeese.UseVisualStyleBackColor = True
+        Me.btnRemoveCheeese.Visible = False
+        '
+        'btnExChangeCheese
+        '
+        Me.btnExChangeCheese.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExChangeCheese.Location = New System.Drawing.Point(443, 75)
+        Me.btnExChangeCheese.Name = "btnExChangeCheese"
+        Me.btnExChangeCheese.Size = New System.Drawing.Size(134, 80)
+        Me.btnExChangeCheese.TabIndex = 174
+        Me.btnExChangeCheese.Text = "ExChange Cheese"
+        Me.btnExChangeCheese.UseVisualStyleBackColor = True
+        Me.btnExChangeCheese.Visible = False
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.Location = New System.Drawing.Point(42, 366)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(134, 80)
+        Me.btnCancel.TabIndex = 175
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
         'frmExChangeCone
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(716, 472)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.btnExChangeCheese)
+        Me.Controls.Add(Me.btnRemoveCheeese)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.txtWeight)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.txtReplaceCone)
-        Me.Controls.Add(Me.btnGoBack)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.chk_C)
         Me.Controls.Add(Me.chk_B)
@@ -369,7 +401,6 @@ Partial Class frmExChangeCone
 
     Friend WithEvents Label3 As Label
     Friend WithEvents txtReplaceCone As TextBox
-    Friend WithEvents btnGoBack As Button
     Friend WithEvents btnClear As Button
     Friend WithEvents chk_C As CheckBox
     Friend WithEvents chk_B As CheckBox
@@ -393,4 +424,7 @@ Partial Class frmExChangeCone
     Friend WithEvents txtWeight As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
+    Friend WithEvents btnRemoveCheeese As Button
+    Friend WithEvents btnExChangeCheese As Button
+    Friend WithEvents btnCancel As Button
 End Class

@@ -10,6 +10,8 @@ Public Class frmExChangeCone
     Dim chkBcode
     Dim dcState, dcCarton, dcProdNum, dcDoffNum As String
     Dim rcState, rcCarton, rcProdNum, rcDoffNum As String
+    Dim removeSelected As Integer = 0
+    Dim ExchangeSelected As Integer = 0
 
 
 
@@ -21,7 +23,11 @@ Public Class frmExChangeCone
         removeCone = 0
         replacementCone = 0
 
-        Me.btnContinue.Visible = True 'Show Save button when form opens
+        Me.btnExChangeCheese.Visible = True
+        Me.btnRemoveCheeese.Visible = True
+
+
+        Me.btnContinue.Visible = False 'Show Save button when form opens
         Me.btnContinue.Enabled = False
         Me.btnClear.Visible = False 'Show Cancel button when form opens
         Me.btnDefect.Enabled = False
@@ -40,24 +46,105 @@ Public Class frmExChangeCone
         Me.chk_B.Visible = False
         Me.chk_C.Visible = False
 
+        Label1.Text = "Select Option"
+
         Me.KeyPreview = True  'Allows us to look for advace character from barcode
         If My.Settings.debugSet Then frmDGV.DGVdata.Visible = True
 
     End Sub
 
-    Private Sub txtRemoveCone_TextChanged(sender As Object, e As EventArgs) Handles txtRemoveCone.TextChanged
+
+    Private Sub btnRemoveCheeese_Click(sender As Object, e As EventArgs) Handles btnRemoveCheeese.Click
+
+        Me.btnExChangeCheese.Visible = False
+        Me.btnRemoveCheeese.Visible = False
+
+
+        Me.btnContinue.Visible = False 'Show Save button when form opens
+        Me.btnContinue.Enabled = False
+        Me.btnClear.Visible = False 'Show Cancel button when form opens
+        Me.btnDefect.Enabled = False
+        Me.btnShort.Enabled = False
+
+        Label2.Visible = True
+        txtRemoveCone.Visible = True
+
+        Me.chk_K.Visible = False
+        Me.chk_D.Visible = False
+        Me.chk_F.Visible = False
+        Me.chk_O.Visible = False
+        Me.chk_T.Visible = False
+        Me.chk_P.Visible = False
+        Me.chk_N.Visible = False
+        Me.chk_W.Visible = False
+        Me.chk_H.Visible = False
+        Me.chk_TR.Visible = False
+        Me.chk_B.Visible = False
+        Me.chk_C.Visible = False
+        txtRemoveCone.Focus()
+        removeSelected = 1
+        Label1.Text = "Remove Cheese"
 
     End Sub
 
-    Private Sub txtReplaceCone_TextChanged(sender As Object, e As EventArgs) Handles txtReplaceCone.TextChanged
+
+
+    Private Sub btnExChangeCheese_Click(sender As Object, e As EventArgs) Handles btnExChangeCheese.Click
+
+        Me.btnExChangeCheese.Visible = False
+        Me.btnRemoveCheeese.Visible = False
+
+
+        Me.btnContinue.Visible = False 'Show Save button when form opens
+        Me.btnContinue.Enabled = False
+        Me.btnClear.Visible = False 'Show Cancel button when form opens
+        Me.btnDefect.Enabled = False
+        Me.btnShort.Enabled = False
+
+        Label2.Visible = True
+        txtRemoveCone.Visible = True
+
+
+
+
+
+
+        Me.chk_K.Visible = False
+        Me.chk_D.Visible = False
+        Me.chk_F.Visible = False
+        Me.chk_O.Visible = False
+        Me.chk_T.Visible = False
+        Me.chk_P.Visible = False
+        Me.chk_N.Visible = False
+        Me.chk_W.Visible = False
+        Me.chk_H.Visible = False
+        Me.chk_TR.Visible = False
+        Me.chk_B.Visible = False
+        Me.chk_C.Visible = False
+        txtRemoveCone.Focus()
+        ExchangeSelected = 1
+        Label1.Text = "ExChange Cheese"
+
 
     End Sub
+
+    Private Sub RemoveCheese()
+
+
+    End Sub
+
+
+    Private Sub ExChangeCheese()
+
+
+    End Sub
+
 
 
     Private Sub checkBcode()
 
 
-        frmJobEntry.LExecQuery("SELECT * FROM jobs WHERE BCODECONE = '" & chkBcode & "' ")
+        frmJobEntry.LExecQuery("SELECT * FROM jobs WHERE BCODECONE = '" & chkBcode & "' ORDER BY CONENUM ")
 
 
         If removeCone = 1 Then
@@ -74,54 +161,64 @@ Public Class frmExChangeCone
                 dcCarton = frmDGV.DGVdata.Rows(0).Cells("CARTONNUM").Value
                 dcProdNum = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
                 dcDoffNum = frmDGV.DGVdata.Rows(0).Cells("DOFFNUM").Value
+                If ExchangeSelected Then
+                    Label3.Visible = True
+                    txtReplaceCone.Visible = True
+                    txtReplaceCone.Focus()
 
-                Label3.Visible = True
-                txtReplaceCone.Visible = True
+                End If
+                If removeSelected Then
+                    removeCone = 2
+                    btnShort.Visible = True
+                    btnShort.Enabled = True
+                    btnDefect.Visible = True
+                    btnDefect.Enabled = True
+                    btnClear.Visible = True
+                    btnClear.Enabled = True
+                End If
                 removeCone = 2
             Else
-                MsgBox("Defect Cone does Not Exist")
+                MsgBox("Defect Cheese does Not Exist")
                 removeCone = 0
                 txtRemoveCone.Clear()
                 txtRemoveCone.Focus()
             End If
         End If
 
-        If replacementCone = 1 Then
+        If ExchangeSelected And removeCone = 2 Then
+            If replacementCone = 1 Then
 
-            If frmJobEntry.LRecordCount > 0 Then
+                If frmJobEntry.LRecordCount > 0 Then
 
-                'LOAD THE DATA FROM dB IN TO THE DATAGRID
-                frmDGV.DGVdata.DataSource = frmJobEntry.LDS.Tables(0)
-                frmDGV.DGVdata.Rows(0).Selected = True
-                Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(frmJobEntry.LDA)
-
-
-                'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
+                    'LOAD THE DATA FROM dB IN TO THE DATAGRID
+                    frmDGV.DGVdata.DataSource = frmJobEntry.LDS.Tables(0)
+                    frmDGV.DGVdata.Rows(0).Selected = True
+                    Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(frmJobEntry.LDA)
 
 
-                rcState = frmDGV.DGVdata.Rows(0).Cells("CONESTATE").Value
-                rcProdNum = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
-                rcDoffNum = frmDGV.DGVdata.Rows(0).Cells("DOFFNUM").Value
+                    'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
+                    frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
 
 
-            Else
-                MsgBox("Replacment Cone does Not Exist")
-                replacementCone = 0
-                txtReplaceCone.Clear()
-                txtReplaceCone.Focus()
-            End If
+                    rcState = frmDGV.DGVdata.Rows(0).Cells("CONESTATE").Value
+                    rcProdNum = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+                    rcDoffNum = frmDGV.DGVdata.Rows(0).Cells("DOFFNUM").Value
+
+                Else
+                    MsgBox("Replacment Cheese does Not Exist")
+                    replacementCone = 0
+                    txtReplaceCone.Clear()
+                    txtReplaceCone.Focus()
+                End If
 
 
-        End If
+                If dcState = 15 And dcState = rcState Then    'CHECK IF DEFECT CONE HAS BEEN ALLOCATED TO PACKING
 
-        If replacementCone = 1 Then
-            If dcState = 15 Then    'CHECK IF DEFECT CONE HAS BEEN ALLOCATED TO PACKING
-                If dcState = rcState Then    'MAKE SURE THAT BOTH CONES ARE IN STATE 15 READY TO PACK
-                    If dcProdNum = rcProdNum Then
-
+                    If dcProdNum = rcProdNum Then    'MAKE SURE THAT BOTH CONES ARE IN STATE 15 READY TO PACK
                         btnShort.Enabled = True
+                        btnShort.Visible = True
                         btnDefect.Enabled = True
+                        btnDefect.Visible = True
                         btnClear.Visible = True
                         btnClear.Enabled = True
                         replacementCone = 2
@@ -132,19 +229,20 @@ Public Class frmExChangeCone
                         txtReplaceCone.Focus()
                         replacementCone = 0
                         MsgBox("2 CHEESES CANNOT BE EXCHANGED" & vbCr & "Defective Product:     " & dcProdNum & "  Doff #:  " & dcDoffNum & vbCr _
-                           & "Replacment Product:  " & rcProdNum & "Doff #:  " & rcDoffNum)
+                               & "Replacment Product:  " & rcProdNum & "Doff #:  " & rcDoffNum)
 
                     End If
+
                 Else
-                    MsgBox("Both Cones not Grade A ")
+                    MsgBox("Both Cheeses are not Grade A ")
                     replacementCone = 0
                     txtReplaceCone.Clear()
                     txtReplaceCone.Focus()
                 End If
+
+
             End If
         End If
-
-
 
     End Sub
 
@@ -220,18 +318,15 @@ Public Class frmExChangeCone
 
     End Sub
 
-    Private Sub btnGoBack_Click(sender As Object, e As EventArgs) Handles btnGoBack.Click
 
-
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Close()
         frmJobEntry.Show()
         frmJobEntry.txtLotNumber.Clear()
         frmJobEntry.txtLotNumber.Focus()
-
-
-
-
     End Sub
+
+
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
 
@@ -290,7 +385,7 @@ Public Class frmExChangeCone
 
 
     Private Sub UpdateDatabase()
-
+        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
 
         Dim conenum As String
         conenum = txtRemoveCone.Text
@@ -347,13 +442,13 @@ Public Class frmExChangeCone
             End If
 
             'UPDATE REPLACEMENT CONE INFORMATION
-
-            frmJobEntry.LExecQuery("UPDATE jobs SET CONESTATE = '16' WHERE BCODECONE = '" & txtReplaceCone.Text & "' ")
-            frmJobEntry.LExecQuery("UPDATE jobs SET CARTENDTM = '" & today & "' WHERE BCODECONE = '" & txtReplaceCone.Text & "' ")
-            frmJobEntry.LExecQuery("UPDATE jobs SET OPNAME = '" & frmJobEntry.txtOperator.Text & "' WHERE BCODECONE = '" & txtReplaceCone.Text & "' ")
-            frmJobEntry.LExecQuery("UPDATE jobs SET OPPACK = '" & frmJobEntry.txtOperator.Text & "' WHERE BCODECONE = '" & txtReplaceCone.Text & "' ")
-            frmJobEntry.LExecQuery("UPDATE jobs SET CARTONNUM = '" & dcCarton & "' WHERE BCODECONE = '" & txtReplaceCone.Text & "' ")
-
+            If ExchangeSelected Then
+                frmJobEntry.LExecQuery("UPDATE jobs SET CONESTATE = '16' WHERE BCODECONE = '" & txtReplaceCone.Text & "' ")
+                frmJobEntry.LExecQuery("UPDATE jobs SET CARTENDTM = '" & today & "' WHERE BCODECONE = '" & txtReplaceCone.Text & "' ")
+                frmJobEntry.LExecQuery("UPDATE jobs SET OPNAME = '" & frmJobEntry.txtOperator.Text & "' WHERE BCODECONE = '" & txtReplaceCone.Text & "' ")
+                frmJobEntry.LExecQuery("UPDATE jobs SET OPPACK = '" & frmJobEntry.txtOperator.Text & "' WHERE BCODECONE = '" & txtReplaceCone.Text & "' ")
+                frmJobEntry.LExecQuery("UPDATE jobs SET CARTONNUM = '" & dcCarton & "' WHERE BCODECONE = '" & txtReplaceCone.Text & "' ")
+            End If
 
 
 
@@ -366,6 +461,7 @@ Public Class frmExChangeCone
 
         defectCone = 0
         shortCone = 0
+        Me.Cursor = System.Windows.Forms.Cursors.Default
         Me.Close()
         frmJobEntry.Show()
         frmJobEntry.txtLotNumber.Clear()
@@ -377,14 +473,29 @@ Public Class frmExChangeCone
 
         If e.KeyCode = Keys.Return Then
 
-            If removeCone = 0 Then
-                chkBcode = txtRemoveCone.Text
-                removeCone = 1
-                checkBcode()
-            ElseIf replacementCone = 0 Then
-                chkBcode = txtReplaceCone.Text
-                replacementCone = 1
-                checkBcode()
+            If removeSelected Then
+                If removeCone = 0 Then
+                    chkBcode = txtRemoveCone.Text
+                    removeCone = 1
+                    checkBcode()
+                    Exit Sub
+                End If
+            End If
+
+            If ExchangeSelected Then
+                If removeCone = 0 Then
+                    chkBcode = txtRemoveCone.Text
+                    removeCone = 1
+                    checkBcode()
+                    Exit Sub
+                End If
+                If removeCone = 2 Then
+                    If replacementCone = 0 Then
+                        chkBcode = txtReplaceCone.Text
+                        replacementCone = 1
+                        checkBcode()
+                    End If
+                End If
             End If
 
         End If
@@ -392,7 +503,9 @@ Public Class frmExChangeCone
     End Sub
 
     Private Sub btnContinue_Click(sender As Object, e As EventArgs) Handles btnContinue.Click
+
         UpdateDatabase()
+
     End Sub
 
     Private Sub txtWeight_TextChanged(sender As Object, e As EventArgs) Handles txtWeight.TextChanged
