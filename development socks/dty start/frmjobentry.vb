@@ -1404,7 +1404,7 @@ Public Class frmJobEntry
 
         Else
             Label3.Visible = True
-            Label3.Text = "PRODUCT NUMBER " & varProductCode & " THIS PRODUCT IS NOT IN THE PRODUCT LIST"
+            Label3.Text = "PRODUCT NUMBER " & varProductCode & " THIS " & vbCrLf & "PRODUCT Is Not In THE PRODUCT LIST"
             DelayTM()
             Label3.Visible = False
             quit = 1
@@ -1527,7 +1527,7 @@ Public Class frmJobEntry
 
 
     Private Sub DelayTM()
-        Dim interval As Integer = "2000"
+        Dim interval As Integer = "5000"  '5sec Delay time
         Dim sw As New Stopwatch
         sw.Start()
         Do While sw.ElapsedMilliseconds < interval
