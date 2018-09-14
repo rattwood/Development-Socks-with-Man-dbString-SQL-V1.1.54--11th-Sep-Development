@@ -300,9 +300,11 @@ Public Class frmSTDColChk
                     frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = tmpstate + 1
                 Case "-"
                     frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 10
+                    frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8  'RESETS CHEESE TO STATE SO CREATE RECHECK CAN FIND IT
                     frmDGV.DGVdata.Rows(i - 1).Cells("M30").Value = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value
                 Case "+"
                     frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 10
+                    frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8  'RESETS CHEESE TO STATE SO CREATE RECHECK CAN FIND IT
                     frmDGV.DGVdata.Rows(i - 1).Cells("P30").Value = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value
 
             End Select
