@@ -155,7 +155,9 @@ Public Class frmPrintCartReport
             End If
 
             If Not IsDBNull(DGVcartReport.Rows(dgvRW - 1).Cells("STDSTATE").Value) Then
-                If DGVcartReport.Rows(dgvRW - 1).Cells("STDSTATE").Value > "0" Then exSTDVal = DGVcartReport.Rows(dgvRW - 1).Cells("CONENUM").Value 'STD Cheese
+                If DGVcartReport.Rows(dgvRW - 1).Cells("STDSTATE").Value > 0 AndAlso DGVcartReport.Rows(dgvRW - 1).Cells("STDSTATE").Value < 10 Then
+                    exSTDVal = DGVcartReport.Rows(dgvRW - 1).Cells("CONENUM").Value 'STD Cheese
+                End If
             End If
             If exSTDVal > 0 Then
                 STDFLAG = 1
