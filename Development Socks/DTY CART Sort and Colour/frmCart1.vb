@@ -1533,7 +1533,8 @@ Public Class frmCart1
                     End If
 
                     If Not IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value) Then
-                        If frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value = "0" Or frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value = Nothing Then
+                        If frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value = "0" Or frmDGV.DGVdata.Rows(rw - 1).Cells("STDCHEESE").Value = Nothing _
+                            Or frmDGV.DGVdata.Rows(rw - 1).Cells("STDSTATE").Value = 10 Then
                             Select Case colcount
                                 Case 10, 15
                                     If cellVal > 0 And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then
