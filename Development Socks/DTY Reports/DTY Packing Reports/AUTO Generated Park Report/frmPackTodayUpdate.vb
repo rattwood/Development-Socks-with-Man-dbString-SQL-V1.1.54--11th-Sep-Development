@@ -40,7 +40,7 @@ Public Class frmPackTodayUpdate
         createBarcode()
         boxCount = mycount
 
-        Dim totCount As Integer = 1
+        Dim totCount As Integer = 0
         'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
         For rcount = 13 To 102
             If MyTodyExcel.Cells(rcount, 4).Value > 0 Then

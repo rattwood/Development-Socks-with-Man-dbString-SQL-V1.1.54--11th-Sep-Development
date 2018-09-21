@@ -202,7 +202,7 @@ Public Class frmPacking
         'GET NUMBER OF CONES THAT NEED ALLOCATING Count agains Job Barcode
 
         For i = 1 To rowendcount
-            If DGVPakingA.Rows(i - 1).Cells(9).Value = "9" And DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = False And (IsDBNull(DGVPakingA.Rows(i - 1).Cells("STDSTATE").Value)) Then
+            If DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "9" And DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = False And (IsDBNull(DGVPakingA.Rows(i - 1).Cells("STDSTATE").Value)) Then
                 toAllocatedCount = toAllocatedCount + 1
             End If
         Next
