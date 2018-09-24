@@ -224,8 +224,9 @@ Partial Class frmJobEntry
         '
         'SettingsToolStripMenuItem
         '
+        Me.SettingsToolStripMenuItem.Image = Global.Development_Socks.My.Resources.Resources.Settings_16x
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(77, 20)
         Me.SettingsToolStripMenuItem.Text = "Settings"
         '
         'ToolsToolStripMenuItem
