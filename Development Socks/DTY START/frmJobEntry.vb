@@ -1574,7 +1574,7 @@ Public Class frmJobEntry
 
 
         Dim modLotStr = txtBoxCartReport.Text.Substring(0, 12)
-
+        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
 
         LExecQuery("SELECT * FROM JOBS WHERE BCODEJOB = '" & modLotStr & "' ")
 
@@ -1585,16 +1585,17 @@ Public Class frmJobEntry
             frmPrintCartReport.DGVcartReport.DataSource = LDS.Tables(0)
                 frmPrintCartReport.DGVcartReport.Rows(0).Selected = True
 
-                'SORT GRIDVIEW IN TO CORRECT JOB SEQUENCE
-                frmPrintCartReport.DGVcartReport.Sort(frmPrintCartReport.DGVcartReport.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
-                'frmPrintCartReport.Show()
-                Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
-                frmPrintCartReport.prtCartSheet()
-                Me.Cursor = System.Windows.Forms.Cursors.Default
+            'SORT GRIDVIEW IN TO CORRECT JOB SEQUENCE
+            frmPrintCartReport.DGVcartReport.Sort(frmPrintCartReport.DGVcartReport.Columns("CONENUM"), ListSortDirection.Ascending)  'sorts On cone number
+            'frmPrintCartReport.Show()
+            Me.Cursor = System.Windows.Forms.Cursors.Default
+            Me.Hide()
+            frmPrintCartReport.Show()
+
 
 
         Else
-
+            Me.Cursor = System.Windows.Forms.Cursors.Default
             MsgBox("No Job Found, Please check if this Job has been checked")
 
             Me.txtBoxCartReport.Visible = False
