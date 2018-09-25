@@ -23,6 +23,9 @@ Partial Class frmPrintCartReport
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.DGVcartReport = New System.Windows.Forms.DataGridView()
+        Me.btnCartReport = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnExpotData = New System.Windows.Forms.Button()
         CType(Me.DGVcartReport, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -35,14 +38,47 @@ Partial Class frmPrintCartReport
         Me.DGVcartReport.Location = New System.Drawing.Point(0, 0)
         Me.DGVcartReport.Name = "DGVcartReport"
         Me.DGVcartReport.ReadOnly = True
-        Me.DGVcartReport.Size = New System.Drawing.Size(860, 437)
+        Me.DGVcartReport.Size = New System.Drawing.Size(698, 371)
         Me.DGVcartReport.TabIndex = 0
+        '
+        'btnCartReport
+        '
+        Me.btnCartReport.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCartReport.Location = New System.Drawing.Point(12, 83)
+        Me.btnCartReport.Name = "btnCartReport"
+        Me.btnCartReport.Size = New System.Drawing.Size(217, 43)
+        Me.btnCartReport.TabIndex = 1
+        Me.btnCartReport.Text = "Create Cart Report"
+        Me.btnCartReport.UseVisualStyleBackColor = True
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.Location = New System.Drawing.Point(233, 260)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(217, 43)
+        Me.btnCancel.TabIndex = 2
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
+        'btnExpotData
+        '
+        Me.btnExpotData.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExpotData.Location = New System.Drawing.Point(463, 83)
+        Me.btnExpotData.Name = "btnExpotData"
+        Me.btnExpotData.Size = New System.Drawing.Size(217, 43)
+        Me.btnExpotData.TabIndex = 3
+        Me.btnExpotData.Text = "Export Data"
+        Me.btnExpotData.UseVisualStyleBackColor = True
         '
         'frmPrintCartReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(860, 449)
+        Me.ClientSize = New System.Drawing.Size(698, 339)
+        Me.Controls.Add(Me.btnExpotData)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.btnCartReport)
         Me.Controls.Add(Me.DGVcartReport)
         Me.Name = "frmPrintCartReport"
         Me.Text = "frmPrintCartReport"
@@ -52,4 +88,7 @@ Partial Class frmPrintCartReport
     End Sub
 
     Friend WithEvents DGVcartReport As DataGridView
+    Friend WithEvents btnCartReport As Button
+    Friend WithEvents btnCancel As Button
+    Friend WithEvents btnExpotData As Button
 End Class

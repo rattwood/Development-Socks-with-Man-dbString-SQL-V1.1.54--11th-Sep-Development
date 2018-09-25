@@ -59,7 +59,7 @@ Public Class frmPrintCartReport
 
         template = (My.Settings.dirTemplate & "\" & "CartReportTemplate.xlsx").ToString
 
-        Dim ExcelApp As New Excel.Application
+        'Dim ExcelApp As New Excel.Application
         Dim workbook As Excel.Workbook
         Dim sheet As Excel.Worksheet
 
@@ -101,8 +101,8 @@ Public Class frmPrintCartReport
         If DGVcartReport.Rows(0).Cells("MCNUM").Value = 29 Then sp_nums = "1 - 32"
 
 
-
-
+        'Wait Curson
+        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         workbook = MyExcel.Workbooks.Open(template)
 
         'MyExcel.Visible = True
@@ -426,7 +426,7 @@ Public Class frmPrintCartReport
             workbook.SaveAs(Filename:=savename, FileFormat:=51)
             MyExcel.DisplayAlerts = True
         Catch ex As Exception
-
+            Me.Cursor = System.Windows.Forms.Cursors.Default
             MsgBox(ex.Message)
 
         End Try
@@ -437,6 +437,7 @@ Public Class frmPrintCartReport
             workbook.Close(SaveChanges:=False)
 
         Catch ex As Exception
+            Me.Cursor = System.Windows.Forms.Cursors.Default
             MsgBox(ex.Message)
         End Try
 
@@ -447,7 +448,7 @@ Public Class frmPrintCartReport
         releaseObject(workbook)
         releaseObject(MyExcel)
 
-
+        Me.Cursor = System.Windows.Forms.Cursors.Default
         MsgBox("Job Report " & savename & " Created")
 
         frmJobEntry.txtLotNumber.Visible = True
@@ -489,6 +490,24 @@ Public Class frmPrintCartReport
         End Try
 
     End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Me.Close()
+        frmJobEntry.txtLotNumber.Visible = True
+        frmJobEntry.txtLotNumber.Focus()
+        frmJobEntry.cartReport = 0
+        frmJobEntry.txtBoxCartReport.Text = ""
+    End Sub
+
+    Private Sub btnCartReport_Click(sender As Object, e As EventArgs) Handles btnCartReport.Click
+        prtCartSheet()
+    End Sub
+
+    Private Sub btnExpotData_Click(sender As Object, e As EventArgs) Handles btnExpotData.Click
+
+    End Sub
+
+
 
 
 End Class
