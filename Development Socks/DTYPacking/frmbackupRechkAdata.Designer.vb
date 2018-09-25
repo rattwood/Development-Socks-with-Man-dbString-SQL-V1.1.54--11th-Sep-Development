@@ -22,6 +22,7 @@ Partial Class frmbackupRechkAdata
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmbackupRechkAdata))
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.txtboxTotal = New System.Windows.Forms.TextBox()
         Me.lblCheese = New System.Windows.Forms.Label()
@@ -704,6 +705,7 @@ Partial Class frmbackupRechkAdata
         Me.Controls.Add(Me.btnCone2)
         Me.Controls.Add(Me.btnCone1)
         Me.Controls.Add(Me.btnCone4)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmbackupRechkAdata"
         Me.Text = "frmbackupRechkAdata"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()

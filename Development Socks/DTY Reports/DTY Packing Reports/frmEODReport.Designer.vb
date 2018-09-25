@@ -22,6 +22,7 @@ Partial Class frmEODReport
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEODReport))
         Me.txtLotNumber = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnEOD = New System.Windows.Forms.Button()
@@ -66,7 +67,7 @@ Partial Class frmEODReport
         Me.btnCancelReport.Text = "Cancel"
         Me.btnCancelReport.UseVisualStyleBackColor = True
         '
-        'EODReport
+        'frmEODReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -75,7 +76,8 @@ Partial Class frmEODReport
         Me.Controls.Add(Me.btnEOD)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtLotNumber)
-        Me.Name = "EODReport"
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Name = "frmEODReport"
         Me.Text = "End Of Day Report"
         Me.ResumeLayout(False)
         Me.PerformLayout()

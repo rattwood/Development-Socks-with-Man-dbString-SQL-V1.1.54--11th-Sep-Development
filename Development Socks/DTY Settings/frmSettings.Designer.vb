@@ -22,6 +22,7 @@ Partial Class frmSettings
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSettings))
         Me.lblSerialPortSelect = New System.Windows.Forms.Label()
         Me.lstSerialPorts = New System.Windows.Forms.ListBox()
         Me.btnSetSave = New System.Windows.Forms.Button()
@@ -398,6 +399,7 @@ Partial Class frmSettings
         Me.Controls.Add(Me.lstSerialPorts)
         Me.Controls.Add(Me.lblSerialPortSelect)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Name = "frmSettings"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent

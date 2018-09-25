@@ -22,6 +22,7 @@ Partial Class DGVDefReport
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DGVDefReport))
         Me.DGVDefData = New System.Windows.Forms.DataGridView()
         Me.MonthCalendar1 = New System.Windows.Forms.MonthCalendar()
         Me.btnLoadData = New System.Windows.Forms.Button()
@@ -123,6 +124,7 @@ Partial Class DGVDefReport
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.MonthCalendar1)
         Me.Controls.Add(Me.DGVDefData)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "DGVDefReport"
         Me.Text = "DGVDefReport"
         CType(Me.DGVDefData, System.ComponentModel.ISupportInitialize).EndInit()

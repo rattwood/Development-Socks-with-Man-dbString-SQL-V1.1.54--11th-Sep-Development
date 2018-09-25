@@ -22,6 +22,7 @@ Partial Class frmSortReCheck
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSortReCheck))
         Me.txtWaste = New System.Windows.Forms.TextBox()
         Me.lblWaste = New System.Windows.Forms.Label()
         Me.chk_HT = New System.Windows.Forms.CheckBox()
@@ -1800,6 +1801,7 @@ Partial Class frmSortReCheck
         Me.Controls.Add(Me.btnCone2)
         Me.Controls.Add(Me.btnCone1)
         Me.Controls.Add(Me.btnCone4)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmSortReCheck"
         Me.Text = "Sort ReCheck"
         Me.ResumeLayout(False)

@@ -22,6 +22,7 @@ Partial Class frmB_AL_AD_W
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmB_AL_AD_W))
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.CheeseAloc1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CheeseNum1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -388,6 +389,7 @@ Partial Class frmB_AL_AD_W
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.DataGridView1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmB_AL_AD_W"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "PACKING for B, AL, AD and Waste"

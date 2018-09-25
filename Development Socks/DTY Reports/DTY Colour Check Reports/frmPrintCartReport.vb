@@ -102,6 +102,8 @@ Public Class frmPrintCartReport
 
 
         'Wait Curson
+        Label1.Visible = True
+        Label1.Text = "Creating Cart Report Please wait "
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         workbook = MyExcel.Workbooks.Open(template)
 
@@ -427,6 +429,8 @@ Public Class frmPrintCartReport
             MyExcel.DisplayAlerts = True
         Catch ex As Exception
             Me.Cursor = System.Windows.Forms.Cursors.Default
+            Label1.Visible = False
+
             MsgBox(ex.Message)
 
         End Try
@@ -438,6 +442,8 @@ Public Class frmPrintCartReport
 
         Catch ex As Exception
             Me.Cursor = System.Windows.Forms.Cursors.Default
+            Label1.Visible = False
+
             MsgBox(ex.Message)
         End Try
 
@@ -449,15 +455,18 @@ Public Class frmPrintCartReport
         releaseObject(MyExcel)
 
         Me.Cursor = System.Windows.Forms.Cursors.Default
-        MsgBox("Job Report " & savename & " Created")
+        Label1.Visible = False
 
+        MsgBox("Job Report " & savename & " Created")
+        Me.Close()
+        frmJobEntry.Show()
         frmJobEntry.txtLotNumber.Visible = True
         frmJobEntry.txtLotNumber.Focus()
         frmJobEntry.cartReport = 0
         frmJobEntry.txtBoxCartReport.Text = ""
 
-        Me.Close()
-        Exit Sub
+        Quit()
+
     End Sub
 
     Private Sub releaseObject(ByVal obj As Object)
@@ -492,11 +501,7 @@ Public Class frmPrintCartReport
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Me.Close()
-        frmJobEntry.txtLotNumber.Visible = True
-        frmJobEntry.txtLotNumber.Focus()
-        frmJobEntry.cartReport = 0
-        frmJobEntry.txtBoxCartReport.Text = ""
+        Quit()
     End Sub
 
     Private Sub btnCartReport_Click(sender As Object, e As EventArgs) Handles btnCartReport.Click
@@ -504,10 +509,27 @@ Public Class frmPrintCartReport
     End Sub
 
     Private Sub btnExpotData_Click(sender As Object, e As EventArgs) Handles btnExpotData.Click
+        Label1.Visible = True
+        Label1.Text = "Sending Data Please Wait "
+        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        frmProductionDataUpdate.sendData()
+        Me.Cursor = System.Windows.Forms.Cursors.Default
+        Label1.Visible = False
+
+        Quit()
+    End Sub
+
+    Private Sub Quit()
+        Me.Close()
+        frmJobEntry.Show()
+        frmJobEntry.txtLotNumber.Visible = True
+        frmJobEntry.txtLotNumber.Focus()
+        frmJobEntry.cartReport = 0
+        frmJobEntry.txtBoxCartReport.Text = ""
 
     End Sub
 
+    Private Sub frmPrintCartReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
-
+    End Sub
 End Class

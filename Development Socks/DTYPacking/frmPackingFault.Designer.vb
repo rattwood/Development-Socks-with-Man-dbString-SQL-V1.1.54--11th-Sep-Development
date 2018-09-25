@@ -22,6 +22,7 @@ Partial Class frmPackingFault
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPackingFault))
         Me.Label4 = New System.Windows.Forms.Label()
         Me.btnContinue = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -330,8 +331,9 @@ Partial Class frmPackingFault
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Label1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmPackingFault"
-        Me.Text = "frmPackingFault"
+        Me.Text = "Packing Fault"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

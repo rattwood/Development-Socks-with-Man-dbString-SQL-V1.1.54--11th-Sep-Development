@@ -23,6 +23,7 @@ Partial Class frmProductMod
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmProductMod))
         Me.DGVProduct = New System.Windows.Forms.DataGridView()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.Toraydb = New Development_Socks.Toraydb()
@@ -68,9 +69,10 @@ Partial Class frmProductMod
         Me.ClientSize = New System.Drawing.Size(528, 420)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.DGVProduct)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmProductMod"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "frmProductMod"
+        Me.Text = "Product Update"
         CType(Me.DGVProduct, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Toraydb, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ToraydbBindingSource, System.ComponentModel.ISupportInitialize).EndInit()

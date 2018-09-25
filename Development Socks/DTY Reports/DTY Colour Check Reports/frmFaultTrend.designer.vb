@@ -22,6 +22,7 @@ Partial Class frmFaultTrend
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmFaultTrend))
         Me.DGVFaultTrend = New System.Windows.Forms.DataGridView()
         CType(Me.DGVFaultTrend, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -40,6 +41,7 @@ Partial Class frmFaultTrend
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(720, 261)
         Me.Controls.Add(Me.DGVFaultTrend)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmFaultTrend"
         Me.Text = "frmFaultTrend"
         CType(Me.DGVFaultTrend, System.ComponentModel.ISupportInitialize).EndInit()

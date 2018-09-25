@@ -22,6 +22,7 @@ Partial Class frmDailyPackProduction
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDailyPackProduction))
         Me.DGVJobsData = New System.Windows.Forms.DataGridView()
         Me.DGVProdData = New System.Windows.Forms.DataGridView()
         Me.DGVJobData = New System.Windows.Forms.DataGridView()
@@ -132,6 +133,7 @@ Partial Class frmDailyPackProduction
         Me.Controls.Add(Me.DGVJobData)
         Me.Controls.Add(Me.DGVProdData)
         Me.Controls.Add(Me.DGVJobsData)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmDailyPackProduction"
         Me.Text = "frmDailyPackProduction"
         CType(Me.DGVJobsData, System.ComponentModel.ISupportInitialize).EndInit()
