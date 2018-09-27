@@ -402,7 +402,7 @@ Public Class frmPrintCartReport
         'TOTALMISSING CONES
         MyExcel.Cells(5, 18) = JudCount
         'TOTAL OF CONES ON CART  192 LESS MISSING CONES
-        MyExcel.Cells(7, 19) = (frmJobEntry.LRecordCount - (missCount + stdCount))
+        MyExcel.Cells(7, 19) = (DGVcartReport.Rows.Count() - (missCount + stdCount))
         'TOTAL OF GRADE A FULL CONES
         MyExcel.Cells(35, 9) = gradeACount - stdCount
         'TOTAL SHORT GRADE A CONES
