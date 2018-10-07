@@ -53,8 +53,8 @@ Public Class frmJobEntry
     Dim machineName As String = ""
     Dim machineCode As String
     Dim productCode As String
-    Dim year As String
-    Dim month As String
+    Public year As String
+    Public month As String
     Dim doffingNum As String
     Dim cartNum As String
     Dim quit As Integer
@@ -1187,13 +1187,13 @@ Public Class frmJobEntry
 
         Select Case txtGrade.Text
             Case "Round1"
-                LExecQuery("Select * FROM Jobs Where Stdstate  = 1 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' ")
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 1 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' ORDER BY CONENUM ")
             Case "Round2"
-                LExecQuery("Select * FROM Jobs Where Stdstate  = 3 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' ")
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 3 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' ORDER BY CONENUM")
             Case "Round3"
-                LExecQuery("Select * FROM Jobs Where Stdstate  = 5 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' ")
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 5 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "'ORDER BY CONENUM ")
             Case "STD"
-                LExecQuery("Select * FROM Jobs Where Stdstate  = 7 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' ")
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 7 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "'ORDER BY CONENUM ")
 
 
         End Select
@@ -1213,7 +1213,7 @@ Public Class frmJobEntry
             'IsDBNull(frmDGV.DGVdata.Rows(0).Cells("BCODECONE").Value)
 
             'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("BCODECONE"), ListSortDirection.Ascending)  'sorts On cone number
+            'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("BCODECONE"), ListSortDirection.Ascending)  'sorts On cone number
 
 
 

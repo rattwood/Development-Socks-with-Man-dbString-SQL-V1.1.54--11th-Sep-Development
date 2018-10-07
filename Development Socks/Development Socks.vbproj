@@ -172,6 +172,12 @@
     <Compile Include="DTY Reports\DTY Colour Check Reports\frmProductionDataUpdate.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmDGVTemp.Designer.vb">
+      <DependentUpon>frmDGVTemp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmDGVTemp.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DTY Reports\DTY Packing Reports\frmDailyPackProduction.Designer.vb">
       <DependentUpon>frmDailyPackProduction.vb</DependentUpon>
     </Compile>
@@ -447,6 +453,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DTY Reports\DTY Colour Check Reports\frmProductionDataUpdate.resx">
       <DependentUpon>frmProductionDataUpdate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTY Reports\DTY Packing Reports\AUTO Generated Park Report\frmDGVTemp.resx">
+      <DependentUpon>frmDGVTemp.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DTY Reports\DTY Packing Reports\frmDailyPackProduction.resx">
       <DependentUpon>frmDailyPackProduction.vb</DependentUpon>

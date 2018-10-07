@@ -4,6 +4,7 @@
 
 
 Imports System.ComponentModel
+Imports System.Data.SqlClient
 
 Public Class frmStdCreate
 
@@ -82,6 +83,7 @@ Public Class frmStdCreate
         txtConeBcode.Text = frmJobEntry.txtLotNumber.Text
         prgContinue()
 
+        If My.Settings.debugSet Then frmDGVTemp.Show()
 
 
     End Sub
@@ -202,8 +204,36 @@ Public Class frmStdCreate
         Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
         Label8.Text = ("Please wait creating packing Excel sheet")
 
-        'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-        frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
+
+        '****************************** Routine to save database and then recall it from SQL and index on Recheck idx
+        UpdateDatabase()
+
+        'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
+        If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
+        frmDGV.DGVdata.ClearSelection()
+
+        Select Case frmJobEntry.txtGrade.Text
+            Case "Round1"
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 2 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+            Case "Round2"
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 4 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+            Case "Round3"
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 6 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+            Case "STD"
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 7 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+        End Select
+
+
+        If frmJobEntry.LRecordCount > 0 Then
+            'LOAD THE DATA FROM dB IN TO THE DATAGRID
+            frmDGV.DGVdata.DataSource = frmJobEntry.LDS.Tables(0)
+            frmDGV.DGVdata.Rows(0).Selected = True
+
+        End If
+
+
+
+
 
         frmPackRepMain.PackRepMainSub()
 
@@ -213,20 +243,24 @@ Public Class frmStdCreate
             Label8.Visible = False
             Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
             frmPackTodayUpdate.Close()
+            frmJobEntry.txtLotNumber.Clear()
+            frmJobEntry.txtLotNumber.Focus()
+            frmJobEntry.Show()
             Me.Close()
             Exit Sub
         Else
-
-            frmPackRepMain.Close()
             UpdateDatabase()
+            'frmPackRepMain.Close()
             Label8.Visible = False
             Me.Cursor = System.Windows.Forms.Cursors.Default
-            Me.Close()
-            frmJobEntry.Show()
+            If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
+            frmDGV.DGVdata.ClearSelection()
             frmJobEntry.txtLotNumber.Clear()
+            frmJobEntry.txtLotNumber.Focus()
+            frmJobEntry.Show()
+            Me.Close()
 
         End If
-
 
 
     End Sub
@@ -282,12 +316,12 @@ Public Class frmStdCreate
 
 
 
-        If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
-        frmDGV.DGVdata.ClearSelection()
-        frmJobEntry.txtLotNumber.Clear()
-        frmJobEntry.txtLotNumber.Focus()
-        frmJobEntry.Show()
-        Me.Close()
+        'If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
+        'frmDGV.DGVdata.ClearSelection()
+        'frmJobEntry.txtLotNumber.Clear()
+        'frmJobEntry.txtLotNumber.Focus()
+        'frmJobEntry.Show()
+        'Me.Close()
 
 
 
