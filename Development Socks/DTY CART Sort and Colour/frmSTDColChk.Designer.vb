@@ -58,6 +58,8 @@ Partial Class frmSTDColChk
         Me.rechk1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.rechkGrade = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.rechkdef = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -386,11 +388,31 @@ Partial Class frmSTDColChk
         Me.rechkdef.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.rechkdef.Width = 200
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(910, 477)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(13, 13)
+        Me.Label5.TabIndex = 69
+        Me.Label5.Text = "0"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(824, 477)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(71, 13)
+        Me.Label8.TabIndex = 68
+        Me.Label8.Text = "Total BARRE"
+        '
         'frmSTDColChk
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1008, 781)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label26)
         Me.Controls.Add(Me.Label25)
         Me.Controls.Add(Me.Label24)
@@ -454,4 +476,6 @@ Partial Class frmSTDColChk
     Friend WithEvents rechk1 As DataGridViewTextBoxColumn
     Friend WithEvents rechkGrade As DataGridViewTextBoxColumn
     Friend WithEvents rechkdef As DataGridViewComboBoxColumn
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label8 As Label
 End Class
