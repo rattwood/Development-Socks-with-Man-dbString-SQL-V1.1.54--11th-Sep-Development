@@ -123,21 +123,17 @@ Public Class frmSTDColChk
             'CHECK DATA IN CORRECTLY
             Dim colname As String
 
-        For i = 1 To frmDGV.DGVdata.Rows.Count
+        'For i = 1 To frmDGV.DGVdata.Rows.Count
 
-            If DataGridView1.Rows(i - 1).Cells(2).Value = "" Then
-                colname = "ReCheck"
-                MsgBox(colname & ", Row " & i & " has no value. Please correct and try again")
-                Exit Sub
-                'ElseIf Not DataGridView1.Rows(i - 1).Cells(2).Value = "a" Or Not DataGridView1.Rows(i - 1).Cells(2).Value = "A" Or
-                '        Not DataGridView1.Rows(i - 1).Cells(2).Value = "d" Or Not DataGridView1.Rows(i - 1).Cells(2).Value = "D" Or
-                '        Not DataGridView1.Rows(i - 1).Cells(2).Value = "l" Or Not DataGridView1.Rows(i - 1).Cells(2).Value = "L" Then
-                '    colname = "ReCheck"
-                '    MsgBox(colname & ", Row " & i & " has an unknown value. Please correct and try again")
-                '    Exit Sub
-            End If
 
-        Next
+        '    If DataGridView1.Rows(i - 1).Cells(2).Value = "" Then
+        '        colname = "ReCheck"
+        '        MsgBox(colname & ", Row " & i & " has no value. Please correct and try again")
+        '        Exit Sub
+
+        '    End If
+
+        'Next
 
 
         Dim CharRead As String
@@ -156,14 +152,23 @@ Public Class frmSTDColChk
                 Case "l", "L"
                     DataGridView1.Rows(i - 1).Cells(2).Style.ForeColor = Color.Blue   'Grade AL
                     DataGridView1.Rows(i - 1).Cells(2).Value = "-"
-
-
+                Case "b", "B"
+                    DataGridView1.Rows(i - 1).Cells(2).Style.ForeColor = Color.Red   'Grade BARRE
+                    DataGridView1.Rows(i - 1).Cells(2).Value = "@"
+                    DataGridView1.Rows(i - 1).Cells(4).Value = "BARRE"
+                Case Else
+                    'DataGridView1.Rows(i - 1).Cells(2).Style.ForeColor = Color.Red   'Grade AL
+                    'DataGridView1.Rows(i - 1).Cells(2).Value = "ERROR ReEnter"
+                    colname = "ReCheck"
+                    MsgBox(colname & ", Row " & i & " has no value. Please correct and try again")
+                    btnReEnter.Visible = True
+                    Exit Sub
             End Select
                 Next
 
 
         Dim tmpReChk1 As String
-        Dim ACount, ALCount, ADCount
+        Dim ACount, ALCount, ADCount, ABCount
 
 
         For i = 1 To frmDGV.DGVdata.Rows.Count
@@ -184,14 +189,18 @@ Public Class frmSTDColChk
                 DataGridView1.Rows(i - 1).Cells(3).Style.ForeColor = Color.Black   'Grade AL
                 DataGridView1.Rows(i - 1).Cells(3).Value = "RECHECK"
                 ALCount = ALCount + 1
-
+            ElseIf tmpReChk1 = "@" Then
+                'BARRE Grade
+                DataGridView1.Rows(i - 1).Cells(3).Style.ForeColor = Color.Red   'Grade AL
+                DataGridView1.Rows(i - 1).Cells(3).Value = "AB Grade"
+                ABCount = ABCount + 1
             End If
 
         Next
 
         Label24.Text = ACount
         Label26.Text = ALCount + ADCount
-
+        Label5.Text = ABCount
 
 
         btnReEnter.Visible = True
@@ -217,6 +226,8 @@ Public Class frmSTDColChk
                     DataGridView1.Rows(i - 1).Cells(2).Value = "L"
                 Case "+"
                     DataGridView1.Rows(i - 1).Cells(2).Value = "D"
+                Case "@"
+                    DataGridView1.Rows(i - 1).Cells(2).Value = "B"
 
             End Select
 
@@ -281,7 +292,7 @@ Public Class frmSTDColChk
 
             If DataGridView1.Rows(i - 1).Cells(4).Value = "SHORT CHEESE" Then frmDGV.DGVdata.Rows(i - 1).Cells(10).Value = 1 'shortCone
             If DataGridView1.Rows(i - 1).Cells(4).Value = "X MISSING CHEESE" Then frmDGV.DGVdata.Rows(i - 1).Cells(11).Value = 1  'missingCone
-            If DataGridView1.Rows(i - 1).Cells(4).Value = "BARRE" Then frmDGV.DGVdata.Rows(i - 1).Cells(16).Value = 1 'Cone with large colour defect
+            ' If DataGridView1.Rows(i - 1).Cells(4).Value = "BARRE" Then frmDGV.DGVdata.Rows(i - 1).Cells(16).Value = 1 'Cone with large colour defect
 
 
 
@@ -306,6 +317,13 @@ Public Class frmSTDColChk
                     frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 10
                     frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8  'RESETS CHEESE TO STATE SO CREATE RECHECK CAN FIND IT
                     frmDGV.DGVdata.Rows(i - 1).Cells("P30").Value = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value
+                Case "@"
+                    frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = Nothing
+                    frmDGV.DGVdata.Rows(i - 1).Cells("STDCHEESE").Value = Nothing
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = Nothing
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = Nothing
+                    frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8  'RESETS CHEESE TO STATE SO CREATE RECHECK CAN FIND IT
+                    frmDGV.DGVdata.Rows(i - 1).Cells("CONEBARLEY").Value = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value
 
             End Select
 
@@ -423,6 +441,9 @@ Public Class frmSTDColChk
                         Case "-"
                             MyReCheckExcel.Cells(8 + i, 4).Font.Color = Color.Blue   'Grade AL
                             MyReCheckExcel.Cells(8 + i, 4) = DataGridView1.Rows(i - 1).Cells(2).Value
+                        Case "@"
+                            MyReCheckExcel.Cells(8 + i, 4).Font.Color = Color.Red   'Grade BARRE
+                            MyReCheckExcel.Cells(8 + i, 4) = DataGridView1.Rows(i - 1).Cells(2).Value
                     End Select
 
 
@@ -432,6 +453,9 @@ Public Class frmSTDColChk
 
                         Case "RECHECK"
                             MyReCheckExcel.Cells(8 + i, 6).Font.Color = Color.Black    'Grade AD
+                            MyReCheckExcel.Cells(8 + i, 6) = DataGridView1.Rows(i - 1).Cells(3).Value
+                        Case "@"
+                            MyReCheckExcel.Cells(8 + i, 6).Font.Color = Color.Red    'Grade AD
                             MyReCheckExcel.Cells(8 + i, 6) = DataGridView1.Rows(i - 1).Cells(3).Value
 
                     End Select

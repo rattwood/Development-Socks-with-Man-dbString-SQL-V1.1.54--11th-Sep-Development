@@ -53,6 +53,8 @@ Partial Class frmSTDColChk
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnResults = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.rechkinx = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bocdecone = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.rechk1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -310,6 +312,24 @@ Partial Class frmSTDColChk
         Me.DataGridView1.Size = New System.Drawing.Size(616, 773)
         Me.DataGridView1.TabIndex = 37
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(910, 477)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(13, 13)
+        Me.Label5.TabIndex = 69
+        Me.Label5.Text = "0"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(824, 477)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(71, 13)
+        Me.Label8.TabIndex = 68
+        Me.Label8.Text = "Total BARRE"
+        '
         'rechkinx
         '
         Me.rechkinx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
@@ -377,11 +397,12 @@ Partial Class frmSTDColChk
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.rechkdef.DefaultCellStyle = DataGridViewCellStyle5
+        Me.rechkdef.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
         Me.rechkdef.DividerWidth = 5
         Me.rechkdef.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.rechkdef.Frozen = True
         Me.rechkdef.HeaderText = "Remark"
-        Me.rechkdef.Items.AddRange(New Object() {"", "BARRE", "KEBA", "DIRTY", "FORM AB", "OVERTHROWN", "TENSION AB", "PAPERTUBE AB", "SHORT CHEESE", "X MISSING CHEESE", "NO TAIL & ABNORMAL", "WASTE", "HITTING", "TARUMI", "B GRADE BY M/C", "C GRADE BY MACHINE", "DIRTY OIL", "DIRTY NY HAND", "COLOUR AB", "FLY IN", "YARN AB", "HIGH TENSION", "LOW TENSION"})
+        Me.rechkdef.Items.AddRange(New Object() {"", "KEBA", "DIRTY", "FORM AB", "OVERTHROWN", "TENSION AB", "PAPERTUBE AB", "SHORT CHEESE", "X MISSING CHEESE", "NO TAIL & ABNORMAL", "WASTE", "HITTING", "TARUMI", "B GRADE BY M/C", "C GRADE BY MACHINE", "DIRTY OIL", "DIRTY NY HAND", "COLOUR AB", "FLY IN", "YARN AB", "HIGH TENSION", "LOW TENSION"})
         Me.rechkdef.Name = "rechkdef"
         Me.rechkdef.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.rechkdef.Width = 200
@@ -391,6 +412,8 @@ Partial Class frmSTDColChk
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1008, 781)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label26)
         Me.Controls.Add(Me.Label25)
         Me.Controls.Add(Me.Label24)
@@ -449,6 +472,8 @@ Partial Class frmSTDColChk
     Friend WithEvents Label1 As Label
     Friend WithEvents btnResults As Button
     Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label8 As Label
     Friend WithEvents rechkinx As DataGridViewTextBoxColumn
     Friend WithEvents bocdecone As DataGridViewTextBoxColumn
     Friend WithEvents rechk1 As DataGridViewTextBoxColumn
