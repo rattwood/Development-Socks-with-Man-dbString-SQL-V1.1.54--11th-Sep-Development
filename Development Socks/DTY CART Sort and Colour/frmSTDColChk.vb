@@ -139,7 +139,7 @@ Public Class frmSTDColChk
         Dim CharRead As String
 
         For i = 1 To frmDGV.DGVdata.Rows.Count
-                CharRead = DataGridView1.Rows(i - 1).Cells(2).Value
+            CharRead = DataGridView1.Rows(i - 1).Cells(2).Value
 
             Select Case CharRead
 
@@ -164,7 +164,7 @@ Public Class frmSTDColChk
                     btnReEnter.Visible = True
                     Exit Sub
             End Select
-                Next
+        Next
 
 
         Dim tmpReChk1 As String
@@ -172,7 +172,7 @@ Public Class frmSTDColChk
 
 
         For i = 1 To frmDGV.DGVdata.Rows.Count
-                tmpReChk1 = DataGridView1.Rows(i - 1).Cells(2).Value
+            tmpReChk1 = DataGridView1.Rows(i - 1).Cells(2).Value
 
             If tmpReChk1 = "OK" Then
                 'A Grade
@@ -204,23 +204,23 @@ Public Class frmSTDColChk
 
 
         btnReEnter.Visible = True
-            btnFinish.Visible = True
+        btnFinish.Visible = True
 
-        End Sub
+    End Sub
 
-        Private Sub btnReEnter_Click(sender As Object, e As EventArgs) Handles btnReEnter.Click
+    Private Sub btnReEnter_Click(sender As Object, e As EventArgs) Handles btnReEnter.Click
 
-            btnReEnter.Visible = False
-            btnFinish.Visible = False
+        btnReEnter.Visible = False
+        btnFinish.Visible = False
 
-            For i = 1 To frmDGV.DGVdata.Rows.Count
+        For i = 1 To frmDGV.DGVdata.Rows.Count
 
 
 
-                'Reset reCheck1 values for re entry or modification
-                Select Case DataGridView1.Rows(i - 1).Cells(2).Value
+            'Reset reCheck1 values for re entry or modification
+            Select Case DataGridView1.Rows(i - 1).Cells(2).Value
 
-                    Case "OK"
+                Case "OK"
                     DataGridView1.Rows(i - 1).Cells(2).Value = "A"
                 Case "-"
                     DataGridView1.Rows(i - 1).Cells(2).Value = "L"
@@ -238,8 +238,8 @@ Public Class frmSTDColChk
 
 
 
-            Label24.Text = 0
-            Label26.Text = 0
+        Label24.Text = 0
+        Label26.Text = 0
 
 
 
@@ -250,12 +250,12 @@ Public Class frmSTDColChk
 
 
 
-        Private Sub btnFinish_Click(sender As Object, e As EventArgs) Handles btnFinish.Click
+    Private Sub btnFinish_Click(sender As Object, e As EventArgs) Handles btnFinish.Click
 
 
 
-            Dim today As String = DateAndTime.Today
-            today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
+        Dim today As String = DateAndTime.Today
+        today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
 
 
 
@@ -332,7 +332,7 @@ Public Class frmSTDColChk
 
         Next
 
-
+        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         printSheet()
 
 

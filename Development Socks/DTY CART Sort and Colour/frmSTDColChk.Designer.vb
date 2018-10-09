@@ -402,7 +402,7 @@ Partial Class frmSTDColChk
         Me.rechkdef.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.rechkdef.Frozen = True
         Me.rechkdef.HeaderText = "Remark"
-        Me.rechkdef.Items.AddRange(New Object() {"", "KEBA", "DIRTY", "FORM AB", "OVERTHROWN", "TENSION AB", "PAPERTUBE AB", "SHORT CHEESE", "X MISSING CHEESE", "NO TAIL & ABNORMAL", "WASTE", "HITTING", "TARUMI", "B GRADE BY M/C", "C GRADE BY MACHINE", "DIRTY OIL", "DIRTY NY HAND", "COLOUR AB", "FLY IN", "YARN AB", "HIGH TENSION", "LOW TENSION"})
+        Me.rechkdef.Items.AddRange(New Object() {"", "BARRE", "KEBA", "DIRTY", "FORM AB", "OVERTHROWN", "TENSION AB", "PAPERTUBE AB", "SHORT CHEESE", "X MISSING CHEESE", "NO TAIL & ABNORMAL", "WASTE", "HITTING", "TARUMI", "B GRADE BY M/C", "C GRADE BY MACHINE", "DIRTY OIL", "DIRTY NY HAND", "COLOUR AB", "FLY IN", "YARN AB", "HIGH TENSION", "LOW TENSION"})
         Me.rechkdef.Name = "rechkdef"
         Me.rechkdef.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.rechkdef.Width = 200
