@@ -123,16 +123,17 @@ Public Class frmSTDColChk
             'CHECK DATA IN CORRECTLY
             Dim colname As String
 
-        For i = 1 To frmDGV.DGVdata.Rows.Count
+        'For i = 1 To frmDGV.DGVdata.Rows.Count
 
-            If DataGridView1.Rows(i - 1).Cells(2).Value = "" Then
-                colname = "ReCheck"
-                MsgBox(colname & ", Row " & i & " has no value. Please correct and try again")
-                Exit Sub
 
-            End If
+        '    If DataGridView1.Rows(i - 1).Cells(2).Value = "" Then
+        '        colname = "ReCheck"
+        '        MsgBox(colname & ", Row " & i & " has no value. Please correct and try again")
+        '        Exit Sub
 
-        Next
+        '    End If
+
+        'Next
 
 
         Dim CharRead As String
@@ -154,10 +155,14 @@ Public Class frmSTDColChk
                 Case "b", "B"
                     DataGridView1.Rows(i - 1).Cells(2).Style.ForeColor = Color.Red   'Grade BARRE
                     DataGridView1.Rows(i - 1).Cells(2).Value = "@"
+                    DataGridView1.Rows(i - 1).Cells(4).Value = "BARRE"
                 Case Else
-                    DataGridView1.Rows(i - 1).Cells(2).Style.ForeColor = Color.Red   'Grade AL
-                    DataGridView1.Rows(i - 1).Cells(2).Value = "ERROR ReEnter"
-
+                    'DataGridView1.Rows(i - 1).Cells(2).Style.ForeColor = Color.Red   'Grade AL
+                    'DataGridView1.Rows(i - 1).Cells(2).Value = "ERROR ReEnter"
+                    colname = "ReCheck"
+                    MsgBox(colname & ", Row " & i & " has no value. Please correct and try again")
+                    btnReEnter.Visible = True
+                    Exit Sub
             End Select
                 Next
 
@@ -287,7 +292,7 @@ Public Class frmSTDColChk
 
             If DataGridView1.Rows(i - 1).Cells(4).Value = "SHORT CHEESE" Then frmDGV.DGVdata.Rows(i - 1).Cells(10).Value = 1 'shortCone
             If DataGridView1.Rows(i - 1).Cells(4).Value = "X MISSING CHEESE" Then frmDGV.DGVdata.Rows(i - 1).Cells(11).Value = 1  'missingCone
-            If DataGridView1.Rows(i - 1).Cells(4).Value = "BARRE" Then frmDGV.DGVdata.Rows(i - 1).Cells(16).Value = 1 'Cone with large colour defect
+            ' If DataGridView1.Rows(i - 1).Cells(4).Value = "BARRE" Then frmDGV.DGVdata.Rows(i - 1).Cells(16).Value = 1 'Cone with large colour defect
 
 
 
@@ -313,7 +318,10 @@ Public Class frmSTDColChk
                     frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8  'RESETS CHEESE TO STATE SO CREATE RECHECK CAN FIND IT
                     frmDGV.DGVdata.Rows(i - 1).Cells("P30").Value = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value
                 Case "@"
-                    frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 0
+                    frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = Nothing
+                    frmDGV.DGVdata.Rows(i - 1).Cells("STDCHEESE").Value = Nothing
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = Nothing
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = Nothing
                     frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8  'RESETS CHEESE TO STATE SO CREATE RECHECK CAN FIND IT
                     frmDGV.DGVdata.Rows(i - 1).Cells("CONEBARLEY").Value = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value
 
