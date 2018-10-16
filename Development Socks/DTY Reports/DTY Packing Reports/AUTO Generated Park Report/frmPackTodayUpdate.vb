@@ -2244,31 +2244,31 @@ Public Class frmPackTodayUpdate
                     If IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value) Then Continue For
 
                     If frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = chkIdx Then
-                            '******************************************************************
-                            'WRITE CONE NUMBER TO SHEET
-                            MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
+                        '******************************************************************
+                        'WRITE CONE NUMBER TO SHEET
+                        MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
 
-                            frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = modBarcode
-                            nfree = nfree + 1
+                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = modBarcode
+                        nfree = nfree + 1
 
-                            frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = "2"  'to show it has been added to the sheet and will not be read again
+                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = "2"  'to show it has been added to the sheet and will not be read again
                         'idxCount = idxCount + 1
 
                         'ROUTINE IF SHEET IS FULL TO COPY SHEET AND CREATE A NEW SHEET IN THE WORKBOOK
 
                         If nfree = 41 Then
-                                Dim tmpsaveName As String
+                            Dim tmpsaveName As String
 
-                                tmpsaveName = (frmPackRepMain.finPath & "\" & frmPackRepMain.sheetName & "_" & mycount & ".xlsx")
-                                MyTodyExcel.DisplayAlerts = False
-                                xlTodyWorkbook.Sheets(mycount).SaveAs(Filename:=tmpsaveName, FileFormat:=51)
+                            tmpsaveName = (frmPackRepMain.finPath & "\" & frmPackRepMain.sheetName & "_" & mycount & ".xlsx")
+                            MyTodyExcel.DisplayAlerts = False
+                            xlTodyWorkbook.Sheets(mycount).SaveAs(Filename:=tmpsaveName, FileFormat:=51)
 
-                                MyTodyExcel.DisplayAlerts = True
-                                xlTodyWorkbook.Sheets(1).Copy(After:=xlTodyWorkbook.Sheets(mycount))
-                                'xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
-                                'CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
+                            MyTodyExcel.DisplayAlerts = True
+                            xlTodyWorkbook.Sheets(1).Copy(After:=xlTodyWorkbook.Sheets(mycount))
+                            'xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
+                            'CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
-                                Dim prodTf As String
+                            Dim prodTf As String
 
                             prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
                             'PRODUCT NAME
@@ -2280,15 +2280,15 @@ Public Class frmPackTodayUpdate
                             'CREATE AND WRITE NEW BARCODE TO NEW SHEET
                             mycount = mycount + 1
                             createBarcode()
-                                MyTodyExcel.Cells(1, 3) = SheetCodeString
+                            MyTodyExcel.Cells(1, 3) = SheetCodeString
 
 
 
                             For x = 9 To 40
-                                    MyTodyExcel.Cells(x, 3) = "" 'Clear the contents of cone cells
-                                Next
+                                MyTodyExcel.Cells(x, 3) = "" 'Clear the contents of cone cells
+                            Next
 
-                                nfree = 9
+                            nfree = 9
 
                                 Exit For
 
