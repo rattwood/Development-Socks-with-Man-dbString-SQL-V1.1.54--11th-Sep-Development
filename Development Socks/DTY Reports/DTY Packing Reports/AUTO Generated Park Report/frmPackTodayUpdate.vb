@@ -2161,6 +2161,7 @@ Public Class frmPackTodayUpdate
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
         mycount = xlTodyWorkbook.Worksheets.Count
+        boxCount = mycount
         createBarcode()
         'CType(MyTodyExcel.ActiveWorkbook.Sheets(mycount), Excel.Worksheet).Select()  'Selects the last sheeet in workbook
         Dim totCount As Integer
@@ -2205,8 +2206,7 @@ Public Class frmPackTodayUpdate
             'CREATE AND WRITE NEW BARCODE TO NEW SHEET
             mycount = mycount + 1
             createBarcode()
-            MyTodyExcel.Cells(1, 4) = SheetCodeString
-
+            MyTodyExcel.Cells(1, 3) = SheetCodeString
 
 
             For i = 9 To 40
@@ -2277,14 +2277,14 @@ Public Class frmPackTodayUpdate
                             MyTodyExcel.Cells(5, 5) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
                             'Packer Name
                             MyTodyExcel.Cells(42, 3) = frmJobEntry.PackOp
-                                'CREATE AND WRITE NEW BARCODE TO NEW SHEET
-                                mycount = mycount + 1
-                                createBarcode()
+                            'CREATE AND WRITE NEW BARCODE TO NEW SHEET
+                            mycount = mycount + 1
+                            createBarcode()
                                 MyTodyExcel.Cells(1, 3) = SheetCodeString
 
 
 
-                                For x = 9 To 40
+                            For x = 9 To 40
                                     MyTodyExcel.Cells(x, 3) = "" 'Clear the contents of cone cells
                                 Next
 
