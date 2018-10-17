@@ -2429,7 +2429,7 @@ Public Class frmPackTodayUpdate
                         End If
                     Case "STD"
                         'WRITE CONE NUMBER TO SHEET
-                        If frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 7 Then
+                        If frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 8 Then
                             MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
                             frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = modBarcode
                             nfree = nfree + 1

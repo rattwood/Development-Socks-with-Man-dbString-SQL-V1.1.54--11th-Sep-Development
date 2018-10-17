@@ -247,7 +247,7 @@ Public Class frmStdCreate
                     Next
                 Case "STD"
                     For i = 1 To frmJobEntry.LRecordCount
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 7
+                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 8
                     Next
             End Select
 
