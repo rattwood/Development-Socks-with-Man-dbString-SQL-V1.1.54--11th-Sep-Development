@@ -206,20 +206,31 @@ Public Class frmJobEntry
     Private Sub prgContinue()
 
 
+
         Dim chkBCode As String
         Dim chkBCode2 As String
 
 
         'Routine to check Barcode is TRUE
         'Check to see if PILOT Cheese, if it is force operatoer to select correct packing grade.
-        If My.Settings.chkUsePack = True And txtLotNumber.Text.Substring(0, 2) = "29" Then
-            If txtGrade.Text.Substring(0, 1) = "" Or txtGrade.Text.Substring(0, 5) <> "Pilot" Then
+
+        Select Case txtGrade.Text
+            Case "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch"
+
+            Case Else
                 MsgBox("This Is a PILOT Machine job Please Select correct" & vbCrLf & "Packing grade from Menu And Try Again")
                 txtLotNumber.Clear()
                 txtLotNumber.Focus()
                 Exit Sub
-            End If
-        End If
+        End Select
+        'If My.Settings.chkUsePack = True And txtLotNumber.Text.Substring(0, 2) = "29" Then
+        '    If txtGrade.Text = "" Or Not (txtGrade.Text.Substring(0, 4) = "Pilot") Then
+        '        MsgBox("This Is a PILOT Machine job Please Select correct" & vbCrLf & "Packing grade from Menu And Try Again")
+        '        txtLotNumber.Clear()
+        '        txtLotNumber.Focus()
+        '        Exit Sub
+        '    End If
+        'End If
 
 
         Try
@@ -481,13 +492,15 @@ Public Class frmJobEntry
     End Sub
 
 
-    Public Sub CheckJob()
 
+    Public Sub CheckJob()
 
 
         LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ORDER BY CONENUM")
 
         If LRecordCount > 0 Then
+
+
 
             Dim result = MessageBox.Show("Edit Job Yes Or No", "JOB ALREADY EXISTS", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
 
@@ -501,7 +514,7 @@ Public Class frmJobEntry
 
 
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone numberchimera4260
+                'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone numberchimera4260
 
 
 
@@ -521,7 +534,7 @@ Public Class frmJobEntry
             End If
         Else
             If My.Settings.chkUseColour Or My.Settings.chkUsePack Then
-                MsgBox("Job does not Exist, you must create new Job from Sort Computer")
+                MsgBox("Job does not Exist, you must create new Job ")
                 txtLotNumber.Clear()
                 txtLotNumber.Focus()
                 Exit Sub
@@ -532,7 +545,15 @@ Public Class frmJobEntry
                 Exit Sub
             End If
 
-            CreatNewJob()
+            If My.Settings.chkDisableCreate Then
+                MsgBox("Job does not Exist, It must be created on 2nd Floor ")
+                txtLotNumber.Clear()
+                txtLotNumber.Focus()
+                Exit Sub
+            Else
+                CreatNewJob()
+            End If
+
 
             If quit Then
                 quit = 0
