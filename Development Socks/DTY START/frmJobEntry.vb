@@ -481,13 +481,15 @@ Public Class frmJobEntry
     End Sub
 
 
-    Public Sub CheckJob()
 
+    Public Sub CheckJob()
 
 
         LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ORDER BY CONENUM")
 
         If LRecordCount > 0 Then
+
+
 
             Dim result = MessageBox.Show("Edit Job Yes Or No", "JOB ALREADY EXISTS", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
 
@@ -501,7 +503,7 @@ Public Class frmJobEntry
 
 
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone numberchimera4260
+                'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone numberchimera4260
 
 
 
@@ -521,7 +523,7 @@ Public Class frmJobEntry
             End If
         Else
             If My.Settings.chkUseColour Or My.Settings.chkUsePack Then
-                MsgBox("Job does not Exist, you must create new Job from Sort Computer")
+                MsgBox("Job does not Exist, you must create new Job ")
                 txtLotNumber.Clear()
                 txtLotNumber.Focus()
                 Exit Sub
@@ -532,7 +534,15 @@ Public Class frmJobEntry
                 Exit Sub
             End If
 
-            CreatNewJob()
+            If My.Settings.chkDisableCreate Then
+                MsgBox("Job does not Exist, It must be created on 2nd Floor ")
+                txtLotNumber.Clear()
+                txtLotNumber.Focus()
+                Exit Sub
+            Else
+                CreatNewJob()
+            End If
+
 
             If quit Then
                 quit = 0

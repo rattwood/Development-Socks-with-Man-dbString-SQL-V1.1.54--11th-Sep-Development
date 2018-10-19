@@ -55,6 +55,7 @@ Partial Class frmSettings
         Me.txtBoxPackReports = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.txtBoxBarcodectrl = New System.Windows.Forms.TextBox()
+        Me.chkDisableCreate = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'lblSerialPortSelect
@@ -363,11 +364,24 @@ Partial Class frmSettings
         Me.txtBoxBarcodectrl.Size = New System.Drawing.Size(48, 21)
         Me.txtBoxBarcodectrl.TabIndex = 54
         '
+        'chkDisableCreate
+        '
+        Me.chkDisableCreate.AutoSize = True
+        Me.chkDisableCreate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkDisableCreate.Location = New System.Drawing.Point(20, 415)
+        Me.chkDisableCreate.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.chkDisableCreate.Name = "chkDisableCreate"
+        Me.chkDisableCreate.Size = New System.Drawing.Size(171, 20)
+        Me.chkDisableCreate.TabIndex = 55
+        Me.chkDisableCreate.Text = "Dissable Sort Create"
+        Me.chkDisableCreate.UseVisualStyleBackColor = True
+        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(913, 579)
+        Me.Controls.Add(Me.chkDisableCreate)
         Me.Controls.Add(Me.txtBoxBarcodectrl)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Button6)
@@ -441,4 +455,5 @@ Partial Class frmSettings
     Friend WithEvents txtBoxPackReports As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents txtBoxBarcodectrl As TextBox
+    Friend WithEvents chkDisableCreate As CheckBox
 End Class

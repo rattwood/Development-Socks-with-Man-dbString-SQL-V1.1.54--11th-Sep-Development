@@ -289,6 +289,18 @@ Namespace My
                 Me("SQLConn") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property chkDisableCreate() As Boolean
+            Get
+                Return CType(Me("chkDisableCreate"),Boolean)
+            End Get
+            Set
+                Me("chkDisableCreate") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

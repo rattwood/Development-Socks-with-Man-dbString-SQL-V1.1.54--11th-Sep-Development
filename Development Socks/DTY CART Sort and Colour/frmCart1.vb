@@ -137,7 +137,17 @@ Public Class frmCart1
 
 
         Me.txtCartNum.Text = frmJobEntry.cartSelect
-        Me.lblJobNum.Text = frmJobEntry.varJobNum
+        Me.lblMcNum.Text = frmDGV.DGVdata.Rows(0).Cells("MCNAME").Value.ToString
+        lblProdName.Text = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value.ToString
+        lblTFNum.Text = frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value.ToString
+        lblDoffNum.Text = frmDGV.DGVdata.Rows(0).Cells("DOFFNUM").Value.ToString
+
+
+
+
+
+
+
 
         'HIDE SAVE BUTTON WHEN FORM OPENS
         Me.btnSave.Visible = False
@@ -2993,6 +3003,7 @@ Public Class frmCart1
     'Routines to control Vericolor Solo
 
     Delegate Sub DataDelegate(ByVal sdata As String)
+
 
     Private Sub StoreReceivedData(ByVal sdata As String)
 

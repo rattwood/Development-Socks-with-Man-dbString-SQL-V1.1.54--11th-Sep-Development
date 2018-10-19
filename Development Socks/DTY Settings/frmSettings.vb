@@ -27,6 +27,7 @@
         If My.Settings.chkUseColour Then chkUseColour.Checked = True Else chkUseColour.Checked = False
         If My.Settings.chkUseSort Then chkUseSort.Checked = True Else chkUseSort.Checked = False
         If My.Settings.chkUsePack Then chkUsePack.Checked = True Else chkUsePack.Checked = False
+        If My.Settings.chkDisableCreate Then chkDisableCreate.Checked = True Else chkDisableCreate.Checked = False
 
         If My.Settings.debugSet Then chkDGV.Checked = True Else chkDGV.Checked = False
 
@@ -92,6 +93,7 @@
         My.Settings.chkUseColour = chkUseColour.CheckState
         My.Settings.chkUseSort = chkUseSort.CheckState
         My.Settings.chkUsePack = chkUsePack.CheckState
+        My.Settings.chkDisableCreate = chkDisableCreate.CheckState
         My.Settings.debugSet = chkDGV.CheckState
         My.Settings.dirTemplate = txtBoxTemplates.Text
         My.Settings.dirCarts = txtBoxCarts.Text

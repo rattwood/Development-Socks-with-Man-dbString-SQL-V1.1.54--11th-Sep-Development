@@ -95,7 +95,7 @@ Partial Class frmCart1
         Me.lblP50 = New System.Windows.Forms.Label()
         Me.VeriColorCom = New System.IO.Ports.SerialPort(Me.components)
         Me.lblFinished = New System.Windows.Forms.Label()
-        Me.lblJobNum = New System.Windows.Forms.Label()
+        Me.lblMcNum = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.btnDefectSave = New System.Windows.Forms.Button()
         Me.btnNextJob = New System.Windows.Forms.Button()
@@ -132,6 +132,11 @@ Partial Class frmCart1
         Me.chk_LT = New System.Windows.Forms.CheckBox()
         Me.txtWaste = New System.Windows.Forms.TextBox()
         Me.lblWaste = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblProdName = New System.Windows.Forms.Label()
+        Me.lblTFNum = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lblDoffNum = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'btnCone4
@@ -1050,25 +1055,26 @@ Partial Class frmCart1
         Me.lblFinished.Text = " Job Finished "
         Me.lblFinished.Visible = False
         '
-        'lblJobNum
+        'lblMcNum
         '
-        Me.lblJobNum.AutoSize = True
-        Me.lblJobNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblJobNum.Location = New System.Drawing.Point(106, 9)
-        Me.lblJobNum.Name = "lblJobNum"
-        Me.lblJobNum.Size = New System.Drawing.Size(72, 24)
-        Me.lblJobNum.TabIndex = 97
-        Me.lblJobNum.Text = "Label4"
+        Me.lblMcNum.AutoSize = True
+        Me.lblMcNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblMcNum.ForeColor = System.Drawing.Color.DeepSkyBlue
+        Me.lblMcNum.Location = New System.Drawing.Point(72, 6)
+        Me.lblMcNum.Name = "lblMcNum"
+        Me.lblMcNum.Size = New System.Drawing.Size(54, 24)
+        Me.lblMcNum.TabIndex = 97
+        Me.lblMcNum.Text = "0000"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label5.Location = New System.Drawing.Point(13, 9)
+        Me.Label5.Location = New System.Drawing.Point(13, 6)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(87, 24)
+        Me.Label5.Size = New System.Drawing.Size(53, 24)
         Me.Label5.TabIndex = 98
-        Me.Label5.Text = "Job Ref:"
+        Me.Label5.Text = "M/C:"
         '
         'btnDefectSave
         '
@@ -1473,12 +1479,70 @@ Partial Class frmCart1
         Me.lblWaste.Text = "WASTE Cheese"
         Me.lblWaste.Visible = False
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label1.Location = New System.Drawing.Point(167, 6)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(114, 24)
+        Me.Label1.TabIndex = 137
+        Me.Label1.Text = "PRODUCT:"
+        '
+        'lblProdName
+        '
+        Me.lblProdName.AutoSize = True
+        Me.lblProdName.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblProdName.ForeColor = System.Drawing.Color.DeepSkyBlue
+        Me.lblProdName.Location = New System.Drawing.Point(283, 6)
+        Me.lblProdName.Name = "lblProdName"
+        Me.lblProdName.Size = New System.Drawing.Size(164, 24)
+        Me.lblProdName.TabIndex = 138
+        Me.lblProdName.Text = "00000000000000"
+        '
+        'lblTFNum
+        '
+        Me.lblTFNum.AutoSize = True
+        Me.lblTFNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblTFNum.ForeColor = System.Drawing.Color.DeepSkyBlue
+        Me.lblTFNum.Location = New System.Drawing.Point(453, 6)
+        Me.lblTFNum.Name = "lblTFNum"
+        Me.lblTFNum.Size = New System.Drawing.Size(32, 24)
+        Me.lblTFNum.TabIndex = 139
+        Me.lblTFNum.Text = "00"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label7.Location = New System.Drawing.Point(509, 6)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(72, 24)
+        Me.Label7.TabIndex = 140
+        Me.Label7.Text = "DOFF:"
+        '
+        'lblDoffNum
+        '
+        Me.lblDoffNum.AutoSize = True
+        Me.lblDoffNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblDoffNum.ForeColor = System.Drawing.Color.DeepSkyBlue
+        Me.lblDoffNum.Location = New System.Drawing.Point(585, 6)
+        Me.lblDoffNum.Name = "lblDoffNum"
+        Me.lblDoffNum.Size = New System.Drawing.Size(43, 24)
+        Me.lblDoffNum.TabIndex = 141
+        Me.lblDoffNum.Text = "000"
+        '
         'frmCart1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(1086, 699)
+        Me.Controls.Add(Me.lblDoffNum)
+        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.lblTFNum)
+        Me.Controls.Add(Me.lblProdName)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtWaste)
         Me.Controls.Add(Me.lblWaste)
         Me.Controls.Add(Me.chk_HT)
@@ -1515,7 +1579,7 @@ Partial Class frmCart1
         Me.Controls.Add(Me.btnNextJob)
         Me.Controls.Add(Me.btnDefectSave)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.lblJobNum)
+        Me.Controls.Add(Me.lblMcNum)
         Me.Controls.Add(Me.lblFinished)
         Me.Controls.Add(Me.lblP50)
         Me.Controls.Add(Me.txtP50)
@@ -1667,7 +1731,7 @@ Partial Class frmCart1
     Friend WithEvents lblP50 As Label
     Friend WithEvents VeriColorCom As IO.Ports.SerialPort
     Friend WithEvents lblFinished As Label
-    Friend WithEvents lblJobNum As Label
+    Friend WithEvents lblMcNum As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents btnDefectSave As Button
     Friend WithEvents btnNextJob As Button
@@ -1704,4 +1768,9 @@ Partial Class frmCart1
     Friend WithEvents chk_LT As CheckBox
     Friend WithEvents txtWaste As TextBox
     Friend WithEvents lblWaste As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents lblProdName As Label
+    Friend WithEvents lblTFNum As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents lblDoffNum As Label
 End Class
