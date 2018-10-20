@@ -214,23 +214,18 @@ Public Class frmJobEntry
         'Routine to check Barcode is TRUE
         'Check to see if PILOT Cheese, if it is force operatoer to select correct packing grade.
 
-        Select Case txtGrade.Text
-            Case "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch"
+        If My.Settings.chkUsePack And txtLotNumber.Text.Substring(0, 2) = "29" Then
+            Select Case txtGrade.Text
+                Case "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch"
 
-            Case Else
-                MsgBox("This Is a PILOT Machine job Please Select correct" & vbCrLf & "Packing grade from Menu And Try Again")
-                txtLotNumber.Clear()
-                txtLotNumber.Focus()
-                Exit Sub
-        End Select
-        'If My.Settings.chkUsePack = True And txtLotNumber.Text.Substring(0, 2) = "29" Then
-        '    If txtGrade.Text = "" Or Not (txtGrade.Text.Substring(0, 4) = "Pilot") Then
-        '        MsgBox("This Is a PILOT Machine job Please Select correct" & vbCrLf & "Packing grade from Menu And Try Again")
-        '        txtLotNumber.Clear()
-        '        txtLotNumber.Focus()
-        '        Exit Sub
-        '    End If
-        'End If
+                Case Else
+                    MsgBox("This Is a PILOT Machine job Please Select correct" & vbCrLf & "Packing grade from Menu And Try Again")
+                    txtLotNumber.Clear()
+                    txtLotNumber.Focus()
+                    Exit Sub
+            End Select
+        End If
+
 
 
         Try
