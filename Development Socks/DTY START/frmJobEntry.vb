@@ -246,22 +246,42 @@ Public Class frmJobEntry
 
             ElseIf txtLotNumber.Text.Substring(12, 1) = "B" Then
                 chkBCode = txtLotNumber.Text.Substring(12, 1)
-                '
-                ' If chkBCode = "B" Then
+
+
                 stdcheck = 0
                 reCheck = 0
-                If txtLotNumber.TextLength > 14 Then  ' For carts B10,11 & 12
-                    cartNum = txtLotNumber.Text.Substring(12, 3)
-                Else
-                    cartNum = txtLotNumber.Text.Substring(12, 2)
-                End If
-            Else
-                MsgBox("This Is Not a CART Barcode Please RE Scan")
-                Me.txtLotNumber.Clear()
 
-                Me.txtLotNumber.Focus()
-                Me.txtLotNumber.Refresh()
-                Exit Sub
+                Select Case txtLotNumber.TextLength
+                    Case 14
+                        If txtLotNumber.Text.Substring(13, 1) >= 1 And txtLotNumber.Text.Substring(13, 1) <= 9 Then
+                            cartNum = txtLotNumber.Text.Substring(12, 2)
+                        Else
+                            MsgBox("This Is Not a CART Barcode Please RE Scan")
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Focus()
+                            Me.txtLotNumber.Refresh()
+                            Exit Sub
+                        End If
+                    Case 15
+                        If txtLotNumber.Text.Substring(13, 2) = "11" Or txtLotNumber.Text.Substring(13, 2) = "12" Then
+                            cartNum = txtLotNumber.Text.Substring(12, 3)
+                        Else
+                            MsgBox("This Is Not a CART Barcode Please RE Scan")
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Focus()
+                            Me.txtLotNumber.Refresh()
+                            Exit Sub
+                        End If
+                    Case > 15
+                        MsgBox("This Is Not a CART Barcode Please RE Scan")
+                        Me.txtLotNumber.Clear()
+                        Me.txtLotNumber.Focus()
+                        Me.txtLotNumber.Refresh()
+                        Exit Sub
+                End Select
+
+
+
             End If
 
         Catch ex As Exception
