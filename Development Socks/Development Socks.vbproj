@@ -190,7 +190,7 @@
     <Compile Include="DTY Reports\DTY Packing Reports\frmProdStockWork.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DTY Settings\frmdbString.Designer.vb">
+    <Compile Include="DTY Settings\frmdbString.designer.vb">
       <DependentUpon>frmdbString.vb</DependentUpon>
     </Compile>
     <Compile Include="DTY Settings\frmdbString.vb">
@@ -202,7 +202,7 @@
     <Compile Include="DTY Settings\frmProductMod.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DTY Settings\frmSettings.Designer.vb">
+    <Compile Include="DTY Settings\frmSettings.designer.vb">
       <DependentUpon>frmSettings.vb</DependentUpon>
     </Compile>
     <Compile Include="DTY Settings\frmSettings.vb">

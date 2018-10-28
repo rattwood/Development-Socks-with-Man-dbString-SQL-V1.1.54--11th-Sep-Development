@@ -108,7 +108,7 @@ Partial Class frmSettings
         '
         Me.chkUseSpectro.AutoSize = True
         Me.chkUseSpectro.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkUseSpectro.Location = New System.Drawing.Point(718, 76)
+        Me.chkUseSpectro.Location = New System.Drawing.Point(418, 106)
         Me.chkUseSpectro.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.chkUseSpectro.Name = "chkUseSpectro"
         Me.chkUseSpectro.Size = New System.Drawing.Size(113, 20)
@@ -120,7 +120,7 @@ Partial Class frmSettings
         '
         Me.chkUseColour.AutoSize = True
         Me.chkUseColour.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkUseColour.Location = New System.Drawing.Point(718, 123)
+        Me.chkUseColour.Location = New System.Drawing.Point(418, 153)
         Me.chkUseColour.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.chkUseColour.Name = "chkUseColour"
         Me.chkUseColour.Size = New System.Drawing.Size(104, 20)
@@ -132,7 +132,7 @@ Partial Class frmSettings
         '
         Me.chkUseSort.AutoSize = True
         Me.chkUseSort.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkUseSort.Location = New System.Drawing.Point(718, 171)
+        Me.chkUseSort.Location = New System.Drawing.Point(418, 201)
         Me.chkUseSort.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.chkUseSort.Name = "chkUseSort"
         Me.chkUseSort.Size = New System.Drawing.Size(87, 20)
@@ -144,7 +144,7 @@ Partial Class frmSettings
         '
         Me.chkUsePack.AutoSize = True
         Me.chkUsePack.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkUsePack.Location = New System.Drawing.Point(718, 218)
+        Me.chkUsePack.Location = New System.Drawing.Point(418, 248)
         Me.chkUsePack.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.chkUsePack.Name = "chkUsePack"
         Me.chkUsePack.Size = New System.Drawing.Size(115, 20)
@@ -156,7 +156,7 @@ Partial Class frmSettings
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(713, 18)
+        Me.Label1.Location = New System.Drawing.Point(413, 48)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(178, 24)
@@ -170,6 +170,7 @@ Partial Class frmSettings
         Me.txtBoxTemplates.Name = "txtBoxTemplates"
         Me.txtBoxTemplates.Size = New System.Drawing.Size(287, 21)
         Me.txtBoxTemplates.TabIndex = 27
+        Me.txtBoxTemplates.Visible = False
         '
         'txtBoxCarts
         '
@@ -178,6 +179,7 @@ Partial Class frmSettings
         Me.txtBoxCarts.Name = "txtBoxCarts"
         Me.txtBoxCarts.Size = New System.Drawing.Size(287, 21)
         Me.txtBoxCarts.TabIndex = 28
+        Me.txtBoxCarts.Visible = False
         '
         'txtBoxJobs
         '
@@ -186,6 +188,7 @@ Partial Class frmSettings
         Me.txtBoxJobs.Name = "txtBoxJobs"
         Me.txtBoxJobs.Size = New System.Drawing.Size(287, 21)
         Me.txtBoxJobs.TabIndex = 29
+        Me.txtBoxJobs.Visible = False
         '
         'Label2
         '
@@ -221,6 +224,7 @@ Partial Class frmSettings
         Me.Label8.Size = New System.Drawing.Size(150, 24)
         Me.Label8.TabIndex = 39
         Me.Label8.Text = "Directory Paths"
+        Me.Label8.Visible = False
         '
         'Button1
         '
@@ -246,6 +250,7 @@ Partial Class frmSettings
         Me.Button2.TabIndex = 41
         Me.Button2.Text = "Templates"
         Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.Visible = False
         '
         'Button3
         '
@@ -255,6 +260,7 @@ Partial Class frmSettings
         Me.Button3.TabIndex = 42
         Me.Button3.Text = "Save Carts"
         Me.Button3.UseVisualStyleBackColor = True
+        Me.Button3.Visible = False
         '
         'Button4
         '
@@ -264,11 +270,12 @@ Partial Class frmSettings
         Me.Button4.TabIndex = 43
         Me.Button4.Text = "Save Jobs"
         Me.Button4.UseVisualStyleBackColor = True
+        Me.Button4.Visible = False
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(838, 469)
+        Me.Label4.Location = New System.Drawing.Point(529, 452)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(51, 15)
         Me.Label4.TabIndex = 44
@@ -277,7 +284,7 @@ Partial Class frmSettings
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(838, 497)
+        Me.Label5.Location = New System.Drawing.Point(529, 480)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(51, 15)
         Me.Label5.TabIndex = 45
@@ -286,7 +293,7 @@ Partial Class frmSettings
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(687, 469)
+        Me.Label6.Location = New System.Drawing.Point(378, 452)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(144, 15)
         Me.Label6.TabIndex = 46
@@ -295,7 +302,7 @@ Partial Class frmSettings
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(688, 497)
+        Me.Label7.Location = New System.Drawing.Point(379, 480)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(138, 15)
         Me.Label7.TabIndex = 47
@@ -321,6 +328,7 @@ Partial Class frmSettings
         Me.Button5.TabIndex = 50
         Me.Button5.Text = "Save Packing"
         Me.Button5.UseVisualStyleBackColor = True
+        Me.Button5.Visible = False
         '
         'txtBoxPack
         '
@@ -329,6 +337,7 @@ Partial Class frmSettings
         Me.txtBoxPack.Name = "txtBoxPack"
         Me.txtBoxPack.Size = New System.Drawing.Size(287, 21)
         Me.txtBoxPack.TabIndex = 49
+        Me.txtBoxPack.Visible = False
         '
         'Button6
         '
@@ -338,6 +347,7 @@ Partial Class frmSettings
         Me.Button6.TabIndex = 52
         Me.Button6.Text = "Save Pack Reports"
         Me.Button6.UseVisualStyleBackColor = True
+        Me.Button6.Visible = False
         '
         'txtBoxPackReports
         '
@@ -346,6 +356,7 @@ Partial Class frmSettings
         Me.txtBoxPackReports.Name = "txtBoxPackReports"
         Me.txtBoxPackReports.Size = New System.Drawing.Size(287, 21)
         Me.txtBoxPackReports.TabIndex = 51
+        Me.txtBoxPackReports.Visible = False
         '
         'Label9
         '
@@ -380,7 +391,7 @@ Partial Class frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(913, 579)
+        Me.ClientSize = New System.Drawing.Size(739, 522)
         Me.Controls.Add(Me.chkDisableCreate)
         Me.Controls.Add(Me.txtBoxBarcodectrl)
         Me.Controls.Add(Me.Label9)
