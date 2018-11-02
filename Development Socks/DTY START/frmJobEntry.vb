@@ -263,7 +263,7 @@ Public Class frmJobEntry
                             Exit Sub
                         End If
                     Case 15
-                        If txtLotNumber.Text.Substring(13, 2) = "11" Or txtLotNumber.Text.Substring(13, 2) = "12" Then
+                        If txtLotNumber.Text.Substring(13, 2) = "10" Or txtLotNumber.Text.Substring(13, 2) = "11" Or txtLotNumber.Text.Substring(13, 2) = "12" Then
                             cartNum = txtLotNumber.Text.Substring(12, 3)
                         Else
                             MsgBox("This Is Not a CART Barcode Please RE Scan")
@@ -1966,11 +1966,12 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub ReCheckToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ReCheckToolStripMenuItem1.Click
-        stdReChk = 1
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
         txtGrade.Text = ReCheckToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
         lblScanType.Text = "Scan First Cheese on Cart"
+
     End Sub
 
     Private Sub ReCheckAToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles ReCheckAToolStripMenuItem4.Click

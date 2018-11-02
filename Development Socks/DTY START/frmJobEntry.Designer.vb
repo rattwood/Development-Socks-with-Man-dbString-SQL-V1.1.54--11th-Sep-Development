@@ -529,7 +529,7 @@ Partial Class frmJobEntry
         Me.ToolStripTextBox5.Font = New System.Drawing.Font("Segoe UI Black", 11.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolStripTextBox5.Name = "ToolStripTextBox5"
         Me.ToolStripTextBox5.Size = New System.Drawing.Size(208, 28)
-        Me.ToolStripTextBox5.Text = "Create Std ReCheck Form"
+        Me.ToolStripTextBox5.Text = "Create ReCheck Form"
         '
         'ToolStripSeparator5
         '
