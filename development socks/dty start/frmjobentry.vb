@@ -120,7 +120,7 @@ Public Class frmJobEntry
 
 
         If My.Settings.chkUseSort = False And My.Settings.chkUseColour = False And My.Settings.chkUsePack = False Then
-            MsgBox("Please edit SETTINGS for type of User")
+            MsgBox("Please edit SETTINGS for type of User" & vbCrLf & " กรุณาแก้ไข setting เพื่อกำหนด User")
             Me.txtLotNumber.Clear()
             Me.txtLotNumber.Focus()
         End If
@@ -219,7 +219,7 @@ Public Class frmJobEntry
                 Case "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch"
 
                 Case Else
-                    MsgBox("This Is a PILOT Machine job Please Select correct" & vbCrLf & "Packing grade from Menu And Try Again")
+                    MsgBox("This Is a PILOT Machine job Please Select correct" & vbCrLf & "Packing grade from Menu And Try Again" & vbCrLf & " หมายเลขนี้เป็นงานไพล็อต กรุณาเลือกการแพ็คจากเมนูให้ถูกต้อง ")
                     txtLotNumber.Clear()
                     txtLotNumber.Focus()
                     Exit Sub
@@ -256,7 +256,7 @@ Public Class frmJobEntry
                         If txtLotNumber.Text.Substring(13, 1) >= 1 And txtLotNumber.Text.Substring(13, 1) <= 9 Then
                             cartNum = txtLotNumber.Text.Substring(12, 2)
                         Else
-                            MsgBox("This Is Not a CART Barcode Please RE Scan")
+                            MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
                             Me.txtLotNumber.Clear()
                             Me.txtLotNumber.Focus()
                             Me.txtLotNumber.Refresh()
@@ -266,14 +266,14 @@ Public Class frmJobEntry
                         If txtLotNumber.Text.Substring(13, 2) = "10" Or txtLotNumber.Text.Substring(13, 2) = "11" Or txtLotNumber.Text.Substring(13, 2) = "12" Then
                             cartNum = txtLotNumber.Text.Substring(12, 3)
                         Else
-                            MsgBox("This Is Not a CART Barcode Please RE Scan")
+                            MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
                             Me.txtLotNumber.Clear()
                             Me.txtLotNumber.Focus()
                             Me.txtLotNumber.Refresh()
                             Exit Sub
                         End If
                     Case > 15
-                        MsgBox("This Is Not a CART Barcode Please RE Scan")
+                        MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
                         Me.txtLotNumber.Clear()
                         Me.txtLotNumber.Focus()
                         Me.txtLotNumber.Refresh()
@@ -285,7 +285,7 @@ Public Class frmJobEntry
             End If
 
         Catch ex As Exception
-            MsgBox("BarCcode Is Not Valid")
+            MsgBox("BarCcode Is Not Valid" & vbCrLf & " บาร์โค็ดไม่ถูกต้อง")
             Me.txtLotNumber.Clear()
             Me.txtLotNumber.Focus()
             Me.txtLotNumber.Refresh()
@@ -549,7 +549,7 @@ Public Class frmJobEntry
             End If
         Else
             If My.Settings.chkUseColour Or My.Settings.chkUsePack Then
-                MsgBox("Job does not Exist, you must create new Job ")
+                MsgBox("Job does not Exist, you must create new Job " & vbCrLf & " ไม่พบงานที่ทำ กรุณาสร้างงานใหม่")
                 txtLotNumber.Clear()
                 txtLotNumber.Focus()
                 Exit Sub
@@ -561,7 +561,7 @@ Public Class frmJobEntry
             End If
 
             If My.Settings.chkDisableCreate Then
-                MsgBox("Job does not Exist, It must be created on 2nd Floor ")
+                MsgBox("Job does not Exist, It must be created on 2nd Floor " & vbCrLf & " ไม่พบงานที่ทำ งานต้องสร้างมาจากชั้นที่ 2 ")
                 txtLotNumber.Clear()
                 txtLotNumber.Focus()
                 Exit Sub
@@ -674,7 +674,7 @@ Public Class frmJobEntry
             End If
         Else
 
-            MsgBox("Job does not Exist")
+            MsgBox("Job does not Exist" & vbCrLf & " ไม่พบงานที่ทำ")
             txtLotNumber.Clear()
             txtLotNumber.Focus()
             Exit Sub
@@ -777,7 +777,7 @@ Public Class frmJobEntry
             frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
 
         Else
-            MsgBox("PRODUCT NUMBER " & varProductCode & " VALUE DOES NOT EXIST")
+            MsgBox("PRODUCT NUMBER " & varProductCode & " VALUE DOES NOT EXIST" & vbCrLf & " หมายเลขโปรดักส์นี้ไม่มมีในรายการโปรดักส์")
             quit = 1
             Exit Sub
 
@@ -852,7 +852,7 @@ Public Class frmJobEntry
             frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
 
         Else
-            MsgBox("PRODUCT NUMBER " & varProductCode & " THIS PRODUCT IS NOT IN THE PRODUCT LIST")
+            MsgBox("PRODUCT NUMBER " & varProductCode & " THIS PRODUCT IS NOT IN THE PRODUCT LIST" & vbCrLf & " หมายเลขโปรดักส์นี้ไม่มมีในรายการโปรดักส์")
             quit = 1
             Exit Sub
 
@@ -1031,7 +1031,7 @@ Public Class frmJobEntry
             If chkBCode = "B" Then
 
                 Label3.Visible = True
-                Label3.Text = "This is not a Valid Cheese Number"
+                Label3.Text = "This is not a Valid Cheese Number" & vbCrLf & " ไม่พบหมายเลข cheese นี้ "
                 DelayTM()
                 Label3.Visible = False
                 Me.txtLotNumber.Clear()
@@ -1047,7 +1047,7 @@ Public Class frmJobEntry
         Catch ex As Exception
 
             Label3.Visible = True
-            Label3.Text = "BarCcode Is Not Valid"
+            Label3.Text = "BarCcode Is Not Valid" * vbCrLf & " ไม่พบหมายเลข บาร์โค็ด นี้"
             DelayTM()
             Label3.Visible = False
 
@@ -1100,7 +1100,7 @@ Public Class frmJobEntry
                     Case "Round1"
                         If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 1 Then
                             Label3.Visible = True
-                            Label3.Text = "THIS CHEESE IS CANNOT BE USED"
+                            Label3.Text = "THIS CHEESE CANNOT BE USED" & vbCrLf & " ใม่สามารถใช้ cheese นี้ได้"
                             DelayTM()
                             Label3.Visible = False
                             quit = 1
@@ -1115,7 +1115,7 @@ Public Class frmJobEntry
                     Case "Round2"
                         If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 3 Then
                             Label3.Visible = True
-                            Label3.Text = "THIS CHEESE CANNOT BE USED"
+                            Label3.Text = "THIS CHEESE CANNOT BE USED" & vbCrLf & " ใม่สามารถใช้ cheese นี้ได้"
                             DelayTM()
                             Label3.Visible = False
                             quit = 1
@@ -1130,7 +1130,7 @@ Public Class frmJobEntry
                     Case "Round3"
                         If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 5 Then
                             Label3.Visible = True
-                            Label3.Text = "THIS CHEESE CANNOT BE USED"
+                            Label3.Text = "THIS CHEESE CANNOT BE USED" & vbCrLf & " ใม่สามารถใช้ cheese นี้ได้"
                             DelayTM()
                             Label3.Visible = False
                             quit = 1
@@ -1145,7 +1145,7 @@ Public Class frmJobEntry
                     Case "STD"
                         If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 7 Then
                             Label3.Visible = True
-                            Label3.Text = "THIS CHEESE CANNOT BE USED"
+                            Label3.Text = "THIS CHEESE CANNOT BE USED" & vbCrLf & " ใม่สามารถใช้ cheese นี้ได้"
                             DelayTM()
                             Label3.Visible = False
                             quit = 1
@@ -1211,7 +1211,8 @@ Public Class frmJobEntry
 
         Else
             Label3.Visible = True
-            Label3.Text = "PRODUCT NUMBER " & varProductCode & " THIS PRODUCT IS NOT IN THE PRODUCT LIST"
+            Label3.Text = "PRODUCT NUMBER " & varProductCode & " THIS PRODUCT IS NOT IN THE PRODUCT LIST" & vbCrLf &
+                "หมายเลขโปรดักส์ “ & varProductCode & ” นี้ ไม่พบอยู่ในรายการสินค้า"
             DelayTM()
             Label3.Visible = False
             quit = 1
@@ -1257,7 +1258,8 @@ Public Class frmJobEntry
 
         Else
             Label3.Visible = True
-            Label3.Text = "NO GRADE " & "'" & txtGrade.Text & "'" & " CHEESES CAN BE FOUND"
+            Label3.Text = "NO GRADE " & "'" & txtGrade.Text & "'" & " CHEESES CAN BE FOUND" & vbCrLf &
+                "ไม่มีค่าสี “ & txtGrade.Text & ” พบ cheese ลูกนี้แล้ว"
             DelayTM()
             Label3.Visible = False
             Me.txtLotNumber.Clear()
@@ -1312,7 +1314,7 @@ Public Class frmJobEntry
         Catch ex As Exception
 
             Label3.Visible = True
-            Label3.Text = "BarCcode Is Not Valid"
+            Label3.Text = "BarCcode Is Not Valid" & vbCrLf & "ไม่พบหมายเลข cheese นี้"
             DelayTM()
             Label3.Visible = False
 
@@ -1367,7 +1369,7 @@ Public Class frmJobEntry
                     If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("RECHK").Value) Then  'check to see if cheese scanned has already been allocated
                         If frmDGV.DGVdata.Rows(0).Cells("RECHK").Value > "0" Then
                             Label3.Visible = True
-                            Label3.Text = "THIS CHEESE HAS ALREADY BEEN ALLOCATED "
+                            Label3.Text = "THIS CHEESE HAS ALREADY BEEN ALLOCATED " & vbCrLf & " Cheese ลูกนี้ได้ถูกนำไปใช้แล้ว"
                             DelayTM()
                             Label3.Visible = False
                             quit = 1
@@ -1392,7 +1394,7 @@ Public Class frmJobEntry
         If LRecordCount = 0 Then
 
             Label3.Visible = True
-            Label3.Text = "NO Grade " & "'" & txtGrade.Text & "'" & " CHEESES PLEASE RE-SCAN"
+            Label3.Text = "NO Grade " & "'" & txtGrade.Text & "'" & " CHEESES PLEASE RE-SCAN" & vbCrLf & "ไม่มีค่าสี “ & txtGrade.Text & ” กรุณาสแกน cheese ลูกนี้อีกครั้ง"
             DelayTM()
             Label3.Visible = False
             Me.txtLotNumber.Clear()
@@ -1440,7 +1442,8 @@ Public Class frmJobEntry
 
         Else
             Label3.Visible = True
-            Label3.Text = "PRODUCT NUMBER " & varProductCode & " THIS " & vbCrLf & "PRODUCT Is Not In THE PRODUCT LIST"
+            Label3.Text = "PRODUCT NUMBER " & varProductCode & " THIS " & vbCrLf & "PRODUCT Is Not In THE PRODUCT LIST" & vbCrLf &
+                "หมายเลขโปรดักส์ “ & varProductCode & ” นี้  ไม่พบอยู่ในรายการสินค้า"
             DelayTM()
             Label3.Visible = False
             quit = 1
@@ -1528,7 +1531,8 @@ Public Class frmJobEntry
 
         Else
             Label3.Visible = True
-            Label3.Text = "NO GRADE " & "'" & txtGrade.Text & "'" & " CHEESES CAN BE FOUND"
+            Label3.Text = "NO GRADE " & "'" & txtGrade.Text & "'" & " CHEESES CAN BE FOUND" & vbCrLf &
+                "ไม่มีค่าสี “ & txtGrade.Text & ” กรุณาสแกน cheese ลูกนี้อีกครั้ง"
             DelayTM()
             Label3.Visible = False
             Me.txtLotNumber.Clear()
@@ -1601,7 +1605,7 @@ Public Class frmJobEntry
 
 
         If txtBoxCartReport.Text = "" Then
-            MsgBox("Please enter Barcode first")
+            MsgBox("Please enter Barcode first" & vbCrLf & " กรุณาป้อนรหัสบาร์โค็ด")
             Me.txtBoxCartReport.Focus()
             Exit Sub
         End If
@@ -1632,7 +1636,7 @@ Public Class frmJobEntry
 
         Else
             Me.Cursor = System.Windows.Forms.Cursors.Default
-            MsgBox("No Job Found, Please check if this Job has been checked")
+            MsgBox("No Job Found, Please check if this Job has been checked" & vbCrLf & " ไม่พบงาน กรุณาตรวจสอบว่างานนี้ได้รับการตรวจเช็คหรือไม่")
 
             Me.txtBoxCartReport.Visible = False
             Me.btnCancelReport.Visible = False
@@ -1678,7 +1682,7 @@ Public Class frmJobEntry
     Private Sub btnExChangeCone_Click(sender As Object, e As EventArgs)
 
         If txtOperator.Text = "" Then
-            MsgBox("Please Enter Operator Name First")
+            MsgBox("Please Enter Operator Name First" & vbCrLf & " กรุณาใส่ชื่อผู้ปฏิบัติงาน")
         Else
             changeCone = 1
             Me.Hide()
@@ -1689,7 +1693,7 @@ Public Class frmJobEntry
 
     Private Sub btnSearchCone_Click(sender As Object, e As EventArgs) Handles btnSearchCone.Click
         If txtOperator.Text = "" Then
-            MsgBox("Please Enter Operator Name First")
+            MsgBox("Please Enter Operator Name First" & vbCrLf & " กรุณาใส่ชื่อผู้ปฏิบัติงาน")
         Else
             Me.Hide()
             frmConeSearch.Show()
@@ -1779,7 +1783,7 @@ Public Class frmJobEntry
     Private Sub ExChangeCheeseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExChangeCheeseToolStripMenuItem.Click
 
         If txtOperator.Text = "" Then
-            MsgBox("Please Enter Operator Name First")
+            MsgBox("Please Enter Operator Name First" & vbCrLf & " กรุณาใส่ชื่อผู้ปฏิบัติงาน")
         Else
             changeCone = 1
             Me.Hide()
