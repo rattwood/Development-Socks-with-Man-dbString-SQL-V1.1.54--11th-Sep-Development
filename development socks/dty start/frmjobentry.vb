@@ -870,63 +870,63 @@ Public Class frmJobEntry
 
 
             'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
+            ' frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
 
             '***********************************************************************************************************************************
             '*********************           CHECK THAT WE HAVE CORRECT VALUES FOR CONESTATES AND CHAGE IF REQUIERD     ************************
             '***********************************************************************************************************************************
-            Dim cstate As String
+            'Dim cstate As String
 
 
-            For i = 1 To LRecordCount
-                cstate = frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value
+            'For i = 1 To LRecordCount
+            '    cstate = frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value
 
-                Select Case cstate
+            '    Select Case cstate
 
-                    Case Is = 0, 5
-                        If frmDGV.DGVdata.Rows(i - 1).Cells("MISSCONE").Value > 0 Or
-                             frmDGV.DGVdata.Rows(i - 1).Cells("DEFCONE").Value > 0 Or
-                             frmDGV.DGVdata.Rows(i - 1).Cells("CONEBARLEY").Value > 0 Or
-                             frmDGV.DGVdata.Rows(i - 1).Cells("M30").Value > 0 Or
-                             frmDGV.DGVdata.Rows(i - 1).Cells("P30").Value > 0 Or
-                             frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
-                             frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
-                             frmDGV.DGVdata.Rows(i - 1).Cells("DYEFLECK").Value > 0 Or
-                             frmDGV.DGVdata.Rows(i - 1).Cells("COLDEF").Value > 0 Or
-                             frmDGV.DGVdata.Rows(i - 1).Cells("COLWASTE").Value > 0 Then
-                            '  frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AD" Or
-                            '    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AL" Then
+            '        Case Is = 0, 5
+            '            If frmDGV.DGVdata.Rows(i - 1).Cells("MISSCONE").Value > 0 Or
+            '                 frmDGV.DGVdata.Rows(i - 1).Cells("DEFCONE").Value > 0 Or
+            '                 frmDGV.DGVdata.Rows(i - 1).Cells("CONEBARLEY").Value > 0 Or
+            '                 frmDGV.DGVdata.Rows(i - 1).Cells("M30").Value > 0 Or
+            '                 frmDGV.DGVdata.Rows(i - 1).Cells("P30").Value > 0 Or
+            '                 frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
+            '                 frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
+            '                 frmDGV.DGVdata.Rows(i - 1).Cells("DYEFLECK").Value > 0 Or
+            '                 frmDGV.DGVdata.Rows(i - 1).Cells("COLDEF").Value > 0 Or
+            '                 frmDGV.DGVdata.Rows(i - 1).Cells("COLWASTE").Value > 0 Then
+            '                '  frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AD" Or
+            '                '    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AL" Then
 
-                            LExecQuery("UPDATE Jobs Set conestate = 8, COLENDTM = '" & frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value & "' WHERE BCODECONE = '" & frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value.ToString & "' ")
+            '                LExecQuery("UPDATE Jobs Set conestate = 8, COLENDTM = '" & frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value & "' WHERE BCODECONE = '" & frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value.ToString & "' ")
 
-                            ' frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8
-                            ' frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
+            '                ' frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8
+            '                ' frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
 
-                            'INFORMATION FOT CSV LOG FILE
-                            fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
-                            csvRowNum = i - 1
-                            CSV()
+            '                'INFORMATION FOT CSV LOG FILE
+            '                fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
+            '                csvRowNum = i - 1
+            '                CSV()
 
-                        Else
+            '            Else
 
-                            'frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 9
-                            'frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
-                            LExecQuery("UPDATE Jobs Set conestate = 9, COLENDTM = '" & frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value & "' WHERE BCODECONE = '" & frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value.ToString & "' ")
+            '                'frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 9
+            '                'frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
+            '                LExecQuery("UPDATE Jobs Set conestate = 9, COLENDTM = '" & frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value & "' WHERE BCODECONE = '" & frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value.ToString & "' ")
 
 
-                            'INFORMATION FOT CSV LOG FILE
-                            fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
-                            csvRowNum = i - 1
-                            CSV()
+            '                'INFORMATION FOT CSV LOG FILE
+            '                fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
+            '                csvRowNum = i - 1
+            '                CSV()
 
-                        End If
+            '            End If
 
-                    Case Else
+            '        Case Else
 
-                        Continue For
+            '            Continue For
 
-                End Select
-            Next
+            '    End Select
+            'Next
 
             'Close local DGv connection and clead dgv
             If LConn.State = ConnectionState.Open Then LConn.Close()
