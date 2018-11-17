@@ -1431,9 +1431,9 @@ Public Class frmPackTodayUpdate
 
 
             'Product Name
-            MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
+            MyTodyExcel.Cells(7, 4) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
             'Product Code
-            MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+            MyTodyExcel.Cells(7, 5) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
             'Packer Name
             MyTodyExcel.Cells(61, 14) = frmJobEntry.PackOp
 
@@ -1458,10 +1458,10 @@ Public Class frmPackTodayUpdate
         Try
             'Packer Name
             MyTodyExcel.Cells(61, 14) = frmJobEntry.PackOp
-            For i = 1 To frmDGV.DGVdata.Rows.Count
+            For i = 1 To frmPacking.DGVPakingA.Rows.Count
 
-                If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "15" Then
-                    frmDGV.DGVdata.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
+                If frmPacking.DGVPakingA.Rows(i - 1).Cells(9).Value = "15" Then
+                    frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
                     'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
                     Select Case nfree
@@ -1516,11 +1516,11 @@ Public Class frmPackTodayUpdate
                     cartonNum = (cartonNum & "-" & boxCount).ToString
 
                     'WRITE CONE NUMBER TO SHEET
-                    MyTodyExcel.Cells(nfree, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
+                    MyTodyExcel.Cells(nfree, 4) = frmPacking.DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value
 
                     'WRITE CARTON NUMBER TO SHEET AND PUT IN DGV
                     MyTodyExcel.Cells(cellNum, 2) = cartonNum
-                    frmDGV.DGVdata.Rows(i - 1).Cells("CARTONNUM").Value = cartonNum
+                    frmPacking.DGVPakingA.Rows(i - 1).Cells("CARTONNUM").Value = cartonNum
                     nfree = nfree + 1
 
 
@@ -1538,9 +1538,9 @@ Public Class frmPackTodayUpdate
                         xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                         CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
-                        MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
+                        MyTodyExcel.Cells(7, 4) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
                         'Product Code
-                        MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+                        MyTodyExcel.Cells(7, 5) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
                         'Packer Name
                         MyTodyExcel.Cells(61, 14) = frmJobEntry.PackOp
 
@@ -1659,9 +1659,9 @@ Public Class frmPackTodayUpdate
 
 
             'Product Name
-            MyTodyExcel.Cells(7, 9) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
+            MyTodyExcel.Cells(7, 9) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
             'Product Code
-            MyTodyExcel.Cells(7, 13) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+            MyTodyExcel.Cells(7, 13) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
 
             'Packer Name
             MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
@@ -1731,10 +1731,10 @@ Public Class frmPackTodayUpdate
         Try
             'Packer Name
             MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
-            For i = 1 To frmDGV.DGVdata.Rows.Count
+            For i = 1 To frmPacking.DGVPakingA.Rows.Count
 
-                If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "15" Then
-                    frmDGV.DGVdata.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
+                If frmPacking.DGVPakingA.Rows(i - 1).Cells(9).Value = "15" Then
+                    frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
 
 
@@ -1803,7 +1803,7 @@ Public Class frmPackTodayUpdate
 
                     'WRITE CONE NUMBER TO SHEET
 
-                    MyTodyExcel.Cells(nfree, ncfree) = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
+                    MyTodyExcel.Cells(nfree, ncfree) = frmPacking.DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value
 
 
 
@@ -1811,7 +1811,7 @@ Public Class frmPackTodayUpdate
 
                     'WRITE CARTON NUMBER TO SHEET AND PUT IN DGV
                     MyTodyExcel.Cells(cellNum, ncfree - 2) = cartonNum
-                    frmDGV.DGVdata.Rows(i - 1).Cells(61).Value = cartonNum
+                    frmPacking.DGVPakingA.Rows(i - 1).Cells(61).Value = cartonNum
                     nfree = nfree + 1
 
 
@@ -1834,9 +1834,9 @@ Public Class frmPackTodayUpdate
                         xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                         CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
-                        MyTodyExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
+                        MyTodyExcel.Cells(6, 8) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
                         'Product Code
-                        MyTodyExcel.Cells(6, 11) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+                        MyTodyExcel.Cells(6, 11) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
                         'Packer Name
                         MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
 
@@ -1955,9 +1955,9 @@ Public Class frmPackTodayUpdate
 
 
             'Product Name
-            MyTodyExcel.Cells(7, 9) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
+            MyTodyExcel.Cells(7, 9) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
             'Product Code
-            MyTodyExcel.Cells(7, 13) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+            MyTodyExcel.Cells(7, 13) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
 
             'Packer Name
             MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
@@ -1992,10 +1992,10 @@ Public Class frmPackTodayUpdate
         Try
             'Packer Name
             MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
-            For i = 1 To frmDGV.DGVdata.Rows.Count
+            For i = 1 To frmPacking.DGVPakingA.Rows.Count
 
-                If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "15" Then
-                    frmDGV.DGVdata.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
+                If frmPacking.DGVPakingA.Rows(i - 1).Cells(9).Value = "15" Then
+                    frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
 
 
@@ -2061,7 +2061,7 @@ Public Class frmPackTodayUpdate
 
                     'WRITE CONE NUMBER TO SHEET
 
-                    MyTodyExcel.Cells(nfree, ncfree) = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
+                    MyTodyExcel.Cells(nfree, ncfree) = frmPacking.DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value
 
 
 
@@ -2069,7 +2069,7 @@ Public Class frmPackTodayUpdate
 
                     'WRITE CARTON NUMBER TO SHEET AND PUT IN DGV
                     MyTodyExcel.Cells(cellNum, ncfree - 2) = cartonNum
-                    frmDGV.DGVdata.Rows(i - 1).Cells(61).Value = cartonNum
+                    frmPacking.DGVPakingA.Rows(i - 1).Cells(61).Value = cartonNum
                     nfree = nfree + 1
                     'Increment the Col Number
                     If nfree = 72 And ncfree < 20 Then
@@ -2090,9 +2090,9 @@ Public Class frmPackTodayUpdate
                         xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                         CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
-                        MyTodyExcel.Cells(9, 7) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
+                        MyTodyExcel.Cells(9, 7) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
                         'Product Code
-                        MyTodyExcel.Cells(13, 7) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+                        MyTodyExcel.Cells(13, 7) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
                         'Packer Name
                         MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
 

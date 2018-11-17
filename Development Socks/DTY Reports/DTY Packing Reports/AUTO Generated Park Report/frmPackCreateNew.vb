@@ -418,14 +418,14 @@ Public Class frmPackCreateNew
                 nfree = 13
                 Dim prodTf As String
 
-                prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
+                prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
                 MyPakExcel.Cells(7, 4) = prodTf
 
                 ''Product Name
                 'MyPakExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D7
                 'Product Code
-                MyPakExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value        'F7
+                MyPakExcel.Cells(7, 6) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value        'F7
                 'DATE
                 MyPakExcel.Cells(5, 3) = Date.Now.ToString("dd MM yyyy")              'C5
                 'CHEESE WEIGHT
@@ -450,14 +450,14 @@ Public Class frmPackCreateNew
 
                 Dim prodTf As String
 
-                prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
+                prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
                 MyPakExcel.Cells(6, 8) = prodTf
 
                 ''Product Name
                 'MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value
                 'Product Code
-                MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+                MyPakExcel.Cells(6, 12) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
                 'Packer Name
                 MyPakExcel.Cells(73, 4) = frmJobEntry.PackOp
                 'DATE
@@ -535,14 +535,14 @@ Public Class frmPackCreateNew
             Case "Pilot 20Ch"
                 Dim prodTf As String
 
-                prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
+                prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
                 MyPakExcel.Cells(6, 8) = prodTf
 
                 ''Product Name
                 'MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value
                 'Product Code
-                MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+                MyPakExcel.Cells(6, 12) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
                 'Packer Name
                 MyPakExcel.Cells(73, 4) = frmJobEntry.PackOp
                 'DATE

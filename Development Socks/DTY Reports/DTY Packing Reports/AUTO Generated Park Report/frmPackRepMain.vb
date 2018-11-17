@@ -32,45 +32,132 @@ Public Class frmPackRepMain
         ''CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
         'prodNameMod = frmPackRchkA.DGVPakingRecA.Rows(0).Cells(52).Value.ToString
         'prodNameMod = prodNameMod.Replace("/", "_")
+        Select Case frmJobEntry.txtGrade.Text
+            Case "ReCheckA"
+                'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+                prodNameMod = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value.ToString
+                prodNameMod = prodNameMod.Replace("/", "_")
 
-        If frmJobEntry.txtGrade.Text = "ReCheckA" Then
+                'CREATE THE SHEET NAME But as this Cheese is from ReCheck we will assign to A grade sheet
+                sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
 
-            'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
-            prodNameMod = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value.ToString
-            prodNameMod = prodNameMod.Replace("/", "_")
+                'CREATE THE FULL NAME FOR SAVING THE FILE
+                saveString = (prodNameMod & " " _
+                    & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                    & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString) & " A"
+            Case "A"
+                'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+                prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
+                prodNameMod = prodNameMod.Replace("/", "_")
 
-            'CREATE THE SHEET NAME But as this Cheese is from ReCheck we will assign to A grade sheet
-            sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
+                'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+                sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
 
-            'CREATE THE FULL NAME FOR SAVING THE FILE
-            saveString = (prodNameMod & " " _
-                & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
-                & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString) & " A"
-        ElseIf frmJobEntry.txtGrade.Text = "A" Then
-            'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
-            prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
-            prodNameMod = prodNameMod.Replace("/", "_")
+                'CREATE THE FULL NAME FOR SAVING THE FILE
+                saveString = (prodNameMod & " " _
+                    & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                    & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & " A"
 
-            'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
-            sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_" & frmJobEntry.txtGrade.Text
+            Case "Pilot 6Ch"
+                'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+                prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
+                prodNameMod = prodNameMod.Replace("/", "_")
 
-            'CREATE THE FULL NAME FOR SAVING THE FILE
-            saveString = (prodNameMod & " " _
-                & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
-                & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & " " & frmJobEntry.txtGrade.Text
-        Else
-            'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
-            prodNameMod = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value.ToString
-            prodNameMod = prodNameMod.Replace("/", "_")
+                'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+                sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
 
-            'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
-            sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_" & frmJobEntry.txtGrade.Text
+                'CREATE THE FULL NAME FOR SAVING THE FILE
+                saveString = (prodNameMod & " " _
+                    & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                    & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & "_PI6_A"
 
-            'CREATE THE FULL NAME FOR SAVING THE FILE
-            saveString = (prodNameMod & " " _
-                & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
-                & frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString) & " " & frmJobEntry.txtGrade.Text
-        End If
+            Case "Pilot 15Ch"
+                'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+                prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
+                prodNameMod = prodNameMod.Replace("/", "_")
+
+                'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+                sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
+
+                'CREATE THE FULL NAME FOR SAVING THE FILE
+                saveString = (prodNameMod & " " _
+                    & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                    & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & "_PI15_A"
+
+
+            Case "Pilot 20Ch"
+                'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+                prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
+                prodNameMod = prodNameMod.Replace("/", "_")
+
+                'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+                sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
+
+                'CREATE THE FULL NAME FOR SAVING THE FILE
+                saveString = (prodNameMod & " " _
+                    & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                    & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & "_PI20_A"
+
+            Case Else
+                'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+                prodNameMod = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value.ToString
+                prodNameMod = prodNameMod.Replace("/", "_")
+
+                'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+                sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_" & frmJobEntry.txtGrade.Text
+
+                'CREATE THE FULL NAME FOR SAVING THE FILE
+                saveString = (prodNameMod & " " _
+                    & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                    & frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString) & " " & frmJobEntry.txtGrade.Text
+
+        End Select
+
+
+
+
+
+
+
+
+        'If frmJobEntry.txtGrade.Text = "ReCheckA" Then
+
+        '    'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+        '    prodNameMod = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value.ToString
+        '    prodNameMod = prodNameMod.Replace("/", "_")
+
+        '    'CREATE THE SHEET NAME But as this Cheese is from ReCheck we will assign to A grade sheet
+        '    sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
+
+        '    'CREATE THE FULL NAME FOR SAVING THE FILE
+        '    saveString = (prodNameMod & " " _
+        '        & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+        '        & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString) & " A"
+        'ElseIf frmJobEntry.txtGrade.Text = "A" Then
+        '    'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+        '    prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
+        '    prodNameMod = prodNameMod.Replace("/", "_")
+
+        '    'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+        '    sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_" & frmJobEntry.txtGrade.Text
+
+        '    'CREATE THE FULL NAME FOR SAVING THE FILE
+        '    saveString = (prodNameMod & " " _
+        '        & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+        '        & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & " " & frmJobEntry.txtGrade.Text
+        'Else
+        '    'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+        '    prodNameMod = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value.ToString
+        '    prodNameMod = prodNameMod.Replace("/", "_")
+
+        '    'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+        '    sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_" & frmJobEntry.txtGrade.Text
+
+        '    'CREATE THE FULL NAME FOR SAVING THE FILE
+        '    saveString = (prodNameMod & " " _
+        '        & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+        '        & frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString) & " " & frmJobEntry.txtGrade.Text
+        'End If
 
 
 

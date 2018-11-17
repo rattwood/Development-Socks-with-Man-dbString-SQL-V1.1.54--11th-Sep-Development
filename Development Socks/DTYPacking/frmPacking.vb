@@ -60,7 +60,7 @@ Public Class frmPacking
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
-        PExecQuery("Select * FROM jobs WHERE bcodecart = '" & frmJobEntry.dbBarcode & "' ;")
+        PExecQuery("Select * FROM jobs WHERE bcodecart = '" & frmJobEntry.dbBarcode & "' Order By CONENUM ;")
 
         'LOAD THE DATA FROM dB IN TO THE DATAGRID
         DGVPakingA.DataSource = PDS.Tables(0)
@@ -69,7 +69,7 @@ Public Class frmPacking
 
 
         'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-        DGVPakingA.Sort(DGVPakingA.Columns("CONENUM"), ListSortDirection.Ascending)  'sorts On cone number
+        'DGVPakingA.Sort(DGVPakingA.Columns("CONENUM"), ListSortDirection.Ascending)  'sorts On cone number
 
 
 
@@ -152,49 +152,49 @@ Public Class frmPacking
         Me.txtCartNum.Text = frmJobEntry.cartSelect
         Me.lblJobNum.Text = frmJobEntry.varJobNum
 
-        'CHECK THAT WE HAVE CORRECT VALUES FOR CONESTATES
-        Dim cstate As String
-        For i = 1 To rowendcount
-            cstate = DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value
+        ''CHECK THAT WE HAVE CORRECT VALUES FOR CONESTATES
+        'Dim cstate As String
+        'For i = 1 To rowendcount
+        '    cstate = DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value
 
-            Select Case cstate
+        '    Select Case cstate
 
-                Case Is = 0, 5
-                    If DGVPakingA.Rows(i - 1).Cells("MISSCONE").Value > 0 Or
-                        DGVPakingA.Rows(i - 1).Cells("DEFCONE").Value > 0 Or
-                        DGVPakingA.Rows(i - 1).Cells("CONEBARLEY").Value > 0 Or
-                        DGVPakingA.Rows(i - 1).Cells("M30").Value > 0 Or
-                        DGVPakingA.Rows(i - 1).Cells("P30").Value > 0 Or
-                        DGVPakingA.Rows(i - 1).Cells("M50").Value > 0 Or
-                        DGVPakingA.Rows(i - 1).Cells("M50").Value > 0 Or
-                        DGVPakingA.Rows(i - 1).Cells("DYEFLECK").Value > 0 Or
-                        DGVPakingA.Rows(i - 1).Cells("COLDEF").Value > 0 Or
-                        DGVPakingA.Rows(i - 1).Cells("COLWASTE").Value > 0 Then
-                        ' DGVPakingA.Rows(i - 1).Cells("RECHKRESULT").Value = "AD" Or
-                        '   DGVPakingA.Rows(i - 1).Cells("RECHKRESULT").Value = "AL" Then
+        '        Case Is = 0, 5
+        '            If DGVPakingA.Rows(i - 1).Cells("MISSCONE").Value > 0 Or
+        '                DGVPakingA.Rows(i - 1).Cells("DEFCONE").Value > 0 Or
+        '                DGVPakingA.Rows(i - 1).Cells("CONEBARLEY").Value > 0 Or
+        '                DGVPakingA.Rows(i - 1).Cells("M30").Value > 0 Or
+        '                DGVPakingA.Rows(i - 1).Cells("P30").Value > 0 Or
+        '                DGVPakingA.Rows(i - 1).Cells("M50").Value > 0 Or
+        '                DGVPakingA.Rows(i - 1).Cells("M50").Value > 0 Or
+        '                DGVPakingA.Rows(i - 1).Cells("DYEFLECK").Value > 0 Or
+        '                DGVPakingA.Rows(i - 1).Cells("COLDEF").Value > 0 Or
+        '                DGVPakingA.Rows(i - 1).Cells("COLWASTE").Value > 0 Then
+        '                ' DGVPakingA.Rows(i - 1).Cells("RECHKRESULT").Value = "AD" Or
+        '                '   DGVPakingA.Rows(i - 1).Cells("RECHKRESULT").Value = "AL" Then
 
-                        DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = 8
-                        DGVPakingA.Rows(i - 1).Cells("COLENDTM").Value = DGVPakingA.Rows(i - 1).Cells("SORTENDTM").Value
+        '                DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = 8
+        '                DGVPakingA.Rows(i - 1).Cells("COLENDTM").Value = DGVPakingA.Rows(i - 1).Cells("SORTENDTM").Value
 
-                        'INFORMATION FOT CSV LOG FILE
-                        fltconeNum = DGVPakingA.Rows(i - 1).Cells("CONENUM").Value.ToString
-                        csvRowNum = i - 1
-                        CSV()
-                    Else
+        '                'INFORMATION FOT CSV LOG FILE
+        '                fltconeNum = DGVPakingA.Rows(i - 1).Cells("CONENUM").Value.ToString
+        '                csvRowNum = i - 1
+        '                CSV()
+        '            Else
 
-                        DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = 9
-                        DGVPakingA.Rows(i - 1).Cells("COLENDTM").Value = DGVPakingA.Rows(i - 1).Cells("SORTENDTM").Value
+        '                DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = 9
+        '                DGVPakingA.Rows(i - 1).Cells("COLENDTM").Value = DGVPakingA.Rows(i - 1).Cells("SORTENDTM").Value
 
-                        'INFORMATION FOT CSV LOG FILE
-                        fltconeNum = DGVPakingA.Rows(i - 1).Cells("CONENUM").Value.ToString
-                        csvRowNum = i - 1
-                        CSV()
-                    End If
+        '                'INFORMATION FOT CSV LOG FILE
+        '                fltconeNum = DGVPakingA.Rows(i - 1).Cells("CONENUM").Value.ToString
+        '                csvRowNum = i - 1
+        '                CSV()
+        '            End If
 
-            End Select
+        '    End Select
 
 
-        Next
+        'Next
 
 
 
@@ -484,7 +484,7 @@ Public Class frmPacking
 
 
             If IsDBNull(DGVPakingA.Rows(0).Cells("PACKCARTTM").Value) Then
-                For x As Integer = 1 To 32
+                For x As Integer = 1 To rowendcount
                     DGVPakingA.Rows(x - 1).Cells("PACKCARTTM").Value = Today 'PACKING CHECK END TIME
                 Next
             End If
