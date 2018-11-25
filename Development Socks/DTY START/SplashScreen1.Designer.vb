@@ -74,11 +74,11 @@ Partial Class SplashScreen1
         Me.Version.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Version.BackColor = System.Drawing.Color.Transparent
         Me.Version.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Version.Location = New System.Drawing.Point(3, 9)
+        Me.Version.Location = New System.Drawing.Point(3, 1)
         Me.Version.Name = "Version"
-        Me.Version.Size = New System.Drawing.Size(241, 20)
+        Me.Version.Size = New System.Drawing.Size(241, 37)
         Me.Version.TabIndex = 1
-        Me.Version.Text = "Version 2.0.0.75"
+        Me.Version.Text = "Version 2.0.0.76" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "support@tecknoserve.com"
         '
         'Copyright
         '
@@ -90,6 +90,7 @@ Partial Class SplashScreen1
         Me.Copyright.Size = New System.Drawing.Size(241, 40)
         Me.Copyright.TabIndex = 2
         Me.Copyright.Text = "Copyright"
+        Me.Copyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'ApplicationTitle
         '
