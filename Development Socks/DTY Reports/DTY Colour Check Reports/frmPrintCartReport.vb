@@ -98,7 +98,7 @@ Public Class frmPrintCartReport
 
         If DGVcartReport.Rows(0).Cells("MCNUM").Value = 21 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 23 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 25 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 27 Then sp_nums = "1 - 192"
         If DGVcartReport.Rows(0).Cells("MCNUM").Value = 22 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 24 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 26 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 28 Then sp_nums = "193 - 384"
-        If DGVcartReport.Rows(0).Cells("MCNUM").Value = 29 Then sp_nums = "1 - 32"
+        If DGVcartReport.Rows(0).Cells("MCNUM").Value = 29 Then sp_nums = "1 - " & DGVcartReport.Rows.Count.ToString
 
 
         'Wait Curson
@@ -414,12 +414,34 @@ Public Class frmPrintCartReport
         'Routine to get the product weight
         Dim prNum As String = DGVcartReport.Rows(0).Cells(2).Value.ToString
         frmJobEntry.LExecQuery("SELECT * FROM product WHERE PRNUM = '" & prNum & "' ")
-        'LOAD THE DATA FROM dB IN TO THE DATAGRID
-        frmDGV.DGVdata.DataSource = frmJobEntry.LDS.Tables(0)
-        frmDGV.DGVdata.Rows(0).Selected = True
-        'CHEESE WEIGHT
-        MyExcel.Cells(4, 18) = frmDGV.DGVdata.Rows(0).Cells(11).Value
+        If frmJobEntry.LRecordCount > 0 Then
+            'LOAD THE DATA FROM dB IN TO THE DATAGRID
+            frmDGV.DGVdata.DataSource = frmJobEntry.LDS.Tables(0)
+            frmDGV.DGVdata.Rows(0).Selected = True
+            'CHEESE WEIGHT
+            MyExcel.Cells(4, 18) = frmDGV.DGVdata.Rows(0).Cells(11).Value
+        Else
+            Me.Cursor = System.Windows.Forms.Cursors.Default
+            Label1.Visible = False
 
+            MsgBox("This product is not in the database")
+
+            MyExcel.Quit()
+
+            releaseObject(sheet)
+            releaseObject(workbook)
+            releaseObject(MyExcel)
+
+            Me.Close()
+            frmJobEntry.Show()
+            frmJobEntry.txtLotNumber.Visible = True
+            frmJobEntry.txtLotNumber.Focus()
+            frmJobEntry.cartReport = 0
+            frmJobEntry.txtBoxCartReport.Text = ""
+            Me.Close()
+            Exit Sub
+
+        End If
 
         Try
 
