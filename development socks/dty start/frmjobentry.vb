@@ -325,98 +325,173 @@ Public Class frmJobEntry
 
             varCartBCode = txtLotNumber.Text
 
-            If machineCode = 21 Then
-                machineName = "11D1"        'Left Side
-            ElseIf machineCode = 22 Then
-                machineName = "11D2"        'Right Side
-            ElseIf machineCode = 23 Then
-                machineName = "12D1"        'Left Side
-            ElseIf machineCode = 24 Then
-                machineName = "12D2"        'Right Side
-            ElseIf machineCode = 25 Then
-                machineName = "21D1"        'Left Side
-            ElseIf machineCode = 26 Then
-                machineName = "21D2"        'Right Side
-            ElseIf machineCode = 27 Then
-                machineName = "22D1"        'Left Side
-            ElseIf machineCode = 28 Then
-                machineName = "22D2"        'Right Side
-            ElseIf machineCode = 29 Then
-                machineName = "Pilot"
-            End If
-
-            'Dim cartSelect As String
-            If machineCode = 21 Or machineCode = 23 Or machineCode = 25 Or machineCode = 27 Then    ' Set Left Side of Machine
-
-                If cartNum = "B1" Or cartNum = "B2" Then
-                    varCartNameA = "B1"
-                    varCartNameB = "B2"
-                    cartSelect = 1
-                    varSpNums = "001 - 032"
-                ElseIf cartNum = "B3" Or cartNum = "B4" Then
-                    varCartNameA = "B3"
-                    varCartNameB = "B4"
-                    cartSelect = 2
-                    varSpNums = "033 - 064"
-                ElseIf cartNum = "B5" Or cartNum = "B6" Then
-                    varCartNameA = "B5"
-                    varCartNameB = "B6"
-                    cartSelect = 3
-                    varSpNums = "065 - 096"
-                ElseIf cartNum = "B7" Or cartNum = "B8" Then
-                    varCartNameA = "B7"
-                    varCartNameB = "B8"
-                    cartSelect = 4
-                    varSpNums = "097 - 128"
-                ElseIf cartNum = "B9" Or cartNum = "B10" Then
-                    varCartNameA = "B9"
-                    varCartNameB = "B10"
-                    cartSelect = 5
-                    varSpNums = "129 - 160"
-                ElseIf cartNum = "B11" Or cartNum = "B12" Then
-                    varCartNameA = "B11"
-                    varCartNameB = "B12"
-                    cartSelect = 6
-                    varSpNums = "161 - 192"
-
-                End If
-            End If
+            Select Case machineCode
+                Case 21
+                    machineName = "11D1"        'Left Side
+                Case 22
+                    machineName = "11D2"        'Right Side
+                Case 23
+                    machineName = "12D1"        'Left Side
+                Case 24
+                    machineName = "12D2"        'Right Side
+                Case 25
+                    machineName = "21D1"        'Left Side
+                Case 26
+                    machineName = "21D2"        'Right Side
+                Case 27
+                    machineName = "22D1"        'Left Side
+                Case 28
+                    machineName = "22D2"        'Right Side
+                Case 29
+                    machineName = "Pilot"
+                Case 30
+                    machineName = "31D1"        'Left Side
+                Case 31
+                    machineName = "31D2"        'Left Side
+                Case 32
+                    machineName = "32D1"        'Left Side
+                Case 33
+                    machineName = "32D2"        'Left Side
+            End Select
 
 
-            If machineCode = 22 Or machineCode = 24 Or machineCode = 26 Or machineCode = 28 Then  ' Set Right Side of Machine
-                If cartNum = "B1" Or cartNum = "B2" Then
-                    varCartNameA = "B1"
-                    varCartNameB = "B2"
-                    cartSelect = 7
-                    varSpNums = "193 - 224"
-                ElseIf cartNum = "B3" Or cartNum = "B4" Then
-                    varCartNameA = "B3"
-                    varCartNameB = "B4"
-                    cartSelect = 8
-                    varSpNums = "225 - 256"
-                ElseIf cartNum = "B5" Or cartNum = "B6" Then
-                    varCartNameA = "B5"
-                    varCartNameB = "B6"
-                    cartSelect = 9
-                    varSpNums = "257 - 288"
-                ElseIf cartNum = "B7" Or cartNum = "B8" Then
-                    varCartNameA = "B7"
-                    varCartNameB = "B8"
-                    cartSelect = 10
-                    varSpNums = "289 - 320"
-                ElseIf cartNum = "B9" Or cartNum = "B10" Then
-                    varCartNameA = "B9"
-                    varCartNameB = "B10"
-                    cartSelect = 11
-                    varSpNums = "321 - 352"
-                ElseIf cartNum = "B11" Or cartNum = "B12" Then
-                    varCartNameA = "B11"
-                    varCartNameB = "B12"
-                    cartSelect = 12
-                    varSpNums = "353 - 384"
 
-                End If
-            End If
+
+            Select Case machineCode
+                'Machine Left side
+                Case 21, 23, 25, 27, 30, 32
+
+                    Select Case cartNum
+                        Case "B1", "B2"
+                            varCartNameA = "B1"
+                            varCartNameB = "B2"
+                            cartSelect = 1
+                            If machineCode = 30 Or machineCode = 32 Then
+                                varSpNums = "001 - 024"
+                            Else
+                                varSpNums = "001 - 032"
+                            End If
+
+                        Case "B3", "B4"
+                            varCartNameA = "B3"
+                            varCartNameB = "B4"
+                            cartSelect = 2
+                            If machineCode = 30 Or machineCode = 32 Then
+                                varSpNums = "025 - 048"
+                            Else
+                                varSpNums = "033 - 064"
+                            End If
+
+                        Case "B5", "B6"
+                            varCartNameA = "B5"
+                            varCartNameB = "B6"
+                            cartSelect = 3
+                            If machineCode = 30 Or machineCode = 32 Then
+                                varSpNums = "049 - 072"
+                            Else
+                                varSpNums = "065 - 096"
+                            End If
+
+                        Case "B7", "B8"
+                            varCartNameA = "B7"
+                            varCartNameB = "B8"
+                            cartSelect = 4
+                            If machineCode = 30 Or machineCode = 32 Then
+                                varSpNums = "073 - 096"
+                            Else
+                                varSpNums = "097 - 128"
+                            End If
+
+                        Case "B9", "B10"
+                            varCartNameA = "B9"
+                            varCartNameB = "B10"
+                            cartSelect = 5
+                            If machineCode = 30 Or machineCode = 32 Then
+                                varSpNums = "097 - 120"
+                            Else
+                                varSpNums = "129 - 160"
+                            End If
+
+                        Case "B11", "B12"
+                            varCartNameA = "B11"
+                            varCartNameB = "B12"
+                            cartSelect = 6
+                            If machineCode = 30 Or machineCode = 32 Then
+                                varSpNums = "121 - 144"
+                            Else
+                                varSpNums = "161 - 192"
+                            End If
+
+                    End Select
+
+
+                'Machine Right side
+                Case 22, 24, 26, 28, 31, 33
+                    Select Case cartNum
+
+                        Case "B1", "B2"
+                            varCartNameA = "B1"
+                            varCartNameB = "B2"
+                            cartSelect = 7
+                            If machineCode = 31 Or machineCode = 33 Then
+                                varSpNums = "145 - 168"
+                            Else
+                                varSpNums = "193 - 224"
+                            End If
+
+                        Case "B3", "B4"
+                            varCartNameA = "B3"
+                            varCartNameB = "B4"
+                            cartSelect = 8
+                            If machineCode = 31 Or machineCode = 33 Then
+                                varSpNums = "169 - 192"
+                            Else
+                                varSpNums = "225 - 256"
+                            End If
+
+                        Case "B5", "B6"
+                            varCartNameA = "B5"
+                            varCartNameB = "B6"
+                            cartSelect = 9
+                            If machineCode = 31 Or machineCode = 33 Then
+                                varSpNums = "193 - 216"
+                            Else
+                                varSpNums = "257 - 288"
+                            End If
+
+                        Case "B7", "B8"
+                            varCartNameA = "B7"
+                            varCartNameB = "B8"
+                            cartSelect = 10
+                            If machineCode = 31 Or machineCode = 33 Then
+                                varSpNums = "217 - 240"
+                            Else
+                                varSpNums = "289 - 320"
+                            End If
+
+                        Case "B9", "B10"
+                            varCartNameA = "B9"
+                            varCartNameB = "B10"
+                            cartSelect = 11
+                            If machineCode = 31 Or machineCode = 33 Then
+                                varSpNums = "241 - 264"
+                            Else
+                                varSpNums = "321 - 352"
+                            End If
+
+                        Case "B11", "B12"
+                            varCartNameA = "B11"
+                            varCartNameB = "B12"
+                            cartSelect = 12
+                            If machineCode = 31 Or machineCode = 33 Then
+                                varSpNums = "265 - 288"
+                            Else
+                                varSpNums = "353 - 384"
+                            End If
+
+                    End Select
+
+            End Select
 
             If machineCode = 29 Then   'CHECK FOR PILOT MACHINE
                 cartSelect = 1
@@ -528,8 +603,7 @@ Public Class frmJobEntry
                 LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
 
 
-                'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-                'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone numberchimera4260
+
 
 
 
@@ -700,52 +774,116 @@ Public Class frmJobEntry
 
 
 
-
-
-        ' Auto buton numbering based on Cart being measuerd
         Select Case cartSelNumber
-            Case Is = 1  'Little routine to only create the correct number of cheese entries for Pilot
-                If machineCode = 29 Then
-                    coneNumStart = 1
-                    coneNumStop = pilotCount
+
+                    Case 1
+                        If machineCode = 29 Then
+                            coneNumStart = 1
+                            coneNumStop = pilotCount
+
+                        ElseIf machineCode = 30 Or machineCode = 32 Then
+                            coneNumStart = 1
+                            coneNumStop = 24
+                        Else
+                            coneNumStart = 1
+                            coneNumStop = 32
+                        End If
+            Case 2
+                If machineCode = 30 Or machineCode = 32 Then
+                    coneNumStart = 25
+                    coneNumStop = 48
                 Else
-                    coneNumStart = 1
-                    coneNumStop = 32
+                    coneNumStart = 33
+                    coneNumStop = 64
                 End If
-            Case Is = 2
-                coneNumStart = 33
-                coneNumStop = 64
-            Case Is = 3
-                coneNumStart = 65
-                coneNumStop = 96
-            Case Is = 4
-                coneNumStart = 97
-                coneNumStop = 128
-            Case Is = 5
-                coneNumStart = 129
-                coneNumStop = 160
-            Case Is = 6
-                coneNumStart = 161
-                coneNumStop = 192
-            Case Is = 7
-                coneNumStart = 193
-                coneNumStop = 224
-            Case Is = 8
-                coneNumStart = 225
-                coneNumStop = 256
-            Case Is = 9
-                coneNumStart = 257
-                coneNumStop = 288
-            Case Is = 10
-                coneNumStart = 289
-                coneNumStop = 320
-            Case Is = 11
-                coneNumStart = 321
-                coneNumStop = 352
-            Case Is = 12
-                coneNumStart = 353
-                coneNumStop = 384
+
+            Case 3
+                If machineCode = 30 Or machineCode = 32 Then
+                    coneNumStart = 49
+                    coneNumStop = 72
+                Else
+                    coneNumStart = 65
+                    coneNumStop = 96
+                End If
+
+            Case 4
+                If machineCode = 30 Or machineCode = 32 Then
+                    coneNumStart = 73
+                    coneNumStop = 96
+                Else
+                    coneNumStart = 97
+                    coneNumStop = 128
+                End If
+            Case 5
+                If machineCode = 30 Or machineCode = 32 Then
+                    coneNumStart = 97
+                    coneNumStop = 120
+                Else
+                    coneNumStart = 129
+                    coneNumStop = 160
+                End If
+
+            Case 6
+                If machineCode = 30 Or machineCode = 32 Then
+                    coneNumStart = 121
+                    coneNumStop = 144
+                Else
+                    coneNumStart = 161
+                    coneNumStop = 192
+                End If
+            Case 7
+                If machineCode = 31 Or machineCode = 33 Then
+                    coneNumStart = 145
+                    coneNumStop = 168
+                Else
+                    coneNumStart = 193
+                    coneNumStop = 224
+                End If
+            Case 8
+                If machineCode = 31 Or machineCode = 33 Then
+                    coneNumStart = 169
+                    coneNumStop = 192
+                Else
+                    coneNumStart = 225
+                    coneNumStop = 256
+                End If
+            Case 9
+                If machineCode = 31 Or machineCode = 33 Then
+                    coneNumStart = 193
+                    coneNumStop = 216
+                Else
+                    coneNumStart = 257
+                    coneNumStop = 288
+                End If
+            Case 10
+                If machineCode = 31 Or machineCode = 33 Then
+                    coneNumStart = 217
+                    coneNumStop = 240
+                Else
+                    coneNumStart = 289
+                    coneNumStop = 320
+                End If
+            Case 11
+                If machineCode = 31 Or machineCode = 33 Then
+                    coneNumStart = 241
+                    coneNumStop = 264
+                Else
+                    coneNumStart = 321
+                    coneNumStop = 352
+                End If
+            Case 12
+                If machineCode = 31 Or machineCode = 33 Then
+                    coneNumStart = 265
+                    coneNumStop = 288
+                Else
+                    coneNumStart = 353
+                    coneNumStop = 384
+                End If
+
         End Select
+
+
+
 
 
         'CONSTRUCT ROWS
@@ -785,24 +923,109 @@ Public Class frmJobEntry
 
 
         For i As Integer = coneNumStart To coneNumStop
-
-            If x <= 16 Then cartName = varCartNameA Else cartName = varCartNameB  'SETS CORRECT CART NUMBER
-
+            If machineCode < 30 Then
+                If x <= 16 Then cartName = varCartNameA Else cartName = varCartNameB  'SETS CORRECT CART NUMBER
+            Else
+                If x <= 12 Then cartName = varCartNameA Else cartName = varCartNameB  'SETS CORRECT CART NUMBER
+            End If
             x = x + 1
             modConeNum = i.ToString(fmt)   ' FORMATS THE CONE NUMBER TO 3 DIGITS
             coneBarcode = modLotStr & modConeNum   'CREATE THE CONE BARCODE NUMBER
             JobBarcode = modLotStr
 
+            JobBarcode = modLotStr
 
-            LExecQuery("INSERT INTO jobs (MCNUM, PRNUM, PRYY, PRMM, DOFFNUM, CONENUM, MERGENUM, OPNAME,CONESTATE," _
-               & "SHORTCONE, MISSCONE, DEFCONE, CARTNUM, CARTNAME, CONEZERO, CONEBARLEY, M10, P10, M30, P30, M50, P50, CARTSTARTTM," _
-              & "BCODECART, BCODECONE,FLT_K, FLT_D, FLT_F, FLT_O, FLT_T, FLT_P, FLT_S, FLT_X, FLT_N, FLT_W, FLT_H, FLT_TR, FLT_B, FLT_C," _
-               & "MCNAME, PRODNAME, BCODEJOB,OPPACKSORT,OPPACK,OPSORT,PSORTERROR,WEIGHTERROR,WEIGHT,CARTONNUM,SORTERROR,COLOURERROR,DYEFLECK," _
-               & "COLDEF, COLWASTE, FLT_DO, FLT_DH, FLT_CL, FLT_FI, FLT_YN, FLT_HT, FLT_LT, CONEAD, CONEAL) " _
-              & "VALUES ('" & varMachineCode & "', '" & varProductCode & "','" & varYear & "','" & varMonth & "','" & varDoffingNum & "','" & modConeNum & "'," _
-              & "'" & mergeNum & "',  ' ', '0', '0', '0', '0', '" & varCartSelect & "','" & cartName & "', '0', '0', '0', '0', '0', '0', '0', '0','" & today & "','" & dbBarcode & "','" & coneBarcode & "'," _
-             & "'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', '" & varMachineName & "','" & varProductName & "', '" & JobBarcode & "'," _
-             & "'0','0','0','0','0','0','0','0','0','0','0','0','False','False','False','False','False','False','False',' 0',' 0')")
+            'Parameters List for full db
+
+            'ADD ORA PARAMETERS & RUN THE COMMAND
+            LAddParam("@mcnum", varMachineCode)
+            LAddParam("@prodnum", varProductCode)
+            LAddParam("@yy", varYear)
+            LAddParam("@mm", varMonth)
+            LAddParam("@doff", varDoffingNum)
+            LAddParam("@cone", modConeNum)
+            LAddParam("@merge", mergeNum)
+            LAddParam("@user", "")
+            LAddParam("@conestate", "0")
+            LAddParam("@shortcone", "0")
+            LAddParam("@nocone", "0")
+            LAddParam("@defectcone", "0")
+            LAddParam("@cartnum", varCartSelect)
+            LAddParam("@cartname", cartName)
+            LAddParam("@passzero", "0")
+            LAddParam("@barley", "0")
+            LAddParam("@m10", "0")
+            LAddParam("@p10", "0")
+            LAddParam("@m30", "0")
+            LAddParam("@p30", "0")
+            LAddParam("@m50", "0")
+            LAddParam("@p50", "0")
+            LAddParam("@cartstart", today)
+            LAddParam("@barcart", dbBarcode)
+            LAddParam("@barcone", coneBarcode)
+            LAddParam("@fk", "False")
+            LAddParam("@fd", "False")
+            LAddParam("@ff", "False")
+            LAddParam("@fo", "False")
+            LAddParam("@ft", "False")
+            LAddParam("@fp", "False")
+            LAddParam("@fs", "False")
+            LAddParam("@fx", "False")
+            LAddParam("@fn", "False")
+            LAddParam("@fw", "False")
+            LAddParam("@fh", "False")
+            LAddParam("@ftr", "False")
+            LAddParam("@fb", "False")
+            LAddParam("@fc", "False")
+            LAddParam("@mcname", varMachineName)
+            LAddParam("@prodname", varProductName)
+            LAddParam("@barjob", JobBarcode)
+            LAddParam("@packsortop", "0")
+            LAddParam("@packop", "0")
+            LAddParam("@sortop", "0")
+            LAddParam("@colourop", "0")
+            LAddParam("@errpsort", "0")
+            LAddParam("@errweigh", "0")
+            LAddParam("@weight", "0")
+            LAddParam("@boxnum", "0")
+            LAddParam("@errsort", "0")
+            LAddParam("@errcol", "0")
+            LAddParam("@errdyefleck", "0")
+            LAddParam("@coldef", "0")
+            LAddParam("@colwaste", "0")
+            LAddParam("@fdo", "False")
+            LAddParam("@fdh", "False")
+            LAddParam("@fcl", "False")
+            LAddParam("@ffi", "False")
+            LAddParam("@fyn", "False")
+            LAddParam("@fht", "False")
+            LAddParam("@flt", "False")
+            LAddParam("@conead", "0")
+            LAddParam("@coneal", "0")
+            'NEWPARAMS ADDED FOR @ND FLOOR DATA ENTRY
+            LAddParam("@opcreate", txtOperator.Text)
+
+
+            LExecQuery("INSERT INTO Jobs (MCNUM, PRNUM, PRYY, PRMM, DOFFNUM, CONENUM, MERGENUM, OPNAME,CONESTATE," _
+                   & "SHORTCONE, MISSCONE, DEFCONE, CARTNUM, CARTNAME, CONEZERO, CONEBARLEY, M10, P10, M30, P30, M50, P50, CARTSTARTTM," _
+                  & "BCODECART, BCODECONE,FLT_K, FLT_D, FLT_F, FLT_O, FLT_T, FLT_P, FLT_S, FLT_X, FLT_N, FLT_W, FLT_H, FLT_TR, FLT_B, FLT_C," _
+                   & "MCNAME, PRODNAME, BCODEJOB,OPPACKSORT,OPPACK,OPSORT,PSORTERROR,WEIGHTERROR,WEIGHT,CARTONNUM,SORTERROR,COLOURERROR,DYEFLECK," _
+                   & "COLDEF, COLWASTE, FLT_DO, FLT_DH, FLT_CL, FLT_FI, FLT_YN, FLT_HT, FLT_LT, CONEAD, CONEAL, OPCREATECART) " _
+                    & "VALUES (@mcnum, @prodnum,@yy,@mm,@doff,@cone,@merge,@user,@conestate,@shortcone,@nocone,@defectcone,@cartnum,@cartname,@passzero," _
+                    & "@barley,@m10,@p10,@m30,@p30,@m50,@p50,@cartstart," _
+                    & "@barcart,@barcone,@fk,@fd,@ff,@fo,@ft,@fp,@fs,@fx,@fn,@fw,@fh,@ftr,@fb,@fc,@mcname,@prodname," _
+                    & "@barjob,@packsortop,@packop,@sortop,@colourop,@errpsort,@errweigh,@boxnum,@errsort,@errcol,@errdyefleck,@coldef,@colwaste,@fdo,@fdh," _
+                    & "@fcl,@ffi,@fyn,@fht,@flt,@conead,@coneal,@opcreate) ")
+
+            'LExecQuery("INSERT INTO jobs (MCNUM, PRNUM, PRYY, PRMM, DOFFNUM, CONENUM, MERGENUM, OPNAME,CONESTATE," _
+            '   & "SHORTCONE, MISSCONE, DEFCONE, CARTNUM, CARTNAME, CONEZERO, CONEBARLEY, M10, P10, M30, P30, M50, P50, CARTSTARTTM," _
+            '  & "BCODECART, BCODECONE,FLT_K, FLT_D, FLT_F, FLT_O, FLT_T, FLT_P, FLT_S, FLT_X, FLT_N, FLT_W, FLT_H, FLT_TR, FLT_B, FLT_C," _
+            '   & "MCNAME, PRODNAME, BCODEJOB,OPPACKSORT,OPPACK,OPSORT,PSORTERROR,WEIGHTERROR,WEIGHT,CARTONNUM,SORTERROR,COLOURERROR,DYEFLECK," _
+            '   & "COLDEF, COLWASTE, FLT_DO, FLT_DH, FLT_CL, FLT_FI, FLT_YN, FLT_HT, FLT_LT, CONEAD, CONEAL) " _
+            '  & "VALUES ('" & varMachineCode & "', '" & varProductCode & "','" & varYear & "','" & varMonth & "','" & varDoffingNum & "','" & modConeNum & "'," _
+            '  & "'" & mergeNum & "',  ' ', '0', '0', '0', '0', '" & varCartSelect & "','" & cartName & "', '0', '0', '0', '0', '0', '0', '0', '0','" & today & "','" & dbBarcode & "','" & coneBarcode & "'," _
+            ' & "'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', '" & varMachineName & "','" & varProductName & "', '" & JobBarcode & "'," _
+            ' & "'0','0','0','0','0','0','0','0','0','0','0','0','False','False','False','False','False','False','False',' 0',' 0')")
 
 
         Next
@@ -869,66 +1092,7 @@ Public Class frmJobEntry
             Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
 
 
-            'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-            ' frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
 
-            '***********************************************************************************************************************************
-            '*********************           CHECK THAT WE HAVE CORRECT VALUES FOR CONESTATES AND CHAGE IF REQUIERD     ************************
-            '***********************************************************************************************************************************
-            'Dim cstate As String
-
-
-            'For i = 1 To LRecordCount
-            '    cstate = frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value
-
-            '    Select Case cstate
-
-            '        Case Is = 0, 5
-            '            If frmDGV.DGVdata.Rows(i - 1).Cells("MISSCONE").Value > 0 Or
-            '                 frmDGV.DGVdata.Rows(i - 1).Cells("DEFCONE").Value > 0 Or
-            '                 frmDGV.DGVdata.Rows(i - 1).Cells("CONEBARLEY").Value > 0 Or
-            '                 frmDGV.DGVdata.Rows(i - 1).Cells("M30").Value > 0 Or
-            '                 frmDGV.DGVdata.Rows(i - 1).Cells("P30").Value > 0 Or
-            '                 frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
-            '                 frmDGV.DGVdata.Rows(i - 1).Cells("M50").Value > 0 Or
-            '                 frmDGV.DGVdata.Rows(i - 1).Cells("DYEFLECK").Value > 0 Or
-            '                 frmDGV.DGVdata.Rows(i - 1).Cells("COLDEF").Value > 0 Or
-            '                 frmDGV.DGVdata.Rows(i - 1).Cells("COLWASTE").Value > 0 Then
-            '                '  frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AD" Or
-            '                '    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKRESULT").Value = "AL" Then
-
-            '                LExecQuery("UPDATE Jobs Set conestate = 8, COLENDTM = '" & frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value & "' WHERE BCODECONE = '" & frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value.ToString & "' ")
-
-            '                ' frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8
-            '                ' frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
-
-            '                'INFORMATION FOT CSV LOG FILE
-            '                fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
-            '                csvRowNum = i - 1
-            '                CSV()
-
-            '            Else
-
-            '                'frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 9
-            '                'frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value
-            '                LExecQuery("UPDATE Jobs Set conestate = 9, COLENDTM = '" & frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value & "' WHERE BCODECONE = '" & frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value.ToString & "' ")
-
-
-            '                'INFORMATION FOT CSV LOG FILE
-            '                fltconeNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value.ToString
-            '                csvRowNum = i - 1
-            '                CSV()
-
-            '            End If
-
-            '        Case Else
-
-            '            Continue For
-
-            '    End Select
-            'Next
-
-            'Close local DGv connection and clead dgv
             If LConn.State = ConnectionState.Open Then LConn.Close()
             frmDGV.DGVdata.ClearSelection()
             frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
@@ -1189,6 +1353,14 @@ Public Class frmJobEntry
                 varMachineName = "22D2"        'Right Side
             Case 29
                 varMachineName = "Pilot"
+            Case 30
+                varMachineName = "31D1"        'Left Side
+            Case 31
+                varMachineName = "31D2"        'Right Side
+            Case 32
+                varMachineName = "32D1"        'Left Side
+            Case 33
+                varMachineName = "32D2"        'Right Side
         End Select
 
 
@@ -1545,22 +1717,7 @@ Public Class frmJobEntry
 
 
 
-        'MsgBox("check DGV")
 
-        'If txtGrade.Text = "A" Then
-        '    rechkA = 1
-        '    coneValUpdate = 1
-        '    varCartSelect = 1
-        '    Me.Hide()
-        '    frmPacking.Show()
-        '    'frmPackRchkA.txtConeBcode.Clear()
-        '    'frmPackRchkA.txtConeBcode.Focus()
-        '    ' frmPackRchkA.Show()
-        'Else
-        '    frmB_AL_AD_W.txtConeBcode.Clear()
-        '    frmB_AL_AD_W.txtConeBcode.Focus()
-        '    frmB_AL_AD_W.Show()
-        'End If
 
     End Sub
 
@@ -1744,11 +1901,14 @@ Public Class frmJobEntry
 
     End Sub
 
+    ' ADD PARAMS
+    Public Sub LAddParam(Name As String, Value As Object)
+        Dim NewParam As New SqlParameter(Name, Value)
+        LParams.Add(NewParam)
+    End Sub
 
 
-    'Private Sub btnReports_Click(sender As Object, e As EventArgs)
-    '    frmPackReports.Show()
-    'End Sub
+
 
     Private Sub btnDefRep_Click(sender As Object, e As EventArgs) Handles btnDefRep.Click
         DGVDefReport.Show()
@@ -1766,15 +1926,6 @@ Public Class frmJobEntry
         frmEODReport.Show()
     End Sub
 
-    'Private Sub StockToProcessReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StockToProcessReportToolStripMenuItem.Click
-    '      ''Me.Hide()
-    '      ''frmProdStockWork.Show()
-    '      Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
-    '      lblMessage.Text = "Please Wait Creating Work in Progress Report"
-    '      frmProdStockWork.processReport()
-    '      Me.Cursor = System.Windows.Forms.Cursors.Default
-
-    '  End Sub
 
     Private Sub DailyPackingReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DailyPackingReportToolStripMenuItem.Click
         frmDailyPackProduction.Show()
