@@ -279,9 +279,12 @@ Public Class frmJobEntry
                         Me.txtLotNumber.Refresh()
                         Exit Sub
                 End Select
-
-
-
+            Else
+                MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
+                Me.txtLotNumber.Clear()
+                Me.txtLotNumber.Focus()
+                Me.txtLotNumber.Refresh()
+                Exit Sub
             End If
 
         Catch ex As Exception
@@ -1618,12 +1621,12 @@ Public Class frmJobEntry
 
         LExecQuery("SELECT * FROM JOBS WHERE BCODEJOB = '" & modLotStr & "' ")
 
-            If LRecordCount > 0 Then
+        If LRecordCount > 0 Then
 
 
             'LOAD THE DATA FROM dB IN TO THE DATAGRID
             frmPrintCartReport.DGVcartReport.DataSource = LDS.Tables(0)
-                frmPrintCartReport.DGVcartReport.Rows(0).Selected = True
+            frmPrintCartReport.DGVcartReport.Rows(0).Selected = True
 
             'SORT GRIDVIEW IN TO CORRECT JOB SEQUENCE
             frmPrintCartReport.DGVcartReport.Sort(frmPrintCartReport.DGVcartReport.Columns("CONENUM"), ListSortDirection.Ascending)  'sorts On cone number
