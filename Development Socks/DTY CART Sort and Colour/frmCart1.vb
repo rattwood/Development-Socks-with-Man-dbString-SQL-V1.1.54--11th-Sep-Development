@@ -72,7 +72,7 @@ Public Class frmCart1
 
     Private Sub frmCart1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
+        Dim localMCCode = frmJobEntry.varMachineCode
         Dim btnNum As Integer
         Dim btnNums As String
 
@@ -81,41 +81,123 @@ Public Class frmCart1
         ' SELECT CONE NUMBER RANGE BASED ON CART NUMBER
         Select Case btnNums
             Case Is = 1
-                btnNum = 1
-                coneNumOffset = 0
+                If localMCCode = 30 Or localMCCode = 32 Then
+                    btnNum = 1
+                    coneNumOffset = 0
+                Else
+                    btnNum = 1
+                    coneNumOffset = 0
+                End If
+
             Case Is = 2
-                btnNum = 33
-                coneNumOffset = 32
+                If localMCCode = 30 Or localMCCode = 32 Then
+                    btnNum = 25
+                    coneNumOffset = 24
+                Else
+                    btnNum = 33
+                    coneNumOffset = 32
+                End If
+
             Case Is = 3
-                btnNum = 65
-                coneNumOffset = 64
+                If localMCCode = 30 Or localMCCode = 32 Then
+                    btnNum = 49
+                    coneNumOffset = 48
+                Else
+                    btnNum = 65
+                    coneNumOffset = 64
+                End If
+
+
             Case Is = 4
-                btnNum = 97
-                coneNumOffset = 96
+                If localMCCode = 30 Or localMCCode = 32 Then
+                    btnNum = 73
+                    coneNumOffset = 72
+                Else
+                    btnNum = 97
+                    coneNumOffset = 96
+                End If
+
+
             Case Is = 5
-                btnNum = 129
-                coneNumOffset = 128
+                If localMCCode = 30 Or localMCCode = 32 Then
+                    btnNum = 97
+                    coneNumOffset = 96
+                Else
+                    btnNum = 129
+                    coneNumOffset = 128
+                End If
+
+
             Case Is = 6
-                btnNum = 161
-                coneNumOffset = 160
+                If localMCCode = 30 Or localMCCode = 32 Then
+                    btnNum = 121
+                    coneNumOffset = 120
+                Else
+                    btnNum = 161
+                    coneNumOffset = 160
+                End If
+
+
             Case Is = 7
-                btnNum = 193
-                coneNumOffset = 192
+                If localMCCode = 31 Or localMCCode = 33 Then
+                    btnNum = 145
+                    coneNumOffset = 144
+                Else
+                    btnNum = 193
+                    coneNumOffset = 192
+                End If
+
+
             Case Is = 8
-                btnNum = 225
-                coneNumOffset = 224
+                If localMCCode = 31 Or localMCCode = 33 Then
+                    btnNum = 169
+                    coneNumOffset = 168
+                Else
+                    btnNum = 225
+                    coneNumOffset = 224
+                End If
+
+
             Case Is = 9
-                btnNum = 257
-                coneNumOffset = 256
+                If localMCCode = 31 Or localMCCode = 33 Then
+                    btnNum = 193
+                    coneNumOffset = 192
+                Else
+                    btnNum = 257
+                    coneNumOffset = 256
+                End If
+
+
             Case Is = 10
-                btnNum = 289
-                coneNumOffset = 288
+                If localMCCode = 31 Or localMCCode = 33 Then
+                    btnNum = 217
+                    coneNumOffset = 216
+                Else
+                    btnNum = 289
+                    coneNumOffset = 288
+                End If
+
+
             Case Is = 11
-                btnNum = 321
-                coneNumOffset = 320
+                If localMCCode = 31 Or localMCCode = 33 Then
+                    btnNum = 241
+                    coneNumOffset = 240
+                Else
+                    btnNum = 321
+                    coneNumOffset = 320
+                End If
+
+
             Case Is = 12
-                btnNum = 353
-                coneNumOffset = 352
+                If localMCCode = 31 Or localMCCode = 33 Then
+                    btnNum = 265
+                    coneNumOffset = 264
+                Else
+                    btnNum = 353
+                    coneNumOffset = 352
+                End If
+
+
         End Select
 
         'SET CORRECT BUTTUN NUMBERS BASED ON CONE NUMBERS (SPINDEL NUMBERS)
