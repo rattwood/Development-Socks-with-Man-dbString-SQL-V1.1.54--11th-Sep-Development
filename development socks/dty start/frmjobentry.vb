@@ -424,6 +424,13 @@ Public Class frmJobEntry
 
                     End Select
 
+                Case 29
+                    cartSelect = 1
+                    varSpNums = "001 - 032"
+                    varCartNameA = "B1"
+                    varCartNameB = "B2"
+
+
 
                 'Machine Right side
                 Case 22, 24, 26, 28, 31, 33
@@ -493,12 +500,7 @@ Public Class frmJobEntry
 
             End Select
 
-            If machineCode = 29 Then   'CHECK FOR PILOT MACHINE
-                cartSelect = 1
-                varSpNums = "001 - 032"
-                varCartNameA = "B1"
-                varCartNameB = "B2"
-            End If
+
 
 
 
@@ -773,7 +775,7 @@ Public Class frmJobEntry
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
 
 
-
+        ' Auto buton numbering based on Cart being measuerd
         Select Case cartSelNumber
 
                     Case 1
