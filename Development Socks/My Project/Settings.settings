@@ -70,7 +70,7 @@
       <Value Profile="(Default)">CR</Value>
     </Setting>
     <Setting Name="SQLConn" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Server=192.168.1.211,1433;Database=Toraydb;User ID=sa;Password=tecknose4260</Value>
     </Setting>
     <Setting Name="chkDisableCreate" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
