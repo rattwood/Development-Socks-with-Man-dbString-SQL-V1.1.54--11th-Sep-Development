@@ -366,8 +366,15 @@ Public Class frmProductionDataUpdate
         'Location of first day cell then incremment by  B5
         For i = 1 To 59  '60 occurences of Column groups
 
+            If Not IsNothing(MyUpdateExcel.Cells(6, ncfree).Value) Then
+                If MyUpdateExcel.Cells(6, ncfree).Value.ToString = xlDoffNum Then
+                    Exit For
+                End If
+            End If
 
-            If MyUpdateExcel.Cells(6, ncfree).Value.ToString = xlDoffNum Or MyUpdateExcel.Cells(3, ncfree).value.ToString = " " Then
+            If IsNothing(MyUpdateExcel.Cells(3, ncfree).value) Then
+                Exit For
+            ElseIf MyUpdateExcel.Cells(3, ncfree).value.ToString = " " Then
                 Exit For
             Else
                 ncfree = ncfree + 8
@@ -383,7 +390,9 @@ Public Class frmProductionDataUpdate
 
 
         'Update the header infor for Day information
-        If MyUpdateExcel.Cells(3, ncfree).Value.ToString = " " Then
+        If IsNothing(MyUpdateExcel.Cells(3, ncfree).Value) Then
+            MyUpdateExcel.Cells(3, ncfree) = dateDay  'B3
+        ElseIf MyUpdateExcel.Cells(3, ncfree).Value.ToString = " " Then
             MyUpdateExcel.Cells(3, ncfree) = dateDay  'B3
         End If
 
