@@ -91,8 +91,8 @@ Public Class frmCart1
 
             Case Is = 2
                 If localMCCode = 30 Or localMCCode = 32 Then
-                    btnNum = 25
-                    coneNumOffset = 24
+                    btnNum = 33
+                    coneNumOffset = 32
                 Else
                     btnNum = 33
                     coneNumOffset = 32
@@ -100,8 +100,8 @@ Public Class frmCart1
 
             Case Is = 3
                 If localMCCode = 30 Or localMCCode = 32 Then
-                    btnNum = 49
-                    coneNumOffset = 48
+                    btnNum = 65
+                    coneNumOffset = 64
                 Else
                     btnNum = 65
                     coneNumOffset = 64
@@ -110,8 +110,8 @@ Public Class frmCart1
 
             Case Is = 4
                 If localMCCode = 30 Or localMCCode = 32 Then
-                    btnNum = 73
-                    coneNumOffset = 72
+                    btnNum = 97
+                    coneNumOffset = 96
                 Else
                     btnNum = 97
                     coneNumOffset = 96
@@ -120,8 +120,8 @@ Public Class frmCart1
 
             Case Is = 5
                 If localMCCode = 30 Or localMCCode = 32 Then
-                    btnNum = 97
-                    coneNumOffset = 96
+                    btnNum = 129
+                    coneNumOffset = 128
                 Else
                     btnNum = 129
                     coneNumOffset = 128
@@ -130,8 +130,8 @@ Public Class frmCart1
 
             Case Is = 6
                 If localMCCode = 30 Or localMCCode = 32 Then
-                    btnNum = 121
-                    coneNumOffset = 120
+                    ' btnNum = 121
+                    ' coneNumOffset = 120
                 Else
                     btnNum = 161
                     coneNumOffset = 160
@@ -150,8 +150,8 @@ Public Class frmCart1
 
             Case Is = 8
                 If localMCCode = 31 Or localMCCode = 33 Then
-                    btnNum = 169
-                    coneNumOffset = 168
+                    btnNum = 177
+                    coneNumOffset = 176
                 Else
                     btnNum = 225
                     coneNumOffset = 224
@@ -160,8 +160,8 @@ Public Class frmCart1
 
             Case Is = 9
                 If localMCCode = 31 Or localMCCode = 33 Then
-                    btnNum = 193
-                    coneNumOffset = 192
+                    btnNum = 209
+                    coneNumOffset = 208
                 Else
                     btnNum = 257
                     coneNumOffset = 256
@@ -170,8 +170,8 @@ Public Class frmCart1
 
             Case Is = 10
                 If localMCCode = 31 Or localMCCode = 33 Then
-                    btnNum = 217
-                    coneNumOffset = 216
+                    btnNum = 241
+                    coneNumOffset = 240
                 Else
                     btnNum = 289
                     coneNumOffset = 288
@@ -180,8 +180,8 @@ Public Class frmCart1
 
             Case Is = 11
                 If localMCCode = 31 Or localMCCode = 33 Then
-                    btnNum = 241
-                    coneNumOffset = 240
+                    btnNum = 273
+                    coneNumOffset = 272
                 Else
                     btnNum = 321
                     coneNumOffset = 320
@@ -190,8 +190,8 @@ Public Class frmCart1
 
             Case Is = 12
                 If localMCCode = 31 Or localMCCode = 33 Then
-                    btnNum = 265
-                    coneNumOffset = 264
+                    ' btnNum = 265
+                    ' coneNumOffset = 264
                 Else
                     btnNum = 353
                     coneNumOffset = 352
