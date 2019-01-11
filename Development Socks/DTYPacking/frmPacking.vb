@@ -75,8 +75,8 @@ Public Class frmPacking
         'SET number of buttons based on machine number
         If localMCCode = 29 Then
             rowendcount = DGVPakingA.Rows.Count
-        ElseIf localMCCode > 29 Then  'Sets buttons for new 24 position machines
-            rowendcount = 24
+        ElseIf localMCCode > 29 Then  'Sets buttons for new 12P position machines
+            rowendcount = DGVPakingA.Rows.Count
         Else
             rowendcount = 32
         End If
@@ -107,8 +107,8 @@ Public Class frmPacking
 
             Case Is = 2
                 If localMCCode = 30 Or localMCCode = 32 Then
-                    btnNum = 25
-                    coneNumOffset = 24
+                    btnNum = 33
+                    coneNumOffset = 32
                 Else
                     btnNum = 33
                     coneNumOffset = 32
@@ -116,8 +116,8 @@ Public Class frmPacking
 
             Case Is = 3
                 If localMCCode = 30 Or localMCCode = 32 Then
-                    btnNum = 49
-                    coneNumOffset = 48
+                    btnNum = 65
+                    coneNumOffset = 64
                 Else
                     btnNum = 65
                     coneNumOffset = 64
@@ -126,8 +126,8 @@ Public Class frmPacking
 
             Case Is = 4
                 If localMCCode = 30 Or localMCCode = 32 Then
-                    btnNum = 73
-                    coneNumOffset = 72
+                    btnNum = 97
+                    coneNumOffset = 96
                 Else
                     btnNum = 97
                     coneNumOffset = 96
@@ -136,8 +136,8 @@ Public Class frmPacking
 
             Case Is = 5
                 If localMCCode = 30 Or localMCCode = 32 Then
-                    btnNum = 97
-                    coneNumOffset = 96
+                    btnNum = 129
+                    coneNumOffset = 128
                 Else
                     btnNum = 129
                     coneNumOffset = 128
@@ -146,8 +146,8 @@ Public Class frmPacking
 
             Case Is = 6
                 If localMCCode = 30 Or localMCCode = 32 Then
-                    btnNum = 121
-                    coneNumOffset = 120
+                    ' btnNum = 121
+                    'coneNumOffset = 120
                 Else
                     btnNum = 161
                     coneNumOffset = 160
@@ -166,8 +166,8 @@ Public Class frmPacking
 
             Case Is = 8
                 If localMCCode = 31 Or localMCCode = 33 Then
-                    btnNum = 169
-                    coneNumOffset = 168
+                    btnNum = 177
+                    coneNumOffset = 176
                 Else
                     btnNum = 225
                     coneNumOffset = 224
@@ -176,8 +176,8 @@ Public Class frmPacking
 
             Case Is = 9
                 If localMCCode = 31 Or localMCCode = 33 Then
-                    btnNum = 193
-                    coneNumOffset = 192
+                    btnNum = 209
+                    coneNumOffset = 208
                 Else
                     btnNum = 257
                     coneNumOffset = 256
@@ -186,8 +186,8 @@ Public Class frmPacking
 
             Case Is = 10
                 If localMCCode = 31 Or localMCCode = 33 Then
-                    btnNum = 217
-                    coneNumOffset = 216
+                    btnNum = 241
+                    coneNumOffset = 240
                 Else
                     btnNum = 289
                     coneNumOffset = 288
@@ -196,8 +196,8 @@ Public Class frmPacking
 
             Case Is = 11
                 If localMCCode = 31 Or localMCCode = 33 Then
-                    btnNum = 241
-                    coneNumOffset = 240
+                    btnNum = 273
+                    coneNumOffset = 272
                 Else
                     btnNum = 321
                     coneNumOffset = 320
@@ -206,8 +206,8 @@ Public Class frmPacking
 
             Case Is = 12
                 If localMCCode = 31 Or localMCCode = 33 Then
-                    btnNum = 265
-                    coneNumOffset = 264
+                    ' btnNum = 265
+                    ' coneNumOffset = 264
                 Else
                     btnNum = 353
                     coneNumOffset = 352
