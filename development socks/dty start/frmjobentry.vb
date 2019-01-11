@@ -250,6 +250,7 @@ Public Class frmJobEntry
 
                 stdcheck = 0
                 reCheck = 0
+                machineCode = txtLotNumber.Text.Substring(0, 2)
 
                 Select Case txtLotNumber.TextLength
                     Case 14
@@ -264,6 +265,13 @@ Public Class frmJobEntry
                         End If
                     Case 15
                         If txtLotNumber.Text.Substring(13, 2) = "10" Or txtLotNumber.Text.Substring(13, 2) = "11" Or txtLotNumber.Text.Substring(13, 2) = "12" Then
+                            If machineCode >= 30 Then  'check that carts B10, B11 and B12 are not used on machines 30,31,32,33
+                                MsgBox("This CART No. " + txtLotNumber.Text.Substring(13, 2) + " Is Not valid for this machine Please check Barcode" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
+                                Me.txtLotNumber.Clear()
+                                Me.txtLotNumber.Focus()
+                                Me.txtLotNumber.Refresh()
+                                Exit Sub
+                            End If
                             cartNum = txtLotNumber.Text.Substring(12, 3)
                         Else
                             MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
@@ -367,7 +375,7 @@ Public Class frmJobEntry
                             varCartNameB = "B2"
                             cartSelect = 1
                             If machineCode = 30 Or machineCode = 32 Then
-                                varSpNums = "001 - 024"
+                                varSpNums = "001 - 032"
                             Else
                                 varSpNums = "001 - 032"
                             End If
@@ -377,7 +385,7 @@ Public Class frmJobEntry
                             varCartNameB = "B4"
                             cartSelect = 2
                             If machineCode = 30 Or machineCode = 32 Then
-                                varSpNums = "025 - 048"
+                                varSpNums = "033 - 064"
                             Else
                                 varSpNums = "033 - 064"
                             End If
@@ -387,7 +395,7 @@ Public Class frmJobEntry
                             varCartNameB = "B6"
                             cartSelect = 3
                             If machineCode = 30 Or machineCode = 32 Then
-                                varSpNums = "049 - 072"
+                                varSpNums = "065 - 096"
                             Else
                                 varSpNums = "065 - 096"
                             End If
@@ -397,7 +405,7 @@ Public Class frmJobEntry
                             varCartNameB = "B8"
                             cartSelect = 4
                             If machineCode = 30 Or machineCode = 32 Then
-                                varSpNums = "073 - 096"
+                                varSpNums = "097 - 128"
                             Else
                                 varSpNums = "097 - 128"
                             End If
@@ -407,7 +415,7 @@ Public Class frmJobEntry
                             varCartNameB = "B10"
                             cartSelect = 5
                             If machineCode = 30 Or machineCode = 32 Then
-                                varSpNums = "097 - 120"
+                                varSpNums = "129 - 144"
                             Else
                                 varSpNums = "129 - 160"
                             End If
@@ -417,7 +425,7 @@ Public Class frmJobEntry
                             varCartNameB = "B12"
                             cartSelect = 6
                             If machineCode = 30 Or machineCode = 32 Then
-                                varSpNums = "121 - 144"
+                                varSpNums = "121 - 144"  'no cart for 12p
                             Else
                                 varSpNums = "161 - 192"
                             End If
@@ -441,7 +449,7 @@ Public Class frmJobEntry
                             varCartNameB = "B2"
                             cartSelect = 7
                             If machineCode = 31 Or machineCode = 33 Then
-                                varSpNums = "145 - 168"
+                                varSpNums = "145 - 176"
                             Else
                                 varSpNums = "193 - 224"
                             End If
@@ -451,7 +459,7 @@ Public Class frmJobEntry
                             varCartNameB = "B4"
                             cartSelect = 8
                             If machineCode = 31 Or machineCode = 33 Then
-                                varSpNums = "169 - 192"
+                                varSpNums = "177 - 208"
                             Else
                                 varSpNums = "225 - 256"
                             End If
@@ -461,7 +469,7 @@ Public Class frmJobEntry
                             varCartNameB = "B6"
                             cartSelect = 9
                             If machineCode = 31 Or machineCode = 33 Then
-                                varSpNums = "193 - 216"
+                                varSpNums = "209 - 240"
                             Else
                                 varSpNums = "257 - 288"
                             End If
@@ -471,7 +479,7 @@ Public Class frmJobEntry
                             varCartNameB = "B8"
                             cartSelect = 10
                             If machineCode = 31 Or machineCode = 33 Then
-                                varSpNums = "217 - 240"
+                                varSpNums = "241 - 272"
                             Else
                                 varSpNums = "289 - 320"
                             End If
@@ -481,7 +489,7 @@ Public Class frmJobEntry
                             varCartNameB = "B10"
                             cartSelect = 11
                             If machineCode = 31 Or machineCode = 33 Then
-                                varSpNums = "241 - 264"
+                                varSpNums = "273 - 288"
                             Else
                                 varSpNums = "321 - 352"
                             End If
@@ -491,7 +499,7 @@ Public Class frmJobEntry
                             varCartNameB = "B12"
                             cartSelect = 12
                             If machineCode = 31 Or machineCode = 33 Then
-                                varSpNums = "265 - 288"
+                                varSpNums = "265 - 288"   'no cart for 12P
                             Else
                                 varSpNums = "353 - 384"
                             End If
@@ -576,7 +584,7 @@ Public Class frmJobEntry
 
         Catch ex As Exception
 
-            LException = "ExecQuery Error: " & vbNewLine & ex.Message
+            LException = "ExecQuery Error:  " & vbNewLine & ex.Message
             MsgBox(LException)
 
         End Try
@@ -785,15 +793,15 @@ Public Class frmJobEntry
 
                         ElseIf machineCode = 30 Or machineCode = 32 Then
                             coneNumStart = 1
-                            coneNumStop = 24
-                        Else
+                    coneNumStop = 32
+                Else
                             coneNumStart = 1
                             coneNumStop = 32
                         End If
             Case 2
                 If machineCode = 30 Or machineCode = 32 Then
-                    coneNumStart = 25
-                    coneNumStop = 48
+                    coneNumStart = 33
+                    coneNumStop = 64
                 Else
                     coneNumStart = 33
                     coneNumStop = 64
@@ -801,8 +809,8 @@ Public Class frmJobEntry
 
             Case 3
                 If machineCode = 30 Or machineCode = 32 Then
-                    coneNumStart = 49
-                    coneNumStop = 72
+                    coneNumStart = 65
+                    coneNumStop = 96
                 Else
                     coneNumStart = 65
                     coneNumStop = 96
@@ -810,16 +818,16 @@ Public Class frmJobEntry
 
             Case 4
                 If machineCode = 30 Or machineCode = 32 Then
-                    coneNumStart = 73
-                    coneNumStop = 96
+                    coneNumStart = 97
+                    coneNumStop = 128
                 Else
                     coneNumStart = 97
                     coneNumStop = 128
                 End If
             Case 5
                 If machineCode = 30 Or machineCode = 32 Then
-                    coneNumStart = 97
-                    coneNumStop = 120
+                    coneNumStart = 129
+                    coneNumStop = 144
                 Else
                     coneNumStart = 129
                     coneNumStop = 160
@@ -827,8 +835,8 @@ Public Class frmJobEntry
 
             Case 6
                 If machineCode = 30 Or machineCode = 32 Then
-                    coneNumStart = 121
-                    coneNumStop = 144
+                    ' coneNumStart = 121
+                    ' coneNumStop = 144
                 Else
                     coneNumStart = 161
                     coneNumStop = 192
@@ -836,47 +844,47 @@ Public Class frmJobEntry
             Case 7
                 If machineCode = 31 Or machineCode = 33 Then
                     coneNumStart = 145
-                    coneNumStop = 168
+                    coneNumStop = 176
                 Else
                     coneNumStart = 193
                     coneNumStop = 224
                 End If
             Case 8
                 If machineCode = 31 Or machineCode = 33 Then
-                    coneNumStart = 169
-                    coneNumStop = 192
+                    coneNumStart = 177
+                    coneNumStop = 208
                 Else
                     coneNumStart = 225
                     coneNumStop = 256
                 End If
             Case 9
                 If machineCode = 31 Or machineCode = 33 Then
-                    coneNumStart = 193
-                    coneNumStop = 216
+                    coneNumStart = 209
+                    coneNumStop = 240
                 Else
                     coneNumStart = 257
                     coneNumStop = 288
                 End If
             Case 10
                 If machineCode = 31 Or machineCode = 33 Then
-                    coneNumStart = 217
-                    coneNumStop = 240
+                    coneNumStart = 241
+                    coneNumStop = 272
                 Else
                     coneNumStart = 289
                     coneNumStop = 320
                 End If
             Case 11
                 If machineCode = 31 Or machineCode = 33 Then
-                    coneNumStart = 241
-                    coneNumStop = 264
+                    coneNumStart = 273
+                    coneNumStop = 288
                 Else
                     coneNumStart = 321
                     coneNumStop = 352
                 End If
             Case 12
                 If machineCode = 31 Or machineCode = 33 Then
-                    coneNumStart = 265
-                    coneNumStop = 288
+                    ' coneNumStart = 265
+                    ' coneNumStop = 288
                 Else
                     coneNumStart = 353
                     coneNumStop = 384
@@ -925,11 +933,11 @@ Public Class frmJobEntry
 
 
         For i As Integer = coneNumStart To coneNumStop
-            If machineCode < 30 Then
-                If x <= 16 Then cartName = varCartNameA Else cartName = varCartNameB  'SETS CORRECT CART NUMBER
-            Else
-                If x <= 12 Then cartName = varCartNameA Else cartName = varCartNameB  'SETS CORRECT CART NUMBER
-            End If
+            ' If machineCode < 30 Then
+            If x <= 16 Then cartName = varCartNameA Else cartName = varCartNameB  'SETS CORRECT CART NUMBER
+            'Else
+            'If x <= 12 Then cartName = varCartNameA Else cartName = varCartNameB  'SETS CORRECT CART NUMBER
+            '  End If
             x = x + 1
             modConeNum = i.ToString(fmt)   ' FORMATS THE CONE NUMBER TO 3 DIGITS
             coneBarcode = modLotStr & modConeNum   'CREATE THE CONE BARCODE NUMBER
@@ -1356,13 +1364,13 @@ Public Class frmJobEntry
             Case 29
                 varMachineName = "Pilot"
             Case 30
-                varMachineName = "31D1"        'Left Side
+                varMachineName = "31D1"        'Left Side 1 - 144
             Case 31
-                varMachineName = "31D2"        'Right Side
+                varMachineName = "31D2"        'Right Side  145 - 288
             Case 32
-                varMachineName = "32D1"        'Left Side
+                varMachineName = "32D1"        'Left Side  1 - 144
             Case 33
-                varMachineName = "32D2"        'Right Side
+                varMachineName = "32D2"        'Right Side  145 - 288
         End Select
 
 
