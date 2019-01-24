@@ -789,18 +789,18 @@ Public Class frmJobEntry
         ' Auto buton numbering based on Cart being measuerd
         Select Case cartSelNumber
 
-                    Case 1
-                        If machineCode = 29 Then
-                            coneNumStart = 1
-                            coneNumStop = pilotCount
+            Case 1
+                If machineCode = 29 Then
+                    coneNumStart = 1
+                    coneNumStop = pilotCount
 
-                        ElseIf machineCode = 30 Or machineCode = 32 Then
-                            coneNumStart = 1
+                ElseIf machineCode = 30 Or machineCode = 32 Then
+                    coneNumStart = 1
                     coneNumStop = 32
                 Else
-                            coneNumStart = 1
-                            coneNumStop = 32
-                        End If
+                    coneNumStart = 1
+                    coneNumStop = 32
+                End If
             Case 2
                 If machineCode = 30 Or machineCode = 32 Then
                     coneNumStart = 33
