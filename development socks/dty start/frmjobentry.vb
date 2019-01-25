@@ -429,6 +429,7 @@ Public Class frmJobEntry
                             cartSelect = 6
                             If machineCode = 30 Or machineCode = 32 Then
                                 varSpNums = "121 - 144"  'no cart for 12p
+                                'roger
                             Else
                                 varSpNums = "161 - 192"
                             End If
