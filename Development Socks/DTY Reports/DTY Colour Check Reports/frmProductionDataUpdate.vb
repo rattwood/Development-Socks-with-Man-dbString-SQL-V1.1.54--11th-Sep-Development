@@ -43,7 +43,8 @@ Public Class frmProductionDataUpdate
     Dim nfree As Integer  'This will be container for the next row free  
     Dim ncfree As Integer = 2 'This is the location of the first day number on the sheet 
     Dim colcount As Integer
-
+    Dim PilotCount As Integer
+    Dim FirstTime As Integer
     'REFRENCE CELL LOCATIONS
     'HEADERS
 
@@ -66,6 +67,11 @@ Public Class frmProductionDataUpdate
     Dim xlAB
     Dim xlPShort
     Dim xlMShort
+    Dim xlCartSize
+    Dim xlD1ColIdx As Integer
+    Dim XLD1NCFree As Integer
+    Dim colLetter As String
+
 
 
 
@@ -74,12 +80,6 @@ Public Class frmProductionDataUpdate
 
         jobNum = frmPrintCartReport.DGVcartReport.Rows(1).Cells("BCODEJOB").Value
 
-        'frmDGVSendData.Visible = True
-
-
-        'CREATE DATE VARIABLES VALUES
-
-        'dateDay = frmDGV.DGVData.Rows(0).Cells("COLENDTM").Value
         checkJobFileExists()
 
     End Sub
@@ -217,147 +217,10 @@ Public Class frmProductionDataUpdate
         'OPEN THE REQUIERD FILE
 
         xlUpdateWorkbook = MyUpdateExcel.Workbooks.Open(fileOpenName)
-        'MyUpdateExcel.Application.WindowState = Excel.XlWindowState.xlMaximized
-        'MyUpdateExcel.Visible = True
+
 
         'Select requierd Worksheet 
         CType(MyUpdateExcel.Workbooks(1).Worksheets("Input Data"), Excel.Worksheet).Select()
-
-        'CHECK NEXT FREE DAY CELL AND write in that days Columns
-
-
-        ''*****************************************  VERSION 1  **************************************************************
-        ''********************************  FOR M30,P30,AB,-S and +S Only  *************************************************** 
-        ''Location of first day cell then incremment by  B5
-        'For i = 1 To 59  '60 occurences of Column groups
-
-
-        '    If MyUpdateExcel.Cells(6, ncfree).Value = xlDoffNum Or MyUpdateExcel.Cells(3, ncfree).value.ToString = " " Then
-        '        Exit For
-        '        'ElseIf MyUpdateExcel.Cells(3, ncfree).Value.ToString = " " Or IsNothing(MyUpdateExcel.Cells(3, ncfree).Value.ToString) Then
-        '        '    Exit For
-        '    Else
-        '        ncfree = ncfree + 5
-        '    End If
-
-        '    'If MyUpdateExcel.Cells(3, ncfree).Value.ToString = " " Or IsNothing(MyUpdateExcel.Cells(3, ncfree).Value.ToString) Then
-        '    '    Exit For
-        '    'Else
-        '    '    ncfree = ncfree + 5
-
-        '    'End If
-        'Next
-
-        ''Update the header infor for Day information
-        'MyUpdateExcel.Cells(3, ncfree) = dateDay  'B3
-        'MyUpdateExcel.Cells(4, ncfree) = xlDTYProd 'B4
-        'MyUpdateExcel.Cells(5, ncfree) = "'" & xlTFNum 'B5
-        'MyUpdateExcel.Cells(5, ncfree + 3) = xlChecker 'D5
-        'MyUpdateExcel.Cells(6, ncfree) = "'" & xlDoffNum 'B6
-
-        'MyUpdateExcel.Visible = True
-
-
-        ''FIND P30 CHEESE
-        'DGVProdDataSend.DataSource = Nothing  'THIS CLEARS ANY OLD DATA OUT OF DGV
-        'LExecQuery("SELECT conenum FROM jobs WHERE P30 > 0 And FLT_S = 'False'  and BCODEJOB = '" & jobNum & "' ORDER BY CONENUM ")
-
-        'If LRecordCount > 0 Then
-        '    'LOAD THE DATA FROM dB IN TO THE DATAGRID
-        '    DGVProdDataSend.DataSource = Nothing  'THIS CLEARS ANY OLD DATA OUT OF DGV
-        '    DGVProdDataSend.DataSource = LDS.Tables(0)
-        '    DGVProdDataSend.Rows(0).Selected = True
-        '    DGVProdDataSend.Sort(DGVProdDataSend.Columns(0), ListSortDirection.Ascending)  'sorts On cone numberchimera4260
-
-        '    For rCount = 1 To DGVProdDataSend.Rows.Count - 1
-        '        MyUpdateExcel.Cells((rCount - 1) + 8, ncfree) = DGVProdDataSend.Rows(rCount - 1).Cells(0).Value.ToString 'Start on row 8 and advance
-
-        '    Next
-
-        'End If
-
-
-        ''FIND M30 CHEESE
-        'DGVProdDataSend.DataSource = Nothing  'THIS CLEARS ANY OLD DATA OUT OF DGV
-        'LExecQuery("SELECT conenum FROM jobs WHERE M30 > 0 And FLT_S = 'False'  and BCODEJOB = '" & jobNum & "' ORDER BY CONENUM ")
-
-        'If LRecordCount > 0 Then
-
-        '    'LOAD THE DATA FROM dB IN TO THE DATAGRID
-        '    DGVProdDataSend.DataSource = LDS.Tables(0)
-        '    DGVProdDataSend.Rows(0).Selected = True
-        '    DGVProdDataSend.Sort(DGVProdDataSend.Columns(0), ListSortDirection.Ascending)  '
-
-
-        '    For rCount = 1 To DGVProdDataSend.Rows.Count - 1
-        '        MyUpdateExcel.Cells((rCount - 1) + 8, ncfree + 1) = DGVProdDataSend.Rows(rCount - 1).Cells(0).Value.ToString 'Start on row 8 and advance
-
-        '    Next
-
-        'End If
-
-
-        ''FIND AB CHEESE
-        'DGVProdDataSend.DataSource = Nothing  'THIS CLEARS ANY OLD DATA OUT OF DGV
-        'LExecQuery("SELECT conenum,colwaste,flt_s FROM jobs WHERE ((conebarley > 0 or M50 > 0 or P50 > 0 Or ColWaste > 0 and (m30 = 0 and p30 = 0)) OR flt_s = 'True') AND BCODEJOB = '" & jobNum & "'  ORDER BY CONENUM ")
-
-        'If LRecordCount > 0 Then
-        '    'LOAD THE DATA FROM dB IN TO THE DATAGRID
-        '    DGVProdDataSend.DataSource = LDS.Tables(0)
-        '    DGVProdDataSend.Rows(0).Selected = True
-        '    DGVProdDataSend.Sort(DGVProdDataSend.Columns(0), ListSortDirection.Ascending)  'sorts On cone numberchimera4260
-
-        '    For rCount = 1 To DGVProdDataSend.Rows.Count - 1
-        '        MyUpdateExcel.Cells((rCount - 1) + 8, ncfree + 2) = DGVProdDataSend.Rows(rCount - 1).Cells(0).Value.ToString 'Start on row 8 and advance
-        '        If DGVProdDataSend.Rows(rCount - 1).Cells(1).Value > 0 Then MyUpdateExcel.Cells((rCount - 1) + 8, ncfree + 2).interior.color = Color.LightGreen Else MyUpdateExcel.Cells((rCount - 1) + 8, ncfree + 2).interior.color = Color.White
-        '        If DGVProdDataSend.Rows(rCount - 1).Cells(2).Value = True Then MyUpdateExcel.Cells((rCount - 1) + 8, ncfree + 2).font.color = Color.Red Else MyUpdateExcel.Cells((rCount - 1) + 8, ncfree + 2).font.color = Color.Black
-
-        '    Next
-
-        'End If
-
-
-
-
-
-        ''FIND PShort
-        'DGVProdDataSend.DataSource = Nothing  'THIS CLEARS ANY OLD DATA OUT OF DGV
-        'LExecQuery("SELECT conenum FROM jobs WHERE P30 > 0 And FLT_S = 'True'  and BCODEJOB = '" & jobNum & "' ORDER BY CONENUM ")
-
-        'If LRecordCount > 0 Then
-        '    'LOAD THE DATA FROM dB IN TO THE DATAGRID
-        '    DGVProdDataSend.DataSource = LDS.Tables(0)
-        '    DGVProdDataSend.Rows(0).Selected = True
-        '    DGVProdDataSend.Sort(DGVProdDataSend.Columns(0), ListSortDirection.Ascending)  'sorts On cone numberchimera4260
-
-        '    For rCount = 1 To DGVProdDataSend.Rows.Count - 1
-        '        MyUpdateExcel.Cells((rCount - 1) + 8, ncfree + 3) = DGVProdDataSend.Rows(rCount - 1).Cells(0).Value.ToString 'Start on row 8 and advance
-
-        '    Next
-
-        'End If
-
-
-        ''FIND MShort
-        'DGVProdDataSend.DataSource = Nothing  'THIS CLEARS ANY OLD DATA OUT OF DGV
-        'LExecQuery("SELECT conenum FROM jobs WHERE M30 > 0 And FLT_S = 'True'  and BCODEJOB = '" & jobNum & "' ORDER BY CONENUM ")
-
-        'If LRecordCount > 0 Then
-        '    'LOAD THE DATA FROM dB IN TO THE DATAGRID
-        '    DGVProdDataSend.DataSource = LDS.Tables(0)
-        '    DGVProdDataSend.Rows(0).Selected = True
-        '    DGVProdDataSend.Sort(DGVProdDataSend.Columns(0), ListSortDirection.Ascending)  'sorts On cone numberchimera4260
-
-        '    For rCount = 1 To DGVProdDataSend.Rows.Count - 1
-        '        MyUpdateExcel.Cells((rCount - 1) + 8, ncfree + 4) = DGVProdDataSend.Rows(rCount - 1).Cells(0).Value.ToString 'Start on row 8 and advance
-
-        '    Next
-
-        'End If
-
-        ''****************************************************** END OF VERSION 1 **********************************************************************
-
-
 
 
 
@@ -402,7 +265,7 @@ Public Class frmProductionDataUpdate
         MyUpdateExcel.Cells(5, ncfree + 5) = xlChecker 'G5
         MyUpdateExcel.Cells(6, ncfree) = xlDoffNum 'B6
 
-        MyUpdateExcel.Visible = True
+        'MyUpdateExcel.Visible = True
 
 
 
@@ -493,8 +356,8 @@ Public Class frmProductionDataUpdate
                 MyUpdateExcel.Cells((rCount - 1) + 8, ncfree + 4) = DGVProdDataSend.Rows(rCount - 1).Cells(0).Value.ToString 'Start on row 8 and advance
 
             Next
-        Else
-            Exit Sub
+            ' Else
+            '   Exit Sub
         End If
 
         'FIND PShort
@@ -567,12 +430,57 @@ Public Class frmProductionDataUpdate
             WasteCount = LRecordCount
         End If
 
+        'Get total number of cheese in job
+        DGVProdDataSend.DataSource = Nothing  'THIS CLEARS ANY OLD DATA OUT OF DGV
+        LExecQuery("SELECT * FROM jobs WHERE  bcodejob = '" & jobNum & "' ")
+
+        If LRecordCount > 0 Then
+            PilotCount = LRecordCount
+        End If
+
 
         'UPDATE TOTAL CEHECK VALUE
-        MyUpdateExcel.Cells(6, ncfree + 5) = 192 - (missCount + stdCount)
+        Select Case xlMcNumHead
+            Case "Pilot"
+                MyUpdateExcel.Cells(6, ncfree + 5) = 12 - (missCount + stdCount)
+                'xlCartSize = (7 + 11)
+
+            Case "31D1", "31D2", "32D1", "32D2"
+                MyUpdateExcel.Cells(6, ncfree + 5) = 144 - (missCount + stdCount)
+                'xlCartSize = (7 + 143)  'Calculate new value of last cell for counting grade A
+
+            Case Else
+                MyUpdateExcel.Cells(6, ncfree + 5) = 192 - (missCount + stdCount)
+                'xlCartSize = (7 + 191)  'Calculate new value of last cell for counting grade A
+        End Select
+
+        'If Not (FirstTime) Then
 
 
-        '************************************************** END OF VERSION 2 ***************************************************************************
+        '    Dim passWord As String = "2813"
+        '    'Select requierd Worksheet 
+        '    CType(MyUpdateExcel.Workbooks(1).Worksheets("D1"), Excel.Worksheet).Select()
+
+        '    MyUpdateExcel.Run("UnProtect", passWord)
+
+
+        '    xlD1ColNum() 'Get the D! Column number to write to
+
+        '    Dim sizeCalc As String = "=COUNTBLANK(" & colLetter & "7:" & colLetter & xlCartSize.ToString & ")"  'Create string for A Calc range
+
+        '    MyUpdateExcel.Range("C204:BJ204").Value = sizeCalc  'Writes the A count calculation to all cells
+
+        '    MyUpdateExcel.Run("Protect", passWord)
+
+        '    '*****************************************************************************************************************************************
+
+
+
+
+        'End If
+
+
+
 
 
 
@@ -594,20 +502,158 @@ Public Class frmProductionDataUpdate
 
 
 
+    End Sub
 
+    Private Sub xlD1ColNum()
+        XLD1NCFree = (ncfree / 8) + 1
 
+        If XLD1NCFree < 2 Then XLD1NCFree = 1
+
+        xlD1ColIdx = XLD1NCFree + 2 'This calculates which Column we need to write to
+
+        Select Case XLD1NCFree
+
+            Case 1
+                colLetter = "C"
+            Case 2
+                colLetter = "D"
+            Case 3
+                colLetter = "E"
+            Case 4
+                colLetter = "F"
+            Case 5
+                colLetter = "G"
+            Case 6
+                colLetter = "H"
+            Case 7
+                colLetter = "I"
+            Case 8
+                colLetter = "J"
+            Case 9
+                colLetter = "K"
+            Case 10
+                colLetter = "L"
+            Case 11
+                colLetter = "M"
+            Case 12
+                colLetter = "N"
+            Case 13
+                colLetter = "O"
+            Case 14
+                colLetter = "p"
+            Case 15
+                colLetter = "Q"
+            Case 16
+                colLetter = "R"
+            Case 17
+                colLetter = "S"
+            Case 18
+                colLetter = "T"
+            Case 19
+                colLetter = "U"
+            Case 20
+                colLetter = "V"
+            Case 21
+                colLetter = "W"
+            Case 22
+                colLetter = "X"
+            Case 23
+                colLetter = "Y"
+            Case 24
+                colLetter = "Z"
+            Case 25
+                colLetter = "AA"
+            Case 26
+                colLetter = "AB"
+            Case 27
+                colLetter = "AC"
+            Case 28
+                colLetter = "AD"
+            Case 29
+                colLetter = "AE"
+            Case 30
+                colLetter = "AF"
+            Case 31
+                colLetter = "AG"
+            Case 32
+                colLetter = "AH"
+            Case 33
+                colLetter = "AI"
+            Case 34
+                colLetter = "AJ"
+            Case 35
+                colLetter = "AK"
+            Case 36
+                colLetter = "AL"
+            Case 37
+                colLetter = "AM"
+            Case 38
+                colLetter = "AN"
+            Case 39
+                colLetter = "AO"
+            Case 40
+                colLetter = "AP"
+            Case 41
+                colLetter = "AQ"'
+            Case 42
+                colLetter = "AR"
+            Case 43
+                colLetter = "AS"
+            Case 44
+                colLetter = "AT"
+            Case 45
+                colLetter = "AU"
+            Case 46
+                colLetter = "AV"
+            Case 47
+                colLetter = "AW"
+            Case 48
+                colLetter = "AX"
+            Case 49
+                colLetter = "AY"
+            Case 50
+                colLetter = "AZ"
+            Case 51
+                colLetter = "BA"
+            Case 52
+                colLetter = "BC"
+            Case 53
+                colLetter = "BD"
+            Case 54
+                colLetter = "BE"
+            Case 55
+                colLetter = "BF"
+            Case 56
+                colLetter = "BG"
+            Case 57
+                colLetter = "BH"
+            Case 58
+                colLetter = "BI"
+            Case 59
+                colLetter = "BJ"
+            Case Else
+                colLetter = "C"
+
+        End Select
 
     End Sub
+
 
     Private Sub DataCreateNewForm()
 
         Dim MyCreateExcel As New Excel.Application
 
-        Dim nfree As Integer  'This will be container for the next row free  
+        '  Dim nfree As Integer  'This will be container for the next row free  
         Dim ncfree As Integer 'This will be container for the next column free  
-        Dim colcount As Integer
+        '  Dim colcount As Integer
         Dim xlCreateWorkbook As Excel.Workbook
-        Dim xlCreateSheets As Excel.Worksheet
+        ' Dim xlCreateSheets As Excel.Worksheet
+
+        Dim missCount As Integer = 0
+        'Dim WasteCount As Integer = 0
+        Dim stdCount As Integer = 0
+
+
 
         template = (My.Settings.dirTemplate & "\" & "PROD REPORT TEMPLATE ANY MACHINE.xlsm")
         'OPEN A NEW WORKSHEET
@@ -625,6 +671,44 @@ Public Class frmProductionDataUpdate
         MyCreateExcel.Cells(2, 10) = ("POY: " & xlPOYProdHead)  'G2
         MyCreateExcel.Cells(2, 18) = ("Weight: " & xlWeightHead & "Kg") 'L2
 
+
+
+        'Count Missing Cheese
+        DGVProdDataSend.DataSource = Nothing  'THIS CLEARS ANY OLD DATA OUT OF DGV
+        LExecQuery("SELECT conenum FROM jobs WHERE misscone > 0 And bcodejob = '" & jobNum & "' ")
+        If LRecordCount > 0 Then
+            missCount = LRecordCount
+
+        End If
+
+        'Count STD CHEESE
+        DGVProdDataSend.DataSource = Nothing  'THIS CLEARS ANY OLD DATA OUT OF DGV
+        LExecQuery("SELECT conenum FROM jobs WHERE STDSTATE Between 1 And 9 and  bcodejob = '" & jobNum & "' ")
+
+        If LRecordCount > 0 Then
+            stdCount = LRecordCount
+        End If
+
+        'Get total number of cheese in job
+        DGVProdDataSend.DataSource = Nothing  'THIS CLEARS ANY OLD DATA OUT OF DGV
+        LExecQuery("SELECT * FROM jobs WHERE  bcodejob = '" & jobNum & "' ")
+
+        If LRecordCount > 0 Then
+            PilotCount = LRecordCount
+        End If
+
+        'Select Case xlMcNumHead
+        '    Case "Pilot"
+        '        MyCreateExcel.Cells(6, ncfree + 5) = 12 - (missCount + stdCount)
+        '    Case "30D1", "30D2", "31D1", "31D2", "32D1", "31D2", "32D1", "31D2"
+        '        MyCreateExcel.Cells(6, ncfree + 5) = 144 - (missCount + stdCount)
+        '    Case Else
+        '        MyCreateExcel.Cells(6, ncfree + 5) = 192 - (missCount + stdCount)
+        'End Select
+
+
+
+
         Dim passWord As String = "2813"
         'Select requierd Worksheet 
         CType(MyCreateExcel.Workbooks(1).Worksheets("D1"), Excel.Worksheet).Select()
@@ -634,18 +718,41 @@ Public Class frmProductionDataUpdate
         Dim offSet As String = 0
 
         Select Case tmpMCnum
-            Case 21, 23, 25, 27
+            Case 21, 23, 25, 27, 29
                 offSet = 1
-            Case 22, 24, 26, 28
+            Case 22, 24, 26, 28,
                 offSet = 193
+            Case 30, 32
+                offSet = 1
+            Case 31, 32
+                offSet = 145
+
         End Select
 
         For i = 1 To 192
             MyCreateExcel.Cells(i + 6, 2) = (i - 1) + offSet
         Next
 
+        'UPDATE TOTAL CEHECK VALUE
+        Select Case xlMcNumHead
+            Case "Pilot"
+                xlCartSize = (7 + 11)
+            Case "31D1", "31D2", "32D1", "32D2"
+                xlCartSize = (7 + 143)  'Calculate new value of last cell for counting grade A
+            Case Else
+                xlCartSize = (7 + 191)  'Calculate new value of last cell for counting grade A
+        End Select
+
+        xlD1ColNum() 'Get the D! Column number to write to
+
+        Dim sizeCalc As String = "=COUNTBLANK(" & colLetter & "7:" & colLetter & xlCartSize.ToString & ")"  'Create string for A Calc range
+
+        MyCreateExcel.Range("C204:BJ204").Value = sizeCalc  'Writes the A count calculation to all cells
 
         MyCreateExcel.Run("Protect", passWord)
+
+        '*****************************************************************************************************************************************
+
 
         Try
 
@@ -655,6 +762,9 @@ Public Class frmProductionDataUpdate
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+
+
+
 
 
         'CLOSE THE TEMPLATE FILE 
@@ -671,7 +781,7 @@ Public Class frmProductionDataUpdate
         releaseObject(MyCreateExcel)
         releaseObject(xlCreateWorkbook)
 
-
+        FirstTime = 1  'Flag so that updatdata section does not recalculate the equation for A count
 
 
     End Sub

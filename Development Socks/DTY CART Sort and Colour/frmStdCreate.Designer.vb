@@ -91,38 +91,45 @@ Partial Class frmStdCreate
         'lbltotScan
         '
         Me.lbltotScan.AutoSize = True
-        Me.lbltotScan.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbltotScan.Location = New System.Drawing.Point(932, 161)
+        Me.lbltotScan.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lbltotScan.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.lbltotScan.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbltotScan.ForeColor = System.Drawing.Color.Red
+        Me.lbltotScan.Location = New System.Drawing.Point(563, 199)
         Me.lbltotScan.Name = "lbltotScan"
-        Me.lbltotScan.Size = New System.Drawing.Size(0, 16)
+        Me.lbltotScan.Size = New System.Drawing.Size(80, 33)
         Me.lbltotScan.TabIndex = 208
+        Me.lbltotScan.Text = "5554"
         '
         'lbltotCount
         '
         Me.lbltotCount.AutoSize = True
-        Me.lbltotCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbltotCount.Location = New System.Drawing.Point(932, 134)
+        Me.lbltotCount.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lbltotCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbltotCount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.lbltotCount.Location = New System.Drawing.Point(563, 54)
         Me.lbltotCount.Name = "lbltotCount"
-        Me.lbltotCount.Size = New System.Drawing.Size(0, 16)
+        Me.lbltotCount.Size = New System.Drawing.Size(80, 33)
         Me.lbltotCount.TabIndex = 207
+        Me.lbltotCount.Text = "4444"
         '
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(799, 161)
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(522, 148)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(109, 16)
+        Me.Label16.Size = New System.Drawing.Size(164, 25)
         Me.Label16.TabIndex = 206
         Me.Label16.Text = "Total Scanned"
         '
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(799, 134)
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(511, 14)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(115, 16)
+        Me.Label15.Size = New System.Drawing.Size(175, 25)
         Me.Label15.TabIndex = 205
         Me.Label15.Text = "Total In System"
         '
@@ -301,6 +308,7 @@ Partial Class frmStdCreate
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.DataGridView1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmStdCreate"
         Me.Text = "frmStdCreate"
