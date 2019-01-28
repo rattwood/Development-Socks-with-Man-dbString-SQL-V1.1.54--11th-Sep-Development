@@ -1,4 +1,4 @@
-﻿'Imports System.Data.DataTable
+'Imports System.Data.DataTable
 Imports System.Data.SqlClient
 Imports System.ComponentModel  'Allows function of Datagridview sorting and filtering
 
@@ -412,7 +412,13 @@ Public Class frmJobEntry
                             varCartNameA = "B11"
                             varCartNameB = "B12"
                             cartSelect = 6
-                            varSpNums = "161 - 192"
+
+                            If machineCode = 30 Or machineCode = 32 Then
+                                varSpNums = "121 - 144"  'no cart for 12p
+                                'roger
+                            Else
+                                varSpNums = "161 - 192"
+                            End If
 
 
                     End Select
