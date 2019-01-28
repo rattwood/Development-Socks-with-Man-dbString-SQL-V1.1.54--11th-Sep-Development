@@ -1,4 +1,4 @@
-﻿'Imports System.Data.DataTable
+'Imports System.Data.DataTable
 Imports System.Data.SqlClient
 Imports System.ComponentModel  'Allows function of Datagridview sorting and filtering
 
@@ -370,69 +370,56 @@ Public Class frmJobEntry
 
             Select Case machineCode
                 'Machine Left side
-                Case 21, 23, 25, 27, 30, 32
+                Case 21, 23, 25, 27
 
                     Select Case cartNum
                         Case "B1", "B2"
                             varCartNameA = "B1"
                             varCartNameB = "B2"
                             cartSelect = 1
-                            If machineCode = 30 Or machineCode = 32 Then
-                                varSpNums = "001 - 032"
-                            Else
-                                varSpNums = "001 - 032"
-                            End If
+                            varSpNums = "001 - 032"
+
 
                         Case "B3", "B4"
                             varCartNameA = "B3"
                             varCartNameB = "B4"
                             cartSelect = 2
-                            If machineCode = 30 Or machineCode = 32 Then
-                                varSpNums = "033 - 064"
-                            Else
-                                varSpNums = "033 - 064"
-                            End If
+                            varSpNums = "033 - 064"
+
 
                         Case "B5", "B6"
                             varCartNameA = "B5"
                             varCartNameB = "B6"
                             cartSelect = 3
-                            If machineCode = 30 Or machineCode = 32 Then
-                                varSpNums = "065 - 096"
-                            Else
-                                varSpNums = "065 - 096"
-                            End If
+                            varSpNums = "065 - 096"
+
 
                         Case "B7", "B8"
                             varCartNameA = "B7"
                             varCartNameB = "B8"
                             cartSelect = 4
-                            If machineCode = 30 Or machineCode = 32 Then
-                                varSpNums = "097 - 128"
-                            Else
-                                varSpNums = "097 - 128"
-                            End If
+                            varSpNums = "097 - 128"
+
 
                         Case "B9", "B10"
                             varCartNameA = "B9"
                             varCartNameB = "B10"
                             cartSelect = 5
-                            If machineCode = 30 Or machineCode = 32 Then
-                                varSpNums = "129 - 144"
-                            Else
-                                varSpNums = "129 - 160"
-                            End If
+                            varSpNums = "129 - 160"
+
 
                         Case "B11", "B12"
                             varCartNameA = "B11"
                             varCartNameB = "B12"
                             cartSelect = 6
+
                             If machineCode = 30 Or machineCode = 32 Then
                                 varSpNums = "121 - 144"  'no cart for 12p
                                 'roger
                             Else
                                 varSpNums = "161 - 192"
                             End If
+
 
                     End Select
 
@@ -445,70 +432,133 @@ Public Class frmJobEntry
 
 
                 'Machine Right side
-                Case 22, 24, 26, 28, 31, 33
+                Case 22, 24, 26, 28
                     Select Case cartNum
 
                         Case "B1", "B2"
                             varCartNameA = "B1"
                             varCartNameB = "B2"
                             cartSelect = 7
-                            If machineCode = 31 Or machineCode = 33 Then
-                                varSpNums = "145 - 176"
-                            Else
-                                varSpNums = "193 - 224"
-                            End If
+                            varSpNums = "193 - 224"
+
 
                         Case "B3", "B4"
                             varCartNameA = "B3"
                             varCartNameB = "B4"
                             cartSelect = 8
-                            If machineCode = 31 Or machineCode = 33 Then
-                                varSpNums = "177 - 208"
-                            Else
-                                varSpNums = "225 - 256"
-                            End If
+                            varSpNums = "225 - 256"
+
 
                         Case "B5", "B6"
                             varCartNameA = "B5"
                             varCartNameB = "B6"
                             cartSelect = 9
-                            If machineCode = 31 Or machineCode = 33 Then
-                                varSpNums = "209 - 240"
-                            Else
-                                varSpNums = "257 - 288"
-                            End If
+                            varSpNums = "257 - 288"
+
 
                         Case "B7", "B8"
                             varCartNameA = "B7"
                             varCartNameB = "B8"
                             cartSelect = 10
-                            If machineCode = 31 Or machineCode = 33 Then
-                                varSpNums = "241 - 272"
-                            Else
-                                varSpNums = "289 - 320"
-                            End If
+                            varSpNums = "289 - 320"
+
 
                         Case "B9", "B10"
                             varCartNameA = "B9"
                             varCartNameB = "B10"
                             cartSelect = 11
-                            If machineCode = 31 Or machineCode = 33 Then
-                                varSpNums = "273 - 288"
-                            Else
-                                varSpNums = "321 - 352"
-                            End If
+                            varSpNums = "321 - 352"
+
 
                         Case "B11", "B12"
                             varCartNameA = "B11"
                             varCartNameB = "B12"
                             cartSelect = 12
-                            If machineCode = 31 Or machineCode = 33 Then
-                                varSpNums = "265 - 288"   'no cart for 12P
-                            Else
-                                varSpNums = "353 - 384"
-                            End If
+                            varSpNums = "353 - 384"
+
 
                     End Select
+
+                    'Changes for new machines
+                Case 30, 32
+
+                    Select Case cartNum
+                        Case "B1", "B2"
+                            varCartNameA = "B1"
+                            varCartNameB = "B2"
+                            cartSelect = 1
+                            varSpNums = "001 - 032"
+
+                        Case "B3", "B4"
+                            varCartNameA = "B3"
+                            varCartNameB = "B4"
+                            cartSelect = 2
+                            varSpNums = "033 - 064"
+
+                        Case "B5", "B6"
+                            varCartNameA = "B5"
+                            varCartNameB = "B6"
+                            cartSelect = 3
+
+                            varSpNums = "065 - 096"
+
+                        Case "B7", "B8"
+                            varCartNameA = "B7"
+                            varCartNameB = "B8"
+                            cartSelect = 4
+                            varSpNums = "097 - 128"
+
+                        Case "B9", "B10"
+                            varCartNameA = "B9"
+                            varCartNameB = "B10"
+                            cartSelect = 5
+                            varSpNums = "129 - 144"
+
+                    End Select
+
+
+
+                'Machine Right side
+                Case 31, 33
+                    Select Case cartNum
+
+                        Case "B1", "B2"
+                            varCartNameA = "B1"
+                            varCartNameB = "B2"
+                            cartSelect = 6
+                            varSpNums = "145 - 176"
+
+
+                        Case "B3", "B4"
+                            varCartNameA = "B3"
+                            varCartNameB = "B4"
+                            cartSelect = 7
+                            varSpNums = "177 - 208"
+
+
+                        Case "B5", "B6"
+                            varCartNameA = "B5"
+                            varCartNameB = "B6"
+                            cartSelect = 8
+                            varSpNums = "209 - 240"
+
+                        Case "B7", "B8"
+                            varCartNameA = "B7"
+                            varCartNameB = "B8"
+                            cartSelect = 9
+                            varSpNums = "241 - 272"
+
+                        Case "B9", "B10"
+                            varCartNameA = "B9"
+                            varCartNameB = "B10"
+                            cartSelect = 10
+                            varSpNums = "273 - 288"
+
+                    End Select
+
+
+
+
 
             End Select
 
@@ -790,18 +840,18 @@ Public Class frmJobEntry
         ' Auto buton numbering based on Cart being measuerd
         Select Case cartSelNumber
 
-                    Case 1
-                        If machineCode = 29 Then
-                            coneNumStart = 1
-                            coneNumStop = pilotCount
+            Case 1
+                If machineCode = 29 Then
+                    coneNumStart = 1
+                    coneNumStop = pilotCount
 
-                        ElseIf machineCode = 30 Or machineCode = 32 Then
-                            coneNumStart = 1
+                ElseIf machineCode = 30 Or machineCode = 32 Then
+                    coneNumStart = 1
                     coneNumStop = 32
                 Else
-                            coneNumStart = 1
-                            coneNumStop = 32
-                        End If
+                    coneNumStart = 1
+                    coneNumStop = 32
+                End If
             Case 2
                 If machineCode = 30 Or machineCode = 32 Then
                     coneNumStart = 33
@@ -838,61 +888,55 @@ Public Class frmJobEntry
                 End If
 
             Case 6
-                If machineCode = 30 Or machineCode = 32 Then
-                    ' coneNumStart = 121
-                    ' coneNumStop = 144
+                If machineCode = 31 Or machineCode = 33 Then
+                    coneNumStart = 145
+                    coneNumStop = 176
                 Else
                     coneNumStart = 161
                     coneNumStop = 192
                 End If
             Case 7
                 If machineCode = 31 Or machineCode = 33 Then
-                    coneNumStart = 145
-                    coneNumStop = 176
+                    coneNumStart = 177
+                    coneNumStop = 208
                 Else
                     coneNumStart = 193
                     coneNumStop = 224
                 End If
             Case 8
                 If machineCode = 31 Or machineCode = 33 Then
-                    coneNumStart = 177
-                    coneNumStop = 208
+                    coneNumStart = 209
+                    coneNumStop = 240
                 Else
                     coneNumStart = 225
                     coneNumStop = 256
                 End If
             Case 9
                 If machineCode = 31 Or machineCode = 33 Then
-                    coneNumStart = 209
-                    coneNumStop = 240
+                    coneNumStart = 241
+                    coneNumStop = 272
                 Else
                     coneNumStart = 257
                     coneNumStop = 288
                 End If
             Case 10
                 If machineCode = 31 Or machineCode = 33 Then
-                    coneNumStart = 241
-                    coneNumStop = 272
+                    coneNumStart = 273
+                    coneNumStop = 288
                 Else
                     coneNumStart = 289
                     coneNumStop = 320
                 End If
             Case 11
-                If machineCode = 31 Or machineCode = 33 Then
-                    coneNumStart = 273
-                    coneNumStop = 288
-                Else
-                    coneNumStart = 321
-                    coneNumStop = 352
-                End If
+
+                coneNumStart = 321
+                coneNumStop = 352
+
             Case 12
-                If machineCode = 31 Or machineCode = 33 Then
-                    ' coneNumStart = 265
-                    ' coneNumStop = 288
-                Else
-                    coneNumStart = 353
-                    coneNumStop = 384
-                End If
+
+                coneNumStart = 353
+                coneNumStop = 384
+
 
         End Select
 

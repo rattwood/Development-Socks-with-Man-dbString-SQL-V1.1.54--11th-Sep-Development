@@ -186,7 +186,7 @@ Public Class frmStdCreate
 
 
 
-        If coneCount = 32 Or coneCount = toAllocatedCount Then jobEnd()
+        If coneCount = 32 Or coneCount = toAllocatedCount Then saveScanYN()
 
         txtConeBcode.Clear()
         txtConeBcode.Focus()
@@ -194,7 +194,23 @@ Public Class frmStdCreate
 
     End Sub
 
+    Private Sub saveScanYN()
 
+        Dim result = MessageBox.Show("Do you wish to save this Job Yes or No", "Save Job Yes or No", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        If result = DialogResult.Yes Then
+            jobEnd()
+        End If
+
+        If result = DialogResult.No Then
+            frmJobEntry.txtLotNumber.Clear()
+            frmJobEntry.txtLotNumber.Focus()
+            frmJobEntry.Show()
+            Me.Close()
+            Exit Sub
+        End If
+
+    End Sub
 
 
     Private Sub jobEnd()

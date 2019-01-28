@@ -280,80 +280,6 @@ Public Class frmPrintCartReport
 
 
 
-            'line to get row/colum dat from DatGridView for Zero and write to Excel Sheet 
-            'ex0Val = DGVcartReport.Rows(dgvRW - 1).Cells(15).Value
-            'If ex0Val > 0 Then
-            '    MyExcel.Cells(ex0Rw, ex0Cl) = ex0Val
-            '    If DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = True Then MyExcel.Cells(ex0Rw, ex0Cl).interior.color = Color.LightSalmon
-            '    If ex0Rw = 12 Then
-            '        ex0Cl = ex0Cl + 1
-            '        JudCount = JudCount + 1
-            '        ex0Rw = 9
-            '    Else
-            '        ex0Rw = ex0Rw + 1
-            '        JudCount = JudCount + 1
-            '    End If
-            'End If
-
-            ''line to get row/colum dat from DatGridView for M10 and write to Excel Sheet 
-            'exM10Val = DGVcartReport.Rows(dgvRW - 1).Cells(17).Value
-            'If exM10Val > 0 Then
-            '    MyExcel.Cells(exM10Rw, exM10Cl) = exM10Val
-            '    If DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = True Then MyExcel.Cells(exM10Rw, exM10Cl).interior.color = Color.LightSalmon
-            '    If exM10Rw = 17 Then
-            '        exM10Cl = exM10Cl + 1
-            '        JudCount = JudCount + 1
-            '        exM10Rw = 14
-            '    Else
-            '        exM10Rw = exM10Rw + 1
-            '        JudCount = JudCount + 1
-            '    End If
-            'End If
-
-            ''line to get row/colum dat from DatGridView for P10 and write to Excel Sheet 
-            'exP10Val = DGVcartReport.Rows(dgvRW - 1).Cells(18).Value
-            'If exP10Val > 0 Then
-            '    MyExcel.Cells(exP10Rw, exP10Cl) = exP10Val
-            '    If DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = True Then MyExcel.Cells(exP10Rw, exP10Cl).interior.color = Color.LightSalmon
-            '    If exP10Rw = 22 Then
-            '        exP10Cl = exP10Cl + 1
-            '        JudCount = JudCount + 1
-            '        exP10Rw = 19
-            '    Else
-            '        exP10Rw = exP10Rw + 1
-            '        JudCount = JudCount + 1
-            '    End If
-            'End If
-
-            ''line to get row/colum dat from DatGridView for M50 and write to Excel Sheet 
-            'exM50Val = DGVcartReport.Rows(dgvRW - 1).Cells(21).Value
-            'If exM50Val > 0 Then
-            '    MyExcel.Cells(exM50Rw, exM50Cl) = exM50Val
-            '    If DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = True Then MyExcel.Cells(exM50Rw, exM50Cl).interior.color = Color.LightSalmon
-            '    If exM50Rw = 27 Then
-            '        exM50Cl = exM50Cl + 1
-            '        JudCount = JudCount + 1
-            '        exM50Rw = 24
-            '    Else
-            '        exM50Rw = exM50Rw + 1
-            '        JudCount = JudCount + 1
-            '    End If
-            'End If
-
-            ''line to get row/colum dat from DatGridView for P50 and write to Excel Sheet 
-            'exP50Val = DGVcartReport.Rows(dgvRW - 1).Cells(22).Value
-            'If exP50Val > 0 Then
-            '    MyExcel.Cells(exP50Rw, exP50Cl) = exP50Val
-            '    If DGVcartReport.Rows(dgvRW - 1).Cells(43).Value = True Then MyExcel.Cells(exP50Rw, exP50Cl).interior.color = Color.LightSalmon
-            '    If exP50Rw = 32 Then
-            '        exP50Cl = exP50Cl + 1
-            '        JudCount = JudCount + 1
-            '        exP50Rw = 29
-            '    Else
-            '        exP50Rw = exP50Rw + 1
-            '        JudCount = JudCount + 1
-            '    End If
-            'End If
 
             'COUNT GRADE A CONES
             If DGVcartReport.Rows(dgvRW - 1).Cells("CONESTATE").Value = 9 And DGVcartReport.Rows(dgvRW - 1).Cells("FLT_S").Value = False Or
@@ -542,6 +468,7 @@ Public Class frmPrintCartReport
     End Sub
 
     Private Sub Quit()
+
         Me.Close()
         frmJobEntry.Show()
         frmJobEntry.txtLotNumber.Visible = True
@@ -550,6 +477,11 @@ Public Class frmPrintCartReport
         frmJobEntry.txtBoxCartReport.Text = ""
 
     End Sub
+
+
+
+
+
 
     Private Sub frmPrintCartReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
