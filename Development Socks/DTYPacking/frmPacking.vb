@@ -146,8 +146,8 @@ Public Class frmPacking
 
             Case Is = 6
                 If localMCCode = 30 Or localMCCode = 32 Then
-                    ' btnNum = 121
-                    'coneNumOffset = 120
+                    btnNum = 145
+                    coneNumOffset = 144
                 Else
                     btnNum = 161
                     coneNumOffset = 160
@@ -156,8 +156,8 @@ Public Class frmPacking
 
             Case Is = 7
                 If localMCCode = 31 Or localMCCode = 33 Then
-                    btnNum = 145
-                    coneNumOffset = 144
+                    btnNum = 177
+                    coneNumOffset = 176
                 Else
                     btnNum = 193
                     coneNumOffset = 192
@@ -166,8 +166,8 @@ Public Class frmPacking
 
             Case Is = 8
                 If localMCCode = 31 Or localMCCode = 33 Then
-                    btnNum = 177
-                    coneNumOffset = 176
+                    btnNum = 209
+                    coneNumOffset = 208
                 Else
                     btnNum = 225
                     coneNumOffset = 224
@@ -176,8 +176,8 @@ Public Class frmPacking
 
             Case Is = 9
                 If localMCCode = 31 Or localMCCode = 33 Then
-                    btnNum = 209
-                    coneNumOffset = 208
+                    btnNum = 241
+                    coneNumOffset = 240
                 Else
                     btnNum = 257
                     coneNumOffset = 256
@@ -186,8 +186,8 @@ Public Class frmPacking
 
             Case Is = 10
                 If localMCCode = 31 Or localMCCode = 33 Then
-                    btnNum = 241
-                    coneNumOffset = 240
+                    btnNum = 273
+                    coneNumOffset = 272
                 Else
                     btnNum = 289
                     coneNumOffset = 288
@@ -195,23 +195,15 @@ Public Class frmPacking
 
 
             Case Is = 11
-                If localMCCode = 31 Or localMCCode = 33 Then
-                    btnNum = 273
-                    coneNumOffset = 272
-                Else
-                    btnNum = 321
-                    coneNumOffset = 320
-                End If
+                btnNum = 321
+                coneNumOffset = 320
+
 
 
             Case Is = 12
-                If localMCCode = 31 Or localMCCode = 33 Then
-                    ' btnNum = 265
-                    ' coneNumOffset = 264
-                Else
-                    btnNum = 353
-                    coneNumOffset = 352
-                End If
+                btnNum = 353
+                coneNumOffset = 352
+
 
 
         End Select
