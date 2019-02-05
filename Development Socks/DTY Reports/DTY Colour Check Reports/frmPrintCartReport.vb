@@ -98,6 +98,8 @@ Public Class frmPrintCartReport
 
         If DGVcartReport.Rows(0).Cells("MCNUM").Value = 21 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 23 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 25 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 27 Then sp_nums = "1 - 192"
         If DGVcartReport.Rows(0).Cells("MCNUM").Value = 22 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 24 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 26 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 28 Then sp_nums = "193 - 384"
+        If DGVcartReport.Rows(0).Cells("MCNUM").Value = 30 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 32 Then sp_nums = "1 - 144"
+        If DGVcartReport.Rows(0).Cells("MCNUM").Value = 31 Or DGVcartReport.Rows(0).Cells("MCNUM").Value = 33 Then sp_nums = "145 - 288"
         If DGVcartReport.Rows(0).Cells("MCNUM").Value = 29 Then sp_nums = "1 - " & DGVcartReport.Rows.Count.ToString
 
 
