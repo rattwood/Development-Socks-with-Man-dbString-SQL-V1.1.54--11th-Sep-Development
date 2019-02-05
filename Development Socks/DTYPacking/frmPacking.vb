@@ -145,7 +145,7 @@ Public Class frmPacking
 
 
             Case Is = 6
-                If localMCCode = 30 Or localMCCode = 32 Then
+                If localMCCode = 31 Or localMCCode = 33 Then
                     btnNum = 145
                     coneNumOffset = 144
                 Else
