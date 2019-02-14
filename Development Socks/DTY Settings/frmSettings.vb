@@ -101,6 +101,7 @@
         My.Settings.dirPacking = txtBoxPack.Text
         My.Settings.dirPackReports = txtBoxPackReports.Text
         My.Settings.barcodeCTRL = txtBoxBarcodectrl.Text
+        My.Settings.Save()
         Me.Hide()
     End Sub
 

@@ -30,6 +30,12 @@
 
         'Copyright info
         Copyright.Text = My.Application.Info.Copyright
+
+        If My.Settings.chkUseSort = False And My.Settings.chkUseColour = False And My.Settings.chkUsePack = False Then
+            MsgBox("Please edit SETTINGS for type of User" & vbCrLf & " กรุณาแก้ไข setting เพื่อกำหนด User")
+        End If
+
+
     End Sub
 
     Private Sub Copyright_Click(sender As Object, e As EventArgs) Handles Copyright.Click
