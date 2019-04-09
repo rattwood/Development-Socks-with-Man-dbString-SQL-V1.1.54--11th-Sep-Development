@@ -64,7 +64,7 @@ Public Class frmPrintCartReport
         Dim sheet As Excel.Worksheet
 
         Dim saveString As String
-        Dim sp_nums As String
+        ' Dim sp_nums As String
 
         saveString = DGVcartReport.Rows(0).Cells("BCODEJOB").Value.ToString  'gets the BCODEJOB Value
 
@@ -159,11 +159,14 @@ Public Class frmPrintCartReport
             End If
 
             If Not IsDBNull(DGVcartReport.Rows(dgvRW - 1).Cells("STDSTATE").Value) Then
-                If DGVcartReport.Rows(dgvRW - 1).Cells("STDSTATE").Value > 0 AndAlso DGVcartReport.Rows(dgvRW - 1).Cells("STDSTATE").Value < 10 Then
-                    exSTDVal = DGVcartReport.Rows(dgvRW - 1).Cells("CONENUM").Value 'STD Cheese
+                If Not (DGVcartReport.Rows(dgvRW - 1).Cells("STDSTATE").Value = "") Then
+                    If DGVcartReport.Rows(dgvRW - 1).Cells("STDSTATE").Value > 0 AndAlso DGVcartReport.Rows(dgvRW - 1).Cells("STDSTATE").Value < 10 Then
+                        exSTDVal = DGVcartReport.Rows(dgvRW - 1).Cells("CONENUM").Value 'STD Cheese
+                    End If
                 End If
             End If
-            If exSTDVal > 0 Then
+
+                If exSTDVal > 0 Then
                 STDFLAG = 1
                 MyExcel.Cells(exNcRw, exNcCl).interior.color = Color.Orange
                 MyExcel.Cells(exNcRw, exNcCl) = exSTDVal

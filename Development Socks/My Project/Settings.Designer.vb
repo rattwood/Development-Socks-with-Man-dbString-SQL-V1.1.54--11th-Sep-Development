@@ -301,6 +301,54 @@ Namespace My
                 Me("chkDisableCreate") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property dirLogs() As String
+            Get
+                Return CType(Me("dirLogs"),String)
+            End Get
+            Set
+                Me("dirLogs") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property chkUseLogs() As String
+            Get
+                Return CType(Me("chkUseLogs"),String)
+            End Get
+            Set
+                Me("chkUseLogs") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property chkUseEng() As Boolean
+            Get
+                Return CType(Me("chkUseEng"),Boolean)
+            End Get
+            Set
+                Me("chkUseEng") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property chkUseThai() As Boolean
+            Get
+                Return CType(Me("chkUseThai"),Boolean)
+            End Get
+            Set
+                Me("chkUseThai") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

@@ -267,6 +267,7 @@
     <Compile Include="DTY Reports\DTY Def Report\DGVDefReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DTY START\writeError.vb" />
     <Compile Include="DTYPacking\frmbackupRechkAdata.Designer.vb">
       <DependentUpon>frmbackupRechkAdata.vb</DependentUpon>
     </Compile>
