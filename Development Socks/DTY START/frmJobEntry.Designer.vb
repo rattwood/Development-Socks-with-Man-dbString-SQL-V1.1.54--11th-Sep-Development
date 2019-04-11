@@ -241,13 +241,13 @@ Partial Class frmJobEntry
         'ExChangeCheeseToolStripMenuItem
         '
         Me.ExChangeCheeseToolStripMenuItem.Name = "ExChangeCheeseToolStripMenuItem"
-        Me.ExChangeCheeseToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+        Me.ExChangeCheeseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ExChangeCheeseToolStripMenuItem.Text = "ExChange Cheese"
         '
         'FindCheeseToolStripMenuItem
         '
         Me.FindCheeseToolStripMenuItem.Name = "FindCheeseToolStripMenuItem"
-        Me.FindCheeseToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+        Me.FindCheeseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.FindCheeseToolStripMenuItem.Text = "Find Cheese"
         '
         'PackingGradeToolStripMenuItem
