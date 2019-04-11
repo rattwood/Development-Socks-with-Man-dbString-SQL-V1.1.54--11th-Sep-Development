@@ -948,7 +948,7 @@ Public Class frmJobEntry
         Dim coneBarcode As String
         Dim cartName As String
         Dim today As String = DateAndTime.Today
-        today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
+        today = Convert.ToDateTime(today).ToString("dd-MM-yyyy HH:mm:ss tt")
 
 
         LExecQuery("SELECT PRODNAME,MERGENUM,PRODWEIGHT,WEIGHTCODE FROM PRODUCT WHERE PRNUM = '" & varProductCode & "'")
@@ -1917,7 +1917,7 @@ Public Class frmJobEntry
 
                 If cartReport = 1 Then
                     cartReportSub()
-                ElseIf My.Settings.chkUseSort And stdcheck = 0 Or My.Settings.chkUseColour Then
+                ElseIf My.Settings.chkUseSort And (stdcheck = 0 And txtGrade.Text <> "ReCheck") Or My.Settings.chkUseColour Then
                     prgContinue()
                 ElseIf (My.Settings.chkUsePack And txtGrade.Text = "A") Or (My.Settings.chkUsePack And (txtGrade.Text = "Pilot 6Ch" Or txtGrade.Text = "Pilot 15Ch" Or txtGrade.Text = "Pilot 20Ch")) Then
                     prgContinue()
