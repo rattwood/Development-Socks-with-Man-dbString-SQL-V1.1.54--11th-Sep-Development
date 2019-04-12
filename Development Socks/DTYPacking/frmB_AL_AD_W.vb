@@ -9,7 +9,7 @@ Public Class frmB_AL_AD_W
     Public bcodeScan As String = ""
     Public toAllocatedCount As Integer 'count of cones requierd to be scanned
     Public allocatedCount As Integer 'count of cones scanned
-    Public varCartEndTime As String
+    ' Public varCartEndTime As String
     Public packedFlag As Integer
 
     Public gradePackActive As Integer = 1
@@ -288,7 +288,7 @@ Public Class frmB_AL_AD_W
                 ElseIf frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk Then
                     frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 11
                     frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 1
-                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Today
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
                     frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
                     frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
 
@@ -301,7 +301,7 @@ Public Class frmB_AL_AD_W
                     modIdxNum = tmpNum.ToString(fmt)
                     frmDGV.DGVdata.Rows(i - 1).Cells("PACKIDX").Value = modIdxNum
                     'Update DGV that Cheese has been alocated, update Packendtm
-                    frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Today
+                    frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
                     frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
                     frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
                 End If

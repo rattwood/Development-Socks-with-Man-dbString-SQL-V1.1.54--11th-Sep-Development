@@ -255,7 +255,7 @@ Public Class frmSTDColChk
 
 
         Dim today As String = DateAndTime.Today
-        today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
+        today = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
 
 
 
@@ -290,8 +290,8 @@ Public Class frmSTDColChk
             frmDGV.DGVdata.Rows(i - 1).Cells(57).Value = frmJobEntry.varUserName  'operatorName   fron entry screen
 
 
-            If DataGridView1.Rows(i - 1).Cells(4).Value = "SHORT CHEESE" Then frmDGV.DGVdata.Rows(i - 1).Cells(10).Value = 1 'shortCone
-            If DataGridView1.Rows(i - 1).Cells(4).Value = "X MISSING CHEESE" Then frmDGV.DGVdata.Rows(i - 1).Cells(11).Value = 1  'missingCone
+            If DataGridView1.Rows(i - 1).Cells(4).Value = "SHORT CHEESE" Then frmDGV.DGVdata.Rows(i - 1).Cells("SHORTCONE").Value = 1 'shortCone
+            If DataGridView1.Rows(i - 1).Cells(4).Value = "X MISSING CHEESE" Then frmDGV.DGVdata.Rows(i - 1).Cells("MISSCONE").Value = 1  'missingCone
             ' If DataGridView1.Rows(i - 1).Cells(4).Value = "BARRE" Then frmDGV.DGVdata.Rows(i - 1).Cells(16).Value = 1 'Cone with large colour defect
 
 

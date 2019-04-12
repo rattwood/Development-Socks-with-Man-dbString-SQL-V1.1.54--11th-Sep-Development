@@ -1482,8 +1482,8 @@ Public Class frmSortReCheck
 
 
         'ONLY PRINT IF COLOUR SELECTED
-        Dim today As String = DateAndTime.Today
-        today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
+        Dim today As String = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        'today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
 
 
         Dim cellVal As String
@@ -2623,7 +2623,7 @@ Public Class frmSortReCheck
 
 
         Else
-            varCartEndTime = Date.Now 'ToString("dd/mm/yyy")
+            varCartEndTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
             If shortCone = 2 Then shortCone = varConeNum
             If shortCone > 0 Then Fault_S = "True" 'Else Fault_S = "False"
 
@@ -2683,8 +2683,7 @@ Public Class frmSortReCheck
 
 
     Private Sub jobArrayUpdate()
-
-
+        Today = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
 
 
 
@@ -2694,19 +2693,19 @@ Public Class frmSortReCheck
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(8).Value = frmJobEntry.varUserName  'operatorName   fron entry screen
 
         If My.Settings.chkUseSort Or My.Settings.chkUseColour Then
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(10).Value = shortCone   'shortCone
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(11).Value = NoCone  'missingCone
-            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(12).Value = defect  'defectCone
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("SHORTCONE").Value = shortCone   'shortCone
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("MISSCONE").Value = NoCone  'missingCone
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("DEFCONE").Value = defect  'defectCone
         End If
 
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(15).Value = coneZero  'passCone  Zero Colour Difference    
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(16).Value = coneBarley 'Cone with large colour defect
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CONEZERO").Value = coneZero  'passCone  Zero Colour Difference    
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CONEBARLEY").Value = coneBarley 'Cone with large colour defect
 
 
 
 
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(33).Value = 3    'Cone has been reChecked  set state to 3  
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(34).Value = Today 'Cone has been reChecked  
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("RECHK").Value = 3    'Cone has been reChecked  set state to 3  
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("RECHKTM").Value = Today 'Cone has been reChecked  
 
 
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("FLT_K").Value = chk_K.Checked    'KEBA Fault  
@@ -2785,53 +2784,53 @@ Public Class frmSortReCheck
         For rw = 1 To frmDGV.DGVdata.Rows.Count
 
 
-            If frmDGV.DGVdata.Rows(rw - 1).Cells(10).Value > 0 Then
+            If frmDGV.DGVdata.Rows(rw - 1).Cells("SHORTCONE").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 shortConeID = shortConeID & tmpConeNum & ","
                 txtShort.Text = shortConeID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(11).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("MISSCONE").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 coneMissingID = coneMissingID & tmpConeNum & ","
                 ' txtMissing.Text = coneMissingID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(12).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("DEFCONE").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 coneDefectID = coneDefectID & tmpConeNum & ","
                 txtDefect.Text = coneDefectID
             End If
 
-            If frmDGV.DGVdata.Rows(rw - 1).Cells(15).Value > 0 Then
+            If frmDGV.DGVdata.Rows(rw - 1).Cells("CONEZERO").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeZeroID = visConeZeroID & tmpConeNum & ","
                 ' txtZero.Text = visConeZeroID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(16).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("CONEBARLEY").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeBarleyID = visConeBarleyID & tmpConeNum & ","
                 txtBarley.Text = visConeBarleyID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(17).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("M10").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeM10ID = visConeM10ID & tmpConeNum & ","
                 'txtM10.Text = visConeM10ID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(18).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("P10").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeP10ID = visConeP10ID & tmpConeNum & ","
                 ' txtP10.Text = visConeP10ID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(19).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("M30").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeM30ID = visConeM30ID & tmpConeNum & ","
                 ' txtM30.Text = visConeM30ID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(20).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("P30").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeP30ID = visConeP30ID & tmpConeNum & ","
                 'txtP30.Text = visConeP30ID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(21).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("M50").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeM50ID = visConeM50ID & tmpConeNum & ","
                 'txtM50.Text = visConeM50ID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(22).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("P50").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeP50ID = visConeP50ID & tmpConeNum & ","
                 'txtP50.Text = visConeP50ID
-            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells(66).Value > 0 Then
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("COLWASTE").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeWasteID = visConeWasteID & tmpConeNum & ","
                 txtWaste.Text = visConeWasteID

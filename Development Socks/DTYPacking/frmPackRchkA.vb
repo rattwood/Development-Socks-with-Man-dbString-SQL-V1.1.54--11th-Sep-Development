@@ -216,8 +216,8 @@ Public Class frmPackRchkA
         bcodeScan = txtConeBcode.Text
         Dim curcone As String
 
-        Dim today As String = DateAndTime.Today
-        today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
+
+        Today = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
 
 
 
@@ -240,7 +240,7 @@ Public Class frmPackRchkA
                 'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
                 If IsDBNull(DGVPakingRecA.Rows(i - 1).Cells("PACKENDTM").Value) Then
                     'For rows As Integer = 1 To rowendcount
-                    DGVPakingRecA.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Today  'PACKING CHECK END TIME.
+                    DGVPakingRecA.Rows(i - 1).Cells("PACKENDTM").Value = Today  'PACKING CHECK END TIME.
                     'Next
                 End If
 

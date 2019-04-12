@@ -947,8 +947,8 @@ Public Class frmJobEntry
         Dim modLotStr = txtLotNumber.Text.Substring(0, 12)
         Dim coneBarcode As String
         Dim cartName As String
-        Dim today As String = DateAndTime.Today
-        today = Convert.ToDateTime(today).ToString("dd-MM-yyyy HH:mm:ss tt")
+        Dim today As String = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        'today = Convert.ToDateTime(today).ToString("dd-MM-yyyy HH:mm:ss tt")
 
 
         LExecQuery("SELECT PRODNAME,MERGENUM,PRODWEIGHT,WEIGHTCODE FROM PRODUCT WHERE PRNUM = '" & varProductCode & "'")
@@ -1195,42 +1195,42 @@ Public Class frmJobEntry
 
     'Create csv file
 
-    Private Sub CSV()
+    'Private Sub CSV()
 
-        Dim today As String = DateAndTime.Now
-        Dim csvFile As String
-        'Check to see if file exists, if it does not creat the file, otherwise add data to the file
-        Dim dataOut As String = String.Concat(varMachineCode, ",", varMachineName, ",", varYear, ",", varMonth, ",", varDoffingNum, ",", fltconeNum, ",", mergeNum, ",", varUserName, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("CONESTATE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("SHORTCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("MISSCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("DEFCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("BCODECART").Value, ",", coneM30, ",", coneP30, ",", varCartStartTime, ",", varCartEndTime, ",", today & Environment.NewLine)
-
-
-        csvFile = My.Settings.dirCarts & ("\" & frmDGV.DGVdata.Rows(csvRowNum).Cells("BCODECART").Value.ToString & "PackLog.csv")
+    '    Dim today As String = DateAndTime.Now
+    '    Dim csvFile As String
+    '    'Check to see if file exists, if it does not creat the file, otherwise add data to the file
+    '    Dim dataOut As String = String.Concat(varMachineCode, ",", varMachineName, ",", varYear, ",", varMonth, ",", varDoffingNum, ",", fltconeNum, ",", mergeNum, ",", varUserName, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("CONESTATE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("SHORTCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("MISSCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("DEFCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("BCODECART").Value, ",", coneM30, ",", coneP30, ",", varCartStartTime, ",", varCartEndTime, ",", today & Environment.NewLine)
 
 
-        If fileActive Then
-
-            Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, True)
-            outFile.WriteLine(dataOut)
-            outFile.Close()
-
-        Else
-            'If fileActive = False Then
-            Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, False)
-            outFile.WriteLine("M/C Code, M/C Name, YY, MM, Doff #, Cone #, Merge #,User, Cone State, Short, NoCone, Defect, Cart Name, -30, +30,Start, End, Fault time ")
-
-            outFile.WriteLine(dataOut)
-            outFile.Close()
-            fileActive = True
+    '    csvFile = My.Settings.dirCarts & ("\" & frmDGV.DGVdata.Rows(csvRowNum).Cells("BCODECART").Value.ToString & "PackLog.csv")
 
 
-        End If
+    '    If fileActive Then
+
+    '        Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, True)
+    '        outFile.WriteLine(dataOut)
+    '        outFile.Close()
+
+    '    Else
+    '        'If fileActive = False Then
+    '        Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, False)
+    '        outFile.WriteLine("M/C Code, M/C Name, YY, MM, Doff #, Cone #, Merge #,User, Cone State, Short, NoCone, Defect, Cart Name, -30, +30,Start, End, Fault time ")
+
+    '        outFile.WriteLine(dataOut)
+    '        outFile.Close()
+    '        fileActive = True
 
 
+    '    End If
 
 
 
 
 
-    End Sub
+
+
+    'End Sub
 
 
 

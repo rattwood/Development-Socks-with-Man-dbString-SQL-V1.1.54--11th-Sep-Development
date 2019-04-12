@@ -1,9 +1,4 @@
-﻿
-
-
-
-
-Imports System.ComponentModel
+﻿Imports System.ComponentModel
 Imports System.Data.SqlClient
 
 Public Class frmStdCreate
@@ -12,7 +7,7 @@ Public Class frmStdCreate
     Public bcodeScan As String = ""
     Public toAllocatedCount As Integer 'count of cones requierd to be scanned
     Public allocatedCount As Integer 'count of cones scanned
-    Public varCartEndTime As String
+    ' Public varCartEndTime As String
     Public packedFlag As Integer
     Dim stdChkNum As Integer = 0
     Dim reqstate As Integer = 0

@@ -414,8 +414,8 @@ Public Class frmPacking
         bcodeScan = txtConeBcode.Text
         Dim curcone As String
         Dim coneCount As Integer = 0
-        Dim today As String = DateAndTime.Today
-        today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
+        Dim today As String
+        today = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
 
 
 
@@ -436,7 +436,7 @@ Public Class frmPacking
                 'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
                 If IsDBNull(DGVPakingA.Rows(i - 1).Cells("PACKENDTM").Value) Then
                     'For rows As Integer = 1 To rowendcount
-                    DGVPakingA.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Today  'PACKING CHECK END TIME.
+                    DGVPakingA.Rows(i - 1).Cells("PACKENDTM").Value = today 'PACKING CHECK END TIME.
                     'Next
                 End If
 

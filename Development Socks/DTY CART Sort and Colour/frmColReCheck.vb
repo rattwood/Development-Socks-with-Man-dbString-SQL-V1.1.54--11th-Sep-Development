@@ -270,7 +270,7 @@ Public Class frmColReCheck
 
 
         Dim today As String = DateAndTime.Today
-        today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
+        today = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
 
         'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
 
@@ -703,34 +703,6 @@ Public Class frmColReCheck
         Me.Close()
 
     End Sub
-
-
-
-
-
-    'Private Sub CellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
-
-
-
-    '    MsgBox("I am here")
-    '    Dim allletters As String = "adlbw"
-    '    'If Not allletters.Contains(e.KeyChar.ToString.ToLower) Then
-
-    '    '    e.KeyChar = ChrW(0)
-    '    '    e.Handled = True
-
-    '    'End If
-    'End Sub
-
-    'Private Sub DataGridView1_CellFormmatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DataGridView1.CellValueChanged
-    '    If e.Value IsNot Nothing Then
-    '        e.Value = e.Value.ToString().ToUpper()
-    '        e.FormattingApplied = True
-    '    End If
-
-    'End Sub
-
-
 
 
 
