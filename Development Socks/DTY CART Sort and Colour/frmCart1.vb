@@ -216,7 +216,11 @@ Public Class frmCart1
         lblDoffNum.Text = frmDGV.DGVdata.Rows(0).Cells("DOFFNUM").Value.ToString
 
 
-
+        If IsDBNull(frmDGV.DGVdata.Rows((0) - coneNumOffset).Cells("CARTSTARTTM").Value) Then
+            varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")    'Set new time if cell is Null
+        Else
+            varCartStartTime = frmDGV.DGVdata.Rows((0) - coneNumOffset).Cells("CARTSTARTTM").Value  'set time to cell value if not null
+        End If
 
 
 
@@ -1254,70 +1258,70 @@ Public Class frmCart1
     Private Sub btnCone1_Click(sender As Object, e As EventArgs) Handles btnCone1.Click
         varConeNum = btnCone1.Text
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone2_Click(sender As Object, e As EventArgs) Handles btnCone2.Click
         varConeNum = btnCone2.Text                 'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now '.ToString("dd/mm/yyy")
+        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone3_Click(sender As Object, e As EventArgs) Handles btnCone3.Click
         varConeNum = btnCone3.Text                  'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone4_Click(sender As Object, e As EventArgs) Handles btnCone4.Click
         varConeNum = btnCone4.Text                   'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone5_Click(sender As Object, e As EventArgs) Handles btnCone5.Click
         varConeNum = btnCone5.Text                  'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone6_Click(sender As Object, e As EventArgs) Handles btnCone6.Click
         varConeNum = btnCone6.Text                   'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone7_Click(sender As Object, e As EventArgs) Handles btnCone7.Click
         varConeNum = btnCone7.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone8_Click(sender As Object, e As EventArgs) Handles btnCone8.Click
         varConeNum = btnCone8.Text                   'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone9_Click(sender As Object, e As EventArgs) Handles btnCone9.Click
         varConeNum = btnCone9.Text                   'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone10_Click(sender As Object, e As EventArgs) Handles btnCone10.Click
         varConeNum = btnCone10.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now ''ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
@@ -1343,154 +1347,154 @@ Public Class frmCart1
     Private Sub btnCone11_Click(sender As Object, e As EventArgs) Handles btnCone11.Click
         varConeNum = btnCone11.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone12_Click(sender As Object, e As EventArgs) Handles btnCone12.Click
         varConeNum = btnCone12.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone13_Click(sender As Object, e As EventArgs) Handles btnCone13.Click
         varConeNum = btnCone13.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone14_Click(sender As Object, e As EventArgs) Handles btnCone14.Click
         varConeNum = btnCone14.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone15_Click(sender As Object, e As EventArgs) Handles btnCone15.Click
         varConeNum = btnCone15.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone16_Click(sender As Object, e As EventArgs) Handles btnCone16.Click
         varConeNum = btnCone16.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone17_Click(sender As Object, e As EventArgs) Handles btnCone17.Click
         varConeNum = btnCone17.Text                  'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '   varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone18_Click(sender As Object, e As EventArgs) Handles btnCone18.Click
         varConeNum = btnCone18.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone19_Click(sender As Object, e As EventArgs) Handles btnCone19.Click
         varConeNum = btnCone19.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone20_Click(sender As Object, e As EventArgs) Handles btnCone20.Click
         varConeNum = btnCone20.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone21_Click(sender As Object, e As EventArgs) Handles btnCone21.Click
         varConeNum = btnCone21.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone22_Click(sender As Object, e As EventArgs) Handles btnCone22.Click
         varConeNum = btnCone22.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone23_Click(sender As Object, e As EventArgs) Handles btnCone23.Click
         varConeNum = btnCone23.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone24_Click(sender As Object, e As EventArgs) Handles btnCone24.Click
         varConeNum = btnCone24.Text                   'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone25_Click(sender As Object, e As EventArgs) Handles btnCone25.Click
         varConeNum = btnCone25.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone26_Click(sender As Object, e As EventArgs) Handles btnCone26.Click
         varConeNum = btnCone26.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone27_Click(sender As Object, e As EventArgs) Handles btnCone27.Click
         varConeNum = btnCone27.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone28_Click(sender As Object, e As EventArgs) Handles btnCone28.Click
         varConeNum = btnCone28.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '   varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone29_Click(sender As Object, e As EventArgs) Handles btnCone29.Click
         varConeNum = btnCone29.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone30_Click(sender As Object, e As EventArgs) Handles btnCone30.Click
         varConeNum = btnCone30.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone31_Click(sender As Object, e As EventArgs) Handles btnCone31.Click
         varConeNum = btnCone31.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone32_Click(sender As Object, e As EventArgs) Handles btnCone32.Click
         varConeNum = btnCone32.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        varCartStartTime = Date.Now 'ToString("dd/mm/yyy")
+        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Me.txtConeNum.Refresh()
     End Sub
 
@@ -1575,8 +1579,8 @@ Public Class frmCart1
 
 
         'ONLY PRINT IF COLOUR SELECTED
-        Dim today As String = DateAndTime.Today
-        today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
+        Dim today As String = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        ' today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
 
 
         Dim cellVal As String
@@ -3154,19 +3158,21 @@ Public Class frmCart1
 
 
 
-
-        If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("COLENDTM").Value) Then
-            For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
-                If My.Settings.chkUseColour = True Then frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = varCartEndTime 'COLOUR CHECK END TIME
-            Next
+        If My.Settings.chkUseColour = True Then
+            If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("COLENDTM").Value) Then
+                For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
+                    frmDGV.DGVdata.Rows(i - 1).Cells("COLENDTM").Value = varCartEndTime 'COLOUR CHECK END TIME
+                Next
+            End If
         End If
 
-        If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("SORTENDTM").Value) Then
-            For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
-                If My.Settings.chkUseSort = True Then frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value = varCartEndTime 'SORT END TIME
-            Next
+        If My.Settings.chkUseSort = True Then
+            If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("SORTENDTM").Value) Then
+                For i As Integer = 1 To frmDGV.DGVdata.Rows.Count
+                    frmDGV.DGVdata.Rows(i - 1).Cells("SORTENDTM").Value = varCartEndTime 'SORT END TIME
+                Next
+            End If
         End If
-
 
         'list of Array Feilds to Update
 
@@ -3193,7 +3199,8 @@ Public Class frmCart1
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("M50").Value = coneM50   'coneM50
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("P50").Value = coneP50  'coneP50
 
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CARTSTARTTM").Value = varCartStartTime  'cartStratTime
+
+        '  frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CARTSTARTTM").Value = varCartStartTime  'cartStratTime
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CARTENDTM").Value = varCartEndTime 'cartEndTime
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("RECHK").Value = reChecked    'Cone has been reChecked    
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("RECHKTM").Value = ReCheckTime    'Cone has been reChecked  
