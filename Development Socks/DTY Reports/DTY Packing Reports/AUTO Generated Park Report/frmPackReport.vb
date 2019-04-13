@@ -24,6 +24,10 @@ Public Class frmPackReport
     Dim yestname As String
     Dim nfree As Integer = 13
 
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
+
+
     Public Sub packPrint()
         Dim sheetCount As Integer = 0
         Dim myCount As Integer = 0
@@ -166,6 +170,10 @@ Public Class frmPackReport
                         releaseObject(xlWBYesterday)
 
                     Catch ex As Exception
+                        'Write error to Log File
+                        writeerrorLog.writelog("Pack Report Error", ex.Message, False, "System Fault")
+                        writeerrorLog.writelog("Pack Report Error", ex.ToString, False, "System Fault")
+
                         MsgBox(ex.Message)
                     End Try
 
@@ -375,6 +383,9 @@ Public Class frmPackReport
             xlWorkbook.SaveAs(Filename:=savename, FileFormat:=51)
 
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Save Error", ex.ToString, False, "System Fault")
 
             MsgBox(ex.Message & "save workbook")
 
@@ -384,6 +395,10 @@ Public Class frmPackReport
             'Close template file but do not save updates to it
             xlWorkbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Close Error", ex.ToString, False, "System Fault")
+
             MsgBox(ex.Message & "Close Workbook")
         End Try
 
@@ -457,6 +472,9 @@ Public Class frmPackReport
 
 
             ' do something here, either close the file if you have a handle, show a msgbox, retry  or as a last resort terminate the process - which could cause corruption and lose data
+            'Write error to Log File
+            writeerrorLog.writelog("Excel Open Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Excel Open Error", ex.ToString, False, "System Fault")
 
             MsgBox("Excel File is open please close and then Retry")
             MyExcel.DisplayAlerts = False

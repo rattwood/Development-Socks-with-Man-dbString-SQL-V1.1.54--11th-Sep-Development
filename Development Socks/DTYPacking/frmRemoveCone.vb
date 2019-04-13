@@ -1,5 +1,7 @@
 ﻿
 Public Class frmRemoveCone
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
 
     Private Sub frmRemoveCone_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -79,58 +81,14 @@ Public Class frmRemoveCone
             End Select
 
 
-            'If frmJobEntry.txtGrade.Text = "Normal" Or frmJobEntry.txtGrade.Text = "A" Then
 
-            '    If chkBCode = frmPacking.bcodeScan Then
-            '        btnContinue.Enabled = True
-            '        btnContinue.Enabled = True
-            '    End If
-
-            'ElseIf frmJobEntry.txtGrade.Text = "ReCheckA" Then
-
-            '    If chkBCode = frmPackRchkA.bcodeScan Then
-            '        btnContinue.Visible = True
-            '        btnContinue.Enabled = True
-            '    End If
-            '    btnContinue.Enabled = True
-            '    btnContinue.Enabled = True
-            'End If
-            'ElseIf frmJobEntry.txtGrade.Text <> frmJobEntry.txtGrade.Text = "Normal" Or frmJobEntry.txtGrade.Text = "A" Or frmJobEntry.txtGrade.Text = "ReCheckA" Then
-            '        'Routine for non Grade A cheese
-            '        If chkBCode = frmB_AL_AD_W.bcodeScan Then
-            '            btnContinue.Visible = True
-            '            btnContinue.Enabled = True
-            '        End If
-            '    Else
-            '        MsgBox("This is not the cone to remove")
-            '        Me.TextBox1.Clear()
-            '        Me.btnContinue.Enabled = False
-            '        Me.TextBox1.Focus()
-            '        Me.TextBox1.Refresh()
-            '        Exit Sub
-            '    End If
-            'End If
-
-
-
-
-            'If frmJobEntry.txtGrade.Text <> frmJobEntry.txtGrade.Text = "Normal" Or frmJobEntry.txtGrade.Text = "A" Or frmJobEntry.txtGrade.Text = "ReCheckA" Then
-            '    'Routine for non Grade A cheese
-            '    If chkBCode = frmB_AL_AD_W.bcodeScan Then
-
-            '        btnContinue.Visible = True
-            '        btnContinue.Enabled = True
-            '    Else
-            '        MsgBox("This is not the cone to remove")
-            '        Me.TextBox1.Clear()
-            '        Me.btnContinue.Enabled = False
-            '        Me.TextBox1.Focus()
-            '        Me.TextBox1.Refresh()
-            '        Exit Sub
-            '    End If
-            'End If
 
         Catch ex As Exception
+
+            MsgBox("Remove cannot find Barcode" & vbNewLine & ex.Message)
+            writeerrorLog.writelog("Remove cannot find Barcode", ex.Message, False, "System_Fault")
+            writeerrorLog.writelog("Remove cannot find Barcode", ex.ToString, False, "System_Fault")
+
             Me.TextBox1.Clear()
             Me.TextBox1.Focus()
             Me.TextBox1.Refresh()

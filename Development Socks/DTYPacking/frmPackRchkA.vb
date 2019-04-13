@@ -25,6 +25,8 @@ Public Class frmPackRchkA
     Private PParams As New List(Of SqlParameter)
     '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
 
 
 
@@ -61,61 +63,69 @@ Public Class frmPackRchkA
 
 
 
+        Try
+            PExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & frmJobEntry.txtLotNumber.Text & "' ")
 
-        PExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & frmJobEntry.txtLotNumber.Text & "' ")
-
-        If PRecordCount > 0 Then
-            'LOAD THE DATA FROM dB IN TO THE DATAGRID
-            DGVPakingRecA.DataSource = PDS.Tables(0)
-            DGVPakingRecA.Rows(0).Selected = True
-            Dim PCB As SqlCommandBuilder = New SqlCommandBuilder(PDA)
-
-
-            'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-            'DGVPakingA.Sort(DGVPakingA.Columns("CONENUM"), ListSortDirection.Ascending)  'sorts On cone number
-            'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE by our own index
-            DGVPakingRecA.Sort(DGVPakingRecA.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
-
-        Else
-
-            MsgBox("There are no Grade A Cheese on the cart")
-            frmJobEntry.Show()
-            frmJobEntry.txtLotNumber.Clear()
-            frmJobEntry.txtLotNumber.Focus()
-            Me.Close()
-        End If
+            If PRecordCount > 0 Then
+                'LOAD THE DATA FROM dB IN TO THE DATAGRID
+                DGVPakingRecA.DataSource = PDS.Tables(0)
+                DGVPakingRecA.Rows(0).Selected = True
+                Dim PCB As SqlCommandBuilder = New SqlCommandBuilder(PDA)
 
 
-        Dim btnNum As Integer = 1
-        Dim btnNums As String = 1
-        coneNumOffset = 0
+                'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
+                'DGVPakingA.Sort(DGVPakingA.Columns("CONENUM"), ListSortDirection.Ascending)  'sorts On cone number
+                'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE by our own index
+                DGVPakingRecA.Sort(DGVPakingRecA.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
 
+            Else
 
-
-
-        For i = 1 To 32
-
-            Me.Controls("btnCone" & i.ToString).Text = btnNum
-            btnNum = btnNum + 1
-        Next
-
-
-        Me.txtCartNum.Text = 1
-        Me.lblJobNum.Text = (frmJobEntry.varProductName & "  " & frmJobEntry.varProductCode)
-
-
-
-
-        'GET NUMBER OF CONES THAT NEED ALLOCATING Count agains Job Barcode
-
-        For i As Integer = 1 To PRecordCount
-            If DGVPakingRecA.Rows(i - 1).Cells(9).Value = "8" And IsDBNull(DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value) Then Continue For
-            If DGVPakingRecA.Rows(i - 1).Cells(9).Value = "8" And DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value = "A" Then
-                toAllocatedCount = toAllocatedCount + 1
+                MsgBox("There are no Grade A Cheese on the cart")
+                frmJobEntry.Show()
+                frmJobEntry.txtLotNumber.Clear()
+                frmJobEntry.txtLotNumber.Focus()
+                Me.Close()
             End If
-        Next
 
 
+            Dim btnNum As Integer = 1
+            Dim btnNums As String = 1
+            coneNumOffset = 0
+
+
+
+
+            For i = 1 To 32
+
+                Me.Controls("btnCone" & i.ToString).Text = btnNum
+                btnNum = btnNum + 1
+            Next
+
+
+            Me.txtCartNum.Text = 1
+            Me.lblJobNum.Text = (frmJobEntry.varProductName & "  " & frmJobEntry.varProductCode)
+
+
+
+
+            'GET NUMBER OF CONES THAT NEED ALLOCATING Count agains Job Barcode
+
+            For i As Integer = 1 To PRecordCount
+                If DGVPakingRecA.Rows(i - 1).Cells(9).Value = "8" And IsDBNull(DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value) Then Continue For
+                If DGVPakingRecA.Rows(i - 1).Cells(9).Value = "8" And DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value = "A" Then
+                    toAllocatedCount = toAllocatedCount + 1
+                End If
+            Next
+
+        Catch ex As Exception
+
+            MsgBox("DRUM BarCode Is Not Valid " & vbNewLine & ex.Message)
+
+            'Write error to Log File
+            writeerrorLog.writelog("PAckRchk Load error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Drum Scan Error", ex.ToString, False, "System Fault")
+
+        End Try
 
         txtboxTotal.Text = toAllocatedCount
 
@@ -164,6 +174,10 @@ Public Class frmPackRchkA
 
         Catch ex As Exception
 
+            'Write error to Log File
+            writeerrorLog.writelog("SQL Access Error", ex.Message, False, "SQL Client Fault")
+            writeerrorLog.writelog("SQL Access Error", ex.ToString, False, "SQL Client Fault")
+
             PException = "ExecQuery Error: " & vbNewLine & ex.Message
             MsgBox(PException)
 
@@ -177,21 +191,29 @@ Public Class frmPackRchkA
         If My.Settings.debugSet Then DGVPakingRecA.Show()
 
 
+        Try
 
-        For rw As Integer = 1 To PRecordCount
-            If DGVPakingRecA.Rows(rw - 1).Cells(9).Value = "8" And IsDBNull(DGVPakingRecA.Rows(rw - 1).Cells("RECHKRESULT").Value) Then Continue For
 
-            If DGVPakingRecA.Rows(rw - 1).Cells(9).Value = "8" And DGVPakingRecA.Rows(rw - 1).Cells("RECHKRESULT").Value = "A" Then
-                Me.Controls("btnCone" & rw).BackColor = Color.Green       'Grade A Cone
-            End If
+            For rw As Integer = 1 To PRecordCount
+                If DGVPakingRecA.Rows(rw - 1).Cells(9).Value = "8" And IsDBNull(DGVPakingRecA.Rows(rw - 1).Cells("RECHKRESULT").Value) Then Continue For
 
-            If DGVPakingRecA.Rows(rw - 1).Cells(9).Value = "15" Then
-                Me.Controls("btnCone" & rw).BackColor = Color.LightGreen       'Grade A Cone
-            End If
+                If DGVPakingRecA.Rows(rw - 1).Cells(9).Value = "8" And DGVPakingRecA.Rows(rw - 1).Cells("RECHKRESULT").Value = "A" Then
+                    Me.Controls("btnCone" & rw).BackColor = Color.Green       'Grade A Cone
+                End If
 
-            Me.Controls("btnCone" & rw).Enabled = False
-        Next
+                If DGVPakingRecA.Rows(rw - 1).Cells(9).Value = "15" Then
+                    Me.Controls("btnCone" & rw).BackColor = Color.LightGreen       'Grade A Cone
+                End If
 
+                Me.Controls("btnCone" & rw).Enabled = False
+            Next
+
+        Catch ex As Exception
+
+            'Write error to Log File
+            writeerrorLog.writelog("Update Cone error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Update Cone error", ex.ToString, False, "System Fault")
+        End Try
 
 
 
@@ -221,60 +243,70 @@ Public Class frmPackRchkA
 
 
 
+        Try
 
 
-        For i = 1 To PRecordCount
+
+            For i = 1 To PRecordCount
 
 
-            If DGVPakingRecA.Rows(i - 1).Cells(9).Value = "8" And IsDBNull(DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value) Then Continue For
+                If DGVPakingRecA.Rows(i - 1).Cells(9).Value = "8" And IsDBNull(DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value) Then Continue For
 
-            If DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "8" And DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value = "A" Then
-                curcone = DGVPakingRecA.Rows(i - 1).Cells("RECHKIDX").Value
-                Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.LightGreen       'Grade A Cone
-                DGVPakingRecA.Rows(i - 1).Cells("RECHK").Value = 5
-                DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "15"
-                DGVPakingRecA.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
-                DGVPakingRecA.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.varUserName
-                DGVPakingRecA.Rows(i - 1).Cells("CARTENDTM").Value = today
+                If DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "8" And DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value = "A" Then
+                    curcone = DGVPakingRecA.Rows(i - 1).Cells("RECHKIDX").Value
+                    Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.LightGreen       'Grade A Cone
+                    DGVPakingRecA.Rows(i - 1).Cells("RECHK").Value = 5
+                    DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "15"
+                    DGVPakingRecA.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
+                    DGVPakingRecA.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.varUserName
+                    DGVPakingRecA.Rows(i - 1).Cells("CARTENDTM").Value = today
 
-                'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
-                If IsDBNull(DGVPakingRecA.Rows(i - 1).Cells("PACKENDTM").Value) Then
-                    'For rows As Integer = 1 To rowendcount
-                    DGVPakingRecA.Rows(i - 1).Cells("PACKENDTM").Value = Today  'PACKING CHECK END TIME.
-                    'Next
+                    'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
+                    If IsDBNull(DGVPakingRecA.Rows(i - 1).Cells("PACKENDTM").Value) Then
+                        'For rows As Integer = 1 To rowendcount
+                        DGVPakingRecA.Rows(i - 1).Cells("PACKENDTM").Value = Today  'PACKING CHECK END TIME.
+                        'Next
+                    End If
+
+
+                    allocatedCount = allocatedCount + 1
+                    curcone = 0
+
+                ElseIf DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
+                    Label1.Visible = True
+                    Label1.Text = "Cheese already allocated"
+                    DelayTM()
+                    Label1.Visible = False
+                ElseIf DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value < "8" Then
+                    curcone = DGVPakingRecA.Rows(i - 1).Cells("CONENUM").Value
+                    psorterror = 1
+                    Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.Red      'Wrong Cone scanned
+                    DGVPakingRecA.Rows(i - 1).Cells("PSORTERROR").Value = psorterror
+                    DGVPakingRecA.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
+                    DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "14"
+                    DGVPakingRecA.Rows(i - 1).Cells("CARTENDTM").Value = today
+
+
+                    Me.Hide()
+                    frmRemoveCone.Show()
+                    psorterror = 0
+                    curcone = 0
+                    Continue For
+                Else
+                    txtConeBcode.Clear()
+                    txtConeBcode.Refresh()
+                    txtConeBcode.Focus()
+
                 End If
+            Next
 
+        Catch ex As Exception
 
-                allocatedCount = allocatedCount + 1
-                curcone = 0
+            'Write error to Log File
+            writeerrorLog.writelog("barcode Scan Error", ex.Message, False, "User Fault")
+            writeerrorLog.writelog("barcode Scan Error", ex.ToString, False, "User Fault")
+        End Try
 
-            ElseIf DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
-                Label1.Visible = True
-                Label1.Text = "Cheese already allocated"
-                DelayTM()
-                Label1.Visible = False
-            ElseIf DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value < "8" Then
-                curcone = DGVPakingRecA.Rows(i - 1).Cells("CONENUM").Value
-                psorterror = 1
-                Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.Red      'Wrong Cone scanned
-                DGVPakingRecA.Rows(i - 1).Cells("PSORTERROR").Value = psorterror
-                DGVPakingRecA.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
-                DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "14"
-                DGVPakingRecA.Rows(i - 1).Cells("CARTENDTM").Value = today
-
-
-                Me.Hide()
-                frmRemoveCone.Show()
-                psorterror = 0
-                curcone = 0
-                Continue For
-            Else
-                txtConeBcode.Clear()
-                txtConeBcode.Refresh()
-                txtConeBcode.Focus()
-
-            End If
-        Next
         endCheck()
 
     End Sub
@@ -358,7 +390,15 @@ Public Class frmPackRchkA
             End If
         Catch ex As Exception
 
+            'Write error to Log File
+            writeerrorLog.writelog("db update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("db update Error", ex.ToString, False, "System Fault")
+
             MsgBox("Update Error: " & vbNewLine & ex.Message)
+
+
+
+
         End Try
 
 

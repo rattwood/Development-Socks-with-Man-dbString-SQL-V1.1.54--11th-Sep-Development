@@ -6,8 +6,12 @@
     Dim chkBcode
     Dim coneNum As String
 
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
+
 
     Private Sub frmPackingFault_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
 
         defectCone = 0
         shortCone = 0
@@ -441,6 +445,11 @@
 
         Catch ex As Exception
 
+            'Write error to Log File
+            writeerrorLog.writelog("Packing Fault Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Packing Fault Update Error", ex.ToString, False, "System Fault")
+
+
             MsgBox(ex.ToString)
             defectCone = 0
             shortCone = 0
@@ -627,61 +636,7 @@
 
 
 
-    'DATABASE UPDATE ROUTINES
 
-
-    'Private Sub UpdateDatabase()
-
-    '    tsbtnSave()
-
-
-    '    '******************   THIS WILL WRITE ANY CHANGES MADE TO THE DATAGRID BACK TO THE DATABASE ******************
-
-
-    '    Select Case frmJobEntry.txtGrade.Text
-    '        Case "A" 'And frmPacking.packingActive
-
-    '        Case "ReCheckA" 'And frmPackRchkA.packingActive
-
-    '        Case "B", "AL", "AD", "PS20 BS", "PS30 BS", "PS35 BS", "PS15 AS", "PS25 AS", "PS35 AS", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch", "ReCheck"
-
-    '    End Select
-
-    '    Try
-
-    '        If frmJobEntry.LDS.HasChanges Then
-
-
-    '            'frmJobEntry.LDA.UpdateCommand = New Oracle.ManagedDataAccess.Client.OracleCommandBuilder(frmJobEntry.LDA).GetUpdateCommand
-
-    '            frmJobEntry.LDA.Update(frmJobEntry.LDS.Tables(0))
-
-    '        End If
-    '    Catch ex As Exception
-
-    '        MsgBox("Update Error: " & vbNewLine & ex.Message)
-    '    End Try
-
-
-
-
-
-    'End Sub
-
-    'Public Sub tsbtnSave()
-
-
-
-
-    '    Dim bAddState As Boolean = frmDGV.DGVdata.AllowUserToAddRows
-
-    '    frmDGV.DGVdata.AllowUserToAddRows = True
-    '    frmDGV.DGVdata.CurrentCell = frmDGV.DGVdata.Rows(frmDGV.DGVdata.Rows.Count - 1).Cells(0) ' move to add row
-    '    frmDGV.DGVdata.CurrentCell = frmDGV.DGVdata.Rows(0).Cells(0) ' move back to current row  Changed Rows(iRow) to (0)
-    '    frmDGV.DGVdata.AllowUserToAddRows = bAddState
-    '    'frmDGV.DGVdata.EndEdit()
-
-    'End Sub
 
     Private Sub frmPackingFault_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
 

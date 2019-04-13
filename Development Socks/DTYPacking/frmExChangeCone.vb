@@ -13,9 +13,12 @@ Public Class frmExChangeCone
     Dim removeSelected As Integer = 0
     Dim ExchangeSelected As Integer = 0
 
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
 
 
     Private Sub frmExChangeCone_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
 
 
         defectCone = 0

@@ -5,6 +5,8 @@ Public Class frmPackCreateNew
     'Dim MyCrExcel As New Excel.Application
     Dim SheetCodeString As String
 
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
 
 
     Public Sub CreateNew()
@@ -647,6 +649,10 @@ Public Class frmPackCreateNew
             MyPakExcel.DisplayAlerts = False
             xlWorkbook.SaveAs(Filename:=frmPackRepMain.savename, FileFormat:=51)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Excel Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Excel Save Error", ex.ToString, False, "System Fault")
+
             MsgBox(ex.Message)
         End Try
 
@@ -656,6 +662,10 @@ Public Class frmPackCreateNew
             MyPakExcel.DisplayAlerts = False
             xlWorkbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Excel Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Excel Close Error", ex.ToString, False, "System Fault")
+
             MsgBox(ex.Message)
         End Try
 

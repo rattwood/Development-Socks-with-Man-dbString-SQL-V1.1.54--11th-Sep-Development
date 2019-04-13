@@ -24,6 +24,8 @@ Public Class frmPacking
     ' SQL QUERY PARAMETERS
     Private PParams As New List(Of SqlParameter)
     '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
 
 
 
@@ -249,12 +251,6 @@ Public Class frmPacking
 
 
 
-        ''For i = 1 To 32
-        ''    If  DGVPakingA.Rows(i - 1).Cells(9).Value = "9" And  DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = "False" Then
-        ''        toAllocatedCount = toAllocatedCount + 1
-        ''    End If
-        ''Next
-
         'GET NUMBER OF CONES THAT NEED ALLOCATING Count agains Job Barcode
         If frmJobEntry.varMachineCode = 29 Then
             Dim btnCountStart As Integer = rowendcount + 1
@@ -312,7 +308,9 @@ Public Class frmPacking
             PRecordCount = PDA.Fill(PDS)
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("ExecQuery Error", ex.Message, False, "SQL Fault")
+            writeerrorLog.writelog("ExecQuery Error", ex.ToString, False, "SQL Fault")
             PException = "ExecQuery Error: " & vbNewLine & ex.Message
             MsgBox(PException)
 
@@ -419,66 +417,83 @@ Public Class frmPacking
 
 
 
+        Try
+
+            For i = 1 To rowendcount
 
 
-        For i = 1 To rowendcount
+
+                If DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "9" And DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = False Then
+                    curcone = DGVPakingA.Rows(i - 1).Cells("CONENUM").Value
+                    Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.LightGreen       'Grade A Cone
+                    DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15"
+                    DGVPakingA.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
+                    DGVPakingA.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.varUserName
+                    DGVPakingA.Rows(i - 1).Cells("CARTENDTM").Value = today
+
+                    'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
+                    If IsDBNull(DGVPakingA.Rows(i - 1).Cells("PACKENDTM").Value) Then
+                        'For rows As Integer = 1 To rowendcount
+                        DGVPakingA.Rows(i - 1).Cells("PACKENDTM").Value = today 'PACKING CHECK END TIME.
+                        'Next
+                    End If
 
 
+                    allocatedCount = allocatedCount + 1
 
-            If DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "9" And DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = False Then
-                curcone = DGVPakingA.Rows(i - 1).Cells("CONENUM").Value
-                Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.LightGreen       'Grade A Cone
-                DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15"
-                DGVPakingA.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
-                DGVPakingA.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.varUserName
-                DGVPakingA.Rows(i - 1).Cells("CARTENDTM").Value = today
+                    curcone = 0
 
-                'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
-                If IsDBNull(DGVPakingA.Rows(i - 1).Cells("PACKENDTM").Value) Then
-                    'For rows As Integer = 1 To rowendcount
-                    DGVPakingA.Rows(i - 1).Cells("PACKENDTM").Value = today 'PACKING CHECK END TIME.
-                    'Next
+                ElseIf DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
+                    Label1.Visible = True
+                    Label1.Text = "Cheese already allocated"
+                    DelayTM()
+                    Label1.Visible = False
+                ElseIf DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value < "9" Or DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "9" And DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = True Then
+                    curcone = DGVPakingA.Rows(i - 1).Cells("CONENUM").Value
+                    psorterror = 1
+                    Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.Red      'Wrong Cone scanned
+                    DGVPakingA.Rows(i - 1).Cells("PSORTERROR").Value = psorterror
+                    DGVPakingA.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
+                    DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "14"
+                    DGVPakingA.Rows(i - 1).Cells("CARTENDTM").Value = today
+
+                    'UPDATE ALL CHEESE ON CART AS PROCESSED TODAY FOR DAILY PACKING REPORT TO WORK
+
+                    'If IsDBNull( DGVPakingA.Rows(0).Cells("PACKENDTM").Value) Then
+                    '    For rows As Integer = 1 To rowendcount
+                    '        If My.Settings.chkUseColour = True Then  DGVPakingA.Rows((rows - 1) - coneNumOffset).Cells("PACKENDTM").Value = varCartEndTime 'PACKING CHECK END TIME
+                    '    Next
+                    'End If
+
+                    Me.Hide()
+                    frmRemoveCone.Show()
+                    psorterror = 0
+                    curcone = 0
+                    Continue For
+                Else
+                    txtConeBcode.Clear()
+                    txtConeBcode.Refresh()
+                    txtConeBcode.Focus()
+
                 End If
+            Next
+        Catch ex As Exception
 
 
-                allocatedCount = allocatedCount + 1
+            MsgBox("Barcode Sacn Error " & vbNewLine & ex.Message)
 
-                curcone = 0
+            'Write error to Log File
+            writeerrorLog.writelog("Scan Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Scan Error", ex.ToString, False, "System Fault")
+            txtConeBcode.Clear()
+            txtConeBcode.Refresh()
+            txtConeBcode.Focus()
+            Exit Sub
+        End Try
 
-            ElseIf DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
-                Label1.Visible = True
-                Label1.Text = "Cheese already allocated"
-                DelayTM()
-                Label1.Visible = False
-            ElseIf DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value < "9" Or DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "9" And DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = True Then
-                curcone = DGVPakingA.Rows(i - 1).Cells("CONENUM").Value
-                psorterror = 1
-                Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.Red      'Wrong Cone scanned
-                DGVPakingA.Rows(i - 1).Cells("PSORTERROR").Value = psorterror
-                DGVPakingA.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
-                DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "14"
-                DGVPakingA.Rows(i - 1).Cells("CARTENDTM").Value = today
 
-                'UPDATE ALL CHEESE ON CART AS PROCESSED TODAY FOR DAILY PACKING REPORT TO WORK
 
-                'If IsDBNull( DGVPakingA.Rows(0).Cells("PACKENDTM").Value) Then
-                '    For rows As Integer = 1 To rowendcount
-                '        If My.Settings.chkUseColour = True Then  DGVPakingA.Rows((rows - 1) - coneNumOffset).Cells("PACKENDTM").Value = varCartEndTime 'PACKING CHECK END TIME
-                '    Next
-                'End If
 
-                Me.Hide()
-                frmRemoveCone.Show()
-                psorterror = 0
-                curcone = 0
-                Continue For
-            Else
-                txtConeBcode.Clear()
-                txtConeBcode.Refresh()
-                txtConeBcode.Focus()
-
-            End If
-        Next
         endCheck()
 
     End Sub

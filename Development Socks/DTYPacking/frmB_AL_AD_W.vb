@@ -26,6 +26,11 @@ Public Class frmB_AL_AD_W
 
     Dim dgvRows As Integer
 
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
+
+
+
     Private Sub frmB_AL_AD_W_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         txtConeBcode.Focus()
@@ -252,112 +257,124 @@ Public Class frmB_AL_AD_W
         today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
 
 
+        Try
 
+            For i = 1 To dgvRows
 
-        For i = 1 To dgvRows
-
-            'CHECK FOR UNPACKED CHEESE AND ALLOCATE
-            'If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = 0 And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
-            If Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value) Then
-                If frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = "" Then frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = Nothing
-            End If
-
-            If frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) And frmJobEntry.txtGrade.Text <> "ReCheck" Or
-                frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) And frmJobEntry.txtGrade.Text = "ReCheck" And
-                IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value) Then
-                'write to the local DGV grid
-                DataGridView1.Rows(gridRow).Cells(gridCol).Value = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value  'Write to Grid Cone Bcode
-                DataGridView1.Rows(gridRow).Cells(gridCol).Style.BackColor = Color.LightGreen
-
-                If frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk = 0 Then  'IF RECHK THEN SET FLAG=1 SET TIME AND SET NUBER 1-32
-                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 1
-                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Today
-                    frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
-                    frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
-                    '************************************************************************************************************
-                    ' routine to get index count from second column
-                    If gridCol = 1 Then
-                        tmpNum = DataGridView1.Rows(gridRow).Cells(0).Value  'format first 9 cheese to have leading Zero before sending to db
-                        modIdxNum = tmpNum.ToString(fmt)
-                    Else
-                        tmpNum = DataGridView1.Rows(gridRow).Cells(2).Value  'format first 9 cheese to have leading Zero before sending to db
-                        modIdxNum = tmpNum.ToString(fmt)
-                    End If
-                    '**************************************************************************************************************
-                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = modIdxNum
-                ElseIf frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk Then
-                    frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 11
-                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 1
-                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
-                    frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
-                    frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
-
-                    tmpNum = DataGridView1.Rows(gridRow).Cells(0).Value  'format first 9 cheese to have leading Zero before sending to db
-                    modIdxNum = tmpNum.ToString(fmt)
-                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = modIdxNum
-                Else
-                    'ROUTINE TO CREATE INDEX OF SCAN ORDER OF CHEESE FOR PRINTING IN SAME ORDER
-                    tmpNum = DataGridView1.Rows(gridRow).Cells(gridCol - 1).Value  'GET SHEET CHEESE POSITION NUMBER 
-                    modIdxNum = tmpNum.ToString(fmt)
-                    frmDGV.DGVdata.Rows(i - 1).Cells("PACKIDX").Value = modIdxNum
-                    'Update DGV that Cheese has been alocated, update Packendtm
-                    frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
-                    frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
-                    frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
+                'CHECK FOR UNPACKED CHEESE AND ALLOCATE
+                'If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = 0 And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+                If Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value) Then
+                    If frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = "" Then frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = Nothing
                 End If
 
+                If frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) And frmJobEntry.txtGrade.Text <> "ReCheck" Or
+                frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) And frmJobEntry.txtGrade.Text = "ReCheck" And
+                IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value) Then
+                    'write to the local DGV grid
+                    DataGridView1.Rows(gridRow).Cells(gridCol).Value = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value  'Write to Grid Cone Bcode
+                    DataGridView1.Rows(gridRow).Cells(gridCol).Style.BackColor = Color.LightGreen
+
+                    If frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk = 0 Then  'IF RECHK THEN SET FLAG=1 SET TIME AND SET NUBER 1-32
+                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 1
+                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Today
+                        frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
+                        frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
+                        '************************************************************************************************************
+                        ' routine to get index count from second column
+                        If gridCol = 1 Then
+                            tmpNum = DataGridView1.Rows(gridRow).Cells(0).Value  'format first 9 cheese to have leading Zero before sending to db
+                            modIdxNum = tmpNum.ToString(fmt)
+                        Else
+                            tmpNum = DataGridView1.Rows(gridRow).Cells(2).Value  'format first 9 cheese to have leading Zero before sending to db
+                            modIdxNum = tmpNum.ToString(fmt)
+                        End If
+                        '**************************************************************************************************************
+                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = modIdxNum
+                    ElseIf frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk Then
+                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 11
+                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 1
+                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                        frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
+                        frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
+
+                        tmpNum = DataGridView1.Rows(gridRow).Cells(0).Value  'format first 9 cheese to have leading Zero before sending to db
+                        modIdxNum = tmpNum.ToString(fmt)
+                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = modIdxNum
+                    Else
+                        'ROUTINE TO CREATE INDEX OF SCAN ORDER OF CHEESE FOR PRINTING IN SAME ORDER
+                        tmpNum = DataGridView1.Rows(gridRow).Cells(gridCol - 1).Value  'GET SHEET CHEESE POSITION NUMBER 
+                        modIdxNum = tmpNum.ToString(fmt)
+                        frmDGV.DGVdata.Rows(i - 1).Cells("PACKIDX").Value = modIdxNum
+                        'Update DGV that Cheese has been alocated, update Packendtm
+                        frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                        frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
+                        frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
+                    End If
 
 
-                packedFlag = 1
+
+                    packedFlag = 1
 
 
-                Exit For
-                'CHECK FOR ALREADY PACKED CHEESE
-            ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) And Not frmJobEntry.txtGrade.Text = "ReCheck" Then
-                Label8.Visible = True
-                Label8.Text = "Cheese already allocated"
-                Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
-                DelayTM()
-                Label8.Visible = False
-                packedFlag = 0
-                txtConeBcode.Clear()
-                txtConeBcode.Focus()
-                Me.KeyPreview = True 'Allows us to look for advace character from barcode
-                Exit Sub
-            ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells(33).Value) And frmJobEntry.txtGrade.Text = "ReCheck" Then
-                Label8.Visible = True
-                Label8.Text = "Cheese already allocated"
-                Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
-                DelayTM()
-                Label8.Visible = False
-                packedFlag = 0
-                txtConeBcode.Clear()
-                txtConeBcode.Focus()
-                Me.KeyPreview = True 'Allows us to look for advace character from barcode
-                Exit Sub
-            ElseIf i - 1 = dgvRows - 1 And packedFlag = 0 Then    'CHECK FOR WRONG CHEESE ON CART
-                'MsgBox("i = " & i - 1 & "Rows = " & dgvRows - 1)
-                Label8.Visible = True
-                Label8.Text = ("This is not a Grade " & frmJobEntry.txtGrade.Text & " Cheese")
-                Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
-                DelayTM()
-                Me.Hide()
-                Me.KeyPreview = True 'Allows us to look for advace character from barcode
-                frmRemoveCone.Show()
+                    Exit For
+                    'CHECK FOR ALREADY PACKED CHEESE
+                ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) And Not frmJobEntry.txtGrade.Text = "ReCheck" Then
+                    Label8.Visible = True
+                    Label8.Text = "Cheese already allocated"
+                    Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
+                    DelayTM()
+                    Label8.Visible = False
+                    packedFlag = 0
+                    txtConeBcode.Clear()
+                    txtConeBcode.Focus()
+                    Me.KeyPreview = True 'Allows us to look for advace character from barcode
+                    Exit Sub
+                ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells(33).Value) And frmJobEntry.txtGrade.Text = "ReCheck" Then
+                    Label8.Visible = True
+                    Label8.Text = "Cheese already allocated"
+                    Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
+                    DelayTM()
+                    Label8.Visible = False
+                    packedFlag = 0
+                    txtConeBcode.Clear()
+                    txtConeBcode.Focus()
+                    Me.KeyPreview = True 'Allows us to look for advace character from barcode
+                    Exit Sub
+                ElseIf i - 1 = dgvRows - 1 And packedFlag = 0 Then    'CHECK FOR WRONG CHEESE ON CART
+                    'MsgBox("i = " & i - 1 & "Rows = " & dgvRows - 1)
+                    Label8.Visible = True
+                    Label8.Text = ("This is not a Grade " & frmJobEntry.txtGrade.Text & " Cheese")
+                    Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
+                    DelayTM()
+                    Me.Hide()
+                    Me.KeyPreview = True 'Allows us to look for advace character from barcode
+                    frmRemoveCone.Show()
 
 
-                frmDGV.DGVdata.Rows(i - 1).Cells(58).Value = 1
-                frmDGV.DGVdata.Rows(i - 1).Cells(55).Value = frmJobEntry.txtOperator.Text
-                frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
+                    frmDGV.DGVdata.Rows(i - 1).Cells(58).Value = 1
+                    frmDGV.DGVdata.Rows(i - 1).Cells(55).Value = frmJobEntry.txtOperator.Text
+                    frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
 
-                Label8.Visible = False
-                txtConeBcode.Clear()
-                txtConeBcode.Focus()
-                Exit Sub
+                    Label8.Visible = False
+                    txtConeBcode.Clear()
+                    txtConeBcode.Focus()
+                    Exit Sub
 
-            End If
+                End If
 
-        Next
+            Next
+        Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Scan Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Scan Error", ex.ToString, False, "System Fault")
+            Label8.Visible = False
+            txtConeBcode.Clear()
+            txtConeBcode.Focus()
+            Exit Sub
+        End Try
+
+
+
         'UPDATE TOTAL COUNTED
         lbltotScan.Text = coneCount + 1
 
@@ -467,39 +484,47 @@ Public Class frmB_AL_AD_W
         Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
         Label8.Text = ("Please wait creating packing Excel sheet")
 
-
-        'Change the number to the column index that you want to sort
-        If frmJobEntry.txtGrade.Text IsNot "ReCheck" Then
-            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("PACKIDX"), System.ComponentModel.ListSortDirection.Ascending)
-        End If
-
-
-        frmPackRepMain.PackRepMainSub()
+        Try
+            'Change the number to the column index that you want to sort
+            If frmJobEntry.txtGrade.Text IsNot "ReCheck" Then
+                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("PACKIDX"), System.ComponentModel.ListSortDirection.Ascending)
+            End If
 
 
-        frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(0), System.ComponentModel.ListSortDirection.Ascending)  ' Is this needed ?
+            frmPackRepMain.PackRepMainSub()
 
-        If frmPackTodayUpdate.prtError Then
-            frmPackRepMain.Close()
-            Me.Cursor = System.Windows.Forms.Cursors.Default
-            Label8.Visible = False
-            Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
-            frmPackTodayUpdate.Close()
-            gradePackActive = 0
-            Me.Close()
-            Exit Sub
-        Else
 
-            frmPackRepMain.Close()
-            UpdateDatabase()
-            Label8.Visible = False
-            Me.Cursor = System.Windows.Forms.Cursors.Default
-            gradePackActive = 0
+            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(0), System.ComponentModel.ListSortDirection.Ascending)  ' Is this needed ?
+
+            If frmPackTodayUpdate.prtError Then
+                frmPackRepMain.Close()
+                Me.Cursor = System.Windows.Forms.Cursors.Default
+                Label8.Visible = False
+                Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
+                frmPackTodayUpdate.Close()
+                gradePackActive = 0
+                Me.Close()
+                Exit Sub
+            Else
+
+                frmPackRepMain.Close()
+                UpdateDatabase()
+                Label8.Visible = False
+                Me.Cursor = System.Windows.Forms.Cursors.Default
+                gradePackActive = 0
+                Me.Close()
+                frmJobEntry.Show()
+                frmJobEntry.txtLotNumber.Clear()
+
+            End If
+        Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Scan Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Scan Error", ex.ToString, False, "System Fault")
             Me.Close()
             frmJobEntry.Show()
             frmJobEntry.txtLotNumber.Clear()
-
-        End If
+        End Try
 
 
 
@@ -559,6 +584,9 @@ Public Class frmB_AL_AD_W
 
             End If
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("db Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("db Update Error", ex.ToString, False, "System Fault")
 
             MsgBox("Update Error: " & vbNewLine & ex.Message)
         End Try

@@ -427,7 +427,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Toraydb.xsd</DependentUpon>
     </Compile>
-    <Compile Include="UtilityRoutines.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AboutBox1.resx">

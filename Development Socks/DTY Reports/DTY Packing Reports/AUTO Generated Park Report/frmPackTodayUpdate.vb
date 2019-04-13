@@ -26,10 +26,14 @@ Public Class frmPackTodayUpdate
     'Dim PrintToFile As Object
     'Dim Collate As Object
     'Dim PrToFileName As Object
-
+    'THIS INITIATES WRITING To Error LOG
+    Private writeerrorLog As New writeError
 
 
     Public Sub TodayUpdate()
+
+        '
+
 
         Dim xlTodyWorkbook As Excel.Workbook
         Dim xlTodysheets As Excel.Worksheet
@@ -201,6 +205,9 @@ Public Class frmPackTodayUpdate
                     Next
 
                 Catch ex As Exception
+                    'Write error to Log File
+                    writeerrorLog.writelog("Excel Error", ex.Message, False, "System Fault")
+                    writeerrorLog.writelog("Excel Error", ex.ToString, False, "System Fault")
 
                     MsgBox(ex.ToString)
 

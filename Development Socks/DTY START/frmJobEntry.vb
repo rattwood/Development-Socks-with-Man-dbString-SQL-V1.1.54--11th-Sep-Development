@@ -8,6 +8,8 @@ Public Class frmJobEntry
     'THIS CREATS LOCAL INSTANCE TO REFRENCE THE SQL CLASS FORM, NOT USED WHEN WORKING WITH DATAGRIDVIEW
     'Private SQL As New SQLConn
 
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
 
     '---------------------------------------    SETTING UP LOCAL INSTANCE FOR SQL LINK FOR DATAGRID TO SYNC CORRECTLY WITH SQL -------------------------------------
     Public LConn As New SQLConnection(My.Settings.SQLConn) 'This need to be changed in Project/Propertie/Settings
@@ -296,6 +298,11 @@ Public Class frmJobEntry
             End If
 
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Drum Scan Error", ex.Message, False, "User Fault")
+            writeerrorLog.writelog("Drum Scan Error", ex.ToString, False, "User Fault")
+
+
             MsgBox("BarCcode Is Not Valid" & vbCrLf & " บาร์โค็ดไม่ถูกต้อง")
             Me.txtLotNumber.Clear()
             Me.txtLotNumber.Focus()
@@ -631,6 +638,9 @@ Public Class frmJobEntry
             LRecordCount = LDA.Fill(LDS)
 
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("ExecQuery Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("ExecQuery Error", ex.ToString, False, "System Fault")
 
             LException = "ExecQuery Error:  " & vbNewLine & ex.Message
             MsgBox(LException)
@@ -973,114 +983,123 @@ Public Class frmJobEntry
 
         End If
 
+        Try
 
-        For i As Integer = coneNumStart To coneNumStop
-            ' If machineCode < 30 Then
-            If x <= 16 Then cartName = varCartNameA Else cartName = varCartNameB  'SETS CORRECT CART NUMBER
-            'Else
-            'If x <= 12 Then cartName = varCartNameA Else cartName = varCartNameB  'SETS CORRECT CART NUMBER
-            '  End If
-            x = x + 1
-            modConeNum = i.ToString(fmt)   ' FORMATS THE CONE NUMBER TO 3 DIGITS
-            coneBarcode = modLotStr & modConeNum   'CREATE THE CONE BARCODE NUMBER
-            JobBarcode = modLotStr
+            For i As Integer = coneNumStart To coneNumStop
+                ' If machineCode < 30 Then
+                If x <= 16 Then cartName = varCartNameA Else cartName = varCartNameB  'SETS CORRECT CART NUMBER
+                'Else
+                'If x <= 12 Then cartName = varCartNameA Else cartName = varCartNameB  'SETS CORRECT CART NUMBER
+                '  End If
+                x = x + 1
+                modConeNum = i.ToString(fmt)   ' FORMATS THE CONE NUMBER TO 3 DIGITS
+                coneBarcode = modLotStr & modConeNum   'CREATE THE CONE BARCODE NUMBER
+                JobBarcode = modLotStr
 
-            JobBarcode = modLotStr
+                JobBarcode = modLotStr
 
-            'Parameters List for full db
+                'Parameters List for full db
 
-            'ADD ORA PARAMETERS & RUN THE COMMAND
-            LAddParam("@mcnum", varMachineCode)
-            LAddParam("@prodnum", varProductCode)
-            LAddParam("@yy", varYear)
-            LAddParam("@mm", varMonth)
-            LAddParam("@doff", varDoffingNum)
-            LAddParam("@cone", modConeNum)
-            LAddParam("@merge", mergeNum)
-            LAddParam("@user", "")
-            LAddParam("@conestate", "0")
-            LAddParam("@shortcone", "0")
-            LAddParam("@nocone", "0")
-            LAddParam("@defectcone", "0")
-            LAddParam("@cartnum", varCartSelect)
-            LAddParam("@cartname", cartName)
-            LAddParam("@passzero", "0")
-            LAddParam("@barley", "0")
-            LAddParam("@m10", "0")
-            LAddParam("@p10", "0")
-            LAddParam("@m30", "0")
-            LAddParam("@p30", "0")
-            LAddParam("@m50", "0")
-            LAddParam("@p50", "0")
-            LAddParam("@cartstart", today)
-            LAddParam("@barcart", dbBarcode)
-            LAddParam("@barcone", coneBarcode)
-            LAddParam("@fk", "False")
-            LAddParam("@fd", "False")
-            LAddParam("@ff", "False")
-            LAddParam("@fo", "False")
-            LAddParam("@ft", "False")
-            LAddParam("@fp", "False")
-            LAddParam("@fs", "False")
-            LAddParam("@fx", "False")
-            LAddParam("@fn", "False")
-            LAddParam("@fw", "False")
-            LAddParam("@fh", "False")
-            LAddParam("@ftr", "False")
-            LAddParam("@fb", "False")
-            LAddParam("@fc", "False")
-            LAddParam("@mcname", varMachineName)
-            LAddParam("@prodname", varProductName)
-            LAddParam("@barjob", JobBarcode)
-            LAddParam("@packsortop", "0")
-            LAddParam("@packop", "0")
-            LAddParam("@sortop", "0")
-            LAddParam("@colourop", "0")
-            LAddParam("@errpsort", "0")
-            LAddParam("@errweigh", "0")
-            LAddParam("@weight", "0")
-            LAddParam("@boxnum", "0")
-            LAddParam("@errsort", "0")
-            LAddParam("@errcol", "0")
-            LAddParam("@errdyefleck", "0")
-            LAddParam("@coldef", "0")
-            LAddParam("@colwaste", "0")
-            LAddParam("@fdo", "False")
-            LAddParam("@fdh", "False")
-            LAddParam("@fcl", "False")
-            LAddParam("@ffi", "False")
-            LAddParam("@fyn", "False")
-            LAddParam("@fht", "False")
-            LAddParam("@flt", "False")
-            LAddParam("@conead", "0")
-            LAddParam("@coneal", "0")
-            'NEWPARAMS ADDED FOR @ND FLOOR DATA ENTRY
-            LAddParam("@opcreate", txtOperator.Text)
-
-
-            LExecQuery("INSERT INTO Jobs (MCNUM, PRNUM, PRYY, PRMM, DOFFNUM, CONENUM, MERGENUM, OPNAME,CONESTATE," _
-                   & "SHORTCONE, MISSCONE, DEFCONE, CARTNUM, CARTNAME, CONEZERO, CONEBARLEY, M10, P10, M30, P30, M50, P50, CARTSTARTTM," _
-                  & "BCODECART, BCODECONE,FLT_K, FLT_D, FLT_F, FLT_O, FLT_T, FLT_P, FLT_S, FLT_X, FLT_N, FLT_W, FLT_H, FLT_TR, FLT_B, FLT_C," _
-                   & "MCNAME, PRODNAME, BCODEJOB,OPPACKSORT,OPPACK,OPSORT,PSORTERROR,WEIGHTERROR,WEIGHT,CARTONNUM,SORTERROR,COLOURERROR,DYEFLECK," _
-                   & "COLDEF, COLWASTE, FLT_DO, FLT_DH, FLT_CL, FLT_FI, FLT_YN, FLT_HT, FLT_LT, CONEAD, CONEAL, OPCREATECART) " _
-                    & "VALUES (@mcnum, @prodnum,@yy,@mm,@doff,@cone,@merge,@user,@conestate,@shortcone,@nocone,@defectcone,@cartnum,@cartname,@passzero," _
-                    & "@barley,@m10,@p10,@m30,@p30,@m50,@p50,@cartstart," _
-                    & "@barcart,@barcone,@fk,@fd,@ff,@fo,@ft,@fp,@fs,@fx,@fn,@fw,@fh,@ftr,@fb,@fc,@mcname,@prodname," _
-                    & "@barjob,@packsortop,@packop,@sortop,@colourop,@errpsort,@errweigh,@boxnum,@errsort,@errcol,@errdyefleck,@coldef,@colwaste,@fdo,@fdh," _
-                    & "@fcl,@ffi,@fyn,@fht,@flt,@conead,@coneal,@opcreate) ")
-
-            'LExecQuery("INSERT INTO jobs (MCNUM, PRNUM, PRYY, PRMM, DOFFNUM, CONENUM, MERGENUM, OPNAME,CONESTATE," _
-            '   & "SHORTCONE, MISSCONE, DEFCONE, CARTNUM, CARTNAME, CONEZERO, CONEBARLEY, M10, P10, M30, P30, M50, P50, CARTSTARTTM," _
-            '  & "BCODECART, BCODECONE,FLT_K, FLT_D, FLT_F, FLT_O, FLT_T, FLT_P, FLT_S, FLT_X, FLT_N, FLT_W, FLT_H, FLT_TR, FLT_B, FLT_C," _
-            '   & "MCNAME, PRODNAME, BCODEJOB,OPPACKSORT,OPPACK,OPSORT,PSORTERROR,WEIGHTERROR,WEIGHT,CARTONNUM,SORTERROR,COLOURERROR,DYEFLECK," _
-            '   & "COLDEF, COLWASTE, FLT_DO, FLT_DH, FLT_CL, FLT_FI, FLT_YN, FLT_HT, FLT_LT, CONEAD, CONEAL) " _
-            '  & "VALUES ('" & varMachineCode & "', '" & varProductCode & "','" & varYear & "','" & varMonth & "','" & varDoffingNum & "','" & modConeNum & "'," _
-            '  & "'" & mergeNum & "',  ' ', '0', '0', '0', '0', '" & varCartSelect & "','" & cartName & "', '0', '0', '0', '0', '0', '0', '0', '0','" & today & "','" & dbBarcode & "','" & coneBarcode & "'," _
-            ' & "'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', '" & varMachineName & "','" & varProductName & "', '" & JobBarcode & "'," _
-            ' & "'0','0','0','0','0','0','0','0','0','0','0','0','False','False','False','False','False','False','False',' 0',' 0')")
+                'ADD ORA PARAMETERS & RUN THE COMMAND
+                LAddParam("@mcnum", varMachineCode)
+                LAddParam("@prodnum", varProductCode)
+                LAddParam("@yy", varYear)
+                LAddParam("@mm", varMonth)
+                LAddParam("@doff", varDoffingNum)
+                LAddParam("@cone", modConeNum)
+                LAddParam("@merge", mergeNum)
+                LAddParam("@user", "")
+                LAddParam("@conestate", "0")
+                LAddParam("@shortcone", "0")
+                LAddParam("@nocone", "0")
+                LAddParam("@defectcone", "0")
+                LAddParam("@cartnum", varCartSelect)
+                LAddParam("@cartname", cartName)
+                LAddParam("@passzero", "0")
+                LAddParam("@barley", "0")
+                LAddParam("@m10", "0")
+                LAddParam("@p10", "0")
+                LAddParam("@m30", "0")
+                LAddParam("@p30", "0")
+                LAddParam("@m50", "0")
+                LAddParam("@p50", "0")
+                LAddParam("@cartstart", today)
+                LAddParam("@barcart", dbBarcode)
+                LAddParam("@barcone", coneBarcode)
+                LAddParam("@fk", "False")
+                LAddParam("@fd", "False")
+                LAddParam("@ff", "False")
+                LAddParam("@fo", "False")
+                LAddParam("@ft", "False")
+                LAddParam("@fp", "False")
+                LAddParam("@fs", "False")
+                LAddParam("@fx", "False")
+                LAddParam("@fn", "False")
+                LAddParam("@fw", "False")
+                LAddParam("@fh", "False")
+                LAddParam("@ftr", "False")
+                LAddParam("@fb", "False")
+                LAddParam("@fc", "False")
+                LAddParam("@mcname", varMachineName)
+                LAddParam("@prodname", varProductName)
+                LAddParam("@barjob", JobBarcode)
+                LAddParam("@packsortop", "0")
+                LAddParam("@packop", "0")
+                LAddParam("@sortop", "0")
+                LAddParam("@colourop", "0")
+                LAddParam("@errpsort", "0")
+                LAddParam("@errweigh", "0")
+                LAddParam("@weight", "0")
+                LAddParam("@boxnum", "0")
+                LAddParam("@errsort", "0")
+                LAddParam("@errcol", "0")
+                LAddParam("@errdyefleck", "0")
+                LAddParam("@coldef", "0")
+                LAddParam("@colwaste", "0")
+                LAddParam("@fdo", "False")
+                LAddParam("@fdh", "False")
+                LAddParam("@fcl", "False")
+                LAddParam("@ffi", "False")
+                LAddParam("@fyn", "False")
+                LAddParam("@fht", "False")
+                LAddParam("@flt", "False")
+                LAddParam("@conead", "0")
+                LAddParam("@coneal", "0")
+                'NEWPARAMS ADDED FOR @ND FLOOR DATA ENTRY
+                LAddParam("@opcreate", txtOperator.Text)
 
 
-        Next
+                LExecQuery("INSERT INTO Jobs (MCNUM, PRNUM, PRYY, PRMM, DOFFNUM, CONENUM, MERGENUM, OPNAME,CONESTATE," _
+                       & "SHORTCONE, MISSCONE, DEFCONE, CARTNUM, CARTNAME, CONEZERO, CONEBARLEY, M10, P10, M30, P30, M50, P50, CARTSTARTTM," _
+                      & "BCODECART, BCODECONE,FLT_K, FLT_D, FLT_F, FLT_O, FLT_T, FLT_P, FLT_S, FLT_X, FLT_N, FLT_W, FLT_H, FLT_TR, FLT_B, FLT_C," _
+                       & "MCNAME, PRODNAME, BCODEJOB,OPPACKSORT,OPPACK,OPSORT,PSORTERROR,WEIGHTERROR,WEIGHT,CARTONNUM,SORTERROR,COLOURERROR,DYEFLECK," _
+                       & "COLDEF, COLWASTE, FLT_DO, FLT_DH, FLT_CL, FLT_FI, FLT_YN, FLT_HT, FLT_LT, CONEAD, CONEAL, OPCREATECART) " _
+                        & "VALUES (@mcnum, @prodnum,@yy,@mm,@doff,@cone,@merge,@user,@conestate,@shortcone,@nocone,@defectcone,@cartnum,@cartname,@passzero," _
+                        & "@barley,@m10,@p10,@m30,@p30,@m50,@p50,@cartstart," _
+                        & "@barcart,@barcone,@fk,@fd,@ff,@fo,@ft,@fp,@fs,@fx,@fn,@fw,@fh,@ftr,@fb,@fc,@mcname,@prodname," _
+                        & "@barjob,@packsortop,@packop,@sortop,@colourop,@errpsort,@errweigh,@boxnum,@errsort,@errcol,@errdyefleck,@coldef,@colwaste,@fdo,@fdh," _
+                        & "@fcl,@ffi,@fyn,@fht,@flt,@conead,@coneal,@opcreate) ")
+
+                'LExecQuery("INSERT INTO jobs (MCNUM, PRNUM, PRYY, PRMM, DOFFNUM, CONENUM, MERGENUM, OPNAME,CONESTATE," _
+                '   & "SHORTCONE, MISSCONE, DEFCONE, CARTNUM, CARTNAME, CONEZERO, CONEBARLEY, M10, P10, M30, P30, M50, P50, CARTSTARTTM," _
+                '  & "BCODECART, BCODECONE,FLT_K, FLT_D, FLT_F, FLT_O, FLT_T, FLT_P, FLT_S, FLT_X, FLT_N, FLT_W, FLT_H, FLT_TR, FLT_B, FLT_C," _
+                '   & "MCNAME, PRODNAME, BCODEJOB,OPPACKSORT,OPPACK,OPSORT,PSORTERROR,WEIGHTERROR,WEIGHT,CARTONNUM,SORTERROR,COLOURERROR,DYEFLECK," _
+                '   & "COLDEF, COLWASTE, FLT_DO, FLT_DH, FLT_CL, FLT_FI, FLT_YN, FLT_HT, FLT_LT, CONEAD, CONEAL) " _
+                '  & "VALUES ('" & varMachineCode & "', '" & varProductCode & "','" & varYear & "','" & varMonth & "','" & varDoffingNum & "','" & modConeNum & "'," _
+                '  & "'" & mergeNum & "',  ' ', '0', '0', '0', '0', '" & varCartSelect & "','" & cartName & "', '0', '0', '0', '0', '0', '0', '0', '0','" & today & "','" & dbBarcode & "','" & coneBarcode & "'," _
+                ' & "'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', '" & varMachineName & "','" & varProductName & "', '" & JobBarcode & "'," _
+                ' & "'0','0','0','0','0','0','0','0','0','0','0','0','False','False','False','False','False','False','False',' 0',' 0')")
+
+
+            Next
+
+        Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Job Create Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Job Create Error", ex.ToString, False, "System Fault")
+        End Try
+
+
 
         LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ORDER BY CONENUM")
 
@@ -1133,104 +1152,75 @@ Public Class frmJobEntry
 
         End If
 
-        LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '9' and FLT_S = 'False' ")
-
-        If LRecordCount > 0 Then
-            LExecQuery("Select * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ORDER BY CONENUM")
-
-            'LOAD THE DATA FROM dB IN TO THE DATAGRID
-            frmDGV.DGVdata.DataSource = LDS.Tables(0)
-            frmDGV.DGVdata.Rows(0).Selected = True
-            Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
-
-
-
-            If LConn.State = ConnectionState.Open Then LConn.Close()
-            frmDGV.DGVdata.ClearSelection()
-            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
-            coneValUpdate = 1
-            Me.Hide()
-            frmPacking.Show()
-
-        Else
-
-            LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '15'")
+        Try
+            LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '9' and FLT_S = 'False' ")
 
             If LRecordCount > 0 Then
-                Label3.Visible = True
+                LExecQuery("Select * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ORDER BY CONENUM")
 
-                Label3.Text = "Cart has already been allocated"
+                'LOAD THE DATA FROM dB IN TO THE DATAGRID
+                frmDGV.DGVdata.DataSource = LDS.Tables(0)
+                frmDGV.DGVdata.Rows(0).Selected = True
+                Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
 
-                DelayTM()
-                Label3.Visible = False
+
+
+                If LConn.State = ConnectionState.Open Then LConn.Close()
+                frmDGV.DGVdata.ClearSelection()
+                frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                coneValUpdate = 1
+                Me.Hide()
+                frmPacking.Show()
 
             Else
-                LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '5'")
+
+                LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '15'")
+
                 If LRecordCount > 0 Then
-
                     Label3.Visible = True
 
-                    Label3.Text = "Cart Has not been COLOUR CHECKED"
+                    Label3.Text = "Cart has already been allocated"
 
                     DelayTM()
                     Label3.Visible = False
+
                 Else
-                    Label3.Visible = True
+                    LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '5'")
+                    If LRecordCount > 0 Then
 
-                    Label3.Text = "Cart Has No Grade 'A' Cheese"
+                        Label3.Visible = True
+
+                        Label3.Text = "Cart Has not been COLOUR CHECKED"
+
+                        DelayTM()
+                        Label3.Visible = False
+                    Else
+                        Label3.Visible = True
+
+                        Label3.Text = "Cart Has No Grade 'A' Cheese"
 
 
-                    DelayTM()
-                    Label3.Visible = False
+                        DelayTM()
+                        Label3.Visible = False
+                    End If
+
                 End If
+
+                Me.txtLotNumber.Clear()
+                Me.txtLotNumber.Focus()
+
             End If
-
-
+        Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Scan Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Scan Error", ex.ToString, False, "System Fault")
             Me.txtLotNumber.Clear()
             Me.txtLotNumber.Focus()
-
-        End If
+        End Try
 
     End Sub
 
-    'Create csv file
 
-    'Private Sub CSV()
-
-    '    Dim today As String = DateAndTime.Now
-    '    Dim csvFile As String
-    '    'Check to see if file exists, if it does not creat the file, otherwise add data to the file
-    '    Dim dataOut As String = String.Concat(varMachineCode, ",", varMachineName, ",", varYear, ",", varMonth, ",", varDoffingNum, ",", fltconeNum, ",", mergeNum, ",", varUserName, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("CONESTATE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("SHORTCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("MISSCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("DEFCONE").Value, ",", frmDGV.DGVdata.Rows(csvRowNum).Cells("BCODECART").Value, ",", coneM30, ",", coneP30, ",", varCartStartTime, ",", varCartEndTime, ",", today & Environment.NewLine)
-
-
-    '    csvFile = My.Settings.dirCarts & ("\" & frmDGV.DGVdata.Rows(csvRowNum).Cells("BCODECART").Value.ToString & "PackLog.csv")
-
-
-    '    If fileActive Then
-
-    '        Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, True)
-    '        outFile.WriteLine(dataOut)
-    '        outFile.Close()
-
-    '    Else
-    '        'If fileActive = False Then
-    '        Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, False)
-    '        outFile.WriteLine("M/C Code, M/C Name, YY, MM, Doff #, Cone #, Merge #,User, Cone State, Short, NoCone, Defect, Cart Name, -30, +30,Start, End, Fault time ")
-
-    '        outFile.WriteLine(dataOut)
-    '        outFile.Close()
-    '        fileActive = True
-
-
-    '    End If
-
-
-
-
-
-
-
-    'End Sub
 
 
 
