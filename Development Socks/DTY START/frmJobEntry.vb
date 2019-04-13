@@ -948,7 +948,7 @@ Public Class frmJobEntry
         Dim coneBarcode As String
         Dim cartName As String
         Dim today As String = DateAndTime.Today
-        today = Convert.ToDateTime(today).ToString("dd-MM-yyyy HH:mm:ss tt")
+        today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy HH:mm:ss tt")
 
 
         LExecQuery("SELECT PRODNAME,MERGENUM,PRODWEIGHT,WEIGHTCODE FROM PRODUCT WHERE PRNUM = '" & varProductCode & "'")
