@@ -99,8 +99,8 @@ Public Class frmJobEntry
         Me.txtLotNumber.Visible = False
 
         If My.Settings.chkUseColour Then btnCartReport.Visible = True Else btnCartReport.Visible = False
-        If My.Settings.chkUseColour Then btnJobReport.Visible = True Else btnJobReport.Visible = False
-        If My.Settings.chkUseColour Then btnDefRep.Visible = True Else btnDefRep.Visible = False
+        ' If My.Settings.chkUseColour Then btnJobReport.Visible = True Else btnJobReport.Visible = False
+        '  If My.Settings.chkUseColour Then btnDefRep.Visible = True Else btnDefRep.Visible = False
 
 
         'NEW PACKING MENU ITEMS

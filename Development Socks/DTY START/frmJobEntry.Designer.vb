@@ -145,6 +145,7 @@ Partial Class frmJobEntry
         Me.btnJobReport.TabIndex = 8
         Me.btnJobReport.Text = "M/C Report"
         Me.btnJobReport.UseVisualStyleBackColor = True
+        Me.btnJobReport.Visible = False
         '
         'ToraydbBindingSource
         '
@@ -167,7 +168,7 @@ Partial Class frmJobEntry
         '
         'btnSearchCone
         '
-        Me.btnSearchCone.Location = New System.Drawing.Point(425, 377)
+        Me.btnSearchCone.Location = New System.Drawing.Point(350, 377)
         Me.btnSearchCone.Name = "btnSearchCone"
         Me.btnSearchCone.Size = New System.Drawing.Size(113, 47)
         Me.btnSearchCone.TabIndex = 12
@@ -213,6 +214,7 @@ Partial Class frmJobEntry
         Me.btnDefRep.TabIndex = 178
         Me.btnDefRep.Text = "Defect Report"
         Me.btnDefRep.UseVisualStyleBackColor = True
+        Me.btnDefRep.Visible = False
         '
         'MenuStrip1
         '
@@ -241,13 +243,13 @@ Partial Class frmJobEntry
         'ExChangeCheeseToolStripMenuItem
         '
         Me.ExChangeCheeseToolStripMenuItem.Name = "ExChangeCheeseToolStripMenuItem"
-        Me.ExChangeCheeseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ExChangeCheeseToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
         Me.ExChangeCheeseToolStripMenuItem.Text = "ExChange Cheese"
         '
         'FindCheeseToolStripMenuItem
         '
         Me.FindCheeseToolStripMenuItem.Name = "FindCheeseToolStripMenuItem"
-        Me.FindCheeseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.FindCheeseToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
         Me.FindCheeseToolStripMenuItem.Text = "Find Cheese"
         '
         'PackingGradeToolStripMenuItem

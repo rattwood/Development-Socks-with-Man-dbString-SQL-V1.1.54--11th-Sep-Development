@@ -216,10 +216,10 @@ Public Class frmCart1
         lblDoffNum.Text = frmDGV.DGVdata.Rows(0).Cells("DOFFNUM").Value.ToString
 
 
-        If IsDBNull(frmDGV.DGVdata.Rows((0) - coneNumOffset).Cells("CARTSTARTTM").Value) Then
+        If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("CARTSTARTTM").Value) Then
             varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")    'Set new time if cell is Null
         Else
-            varCartStartTime = frmDGV.DGVdata.Rows((0) - coneNumOffset).Cells("CARTSTARTTM").Value  'set time to cell value if not null
+            varCartStartTime = frmDGV.DGVdata.Rows(0).Cells("CARTSTARTTM").Value  'set time to cell value if not null
         End If
 
 

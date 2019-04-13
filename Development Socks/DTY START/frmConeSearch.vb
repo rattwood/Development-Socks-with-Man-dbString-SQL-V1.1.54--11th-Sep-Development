@@ -222,11 +222,20 @@ Public Class frmConeSearch
                             Else
                                 txtBoxGrad.Text = "B"
                             End If
+                        ElseIf DataGridView1.Rows(0).Cells("M10").Value > "0" Then
+                            txtBoxGrad.Text = "-10"
+                        ElseIf DataGridView1.Rows(0).Cells("P10").Value > "0" Then
+                            txtBoxGrad.Text = "+10"
                         ElseIf DataGridView1.Rows(0).Cells("M30").Value > "0" Then
                             txtBoxGrad.Text = "-30"
                         ElseIf DataGridView1.Rows(0).Cells("P30").Value > "0" Then
                             txtBoxGrad.Text = "+30"
+                        ElseIf DataGridView1.Rows(0).Cells("M50").Value > "0" Then
+                            txtBoxGrad.Text = "-50"
+                        ElseIf DataGridView1.Rows(0).Cells("P50").Value > "0" Then
+                            txtBoxGrad.Text = "+50"
                         End If
+
 
                         If DataGridView1.Rows(0).Cells("FLT_X").Value = "True" Then txtBoxGrad.Text = "Missing"
                     Case 9, 15
