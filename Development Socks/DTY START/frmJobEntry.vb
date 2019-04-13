@@ -957,7 +957,7 @@ Public Class frmJobEntry
         Dim modLotStr = txtLotNumber.Text.Substring(0, 12)
         Dim coneBarcode As String
         Dim cartName As String
-        Dim today As String = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        Dim today As String = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
         'today = Convert.ToDateTime(today).ToString("dd-MM-yyyy HH:mm:ss tt")
 
 

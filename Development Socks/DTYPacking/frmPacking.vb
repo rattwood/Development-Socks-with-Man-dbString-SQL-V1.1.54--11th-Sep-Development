@@ -413,7 +413,7 @@ Public Class frmPacking
         Dim curcone As String
         Dim coneCount As Integer = 0
         Dim today As String
-        today = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        today = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
 
 
 

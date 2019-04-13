@@ -270,7 +270,7 @@ Public Class frmColReCheck
 
 
         Dim today As String = DateAndTime.Today
-        today = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        today = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
 
         'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
 

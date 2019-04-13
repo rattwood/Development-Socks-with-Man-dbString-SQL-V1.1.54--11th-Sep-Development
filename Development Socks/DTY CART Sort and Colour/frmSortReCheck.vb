@@ -1482,7 +1482,7 @@ Public Class frmSortReCheck
 
 
         'ONLY PRINT IF COLOUR SELECTED
-        Dim today As String = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        Dim today As String = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
         'today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
 
 
@@ -2623,7 +2623,7 @@ Public Class frmSortReCheck
 
 
         Else
-            varCartEndTime = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+            varCartEndTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
             If shortCone = 2 Then shortCone = varConeNum
             If shortCone > 0 Then Fault_S = "True" 'Else Fault_S = "False"
 
@@ -2683,7 +2683,7 @@ Public Class frmSortReCheck
 
 
     Private Sub jobArrayUpdate()
-        Today = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        Today = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
 
 
 

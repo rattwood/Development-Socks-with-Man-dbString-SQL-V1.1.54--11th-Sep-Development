@@ -239,7 +239,7 @@ Public Class frmPackRchkA
         Dim curcone As String
 
 
-        Today = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        Today = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
 
 
 

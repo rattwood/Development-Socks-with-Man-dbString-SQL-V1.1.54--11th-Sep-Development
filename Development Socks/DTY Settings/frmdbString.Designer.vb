@@ -42,6 +42,9 @@ Partial Class frmdbString
         Me.txtBoxCarts = New System.Windows.Forms.TextBox()
         Me.txtBoxTemplates = New System.Windows.Forms.TextBox()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.txtLogReport = New System.Windows.Forms.TextBox()
+        Me.chkUseLogs = New System.Windows.Forms.CheckBox()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -189,11 +192,45 @@ Partial Class frmdbString
         Me.txtBoxTemplates.Size = New System.Drawing.Size(534, 20)
         Me.txtBoxTemplates.TabIndex = 53
         '
+        'Button7
+        '
+        Me.Button7.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Button7.Location = New System.Drawing.Point(12, 410)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(144, 22)
+        Me.Button7.TabIndex = 65
+        Me.Button7.Text = "Log File Path"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'txtLogReport
+        '
+        Me.txtLogReport.Location = New System.Drawing.Point(163, 410)
+        Me.txtLogReport.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.txtLogReport.Name = "txtLogReport"
+        Me.txtLogReport.Size = New System.Drawing.Size(534, 20)
+        Me.txtLogReport.TabIndex = 64
+        '
+        'chkUseLogs
+        '
+        Me.chkUseLogs.AutoSize = True
+        Me.chkUseLogs.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.chkUseLogs.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.chkUseLogs.Location = New System.Drawing.Point(13, 453)
+        Me.chkUseLogs.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.chkUseLogs.Name = "chkUseLogs"
+        Me.chkUseLogs.Size = New System.Drawing.Size(107, 20)
+        Me.chkUseLogs.TabIndex = 66
+        Me.chkUseLogs.Text = "Create logs"
+        Me.chkUseLogs.UseVisualStyleBackColor = True
+        '
         'frmdbString
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(710, 488)
+        Me.Controls.Add(Me.chkUseLogs)
+        Me.Controls.Add(Me.Button7)
+        Me.Controls.Add(Me.txtLogReport)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.txtBoxPackReports)
         Me.Controls.Add(Me.Button5)
@@ -237,4 +274,7 @@ Partial Class frmdbString
     Friend WithEvents txtBoxCarts As TextBox
     Friend WithEvents txtBoxTemplates As TextBox
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
+    Friend WithEvents chkUseLogs As CheckBox
+    Friend WithEvents Button7 As Button
+    Friend WithEvents txtLogReport As TextBox
 End Class

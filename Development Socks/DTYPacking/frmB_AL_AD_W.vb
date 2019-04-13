@@ -293,7 +293,7 @@ Public Class frmB_AL_AD_W
                     ElseIf frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk Then
                         frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 11
                         frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 1
-                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
                         frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
                         frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
 
@@ -306,7 +306,7 @@ Public Class frmB_AL_AD_W
                         modIdxNum = tmpNum.ToString(fmt)
                         frmDGV.DGVdata.Rows(i - 1).Cells("PACKIDX").Value = modIdxNum
                         'Update DGV that Cheese has been alocated, update Packendtm
-                        frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                        frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
                         frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
                         frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
                     End If

@@ -255,7 +255,7 @@ Public Class frmSTDColChk
 
 
         Dim today As String = DateAndTime.Today
-        today = DateAndTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        today = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
 
 
 

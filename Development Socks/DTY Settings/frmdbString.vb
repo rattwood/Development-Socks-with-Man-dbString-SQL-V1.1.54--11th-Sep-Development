@@ -9,8 +9,8 @@
         txtBoxJobs.Text = My.Settings.dirJobs
         txtBoxPack.Text = My.Settings.dirPacking
         txtBoxPackReports.Text = My.Settings.dirPackReports
-
-
+        txtLogReport.Text = My.Settings.dirLogs
+        If My.Settings.chkUseLogs Then chkUseLogs.Checked = True Else chkUseLogs.Checked = False
 
         btnSave.Enabled = False
     End Sub
@@ -48,7 +48,15 @@
         btnSave.Enabled = True
     End Sub
 
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        FolderBrowserDialog1.ShowDialog()
+        txtLogReport.Text = FolderBrowserDialog1.SelectedPath
+        btnSave.Enabled = True
+    End Sub
 
+    Private Sub chkUseLogs_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseLogs.CheckedChanged
+        btnSave.Enabled = True
+    End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         frmJobEntry.Show()
@@ -64,7 +72,8 @@
         My.Settings.dirJobs = txtBoxJobs.Text
         My.Settings.dirPacking = txtBoxPack.Text
         My.Settings.dirPackReports = txtBoxPackReports.Text
-
+        My.Settings.dirLogs = txtLogReport.Text
+        My.Settings.chkUseLogs = chkUseLogs.CheckState
 
         btnSave.Enabled = False
         TextBox1.Refresh()
@@ -73,4 +82,6 @@
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
         btnSave.Enabled = True
     End Sub
+
+
 End Class
