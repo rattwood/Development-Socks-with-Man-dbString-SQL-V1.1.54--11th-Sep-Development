@@ -720,7 +720,7 @@ Public Class frmProductionDataUpdate
         Select Case tmpMCnum
             Case 21, 23, 25, 27, 29
                 offSet = 1
-            Case 22, 24, 26, 28,
+            Case 22, 24, 26, 28
                 offSet = 193
             Case 30, 32
                 offSet = 1
