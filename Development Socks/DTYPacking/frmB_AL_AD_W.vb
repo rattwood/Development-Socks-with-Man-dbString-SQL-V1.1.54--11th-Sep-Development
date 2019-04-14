@@ -21,6 +21,7 @@
     Dim coneCount As Integer = 0
 
     Dim dgvRows As Integer
+    Dim screenHeight As Integer = Screen.PrimaryScreen.WorkingArea.Height
 
     'THIS INITIATES WRITING TO ERROR LOG
     Private writeerrorLog As New writeError
@@ -36,8 +37,14 @@
         Label5.Text = frmJobEntry.varProductName
         Label6.Text = frmJobEntry.varProductCode
 
+        'CHECK SCREEN SIZE AND ADJUST VEIW
+        If screenHeight <= 770 Then Me.WindowState = FormWindowState.Maximized Else Me.WindowState = FormWindowState.Normal
+
         Select Case frmJobEntry.txtGrade.Text
             Case "B", "AL", "AD", "P35 AS", "P35 BS"
+
+                SetupDGV()
+
                 For i = 6 To 9  'Columns to Hide
                     DataGridView1.Columns(i).Visible = False
                 Next
@@ -63,6 +70,9 @@
 
 
             Case "P25 AS", "P30 BS"
+
+                SetupDGV()
+
                 For i = 8 To 9   'Columns to Hide
                     DataGridView1.Columns(i).Visible = False
                 Next
@@ -87,6 +97,7 @@
                 Next
 
             Case "P15 AS", "P20 BS"
+                SetupDGV()
 
                 'create rows 
                 DataGridView1.Rows.Add(39)
@@ -106,6 +117,19 @@
 
                 Next
             Case "ReCheck"
+
+
+                'Dim anteWidth As Integer = Me.Width
+                'Dim anteHeight As Integer = Me.Height
+                'Dim screenWidth As Integer = Screen.PrimaryScreen.WorkingArea.Width
+                'Dim screenHeight As Integer = Screen.PrimaryScreen.WorkingArea.Height
+                'Dim WidthRatio As Integer = screenWidth / anteWidth
+                'Dim HeightRatio As Integer = screenHeight / anteHeight
+
+                ' MsgBox("Height = " & screenHeight & vbCrLf & "width = " & screenWidth & vbCrLf & "window Hight = " & anteHeight & vbCrLf & "window Width = " & anteWidth)
+
+                SetupDGV()
+
 
                 For i = 4 To 9   'Columns to Hide
                     DataGridView1.Columns(i).Visible = False
@@ -127,8 +151,6 @@
                         dgv1gridCol = dgv1gridCol + 2
                     End If
 
-
-                    SetupDGV()
 
                 Next
             Case "Waste"
@@ -154,54 +176,311 @@
 
     Private Sub SetupDGV()
 
-        With DataGridView1.ColumnHeadersDefaultCellStyle
-            .BackColor = Color.Navy
-            .ForeColor = Color.White
-            .Font = New Font("Microsoft Sans Serif", 15, FontStyle.Bold)
-        End With
+        'CHECK SCREEN HEIGHT AND ADJUST TO MAXIMIZED IF TO SMALL
+        If screenHeight <= 770 Then Me.WindowState = FormWindowState.Maximized Else Me.WindowState = FormWindowState.Normal
 
-        With DataGridView1
-            .Name = " DataGridView1"
-            ' .AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
-            .BorderStyle = BorderStyle.Fixed3D
+        Select Case frmJobEntry.txtGrade.Text
 
+            Case "B", "AL", "AD", "P35 AS", "P35 BS"
 
-            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader
-            '.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised
-            '.CellBorderStyle = DataGridViewCellBorderStyle.Single
-            .GridColor = Color.Black
-            .RowHeadersVisible = False
+                With DataGridView1.ColumnHeadersDefaultCellStyle
+                    .BackColor = Color.Navy
+                    .ForeColor = Color.White
+                    .Font = New Font("Microsoft Sans Serif", 18, FontStyle.Bold)
 
+                End With
 
-            .Columns(0).DefaultCellStyle.Font =
-           New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
-            .Columns(0).Width = 100
-            .Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-            .Columns(1).DefaultCellStyle.Font =
-            New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
-            .Columns(1).Width = 450
-            .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-            .Columns(2).DefaultCellStyle.Font =
-           New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
-            .Columns(2).Width = 100
-            .Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-            .Columns(3).DefaultCellStyle.Font =
-            New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
-            .Columns(3).Width = 450
-            .Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                With DataGridView1
+                    .Name = " DataGridView1"
+                    '.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+                    .RowTemplate.Height = 21.5
+                    .BorderStyle = BorderStyle.Fixed3D
 
 
-        End With
+                    ' .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader
+                    .ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised
+                    .CellBorderStyle = DataGridViewCellBorderStyle.Single
+                    .GridColor = Color.Black
+
+                    .RowHeadersVisible = False
+
+
+                    .Columns(0).DefaultCellStyle.Font =
+                   New Font("Microsoft Sans Serif", 18, FontStyle.Bold)
+                    .Columns(0).Width = 75
+                    .Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                    .Columns(1).DefaultCellStyle.Font =
+                    New Font("Microsoft Sans Serif", 18, FontStyle.Bold)
+                    .Columns(1).Width = 284
+                    .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                    .Columns(2).DefaultCellStyle.Font =
+                   New Font("Microsoft Sans Serif", 18, FontStyle.Bold)
+                    .Columns(2).Width = 75
+                    .Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                    .Columns(3).DefaultCellStyle.Font =
+                    New Font("Microsoft Sans Serif", 18, FontStyle.Bold)
+                    .Columns(3).Width = 284
+                    .Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                    .Columns(4).DefaultCellStyle.Font =
+                  New Font("Microsoft Sans Serif", 18, FontStyle.Bold)
+                    .Columns(4).Width = 75
+                    .Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                    .Columns(5).DefaultCellStyle.Font =
+                  New Font("Microsoft Sans Serif", 18, FontStyle.Bold)
+                    .Columns(5).Width = 284
+                    .Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+
+                End With
+
+            Case "P25 AS", "P30 BS"
+
+                With DataGridView1.ColumnHeadersDefaultCellStyle
+                    .BackColor = Color.Navy
+                    .ForeColor = Color.White
+                    .Font = New Font("Microsoft Sans Serif", 17, FontStyle.Bold)
+
+                End With
+
+                With DataGridView1
+                    .Name = " DataGridView1"
+                    '.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+                    .RowTemplate.Height = 21.8
+                    .BorderStyle = BorderStyle.Fixed3D
+
+
+                    ' .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader
+                    .ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised
+                    .CellBorderStyle = DataGridViewCellBorderStyle.Single
+                    .GridColor = Color.Black
+
+                    .RowHeadersVisible = False
+
+
+                    .Columns(0).DefaultCellStyle.Font =
+                   New Font("Microsoft Sans Serif", 14, FontStyle.Bold)
+                    .Columns(0).Width = 60
+                    .Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                    .Columns(1).DefaultCellStyle.Font =
+                    New Font("Microsoft Sans Serif", 14, FontStyle.Bold)
+                    .Columns(1).Width = 209
+                    .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                    .Columns(2).DefaultCellStyle.Font =
+                   New Font("Microsoft Sans Serif", 14, FontStyle.Bold)
+                    .Columns(2).Width = 60
+                    .Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                    .Columns(3).DefaultCellStyle.Font =
+                    New Font("Microsoft Sans Serif", 14, FontStyle.Bold)
+                    .Columns(3).Width = 209
+                    .Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                    .Columns(4).DefaultCellStyle.Font =
+                  New Font("Microsoft Sans Serif", 14, FontStyle.Bold)
+                    .Columns(4).Width = 60
+                    .Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                    .Columns(5).DefaultCellStyle.Font =
+                  New Font("Microsoft Sans Serif", 14, FontStyle.Bold)
+                    .Columns(5).Width = 209
+                    .Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                    .Columns(6).DefaultCellStyle.Font =
+                  New Font("Microsoft Sans Serif", 14, FontStyle.Bold)
+                    .Columns(6).Width = 60
+                    .Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(6).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                    .Columns(7).DefaultCellStyle.Font =
+                  New Font("Microsoft Sans Serif", 14, FontStyle.Bold)
+                    .Columns(7).Width = 209
+                    .Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(7).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
 
 
+
+                End With
+
+
+
+
+
+            Case "P15 AS", "P20 BS"
+
+                With DataGridView1.ColumnHeadersDefaultCellStyle
+                    .BackColor = Color.Navy
+                    .ForeColor = Color.White
+                    .Font = New Font("Microsoft Sans Serif", 10, FontStyle.Bold)
+
+                End With
+
+                With DataGridView1
+                    .Name = " DataGridView1"
+                    '.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+                    .RowTemplate.Height = 16.51
+
+                    .BorderStyle = BorderStyle.Fixed3D
+
+
+                    ' .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader
+                    .ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised
+                    .CellBorderStyle = DataGridViewCellBorderStyle.Single
+                    .GridColor = Color.Black
+
+                    .RowHeadersVisible = False
+
+
+                    .Columns(0).DefaultCellStyle.Font =
+                   New Font("Microsoft Sans Serif", 10, FontStyle.Bold)
+                    .Columns(0).Width = 51
+                    .Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+                    .Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft
+
+                    .Columns(1).DefaultCellStyle.Font =
+                    New Font("Microsoft Sans Serif", 10, FontStyle.Bold)
+                    .Columns(1).Width = 165
+                    .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+                    .Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft
+
+                    .Columns(2).DefaultCellStyle.Font =
+                   New Font("Microsoft Sans Serif", 10, FontStyle.Bold)
+                    .Columns(2).Width = 51
+                    .Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+                    .Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft
+
+                    .Columns(3).DefaultCellStyle.Font =
+                    New Font("Microsoft Sans Serif", 10, FontStyle.Bold)
+                    .Columns(3).Width = 165
+                    .Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+                    .Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft
+
+                    .Columns(4).DefaultCellStyle.Font =
+                  New Font("Microsoft Sans Serif", 10, FontStyle.Bold)
+                    .Columns(4).Width = 51
+                    .Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+                    .Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft
+
+                    .Columns(5).DefaultCellStyle.Font =
+                  New Font("Microsoft Sans Serif", 10, FontStyle.Bold)
+                    .Columns(5).Width = 165
+                    .Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+                    .Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft
+
+                    .Columns(6).DefaultCellStyle.Font =
+                  New Font("Microsoft Sans Serif", 10, FontStyle.Bold)
+                    .Columns(6).Width = 51
+                    .Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+                    .Columns(6).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft
+
+                    .Columns(7).DefaultCellStyle.Font =
+                  New Font("Microsoft Sans Serif", 10, FontStyle.Bold)
+                    .Columns(7).Width = 165
+                    .Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+                    .Columns(7).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft
+
+                    .Columns(8).DefaultCellStyle.Font =
+               New Font("Microsoft Sans Serif", 10, FontStyle.Bold)
+                    .Columns(8).Width = 51
+                    .Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+                    .Columns(8).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft
+
+                    .Columns(9).DefaultCellStyle.Font =
+                  New Font("Microsoft Sans Serif", 10, FontStyle.Bold)
+                    .Columns(9).Width = 165
+                    .Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+                    .Columns(9).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft
+
+
+                End With
+
+
+
+
+
+            Case "ReCheck"
+
+                With DataGridView1.ColumnHeadersDefaultCellStyle
+                    .BackColor = Color.Navy
+                    .ForeColor = Color.White
+                    .Font = New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
+
+                End With
+
+
+
+
+                With DataGridView1
+                .Name = " DataGridView1"
+                '.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+                .RowTemplate.Height = 41
+                .BorderStyle = BorderStyle.Fixed3D
+
+
+                ' .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader
+                '.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised
+                .CellBorderStyle = DataGridViewCellBorderStyle.Single
+                .GridColor = Color.Black
+                .RowHeadersVisible = False
+
+
+                .Columns(0).DefaultCellStyle.Font =
+               New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
+                .Columns(0).Width = 100
+                .Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                .Columns(1).DefaultCellStyle.Font =
+                New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
+                .Columns(1).Width = 450
+                .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                .Columns(2).DefaultCellStyle.Font =
+               New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
+                .Columns(2).Width = 100
+                .Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                .Columns(3).DefaultCellStyle.Font =
+                New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
+                .Columns(3).Width = 400
+                .Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+
+            End With
+
+
+
+
+
+
+
+
+
+
+
+        End Select
 
 
 
