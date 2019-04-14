@@ -1,5 +1,9 @@
-﻿Public Class frmB_AL_AD_W
+﻿
 
+
+
+
+Public Class frmB_AL_AD_W_ORIG
 
     Public packingActive = 0
     Public bcodeScan As String = ""
@@ -154,6 +158,11 @@
 
     Private Sub SetupDGV()
 
+
+
+
+
+
         With DataGridView1.ColumnHeadersDefaultCellStyle
             .BackColor = Color.Navy
             .ForeColor = Color.White
@@ -166,34 +175,36 @@
             .BorderStyle = BorderStyle.Fixed3D
 
 
-            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader
+            '.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader
             '.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised
-            '.CellBorderStyle = DataGridViewCellBorderStyle.Single
+            .CellBorderStyle = DataGridViewCellBorderStyle.Single
             .GridColor = Color.Black
             .RowHeadersVisible = False
 
 
+
+
             .Columns(0).DefaultCellStyle.Font =
-           New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
-            .Columns(0).Width = 100
+           New Font("Microsoft Sans Serif", 15, FontStyle.Bold)
+            .Columns(0).Width = 50
             .Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
             .Columns(1).DefaultCellStyle.Font =
-            New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
-            .Columns(1).Width = 450
+            New Font("Microsoft Sans Serif", 15, FontStyle.Bold)
+            .Columns(1).Width = 200
             .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
             .Columns(2).DefaultCellStyle.Font =
-           New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
-            .Columns(2).Width = 100
+           New Font("Microsoft Sans Serif", 15, FontStyle.Bold)
+            .Columns(2).Width = 50
             .Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
             .Columns(3).DefaultCellStyle.Font =
-            New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
-            .Columns(3).Width = 450
+            New Font("Microsoft Sans Serif", 15, FontStyle.Bold)
+            .Columns(3).Width = 200
             .Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
@@ -632,7 +643,3 @@
 
 
 End Class
-
-
-
-
