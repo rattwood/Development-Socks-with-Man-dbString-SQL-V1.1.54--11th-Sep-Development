@@ -1999,6 +1999,7 @@ Public Class frmJobEntry
         txtGrade.Text = AGradeToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan Job Sheet"
     End Sub
 
@@ -2007,6 +2008,7 @@ Public Class frmJobEntry
         txtGrade.Text = P15ASToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
@@ -2014,6 +2016,7 @@ Public Class frmJobEntry
         txtGrade.Text = P25ASToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
@@ -2022,6 +2025,7 @@ Public Class frmJobEntry
         txtGrade.Text = P35ASToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
@@ -2032,6 +2036,7 @@ Public Class frmJobEntry
         txtGrade.Text = WasteToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
@@ -2040,6 +2045,7 @@ Public Class frmJobEntry
         txtGrade.Text = BToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
@@ -2048,6 +2054,7 @@ Public Class frmJobEntry
         txtGrade.Text = ALToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
@@ -2056,6 +2063,7 @@ Public Class frmJobEntry
         txtGrade.Text = ADToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
@@ -2064,6 +2072,7 @@ Public Class frmJobEntry
         txtGrade.Text = P20BSToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
@@ -2072,6 +2081,7 @@ Public Class frmJobEntry
         txtGrade.Text = P30BSToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
@@ -2080,6 +2090,7 @@ Public Class frmJobEntry
         txtGrade.Text = P35BSToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
@@ -2089,6 +2100,7 @@ Public Class frmJobEntry
         txtGrade.Text = ReCheckToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
@@ -2099,6 +2111,7 @@ Public Class frmJobEntry
         txtGrade.Text = Round1ToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan First Cheese on Cart"
         stdcheck = 1
     End Sub
@@ -2108,6 +2121,7 @@ Public Class frmJobEntry
         txtGrade.Text = Round2ToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan First Cheese on Cart"
         stdcheck = 1
     End Sub
@@ -2117,6 +2131,7 @@ Public Class frmJobEntry
         txtGrade.Text = Round3ToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan First Cheese on Cart"
         stdcheck = 1
     End Sub
@@ -2126,6 +2141,7 @@ Public Class frmJobEntry
         txtGrade.Text = StdSheetToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan First Cheese on Cart"
         stdcheck = 1
     End Sub
@@ -2135,6 +2151,7 @@ Public Class frmJobEntry
         txtGrade.Text = ToolStripMenuItem1.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan Job Sheet"
     End Sub
 
@@ -2143,6 +2160,7 @@ Public Class frmJobEntry
         txtGrade.Text = Pilot6ChToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan Job Sheet"
     End Sub
 
@@ -2151,6 +2169,7 @@ Public Class frmJobEntry
         txtGrade.Text = Pilot15ChToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan Job Sheet"
     End Sub
 
@@ -2159,6 +2178,7 @@ Public Class frmJobEntry
         txtGrade.Text = Pilot20ChToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan Job Sheet"
     End Sub
 
@@ -2167,6 +2187,7 @@ Public Class frmJobEntry
         txtGrade.Text = ReCheckToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan First Cheese on Cart"
 
     End Sub
@@ -2176,6 +2197,7 @@ Public Class frmJobEntry
         txtGrade.Text = ReCheckAToolStripMenuItem4.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
+        txtOperator.Focus()
         lblScanType.Text = "Scan Job Sheet"
     End Sub
 
