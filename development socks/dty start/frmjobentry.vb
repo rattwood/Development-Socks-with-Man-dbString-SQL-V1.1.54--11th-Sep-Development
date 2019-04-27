@@ -978,6 +978,9 @@ Public Class frmJobEntry
 
         Else
             MsgBox("PRODUCT NUMBER " & varProductCode & " VALUE DOES NOT EXIST" & vbCrLf & " หมายเลขโปรดักส์นี้ไม่มมีในรายการโปรดักส์")
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Focus()
+            Me.txtLotNumber.Refresh()
             quit = 1
             Exit Sub
 
@@ -1147,6 +1150,9 @@ Public Class frmJobEntry
 
         Else
             MsgBox("PRODUCT NUMBER " & varProductCode & " THIS PRODUCT IS NOT IN THE PRODUCT LIST" & vbCrLf & " หมายเลขโปรดักส์นี้ไม่มมีในรายการโปรดักส์")
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Focus()
+            Me.txtLotNumber.Refresh()
             quit = 1
             Exit Sub
 
@@ -1429,6 +1435,9 @@ Public Class frmJobEntry
                 "หมายเลขโปรดักส์ “ & varProductCode & ” นี้ ไม่พบอยู่ในรายการสินค้า"
             DelayTM()
             Label3.Visible = False
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Focus()
+            Me.txtLotNumber.Refresh()
             quit = 1
             Exit Sub
 
@@ -1660,6 +1669,9 @@ Public Class frmJobEntry
                 "หมายเลขโปรดักส์ “ & varProductCode & ” นี้  ไม่พบอยู่ในรายการสินค้า"
             DelayTM()
             Label3.Visible = False
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Visible = True
+            Me.txtLotNumber.Focus()
             quit = 1
             Exit Sub
 
