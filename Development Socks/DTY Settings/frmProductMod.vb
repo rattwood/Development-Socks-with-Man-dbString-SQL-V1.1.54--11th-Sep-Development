@@ -1,5 +1,5 @@
 ﻿Imports System.ComponentModel  'Allows function of Datagridview sorting and filtering
-
+Imports System.Data.SqlClient
 
 Public Class frmProductMod
     Private SQL As New SQLConn
@@ -16,16 +16,17 @@ Public Class frmProductMod
     End Sub
 
     Private Sub LoadGrid()
-        SQL.ExecQuery("SELECT PRNUM,PRODNAME,MERGENUM,PRODWEIGHT,WEIGHTCODE FROM product")
+        SQL.ExecQuery("SELECT PRNUM,PRODNAME,MERGENUM,PRODWEIGHT,WEIGHTCODE FROM product order by prnum")
         If SQL.RecordCount > 0 Then
 
 
             DGVProduct.DataSource = SQL.SQLDS.Tables(0)
             Dim dgvrowcnt = DGVProduct.Rows.Count
             DGVProduct.CurrentCell = DGVProduct.Rows(dgvrowcnt - 1).Cells(0)
-            DGVProduct.Sort(DGVProduct.Columns("PRNUM"), ListSortDirection.Ascending)  'sorts On cone number
+            ' DGVProduct.Sort(DGVProduct.Columns("PRNUM"), ListSortDirection.Ascending)  'sorts On cone number
 
             SQL.SQLDA.UpdateCommand = New SqlClient.SqlCommandBuilder(SQL.SQLDA).GetUpdateCommand
+
         End If
 
 
