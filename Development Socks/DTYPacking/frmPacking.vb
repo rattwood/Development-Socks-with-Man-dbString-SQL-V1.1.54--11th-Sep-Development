@@ -454,7 +454,7 @@ Public Class frmPacking
                     Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.Red      'Wrong Cone scanned
                     DGVPakingA.Rows(i - 1).Cells("PSORTERROR").Value = psorterror
                     DGVPakingA.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
-                    DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "14"
+                    ' DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "14"
                     DGVPakingA.Rows(i - 1).Cells("CARTENDTM").Value = today
 
                     'UPDATE ALL CHEESE ON CART AS PROCESSED TODAY FOR DAILY PACKING REPORT TO WORK
@@ -464,9 +464,14 @@ Public Class frmPacking
                     '        If My.Settings.chkUseColour = True Then  DGVPakingA.Rows((rows - 1) - coneNumOffset).Cells("PACKENDTM").Value = varCartEndTime 'PACKING CHECK END TIME
                     '    Next
                     'End If
+                    Label1.Visible = True
+                    Label1.Text = "You Have scanned a Cheese that is not 'GRADE A'"
+                    DelayTM()
+                    Label1.Visible = False
 
-                    Me.Hide()
-                    frmRemoveCone.Show()
+
+                    'Me.Hide()
+                    'frmRemoveCone.Show()
                     psorterror = 0
                     curcone = 0
                     Continue For
