@@ -41,8 +41,8 @@ Public Class frmPackTodayUpdate
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
         mycount = xlTodyWorkbook.Worksheets.Count
-        createBarcode()
         boxCount = mycount
+        createBarcode()
 
         Dim totCount As Integer = 0
         'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
