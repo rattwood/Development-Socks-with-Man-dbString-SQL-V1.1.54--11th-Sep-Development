@@ -53,6 +53,9 @@ Public Class frmPacking
     Dim fltconeNum As String
     Dim csvRowNum As String
 
+    Public saveJob As Integer = 0
+    Public finJob As Integer
+
 
 
 
@@ -515,11 +518,7 @@ Public Class frmPacking
     End Sub
 
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        'frmPackReport.Hide()
-
-    End Sub
 
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
@@ -536,7 +535,7 @@ Public Class frmPacking
 
     Public Sub endCheck()
 
-        If toAllocatedCount = allocatedCount Then
+        If toAllocatedCount = allocatedCount Or saveJob = 1 Or finJob = 1 Then
             curcone = 0
             Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
             '**************************************************************************************************************
@@ -555,6 +554,7 @@ Public Class frmPacking
             frmPackRepMain.Close()
             UpdateDatabase()
             Me.Cursor = System.Windows.Forms.Cursors.Default
+            saveJob = 0
             frmJobEntry.Show()
             frmJobEntry.txtLotNumber.Clear()
             frmJobEntry.txtLotNumber.Focus()
@@ -621,9 +621,24 @@ Public Class frmPacking
 
     End Sub
 
-    Private Sub btnCone32_Click(sender As Object, e As EventArgs) Handles btnCone32.Click
+
+
+    Private Sub btnSaveJob_Click(sender As Object, e As EventArgs) Handles btnSaveJob.Click
+
+        saveJob = 1
+        endCheck()
 
     End Sub
+
+    Private Sub btnFinJob_Click(sender As Object, e As EventArgs) Handles btnFinJob.Click
+
+        finJob = 1
+        endCheck()
+
+
+    End Sub
+
+
 
     'THIS LOOKS FOR ENTER key to be pressed or received via barcode
     Private Sub frmJobEntry_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown

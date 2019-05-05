@@ -61,13 +61,14 @@ Partial Class frmPacking
         Me.btnCone2 = New System.Windows.Forms.Button()
         Me.btnCone1 = New System.Windows.Forms.Button()
         Me.btnCone4 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnSaveJob = New System.Windows.Forms.Button()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.btnDefect = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtboxTotal = New System.Windows.Forms.TextBox()
         Me.lblCheese = New System.Windows.Forms.Label()
         Me.DGVPakingA = New System.Windows.Forms.DataGridView()
+        Me.btnFinJob = New System.Windows.Forms.Button()
         CType(Me.DGVPakingA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -580,25 +581,27 @@ Partial Class frmPacking
         Me.btnCone4.Text = "4"
         Me.btnCone4.UseVisualStyleBackColor = False
         '
-        'Button1
+        'btnSaveJob
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Button1.Location = New System.Drawing.Point(400, 804)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(372, 43)
-        Me.Button1.TabIndex = 170
-        Me.Button1.Text = "Continue"
-        Me.Button1.UseVisualStyleBackColor = False
-        Me.Button1.Visible = False
+        Me.btnSaveJob.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.btnSaveJob.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveJob.Location = New System.Drawing.Point(299, 763)
+        Me.btnSaveJob.Name = "btnSaveJob"
+        Me.btnSaveJob.Size = New System.Drawing.Size(197, 84)
+        Me.btnSaveJob.TabIndex = 170
+        Me.btnSaveJob.Text = "SAVE JOB"
+        Me.btnSaveJob.UseVisualStyleBackColor = False
         '
         'btnBack
         '
+        Me.btnBack.BackColor = System.Drawing.Color.Red
+        Me.btnBack.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBack.Location = New System.Drawing.Point(31, 767)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(197, 80)
         Me.btnBack.TabIndex = 172
-        Me.btnBack.Text = "Go Back"
-        Me.btnBack.UseVisualStyleBackColor = True
+        Me.btnBack.Text = "CANCEL"
+        Me.btnBack.UseVisualStyleBackColor = False
         '
         'btnDefect
         '
@@ -652,24 +655,36 @@ Partial Class frmPacking
         Me.DGVPakingA.AllowUserToAddRows = False
         Me.DGVPakingA.AllowUserToDeleteRows = False
         Me.DGVPakingA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVPakingA.Location = New System.Drawing.Point(308, 777)
+        Me.DGVPakingA.Location = New System.Drawing.Point(778, 833)
         Me.DGVPakingA.Name = "DGVPakingA"
         Me.DGVPakingA.Size = New System.Drawing.Size(757, 220)
         Me.DGVPakingA.TabIndex = 178
         Me.DGVPakingA.Visible = False
+        '
+        'btnFinJob
+        '
+        Me.btnFinJob.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.btnFinJob.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFinJob.Location = New System.Drawing.Point(561, 765)
+        Me.btnFinJob.Name = "btnFinJob"
+        Me.btnFinJob.Size = New System.Drawing.Size(197, 84)
+        Me.btnFinJob.TabIndex = 179
+        Me.btnFinJob.Text = "FINISH JOB"
+        Me.btnFinJob.UseVisualStyleBackColor = False
         '
         'frmPacking
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1584, 861)
+        Me.Controls.Add(Me.btnFinJob)
         Me.Controls.Add(Me.DGVPakingA)
         Me.Controls.Add(Me.txtboxTotal)
         Me.Controls.Add(Me.lblCheese)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnDefect)
         Me.Controls.Add(Me.btnBack)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnSaveJob)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.lblJobNum)
         Me.Controls.Add(Me.txtCartNum)
@@ -756,11 +771,12 @@ Partial Class frmPacking
     Friend WithEvents btnCone2 As Button
     Friend WithEvents btnCone1 As Button
     Friend WithEvents btnCone4 As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnSaveJob As Button
     Friend WithEvents btnBack As Button
     Friend WithEvents btnDefect As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents txtboxTotal As TextBox
     Friend WithEvents lblCheese As Label
     Friend WithEvents DGVPakingA As DataGridView
+    Friend WithEvents btnFinJob As Button
 End Class

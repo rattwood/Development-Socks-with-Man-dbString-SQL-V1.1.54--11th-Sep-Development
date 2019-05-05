@@ -5,6 +5,8 @@ Imports Excel = Microsoft.Office.Interop.Excel
 Public Class frmPackTodayUpdate
 
     Dim MyTodyExcel As New Excel.Application
+    Dim xlTodyWorkbook As Excel.Workbook
+    Dim xlTodysheets As Excel.Worksheet
     Dim xlRowCount As Integer
     Dim mycount As Integer = 0
     Dim boxCount As Integer = 0
@@ -35,8 +37,8 @@ Public Class frmPackTodayUpdate
         '
 
 
-        Dim xlTodyWorkbook As Excel.Workbook
-        Dim xlTodysheets As Excel.Worksheet
+        'Dim xlTodyWorkbook As Excel.Workbook
+        'Dim xlTodysheets As Excel.Worksheet
 
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
@@ -179,8 +181,11 @@ Public Class frmPackTodayUpdate
 
                                 MyTodyExcel.DisplayAlerts = True
 
+                                'Call to auto print full sheeet on default printer
+                                printOut()
 
 
+                                'Create new blank worksheet in Excel
                                 xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                                 CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
@@ -203,6 +208,50 @@ Public Class frmPackTodayUpdate
                             End If
                         End If
                     Next
+
+                    'check if this is an early finish and if it is print part sheet
+                    If frmPacking.saveJob = 1 Then
+                        printOut()
+                        frmPacking.saveJob = 0
+                    End If
+
+                    'CHECK for early finish to job print and create new black sheet ready for next cart to be scanned in
+                    If frmPacking.finJob = 1 Then
+                        Dim tmpsaveName As String
+
+                        tmpsaveName = (frmPackRepMain.finPath & "\" & frmPackRepMain.sheetName & "_" & mycount & ".xlsx")
+                        MyTodyExcel.DisplayAlerts = False
+
+
+                        xlTodyWorkbook.Sheets(mycount).SaveAs(Filename:=tmpsaveName, FileFormat:=51)
+
+                        MyTodyExcel.DisplayAlerts = True
+
+                        'Call to auto print full sheeet on default printer
+                        printOut()
+
+
+                        'Create new blank worksheet in Excel
+                        xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
+                        CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
+
+                        MyTodyExcel.Cells(7, 4) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
+                        'Product Code
+                        MyTodyExcel.Cells(7, 5) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
+                        'Packer Name
+                        MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
+
+                        boxCount = boxCount + 1
+                        createBarcode()
+                        MyTodyExcel.Cells(1, 4) = SheetCodeString
+
+                        For x = 13 To 102
+                            MyTodyExcel.Cells(x, 4) = "" 'Clear the contents of cone cells
+                        Next
+
+                        nfree = 13
+
+                    End If
 
                 Catch ex As Exception
                     'Write error to Log File
@@ -396,6 +445,35 @@ Public Class frmPackTodayUpdate
 
     End Sub
 
+
+    Public Sub printOut()
+
+        'Print out finished work sheet
+        Try
+
+            Dim defPrinter As String
+            defPrinter = MyTodyExcel.ActivePrinter
+
+
+            'Printout results of Pack Form
+            xlTodyWorkbook.PrintOutEx(
+                From:=boxCount,
+                To:=boxCount,
+                Copies:=1,
+                Preview:=False,
+                Collate:=True,
+                IgnorePrintAreas:=True)
+
+            MyTodyExcel.ActivePrinter = defPrinter
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            writeerrorLog.writelog("'A' Excel Print", ex.Message, True, "System_Fault")
+            writeerrorLog.writelog("'A' Excel Print", ex.ToString, True, "System_Fault")
+        End Try
+
+
+    End Sub
 
     Public Sub TodayUpdateB_AL_AD()
 
