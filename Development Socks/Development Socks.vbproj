@@ -268,12 +268,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DTY START\writeError.vb" />
-    <Compile Include="DTYPacking\frmbackupRechkAdata.Designer.vb">
-      <DependentUpon>frmbackupRechkAdata.vb</DependentUpon>
-    </Compile>
-    <Compile Include="DTYPacking\frmbackupRechkAdata.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="DTYPacking\frmExChangeCone.Designer.vb">
       <DependentUpon>frmExChangeCone.vb</DependentUpon>
     </Compile>
@@ -326,12 +320,6 @@
       <DependentUpon>frmB_AL_AD_W.vb</DependentUpon>
     </Compile>
     <Compile Include="DTYPacking\frmB_AL_AD_W.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmcart1backup.Designer.vb">
-      <DependentUpon>frmcart1backup.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmcart1backup.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DTY CART Sort and Colour\frmStdCreate.Designer.vb">
@@ -502,9 +490,6 @@
     <EmbeddedResource Include="DTY Reports\DTY Def Report\DGVDefReport.resx">
       <DependentUpon>DGVDefReport.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DTYPacking\frmbackupRechkAdata.resx">
-      <DependentUpon>frmbackupRechkAdata.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DTYPacking\frmExChangeCone.resx">
       <DependentUpon>frmExChangeCone.vb</DependentUpon>
     </EmbeddedResource>
@@ -528,9 +513,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DTYPacking\frmB_AL_AD_W.resx">
       <DependentUpon>frmB_AL_AD_W.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmcart1backup.resx">
-      <DependentUpon>frmcart1backup.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DTY CART Sort and Colour\frmStdCreate.resx">
       <DependentUpon>frmStdCreate.vb</DependentUpon>

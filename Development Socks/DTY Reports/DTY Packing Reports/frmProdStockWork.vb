@@ -36,7 +36,8 @@ Public Class frmProdStockWork
     Dim prodName As String
     Dim prodnum As String
     Dim MyWRExcel As New Excel.Application
-
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
 
 
 
@@ -226,6 +227,9 @@ Public Class frmProdStockWork
             workbookWR.SaveAs(Filename:=savename, FileFormat:=51)
 
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
 
             MsgBox(ex.Message)
             workbookWR.Close()
@@ -245,6 +249,9 @@ Public Class frmProdStockWork
             workbookWR.Close(SaveChanges:=False)
             MyWRExcel.DisplayAlerts = True
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
         End Try
 
@@ -452,7 +459,9 @@ Public Class frmProdStockWork
             workbookWR.SaveAs(Filename:=savename, FileFormat:=51)
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
             workbookWR.Close()
             MyWRExcel.Quit()
@@ -473,6 +482,9 @@ Public Class frmProdStockWork
             workbookWR.Close(SaveChanges:=False)
             MyWRExcel.DisplayAlerts = True
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
         End Try
 

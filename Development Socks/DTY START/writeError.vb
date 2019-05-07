@@ -23,6 +23,7 @@
             My.Computer.FileSystem.WriteAllText(My.Settings.dirLogs & "/" & logname & ".html", data_con & vbCrLf, True)
 
         Catch ex As Exception
+
         End Try
 
     End Sub

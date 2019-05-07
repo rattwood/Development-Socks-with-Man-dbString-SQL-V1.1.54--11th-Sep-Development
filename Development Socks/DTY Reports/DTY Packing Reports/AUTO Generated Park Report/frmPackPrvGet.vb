@@ -7,6 +7,8 @@ Public Class frmPackPrvGet
     'Dim MyPrevExcel As New Excel.Application
     Public nfree As Integer
     Public ncfree As Integer
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
 
     Public Sub PrvGet()
 
@@ -263,6 +265,9 @@ Public Class frmPackPrvGet
             'Close template file but do not save updates to it
             xpPrevWoorkbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
         End Try
 

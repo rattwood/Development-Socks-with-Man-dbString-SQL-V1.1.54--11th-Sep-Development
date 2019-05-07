@@ -487,12 +487,11 @@ Public Class frmPacking
             Next
         Catch ex As Exception
 
-
-            MsgBox("Barcode Sacn Error " & vbNewLine & ex.Message)
-
             'Write error to Log File
             writeerrorLog.writelog("Scan Error", ex.Message, False, "System Fault")
             writeerrorLog.writelog("Scan Error", ex.ToString, False, "System Fault")
+
+            MsgBox("Barcode Sacn Error " & vbNewLine & ex.Message)
             txtConeBcode.Clear()
             txtConeBcode.Refresh()
             txtConeBcode.Focus()
@@ -589,6 +588,9 @@ Public Class frmPacking
 
             End If
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("db Update Error", ex.Message, False, "User Fault")
+            writeerrorLog.writelog("db Update Error", ex.ToString, False, "User Fault")
 
             MsgBox("Update Error: " & vbNewLine & ex.Message)
         End Try

@@ -36,7 +36,8 @@ Public Class DGVDefReport
     Dim FileInName As String
     Dim MyExcel As New Excel.Application
 
-
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
 
 
     Private Sub DGVDefReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -324,6 +325,9 @@ Public Class DGVDefReport
             workbook.SaveAs(Filename:=savename, FileFormat:=51)
 
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
 
             MsgBox(ex.Message)
             workbook.Close()
@@ -342,6 +346,9 @@ Public Class DGVDefReport
             workbook.Close(SaveChanges:=False)
             MyExcel.DisplayAlerts = True
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
         End Try
 

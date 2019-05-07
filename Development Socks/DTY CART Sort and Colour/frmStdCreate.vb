@@ -24,6 +24,9 @@ Public Class frmStdCreate
 
     Dim dgvRows As Integer
 
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
+
     Private Sub frmStdCreate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         txtConeBcode.Focus()
@@ -345,6 +348,9 @@ Public Class frmStdCreate
 
             End If
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("db Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("db Update Error", ex.ToString, False, "System Fault")
 
             MsgBox("Update Error: " & vbNewLine & ex.Message)
         End Try

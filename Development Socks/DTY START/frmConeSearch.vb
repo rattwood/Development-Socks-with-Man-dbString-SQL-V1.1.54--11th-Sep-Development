@@ -6,6 +6,9 @@ Public Class frmConeSearch
     Dim jobSearchFlag As Integer
     Dim coneSearchFlag As Integer
 
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
+
     Private Sub frmConeSearch_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         txtBoxJob.Text = ""
@@ -71,6 +74,9 @@ Public Class frmConeSearch
             End If
 
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Job Search Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Job Search Error", ex.ToString, False, "System Fault")
             MsgBox(ex.ToString)
             Me.txtBoxJob.Clear()
             Me.btnJobSearch.Enabled = False
@@ -102,6 +108,9 @@ Public Class frmConeSearch
                 Exit Sub
             End If
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Cone Search Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Cone Search Error", ex.ToString, False, "System Fault")
             MsgBox(ex.ToString)
             Me.txtBoxJob.Clear()
             Me.btnJobSearch.Enabled = False
@@ -357,6 +366,9 @@ Public Class frmConeSearch
         Try
             datestring = dbDate.ToString("dd/MM/yyyy")
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Date Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Date Error", ex.ToString, False, "System Fault")
             MsgBox("Date Missing in Database")
         End Try
 

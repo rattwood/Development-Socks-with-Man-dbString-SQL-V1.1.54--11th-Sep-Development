@@ -59,11 +59,12 @@ Public Class frmSTDColChk
     Public coneCount As Integer
     Public coneState As String
 
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
 
 
 
-
-        Private SQL As New SQLConn
+    Private SQL As New SQLConn
 
 
 
@@ -507,6 +508,9 @@ Public Class frmSTDColChk
             End If
 
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
         End Try
 
@@ -519,6 +523,9 @@ Public Class frmSTDColChk
             ReCheckworkbook.SaveAs(Filename:=savename, FileFormat:=51)
 
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
 
             MsgBox(ex.Message)
 
@@ -528,6 +535,9 @@ Public Class frmSTDColChk
             'Close template file but do not save updates to it
             ReCheckworkbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
         End Try
 
@@ -633,6 +643,9 @@ Public Class frmSTDColChk
 
             End If
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("db Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("db Update Error", ex.ToString, False, "System Fault")
 
             MsgBox("Update Error: " & vbNewLine & ex.Message)
         End Try

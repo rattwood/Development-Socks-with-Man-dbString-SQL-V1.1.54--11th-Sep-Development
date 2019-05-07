@@ -11,7 +11,8 @@ Public Class frmPrintCartReport
     Dim FileInName As String
     Dim MyExcel As New Excel.Application
     Dim abortPrint As Integer = 0
-
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
 
 
     Public Sub prtCartSheet()
@@ -383,6 +384,9 @@ Public Class frmPrintCartReport
         Catch ex As Exception
             Me.Cursor = System.Windows.Forms.Cursors.Default
             Label1.Visible = False
+            'Write error to Log File
+            writeerrorLog.writelog("Fault Report Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Fault Report Save Error", ex.ToString, False, "System Fault")
 
             MsgBox(ex.Message)
 
@@ -396,6 +400,10 @@ Public Class frmPrintCartReport
         Catch ex As Exception
             Me.Cursor = System.Windows.Forms.Cursors.Default
             Label1.Visible = False
+            'Write error to Log File
+            writeerrorLog.writelog("Fault Report Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Fault Report Close Error", ex.ToString, False, "System Fault")
+
 
             MsgBox(ex.Message)
         End Try
@@ -440,7 +448,9 @@ Public Class frmPrintCartReport
             stream = file.Open(FileMode.Open, FileAccess.ReadWrite, FileShare.None)
             stream.Close()
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Open Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Open Error", ex.ToString, False, "System Fault")
 
             ' do something here, either close the file if you have a handle, show a msgbox, retry  or as a last resort terminate the process - which could cause corruption and lose data
             MsgBox("Excel file is Open, Please close and retry")

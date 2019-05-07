@@ -22,7 +22,10 @@ Public Class frmPackSort
         Dim short1, short2, short3, short4, short5, short6, short7, short8, short9, short10, short11, short12, short13, short14, short15, short16 As String
         Dim short17, short18, short19, short20, short21, short22, short23, short24, short25, short26, short27, short28, short29, short30, short31, short32 As String
 
-        Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
             If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
             frmDGV.DGVdata.ClearSelection()
             frmJobEntry.Show()
@@ -1193,8 +1196,10 @@ Public Class frmPackSort
 
                 End If
             Catch ex As Exception
-
-                bill = "Update Error: " & vbNewLine & ex.Message
+            'Write error to Log File
+            writeerrorLog.writelog("db Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("db Update Error", ex.ToString, False, "System Fault")
+            bill = "Update Error: " & vbNewLine & ex.Message
 
                 MsgBox(bill)
             End Try

@@ -23,6 +23,9 @@ Public Class SQLConn
     Public RecordCount As Integer
     Public Exception As String
 
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
+
     Public Sub Newdb()
 
     End Sub
@@ -62,7 +65,8 @@ Public Class SQLConn
             RecordCount = SQLDA.Fill(SQLDS)
 
         Catch ex As Exception
-
+            writeerrorLog.writelog("SQL Error", ex.Message, False, "System_Fault")
+            writeerrorLog.writelog("SQL Error", ex.ToString, False, "System_Fault")
             Exception = "ExecQuery Error: " & vbNewLine & ex.Message
             MsgBox(Exception)
 

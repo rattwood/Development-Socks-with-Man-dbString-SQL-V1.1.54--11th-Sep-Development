@@ -47,7 +47,8 @@ Public Class frmSortReCheck
     Public coneCount As Integer
     Public coneState As String
 
-
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
 
 
 
@@ -1426,6 +1427,9 @@ Public Class frmSortReCheck
             End If
 
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
         End Try
 
@@ -1439,6 +1443,10 @@ Public Class frmSortReCheck
 
         Catch ex As Exception
 
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save  Error", ex.ToString, False, "System Fault")
+
             MsgBox(ex.Message)
 
         End Try
@@ -1447,6 +1455,10 @@ Public Class frmSortReCheck
             'Close template file but do not save updates to it
             ReCheckworkbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
+
             MsgBox(ex.Message)
         End Try
 
@@ -2880,6 +2892,9 @@ Public Class frmSortReCheck
 
             End If
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("db Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("db Update Error", ex.ToString, False, "System Fault")
 
             MsgBox("Update Error: " & vbNewLine & ex.Message)
         End Try

@@ -3,7 +3,8 @@ Imports System.Data.SqlClient
 
 Public Class frmProductMod
     Private SQL As New SQLConn
-
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
 
 
     Private Sub frmProductMod_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -40,6 +41,9 @@ Public Class frmProductMod
             'REFRESH DATAGRID
             LoadGrid()
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Product Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Product Update Error", ex.ToString, False, "System Fault")
             MessageBox.Show(ex.Message.ToString)
         End Try
 

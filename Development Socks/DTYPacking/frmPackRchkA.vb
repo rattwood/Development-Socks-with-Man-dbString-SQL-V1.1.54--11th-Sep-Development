@@ -119,11 +119,11 @@ Public Class frmPackRchkA
 
         Catch ex As Exception
 
-            MsgBox("DRUM BarCode Is Not Valid " & vbNewLine & ex.Message)
-
             'Write error to Log File
             writeerrorLog.writelog("PAckRchk Load error", ex.Message, False, "System Fault")
             writeerrorLog.writelog("Drum Scan Error", ex.ToString, False, "System Fault")
+
+            MsgBox("DRUM BarCode Is Not Valid " & vbNewLine & ex.Message)
 
         End Try
 

@@ -218,6 +218,9 @@ Public Class frmPackReport
             End If
 
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Create Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Create Error", ex.ToString, False, "System Fault")
 
             MsgBox(ex.ToString)
 
@@ -371,7 +374,9 @@ Public Class frmPackReport
             Next
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("Parck Report Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Pack Report Error", ex.ToString, False, "System Fault")
             MsgBox(ex.ToString)
 
         End Try

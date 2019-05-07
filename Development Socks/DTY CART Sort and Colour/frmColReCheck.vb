@@ -44,7 +44,8 @@ Public Class frmColReCheck
     Public coneCount As Integer
     Public coneState As String
 
-
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
 
 
 
@@ -525,6 +526,10 @@ Public Class frmColReCheck
             End If
 
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Scan Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Scan Error", ex.ToString, False, "System Fault")
+
             MsgBox(ex.Message)
         End Try
 
@@ -538,6 +543,9 @@ Public Class frmColReCheck
 
         Catch ex As Exception
 
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File SAve Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
 
         End Try
@@ -546,6 +554,10 @@ Public Class frmColReCheck
             'Close template file but do not save updates to it
             ReCheckworkbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
+
             MsgBox(ex.Message)
         End Try
 
@@ -728,6 +740,9 @@ Public Class frmColReCheck
 
             End If
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("db Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("db Update Error", ex.ToString, False, "System Fault")
 
             MsgBox("Update Error: " & vbNewLine & ex.Message)
         End Try

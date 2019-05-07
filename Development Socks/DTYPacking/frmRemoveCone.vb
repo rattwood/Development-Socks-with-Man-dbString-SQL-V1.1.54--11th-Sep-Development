@@ -84,10 +84,11 @@ Public Class frmRemoveCone
 
 
         Catch ex As Exception
+            writeerrorLog.writelog("Barcode Error", ex.Message, False, "System_Fault")
+            writeerrorLog.writelog("Barcode Error", ex.ToString, False, "System_Fault")
 
             MsgBox("Remove cannot find Barcode" & vbNewLine & ex.Message)
-            writeerrorLog.writelog("Remove cannot find Barcode", ex.Message, False, "System_Fault")
-            writeerrorLog.writelog("Remove cannot find Barcode", ex.ToString, False, "System_Fault")
+
 
             Me.TextBox1.Clear()
             Me.TextBox1.Focus()

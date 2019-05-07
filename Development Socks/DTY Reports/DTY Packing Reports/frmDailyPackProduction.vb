@@ -45,6 +45,9 @@ Public Class frmDailyPackProduction
     Dim reCheckCount As Integer = 0 'COUNT OF ReCHECK CONES
     Dim startDate As Date
 
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
+
 
 
     Private Sub MonthCalendar1_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
@@ -275,6 +278,10 @@ Public Class frmDailyPackProduction
             workbookPR.SaveAs(Filename:=savename, FileFormat:=51)
 
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
+
             MsgBox(ex.Message)
             workbookPR.Close()
             DGVJobsData.Dispose()
@@ -289,12 +296,15 @@ Public Class frmDailyPackProduction
             Exit Sub
         End Try
 
-            Try
+        Try
             'Close template file but do not save updates to it
 
             workbookPR.Close(SaveChanges:=False)
             MyPRExcel.DisplayAlerts = True
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
 
         End Try

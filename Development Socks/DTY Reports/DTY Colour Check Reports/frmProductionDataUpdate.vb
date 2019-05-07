@@ -71,7 +71,8 @@ Public Class frmProductionDataUpdate
     Dim xlD1ColIdx As Integer
     Dim XLD1NCFree As Integer
     Dim colLetter As String
-
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
 
 
 
@@ -116,6 +117,9 @@ Public Class frmProductionDataUpdate
             LRecordCount = LDA.Fill(LDS)
 
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("SQL Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("SQL Error", ex.ToString, False, "System Fault")
 
             LException = "ExecQuery Error: " & vbNewLine & ex.Message
             MsgBox(LException)
@@ -490,6 +494,10 @@ Public Class frmProductionDataUpdate
             MyUpdateExcel.DisplayAlerts = False
             xlUpdateWorkbook.SaveAs(Filename:=fileOpenName, FileFormat:=51)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
+
             MsgBox(ex.Message)
         End Try
 
@@ -760,6 +768,9 @@ Public Class frmProductionDataUpdate
             MyCreateExcel.DisplayAlerts = False
             xlCreateWorkbook.SaveAs(Filename:=fileOpenName, FileFormat:=51)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
         End Try
 
@@ -773,6 +784,9 @@ Public Class frmProductionDataUpdate
             MyCreateExcel.DisplayAlerts = False
             xlCreateWorkbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
         End Try
 

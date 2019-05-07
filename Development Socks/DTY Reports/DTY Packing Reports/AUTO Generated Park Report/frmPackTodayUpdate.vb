@@ -420,7 +420,9 @@ Public Class frmPackTodayUpdate
                     Next
 
                 Catch ex As Exception
-
+                    'Write error to Log File
+                    writeerrorLog.writelog("ReCheck A Error", ex.Message, False, "System Fault")
+                    writeerrorLog.writelog("ReCheck A Error", ex.ToString, False, "System Fault")
                     MsgBox(ex.ToString)
 
                 End Try
@@ -438,7 +440,9 @@ Public Class frmPackTodayUpdate
             xlTodyWorkbook.SaveAs(Filename:=frmPackRepMain.savename, FileFormat:=51)
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
 
         End Try
@@ -447,6 +451,9 @@ Public Class frmPackTodayUpdate
             'Close template file but do not save updates to it
             xlTodyWorkbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
         End Try
 
@@ -665,7 +672,9 @@ Public Class frmPackTodayUpdate
             Next
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("Excel Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Excel Update Error", ex.ToString, False, "System Fault")
             MsgBox(ex.ToString)
 
         End Try
@@ -677,7 +686,9 @@ Public Class frmPackTodayUpdate
             xlTodyWorkbook.SaveAs(Filename:=frmPackRepMain.savename, FileFormat:=51)
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
 
         End Try
@@ -686,6 +697,9 @@ Public Class frmPackTodayUpdate
             'Close template file but do not save updates to it
             xlTodyWorkbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
         End Try
 
@@ -924,6 +938,9 @@ Public Class frmPackTodayUpdate
 
         Catch ex As Exception
 
+            'Write error to Log File
+            writeerrorLog.writelog("File Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Update Error", ex.ToString, False, "System Fault")
             MsgBox(ex.ToString)
 
         End Try
@@ -935,7 +952,9 @@ Public Class frmPackTodayUpdate
             xlTodyWorkbook.SaveAs(Filename:=frmPackRepMain.savename, FileFormat:=51)
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
 
         End Try
@@ -944,6 +963,9 @@ Public Class frmPackTodayUpdate
             'Close template file but do not save updates to it
             xlTodyWorkbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
         End Try
 
@@ -1178,7 +1200,9 @@ Public Class frmPackTodayUpdate
             Next
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Update Error", ex.ToString, False, "System Fault")
             MsgBox(ex.ToString)
 
         End Try
@@ -1190,7 +1214,9 @@ Public Class frmPackTodayUpdate
             xlTodyWorkbook.SaveAs(Filename:=frmPackRepMain.savename, FileFormat:=51)
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
 
         End Try
@@ -1199,6 +1225,9 @@ Public Class frmPackTodayUpdate
             'Close template file but do not save updates to it
             xlTodyWorkbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
         End Try
 
@@ -1465,7 +1494,9 @@ Public Class frmPackTodayUpdate
             Next
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Update Error", ex.ToString, False, "System Fault")
             MsgBox(ex.ToString)
 
         End Try
@@ -1477,7 +1508,9 @@ Public Class frmPackTodayUpdate
             xlTodyWorkbook.SaveAs(Filename:=frmPackRepMain.savename, FileFormat:=51)
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
 
         End Try
@@ -1486,6 +1519,9 @@ Public Class frmPackTodayUpdate
             'Close template file but do not save updates to it
             xlTodyWorkbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
         End Try
 
@@ -1658,7 +1694,9 @@ Public Class frmPackTodayUpdate
             Next
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Update Error", ex.ToString, False, "System Fault")
             MsgBox(ex.ToString)
 
         End Try
@@ -1670,7 +1708,9 @@ Public Class frmPackTodayUpdate
             xlTodyWorkbook.SaveAs(Filename:=frmPackRepMain.savename, FileFormat:=51)
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
 
         End Try
@@ -1679,6 +1719,9 @@ Public Class frmPackTodayUpdate
             'Close template file but do not save updates to it
             xlTodyWorkbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
         End Try
 
@@ -1969,7 +2012,9 @@ Public Class frmPackTodayUpdate
             Next
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Update Error", ex.ToString, False, "System Fault")
             MsgBox(ex.ToString)
 
         End Try
@@ -1981,7 +2026,9 @@ Public Class frmPackTodayUpdate
             xlTodyWorkbook.SaveAs(Filename:=frmPackRepMain.savename, FileFormat:=51)
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
 
         End Try
@@ -1990,6 +2037,9 @@ Public Class frmPackTodayUpdate
             'Close template file but do not save updates to it
             xlTodyWorkbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
         End Try
 
@@ -2218,7 +2268,9 @@ Public Class frmPackTodayUpdate
             Next
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Update Error", ex.ToString, False, "System Fault")
             MsgBox(ex.ToString)
 
         End Try
@@ -2230,7 +2282,9 @@ Public Class frmPackTodayUpdate
             xlTodyWorkbook.SaveAs(Filename:=frmPackRepMain.savename, FileFormat:=51)
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
 
         End Try
@@ -2239,6 +2293,9 @@ Public Class frmPackTodayUpdate
             'Close template file but do not save updates to it
             xlTodyWorkbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
         End Try
 
@@ -2398,6 +2455,9 @@ Public Class frmPackTodayUpdate
             Next
         Catch ex As Exception
 
+            'Write error to Log File
+            writeerrorLog.writelog("File Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Update Error", ex.ToString, False, "System Fault")
             MsgBox(ex.ToString)
 
         End Try
@@ -2410,7 +2470,9 @@ Public Class frmPackTodayUpdate
             xlTodyWorkbook.SaveAs(Filename:=frmPackRepMain.savename, FileFormat:=51)
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
 
         End Try
@@ -2419,6 +2481,9 @@ Public Class frmPackTodayUpdate
             'Close template file but do not save updates to it
             xlTodyWorkbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
             MsgBox("Please make sure excel does not have any open Excel sheets. Close and then select Finish to retry")
             MyTodyExcel.Quit()
@@ -2584,7 +2649,9 @@ Public Class frmPackTodayUpdate
             Next
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Update Error", ex.ToString, False, "System Fault")
             MsgBox(ex.ToString)
 
         End Try
@@ -2597,7 +2664,9 @@ Public Class frmPackTodayUpdate
             xlTodyWorkbook.SaveAs(Filename:=frmPackRepMain.savename, FileFormat:=51)
 
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
 
         End Try
@@ -2606,6 +2675,10 @@ Public Class frmPackTodayUpdate
             'Close template file but do not save updates to it
             xlTodyWorkbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
+
             MsgBox(ex.Message)
             MsgBox("Please make sure excel does not have any open Excel sheets. Close then and then select Finish to retry")
             MyTodyExcel.Quit()

@@ -32,6 +32,8 @@ Public Class frmEODReport
     Dim myCount As Integer = 0
 
     Dim MyExcel As New Excel.Application
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
 
     Private Sub EODReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.KeyPreview = True  'Allows us to look for advace character from barcode
@@ -64,6 +66,10 @@ Public Class frmEODReport
             End If
 
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Bcode Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Bcode Error", ex.ToString, False, "System Fault")
+
             MsgBox("BarCcode Is Not Valid")
             Me.txtLotNumber.Clear()
             Me.txtLotNumber.Focus()
@@ -180,7 +186,9 @@ Public Class frmEODReport
                 Exit Sub
             End If
         Catch ex As Exception
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Error", ex.ToString, False, "System Fault")
             MsgBox(ex.ToString)
 
 
@@ -191,6 +199,9 @@ Public Class frmEODReport
 
             workbook.Close(SaveChanges:=False)
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
 
         End Try
@@ -260,7 +271,9 @@ Public Class frmEODReport
         Catch ex As Exception
 
             ' do something here, either close the file if you have a handle, show a msgbox, retry  or as a last resort terminate the process - which could cause corruption and lose data
-
+            'Write error to Log File
+            writeerrorLog.writelog("File Open Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Open Error", ex.ToString, False, "System Fault")
             MsgBox("Excel File is open please close and then Retry")
             MyExcel.DisplayAlerts = False
             MyExcel.Quit()

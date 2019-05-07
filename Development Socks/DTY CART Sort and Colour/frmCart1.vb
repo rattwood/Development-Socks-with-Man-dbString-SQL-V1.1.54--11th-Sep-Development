@@ -62,6 +62,9 @@ Public Class frmCart1
     Dim fltconeNum As String
     Dim csvRowNum As Integer
 
+    'THIS INITIATES WRITING TO ERROR LOG
+    Private writeerrorLog As New writeError
+
 
 
 
@@ -3502,6 +3505,10 @@ Public Class frmCart1
 
             End If
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("db Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("db Update Error", ex.ToString, False, "System Fault")
+
 
             MsgBox("Update Error: " & vbNewLine & ex.Message)
         End Try

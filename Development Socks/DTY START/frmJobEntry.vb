@@ -99,8 +99,6 @@ Public Class frmJobEntry
         Me.txtLotNumber.Visible = False
 
         If My.Settings.chkUseColour Then btnCartReport.Visible = True Else btnCartReport.Visible = False
-        ' If My.Settings.chkUseColour Then btnJobReport.Visible = True Else btnJobReport.Visible = False
-        '  If My.Settings.chkUseColour Then btnDefRep.Visible = True Else btnDefRep.Visible = False
 
 
         'NEW PACKING MENU ITEMS
@@ -299,8 +297,8 @@ Public Class frmJobEntry
 
         Catch ex As Exception
             'Write error to Log File
-            writeerrorLog.writelog("Drum Scan Error", ex.Message, False, "User Fault")
-            writeerrorLog.writelog("Drum Scan Error", ex.ToString, False, "User Fault")
+            writeerrorLog.writelog("Barcode Error", ex.Message, False, "User Fault")
+            writeerrorLog.writelog("Barcode Error", ex.ToString, False, "User Fault")
 
 
             MsgBox("BarCcode Is Not Valid" & vbCrLf & " บาร์โค็ดไม่ถูกต้อง")
@@ -788,7 +786,6 @@ Public Class frmJobEntry
 
 
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-                'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On ReCheck index Number
 
                 If My.Settings.debugSet Then frmDGV.Show()
                 varProductName = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value.ToString
@@ -958,7 +955,6 @@ Public Class frmJobEntry
         Dim coneBarcode As String
         Dim cartName As String
         Dim today As String = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
-        'today = Convert.ToDateTime(today).ToString("dd-MM-yyyy HH:mm:ss tt")
 
 
         LExecQuery("SELECT PRODNAME,MERGENUM,PRODWEIGHT,WEIGHTCODE FROM PRODUCT WHERE PRNUM = '" & varProductCode & "'")
@@ -989,11 +985,9 @@ Public Class frmJobEntry
         Try
 
             For i As Integer = coneNumStart To coneNumStop
-                ' If machineCode < 30 Then
+
                 If x <= 16 Then cartName = varCartNameA Else cartName = varCartNameB  'SETS CORRECT CART NUMBER
-                'Else
-                'If x <= 12 Then cartName = varCartNameA Else cartName = varCartNameB  'SETS CORRECT CART NUMBER
-                '  End If
+
                 x = x + 1
                 modConeNum = i.ToString(fmt)   ' FORMATS THE CONE NUMBER TO 3 DIGITS
                 coneBarcode = modLotStr & modConeNum   'CREATE THE CONE BARCODE NUMBER
@@ -1083,15 +1077,6 @@ Public Class frmJobEntry
                         & "@barjob,@packsortop,@packop,@sortop,@colourop,@errpsort,@errweigh,@boxnum,@errsort,@errcol,@errdyefleck,@coldef,@colwaste,@fdo,@fdh," _
                         & "@fcl,@ffi,@fyn,@fht,@flt,@conead,@coneal,@opcreate) ")
 
-                'LExecQuery("INSERT INTO jobs (MCNUM, PRNUM, PRYY, PRMM, DOFFNUM, CONENUM, MERGENUM, OPNAME,CONESTATE," _
-                '   & "SHORTCONE, MISSCONE, DEFCONE, CARTNUM, CARTNAME, CONEZERO, CONEBARLEY, M10, P10, M30, P30, M50, P50, CARTSTARTTM," _
-                '  & "BCODECART, BCODECONE,FLT_K, FLT_D, FLT_F, FLT_O, FLT_T, FLT_P, FLT_S, FLT_X, FLT_N, FLT_W, FLT_H, FLT_TR, FLT_B, FLT_C," _
-                '   & "MCNAME, PRODNAME, BCODEJOB,OPPACKSORT,OPPACK,OPSORT,PSORTERROR,WEIGHTERROR,WEIGHT,CARTONNUM,SORTERROR,COLOURERROR,DYEFLECK," _
-                '   & "COLDEF, COLWASTE, FLT_DO, FLT_DH, FLT_CL, FLT_FI, FLT_YN, FLT_HT, FLT_LT, CONEAD, CONEAL) " _
-                '  & "VALUES ('" & varMachineCode & "', '" & varProductCode & "','" & varYear & "','" & varMonth & "','" & varDoffingNum & "','" & modConeNum & "'," _
-                '  & "'" & mergeNum & "',  ' ', '0', '0', '0', '0', '" & varCartSelect & "','" & cartName & "', '0', '0', '0', '0', '0', '0', '0', '0','" & today & "','" & dbBarcode & "','" & coneBarcode & "'," _
-                ' & "'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', 'False', '" & varMachineName & "','" & varProductName & "', '" & JobBarcode & "'," _
-                ' & "'0','0','0','0','0','0','0','0','0','0','0','0','False','False','False','False','False','False','False',' 0',' 0')")
 
 
             Next
@@ -1257,6 +1242,10 @@ Public Class frmJobEntry
             End If
 
         Catch ex As Exception
+
+            'Write error to Log File
+            writeerrorLog.writelog("Barcode Error", ex.Message, False, "User Fault")
+            writeerrorLog.writelog("Barcode Error", ex.ToString, False, "User Fault")
 
             Label3.Visible = True
             Label3.Text = "BarCcode Is Not Valid" * vbCrLf & " ไม่พบหมายเลข บาร์โค็ด นี้"
@@ -1470,14 +1459,6 @@ Public Class frmJobEntry
             frmDGV.DGVdata.Rows(0).Selected = True
             Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
 
-            'IsDBNull(frmDGV.DGVdata.Rows(0).Cells("BCODECONE").Value)
-
-            'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-            'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("BCODECONE"), ListSortDirection.Ascending)  'sorts On cone number
-
-
-
-
 
         Else
             Label3.Visible = True
@@ -1536,8 +1517,12 @@ Public Class frmJobEntry
             End If
         Catch ex As Exception
 
+            'Write error to Log File
+            writeerrorLog.writelog("Barcode Error", ex.Message, False, "User Fault")
+            writeerrorLog.writelog("Barcode Error", ex.ToString, False, "User Fault")
+
             Label3.Visible = True
-            Label3.Text = "BarCcode Is Not Valid" & vbCrLf & "ไม่พบหมายเลข cheese นี้"
+            Label3.Text = "Barcode Is Not Valid" & vbCrLf & "ไม่พบหมายเลข cheese นี้"
             DelayTM()
             Label3.Visible = False
 
@@ -1643,10 +1628,7 @@ Public Class frmJobEntry
         End If
 
 
-        'Extract requierd Informatiom
-        'varProductCode = txtLotNumber.Text.Substring(2, 3)
-        'year = txtLotNumber.Text.Substring(5, 2)
-        'month = txtLotNumber.Text.Substring(7, 2)
+
 
         'GET PRODUCT WEIGHT INFORMATION
         LExecQuery("SELECT PRODNAME,PRODWEIGHT,WEIGHTCODE FROM PRODUCT WHERE PRNUM = '" & varProductCode & "'")
@@ -1684,18 +1666,15 @@ Public Class frmJobEntry
 
             Case "ReCheckA"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & txtLotNumber.Text & "' And  RECHK = 4 And RECHKRESULT = 'A' ")
+                LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & txtLotNumber.Text & "' And  RECHK = 4 And RECHKRESULT = 'A' ORDER BY RECHKIDX ")
             Case "B"
                 packGrade = txtGrade.Text
-                '  LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8  And (DEFCONE > 0 Or CONEBARLEY > 0  And FLT_W = 'False') and COLWASTE > 0 And PACKENDTM is Null ")
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9  And (DEFCONE > 0 OR CONEBARLEY > 0 Or RECHKRESULT = 'B') And FLT_W = 'False' And PACKENDTM is Null  ")
             Case "AL"
                 packGrade = txtGrade.Text
-                ' LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 9 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAL = 'AL'   And RECHK = 4 And PACKENDTM is Null")
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9 And DEFCONE = 0 And CONEBARLEY = 0 And RECHKRESULT = 'AL' And RECHK = 4 And PACKENDTM is Null")
             Case "AD"
                 packGrade = txtGrade.Text
-                'LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 9 And DEFCONE = 0 And CONEBARLEY = 0 And CONEAD = 'AD' And RECHK = 4 And PACKENDTM is Null")
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9 And DEFCONE = 0 And CONEBARLEY = 0 And RECHKRESULT = 'AD' And RECHK = 4 And PACKENDTM is Null")
             Case "P15 AS", "P25 AS", "P35 AS"
                 packGrade = txtGrade.Text
@@ -1706,7 +1685,6 @@ Public Class frmJobEntry
             Case "ReCheck"  'CREATE RECHECK SHEET
                 packGrade = txtGrade.Text
                 If stdReChk = 0 Then
-                    '  LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And M30 > 0 And PACKENDTM is Null Or PRNUM = '" & varProductCode & "' And FLT_S = 'False' And SHORTCONE = 0 And CONESTATE = 8 And DEFCONE = 0 And CONEBARLEY = 0 And P30 > 0 And PACKENDTM is Null")
                     LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And (CONESTATE = 8 Or  CONESTATE = 14) And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null And RECHKSTARTTM is Null And RECHK is Null ")
                 Else
                     'ReCheck creation for std cheese  state 10
@@ -1730,7 +1708,7 @@ Public Class frmJobEntry
 
             If txtGrade.Text = "ReCheckA" Then
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE by our own index
-                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
+                ' frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
 
             Else
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
@@ -1744,10 +1722,7 @@ Public Class frmJobEntry
                 varCartSelect = 1
                 Me.Hide()
                 frmPackRchkA.Show()
-                'Original before new Recheck A form
-                'frmPackRchkA.txtConeBcode.Clear()
-                'frmPackRchkA.txtConeBcode.Focus()
-                'frmPackRchkA.Show()
+
             Else
                 frmB_AL_AD_W.txtConeBcode.Clear()
                 frmB_AL_AD_W.txtConeBcode.Focus()
@@ -1806,7 +1781,6 @@ Public Class frmJobEntry
         Me.btnJobReport.Visible = False
         btnCancelReport.Visible = True
         Me.txtBoxCartReport.Focus()
-        'Me.KeyPreview = True  'Allows us to look for advance character from barcode
         cartReport = 1
         Me.KeyPreview = True
 
@@ -1838,7 +1812,6 @@ Public Class frmJobEntry
 
             'SORT GRIDVIEW IN TO CORRECT JOB SEQUENCE
             frmPrintCartReport.DGVcartReport.Sort(frmPrintCartReport.DGVcartReport.Columns("CONENUM"), ListSortDirection.Ascending)  'sorts On cone number
-            'frmPrintCartReport.Show()
             Me.Cursor = System.Windows.Forms.Cursors.Default
             Me.Hide()
             frmPrintCartReport.Show()
@@ -1925,7 +1898,7 @@ Public Class frmJobEntry
                     prgContinue()
                 ElseIf My.Settings.chkUseSort And stdcheck Or My.Settings.chkUsePack And stdcheck Then
                     STDCreate()
-                Else  'If My.Settings.chkUsePack And (txtGrade.Text.Substring(0, 1) <> "A" Or txtGrade.Text.Substring(0, 1) <> "P") Then
+                Else
 
                     nonAPacking()
 
@@ -1937,7 +1910,7 @@ Public Class frmJobEntry
                 Dim result = MessageBox.Show("IS NUMBER CORRECT CONTINUE ", "YES or NO", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
 
                 If result = DialogResult.Yes Then
-                    'cone count = number entered and clear info from screen and continue
+
                     varSpNums = "1 - " & txtPilotCount.Text
                     pilotCount = txtPilotCount.Text
                     pilotentry = 0
@@ -1998,9 +1971,7 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub FindCheeseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FindCheeseToolStripMenuItem.Click
-        ' If txtOperator.Text = "" Then
-        'MsgBox("Please Enter Operator Name First")
-        'Else
+
         Me.Hide()
             frmConeSearch.Show()
         'End If

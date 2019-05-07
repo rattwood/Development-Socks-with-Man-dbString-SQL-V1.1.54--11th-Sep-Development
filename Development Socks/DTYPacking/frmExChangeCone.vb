@@ -456,6 +456,9 @@ Public Class frmExChangeCone
 
 
         Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Exchange Cone Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Exchange Cone Error", ex.ToString, False, "System Fault")
             MsgBox("Update Error: " & vbNewLine & ex.Message)
         End Try
 
