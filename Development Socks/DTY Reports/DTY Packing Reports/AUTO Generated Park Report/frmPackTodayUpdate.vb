@@ -81,9 +81,10 @@ Public Class frmPackTodayUpdate
 
                     boxCount = boxCount + 1
                     createBarcode()
-                    MyTodyExcel.Cells(1, 4) = SheetCodeString
-
-
+                    ' MyTodyExcel.Cells(1, 4) = SheetCodeString
+                    'New positions for barcode
+                    MyTodyExcel.Cells(5, 8) = SheetCodeString
+                    MyTodyExcel.Cells(9, 10) = modBarcode
 
                     For i = 13 To 102
                         MyTodyExcel.Cells(nfree, 4) = "" 'Clear the contents of cone cells
@@ -104,8 +105,11 @@ Public Class frmPackTodayUpdate
 
                     For i = 1 To frmPacking.DGVPakingA.Rows.Count
 
-                        If frmPacking.DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
+                        If frmPacking.DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "14" Then
                             frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
+
+                            'NEW METHOD SO WE CAN IDENTIFY CHEESE THAT HAVE ALREADY BEEEN PACK AND NOT REPRINT THEM
+                            frmPacking.DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15"
 
                             'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
                             Select Case nfree
@@ -197,7 +201,10 @@ Public Class frmPackTodayUpdate
 
                                 boxCount = boxCount + 1
                                 createBarcode()
-                                MyTodyExcel.Cells(1, 4) = SheetCodeString
+                                'MyTodyExcel.Cells(1, 4) = SheetCodeString
+                                'New positions for barcode
+                                MyTodyExcel.Cells(5, 8) = SheetCodeString
+                                MyTodyExcel.Cells(9, 10) = modBarcode
 
                                 For x = 13 To 102
                                     MyTodyExcel.Cells(x, 4) = "" 'Clear the contents of cone cells
@@ -243,7 +250,10 @@ Public Class frmPackTodayUpdate
 
                         boxCount = boxCount + 1
                         createBarcode()
-                        MyTodyExcel.Cells(1, 4) = SheetCodeString
+                        'MyTodyExcel.Cells(1, 4) = SheetCodeString
+                        'New positions for barcode
+                        MyTodyExcel.Cells(5, 8) = SheetCodeString
+                        MyTodyExcel.Cells(9, 10) = modBarcode
 
                         For x = 13 To 102
                             MyTodyExcel.Cells(x, 4) = "" 'Clear the contents of cone cells
@@ -283,8 +293,10 @@ Public Class frmPackTodayUpdate
 
                     boxCount = boxCount + 1
                     createBarcode()
-                    MyTodyExcel.Cells(1, 4) = SheetCodeString
-
+                    ' MyTodyExcel.Cells(1, 4) = SheetCodeString
+                    'New positions for barcode
+                    MyTodyExcel.Cells(5, 8) = SheetCodeString
+                    MyTodyExcel.Cells(9, 10) = modBarcode
 
 
                     For i = 13 To 102
@@ -393,7 +405,9 @@ Public Class frmPackTodayUpdate
 
                                 boxCount = boxCount + 1
                                 createBarcode()
-                                MyTodyExcel.Cells(1, 4) = SheetCodeString
+                                'MyTodyExcel.Cells(1, 4) = SheetCodeString
+                                MyTodyExcel.Cells(5, 8) = SheetCodeString
+                                MyTodyExcel.Cells(9, 10) = modBarcode
 
                                 For x = 13 To 102
                                     MyTodyExcel.Cells(x, 4) = "" 'Clear the contents of cone cells

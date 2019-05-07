@@ -7,7 +7,7 @@ Public Class frmPackCreateNew
 
     'THIS INITIATES WRITING TO ERROR LOG
     Private writeerrorLog As New writeError
-
+    Dim modBarcode As String
 
     Public Sub CreateNew()
         Dim MyPakExcel As New Excel.Application
@@ -49,7 +49,12 @@ Public Class frmPackCreateNew
                 MyPakExcel.Cells(13, 8) = frmJobEntry.PackOp     'H13
 
                 createBarcode()
-                MyPakExcel.Cells(1, 4) = SheetCodeString
+                'MyPakExcel.Cells(1, 4) = SheetCodeString
+                'New positions for barcode
+                MyPakExcel.Cells(5, 8) = SheetCodeString
+                MyPakExcel.Cells(9, 10) = modBarcode
+
+
 
                 'THIS IS USED TO WRITE DATE IN TO USED ROWS
                 If frmPackPrvGet.nfree > 0 Then
@@ -81,7 +86,11 @@ Public Class frmPackCreateNew
                 MyPakExcel.Cells(13, 8) = frmJobEntry.PackOp     'H13
 
                 createBarcode()
-                MyPakExcel.Cells(1, 4) = SheetCodeString
+
+                'MyPakExcel.Cells(1, 4) = SheetCodeString
+                'New positions for barcode
+                MyPakExcel.Cells(5, 8) = SheetCodeString
+                MyPakExcel.Cells(9, 10) = modBarcode
 
                 'THIS IS USED TO WRITE DATE IN TO USED ROWS
                 If frmPackPrvGet.nfree > 0 Then
@@ -781,7 +790,7 @@ Public Class frmPackCreateNew
 
 
         SheetCodeString = ("*" & frmJobEntry.varProductCode & year & month & day & gradeTxt & "1" & "*")
-
+        modBarcode = SheetCodeString.Replace("*", "")
     End Sub
 
     Private Sub frmPackCreateNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load

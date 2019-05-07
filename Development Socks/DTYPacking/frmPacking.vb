@@ -429,10 +429,10 @@ Public Class frmPacking
                 If DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "9" And DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = False Then
                     curcone = DGVPakingA.Rows(i - 1).Cells("CONENUM").Value
                     Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.LightGreen       'Grade A Cone
-                    DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15"
+                    DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "14"
                     DGVPakingA.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
                     DGVPakingA.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.varUserName
-                    DGVPakingA.Rows(i - 1).Cells("CARTENDTM").Value = today
+                    'DGVPakingA.Rows(i - 1).Cells("CARTENDTM").Value = today
 
                     'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
                     If IsDBNull(DGVPakingA.Rows(i - 1).Cells("PACKENDTM").Value) Then
