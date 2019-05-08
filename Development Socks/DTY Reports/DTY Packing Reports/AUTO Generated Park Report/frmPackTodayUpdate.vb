@@ -2797,22 +2797,5 @@ Public Class frmPackTodayUpdate
 
     End Sub
 
-    ' Private Sub PrintOut()
-    'From As Object,
-    'To As Object,
-    ' Copies As Object,
-    'Preview As Object,
-    'ActivePrinter As Object,
-    'PrintToFile As Object,
-    'Collate As Object,
-    'PrToFileName As Object
-    ')
 
-
-    'Globals.mycount.PrintOut(From:=1, To:=1, Copies:=2, Preview:=True)
-
-
-    'xlPrintSheet.PrintOut(mycount, mycount, 1, False,
-    '     ActivePrinter)
-    'End Sub
 End Class
