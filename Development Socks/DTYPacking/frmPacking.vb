@@ -27,6 +27,9 @@ Public Class frmPacking
     'THIS INITIATES WRITING TO ERROR LOG
     Private writeerrorLog As New writeError
 
+    'THIS CREATS LOCAL INSTANCE OD
+    Private getConeCount As New xlConeCount
+
 
 
 
@@ -55,7 +58,7 @@ Public Class frmPacking
 
     Public saveJob As Integer = 0
     Public finJob As Integer
-
+    Dim xlcheesecount As Integer
 
 
 
@@ -281,6 +284,18 @@ Public Class frmPacking
 
     End Sub
 
+
+    Private Sub sheetconecount()
+        Dim seachstring = getConeCount.searchBarcode
+
+
+        PExecQuery("Select count(packsheetbcode) froms jobs where packsheetbcode = '" & seachstring & "'  ")
+        xlcheesecount = PRecordCount
+
+        MsgBox(xlcheesecount)
+
+
+    End Sub
 
     Public Sub PExecQuery(Query As String)
         ' RESET QUERY STATISTCIS

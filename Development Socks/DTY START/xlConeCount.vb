@@ -3,7 +3,7 @@ Imports Microsoft.Office.Interop
 
 Public Class xlConeCount
     'METHOD for CHECKING HOW MANY CHEESE ARE ALREADY SCANNED ON TO A GRADE SHEET AND PASS INFORMATION BACK TO PACKING SCREEN FOR A and ReCheck A
-    Public xlconecount As Integer
+
 
     Dim prodNameMod As String
     Dim sheetName As String
@@ -21,7 +21,7 @@ Public Class xlConeCount
     Dim nfree As Integer
     Dim todaypath As String
     Dim sheetCount As Integer
-    Dim modBarcode As String
+    Public searchBarcode As String  'THIS IS THE SEARCH STRING FOR SQL ON PACKING A AND REACHECKA SHEETS
 
     'THIS INITIATES WRITING TO ERROR LOG
     Private writeerrorLog As New writeError
@@ -83,27 +83,20 @@ Public Class xlConeCount
             getCounts()
             Exit Sub
 
-
         Else
 
-
             If File.Exists(yestname1) Then      'ONE DAY AGO
-                    prevDaysName = yestname1
-                    prevDays = Date.Now.AddDays(-1).ToString("ddMMyyyy")
-                    PrvGet()
-                    Exit Sub
-                ElseIf File.Exists(yestname2) Then  'TWO DAYS AGO
-                    prevDaysName = yestname2
-                    prevDays = Date.Now.AddDays(-2).ToString("ddMMyyyy")
-                    PrvGet()
-                    Exit Sub
-                ElseIf File.Exists(yestname3) Then  'THREE DAYS AGO
-                    prevDaysName = yestname3
-                    prevDays = Date.Now.AddDays(-3).ToString("ddMMyyyy")
-                    PrvGet()
-                    Exit Sub
-                End If
-
+                savename = yestname1
+                getCounts()
+                Exit Sub
+            ElseIf File.Exists(yestname2) Then  'TWO DAYS AGO
+                savename = yestname2
+                getCounts()
+                Exit Sub
+            ElseIf File.Exists(yestname3) Then  'THREE DAYS AGO
+                savename = yestname3
+                getCounts()
+            End If
         End If
 
     End Sub
@@ -139,25 +132,14 @@ Public Class xlConeCount
 
     Public Sub PrvGet()
 
+
+
         Dim MyPrevExcel As New Excel.Application
         Dim xpPrevWoorkbook As Excel.Workbook
 
 
         xpPrevWoorkbook = MyPrevExcel.Workbooks.Open(prevDaysName)
 
-
-        'FIND NEXT BLANK ROW FOR CONES
-        Select Case frmJobEntry.txtGrade.Text
-            Case "A", "ReCheckA"
-                For rcount = 13 To 102
-                    If MyPrevExcel.Cells(rcount, 4).Value > 0 Then
-                        Continue For
-                    Else
-                        nfree = rcount
-                        Exit For
-                    End If
-                Next
-        End Select
 
 
         Try
@@ -224,11 +206,7 @@ Public Class xlConeCount
 
 
 
-        modBarcode = (frmJobEntry.varProductCode & year & month & day & gradeTxt & sheetCount)
-
-
-
-
+        searchBarcode = (frmJobEntry.varProductCode & year & month & day & gradeTxt & sheetCount)
 
     End Sub
 
