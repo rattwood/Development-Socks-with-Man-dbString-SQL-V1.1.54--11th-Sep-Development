@@ -68,7 +68,7 @@ Public Class frmPackRchkA
 
 
 
-    Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmPackRchkA_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
 
@@ -81,7 +81,7 @@ Public Class frmPackRchkA
                 DGVPakingRecA.Rows(0).Selected = True
                 Dim PCB As SqlCommandBuilder = New SqlCommandBuilder(PDA)
 
-                MsgBox(frmJobEntry.txtLotNumber.Text)
+                'MsgBox(frmJobEntry.txtLotNumber.Text)
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
                 'DGVPakingA.Sort(DGVPakingA.Columns("CONENUM"), ListSortDirection.Ascending)  'sorts On cone number
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE by our own index

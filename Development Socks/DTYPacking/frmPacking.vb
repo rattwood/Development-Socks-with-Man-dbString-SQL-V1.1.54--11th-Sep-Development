@@ -69,7 +69,7 @@ Public Class frmPacking
     'Faults
 
 
-    Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmPacking_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
         PExecQuery("Select * FROM jobs WHERE bcodecart = '" & frmJobEntry.dbBarcode & "' Order By CONENUM ;")
