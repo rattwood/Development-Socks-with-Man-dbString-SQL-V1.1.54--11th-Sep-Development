@@ -7,7 +7,8 @@ Imports System.Text
 
 
 Public Class frmPacking
-    'Private SQL As New SQLConn
+    'GIVES ACCESS TO GLOBAL SQL CLASS
+    Private SQL As New SQLConn
 
     '---------------------------------------    SETTING UP LOCAL INSTANCE FOR SQL LINK FOR DATAGRID TO SYNC CORRECTLY WITH SQL -------------------------------------
     Private PConn As New SqlConnection(My.Settings.SQLConn) 'This need to be changed in Project/Propertie/Settings
@@ -271,7 +272,10 @@ Public Class frmPacking
 
         'THIS SECTION GETS THE COUNT OF CHEESE ON THE LAST EXCEL SHEET TO DISPLAY NUMBER LEFT TO COMPLETE THE PACK SHEET 
         sheetconecount()
-        MsgBox("cheese on sheet = " & packedCheese & vbCrLf & "To Finish Sheet = " & remainingCheese)
+
+        txtBoxToFinish.Text = remainingCheese
+        txtBoxOnSheet.Text = packedCheese
+
 
         txtboxTotal.Text = toAllocatedCount
 
@@ -297,11 +301,16 @@ Public Class frmPacking
 
         Dim searchstring = getConeCount.searchBarcode
 
-        PExecQuery("Select count(packsheetbcode) from jobs where packsheetbcode = '" & searchstring & "'  ")
-        xlcheesecount = PRecordCount
-
-        MsgBox("sheeet name = " & searchstring & vbCrLf & "sheet count= " & xlcheesecount)
-
+        SQL.ExecQuery("Select * from jobs where packsheetbcode = '" & searchstring & "'  ")
+        xlcheesecount = SQL.RecordCount
+        If xlcheesecount > 0 Then
+            'MsgBox("sheeet name = " & searchstring & vbCrLf & "Cheese on sheet count = " & xlcheesecount)
+            packedCheese = xlcheesecount   'this is the number of cheese already included on the excel sheet
+            remainingCheese = 90 - packedCheese
+        Else
+            packedCheese = 0
+            remainingCheese = 90
+        End If
 
     End Sub
 
@@ -345,46 +354,46 @@ Public Class frmPacking
     End Sub
 
 
-    'Create csv file
+    ''Create csv file
 
-    Private Sub CSV()
+    'Private Sub CSV()
 
-        Dim today As String = DateAndTime.Now
-        Dim csvFile As String
+    '    Dim today As String = DateAndTime.Now
+    '    Dim csvFile As String
 
-        'Check to see if file exists, if it does not creat the file, otherwise add data to the file
-        Dim dataOut As String = String.Concat(frmJobEntry.varMachineCode, ",", frmJobEntry.varMachineName, ",", frmJobEntry.varYear, ",", frmJobEntry.varMonth, ",", frmJobEntry.varDoffingNum, ",", fltconeNum, ",", frmJobEntry.mergeNum, ",", frmJobEntry.varUserName, ",", DGVPakingA.Rows(csvRowNum).Cells("CONESTATE"), ",", DGVPakingA.Rows(csvRowNum).Cells("SHORTCONE").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("MISSCONE").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("DEFCONE").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("BCODECART").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("M30").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("P30").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("CARTSTARTTM").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("CARTENDTM").Value, ",", today & Environment.NewLine)
-
-
-        csvFile = My.Settings.dirCarts & ("\" & DGVPakingA.Rows(csvRowNum).Cells("BCODECART").Value.ToString & "PackLog.csv")
+    '    'Check to see if file exists, if it does not creat the file, otherwise add data to the file
+    '    Dim dataOut As String = String.Concat(frmJobEntry.varMachineCode, ",", frmJobEntry.varMachineName, ",", frmJobEntry.varYear, ",", frmJobEntry.varMonth, ",", frmJobEntry.varDoffingNum, ",", fltconeNum, ",", frmJobEntry.mergeNum, ",", frmJobEntry.varUserName, ",", DGVPakingA.Rows(csvRowNum).Cells("CONESTATE"), ",", DGVPakingA.Rows(csvRowNum).Cells("SHORTCONE").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("MISSCONE").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("DEFCONE").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("BCODECART").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("M30").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("P30").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("CARTSTARTTM").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("CARTENDTM").Value, ",", today & Environment.NewLine)
 
 
-        If fileActive Then
-
-            Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, True)
-            outFile.WriteLine("M/C Code, M/C Name, YY, MM, Doff #, Cone #, Merge #,User, Cone State, Short, NoCone, Defect, Cart Name, -30, +30,Start, End, Fault time ")
-            outFile.WriteLine(dataOut)
-            outFile.Close()
-
-        Else
-
-            Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, False)
-            outFile.WriteLine("M/C Code, M/C Name, YY, MM, Doff #, Cone #, Merge #,User, Cone State, Short, NoCone, Defect, Cart Name, -30, +30,Start, End, Fault time ")
-
-            outFile.WriteLine(dataOut)
-            outFile.Close()
-            fileActive = True
+    '    csvFile = My.Settings.dirCarts & ("\" & DGVPakingA.Rows(csvRowNum).Cells("BCODECART").Value.ToString & "PackLog.csv")
 
 
-        End If
+    '    If fileActive Then
+
+    '        Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, True)
+    '        outFile.WriteLine("M/C Code, M/C Name, YY, MM, Doff #, Cone #, Merge #,User, Cone State, Short, NoCone, Defect, Cart Name, -30, +30,Start, End, Fault time ")
+    '        outFile.WriteLine(dataOut)
+    '        outFile.Close()
+
+    '    Else
+
+    '        Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, False)
+    '        outFile.WriteLine("M/C Code, M/C Name, YY, MM, Doff #, Cone #, Merge #,User, Cone State, Short, NoCone, Defect, Cart Name, -30, +30,Start, End, Fault time ")
+
+    '        outFile.WriteLine(dataOut)
+    '        outFile.Close()
+    '        fileActive = True
 
 
+    '    End If
 
 
 
 
 
-    End Sub
+
+
+    'End Sub
 
     Public Sub UpdateConeVal()
         If My.Settings.debugSet Then frmDGV.Show()
@@ -432,6 +441,13 @@ Public Class frmPacking
 
     Private Sub prgContinue()
 
+        If txtConeBcode.TextLength <> 15 Then
+            Label1.Visible = True
+            Label1.Text = "BARCODE ERROR not a cheese BARCODE"
+            DelayTM()
+            Label1.Visible = False
+            Exit Sub
+        End If
 
 
 
@@ -440,6 +456,7 @@ Public Class frmPacking
         Dim coneCount As Integer = 0
         Dim today As String
         today = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
 
 
 
@@ -464,8 +481,19 @@ Public Class frmPacking
                         'Next
                     End If
 
-
+                    'Section to adjust Counts on screen
                     allocatedCount = allocatedCount + 1
+
+                    packedCheese = packedCheese + 1
+                    remainingCheese = remainingCheese - 1
+
+                    If packedCheese = 90 Then
+                        packedCheese = 0
+                        remainingCheese = 90
+                    End If
+
+                    txtBoxOnSheet.Text = packedCheese
+                    txtBoxToFinish.Text = remainingCheese
 
                     curcone = 0
 
@@ -662,6 +690,9 @@ Public Class frmPacking
 
 
     End Sub
+
+
+
 
 
 

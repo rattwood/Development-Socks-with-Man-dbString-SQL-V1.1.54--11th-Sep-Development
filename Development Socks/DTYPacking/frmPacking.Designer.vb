@@ -69,6 +69,10 @@ Partial Class frmPacking
         Me.lblCheese = New System.Windows.Forms.Label()
         Me.DGVPakingA = New System.Windows.Forms.DataGridView()
         Me.btnFinJob = New System.Windows.Forms.Button()
+        Me.txtBoxOnSheet = New System.Windows.Forms.TextBox()
+        Me.txtBoxToFinish = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         CType(Me.DGVPakingA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -607,7 +611,7 @@ Partial Class frmPacking
         '
         Me.btnDefect.BackColor = System.Drawing.Color.Yellow
         Me.btnDefect.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDefect.Location = New System.Drawing.Point(888, 692)
+        Me.btnDefect.Location = New System.Drawing.Point(11, 550)
         Me.btnDefect.Margin = New System.Windows.Forms.Padding(2)
         Me.btnDefect.Name = "btnDefect"
         Me.btnDefect.Size = New System.Drawing.Size(138, 80)
@@ -643,21 +647,21 @@ Partial Class frmPacking
         '
         Me.lblCheese.AutoSize = True
         Me.lblCheese.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCheese.Location = New System.Drawing.Point(25, 173)
+        Me.lblCheese.Location = New System.Drawing.Point(42, 180)
         Me.lblCheese.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblCheese.Name = "lblCheese"
-        Me.lblCheese.Size = New System.Drawing.Size(115, 20)
+        Me.lblCheese.Size = New System.Drawing.Size(93, 20)
         Me.lblCheese.TabIndex = 176
-        Me.lblCheese.Text = "Total Cheese"
+        Me.lblCheese.Text = "'A' on Cart"
         '
         'DGVPakingA
         '
         Me.DGVPakingA.AllowUserToAddRows = False
         Me.DGVPakingA.AllowUserToDeleteRows = False
         Me.DGVPakingA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVPakingA.Location = New System.Drawing.Point(1031, 661)
+        Me.DGVPakingA.Location = New System.Drawing.Point(12, 387)
         Me.DGVPakingA.Name = "DGVPakingA"
-        Me.DGVPakingA.Size = New System.Drawing.Size(526, 200)
+        Me.DGVPakingA.Size = New System.Drawing.Size(526, 120)
         Me.DGVPakingA.TabIndex = 178
         Me.DGVPakingA.Visible = False
         '
@@ -672,25 +676,60 @@ Partial Class frmPacking
         Me.btnFinJob.Text = "FINISH JOB"
         Me.btnFinJob.UseVisualStyleBackColor = False
         '
+        'txtBoxOnSheet
+        '
+        Me.txtBoxOnSheet.BackColor = System.Drawing.SystemColors.Control
+        Me.txtBoxOnSheet.Font = New System.Drawing.Font("Microsoft Sans Serif", 72.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBoxOnSheet.ForeColor = System.Drawing.Color.DeepSkyBlue
+        Me.txtBoxOnSheet.Location = New System.Drawing.Point(1188, 711)
+        Me.txtBoxOnSheet.Name = "txtBoxOnSheet"
+        Me.txtBoxOnSheet.Size = New System.Drawing.Size(166, 116)
+        Me.txtBoxOnSheet.TabIndex = 180
+        Me.txtBoxOnSheet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'txtBoxToFinish
+        '
+        Me.txtBoxToFinish.BackColor = System.Drawing.SystemColors.Control
+        Me.txtBoxToFinish.Font = New System.Drawing.Font("Microsoft Sans Serif", 72.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBoxToFinish.ForeColor = System.Drawing.Color.Red
+        Me.txtBoxToFinish.Location = New System.Drawing.Point(835, 711)
+        Me.txtBoxToFinish.Name = "txtBoxToFinish"
+        Me.txtBoxToFinish.Size = New System.Drawing.Size(166, 116)
+        Me.txtBoxToFinish.TabIndex = 181
+        Me.txtBoxToFinish.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(1195, 688)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(148, 20)
+        Me.Label4.TabIndex = 182
+        Me.Label4.Text = "Cheese on Sheet"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(854, 688)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(131, 20)
+        Me.Label6.TabIndex = 183
+        Me.Label6.Text = "To Finsh Sheet"
+        '
         'frmPacking
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1584, 861)
-        Me.Controls.Add(Me.btnFinJob)
-        Me.Controls.Add(Me.DGVPakingA)
-        Me.Controls.Add(Me.txtboxTotal)
-        Me.Controls.Add(Me.lblCheese)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.txtBoxToFinish)
+        Me.Controls.Add(Me.txtBoxOnSheet)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.btnDefect)
-        Me.Controls.Add(Me.btnBack)
-        Me.Controls.Add(Me.btnSaveJob)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.lblJobNum)
-        Me.Controls.Add(Me.txtCartNum)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.txtConeBcode)
-        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.btnCone32)
         Me.Controls.Add(Me.btnCone24)
         Me.Controls.Add(Me.btnCone16)
@@ -723,6 +762,19 @@ Partial Class frmPacking
         Me.Controls.Add(Me.btnCone2)
         Me.Controls.Add(Me.btnCone1)
         Me.Controls.Add(Me.btnCone4)
+        Me.Controls.Add(Me.btnFinJob)
+        Me.Controls.Add(Me.txtboxTotal)
+        Me.Controls.Add(Me.lblCheese)
+        Me.Controls.Add(Me.btnDefect)
+        Me.Controls.Add(Me.btnBack)
+        Me.Controls.Add(Me.btnSaveJob)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.lblJobNum)
+        Me.Controls.Add(Me.txtCartNum)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.txtConeBcode)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.DGVPakingA)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmPacking"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -779,4 +831,8 @@ Partial Class frmPacking
     Friend WithEvents lblCheese As Label
     Friend WithEvents DGVPakingA As DataGridView
     Friend WithEvents btnFinJob As Button
+    Friend WithEvents txtBoxOnSheet As TextBox
+    Friend WithEvents txtBoxToFinish As TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label6 As Label
 End Class

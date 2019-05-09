@@ -6,19 +6,16 @@ Public Class xlConeCount
 
 
     Dim prodNameMod As String
-    Dim sheetName As String
     Dim savestring As String
     Dim savename As String
-    Dim template As String
     Dim yestname1 As String
     Dim yestname2 As String
     Dim yestname3 As String
     Dim PrevPath1 As String
     Dim PrevPath2 As String
     Dim PrevPath3 As String
-    Dim prevDaysName As String
-    Dim prevDays As String
-    Dim nfree As Integer
+
+
     Dim todaypath As String
     Dim sheetCount As Integer
     Dim SearchDate As String
@@ -166,8 +163,6 @@ Public Class xlConeCount
 
 
 
-
-
     Public Sub createBarcode()
 
 
@@ -189,8 +184,6 @@ Public Class xlConeCount
                 gradeTxt = "RECHECK" 'ReCheck Grade
 
         End Select
-
-
 
         searchBarcode = (frmJobEntry.varProductCode & year & month & day & gradeTxt & sheetCount)
 
