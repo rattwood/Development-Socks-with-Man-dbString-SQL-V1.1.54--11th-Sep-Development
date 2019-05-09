@@ -322,7 +322,7 @@ Public Class frmPackTodayUpdate
                             frmPackRchkA.DGVPakingRecA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
                             'NEW METHOD SO WE CAN IDENTIFY CHEESE THAT HAVE ALREADY BEEEN PACK AND NOT REPRINT THEM
-                            frmPacking.DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15"
+                            frmPackRchkA.DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "15"
 
                             'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
                             Select Case nfree
