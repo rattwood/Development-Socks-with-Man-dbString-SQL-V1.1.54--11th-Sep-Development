@@ -36,9 +36,6 @@ Public Class xlConeCount
                 prodNameMod = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value.ToString
                 prodNameMod = prodNameMod.Replace("/", "_")
 
-                ''CREATE THE SHEET NAME But as this Cheese is from ReCheck we will assign to A grade sheet
-                'sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
-
                 'CREATE THE FULL NAME FOR SAVING THE FILE
                 savestring = (prodNameMod & " " _
                     & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
@@ -47,9 +44,6 @@ Public Class xlConeCount
                 'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
                 prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
                 prodNameMod = prodNameMod.Replace("/", "_")
-
-                ''CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
-                'sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
 
                 'CREATE THE FULL NAME FOR SAVING THE FILE
                 savestring = (prodNameMod & " " _

@@ -168,7 +168,6 @@ Public Class frmPackRchkA
         SQL.ExecQuery("Select * from jobs where packsheetbcode = '" & searchstring & "'  ")
         xlcheesecount = SQL.RecordCount
         If xlcheesecount > 0 Then
-            'MsgBox("sheeet name = " & searchstring & vbCrLf & "Cheese on sheet count = " & xlcheesecount)
             packedCheese = xlcheesecount   'this is the number of cheese already included on the excel sheet
             remainingCheese = 90 - packedCheese
         Else

@@ -649,9 +649,9 @@ Partial Class frmPackRchkA
         Me.DGVPakingRecA.AllowUserToDeleteRows = False
         Me.DGVPakingRecA.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.DGVPakingRecA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVPakingRecA.Location = New System.Drawing.Point(-200, 539)
+        Me.DGVPakingRecA.Location = New System.Drawing.Point(1100, 672)
         Me.DGVPakingRecA.Name = "DGVPakingRecA"
-        Me.DGVPakingRecA.Size = New System.Drawing.Size(324, 179)
+        Me.DGVPakingRecA.Size = New System.Drawing.Size(460, 179)
         Me.DGVPakingRecA.TabIndex = 178
         Me.DGVPakingRecA.Visible = False
         '
@@ -726,6 +726,7 @@ Partial Class frmPackRchkA
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1584, 861)
+        Me.Controls.Add(Me.DGVPakingRecA)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.txtBoxToFinish)
@@ -775,7 +776,6 @@ Partial Class frmPackRchkA
         Me.Controls.Add(Me.btnCone2)
         Me.Controls.Add(Me.btnCone1)
         Me.Controls.Add(Me.btnCone4)
-        Me.Controls.Add(Me.DGVPakingRecA)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmPackRchkA"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
