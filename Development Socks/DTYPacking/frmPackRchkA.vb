@@ -81,7 +81,7 @@ Public Class frmPackRchkA
                 DGVPakingRecA.Rows(0).Selected = True
                 Dim PCB As SqlCommandBuilder = New SqlCommandBuilder(PDA)
 
-
+                MsgBox(frmJobEntry.txtLotNumber.Text)
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
                 'DGVPakingA.Sort(DGVPakingA.Columns("CONENUM"), ListSortDirection.Ascending)  'sorts On cone number
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE by our own index
@@ -306,7 +306,7 @@ Public Class frmPackRchkA
                     curcone = DGVPakingRecA.Rows(i - 1).Cells("RECHKIDX").Value
                     Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.LightGreen       'Grade A Cone
                     DGVPakingRecA.Rows(i - 1).Cells("RECHK").Value = 5
-                    DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "15"
+                    DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "14"
                     DGVPakingRecA.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
                     DGVPakingRecA.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.varUserName
                     DGVPakingRecA.Rows(i - 1).Cells("CARTENDTM").Value = today
