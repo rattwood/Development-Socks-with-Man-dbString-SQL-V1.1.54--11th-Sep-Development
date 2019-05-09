@@ -58,8 +58,11 @@ Public Class frmPacking
 
     Public saveJob As Integer = 0
     Public finJob As Integer
-    Dim xlcheesecount As Integer
 
+    'Variables used to display remaining on sheet and number left to finish sheet
+    Dim xlcheesecount As Integer
+    Dim packedCheese As Integer
+    Dim remainingCheese As Integer
 
 
     'Faults
@@ -266,7 +269,9 @@ Public Class frmPacking
             Next
         End If
 
-
+        'THIS SECTION GETS THE COUNT OF CHEESE ON THE LAST EXCEL SHEET TO DISPLAY NUMBER LEFT TO COMPLETE THE PACK SHEET 
+        sheetconecount()
+        MsgBox("cheese on sheet = " & packedCheese & vbCrLf & "To Finish Sheet = " & remainingCheese)
 
         txtboxTotal.Text = toAllocatedCount
 
@@ -286,13 +291,16 @@ Public Class frmPacking
 
 
     Private Sub sheetconecount()
-        Dim seachstring = getConeCount.searchBarcode
 
+        'Go off to Class and get the cone count on any excel sheet for this grade from last 3 days
+        getConeCount.xlCheck()
 
-        PExecQuery("Select count(packsheetbcode) froms jobs where packsheetbcode = '" & seachstring & "'  ")
+        Dim searchstring = getConeCount.searchBarcode
+
+        PExecQuery("Select count(packsheetbcode) from jobs where packsheetbcode = '" & searchstring & "'  ")
         xlcheesecount = PRecordCount
 
-        MsgBox(xlcheesecount)
+        MsgBox("sheeet name = " & searchstring & vbCrLf & "sheet count= " & xlcheesecount)
 
 
     End Sub

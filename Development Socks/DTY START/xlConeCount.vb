@@ -21,6 +21,7 @@ Public Class xlConeCount
     Dim nfree As Integer
     Dim todaypath As String
     Dim sheetCount As Integer
+    Dim SearchDate As String
     Public searchBarcode As String  'THIS IS THE SEARCH STRING FOR SQL ON PACKING A AND REACHECKA SHEETS
 
     'THIS INITIATES WRITING TO ERROR LOG
@@ -38,8 +39,8 @@ Public Class xlConeCount
                 prodNameMod = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value.ToString
                 prodNameMod = prodNameMod.Replace("/", "_")
 
-                'CREATE THE SHEET NAME But as this Cheese is from ReCheck we will assign to A grade sheet
-                sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
+                ''CREATE THE SHEET NAME But as this Cheese is from ReCheck we will assign to A grade sheet
+                'sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
 
                 'CREATE THE FULL NAME FOR SAVING THE FILE
                 savestring = (prodNameMod & " " _
@@ -50,8 +51,8 @@ Public Class xlConeCount
                 prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
                 prodNameMod = prodNameMod.Replace("/", "_")
 
-                'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
-                sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
+                ''CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+                'sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
 
                 'CREATE THE FULL NAME FOR SAVING THE FILE
                 savestring = (prodNameMod & " " _
@@ -79,7 +80,7 @@ Public Class xlConeCount
         'CHECK TO SEE IF THERE IS ALREADY A FILE STARTED FOR PRODUCT NUMBER
         'IN TODATY DIRECTORY
         If File.Exists(savename) Then
-
+            SearchDate = Date.Now.ToString("dd_MM_yyyy")
             getCounts()
             Exit Sub
 
@@ -87,14 +88,17 @@ Public Class xlConeCount
 
             If File.Exists(yestname1) Then      'ONE DAY AGO
                 savename = yestname1
+                SearchDate = Date.Now.AddDays(-1).ToString("dd_MM_yyyy")
                 getCounts()
                 Exit Sub
             ElseIf File.Exists(yestname2) Then  'TWO DAYS AGO
                 savename = yestname2
+                SearchDate = Date.Now.AddDays(-2).ToString("dd_MM_yyyy")
                 getCounts()
                 Exit Sub
             ElseIf File.Exists(yestname3) Then  'THREE DAYS AGO
                 savename = yestname3
+                SearchDate = Date.Now.AddDays(-3).ToString("dd_MM_yyyy")
                 getCounts()
             End If
         End If
@@ -105,14 +109,28 @@ Public Class xlConeCount
         Dim MyTodyExcel As New Excel.Application
         Dim xlTodyWorkbook As Excel.Workbook
 
-        'GET SHEET COUNT FOR DOCUMENT SO WE CAN USE TO SEACK SQL AND GET COUNT OF PACKED CHEESE
-        xlTodyWorkbook = MyTodyExcel.Workbooks.Open(savename)
-        sheetCount = xlTodyWorkbook.Worksheets.Count
-        createBarcode()
+
+        Try
+            'GET SHEET COUNT FOR DOCUMENT SO WE CAN USE TO SEACK SQL AND GET COUNT OF PACKED CHEESE
+            xlTodyWorkbook = MyTodyExcel.Workbooks.Open(savename)
+            sheetCount = xlTodyWorkbook.Worksheets.Count
+            createBarcode()
+
+            'Close the Excel file but do not save updates to it
+            xlTodyWorkbook.Close(SaveChanges:=False)
+
+        Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
+            MsgBox(ex.Message)
+        End Try
 
 
-
-
+        'CLEAN UP
+        MyTodyExcel.Quit()
+        releaseObject(xlTodyWorkbook)
+        releaseObject(MyTodyExcel)
 
     End Sub
 
@@ -130,37 +148,6 @@ Public Class xlConeCount
     End Sub
 
 
-    Public Sub PrvGet()
-
-
-
-        Dim MyPrevExcel As New Excel.Application
-        Dim xpPrevWoorkbook As Excel.Workbook
-
-
-        xpPrevWoorkbook = MyPrevExcel.Workbooks.Open(prevDaysName)
-
-
-
-        Try
-            'Close template file but do not save updates to it
-            xpPrevWoorkbook.Close(SaveChanges:=False)
-        Catch ex As Exception
-            'Write error to Log File
-            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
-            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
-            MsgBox(ex.Message)
-        End Try
-
-
-        'CLEAN UP
-        MyPrevExcel.Quit()
-        releaseObject(xpPrevWoorkbook)
-        releaseObject(MyPrevExcel)
-
-
-
-    End Sub
 
 
     Private Sub releaseObject(ByVal obj As Object)
@@ -183,23 +170,22 @@ Public Class xlConeCount
 
     Public Sub createBarcode()
 
-        Dim today As String = Date.Now
+
         Dim day As String
         Dim month As String
         Dim year As String
         Dim gradeTxt As String
 
-        'Routine to get date brocken down
-        today = Convert.ToDateTime(today).ToString("dd MM yyyy")
-        day = today.Substring(0, 2)
-        month = today.Substring(3, 2)
-        year = today.Substring(8, 2)
+
+        day = SearchDate.Substring(0, 2)
+        month = SearchDate.Substring(3, 2)
+        year = SearchDate.Substring(8, 2)
 
         Select Case frmJobEntry.txtGrade.Text
             Case "A"
                 gradeTxt = "A" 'A Grade
 
-            Case "ReCheck"
+            Case "ReCheckA"
                 gradeTxt = "RECHECK" 'ReCheck Grade
 
         End Select
