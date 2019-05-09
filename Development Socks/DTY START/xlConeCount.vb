@@ -120,7 +120,7 @@ Public Class xlConeCount
             'Write error to Log File
             writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
             writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
-            MsgBox(ex.Message)
+            MsgBox(ex.ToString)
         End Try
 
 
@@ -175,15 +175,19 @@ Public Class xlConeCount
         day = SearchDate.Substring(0, 2)
         month = SearchDate.Substring(3, 2)
         year = SearchDate.Substring(8, 2)
+        Try
+            Select Case frmJobEntry.txtGrade.Text
+                Case "A", "ReCheckA"
+                    gradeTxt = "A" 'A Grade
 
-        Select Case frmJobEntry.txtGrade.Text
-            Case "A"
-                gradeTxt = "A" 'A Grade
+            End Select
 
-            Case "ReCheckA"
-                gradeTxt = "RECHECK" 'ReCheck Grade
-
-        End Select
+        Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog(" Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
+            MsgBox(ex.ToString)
+        End Try
 
         searchBarcode = (frmJobEntry.varProductCode & year & month & day & gradeTxt & sheetCount)
 
