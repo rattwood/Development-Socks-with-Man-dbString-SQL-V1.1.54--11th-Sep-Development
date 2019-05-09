@@ -7,7 +7,9 @@ Imports System.Text
 
 
 Public Class frmPackRchkA
-    'Private SQL As New SQLConn
+    'GIVES ACCESS TO GLOBAL SQL CLASS
+    Private SQL As New SQLConn
+
 
     '---------------------------------------    SETTING UP LOCAL INSTANCE FOR SQL LINK FOR DATAGRID TO SYNC CORRECTLY WITH SQL -------------------------------------
     Private PConn As New SqlConnection(My.Settings.SQLConn) 'This need to be changed in Project/Propertie/Settings
@@ -28,7 +30,8 @@ Public Class frmPackRchkA
     'THIS INITIATES WRITING TO ERROR LOG
     Private writeerrorLog As New writeError
 
-
+    'THIS CREATS LOCAL INSTANCE xlConeCount Class
+    Private getConeCount As New xlConeCount
 
     Dim psorterror As String = 0
     Public bcodeScan As String = ""
@@ -53,7 +56,13 @@ Public Class frmPackRchkA
     Dim fltconeNum As String
     Dim csvRowNum As String
 
+    Public saveJob As Integer = 0
+    Public finJob As Integer
 
+    'Variables used to display remaining on sheet and number left to finish sheet
+    Dim xlcheesecount As Integer
+    Dim packedCheese As Integer
+    Dim remainingCheese As Integer
 
 
 
@@ -64,7 +73,7 @@ Public Class frmPackRchkA
 
 
         Try
-            PExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & frmJobEntry.txtLotNumber.Text & "' ")
+            PExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & frmJobEntry.txtLotNumber.Text & "' Order by RECHKIDX  ")
 
             If PRecordCount > 0 Then
                 'LOAD THE DATA FROM dB IN TO THE DATAGRID
@@ -76,7 +85,7 @@ Public Class frmPackRchkA
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
                 'DGVPakingA.Sort(DGVPakingA.Columns("CONENUM"), ListSortDirection.Ascending)  'sorts On cone number
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE by our own index
-                DGVPakingRecA.Sort(DGVPakingRecA.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
+                ' DGVPakingRecA.Sort(DGVPakingRecA.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
 
             Else
 
@@ -127,6 +136,12 @@ Public Class frmPackRchkA
 
         End Try
 
+        'THIS SECTION GETS THE COUNT OF CHEESE ON THE LAST EXCEL SHEET TO DISPLAY NUMBER LEFT TO COMPLETE THE PACK SHEET 
+        sheetconecount()
+
+        txtBoxToFinish.Text = remainingCheese
+        txtBoxOnSheet.Text = packedCheese
+
         txtboxTotal.Text = toAllocatedCount
 
         Me.KeyPreview = True  'Allows us to look for advace character from barcode
@@ -142,6 +157,28 @@ Public Class frmPackRchkA
 
 
     End Sub
+
+    Private Sub sheetconecount()
+
+        'Go off to Class and get the cone count on any excel sheet for this grade from last 3 days
+        getConeCount.xlCheck()
+
+        Dim searchstring = getConeCount.searchBarcode
+
+        SQL.ExecQuery("Select * from jobs where packsheetbcode = '" & searchstring & "'  ")
+        xlcheesecount = SQL.RecordCount
+        If xlcheesecount > 0 Then
+            'MsgBox("sheeet name = " & searchstring & vbCrLf & "Cheese on sheet count = " & xlcheesecount)
+            packedCheese = xlcheesecount   'this is the number of cheese already included on the excel sheet
+            remainingCheese = 90 - packedCheese
+        Else
+            packedCheese = 0
+            remainingCheese = 90
+        End If
+
+    End Sub
+
+
 
 
     Public Sub PExecQuery(Query As String)
@@ -235,11 +272,24 @@ Public Class frmPackRchkA
 
     Private Sub prgContinue()
 
+
+        If txtConeBcode.TextLength <> 15 Then
+            Label1.Visible = True
+            Label1.Text = "BARCODE ERROR not a cheese BARCODE"
+            DelayTM()
+            Label1.Visible = False
+            Exit Sub
+        End If
+
+
+
+
+
         bcodeScan = txtConeBcode.Text
         Dim curcone As String
 
 
-        Today = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+        Dim Today = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
 
 
 
@@ -269,7 +319,20 @@ Public Class frmPackRchkA
                     End If
 
 
+                    'Section to adjust Counts on screen
                     allocatedCount = allocatedCount + 1
+
+                    packedCheese = packedCheese + 1
+                    remainingCheese = remainingCheese - 1
+
+                    If packedCheese = 90 Then
+                        packedCheese = 0
+                        remainingCheese = 90
+                    End If
+
+                    txtBoxOnSheet.Text = packedCheese
+                    txtBoxToFinish.Text = remainingCheese
+
                     curcone = 0
 
                 ElseIf DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
@@ -283,12 +346,17 @@ Public Class frmPackRchkA
                     Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.Red      'Wrong Cone scanned
                     DGVPakingRecA.Rows(i - 1).Cells("PSORTERROR").Value = psorterror
                     DGVPakingRecA.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
-                    DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "14"
-                    DGVPakingRecA.Rows(i - 1).Cells("CARTENDTM").Value = today
+                    'DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "14"
+                    DGVPakingRecA.Rows(i - 1).Cells("CARTENDTM").Value = Today
 
 
-                    Me.Hide()
-                    frmRemoveCone.Show()
+                    'Me.Hide()
+                    ' frmRemoveCone.Show()
+                    Label1.Visible = True
+                    Label1.Text = "You Have scanned a Cheese that is not 'GRADE A'"
+                    DelayTM()
+                    Label1.Visible = False
+
                     psorterror = 0
                     curcone = 0
                     Continue For
@@ -338,7 +406,7 @@ Public Class frmPackRchkA
 
     Public Sub endCheck()
 
-        If toAllocatedCount = allocatedCount Then
+        If toAllocatedCount = allocatedCount Or saveJob = 1 Or finJob = 1 Then
             Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
             curcone = 0
 
@@ -358,12 +426,15 @@ Public Class frmPackRchkA
             frmPackRepMain.Close()
             UpdateDatabase()
             Me.Cursor = System.Windows.Forms.Cursors.Default
-            Me.Close()
+
+            saveJob = 0
+            frmJobEntry.Show()
             frmJobEntry.txtLotNumber.Clear()
             frmJobEntry.txtLotNumber.Focus()
-            frmJobEntry.Show()
-        End If
+            Me.Close()
 
+        End If
+        Me.Cursor = System.Windows.Forms.Cursors.Default
     End Sub
 
 
@@ -429,7 +500,20 @@ Public Class frmPackRchkA
 
     End Sub
 
+    Private Sub btnSaveJob_Click(sender As Object, e As EventArgs) Handles btnSaveJob.Click
 
+        saveJob = 1
+        endCheck()
+
+    End Sub
+
+    Private Sub btnFinJob_Click(sender As Object, e As EventArgs) Handles btnFinJob.Click
+
+        finJob = 1
+        endCheck()
+
+
+    End Sub
 
     'THIS LOOKS FOR ENTER key to be pressed or received via barcode
     Private Sub frmJobEntry_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown

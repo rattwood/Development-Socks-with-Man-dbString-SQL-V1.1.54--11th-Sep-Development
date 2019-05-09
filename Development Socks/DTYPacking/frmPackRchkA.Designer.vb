@@ -61,13 +61,18 @@ Partial Class frmPackRchkA
         Me.btnCone2 = New System.Windows.Forms.Button()
         Me.btnCone1 = New System.Windows.Forms.Button()
         Me.btnCone4 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.btnDefect = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtboxTotal = New System.Windows.Forms.TextBox()
         Me.lblCheese = New System.Windows.Forms.Label()
         Me.DGVPakingRecA = New System.Windows.Forms.DataGridView()
+        Me.btnFinJob = New System.Windows.Forms.Button()
+        Me.btnSaveJob = New System.Windows.Forms.Button()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtBoxToFinish = New System.Windows.Forms.TextBox()
+        Me.txtBoxOnSheet = New System.Windows.Forms.TextBox()
         CType(Me.DGVPakingRecA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -580,31 +585,22 @@ Partial Class frmPackRchkA
         Me.btnCone4.Text = "4"
         Me.btnCone4.UseVisualStyleBackColor = False
         '
-        'Button1
-        '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Button1.Location = New System.Drawing.Point(400, 804)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(372, 43)
-        Me.Button1.TabIndex = 170
-        Me.Button1.Text = "Continue"
-        Me.Button1.UseVisualStyleBackColor = False
-        Me.Button1.Visible = False
-        '
         'btnBack
         '
+        Me.btnBack.BackColor = System.Drawing.Color.Red
+        Me.btnBack.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBack.Location = New System.Drawing.Point(31, 767)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(197, 80)
         Me.btnBack.TabIndex = 172
-        Me.btnBack.Text = "Go Back"
-        Me.btnBack.UseVisualStyleBackColor = True
+        Me.btnBack.Text = "CANCEL"
+        Me.btnBack.UseVisualStyleBackColor = False
         '
         'btnDefect
         '
         Me.btnDefect.BackColor = System.Drawing.Color.Yellow
         Me.btnDefect.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDefect.Location = New System.Drawing.Point(888, 692)
+        Me.btnDefect.Location = New System.Drawing.Point(11, 550)
         Me.btnDefect.Margin = New System.Windows.Forms.Padding(2)
         Me.btnDefect.Name = "btnDefect"
         Me.btnDefect.Size = New System.Drawing.Size(138, 80)
@@ -640,12 +636,12 @@ Partial Class frmPackRchkA
         '
         Me.lblCheese.AutoSize = True
         Me.lblCheese.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCheese.Location = New System.Drawing.Point(25, 173)
+        Me.lblCheese.Location = New System.Drawing.Point(36, 180)
         Me.lblCheese.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblCheese.Name = "lblCheese"
-        Me.lblCheese.Size = New System.Drawing.Size(115, 20)
+        Me.lblCheese.Size = New System.Drawing.Size(93, 20)
         Me.lblCheese.TabIndex = 176
-        Me.lblCheese.Text = "Total Cheese"
+        Me.lblCheese.Text = "'A' on Cart"
         '
         'DGVPakingRecA
         '
@@ -653,24 +649,94 @@ Partial Class frmPackRchkA
         Me.DGVPakingRecA.AllowUserToDeleteRows = False
         Me.DGVPakingRecA.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.DGVPakingRecA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVPakingRecA.Location = New System.Drawing.Point(-200, 483)
+        Me.DGVPakingRecA.Location = New System.Drawing.Point(-200, 539)
         Me.DGVPakingRecA.Name = "DGVPakingRecA"
         Me.DGVPakingRecA.Size = New System.Drawing.Size(324, 179)
         Me.DGVPakingRecA.TabIndex = 178
         Me.DGVPakingRecA.Visible = False
         '
+        'btnFinJob
+        '
+        Me.btnFinJob.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.btnFinJob.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFinJob.Location = New System.Drawing.Point(557, 767)
+        Me.btnFinJob.Name = "btnFinJob"
+        Me.btnFinJob.Size = New System.Drawing.Size(197, 84)
+        Me.btnFinJob.TabIndex = 181
+        Me.btnFinJob.Text = "FINISH JOB"
+        Me.btnFinJob.UseVisualStyleBackColor = False
+        '
+        'btnSaveJob
+        '
+        Me.btnSaveJob.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.btnSaveJob.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveJob.Location = New System.Drawing.Point(299, 767)
+        Me.btnSaveJob.Name = "btnSaveJob"
+        Me.btnSaveJob.Size = New System.Drawing.Size(197, 84)
+        Me.btnSaveJob.TabIndex = 180
+        Me.btnSaveJob.Text = "SAVE JOB"
+        Me.btnSaveJob.UseVisualStyleBackColor = False
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(864, 688)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(131, 20)
+        Me.Label6.TabIndex = 187
+        Me.Label6.Text = "To Finsh Sheet"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(1205, 688)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(148, 20)
+        Me.Label4.TabIndex = 186
+        Me.Label4.Text = "Cheese on Sheet"
+        '
+        'txtBoxToFinish
+        '
+        Me.txtBoxToFinish.BackColor = System.Drawing.SystemColors.Control
+        Me.txtBoxToFinish.Font = New System.Drawing.Font("Microsoft Sans Serif", 72.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBoxToFinish.ForeColor = System.Drawing.Color.Red
+        Me.txtBoxToFinish.Location = New System.Drawing.Point(845, 711)
+        Me.txtBoxToFinish.Name = "txtBoxToFinish"
+        Me.txtBoxToFinish.Size = New System.Drawing.Size(166, 116)
+        Me.txtBoxToFinish.TabIndex = 185
+        Me.txtBoxToFinish.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'txtBoxOnSheet
+        '
+        Me.txtBoxOnSheet.BackColor = System.Drawing.SystemColors.Control
+        Me.txtBoxOnSheet.Font = New System.Drawing.Font("Microsoft Sans Serif", 72.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBoxOnSheet.ForeColor = System.Drawing.Color.DeepSkyBlue
+        Me.txtBoxOnSheet.Location = New System.Drawing.Point(1198, 711)
+        Me.txtBoxOnSheet.Name = "txtBoxOnSheet"
+        Me.txtBoxOnSheet.Size = New System.Drawing.Size(166, 116)
+        Me.txtBoxOnSheet.TabIndex = 184
+        Me.txtBoxOnSheet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'frmPackRchkA
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1584, 749)
-        Me.Controls.Add(Me.DGVPakingRecA)
+        Me.ClientSize = New System.Drawing.Size(1584, 861)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.txtBoxToFinish)
+        Me.Controls.Add(Me.txtBoxOnSheet)
+        Me.Controls.Add(Me.btnFinJob)
+        Me.Controls.Add(Me.btnSaveJob)
         Me.Controls.Add(Me.txtboxTotal)
         Me.Controls.Add(Me.lblCheese)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnDefect)
         Me.Controls.Add(Me.btnBack)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.lblJobNum)
         Me.Controls.Add(Me.txtCartNum)
@@ -709,6 +775,7 @@ Partial Class frmPackRchkA
         Me.Controls.Add(Me.btnCone2)
         Me.Controls.Add(Me.btnCone1)
         Me.Controls.Add(Me.btnCone4)
+        Me.Controls.Add(Me.DGVPakingRecA)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmPackRchkA"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -757,11 +824,16 @@ Partial Class frmPackRchkA
     Friend WithEvents btnCone2 As Button
     Friend WithEvents btnCone1 As Button
     Friend WithEvents btnCone4 As Button
-    Friend WithEvents Button1 As Button
     Friend WithEvents btnBack As Button
     Friend WithEvents btnDefect As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents txtboxTotal As TextBox
     Friend WithEvents lblCheese As Label
     Friend WithEvents DGVPakingRecA As DataGridView
+    Friend WithEvents btnFinJob As Button
+    Friend WithEvents btnSaveJob As Button
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents txtBoxToFinish As TextBox
+    Friend WithEvents txtBoxOnSheet As TextBox
 End Class
