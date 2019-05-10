@@ -649,7 +649,7 @@ Partial Class frmPackRchkA
         Me.DGVPakingRecA.AllowUserToDeleteRows = False
         Me.DGVPakingRecA.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.DGVPakingRecA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVPakingRecA.Location = New System.Drawing.Point(1100, 672)
+        Me.DGVPakingRecA.Location = New System.Drawing.Point(989, 564)
         Me.DGVPakingRecA.Name = "DGVPakingRecA"
         Me.DGVPakingRecA.Size = New System.Drawing.Size(460, 179)
         Me.DGVPakingRecA.TabIndex = 178
