@@ -29,9 +29,8 @@ Public Class xlConeCount
 
 
         ''CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
-
-        Select Case frmJobEntry.txtGrade.Text
-            Case "ReCheckA"
+        Try
+            If frmJobEntry.txtGrade.Text = "A" And frmJobEntry.reCheck = 1 Then ' this is if we are packing recheck A
                 'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
                 prodNameMod = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value.ToString
                 prodNameMod = prodNameMod.Replace("/", "_")
@@ -40,7 +39,8 @@ Public Class xlConeCount
                 savestring = (prodNameMod & " " _
                     & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
                     & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString) & " A"
-            Case "A"
+
+            ElseIf frmJobEntry.txtGrade.Text = "A" Then
                 'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
                 prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
                 prodNameMod = prodNameMod.Replace("/", "_")
@@ -50,7 +50,14 @@ Public Class xlConeCount
                     & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
                     & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & " A"
 
-        End Select
+            End If
+        Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
+            MsgBox(ex.ToString)
+        End Try
+
 
 
 

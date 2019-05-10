@@ -59,7 +59,7 @@ Public Class frmPackTodayUpdate
         Next
 
 
-        Select Case frmJobEntry.txtGrade.Text
+        Select Case frmPackRepMain.TmpGrade
             Case "A"
                 'CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
                 If totCount = 90 Then
@@ -2742,7 +2742,7 @@ Public Class frmPackTodayUpdate
         year = today.Substring(8, 2)
 
         Select Case frmJobEntry.txtGrade.Text
-            Case "A"
+            Case "A", "ReCheckA"
                 gradeTxt = "A" 'A Grade
             Case "B"
                 gradeTxt = "B" 'B Grade

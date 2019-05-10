@@ -315,6 +315,7 @@ Public Class frmJobEntry
 
     Private Sub CreateJob()
 
+        'For A packing on normal cart
         If reCheck = 0 And stdcheck = 0 Then
             If txtLotNumber.TextLength > 14 Then  ' For carts B10,11 & 12
                 machineName = ""
@@ -596,11 +597,12 @@ Public Class frmJobEntry
             varJobNum = txtLotNumber.Text
 
             reCheckJob()
+            Exit Sub
         Else
             If My.Settings.chkUseColour Or My.Settings.chkUseSort Then CheckJob()
         End If
 
-        'Select Packing Routine
+        'THIS Selects "A" Packing Routine
         If My.Settings.chkUsePack Then APacking()
 
 
@@ -774,6 +776,21 @@ Public Class frmJobEntry
 
         If LRecordCount > 0 Then
 
+            If reCheck = 1 And txtGrade.Text = "A" And My.Settings.chkUsePack Then
+                'LOAD THE DATA FROM dB IN TO THE DATAGRID
+                frmDGV.DGVdata.DataSource = LDS.Tables(0)
+                frmDGV.DGVdata.Rows(0).Selected = True
+                Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
+
+
+                'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
+
+                If My.Settings.debugSet Then frmDGV.Show()
+                varProductName = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value.ToString
+                coneValUpdate = 1
+                nonAPacking()
+                Exit Sub
+            End If
 
             Dim result = MessageBox.Show("Edit Job Yes Or No", "JOB ALREADY EXISTS", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
 
@@ -795,8 +812,8 @@ Public Class frmJobEntry
                 ElseIf My.Settings.chkUseColour Then
 
                     If stdcheck Then frmSTDColChk.Show() Else frmColReCheck.Show()
-                ElseIf My.Settings.chkUsePack Then
-                    nonAPacking()
+                    'ElseIf My.Settings.chkUsePack Then
+                    '    nonAPacking()
                 End If
 
 
@@ -1535,7 +1552,7 @@ Public Class frmJobEntry
         'CHECK SCANNED CHEESE IS CORREECT GRADE OTHERWISE RESCAN
 
         Select Case txtGrade.Text
-            Case "ReCheckA"
+            Case "A"  'Case "ReCheckA"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & txtLotNumber.Text & "'  And RECHK = 4 And  PACKENDTM is Null And RECHKRESULT = 'A' ")
             Case "B"
@@ -1600,21 +1617,21 @@ Public Class frmJobEntry
         End Select
 
         If LRecordCount = 0 Then
-
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Visible = True
+            Me.txtLotNumber.Focus()
             Label3.Visible = True
             Label3.Text = "NO Grade " & "'" & txtGrade.Text & "'" & " CHEESES PLEASE RE-SCAN" & vbCrLf & "ไม่มีค่าสี “ & txtGrade.Text & ” กรุณาสแกน cheese ลูกนี้อีกครั้ง"
             DelayTM()
             Label3.Visible = False
-            Me.txtLotNumber.Clear()
-            Me.txtLotNumber.Visible = True
-            Me.txtLotNumber.Focus()
+
             quit = 1
             Exit Sub
 
         End If
 
 
-        If txtGrade.Text = "ReCheckA" Then
+        If txtGrade.Text = "A" Then  'txtGrade.Text = "ReCheckA" Then
             'Extract requierd Informatiom
             varProductCode = txtLotNumber.Text.Substring(0, 3)
             year = txtLotNumber.Text.Substring(3, 2)
@@ -1664,7 +1681,7 @@ Public Class frmJobEntry
         'Check for correct cheese selection
         Select Case txtGrade.Text
 
-            Case "ReCheckA"
+            Case "A"   '"ReCheckA"
                 packGrade = txtGrade.Text
                 LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & txtLotNumber.Text & "' And  RECHK = 4 And RECHKRESULT = 'A' ORDER BY RECHKIDX ")
             Case "B"
@@ -1706,7 +1723,7 @@ Public Class frmJobEntry
             frmDGV.DGVdata.Rows(0).Selected = True
             Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
 
-            If txtGrade.Text = "ReCheckA" Then
+            If txtGrade.Text = "A" Then  '  If txtGrade.Text = "ReCheckA" Then
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE by our own index
                 ' frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
 
@@ -1716,7 +1733,7 @@ Public Class frmJobEntry
 
             End If
 
-            If txtGrade.Text = "ReCheckA" Then
+            If txtGrade.Text = "A" Then  ' If txtGrade.Text = "ReCheckA" Then
                 rechkA = 1
                 coneValUpdate = 1
                 varCartSelect = 1

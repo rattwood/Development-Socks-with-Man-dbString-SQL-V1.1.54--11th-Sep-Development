@@ -81,11 +81,6 @@ Public Class frmPackRchkA
                 DGVPakingRecA.Rows(0).Selected = True
                 Dim PCB As SqlCommandBuilder = New SqlCommandBuilder(PDA)
 
-                'MsgBox(frmJobEntry.txtLotNumber.Text)
-                'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-                'DGVPakingA.Sort(DGVPakingA.Columns("CONENUM"), ListSortDirection.Ascending)  'sorts On cone number
-                'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE by our own index
-                ' DGVPakingRecA.Sort(DGVPakingRecA.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
 
             Else
 
@@ -339,6 +334,9 @@ Public Class frmPackRchkA
                     Label1.Text = "Cheese already allocated"
                     DelayTM()
                     Label1.Visible = False
+                    txtConeBcode.Clear()
+                    txtConeBcode.Refresh()
+                    txtConeBcode.Focus()
                 ElseIf DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value < "8" Then
                     curcone = DGVPakingRecA.Rows(i - 1).Cells("CONENUM").Value
                     psorterror = 1
@@ -355,7 +353,9 @@ Public Class frmPackRchkA
                     Label1.Text = "You Have scanned a Cheese that is not 'GRADE A'"
                     DelayTM()
                     Label1.Visible = False
-
+                    txtConeBcode.Clear()
+                    txtConeBcode.Refresh()
+                    txtConeBcode.Focus()
                     psorterror = 0
                     curcone = 0
                     Continue For
