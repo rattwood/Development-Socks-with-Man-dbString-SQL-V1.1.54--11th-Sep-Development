@@ -45,7 +45,8 @@ Partial Class frmJobEntry
         Me.PackingGradeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripTextBox3 = New System.Windows.Forms.ToolStripTextBox()
         Me.AGradeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReCheckAToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GradeAReCheckAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SpecialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ASGradeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.P15ASToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.P25ASToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -254,7 +255,7 @@ Partial Class frmJobEntry
         '
         'PackingGradeToolStripMenuItem
         '
-        Me.PackingGradeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox3, Me.AGradeToolStripMenuItem, Me.ReCheckAToolStripMenuItem4, Me.ASGradeToolStripMenuItem, Me.BALADGradeToolStripMenuItem, Me.BSGradesToolStripMenuItem, Me.ToolStripMenuItem2, Me.WasteToolStripMenuItem, Me.ToolStripSeparator3, Me.ToolStripTextBox2, Me.ReCheckToolStripMenuItem})
+        Me.PackingGradeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox3, Me.AGradeToolStripMenuItem, Me.ASGradeToolStripMenuItem, Me.BALADGradeToolStripMenuItem, Me.BSGradesToolStripMenuItem, Me.ToolStripMenuItem2, Me.WasteToolStripMenuItem, Me.ToolStripSeparator3, Me.ToolStripTextBox2, Me.ReCheckToolStripMenuItem})
         Me.PackingGradeToolStripMenuItem.Name = "PackingGradeToolStripMenuItem"
         Me.PackingGradeToolStripMenuItem.Size = New System.Drawing.Size(95, 20)
         Me.PackingGradeToolStripMenuItem.Text = "Packing Grade"
@@ -270,17 +271,25 @@ Partial Class frmJobEntry
         'AGradeToolStripMenuItem
         '
         Me.AGradeToolStripMenuItem.BackColor = System.Drawing.Color.White
+        Me.AGradeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GradeAReCheckAToolStripMenuItem, Me.SpecialToolStripMenuItem})
         Me.AGradeToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AGradeToolStripMenuItem.Name = "AGradeToolStripMenuItem"
         Me.AGradeToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.AGradeToolStripMenuItem.Text = "A"
         '
-        'ReCheckAToolStripMenuItem4
+        'GradeAReCheckAToolStripMenuItem
         '
-        Me.ReCheckAToolStripMenuItem4.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ReCheckAToolStripMenuItem4.Name = "ReCheckAToolStripMenuItem4"
-        Me.ReCheckAToolStripMenuItem4.Size = New System.Drawing.Size(185, 22)
-        Me.ReCheckAToolStripMenuItem4.Text = "ReCheckA"
+        Me.GradeAReCheckAToolStripMenuItem.BackColor = System.Drawing.Color.LightGreen
+        Me.GradeAReCheckAToolStripMenuItem.Name = "GradeAReCheckAToolStripMenuItem"
+        Me.GradeAReCheckAToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.GradeAReCheckAToolStripMenuItem.Text = "Grade A & ReCheck A"
+        '
+        'SpecialToolStripMenuItem
+        '
+        Me.SpecialToolStripMenuItem.Enabled = False
+        Me.SpecialToolStripMenuItem.Name = "SpecialToolStripMenuItem"
+        Me.SpecialToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.SpecialToolStripMenuItem.Text = "Grade A Special"
         '
         'ASGradeToolStripMenuItem
         '
@@ -725,7 +734,6 @@ Partial Class frmJobEntry
     Friend WithEvents Pilot6ChToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Pilot15ChToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Pilot20ChToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ReCheckAToolStripMenuItem4 As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents ToolStripTextBox2 As ToolStripTextBox
     Friend WithEvents ToolStripTextBox3 As ToolStripTextBox
@@ -734,4 +742,6 @@ Partial Class frmJobEntry
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents ToolStripTextBox5 As ToolStripTextBox
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
+    Friend WithEvents GradeAReCheckAToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SpecialToolStripMenuItem As ToolStripMenuItem
 End Class

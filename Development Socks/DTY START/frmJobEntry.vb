@@ -1994,14 +1994,14 @@ Public Class frmJobEntry
         'End If
     End Sub
 
-    Private Sub AGradeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AGradeToolStripMenuItem.Click
-        stdReChk = 0
-        txtGrade.Text = AGradeToolStripMenuItem.Text
-        lblSelectGrade.Visible = False
-        txtOperator.Visible = True
-        txtOperator.Focus()
-        lblScanType.Text = "Scan Job Sheet"
-    End Sub
+    'Private Sub AGradeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AGradeToolStripMenuItem.Click
+    '    stdReChk = 0
+    '    txtGrade.Text = AGradeToolStripMenuItem.Text
+    '    lblSelectGrade.Visible = False
+    '    txtOperator.Visible = True
+    '    txtOperator.Focus()
+    '    lblScanType.Text = "Scan Job Sheet"
+    'End Sub
 
     Private Sub P15ASToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles P15ASToolStripMenuItem.Click
         stdReChk = 0
@@ -2192,19 +2192,26 @@ Public Class frmJobEntry
 
     End Sub
 
-    Private Sub ReCheckAToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles ReCheckAToolStripMenuItem4.Click
-        stdReChk = 0
-        txtGrade.Text = ReCheckAToolStripMenuItem4.Text
-        lblSelectGrade.Visible = False
-        txtOperator.Visible = True
-        txtOperator.Focus()
-        lblScanType.Text = "Scan Job Sheet"
-    End Sub
+    'Private Sub ReCheckAToolStripMenuItem4_Click(sender As Object, e As EventArgs)
+    '    stdReChk = 0
+    '    txtGrade.Text = ReCheckAToolStripMenuItem4.Text
+    '    lblSelectGrade.Visible = False
+    '    txtOperator.Visible = True
+    '    txtOperator.Focus()
+    '    lblScanType.Text = "Scan Job Sheet"
+    'End Sub
 
     Private Sub StockToProcessReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StockToProcessReportToolStripMenuItem.Click
         frmProdStockWork.Show()
 
     End Sub
 
-
+    Private Sub GradeAReCheckAToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GradeAReCheckAToolStripMenuItem.Click
+        stdReChk = 0
+        txtGrade.Text = AGradeToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan Job Sheet"
+    End Sub
 End Class
