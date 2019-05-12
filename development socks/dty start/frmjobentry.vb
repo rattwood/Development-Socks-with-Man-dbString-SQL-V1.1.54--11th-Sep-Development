@@ -149,6 +149,7 @@ Public Class frmJobEntry
 
         Me.btnCancelReport.Visible = False
 
+        ' audioAlarms.Start()
 
 
     End Sub
@@ -213,6 +214,14 @@ Public Class frmJobEntry
 
         'Routine to check Barcode is TRUE
         'Check to see if PILOT Cheese, if it is force operatoer to select correct packing grade.
+
+        If txtLotNumber.Text = "" Then
+            MsgBox("Please scan Barcode")
+            txtLotNumber.Clear()
+            txtLotNumber.Focus()
+            Exit Sub
+
+        End If
 
         If My.Settings.chkUsePack And txtLotNumber.Text.Substring(0, 2) = "29" Then
             Select Case txtGrade.Text
