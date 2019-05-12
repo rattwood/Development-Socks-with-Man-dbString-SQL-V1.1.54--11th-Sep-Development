@@ -141,6 +141,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        '''</summary>
+        Friend ReadOnly Property toray_warning() As System.IO.UnmanagedMemoryStream
+            Get
+                Return ResourceManager.GetStream("toray_warning", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         '''</summary>
         Friend ReadOnly Property ts_final_logo_yk_FSc_icon() As System.Drawing.Icon

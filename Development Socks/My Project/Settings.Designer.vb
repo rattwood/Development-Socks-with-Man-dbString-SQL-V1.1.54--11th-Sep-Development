@@ -349,6 +349,18 @@ Namespace My
                 Me("chkUseThai") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property audioAlarm() As Boolean
+            Get
+                Return CType(Me("audioAlarm"),Boolean)
+            End Get
+            Set
+                Me("audioAlarm") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

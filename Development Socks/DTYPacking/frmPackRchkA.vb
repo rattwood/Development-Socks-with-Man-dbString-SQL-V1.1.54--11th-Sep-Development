@@ -294,16 +294,16 @@ Public Class frmPackRchkA
             For i = 1 To PRecordCount
 
 
-                If DGVPakingRecA.Rows(i - 1).Cells(9).Value = "8" And IsDBNull(DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value) Then Continue For
+                If DGVPakingRecA.Rows(i - 1).Cells(9).Value = 8 And IsDBNull(DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value) Then Continue For
 
-                If DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "8" And DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value = "A" Then
+                If DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = 8 And DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value = "A" Then
                     curcone = DGVPakingRecA.Rows(i - 1).Cells("RECHKIDX").Value
                     Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.LightGreen       'Grade A Cone
                     DGVPakingRecA.Rows(i - 1).Cells("RECHK").Value = 5
-                    DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "14"
+                    DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = 14
                     DGVPakingRecA.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
                     DGVPakingRecA.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.varUserName
-                    DGVPakingRecA.Rows(i - 1).Cells("CARTENDTM").Value = today
+                    DGVPakingRecA.Rows(i - 1).Cells("CARTENDTM").Value = Today
 
                     'CHECK TO SEE IF DATE ALREADY SET FOR END TIME
                     If IsDBNull(DGVPakingRecA.Rows(i - 1).Cells("PACKENDTM").Value) Then
@@ -329,7 +329,7 @@ Public Class frmPackRchkA
 
                     curcone = 0
 
-                ElseIf DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
+                ElseIf DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value >= 14 Then
                     Label1.Visible = True
                     Label1.Text = "Cheese already allocated"
                     DelayTM()
@@ -337,18 +337,16 @@ Public Class frmPackRchkA
                     txtConeBcode.Clear()
                     txtConeBcode.Refresh()
                     txtConeBcode.Focus()
-                ElseIf DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value < "8" Then
+                ElseIf DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value < 8 Then
                     curcone = DGVPakingRecA.Rows(i - 1).Cells("CONENUM").Value
                     psorterror = 1
                     Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.Red      'Wrong Cone scanned
                     DGVPakingRecA.Rows(i - 1).Cells("PSORTERROR").Value = psorterror
                     DGVPakingRecA.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
-                    'DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = "14"
                     DGVPakingRecA.Rows(i - 1).Cells("CARTENDTM").Value = Today
 
 
-                    'Me.Hide()
-                    ' frmRemoveCone.Show()
+
                     Label1.Visible = True
                     Label1.Text = "You Have scanned a Cheese that is not 'GRADE A'"
                     DelayTM()
@@ -383,6 +381,9 @@ Public Class frmPackRchkA
         Dim sw As New Stopwatch
         sw.Start()
         Do While sw.ElapsedMilliseconds < interval
+            If My.Settings.audioAlarm Then
+                My.Computer.Audio.Play(My.Resources.toray_warning, AudioPlayMode.WaitToComplete)
+            End If
             Application.DoEvents()
         Loop
         sw.Stop()

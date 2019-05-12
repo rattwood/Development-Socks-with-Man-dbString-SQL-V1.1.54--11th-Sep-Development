@@ -56,6 +56,7 @@ Partial Class frmSettings
         Me.Label9 = New System.Windows.Forms.Label()
         Me.txtBoxBarcodectrl = New System.Windows.Forms.TextBox()
         Me.chkDisableCreate = New System.Windows.Forms.CheckBox()
+        Me.chkAudioAlarm = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'lblSerialPortSelect
@@ -229,7 +230,7 @@ Partial Class frmSettings
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(21, 452)
+        Me.Button1.Location = New System.Drawing.Point(471, 405)
         Me.Button1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(240, 48)
@@ -387,11 +388,24 @@ Partial Class frmSettings
         Me.chkDisableCreate.Text = "Dissable Sort Create"
         Me.chkDisableCreate.UseVisualStyleBackColor = True
         '
+        'chkAudioAlarm
+        '
+        Me.chkAudioAlarm.AutoSize = True
+        Me.chkAudioAlarm.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkAudioAlarm.Location = New System.Drawing.Point(21, 441)
+        Me.chkAudioAlarm.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.chkAudioAlarm.Name = "chkAudioAlarm"
+        Me.chkAudioAlarm.Size = New System.Drawing.Size(164, 20)
+        Me.chkAudioAlarm.TabIndex = 56
+        Me.chkAudioAlarm.Text = "Audio Alarm Enable"
+        Me.chkAudioAlarm.UseVisualStyleBackColor = True
+        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(739, 522)
+        Me.Controls.Add(Me.chkAudioAlarm)
         Me.Controls.Add(Me.chkDisableCreate)
         Me.Controls.Add(Me.txtBoxBarcodectrl)
         Me.Controls.Add(Me.Label9)
@@ -467,4 +481,5 @@ Partial Class frmSettings
     Friend WithEvents Label9 As Label
     Friend WithEvents txtBoxBarcodectrl As TextBox
     Friend WithEvents chkDisableCreate As CheckBox
+    Friend WithEvents chkAudioAlarm As CheckBox
 End Class

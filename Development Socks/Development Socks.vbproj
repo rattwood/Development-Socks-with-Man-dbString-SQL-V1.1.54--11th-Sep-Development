@@ -213,6 +213,7 @@
     <Compile Include="DTY Settings\frmSettingSelect.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DTY START\audioAlarms.vb" />
     <Compile Include="DTY START\frmChangePassword.Designer.vb">
       <DependentUpon>frmChangePassword.vb</DependentUpon>
     </Compile>
@@ -858,6 +859,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Settings_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\toray_warning.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

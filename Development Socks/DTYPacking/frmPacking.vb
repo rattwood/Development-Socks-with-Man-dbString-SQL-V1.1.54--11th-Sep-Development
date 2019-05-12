@@ -354,46 +354,7 @@ Public Class frmPacking
     End Sub
 
 
-    ''Create csv file
 
-    'Private Sub CSV()
-
-    '    Dim today As String = DateAndTime.Now
-    '    Dim csvFile As String
-
-    '    'Check to see if file exists, if it does not creat the file, otherwise add data to the file
-    '    Dim dataOut As String = String.Concat(frmJobEntry.varMachineCode, ",", frmJobEntry.varMachineName, ",", frmJobEntry.varYear, ",", frmJobEntry.varMonth, ",", frmJobEntry.varDoffingNum, ",", fltconeNum, ",", frmJobEntry.mergeNum, ",", frmJobEntry.varUserName, ",", DGVPakingA.Rows(csvRowNum).Cells("CONESTATE"), ",", DGVPakingA.Rows(csvRowNum).Cells("SHORTCONE").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("MISSCONE").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("DEFCONE").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("BCODECART").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("M30").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("P30").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("CARTSTARTTM").Value, ",", DGVPakingA.Rows(csvRowNum).Cells("CARTENDTM").Value, ",", today & Environment.NewLine)
-
-
-    '    csvFile = My.Settings.dirCarts & ("\" & DGVPakingA.Rows(csvRowNum).Cells("BCODECART").Value.ToString & "PackLog.csv")
-
-
-    '    If fileActive Then
-
-    '        Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, True)
-    '        outFile.WriteLine("M/C Code, M/C Name, YY, MM, Doff #, Cone #, Merge #,User, Cone State, Short, NoCone, Defect, Cart Name, -30, +30,Start, End, Fault time ")
-    '        outFile.WriteLine(dataOut)
-    '        outFile.Close()
-
-    '    Else
-
-    '        Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, False)
-    '        outFile.WriteLine("M/C Code, M/C Name, YY, MM, Doff #, Cone #, Merge #,User, Cone State, Short, NoCone, Defect, Cart Name, -30, +30,Start, End, Fault time ")
-
-    '        outFile.WriteLine(dataOut)
-    '        outFile.Close()
-    '        fileActive = True
-
-
-    '    End If
-
-
-
-
-
-
-
-    'End Sub
 
     Public Sub UpdateConeVal()
         If My.Settings.debugSet Then frmDGV.Show()
@@ -433,12 +394,6 @@ Public Class frmPacking
     End Sub
 
 
-
-
-
-
-    'Private Sub txtConeBcode_TextChanged(sender As Object, e As EventArgs) Handles txtConeBcode.TextChanged
-
     Private Sub prgContinue()
 
         If txtConeBcode.TextLength <> 15 Then
@@ -466,10 +421,10 @@ Public Class frmPacking
 
 
 
-                If DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "9" And DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = False Then
+                If DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = 9 And DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = False Then
                     curcone = DGVPakingA.Rows(i - 1).Cells("CONENUM").Value
                     Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.LightGreen       'Grade A Cone
-                    DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "14"
+                    DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = 14
                     DGVPakingA.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
                     DGVPakingA.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.varUserName
                     'DGVPakingA.Rows(i - 1).Cells("CARTENDTM").Value = today
@@ -494,15 +449,24 @@ Public Class frmPacking
 
                     txtBoxOnSheet.Text = packedCheese
                     txtBoxToFinish.Text = remainingCheese
-
                     curcone = 0
+                    txtConeBcode.Clear()
+                    txtConeBcode.Refresh()
+                    txtConeBcode.Focus()
 
-                ElseIf DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15" Then
-                    Label1.Visible = True
+                ElseIf DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value >= 14 Then
+
+
                     Label1.Text = "Cheese already allocated"
+                    Label1.Visible = True
                     DelayTM()
                     Label1.Visible = False
-                ElseIf DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value < "9" Or DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "9" And DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = True Then
+
+                    txtConeBcode.Clear()
+                    txtConeBcode.Refresh()
+                    txtConeBcode.Focus()
+
+                ElseIf DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value < 9 Or DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = 9 And DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = True Then
                     curcone = DGVPakingA.Rows(i - 1).Cells("CONENUM").Value
                     psorterror = 1
                     Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.Red      'Wrong Cone scanned
@@ -511,31 +475,25 @@ Public Class frmPacking
                     ' DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "14"
                     DGVPakingA.Rows(i - 1).Cells("CARTENDTM").Value = today
 
-                    'UPDATE ALL CHEESE ON CART AS PROCESSED TODAY FOR DAILY PACKING REPORT TO WORK
 
-                    'If IsDBNull( DGVPakingA.Rows(0).Cells("PACKENDTM").Value) Then
-                    '    For rows As Integer = 1 To rowendcount
-                    '        If My.Settings.chkUseColour = True Then  DGVPakingA.Rows((rows - 1) - coneNumOffset).Cells("PACKENDTM").Value = varCartEndTime 'PACKING CHECK END TIME
-                    '    Next
-                    'End If
                     Label1.Visible = True
                     Label1.Text = "You Have scanned a Cheese that is not 'GRADE A'"
                     DelayTM()
                     Label1.Visible = False
 
 
-                    'Me.Hide()
-                    'frmRemoveCone.Show()
+
+                    bcodeScan = ""
                     psorterror = 0
                     curcone = 0
-                    Continue For
-                Else
                     txtConeBcode.Clear()
                     txtConeBcode.Refresh()
                     txtConeBcode.Focus()
 
+
                 End If
             Next
+
         Catch ex As Exception
 
             'Write error to Log File
@@ -561,6 +519,9 @@ Public Class frmPacking
         Dim sw As New Stopwatch
         sw.Start()
         Do While sw.ElapsedMilliseconds < interval
+            If My.Settings.audioAlarm Then
+                My.Computer.Audio.Play(My.Resources.toray_warning, AudioPlayMode.WaitToComplete)
+            End If
             Application.DoEvents()
         Loop
         sw.Stop()
