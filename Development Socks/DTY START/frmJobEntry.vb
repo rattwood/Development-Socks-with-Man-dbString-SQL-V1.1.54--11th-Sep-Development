@@ -2223,4 +2223,10 @@ Public Class frmJobEntry
         txtOperator.Focus()
         lblScanType.Text = "Scan Job Sheet"
     End Sub
+
+    Private Sub PrintToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintToolStripMenuItem.Click
+        Me.Hide()
+        frmPackingPrintLastSheet.Show()
+
+    End Sub
 End Class
