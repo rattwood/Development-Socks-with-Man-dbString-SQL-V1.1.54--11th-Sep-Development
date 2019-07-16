@@ -864,6 +864,19 @@ Public Class frmCart1
                     ' txtBoxUpdates()
                     UpdateConeVal()
 
+                    Dim department As String
+
+                    If My.Settings.chkUseSort Then department = "SORTING"
+                    If My.Settings.chkUseColour Then department = "COLOUR"
+                    If My.Settings.chkUsePack Then department = "PACKING"
+
+
+                    Dim message As String = "Operator " & frmJobEntry.varUserName & " Department " & department & vbCrLf & "Deleted Cheese Number " & (varConeNum) & " From Job " & frmJobEntry.txtLotNumber.Text
+                    MsgBox(message)
+
+                    'Write error to Log File
+                    writeerrorLog.writelog("CHESSE DELETED", message, False, "Operator Overide")
+
 
                     varConeNum = 0
                     txtConeNum.Text = ""
