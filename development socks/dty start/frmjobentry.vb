@@ -306,9 +306,12 @@ Public Class frmJobEntry
 
         Catch ex As Exception
             'Write error to Log File
+            Dim tmpMessage As String
+            tmpMessage = "Faulty Barcode for this error is " & txtLotNumber.Text
+
             writeerrorLog.writelog("Barcode Error", ex.Message, False, "User Fault")
             writeerrorLog.writelog("Barcode Error", ex.ToString, False, "User Fault")
-
+            writeerrorLog.writelog("Barcode Error", tmpMessage, False, "User Fault")
 
             MsgBox("BarCcode Is Not Valid" & vbCrLf & " บาร์โค็ดไม่ถูกต้อง")
             Me.txtLotNumber.Clear()
