@@ -766,7 +766,7 @@ Public Class frmJobEntry
 
     End Sub
 
-    Public Sub reCheckJob()
+    Public Sub reCheckJob()  'This is to find existing ReCheck job using sheet number
 
         If stdcheck Then
             Select Case txtLotNumber.Text.Substring(9, 3)
@@ -1277,7 +1277,7 @@ Public Class frmJobEntry
             writeerrorLog.writelog("Barcode Error", ex.ToString, False, "User Fault")
 
             Label3.Visible = True
-            Label3.Text = "BarCcode Is Not Valid" * vbCrLf & " ไม่พบหมายเลข บาร์โค็ด นี้"
+            Label3.Text = "BarCcode Is Not Valid" & vbCrLf & " ไม่พบหมายเลข บาร์โค็ด นี้"
             DelayTM()
             Label3.Visible = False
 
