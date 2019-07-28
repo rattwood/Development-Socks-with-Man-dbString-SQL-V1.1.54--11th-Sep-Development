@@ -635,8 +635,13 @@
             Next
         Catch ex As Exception
             'Write error to Log File
-            writeerrorLog.writelog("Scan Error", ex.Message, False, "System Fault")
+            Dim errorDetail As String
+
+            errorDetail = "Operator " & frmJobEntry.txtOperator.Text & "Barcode " & bcodeScan
+
+            writeerrorLog.writelog("Scan Error", errorDetail, False, "System Fault")
             writeerrorLog.writelog("Scan Error", ex.ToString, False, "System Fault")
+            writeerrorLog.writelog("Scan Detail", ex.ToString, False, "System Fault")
             Label8.Visible = False
             txtConeBcode.Clear()
             txtConeBcode.Focus()
@@ -764,7 +769,7 @@
             frmPackRepMain.PackRepMainSub()
 
 
-            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(0), System.ComponentModel.ListSortDirection.Ascending)  ' Is this needed ?
+            'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(0), System.ComponentModel.ListSortDirection.Ascending)  ' Is this needed ?
 
             If frmPackTodayUpdate.prtError Then
                 frmPackRepMain.Close()
@@ -789,6 +794,10 @@
             End If
         Catch ex As Exception
             'Write error to Log File
+            Dim errorDetail As String
+            errorDetail = "Operator " & frmJobEntry.txtOperator.Text & "Barcode " & bcodeScan
+
+            writeerrorLog.writelog("Scan Error", errorDetail, False, "System Fault")
             writeerrorLog.writelog("Scan Error", ex.Message, False, "System Fault")
             writeerrorLog.writelog("Scan Error", ex.ToString, False, "System Fault")
             Me.Close()

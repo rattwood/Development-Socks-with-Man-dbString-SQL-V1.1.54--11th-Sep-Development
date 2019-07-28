@@ -87,6 +87,7 @@ Partial Class frmJobEntry
         Me.ToolStripTextBox5 = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ReCheckToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrintToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblMessage = New System.Windows.Forms.ToolStripStatusLabel()
@@ -96,7 +97,6 @@ Partial Class frmJobEntry
         Me.lblSelectGrade = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtPilotCount = New System.Windows.Forms.TextBox()
-        Me.PrintToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.ToraydbBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Toraydb, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
@@ -555,6 +555,12 @@ Partial Class frmJobEntry
         Me.ReCheckToolStripMenuItem1.Text = "ReCheck"
         Me.ReCheckToolStripMenuItem1.Visible = False
         '
+        'PrintToolStripMenuItem
+        '
+        Me.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem"
+        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.PrintToolStripMenuItem.Text = "Print"
+        '
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.lblMessage, Me.StatusPanel})
@@ -632,12 +638,6 @@ Partial Class frmJobEntry
         Me.txtPilotCount.Size = New System.Drawing.Size(44, 44)
         Me.txtPilotCount.TabIndex = 185
         Me.txtPilotCount.Visible = False
-        '
-        'PrintToolStripMenuItem
-        '
-        Me.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem"
-        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
-        Me.PrintToolStripMenuItem.Text = "Print"
         '
         'frmJobEntry
         '
