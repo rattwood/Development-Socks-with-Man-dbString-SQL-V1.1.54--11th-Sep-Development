@@ -659,9 +659,9 @@ Partial Class frmPacking
         Me.DGVPakingA.AllowUserToAddRows = False
         Me.DGVPakingA.AllowUserToDeleteRows = False
         Me.DGVPakingA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVPakingA.Location = New System.Drawing.Point(12, 387)
+        Me.DGVPakingA.Location = New System.Drawing.Point(1106, 657)
         Me.DGVPakingA.Name = "DGVPakingA"
-        Me.DGVPakingA.Size = New System.Drawing.Size(526, 120)
+        Me.DGVPakingA.Size = New System.Drawing.Size(285, 190)
         Me.DGVPakingA.TabIndex = 178
         Me.DGVPakingA.Visible = False
         '
@@ -725,6 +725,7 @@ Partial Class frmPacking
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1584, 861)
+        Me.Controls.Add(Me.DGVPakingA)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.txtBoxToFinish)
@@ -774,7 +775,6 @@ Partial Class frmPacking
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtConeBcode)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.DGVPakingA)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmPacking"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

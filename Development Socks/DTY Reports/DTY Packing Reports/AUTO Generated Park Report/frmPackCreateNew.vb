@@ -26,7 +26,7 @@ Public Class frmPackCreateNew
 
 
         'CREATE CORRECT HEADER FOR SHEET
-        Select Case frmJobEntry.txtGrade.Text
+        Select Case frmPackRepMain.TmpGrade       'frmJobEntry.txtGrade.Text
 
             Case "A"
                 nfree = 13
