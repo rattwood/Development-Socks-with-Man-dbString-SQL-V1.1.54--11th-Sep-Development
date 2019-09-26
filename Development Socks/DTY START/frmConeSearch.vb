@@ -13,8 +13,6 @@ Public Class frmConeSearch
 
         txtBoxJob.Text = ""
         txtBoxConeBC.Text = ""
-        'txtBoxSpindle.Text = ""
-        'txtBoxSpindle.Enabled = False
         btnJobSearch.Enabled = False
         btnConeSearch.Enabled = False
 
@@ -42,10 +40,6 @@ Public Class frmConeSearch
 
 
 
-        'frmJobEntry.LExecQuery("SELECT MCNUM,PRODNAME, DOFFNUM, CARTENDTM, OPPACK, OPCOLOUR, DEFCONE, CONESTATE, SHORTCONE FROM jobs Where BCODEJOB = '" & txtBoxJob.Text & "' AND CONENUM = '" & txtBoxSpindle.Text & "' ")
-
-        ' frmJobEntry.LExecQuery("SELECT MCNUM,PRODNAME, DOFFNUM, MERGENUM, CONENUM, CONESTATE, SHORTCONE, MISSCONE, DEFCONE, M30, P30, CONEBARLEY, SORTENDTM, COLENDTM, PACKENDTM FROM jobs Where BCODEJOB = '" & txtBoxJob.Text & "' ")
-
 
 
 
@@ -53,7 +47,6 @@ Public Class frmConeSearch
 
         Try
 
-            ' frmJobEntry.LExecQuery("SELECT MCNUM, PRODNAME, DOFFNUM, CARTENDTM, OPPACK, OPCOLOUR, DEFCONE, CONESTATE, SHORTCONE, CARTONNUM FROM jobs Where BCODEJOB = '" & txtBoxJob.Text & "' AND CONENUM = '" & txtBoxSpindle.Text & "' ")
             frmJobEntry.LExecQuery("SELECT MCNUM,PRODNAME, MERGENUM, DOFFNUM,CONENUM, CONESTATE, SHORTCONE, MISSCONE, DEFCONE, M30, P30, CONEBARLEY, SORTENDTM, COLENDTM, PACKENDTM FROM jobs Where BCODECART = '" & txtBoxJob.Text & "' ")
 
 
@@ -411,15 +404,8 @@ Public Class frmConeSearch
         frmJobEntry.txtLotNumber.Focus()
     End Sub
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
-    End Sub
 
-    Private Sub txtTraceNum_TextChanged(sender As Object, e As EventArgs) Handles txtTraceNum.TextChanged
 
-    End Sub
 
-    Private Sub txtBoxDef_TextChanged(sender As Object, e As EventArgs) Handles txtBoxDef.TextChanged
-
-    End Sub
 End Class

@@ -637,7 +637,7 @@
             'Write error to Log File
             Dim errorDetail As String
 
-            errorDetail = "Operator " & frmJobEntry.txtOperator.Text & "Barcode " & bcodeScan
+            errorDetail = "Operator " & frmJobEntry.txtOperator.Text & "Barcode " & bcodeScan & "Computer " & bcodeScan & System.Environment.MachineName
 
             writeerrorLog.writelog("Scan Error", errorDetail, False, "System Fault")
             writeerrorLog.writelog("Scan Error", ex.ToString, False, "System Fault")
@@ -795,11 +795,11 @@
         Catch ex As Exception
             'Write error to Log File
             Dim errorDetail As String
-            errorDetail = "Operator " & frmJobEntry.txtOperator.Text & "Barcode " & bcodeScan
+            errorDetail = "Operator " & frmJobEntry.txtOperator.Text & "Computer " & System.Environment.MachineName
 
-            writeerrorLog.writelog("Scan Error", errorDetail, False, "System Fault")
-            writeerrorLog.writelog("Scan Error", ex.Message, False, "System Fault")
-            writeerrorLog.writelog("Scan Error", ex.ToString, False, "System Fault")
+            writeerrorLog.writelog("Error during Print", errorDetail, False, "System Fault")
+            writeerrorLog.writelog("Error during Print", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Error during Print", ex.ToString, False, "System Fault")
             Me.Close()
             frmJobEntry.Show()
             frmJobEntry.txtLotNumber.Clear()
@@ -864,6 +864,8 @@
             End If
         Catch ex As Exception
             'Write error to Log File
+            Dim ErrorMsg As String = "Computer " & System.Environment.MachineName
+            writeerrorLog.writelog("db Update Error", ErrorMsg, False, "System Fault")
             writeerrorLog.writelog("db Update Error", ex.Message, False, "System Fault")
             writeerrorLog.writelog("db Update Error", ex.ToString, False, "System Fault")
 
