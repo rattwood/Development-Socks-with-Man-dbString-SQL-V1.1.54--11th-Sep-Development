@@ -124,10 +124,10 @@ Public Class frmPackRchkA
         Catch ex As Exception
 
             'Write error to Log File
-            writeerrorLog.writelog("PAckRchk Load error", ex.Message, False, "System Fault")
-            writeerrorLog.writelog("Drum Scan Error", ex.ToString, False, "System Fault")
+            writeerrorLog.writelog("PackRchk Load error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("PackRchk Load Error", ex.ToString, False, "System Fault")
 
-            MsgBox("DRUM BarCode Is Not Valid " & vbNewLine & ex.Message)
+            MsgBox("PackRchk Load " & vbNewLine & ex.Message)
 
         End Try
 
@@ -239,6 +239,7 @@ Public Class frmPackRchkA
                 Me.Controls("btnCone" & rw).Enabled = False
             Next
 
+            txtboxTotal.Text = toAllocatedCount
         Catch ex As Exception
 
             'Write error to Log File
