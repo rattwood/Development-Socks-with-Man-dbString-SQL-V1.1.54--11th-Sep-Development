@@ -797,6 +797,7 @@ Public Class frmJobEntry
 
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
 
+
                 If My.Settings.debugSet Then frmDGV.Show()
                 varProductName = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value.ToString
                 coneValUpdate = 1
