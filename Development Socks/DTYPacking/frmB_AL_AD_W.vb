@@ -5,23 +5,25 @@
     Public bcodeScan As String = ""
     Public toAllocatedCount As Integer 'count of cones requierd to be scanned
     Public allocatedCount As Integer 'count of cones scanned
-    ' Public varCartEndTime As String
-    Public packedFlag As Integer
 
+    'Public varCartEndTime As String
+    Public packedFlag As Integer
     Public gradePackActive As Integer = 1
+
     'Index for DGV
     Dim gridRow As Integer = 0
     Dim gridCol As Integer = 1
+
     'INDEX FOR DGV1
     Dim dgv1gridRow As Integer = 0
     Dim dgv1gridCol As Integer = 0
+
     'Index for changing input location in DGV
     Dim tmpNum As Integer
-
     Dim coneCount As Integer = 0
-
     Dim dgvRows As Integer
     Dim screenHeight As Integer = Screen.PrimaryScreen.WorkingArea.Height
+    Dim pauseScan As Integer = 0  'Stop barcode entry when 0
 
     'THIS INITIATES WRITING TO ERROR LOG
     Private writeerrorLog As New writeError
@@ -168,6 +170,7 @@
 
         'THESE TWO LINES CONE SCANNED CHEESE FROM JOBENTRY IN TO THE FIRST ROW OF THE FORM AS WE KNOW IT IS THE CORRECT GRADE
         txtConeBcode.Text = frmJobEntry.txtLotNumber.Text
+        If My.Settings.chkUseSort Then btnDefect.Visible = False
         prgContinue()
 
 
@@ -756,7 +759,7 @@
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         Label8.Visible = True
         ' Label8.Text = ("This is not a Grade " & frmJobEntry.txtGrade.Text & " Cheese")
-        Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
+        pauseScan = 1 'Stop Barcode entry
         Label8.Text = ("Please wait creating packing Excel sheet")
 
         Try
@@ -771,6 +774,7 @@
 
             'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(0), System.ComponentModel.ListSortDirection.Ascending)  ' Is this needed ?
 
+
             If frmPackTodayUpdate.prtError Then
                 frmPackRepMain.Close()
                 Me.Cursor = System.Windows.Forms.Cursors.Default
@@ -778,6 +782,7 @@
                 Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
                 frmPackTodayUpdate.Close()
                 gradePackActive = 0
+                pauseScan = 0 'Stop Barcode entry
                 Me.Close()
                 Exit Sub
             Else
@@ -844,6 +849,8 @@
 
     Private Sub UpdateDatabase()
 
+        pauseScan = 1 'Stop Barcode entry
+
         tsbtnSave()
 
 
@@ -870,6 +877,7 @@
             writeerrorLog.writelog("db Update Error", ex.ToString, False, "System Fault")
 
             MsgBox("Update Error: " & vbNewLine & ex.Message)
+            pauseScan = 0 'Allow barcode entry
         End Try
 
 
@@ -880,6 +888,7 @@
         frmJobEntry.txtLotNumber.Focus()
         frmJobEntry.Show()
         gradePackActive = 0
+        pauseScan = 0 'Allow barcode entry
         Me.Close()
 
 
@@ -904,12 +913,10 @@
 
     'THIS LOOKS FOR ENTER key to be pressed or received via barcode
     Private Sub frmJobEntry_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
-
-        If e.KeyCode = Keys.Return Then
-
-            prgContinue()
-
-
+        If pauseScan = 0 Then
+            If e.KeyCode = Keys.Return Then
+                prgContinue()
+            End If
         End If
 
     End Sub

@@ -63,6 +63,7 @@ Public Class frmPackRchkA
     Dim xlcheesecount As Integer
     Dim packedCheese As Integer
     Dim remainingCheese As Integer
+    Dim pauseScan As Integer = 0  'Stop barcode entry when 1
 
 
 
@@ -442,6 +443,8 @@ Public Class frmPackRchkA
 
     Private Sub UpdateDatabase()
 
+        pauseScan = 1 'Stop Barcode entry
+
         tsbtnSave()
 
 
@@ -455,11 +458,19 @@ Public Class frmPackRchkA
             If PDS.HasChanges Then
 
 
-                'LDA.UpdateCommand = New Oracle.ManagedDataAccess.Client.OracleCommandBuilder(frmJobEntry.LDA).GetUpdateCommand
-
                 PDA.Update(PDS.Tables(0))
 
             End If
+
+        Catch dbcx As DBConcurrencyException
+            Dim Response As String
+
+            Response = dbcx.Row.ToString
+            writeerrorLog.writelog("db Con Error", Response, False, "System Fault")
+            Response = dbcx.RowCount.ToString
+            writeerrorLog.writelog("db Con Error", Response, False, "System Fault")
+
+
         Catch ex As Exception
 
             'Write error to Log File
@@ -468,7 +479,7 @@ Public Class frmPackRchkA
 
             MsgBox("Update Error: " & vbNewLine & ex.Message)
 
-
+            pauseScan = 0 'Allow barcode entry
 
 
         End Try
@@ -481,6 +492,7 @@ Public Class frmPackRchkA
         frmJobEntry.txtLotNumber.Clear()
         frmJobEntry.txtLotNumber.Focus()
         frmJobEntry.Show()
+        pauseScan = 0 'Allow barcode entry
         Me.Close()
 
 
@@ -519,11 +531,13 @@ Public Class frmPackRchkA
     'THIS LOOKS FOR ENTER key to be pressed or received via barcode
     Private Sub frmJobEntry_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
 
-        If e.KeyCode = Keys.Return Then
+        If pauseScan = 0 Then
+            If e.KeyCode = Keys.Return Then
 
-            prgContinue()
+                prgContinue()
 
 
+            End If
         End If
 
     End Sub

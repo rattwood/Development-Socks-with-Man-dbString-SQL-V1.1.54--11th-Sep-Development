@@ -275,7 +275,7 @@
                         frmPacking.Controls("btnCone" & changeConeNum.ToString).BackColor = Color.Yellow
 
                         If defectCone = 1 Then
-                            frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "8"  'change cone state back to DEFECT FROM PACKING
+                            frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "13"  'change cone state back to DEFECT FROM PACKING
                             frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("FLT_K").Value = chk_K.Checked
                             frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("FLT_D").Value = chk_D.Checked
                             frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("FLT_F").Value = chk_F.Checked
@@ -295,7 +295,7 @@
 
                         If shortCone = 1 Then
 
-                            frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "8"  'change cone state back to defect cone
+                            frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "13"  'change cone state back to defect cone
                             frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("SHORTCONE").Value = frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("CONENUM").Value 'shortCone
                             frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("FLT_S").Value = "True" 'Sets the SHORT fault flag
                             frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("OPNAME").Value = frmJobEntry.PackOp
@@ -326,7 +326,7 @@
                             frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("OPNAME").Value = frmJobEntry.PackOp
                             frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
                             If hasdefect = 1 Then
-                                frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "8"
+                                frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "13"
                                 frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("DEFCONE").Value = frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("CONENUM").Value
                             End If
 
@@ -336,7 +336,7 @@
                         frmPackRchkA.Controls("btnCone" & changeConeNum.ToString).BackColor = Color.Yellow
 
                         If defectCone = 1 Then
-                            frmPackRchkA.DGVPakingRecA.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "8"  'change cone state back to DEFECT FROM PACKING
+                            frmPackRchkA.DGVPakingRecA.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "13"  'change cone state back to DEFECT FROM PACKING
                             frmPackRchkA.DGVPakingRecA.Rows(changeConeNum - 1).Cells("FLT_K").Value = chk_K.Checked
                             frmPackRchkA.DGVPakingRecA.Rows(changeConeNum - 1).Cells("FLT_D").Value = chk_D.Checked
                             frmPackRchkA.DGVPakingRecA.Rows(changeConeNum - 1).Cells("FLT_F").Value = chk_F.Checked
@@ -356,7 +356,7 @@
 
                         If shortCone = 1 Then
 
-                            frmPackRchkA.DGVPakingRecA.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "8"  'change cone state back to defect cone
+                            frmPackRchkA.DGVPakingRecA.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "13"  'change cone state back to defect cone
                             frmPackRchkA.DGVPakingRecA.Rows(changeConeNum - 1).Cells("SHORTCONE").Value = frmPackRchkA.DGVPakingRecA.Rows(changeConeNum - 1).Cells("CONENUM").Value 'shortCone
                             frmPackRchkA.DGVPakingRecA.Rows(changeConeNum - 1).Cells("FLT_S").Value = "True" 'Sets the SHORT fault flag
                             frmPackRchkA.DGVPakingRecA.Rows(changeConeNum - 1).Cells("OPNAME").Value = frmJobEntry.PackOp
@@ -387,7 +387,7 @@
                             frmPackRchkA.DGVPakingRecA.Rows(changeConeNum - 1).Cells("OPNAME").Value = frmJobEntry.PackOp
                             frmPackRchkA.DGVPakingRecA.Rows(changeConeNum - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
                             If hasdefect = 1 Then
-                                frmPackRchkA.DGVPakingRecA.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "8"
+                                frmPackRchkA.DGVPakingRecA.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "13"
                                 frmPackRchkA.DGVPakingRecA.Rows(changeConeNum - 1).Cells("DEFCONE").Value = frmPackRchkA.DGVPakingRecA.Rows(changeConeNum - 1).Cells("CONENUM").Value
                             End If
 
@@ -402,7 +402,7 @@
 
 
                     If defectCone = 1 Then
-                        frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "8"  'change cone state back to DEFECT FROM PACKING
+                        frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "13"  'change cone state back to DEFECT FROM PACKING
                         frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("FLT_K").Value = chk_K.Checked
                         frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("FLT_D").Value = chk_D.Checked
                         frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("FLT_F").Value = chk_F.Checked
@@ -422,7 +422,7 @@
 
                     If shortCone = 1 Then
 
-                        frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "8"  'change cone state back to defect cone
+                        frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "13"  'change cone state back to defect cone
                         frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("SHORTCONE").Value = frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("CONENUM").Value 'shortCone
                         frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("FLT_S").Value = "True" 'Sets the SHORT fault flag
                         frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("OPNAME").Value = frmJobEntry.PackOp
@@ -453,7 +453,7 @@
                         frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("OPNAME").Value = frmJobEntry.PackOp
                         frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
                         If hasdefect = 1 Then
-                            frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "8"
+                            frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "13"
                             frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("DEFCONE").Value = frmDGV.DGVdata.Rows(changeConeNum - 1).Cells("CONENUM").Value
                         End If
 
