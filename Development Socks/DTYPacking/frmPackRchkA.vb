@@ -340,7 +340,7 @@ Public Class frmPackRchkA
                     txtConeBcode.Refresh()
                     txtConeBcode.Focus()
                 ElseIf DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value < 8 Then
-                    curcone = DGVPakingRecA.Rows(i - 1).Cells("CONENUM").Value
+                    curcone = DGVPakingRecA.Rows(i - 1).Cells("RECHKIDX").Value
                     psorterror = 1
                     Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.Red      'Wrong Cone scanned
                     DGVPakingRecA.Rows(i - 1).Cells("PSORTERROR").Value = psorterror
@@ -359,6 +359,29 @@ Public Class frmPackRchkA
                     psorterror = 0
                     curcone = 0
                     Continue For
+                ElseIf DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = 8 And DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value = "AL" Or
+                        DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = 8 And DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value = "AD" Then
+                    curcone = DGVPakingRecA.Rows(i - 1).Cells("RECHKIDX").Value
+                    psorterror = 1
+                    Me.Controls("btnCone" & curcone - coneNumOffset.ToString).BackColor = Color.Red      'Wrong Cone scanned
+                    DGVPakingRecA.Rows(i - 1).Cells("PSORTERROR").Value = psorterror
+                    DGVPakingRecA.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
+                    DGVPakingRecA.Rows(i - 1).Cells("CARTENDTM").Value = Today
+
+
+                    Label1.Visible = True
+                    Label1.Text = "You Have scanned a Cheese that is not 'GRADE A'"
+                    DelayTM()
+                    Label1.Visible = False
+                    txtConeBcode.Clear()
+                    txtConeBcode.Refresh()
+                    txtConeBcode.Focus()
+                    psorterror = 0
+                    curcone = 0
+                    Continue For
+
+
+
                 Else
                     txtConeBcode.Clear()
                     txtConeBcode.Refresh()
