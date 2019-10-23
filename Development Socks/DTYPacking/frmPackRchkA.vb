@@ -489,16 +489,20 @@ Public Class frmPackRchkA
             Dim Response As String
 
             Response = dbcx.Row.ToString
-            writeerrorLog.writelog("db Con Error", Response, False, "System Fault")
+            writeerrorLog.writelog("db ReChk Con Error", Response, False, "ReChk Con Fault")
             Response = dbcx.RowCount.ToString
-            writeerrorLog.writelog("db Con Error", Response, False, "System Fault")
+            writeerrorLog.writelog("db ReChk Con Error", Response, False, "ReChk Fault")
 
 
         Catch ex As Exception
 
+            Dim sheetNo As String = frmJobEntry.txtLotNumber.Text
             'Write error to Log File
-            writeerrorLog.writelog("db update Error", ex.Message, False, "System Fault")
-            writeerrorLog.writelog("db update Error", ex.ToString, False, "System Fault")
+            writeerrorLog.writelog("Sheet No.", sheetNo, False, "Packing sheet")
+
+            'Write error to Log File
+            writeerrorLog.writelog("db ReCheckPack Error", ex.Message, False, "db ReCheckPack Fault")
+            writeerrorLog.writelog("db ReCheckPack Error", ex.ToString, False, "db ReCheckPack Fault")
 
             MsgBox("Update Error: " & vbNewLine & ex.Message)
 

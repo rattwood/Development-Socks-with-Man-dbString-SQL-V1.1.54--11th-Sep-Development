@@ -599,10 +599,22 @@ Public Class frmPacking
                 PDA.Update(PDS.Tables(0))
 
             End If
+        Catch dbcx As DBConcurrencyException
+            Dim Response As String
+
+            Response = dbcx.Row.ToString
+            writeerrorLog.writelog("db A_Pk Con Error", Response, False, "A_Pk Con Fault")
+            Response = dbcx.RowCount.ToString
+            writeerrorLog.writelog("db A_Pk Con Error", Response, False, "A_Pk Con Fault")
+
+
+
         Catch ex As Exception
+            Dim sheetNo As String = frmJobEntry.txtLotNumber.Text
             'Write error to Log File
-            writeerrorLog.writelog("db Update Error", ex.Message, False, "User Fault")
-            writeerrorLog.writelog("db Update Error", ex.ToString, False, "User Fault")
+            writeerrorLog.writelog("Sheet No.", sheetNo, False, "Packing sheet")
+            writeerrorLog.writelog("db A_Pk Error", ex.Message, False, "db A_Pk Fault")
+            writeerrorLog.writelog("db A_Pk Error", ex.ToString, False, "db A_Pk Fault")
 
             MsgBox("Update Error: " & vbNewLine & ex.Message)
         End Try
