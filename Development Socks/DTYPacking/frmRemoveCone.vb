@@ -11,15 +11,15 @@ Public Class frmRemoveCone
             frmJobEntry.txtGrade.Text = "Pilot 20Ch" Then
 
             Label1.Text = "Not Grade 'A' Cheese"
-            Me.Label5.Text = frmPacking.bcodeScan
+            Me.lblScannedCone.Text = frmPacking.bcodeScan
 
         ElseIf frmJobEntry.txtGrade.Text = "ReCheckA" Then
             Label1.Text = "Not Grade 'A' Cheese"
-            Me.Label5.Text = frmPackRchkA.bcodeScan
+            Me.lblScannedCone.Text = frmPackRchkA.bcodeScan
 
         Else
             Label1.Text = "Not Grade " & "'" & frmJobEntry.txtGrade.Text & "'" & " Cheese"
-            Me.Label5.Text = frmB_AL_AD_W.bcodeScan
+            Me.lblScannedCone.Text = frmB_AL_AD_W.bcodeScan
         End If
 
         Me.btnContinue.Enabled = False
@@ -34,11 +34,12 @@ Public Class frmRemoveCone
         Try
 
             chkBCode = TextBox1.Text
+            MsgBox(frmJobEntry.txtGrade.Text & vbCrLf & lblScannedCone.Text)
 
             Select Case frmJobEntry.txtGrade.Text
                 Case "Normal", "A", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch"
 
-                    If chkBCode = frmPacking.bcodeScan Then
+                    If chkBCode = lblScannedCone.Text Then
                         btnContinue.Visible = True
                         btnContinue.Enabled = True
 
@@ -51,7 +52,7 @@ Public Class frmRemoveCone
                     End If
 
                 Case "ReCheckA"
-                    If chkBCode = frmPackRchkA.bcodeScan Then
+                    If chkBCode = lblScannedCone.Text Then
                         btnContinue.Visible = True
                         btnContinue.Enabled = True
 
@@ -64,9 +65,9 @@ Public Class frmRemoveCone
                         Exit Sub
                     End If
 
-                Case Else
+                Case Else 'Check for grade B,AL,AD
 
-                    If chkBCode = frmB_AL_AD_W.bcodeScan Then
+                    If chkBCode = lblScannedCone.Text Then
                         btnContinue.Visible = True
                         btnContinue.Enabled = True
                     Else

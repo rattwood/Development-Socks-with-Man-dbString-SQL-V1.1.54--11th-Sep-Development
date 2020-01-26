@@ -535,7 +535,7 @@
             For i = 1 To dgvRows
 
                 'CHECK FOR UNPACKED CHEESE AND ALLOCATE
-                'If frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = 0 And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+                'If frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells(33).Value = 0 And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
                 If Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value) Then
                     If frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = "" Then frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = Nothing
                 End If
@@ -591,7 +591,7 @@
 
                     Exit For
                     'CHECK FOR ALREADY PACKED CHEESE
-                ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) And Not frmJobEntry.txtGrade.Text = "ReCheck" Then
+                ElseIf frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) And Not frmJobEntry.txtGrade.Text = "ReCheck" Then
                     Label8.Visible = True
                     Label8.Text = "Cheese already allocated"
                     Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
@@ -602,7 +602,7 @@
                     txtConeBcode.Focus()
                     Me.KeyPreview = True 'Allows us to look for advace character from barcode
                     Exit Sub
-                ElseIf frmDGV.DGVdata.Rows(i - 1).Cells(36).Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells(33).Value) And frmJobEntry.txtGrade.Text = "ReCheck" Then
+                ElseIf frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value) And frmJobEntry.txtGrade.Text = "ReCheck" Then
                     Label8.Visible = True
                     Label8.Text = "Cheese already allocated"
                     Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
@@ -614,19 +614,19 @@
                     Me.KeyPreview = True 'Allows us to look for advace character from barcode
                     Exit Sub
                 ElseIf i - 1 = dgvRows - 1 And packedFlag = 0 Then    'CHECK FOR WRONG CHEESE ON CART
-                    'MsgBox("i = " & i - 1 & "Rows = " & dgvRows - 1)
+                    MsgBox("i = " & i - 1 & "Rows = " & dgvRows - 1)
                     Label8.Visible = True
                     Label8.Text = ("This is not a Grade " & frmJobEntry.txtGrade.Text & " Cheese")
                     Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
                     DelayTM()
                     Me.Hide()
-                    Me.KeyPreview = True 'Allows us to look for advace character from barcode
+                    Me.KeyPreview = True 'Allows us to look for advance character from barcode
                     frmRemoveCone.Show()
 
 
-                    frmDGV.DGVdata.Rows(i - 1).Cells(58).Value = 1
-                    frmDGV.DGVdata.Rows(i - 1).Cells(55).Value = frmJobEntry.txtOperator.Text
-                    frmDGV.DGVdata.Rows(i - 1).Cells(32).Value = today
+                    frmDGV.DGVdata.Rows(i - 1).Cells("PSORTERROR").Value = 1
+                    frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
+                    frmDGV.DGVdata.Rows(i - 1).Cells("CARTENDTM").Value = today
 
                     Label8.Visible = False
                     txtConeBcode.Clear()

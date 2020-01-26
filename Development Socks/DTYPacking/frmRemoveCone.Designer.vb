@@ -29,7 +29,7 @@ Partial Class frmRemoveCone
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblScannedCone = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'btnContinue
@@ -90,15 +90,15 @@ Partial Class frmRemoveCone
         Me.Label4.Size = New System.Drawing.Size(0, 20)
         Me.Label4.TabIndex = 9
         '
-        'Label5
+        'lblScannedCone
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(505, 149)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(101, 31)
-        Me.Label5.TabIndex = 10
-        Me.Label5.Text = "Label5"
+        Me.lblScannedCone.AutoSize = True
+        Me.lblScannedCone.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblScannedCone.Location = New System.Drawing.Point(505, 149)
+        Me.lblScannedCone.Name = "lblScannedCone"
+        Me.lblScannedCone.Size = New System.Drawing.Size(101, 31)
+        Me.lblScannedCone.TabIndex = 10
+        Me.lblScannedCone.Text = "Label5"
         '
         'frmRemoveCone
         '
@@ -106,7 +106,7 @@ Partial Class frmRemoveCone
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Red
         Me.ClientSize = New System.Drawing.Size(1086, 681)
-        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.lblScannedCone)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.btnContinue)
@@ -127,5 +127,5 @@ Partial Class frmRemoveCone
     Friend WithEvents Label1 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents Label5 As Label
+    Friend WithEvents lblScannedCone As Label
 End Class

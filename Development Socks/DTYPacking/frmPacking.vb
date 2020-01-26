@@ -363,12 +363,12 @@ Public Class frmPacking
 
         For rw As Integer = 1 To rowendcount
 
-            If DGVPakingA.Rows(rw - 1).Cells(9).Value = "9" And DGVPakingA.Rows(rw - 1).Cells("FLT_S").Value = False And (IsDBNull(DGVPakingA.Rows(rw - 1).Cells("STDSTATE").Value)) Then
+            If DGVPakingA.Rows(rw - 1).Cells("CONESTATE").Value = "9" And DGVPakingA.Rows(rw - 1).Cells("FLT_S").Value = False And (IsDBNull(DGVPakingA.Rows(rw - 1).Cells("STDSTATE").Value)) Then
 
                 Me.Controls("btnCone" & rw).BackColor = Color.Green       'Grade A Cone
             End If
 
-            If DGVPakingA.Rows(rw - 1).Cells(9).Value = "15" Then
+            If DGVPakingA.Rows(rw - 1).Cells("CONESTATE").Value = "15" Then
                 Me.Controls("btnCone" & rw).BackColor = Color.LightGreen       'Grade A Cone
             End If
 
@@ -475,13 +475,13 @@ Public Class frmPacking
                     ' DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "14"
                     DGVPakingA.Rows(i - 1).Cells("CARTENDTM").Value = today
 
+                    'Label1.Visible = True
+                    'Label1.Text = "You Have scanned a Cheese that is not 'GRADE A'"
+                    'DelayTM()
+                    'Label1.Visible = False
 
-                    Label1.Visible = True
-                    Label1.Text = "You Have scanned a Cheese that is not 'GRADE A'"
-                    DelayTM()
-                    Label1.Visible = False
-
-
+                    Me.Hide()
+                    frmRemoveCone.Show()
 
                     bcodeScan = ""
                     psorterror = 0
