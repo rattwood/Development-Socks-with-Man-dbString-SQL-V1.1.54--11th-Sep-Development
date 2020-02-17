@@ -584,40 +584,40 @@ Public Class frmPacking
         tsbtnSave()
 
 
-
+        'New Update to avoid concurrency errors
 
 
         '******************   THIS WILL WRITE ANY CHANGES MADE TO THE DATAGRID BACK TO THE DATABASE ******************
 
-        Try
+        'Try
 
-            If PDS.HasChanges Then
-
-
-                'LDA.UpdateCommand = New Oracle.ManagedDataAccess.Client.OracleCommandBuilder(frmJobEntry.LDA).GetUpdateCommand
-
-                PDA.Update(PDS.Tables(0))
-
-            End If
-        Catch dbcx As DBConcurrencyException
-            Dim Response As String
-
-            Response = dbcx.Row.ToString
-            writeerrorLog.writelog("db A_Pk Con Error", Response, False, "A_Pk Con Fault")
-            Response = dbcx.RowCount.ToString
-            writeerrorLog.writelog("db A_Pk Con Error", Response, False, "A_Pk Con Fault")
+        '    If PDS.HasChanges Then
 
 
+        '        'LDA.UpdateCommand = New Oracle.ManagedDataAccess.Client.OracleCommandBuilder(frmJobEntry.LDA).GetUpdateCommand
 
-        Catch ex As Exception
-            Dim sheetNo As String = frmJobEntry.txtLotNumber.Text
-            'Write error to Log File
-            writeerrorLog.writelog("Sheet No.", sheetNo, False, "Packing sheet")
-            writeerrorLog.writelog("db A_Pk Error", ex.Message, False, "db A_Pk Fault")
-            writeerrorLog.writelog("db A_Pk Error", ex.ToString, False, "db A_Pk Fault")
+        '        PDA.Update(PDS.Tables(0))
 
-            MsgBox("Update Error: " & vbNewLine & ex.Message)
-        End Try
+        '    End If
+        'Catch dbcx As DBConcurrencyException
+        '    Dim Response As String
+
+        '    Response = dbcx.Row.ToString
+        '    writeerrorLog.writelog("db A_Pk Con Error", Response, False, "A_Pk Con Fault")
+        '    Response = dbcx.RowCount.ToString
+        '    writeerrorLog.writelog("db A_Pk Con Error", Response, False, "A_Pk Con Fault")
+
+
+
+        'Catch ex As Exception
+        '    Dim sheetNo As String = frmJobEntry.txtLotNumber.Text
+        '    'Write error to Log File
+        '    writeerrorLog.writelog("Sheet No.", sheetNo, False, "Packing sheet")
+        '    writeerrorLog.writelog("db A_Pk Error", ex.Message, False, "db A_Pk Fault")
+        '    writeerrorLog.writelog("db A_Pk Error", ex.ToString, False, "db A_Pk Fault")
+
+        '    MsgBox("Update Error: " & vbNewLine & ex.Message)
+        'End Try
 
 
 
