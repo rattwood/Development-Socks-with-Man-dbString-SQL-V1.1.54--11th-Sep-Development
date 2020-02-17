@@ -586,6 +586,62 @@ Public Class frmPacking
 
         'New Update to avoid concurrency errors
 
+        Try
+
+
+            For i = 1 To rowendcount
+
+                Dim id As String = DGVPakingA.Rows(i - 1).Cells("id_Package").Value
+                Dim conestate As String = DGVPakingA.Rows(i - 1).Cells("conestate").Value
+                Dim oppack As String = DGVPakingA.Rows(i - 1).Cells("OpPack").Value
+                Dim opname = DGVPakingA.Rows(i - 1).Cells("OpName").Value
+                Dim packendtm = DGVPakingA.Rows(i - 1).Cells("Packendtm").Value
+                Dim pssorterror = DGVPakingA.Rows(i - 1).Cells("PSSORTERROR").Value
+                Dim cartendtm = DGVPakingA.Rows(i - 1).Cells("CartEndTm").Value
+
+
+
+                SQL.AddParam("@id", DGVPakingA.Rows(i - 1).Cells("id_Package").Value)
+                SQL.AddParam("@conestate", DGVPakingA.Rows(i - 1).Cells("conestate").Value)
+                SQL.AddParam("@oppack", DGVPakingA.Rows(i - 1).Cells("OpPack").Value)
+                SQL.AddParam("@opname", DGVPakingA.Rows(i - 1).Cells("OpName").Value)
+                SQL.AddParam("@packendtm", DGVPakingA.Rows(i - 1).Cells("Packendtm").Value)
+                SQL.AddParam("@pssorterror", DGVPakingA.Rows(i - 1).Cells("PSSORTERROR").Value)
+                SQL.AddParam("@cartendtm", DGVPakingA.Rows(i - 1).Cells("CartEndTm").Value)
+
+                MsgBox("ID = " & id.ToString & vbCrLf _
+                       & "coneState = " & conestate.ToString & vbCrLf _
+                       & "oppack = " & oppack.ToString & vbCrLf _
+                       & "opname = " & opname.ToString & vbCrLf _
+                       & "packendtm = " & packendtm.ToString & vbCrLf _
+                       & "pssorterror = " & cartendtm.ToString & vbCrLf)
+
+                'SQL.ExecQuery(" Update jobs set CONESTATE = @conestate, OPPACK = @oppack, OPNAME = @opname, PACKENDTM = @packendtm, " _
+                '          & "PSSORTERROR = @pssorterror, CARTENDTM = @cartendtm  Where id_package = @id")
+
+
+            Next
+
+        Catch dbcx As DBConcurrencyException
+            Dim Response As String
+
+            Response = dbcx.Row.ToString
+            writeerrorLog.writelog("db A_Pk Con Error", Response, False, "A_Pk Con Fault")
+            Response = dbcx.RowCount.ToString
+            writeerrorLog.writelog("db A_Pk Con Error", Response, False, "A_Pk Con Fault")
+
+
+
+        Catch ex As Exception
+            Dim sheetNo As String = frmJobEntry.txtLotNumber.Text
+            'Write error to Log File
+            writeerrorLog.writelog("Sheet No.", sheetNo, False, "Packing sheet")
+            writeerrorLog.writelog("db A_Pk Error", ex.Message, False, "db A_Pk Fault")
+            writeerrorLog.writelog("db A_Pk Error", ex.ToString, False, "db A_Pk Fault")
+
+            MsgBox("Update Error: " & vbNewLine & ex.Message)
+
+        End Try
 
         '******************   THIS WILL WRITE ANY CHANGES MADE TO THE DATAGRID BACK TO THE DATABASE ******************
 
