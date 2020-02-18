@@ -609,13 +609,13 @@ Public Class frmPacking
                 SQL.AddParam("@psorterror", DGVPakingA.Rows(i - 1).Cells("PSORTERROR").Value)
                 SQL.AddParam("@cartendtm", DGVPakingA.Rows(i - 1).Cells("CartEndTm").Value)
 
-                MsgBox("ID = " & id.ToString & vbCrLf _
-                       & "coneState = " & conestate.ToString & vbCrLf _
-                       & "oppack = " & oppack.ToString & vbCrLf _
-                       & "opname = " & opname.ToString & vbCrLf _
-                       & "packendtm = " & packendtm.ToString & vbCrLf _
-                       & "psorterror = " & psorterror.ToString & vbCrLf _
-                       & "cartendtm = " & cartendtm.ToString & vbCrLf)
+                'MsgBox("ID = " & id.ToString & vbCrLf _
+                '       & "coneState = " & conestate.ToString & vbCrLf _
+                '       & "oppack = " & oppack.ToString & vbCrLf _
+                '       & "opname = " & opname.ToString & vbCrLf _
+                '       & "packendtm = " & packendtm.ToString & vbCrLf _
+                '       & "psorterror = " & psorterror.ToString & vbCrLf _
+                '       & "cartendtm = " & cartendtm.ToString & vbCrLf)
 
                 SQL.ExecQuery(" Update jobs set CONESTATE = @conestate, OPPACK = @oppack, OPNAME = @opname, PACKENDTM = @packendtm, " _
                           & "PSORTERROR = @psorterror, CARTENDTM = @cartendtm  Where id_product = @id")
