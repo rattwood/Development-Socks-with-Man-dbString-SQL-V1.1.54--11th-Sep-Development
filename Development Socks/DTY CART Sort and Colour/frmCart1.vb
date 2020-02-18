@@ -3398,8 +3398,10 @@ Public Class frmCart1
         Catch dbcx As DBConcurrencyException
             Dim Response As String
 
-            MessageBox.Show("Data for this job is already being used in packing " & vbCrLf _
-                       & "Please wait and then try opening the cart again", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("Data for this job is already being used in packing, " & vbCrLf _
+                       & "Please retry after some time, all changes made will be lost" & vbCrLf _
+                       & "ข้อมูลสำหรับงานนี้กำลังถูกประมวลผลโดยแผนกแพ็คกิ้ง," _
+                       & "กรุณาป้อนใหม่อีกครั้งในภายหลัง, ข้อมูลที่ท่านป้อนจะไม่ได้ทำการบันทึก.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
             Response = dbcx.Row.ToString
             writeerrorLog.writelog("db A_Pk Con Error", Response, False, "A_Pk Con Fault")
@@ -3421,7 +3423,7 @@ Public Class frmCart1
             writeerrorLog.writelog("db Update Error", ex.ToString, False, "System Fault")
 
 
-            MsgBox("Update Error: " & vbNewLine & ex.Message)
+            MsgBox("Update Error:  " & vbNewLine & ex.Message)
         End Try
 
         Dim coneref

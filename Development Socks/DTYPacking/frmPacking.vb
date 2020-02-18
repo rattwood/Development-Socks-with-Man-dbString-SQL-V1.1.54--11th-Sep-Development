@@ -591,22 +591,22 @@ Public Class frmPacking
 
             For i = 1 To rowendcount
 
-                Dim id As String = DGVPakingA.Rows(i - 1).Cells("id_Package").Value
+                Dim id As String = DGVPakingA.Rows(i - 1).Cells("id_Product").Value
                 Dim conestate As String = DGVPakingA.Rows(i - 1).Cells("conestate").Value
                 Dim oppack As String = DGVPakingA.Rows(i - 1).Cells("OpPack").Value
                 Dim opname = DGVPakingA.Rows(i - 1).Cells("OpName").Value
                 Dim packendtm = DGVPakingA.Rows(i - 1).Cells("Packendtm").Value
-                Dim pssorterror = DGVPakingA.Rows(i - 1).Cells("PSSORTERROR").Value
+                Dim psorterror = DGVPakingA.Rows(i - 1).Cells("PSORTERROR").Value
                 Dim cartendtm = DGVPakingA.Rows(i - 1).Cells("CartEndTm").Value
 
 
 
-                SQL.AddParam("@id", DGVPakingA.Rows(i - 1).Cells("id_Package").Value)
+                SQL.AddParam("@id", DGVPakingA.Rows(i - 1).Cells("id_Product").Value)
                 SQL.AddParam("@conestate", DGVPakingA.Rows(i - 1).Cells("conestate").Value)
                 SQL.AddParam("@oppack", DGVPakingA.Rows(i - 1).Cells("OpPack").Value)
                 SQL.AddParam("@opname", DGVPakingA.Rows(i - 1).Cells("OpName").Value)
                 SQL.AddParam("@packendtm", DGVPakingA.Rows(i - 1).Cells("Packendtm").Value)
-                SQL.AddParam("@pssorterror", DGVPakingA.Rows(i - 1).Cells("PSSORTERROR").Value)
+                SQL.AddParam("@psorterror", DGVPakingA.Rows(i - 1).Cells("PSORTERROR").Value)
                 SQL.AddParam("@cartendtm", DGVPakingA.Rows(i - 1).Cells("CartEndTm").Value)
 
                 MsgBox("ID = " & id.ToString & vbCrLf _
@@ -614,10 +614,11 @@ Public Class frmPacking
                        & "oppack = " & oppack.ToString & vbCrLf _
                        & "opname = " & opname.ToString & vbCrLf _
                        & "packendtm = " & packendtm.ToString & vbCrLf _
-                       & "pssorterror = " & cartendtm.ToString & vbCrLf)
+                       & "psorterror = " & psorterror.ToString & vbCrLf _
+                       & "cartendtm = " & cartendtm.ToString & vbCrLf)
 
-                'SQL.ExecQuery(" Update jobs set CONESTATE = @conestate, OPPACK = @oppack, OPNAME = @opname, PACKENDTM = @packendtm, " _
-                '          & "PSSORTERROR = @pssorterror, CARTENDTM = @cartendtm  Where id_package = @id")
+                SQL.ExecQuery(" Update jobs set CONESTATE = @conestate, OPPACK = @oppack, OPNAME = @opname, PACKENDTM = @packendtm, " _
+                          & "PSORTERROR = @psorterror, CARTENDTM = @cartendtm  Where id_product = @id")
 
 
             Next
