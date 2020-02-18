@@ -441,15 +441,19 @@ Public Class frmCart1
 
 
             'CHECK FLT_S FLA
-            If frmDGV.DGVdata.Rows(rw - 1).Cells(43).Value = True Then
+            If frmDGV.DGVdata.Rows(rw - 1).Cells("FLT_S").Value = True And frmDGV.DGVdata.Rows(rw - 1).Cells("DEFCONE").Value = 0 Then
                 Me.Controls("btnCone" & rw).BackColor = Color.Red
+                Me.Controls("btnCone" & rw).Enabled = True
+            ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("FLT_S").Value = True And frmDGV.DGVdata.Rows(rw - 1).Cells("DEFCONE").Value > 0 Then
+                Me.Controls("btnCone" & rw).BackColor = Color.Red
+                Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.DefectStrip
                 Me.Controls("btnCone" & rw).Enabled = True
             End If
 
 
-            'WASTE CELL in db
-            If frmDGV.DGVdata.Rows(rw - 1).Cells(66).Value > 0 Then Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
-            If frmDGV.DGVdata.Rows(rw - 1).Cells(46).Value = True Then Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
+                'WASTE CELL in db
+                If frmDGV.DGVdata.Rows(rw - 1).Cells("COLWASTE").Value > 0 Then Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
+            If frmDGV.DGVdata.Rows(rw - 1).Cells("FLT_W").Value = True Then Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
         Next
 
         txtBoxUpdates()
@@ -1718,25 +1722,26 @@ Public Class frmCart1
 
         UpdateDatabase()
 
-        If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
-        frmDGV.DGVdata.ClearSelection()
+        'this was second save for database incase of problem
+        'If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
+        'frmDGV.DGVdata.ClearSelection()
 
 
-        'RE Load Database and then save again to try and get correct conestates
+        ''RE Load Database and then save again to try and get correct conestates
 
-        frmJobEntry.LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & frmJobEntry.dbBarcode & "'")
+        'frmJobEntry.LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & frmJobEntry.dbBarcode & "'")
 
-        'LOAD THE DATA FROM dB IN TO THE DATAGRID
-        frmDGV.DGVdata.DataSource = frmJobEntry.LDS.Tables(0)
-        frmDGV.DGVdata.Rows(0).Selected = True
-        ' Dim LCB As frmJobEntry.SqlCommandBuilder = New SqlCommandBuilder(LDA)
-
-
-        'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-        frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
+        ''LOAD THE DATA FROM dB IN TO THE DATAGRID
+        'frmDGV.DGVdata.DataSource = frmJobEntry.LDS.Tables(0)
+        'frmDGV.DGVdata.Rows(0).Selected = True
+        '' Dim LCB As frmJobEntry.SqlCommandBuilder = New SqlCommandBuilder(LDA)
 
 
-        UpdateDatabase()
+        ''SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
+        'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
+
+
+        'UpdateDatabase()
 
         If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
         frmDGV.DGVdata.ClearSelection()
@@ -1748,9 +1753,19 @@ Public Class frmCart1
 
     End Sub
 
-
+    Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
+        If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
+        frmDGV.DGVdata.ClearSelection()
+        frmJobEntry.Show()
+        frmJobEntry.txtLotNumber.Clear()
+        frmJobEntry.txtLotNumber.Focus()
+        Me.Cursor = System.Windows.Forms.Cursors.Default
+        Me.Close()
+    End Sub
 
     Private Sub readsave()
+
+        btnFinishedJob.Visible = True  'Turn on the finish button if any changes
 
         'MEASUERD CONE Set the color of Measuerd button if Spectro used
         If measureOn = 1 Then
@@ -3379,6 +3394,27 @@ Public Class frmCart1
                 frmJobEntry.LDA.Update(frmJobEntry.LDS.Tables(0))
 
             End If
+
+        Catch dbcx As DBConcurrencyException
+            Dim Response As String
+
+            MessageBox.Show("Data for this job is already being used in packing " & vbCrLf _
+                       & "Please wait and then try opening the cart again", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+            Response = dbcx.Row.ToString
+            writeerrorLog.writelog("db A_Pk Con Error", Response, False, "A_Pk Con Fault")
+            Response = dbcx.RowCount.ToString
+            writeerrorLog.writelog("db A_Pk Con Error", Response, False, "A_Pk Con Fault")
+
+            If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
+            frmDGV.DGVdata.ClearSelection()
+            frmJobEntry.Show()
+            frmJobEntry.txtLotNumber.Clear()
+            frmJobEntry.txtLotNumber.Focus()
+            Me.Cursor = System.Windows.Forms.Cursors.Default
+            Me.Close()
+
+
         Catch ex As Exception
             'Write error to Log File
             writeerrorLog.writelog("db Update Error", ex.Message, False, "System Fault")

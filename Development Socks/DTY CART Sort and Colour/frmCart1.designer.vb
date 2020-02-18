@@ -137,6 +137,7 @@ Partial Class frmCart1
         Me.lblTFNum = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.lblDoffNum = New System.Windows.Forms.Label()
+        Me.btnHome = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'btnCone4
@@ -1110,6 +1111,7 @@ Partial Class frmCart1
         Me.btnFinishedJob.TabIndex = 103
         Me.btnFinishedJob.Text = "Finish Job"
         Me.btnFinishedJob.UseVisualStyleBackColor = False
+        Me.btnFinishedJob.Visible = False
         '
         'btnWaste
         '
@@ -1532,12 +1534,26 @@ Partial Class frmCart1
         Me.lblDoffNum.TabIndex = 141
         Me.lblDoffNum.Text = "000"
         '
+        'btnHome
+        '
+        Me.btnHome.BackColor = System.Drawing.Color.Cyan
+        Me.btnHome.BackgroundImage = Global.Development_Socks.My.Resources.Resources.home_icon_silhouette
+        Me.btnHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnHome.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnHome.Location = New System.Drawing.Point(15, 600)
+        Me.btnHome.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnHome.Name = "btnHome"
+        Me.btnHome.Size = New System.Drawing.Size(173, 62)
+        Me.btnHome.TabIndex = 142
+        Me.btnHome.UseVisualStyleBackColor = False
+        '
         'frmCart1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(1086, 699)
+        Me.Controls.Add(Me.btnHome)
         Me.Controls.Add(Me.lblDoffNum)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.lblTFNum)
@@ -1773,4 +1789,5 @@ Partial Class frmCart1
     Friend WithEvents lblTFNum As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents lblDoffNum As Label
+    Friend WithEvents btnHome As Button
 End Class
