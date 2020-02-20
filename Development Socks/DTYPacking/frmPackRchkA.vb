@@ -230,11 +230,11 @@ Public Class frmPackRchkA
                 If DGVPakingRecA.Rows(rw - 1).Cells(9).Value = "8" And IsDBNull(DGVPakingRecA.Rows(rw - 1).Cells("RECHKRESULT").Value) Then Continue For
 
                 If DGVPakingRecA.Rows(rw - 1).Cells(9).Value = "8" And DGVPakingRecA.Rows(rw - 1).Cells("RECHKRESULT").Value = "A" Then
-                    Me.Controls("btnCone" & rw).BackColor = Color.Green       'Grade A Cone
+                    Me.Controls("btnCone" & rw).BackColor = Color.Green       'Grade A Cone not packed
                 End If
 
                 If DGVPakingRecA.Rows(rw - 1).Cells(9).Value = "15" Then
-                    Me.Controls("btnCone" & rw).BackColor = Color.LightGreen       'Grade A Cone
+                    Me.Controls("btnCone" & rw).BackColor = Color.LightGreen       'Grade A Cone and Packed
                 End If
 
                 Me.Controls("btnCone" & rw).Enabled = False
@@ -359,6 +359,7 @@ Public Class frmPackRchkA
                     psorterror = 0
                     curcone = 0
                     Continue For
+
                 ElseIf DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = 8 And DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value = "AL" Or
                         DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = 8 And DGVPakingRecA.Rows(i - 1).Cells("RECHKRESULT").Value = "AD" Then
                     curcone = DGVPakingRecA.Rows(i - 1).Cells("RECHKIDX").Value
@@ -369,10 +370,7 @@ Public Class frmPackRchkA
                     DGVPakingRecA.Rows(i - 1).Cells("CARTENDTM").Value = Today
 
 
-                    'Label1.Visible = True
-                    'Label1.Text = "You Have scanned a Cheese that is not 'GRADE A'"
-                    'DelayTM()
-                    'Label1.Visible = False
+
 
                     Me.Hide()
                     frmRemoveCone.Show()
@@ -477,20 +475,62 @@ Public Class frmPackRchkA
 
         tsbtnSave()
 
-
-
-
-
-        '******************   THIS WILL WRITE ANY CHANGES MADE TO THE DATAGRID BACK TO THE DATABASE ******************
-
+        'NEW db UPDATE Routine not using CommandBuilder
         Try
 
-            If PDS.HasChanges Then
+            For i = 1 To PRecordCount   'This is all cheese on the DGV
+
+                If DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = 15 Then  'Only write cheese that is state 15 Packed
+
+                    'load parameters for cheese to write
+                    Dim id As String = DGVPakingRecA.Rows(i - 1).Cells("id_Product").Value
+                    Dim conestate As String = DGVPakingRecA.Rows(i - 1).Cells("conestate").Value
+                    Dim oppack As String = DGVPakingRecA.Rows(i - 1).Cells("OpPack").Value
+                    Dim opname = DGVPakingRecA.Rows(i - 1).Cells("OpName").Value
+                    Dim packendtm = DGVPakingRecA.Rows(i - 1).Cells("Packendtm").Value
+                    Dim psorterror = DGVPakingRecA.Rows(i - 1).Cells("PSORTERROR").Value
+                    Dim cartendtm = DGVPakingRecA.Rows(i - 1).Cells("CartEndTm").Value
+                    Dim recheck = DGVPakingRecA.Rows(i - 1).Cells("RECHK").Value
+
+                    SQL.AddParam("@id", DGVPakingRecA.Rows(i - 1).Cells("id_Product").Value)
+                    SQL.AddParam("@conestate", DGVPakingRecA.Rows(i - 1).Cells("conestate").Value)
+                    SQL.AddParam("@oppack", DGVPakingRecA.Rows(i - 1).Cells("OpPack").Value)
+                    SQL.AddParam("@opname", DGVPakingRecA.Rows(i - 1).Cells("OpName").Value)
+                    SQL.AddParam("@packendtm", DGVPakingRecA.Rows(i - 1).Cells("Packendtm").Value)
+                    SQL.AddParam("@psorterror", DGVPakingRecA.Rows(i - 1).Cells("PSORTERROR").Value)
+                    SQL.AddParam("@cartendtm", DGVPakingRecA.Rows(i - 1).Cells("CartEndTm").Value)
+                    SQL.AddParam("@rechk", DGVPakingRecA.Rows(i - 1).Cells("RECHK").Value)
 
 
-                PDA.Update(PDS.Tables(0))
 
-            End If
+
+
+                    'MsgBox("ID = " & id.ToString & vbCrLf _
+                    '       & "coneState = " & conestate.ToString & vbCrLf _
+                    '       & "rechk =" & recheck.ToString & vbCrLf _
+                    '       & "oppack = " & oppack.ToString & vbCrLf _
+                    '       & "opname = " & opname.ToString & vbCrLf _
+                    '       & "packendtm = " & packendtm.ToString & vbCrLf _
+                    '       & "psorterror = " & psorterror.ToString & vbCrLf _
+                    '       & "cartendtm = " & cartendtm.ToString & vbCrLf)
+
+
+                    SQL.AddParam("@id", DGVPakingRecA.Rows(i - 1).Cells("id_Product").Value)
+                    SQL.AddParam("@conestate", DGVPakingRecA.Rows(i - 1).Cells("conestate").Value)
+                    SQL.AddParam("@oppack", DGVPakingRecA.Rows(i - 1).Cells("OpPack").Value)
+                    SQL.AddParam("@opname", DGVPakingRecA.Rows(i - 1).Cells("OpName").Value)
+                    SQL.AddParam("@packendtm", DGVPakingRecA.Rows(i - 1).Cells("Packendtm").Value)
+                    SQL.AddParam("@psorterror", DGVPakingRecA.Rows(i - 1).Cells("PSORTERROR").Value)
+                    SQL.AddParam("@cartendtm", DGVPakingRecA.Rows(i - 1).Cells("CartEndTm").Value)
+                    SQL.AddParam("@rechk", DGVPakingRecA.Rows(i - 1).Cells("RECHK").Value)
+
+
+                Else
+                    Continue For
+
+                End If
+
+            Next
 
         Catch dbcx As DBConcurrencyException
             Dim Response As String
@@ -504,19 +544,66 @@ Public Class frmPackRchkA
         Catch ex As Exception
 
             Dim sheetNo As String = frmJobEntry.txtLotNumber.Text
-            'Write error to Log File
-            writeerrorLog.writelog("Sheet No.", sheetNo, False, "Packing sheet")
+        'Write error to Log File
+        writeerrorLog.writelog("Sheet No.", sheetNo, False, "Packing sheet")
 
-            'Write error to Log File
-            writeerrorLog.writelog("db ReCheckPack Error", ex.Message, False, "db ReCheckPack Fault")
-            writeerrorLog.writelog("db ReCheckPack Error", ex.ToString, False, "db ReCheckPack Fault")
+        'Write error to Log File
+        writeerrorLog.writelog("db ReCheckPack Error", ex.Message, False, "db ReCheckPack Fault")
+        writeerrorLog.writelog("db ReCheckPack Error", ex.ToString, False, "db ReCheckPack Fault")
 
-            MsgBox("Update Error: " & vbNewLine & ex.Message)
+        MsgBox("Update Error: " & vbNewLine & ex.Message)
 
-            pauseScan = 0 'Allow barcode entry
+        pauseScan = 0 'Allow barcode entry
 
 
         End Try
+
+
+
+
+
+
+
+
+
+
+
+        '******************   THIS WILL WRITE ANY CHANGES MADE TO THE DATAGRID BACK TO THE DATABASE ******************
+
+        'Try
+
+        '    If PDS.HasChanges Then
+
+
+        '        PDA.Update(PDS.Tables(0))
+
+        '    End If
+
+        'Catch dbcx As DBConcurrencyException
+        '    Dim Response As String
+
+        '    Response = dbcx.Row.ToString
+        '    writeerrorLog.writelog("db ReChk Con Error", Response, False, "ReChk Con Fault")
+        '    Response = dbcx.RowCount.ToString
+        '    writeerrorLog.writelog("db ReChk Con Error", Response, False, "ReChk Fault")
+
+
+        'Catch ex As Exception
+
+        '    Dim sheetNo As String = frmJobEntry.txtLotNumber.Text
+        '    'Write error to Log File
+        '    writeerrorLog.writelog("Sheet No.", sheetNo, False, "Packing sheet")
+
+        '    'Write error to Log File
+        '    writeerrorLog.writelog("db ReCheckPack Error", ex.Message, False, "db ReCheckPack Fault")
+        '    writeerrorLog.writelog("db ReCheckPack Error", ex.ToString, False, "db ReCheckPack Fault")
+
+        '    MsgBox("Update Error: " & vbNewLine & ex.Message)
+
+        '    pauseScan = 0 'Allow barcode entry
+
+
+        'End Try
 
 
 

@@ -10,12 +10,21 @@ Public Class frmRemoveCone
         If frmJobEntry.txtGrade.Text = "A" Or frmJobEntry.txtGrade.Text = "Normal" Or frmJobEntry.txtGrade.Text = "Pilot 6Ch" Or frmJobEntry.txtGrade.Text = "Pilot 15Ch" Or
             frmJobEntry.txtGrade.Text = "Pilot 20Ch" Then
 
-            Label1.Text = "Not Grade 'A' Cheese"
-            Me.lblScannedCone.Text = frmPacking.bcodeScan
 
-        ElseIf frmJobEntry.txtGrade.Text = "ReCheckA" Then
-            Label1.Text = "Not Grade 'A' Cheese"
-            Me.lblScannedCone.Text = frmPackRchkA.bcodeScan
+
+            If frmJobEntry.rechkA = 1 Then
+                Label1.Text = "Not Grade 'A' Cheese"
+                Me.lblScannedCone.Text = frmPackRchkA.bcodeScan
+            Else
+                Label1.Text = "Not Grade 'A' Cheese"
+                Me.lblScannedCone.Text = frmPacking.bcodeScan
+            End If
+            'Label1.Text = "Not Grade 'A' Cheese"
+            'Me.lblScannedCone.Text = frmPacking.bcodeScan
+
+            'ElseIf frmJobEntry.txtGrade.Text = "ReCheckA" Then
+            '    Label1.Text = "Not Grade 'A' Cheese"
+            '    Me.lblScannedCone.Text = frmPackRchkA.bcodeScan
 
         Else
             Label1.Text = "Not Grade " & "'" & frmJobEntry.txtGrade.Text & "'" & " Cheese"
@@ -104,14 +113,27 @@ Public Class frmRemoveCone
 
         If frmJobEntry.txtGrade.Text = "A" Or frmJobEntry.txtGrade.Text = "Normal" Or frmJobEntry.txtGrade.Text = "Pilot 6Ch" Or frmJobEntry.txtGrade.Text = "Pilot 15Ch" Or
                 frmJobEntry.txtGrade.Text = "Pilot 20Ch" Then
-            frmPacking.txtConeBcode.Clear()
-            frmPacking.txtConeBcode.Focus()
-            frmPacking.Show()
 
-        ElseIf frmJobEntry.txtGrade.Text = "ReCheckA" Then
-            frmPackRchkA.txtConeBcode.Clear()
-            frmPackRchkA.txtConeBcode.Focus()
-            frmPackRchkA.Show()
+
+            If frmJobEntry.rechkA = 1 Then
+                frmPackRchkA.txtConeBcode.Clear()
+                frmPackRchkA.txtConeBcode.Focus()
+                frmPackRchkA.Show()
+            Else
+                frmPacking.txtConeBcode.Clear()
+                frmPacking.txtConeBcode.Focus()
+                frmPacking.Show()
+            End If
+
+
+            'frmPacking.txtConeBcode.Clear()
+            'frmPacking.txtConeBcode.Focus()
+            'frmPacking.Show()
+
+            'ElseIf frmJobEntry.txtGrade.Text = "ReCheckA" Then
+            '    frmPackRchkA.txtConeBcode.Clear()
+            '    frmPackRchkA.txtConeBcode.Focus()
+            '    frmPackRchkA.Show()
         Else
             frmB_AL_AD_W.txtConeBcode.Clear()
             frmB_AL_AD_W.txtConeBcode.Focus()
