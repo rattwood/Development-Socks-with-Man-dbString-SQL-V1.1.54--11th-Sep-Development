@@ -611,15 +611,15 @@ Public Class frmPacking
                 SQL.AddParam("@carton", DGVPakingA.Rows(i - 1).Cells("CARTONNUM").Value)
                 SQL.AddParam("@packsheet", DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value)
 
-                MsgBox("ID = " & id.ToString & vbCrLf _
-                       & "coneState = " & conestate.ToString & vbCrLf _
-                       & "oppack = " & oppack.ToString & vbCrLf _
-                       & "opname = " & opname.ToString & vbCrLf _
-                       & "packendtm = " & packendtm.ToString & vbCrLf _
-                       & "psorterror = " & psorterror.ToString & vbCrLf _
-                       & "catonnum = " & cartonno.ToString & vbCrLf _
-                       & "packsheet = " & cartsheet.ToString & vbCrLf _
-                       & "cartendtm = " & cartendtm.ToString & vbCrLf)
+                'MsgBox("ID = " & id.ToString & vbCrLf _
+                '       & "coneState = " & conestate.ToString & vbCrLf _
+                '       & "oppack = " & oppack.ToString & vbCrLf _
+                '       & "opname = " & opname.ToString & vbCrLf _
+                '       & "packendtm = " & packendtm.ToString & vbCrLf _
+                '       & "psorterror = " & psorterror.ToString & vbCrLf _
+                '       & "catonnum = " & cartonno.ToString & vbCrLf _
+                '       & "packsheet = " & cartsheet.ToString & vbCrLf _
+                '       & "cartendtm = " & cartendtm.ToString & vbCrLf)
 
                 SQL.ExecQuery(" Update jobs set CONESTATE = @conestate, OPPACK = @oppack, OPNAME = @opname, PACKENDTM = @packendtm, " _
                           & "PSORTERROR = @psorterror, CARTENDTM = @cartendtm,PACKSHEETBCODE = @packsheet, CARTONNUM = @carton  Where id_product = @id")
@@ -631,9 +631,9 @@ Public Class frmPacking
             Dim Response As String
 
             Response = dbcx.Row.ToString
-            writeerrorLog.writelog("db A_Pk Con Error", Response, False, "A_Pk Con Fault")
+            writeerrorLog.writelog("db A_Pk Con Error", Response, False, "reChkA_Pk Con Fault")
             Response = dbcx.RowCount.ToString
-            writeerrorLog.writelog("db A_Pk Con Error", Response, False, "A_Pk Con Fault")
+            writeerrorLog.writelog("db A_Pk Con Error", Response, False, "ReChkA_Pk Con Fault")
 
 
 
@@ -641,8 +641,8 @@ Public Class frmPacking
             Dim sheetNo As String = frmJobEntry.txtLotNumber.Text
             'Write error to Log File
             writeerrorLog.writelog("Sheet No.", sheetNo, False, "Packing sheet")
-            writeerrorLog.writelog("db A_Pk Error", ex.Message, False, "db A_Pk Fault")
-            writeerrorLog.writelog("db A_Pk Error", ex.ToString, False, "db A_Pk Fault")
+            writeerrorLog.writelog("db A_Pk Error", ex.Message, False, "db ReChkA_Pk Fault")
+            writeerrorLog.writelog("db A_Pk Error", ex.ToString, False, "db ReChkA_Pk Fault")
 
             MsgBox("Update Error: " & vbNewLine & ex.Message)
 

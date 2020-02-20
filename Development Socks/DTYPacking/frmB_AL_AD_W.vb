@@ -613,14 +613,16 @@
                     txtConeBcode.Focus()
                     Me.KeyPreview = True 'Allows us to look for advace character from barcode
                     Exit Sub
-                ElseIf i - 1 = dgvRows - 1 And packedFlag = 0 Then    'CHECK FOR WRONG CHEESE ON CART
-                    MsgBox("i = " & i - 1 & "Rows = " & dgvRows - 1)
-                    Label8.Visible = True
-                    Label8.Text = ("This is not a Grade " & frmJobEntry.txtGrade.Text & " Cheese")
-                    Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
-                    DelayTM()
-                    Me.Hide()
-                    Me.KeyPreview = True 'Allows us to look for advance character from barcode
+                ElseIf frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodescan And packedFlag = 0 Then
+                    'CHECK FOR WRONG CHEESE ON CART
+                    'MsgBox("i = " & i - 1 & "Rows = " & dgvRows - 1)
+                    'Label8.Visible = True
+                    'Label8.Text = ("This is not a Grade " & frmJobEntry.txtGrade.Text & " Cheese")
+                    'Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
+                    'DelayTM()
+                    'Me.Hide()
+                    'Me.KeyPreview = True 'Allows us to look for advance character from barcode
+
                     frmRemoveCone.Show()
 
 
@@ -758,7 +760,7 @@
 
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         Label8.Visible = True
-        ' Label8.Text = ("This is not a Grade " & frmJobEntry.txtGrade.Text & " Cheese")
+
         pauseScan = 1 'Stop Barcode entry
         Label8.Text = ("Please wait creating packing Excel sheet")
 
@@ -853,7 +855,23 @@
 
         tsbtnSave()
 
+        ''New save to SQL routine
 
+        ''Save ReCheck details
+        'If frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk = 0 Then
+
+
+        'End If
+
+
+        ''Save details for stdrecheck
+        'If frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk Then
+
+
+
+
+
+        'End If
 
 
 
@@ -869,12 +887,29 @@
                 frmJobEntry.LDA.Update(frmJobEntry.LDS.Tables(0))
 
             End If
+
+
+
+
+
+
+        Catch dbcx As DBConcurrencyException
+            Dim Response As String
+
+            Response = dbcx.Row.ToString
+            writeerrorLog.writelog("db B_AL_AD_W Con Error", Response, False, "reChkA_Pk Con Fault")
+            Response = dbcx.RowCount.ToString
+            writeerrorLog.writelog("db B_AL_AD_W_Pk Con Error", Response, False, "ReChkA_Pk Con Fault")
+
+
+
+
         Catch ex As Exception
             'Write error to Log File
             Dim ErrorMsg As String = "Computer " & System.Environment.MachineName
-            writeerrorLog.writelog("db Update Error", ErrorMsg, False, "System Fault")
-            writeerrorLog.writelog("db Update Error", ex.Message, False, "System Fault")
-            writeerrorLog.writelog("db Update Error", ex.ToString, False, "System Fault")
+            writeerrorLog.writelog("db B_AL_AD_W Update Error", ErrorMsg, False, "System Fault")
+            writeerrorLog.writelog("db B_AL_AD_W Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("db B_AL_AD_W Update Error", ex.ToString, False, "System Fault")
 
             MsgBox("Update Error: " & vbNewLine & ex.Message)
             pauseScan = 0 'Allow barcode entry

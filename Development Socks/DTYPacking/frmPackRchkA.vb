@@ -482,7 +482,7 @@ Public Class frmPackRchkA
 
             For i = 1 To PRecordCount   'This is all cheese on the DGV
 
-                ' If DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = 15 Then  'Only write cheese that is state 15 Packed
+
 
                 'load parameters for cheese to write
                 Dim id As String = DGVPakingRecA.Rows(i - 1).Cells("id_Product").Value
@@ -509,25 +509,22 @@ Public Class frmPackRchkA
 
 
 
-                    MsgBox("ID = " & id.ToString & vbCrLf _
-                           & "coneState = " & conestate.ToString & vbCrLf _
-                           & "rechk =" & recheck.ToString & vbCrLf _
-                           & "oppack = " & oppack.ToString & vbCrLf _
-                           & "opname = " & opname.ToString & vbCrLf _
-                           & "packendtm = " & packendtm.ToString & vbCrLf _
-                           & "psorterror = " & psorterror.ToString & vbCrLf _
-                           & "cartendtm = " & cartendtm.ToString & vbCrLf)
+                'MsgBox("ID = " & id.ToString & vbCrLf _
+                '       & "coneState = " & conestate.ToString & vbCrLf _
+                '       & "rechk =" & recheck.ToString & vbCrLf _
+                '       & "oppack = " & oppack.ToString & vbCrLf _
+                '       & "opname = " & opname.ToString & vbCrLf _
+                '       & "packendtm = " & packendtm.ToString & vbCrLf _
+                '       & "psorterror = " & psorterror.ToString & vbCrLf _
+                '       & "cartendtm = " & cartendtm.ToString & vbCrLf)
 
 
 
-                    SQL.ExecQuery(" Update jobs set CONESTATE = @conestate, OPPACK = @oppack, OPNAME = @opname, PACKENDTM = @packendtm, " _
+                SQL.ExecQuery(" Update jobs set CONESTATE = @conestate, OPPACK = @oppack, OPNAME = @opname, PACKENDTM = @packendtm, " _
                           & "PSORTERROR = @psorterror, CARTENDTM = @cartendtm, RECHK = @rechk,PACKSHEETBCODE = @packsheet, CARTONNUM = @carton  Where id_product = @id")
 
 
-                ' Else
-                '   Continue For
 
-                ' End If
 
             Next
 
