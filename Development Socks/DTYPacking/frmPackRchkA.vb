@@ -475,17 +475,17 @@ Public Class frmPackRchkA
 
         pauseScan = 1 'Stop Barcode entry
 
-        tsbtnSave()
+        'tsbtnSave()
 
         'NEW db UPDATE Routine not using CommandBuilder
         Try
 
             For i = 1 To PRecordCount   'This is all cheese on the DGV
 
-                If DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = 15 Then  'Only write cheese that is state 15 Packed
+                ' If DGVPakingRecA.Rows(i - 1).Cells("CONESTATE").Value = 15 Then  'Only write cheese that is state 15 Packed
 
-                    'load parameters for cheese to write
-                    Dim id As String = DGVPakingRecA.Rows(i - 1).Cells("id_Product").Value
+                'load parameters for cheese to write
+                Dim id As String = DGVPakingRecA.Rows(i - 1).Cells("id_Product").Value
                     Dim conestate As String = DGVPakingRecA.Rows(i - 1).Cells("conestate").Value
                     Dim oppack As String = DGVPakingRecA.Rows(i - 1).Cells("OpPack").Value
                     Dim opname = DGVPakingRecA.Rows(i - 1).Cells("OpName").Value
@@ -493,6 +493,8 @@ Public Class frmPackRchkA
                     Dim psorterror = DGVPakingRecA.Rows(i - 1).Cells("PSORTERROR").Value
                     Dim cartendtm = DGVPakingRecA.Rows(i - 1).Cells("CartEndTm").Value
                     Dim recheck = DGVPakingRecA.Rows(i - 1).Cells("RECHK").Value
+                    Dim cartsheet = DGVPakingRecA.Rows(i - 1).Cells("PACKSHEETBCODE").Value
+                    Dim cartonno = DGVPakingRecA.Rows(i - 1).Cells("CARTONNUM").Value
 
                     SQL.AddParam("@id", DGVPakingRecA.Rows(i - 1).Cells("id_Product").Value)
                     SQL.AddParam("@conestate", DGVPakingRecA.Rows(i - 1).Cells("conestate").Value)
@@ -502,35 +504,30 @@ Public Class frmPackRchkA
                     SQL.AddParam("@psorterror", DGVPakingRecA.Rows(i - 1).Cells("PSORTERROR").Value)
                     SQL.AddParam("@cartendtm", DGVPakingRecA.Rows(i - 1).Cells("CartEndTm").Value)
                     SQL.AddParam("@rechk", DGVPakingRecA.Rows(i - 1).Cells("RECHK").Value)
+                    SQL.AddParam("@carton", DGVPakingRecA.Rows(i - 1).Cells("CARTONNUM").Value)
+                    SQL.AddParam("@packsheet", DGVPakingRecA.Rows(i - 1).Cells("PACKSHEETBCODE").Value)
 
 
 
+                    MsgBox("ID = " & id.ToString & vbCrLf _
+                           & "coneState = " & conestate.ToString & vbCrLf _
+                           & "rechk =" & recheck.ToString & vbCrLf _
+                           & "oppack = " & oppack.ToString & vbCrLf _
+                           & "opname = " & opname.ToString & vbCrLf _
+                           & "packendtm = " & packendtm.ToString & vbCrLf _
+                           & "psorterror = " & psorterror.ToString & vbCrLf _
+                           & "cartendtm = " & cartendtm.ToString & vbCrLf)
 
 
-                    'MsgBox("ID = " & id.ToString & vbCrLf _
-                    '       & "coneState = " & conestate.ToString & vbCrLf _
-                    '       & "rechk =" & recheck.ToString & vbCrLf _
-                    '       & "oppack = " & oppack.ToString & vbCrLf _
-                    '       & "opname = " & opname.ToString & vbCrLf _
-                    '       & "packendtm = " & packendtm.ToString & vbCrLf _
-                    '       & "psorterror = " & psorterror.ToString & vbCrLf _
-                    '       & "cartendtm = " & cartendtm.ToString & vbCrLf)
+
+                    SQL.ExecQuery(" Update jobs set CONESTATE = @conestate, OPPACK = @oppack, OPNAME = @opname, PACKENDTM = @packendtm, " _
+                          & "PSORTERROR = @psorterror, CARTENDTM = @cartendtm, RECHK = @rechk,PACKSHEETBCODE = @packsheet, CARTONNUM = @carton  Where id_product = @id")
 
 
-                    SQL.AddParam("@id", DGVPakingRecA.Rows(i - 1).Cells("id_Product").Value)
-                    SQL.AddParam("@conestate", DGVPakingRecA.Rows(i - 1).Cells("conestate").Value)
-                    SQL.AddParam("@oppack", DGVPakingRecA.Rows(i - 1).Cells("OpPack").Value)
-                    SQL.AddParam("@opname", DGVPakingRecA.Rows(i - 1).Cells("OpName").Value)
-                    SQL.AddParam("@packendtm", DGVPakingRecA.Rows(i - 1).Cells("Packendtm").Value)
-                    SQL.AddParam("@psorterror", DGVPakingRecA.Rows(i - 1).Cells("PSORTERROR").Value)
-                    SQL.AddParam("@cartendtm", DGVPakingRecA.Rows(i - 1).Cells("CartEndTm").Value)
-                    SQL.AddParam("@rechk", DGVPakingRecA.Rows(i - 1).Cells("RECHK").Value)
+                ' Else
+                '   Continue For
 
-
-                Else
-                    Continue For
-
-                End If
+                ' End If
 
             Next
 

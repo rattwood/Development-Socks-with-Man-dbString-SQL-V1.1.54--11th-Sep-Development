@@ -189,7 +189,7 @@ Public Class frmPackRepMain
         'SELECT CORRECT PRINT TEMPLATE
 
         Select Case frmJobEntry.txtGrade.Text
-            Case "A", "ReCheckA"
+            Case "A"
                 template = (My.Settings.dirTemplate & "\" & "PackingTemplate.xlsx").ToString
             Case "B"
                 template = (My.Settings.dirTemplate & "\" & "Packing Template Grade B.xlsx").ToString
@@ -245,7 +245,7 @@ Public Class frmPackRepMain
 
             Select Case frmJobEntry.txtGrade.Text
 
-                Case "A", "ReCheckA"
+                Case "A"
                     frmPackTodayUpdate.TodayUpdate()
                 Case "B", "AD", "AL", "Waste"
                     frmPackTodayUpdate.TodayUpdateB_AL_AD()
