@@ -347,12 +347,14 @@ Public Class frmPackRchkA
                     DGVPakingRecA.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.PackOp
                     DGVPakingRecA.Rows(i - 1).Cells("CARTENDTM").Value = Today
 
+                    Me.Hide()
+                    frmRemoveCone.Show()
 
 
-                    Label1.Visible = True
-                    Label1.Text = "You Have scanned a Cheese that is not 'GRADE A'"
-                    DelayTM()
-                    Label1.Visible = False
+                    'Label1.Visible = True
+                    'Label1.Text = "You Have scanned a Cheese that is not 'GRADE A'"
+                    'DelayTM()
+                    'Label1.Visible = False
                     txtConeBcode.Clear()
                     txtConeBcode.Refresh()
                     txtConeBcode.Focus()

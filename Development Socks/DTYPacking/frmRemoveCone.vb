@@ -10,12 +10,20 @@ Public Class frmRemoveCone
         If frmJobEntry.txtGrade.Text = "A" Or frmJobEntry.txtGrade.Text = "Normal" Or frmJobEntry.txtGrade.Text = "Pilot 6Ch" Or frmJobEntry.txtGrade.Text = "Pilot 15Ch" Or
             frmJobEntry.txtGrade.Text = "Pilot 20Ch" Then
 
-            Label1.Text = "Not Grade 'A' Cheese"
-            Me.lblScannedCone.Text = frmPacking.bcodeScan
+            If frmJobEntry.rechkA = 1 Then
+                Label1.Text = "Not Grade 'A' Cheese"
+                Me.lblScannedCone.Text = frmPackRchkA.bcodeScan
+            Else
+                Label1.Text = "Not Grade 'A' Cheese"
+                Me.lblScannedCone.Text = frmPacking.bcodeScan
+            End If
 
-        ElseIf frmJobEntry.txtGrade.Text = "ReCheckA" Then
-            Label1.Text = "Not Grade 'A' Cheese"
-            Me.lblScannedCone.Text = frmPackRchkA.bcodeScan
+            'Label1.Text = "Not Grade 'A' Cheese"
+            'Me.lblScannedCone.Text = frmPacking.bcodeScan
+
+            'ElseIf frmJobEntry.txtGrade.Text = "ReCheckA" Then
+            '    Label1.Text = "Not Grade 'A' Cheese"
+            '    Me.lblScannedCone.Text = frmPackRchkA.bcodeScan
 
         Else
             Label1.Text = "Not Grade " & "'" & frmJobEntry.txtGrade.Text & "'" & " Cheese"
@@ -34,24 +42,13 @@ Public Class frmRemoveCone
         Try
 
             chkBCode = TextBox1.Text
-            MsgBox(frmJobEntry.txtGrade.Text & vbCrLf & lblScannedCone.Text)
+            'MsgBox(frmJobEntry.txtGrade.Text & vbCrLf & lblScannedCone.Text)
 
             Select Case frmJobEntry.txtGrade.Text
                 Case "Normal", "A", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch"
 
-                    If chkBCode = lblScannedCone.Text Then
-                        btnContinue.Visible = True
-                        btnContinue.Enabled = True
 
-                    Else
-                        MsgBox("This is not the cone to remove")
-                        Me.TextBox1.Clear()
-                        Me.btnContinue.Enabled = False
-                        Me.TextBox1.Focus()
-                        Me.TextBox1.Refresh()
-                    End If
 
-                Case "ReCheckA"
                     If chkBCode = lblScannedCone.Text Then
                         btnContinue.Visible = True
                         btnContinue.Enabled = True
@@ -64,6 +61,20 @@ Public Class frmRemoveCone
                         Me.TextBox1.Refresh()
                         Exit Sub
                     End If
+
+                    'Case "ReCheckA"
+                    '    If chkBCode = lblScannedCone.Text Then
+                    '        btnContinue.Visible = True
+                    '        btnContinue.Enabled = True
+
+                    '    Else
+                    '        MsgBox("This is not the cone to remove")
+                    '        Me.TextBox1.Clear()
+                    '        Me.btnContinue.Enabled = False
+                    '        Me.TextBox1.Focus()
+                    '        Me.TextBox1.Refresh()
+                    '        Exit Sub
+                    '    End If
 
                 Case Else 'Check for grade B,AL,AD
 
@@ -104,14 +115,26 @@ Public Class frmRemoveCone
 
         If frmJobEntry.txtGrade.Text = "A" Or frmJobEntry.txtGrade.Text = "Normal" Or frmJobEntry.txtGrade.Text = "Pilot 6Ch" Or frmJobEntry.txtGrade.Text = "Pilot 15Ch" Or
                 frmJobEntry.txtGrade.Text = "Pilot 20Ch" Then
-            frmPacking.txtConeBcode.Clear()
-            frmPacking.txtConeBcode.Focus()
-            frmPacking.Show()
 
-        ElseIf frmJobEntry.txtGrade.Text = "ReCheckA" Then
-            frmPackRchkA.txtConeBcode.Clear()
-            frmPackRchkA.txtConeBcode.Focus()
-            frmPackRchkA.Show()
+
+            If frmJobEntry.rechkA = 1 Then
+
+                frmPackRchkA.txtConeBcode.Clear()
+                frmPackRchkA.txtConeBcode.Focus()
+                frmPackRchkA.Show()
+            Else
+                frmPacking.txtConeBcode.Clear()
+                frmPacking.txtConeBcode.Focus()
+                frmPacking.Show()
+            End If
+            'frmPacking.txtConeBcode.Clear()
+            'frmPacking.txtConeBcode.Focus()
+            'frmPacking.Show()
+
+            'ElseIf frmJobEntry.txtGrade.Text = "ReCheckA" Then
+            '    frmPackRchkA.txtConeBcode.Clear()
+            '    frmPackRchkA.txtConeBcode.Focus()
+            '    frmPackRchkA.Show()
         Else
             frmB_AL_AD_W.txtConeBcode.Clear()
             frmB_AL_AD_W.txtConeBcode.Focus()
