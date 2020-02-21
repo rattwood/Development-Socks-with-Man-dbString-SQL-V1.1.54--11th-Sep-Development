@@ -124,7 +124,7 @@ Public Class frmPackPrvGet
                 Dim colCount As Integer = 4
                 Dim endloop As Integer
 
-                For ccount = 1 To 4  'Three sets of columns
+                For ccount = 1 To 4  'Four sets of columns
                     If ccount < 4 Then
                         For rcount = 14 To 65
                             If MyPrevExcel.Cells(rcount, colCount).Value > "0" Then

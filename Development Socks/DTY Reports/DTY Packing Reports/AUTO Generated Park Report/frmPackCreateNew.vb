@@ -37,19 +37,20 @@ Public Class frmPackCreateNew
                 'PRODUCT NAME
                 MyPakExcel.Cells(7, 4) = prodTf
 
-                ''Product Name
-                'MyPakExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D7
                 'Product Code
                 MyPakExcel.Cells(7, 6) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value        'F7
+
                 'DATE
                 MyPakExcel.Cells(5, 3) = Date.Now.ToString("dd MM yyyy")              'C5
+
                 'CHEESE WEIGHT
                 MyPakExcel.Cells(13, 5) = frmJobEntry.varProdWeight                   'E13
+
                 'PACKER NAME
                 MyPakExcel.Cells(13, 8) = frmJobEntry.PackOp     'H13
 
                 createBarcode()
-                'MyPakExcel.Cells(1, 4) = SheetCodeString
+
                 'New positions for barcode
                 MyPakExcel.Cells(5, 8) = SheetCodeString
                 MyPakExcel.Cells(9, 10) = modBarcode
@@ -74,8 +75,6 @@ Public Class frmPackCreateNew
                 'PRODUCT NAME
                 MyPakExcel.Cells(7, 4) = prodTf
 
-                ''Product Name
-                'MyPakExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D7
                 'Product Code
                 MyPakExcel.Cells(7, 6) = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value        'F7
                 'DATE
@@ -87,7 +86,7 @@ Public Class frmPackCreateNew
 
                 createBarcode()
 
-                'MyPakExcel.Cells(1, 4) = SheetCodeString
+
                 'New positions for barcode
                 MyPakExcel.Cells(5, 8) = SheetCodeString
                 MyPakExcel.Cells(9, 10) = modBarcode
@@ -111,8 +110,6 @@ Public Class frmPackCreateNew
                 'PRODUCT NAME
                 MyPakExcel.Cells(7, 4) = prodTf
 
-                ''Product Name
-                'MyPakExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D7
                 'Product Code
                 MyPakExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value        'F7
                 'DATE
@@ -151,14 +148,11 @@ Public Class frmPackCreateNew
                 'PRODUCT NAME
                 MyPakExcel.Cells(6, 8) = prodTf
 
-                ''Product Name
-                'MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'H6
                 'Product Code
                 MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value       'L6
                 'DATE
                 MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D5
-                'CHEESE WEIGHT
-                ' MyPakExcel.Cells(12, 5) = frmJobEntry.varProdWeight                   'E12
+
                 'PACKER NAME
                 MyPakExcel.Cells(43, 4) = frmDGV.DGVdata.Rows(0).Cells(55).Value      'D43
 
@@ -219,14 +213,11 @@ Public Class frmPackCreateNew
                 'PRODUCT NAME
                 MyPakExcel.Cells(6, 8) = prodTf
 
-                ''Product Name
-                'MyPakExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'H6
                 'Product Code
                 MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value       'L6
                 'DATE
                 MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D5
-                'CHEESE WEIGHT
-                'MyPakExcel.Cells(12, 5) = frmJobEntry.varProdWeight                   'E12
+
                 'PACKER NAME
                 MyPakExcel.Cells(53, 4) = frmDGV.DGVdata.Rows(0).Cells(55).Value      'D53
 
