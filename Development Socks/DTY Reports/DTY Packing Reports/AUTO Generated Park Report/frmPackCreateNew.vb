@@ -154,7 +154,7 @@ Public Class frmPackCreateNew
                 MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D5
 
                 'PACKER NAME
-                MyPakExcel.Cells(43, 4) = frmDGV.DGVdata.Rows(0).Cells(55).Value      'D43
+                MyPakExcel.Cells(43, 4) = frmJobEntry.PackOp 'frmDGV.DGVdata.Rows(0).Cells(55).Value      'D43
 
                 'THIS IS USED TO WRITE DATE IN TO USED ROWS
                 Select Case frmPackPrvGet.ncfree
@@ -219,7 +219,7 @@ Public Class frmPackCreateNew
                 MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D5
 
                 'PACKER NAME
-                MyPakExcel.Cells(53, 4) = frmDGV.DGVdata.Rows(0).Cells(55).Value      'D53
+                MyPakExcel.Cells(53, 4) = frmJobEntry.PackOp  'frmDGV.DGVdata.Rows(0).Cells(55).Value      'D53
 
 
                 'THIS IS USED TO WRITE DATE IN TO USED ROWS
@@ -280,7 +280,7 @@ Public Class frmPackCreateNew
                 ''Product Name
                 'MyPakExcel.Cells(7, 9) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'E8
                 'Product Code
-                MyPakExcel.Cells(7, 14) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value       'N8
+                MyPakExcel.Cells(7, 16) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value       'N8
                 'DATE
                 MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D6
                 'CHEESE WEIGHT

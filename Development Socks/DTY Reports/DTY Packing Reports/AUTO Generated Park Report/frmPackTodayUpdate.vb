@@ -1038,7 +1038,7 @@ Public Class frmPackTodayUpdate
             MyTodyExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
 
             'Packer Name
-            MyTodyExcel.Cells(43, 4) = frmJobEntry.PackOp
+            MyTodyExcel.Cells(53, 4) = frmJobEntry.PackOp
 
 
 
@@ -1069,7 +1069,7 @@ Public Class frmPackTodayUpdate
 
         Try
             'Packer Name
-            MyTodyExcel.Cells(43, 4) = frmJobEntry.PackOp
+            MyTodyExcel.Cells(53, 4) = frmJobEntry.PackOp
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
                 If frmJobEntry.txtGrade.Text = "P30 BS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Or
