@@ -1,5 +1,9 @@
-﻿Public Class frmB_AL_AD_W
+﻿Imports System.Data.SqlClient
 
+Public Class frmB_AL_AD_W
+
+    'GIVES ACCESS TO GLOBAL SQL CLASS
+    Private SQLL As New SQLConn
 
     Public packingActive = 0
     Public bcodeScan As String = ""
@@ -172,6 +176,9 @@
         Me.KeyPreview = True 'Allows us to look for advace character from barcode
 
         'THESE TWO LINES CONE SCANNED CHEESE FROM JOBENTRY IN TO THE FIRST ROW OF THE FORM AS WE KNOW IT IS THE CORRECT GRADE
+
+        If My.Settings.debugSet Then frmDGV.Show()
+
         txtConeBcode.Text = frmJobEntry.txtLotNumber.Text
         If My.Settings.chkUseSort Then btnDefect.Visible = False
         prgContinue()
@@ -436,45 +443,45 @@
 
 
                 With DataGridView1
-                .Name = " DataGridView1"
-                '.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
-                .RowTemplate.Height = 41
-                .BorderStyle = BorderStyle.Fixed3D
+                    .Name = " DataGridView1"
+                    '.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+                    .RowTemplate.Height = 41
+                    .BorderStyle = BorderStyle.Fixed3D
 
 
-                ' .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader
-                '.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised
-                .CellBorderStyle = DataGridViewCellBorderStyle.Single
-                .GridColor = Color.Black
-                .RowHeadersVisible = False
+                    ' .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader
+                    '.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised
+                    .CellBorderStyle = DataGridViewCellBorderStyle.Single
+                    .GridColor = Color.Black
+                    .RowHeadersVisible = False
 
 
-                .Columns(0).DefaultCellStyle.Font =
+                    .Columns(0).DefaultCellStyle.Font =
                New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
-                .Columns(0).Width = 100
-                .Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-                .Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(0).Width = 100
+                    .Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-                .Columns(1).DefaultCellStyle.Font =
+                    .Columns(1).DefaultCellStyle.Font =
                 New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
-                .Columns(1).Width = 450
-                .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-                .Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(1).Width = 450
+                    .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-                .Columns(2).DefaultCellStyle.Font =
+                    .Columns(2).DefaultCellStyle.Font =
                New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
-                .Columns(2).Width = 100
-                .Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-                .Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(2).Width = 100
+                    .Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-                .Columns(3).DefaultCellStyle.Font =
+                    .Columns(3).DefaultCellStyle.Font =
                 New Font("Microsoft Sans Serif", 20, FontStyle.Bold)
-                .Columns(3).Width = 400
-                .Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-                .Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(3).Width = 400
+                    .Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    .Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
 
-            End With
+                End With
 
 
 
@@ -524,8 +531,20 @@
 
         dgvRows = toAllocatedCount
 
+        If txtConeBcode.TextLength <> 15 Then
+            Label8.Visible = True
+            Label8.Text = "BARCODE ERROR not a cheese BARCODE"
+            DelayTM()
+            Label8.Visible = False
+            Exit Sub
+        End If
+
+
+
 
         bcodeScan = txtConeBcode.Text
+
+
 
         Dim fmt As String = "00"
         Dim modIdxNum As String
@@ -887,69 +906,104 @@
 
         pauseScan = 1 'Stop Barcode entry
 
-        tsbtnSave()
+        'tsbtnSave()
 
         ''New save to SQL routine
-        Dim arrayLen As Integer
+        Dim arrayLen As Integer 'used to store the count of entries in the array
 
         For Each element As String In conelist
             If element > 0 Then arrayLen = arrayLen + 1
         Next
 
-        If arrayLen = 0 Then
-            ListBox1.Items.Add(conelist(0).ToString)
-        Else
+        'If arrayLen = 0 Then
+        '    ListBox1.Items.Add(conelist(0).ToString)
+        'Else
 
-            For y = 0 To arrayLen
-                ListBox1.Items.Add(conelist(y).ToString)
+        'For y = 0 To arrayLen
+        '        ListBox1.Items.Add(conelist(y).ToString)
+        '    Next
+
+        ' End If
+        Try
+            Dim rcount As Integer
+
+            For i = 1 To arrayLen
+
+
+
+                SQLL.AddParam("@id", conelist(i - 1).ToString) 'frmDGV.DGVdata.Rows(i - 1).Cells("id_Product").Value)
+                Dim id_val As String = (conelist(i - 1).ToString)
+                'We must find correct row in dgv to get data for parameters
+
+                For x = 1 To dgvRows
+                    If frmDGV.DGVdata.Rows(x - 1).Cells("id_product").Value = id_val Then
+                        rcount = x - 1
+                    End If
+                Next
+
+
+                SQLL.AddParam("@opname", frmDGV.DGVdata.Rows(rcount).Cells("OpName").Value)
+                SQLL.AddParam("@conestate", frmDGV.DGVdata.Rows(rcount).Cells("conestate").Value)
+                SQLL.AddParam("@shortcone", frmDGV.DGVdata.Rows(rcount).Cells("SHORTCONE").Value)
+                SQLL.AddParam("@defcone", frmDGV.DGVdata.Rows(rcount).Cells("DEFCONE").Value)
+                SQLL.AddParam("@cartendtm", frmDGV.DGVdata.Rows(rcount).Cells("CartEndTm").Value)
+                SQLL.AddParam("@rechk", frmDGV.DGVdata.Rows(rcount).Cells("RECHK").Value)
+                SQLL.AddParam("@flt_k", frmDGV.DGVdata.Rows(rcount).Cells("FLT_K").Value)
+                SQLL.AddParam("@flt_d", frmDGV.DGVdata.Rows(rcount).Cells("FLT_D").Value)
+                SQLL.AddParam("@flt_f", frmDGV.DGVdata.Rows(rcount).Cells("FLT_F").Value)
+                SQLL.AddParam("@flt_o", frmDGV.DGVdata.Rows(rcount).Cells("FLT_O").Value)
+                SQLL.AddParam("@flt_t", frmDGV.DGVdata.Rows(rcount).Cells("FLT_T").Value)
+                SQLL.AddParam("@flt_p", frmDGV.DGVdata.Rows(rcount).Cells("FLT_P").Value)
+                SQLL.AddParam("@flt_s", frmDGV.DGVdata.Rows(rcount).Cells("FLT_S").Value)
+                SQLL.AddParam("@flt_n", frmDGV.DGVdata.Rows(rcount).Cells("FLT_N").Value)
+                SQLL.AddParam("@flt_w", frmDGV.DGVdata.Rows(rcount).Cells("FLT_W").Value)
+                SQLL.AddParam("@flt_h", frmDGV.DGVdata.Rows(rcount).Cells("FLT_H").Value)
+                SQLL.AddParam("@flt_tr", frmDGV.DGVdata.Rows(rcount).Cells("FLT_TR").Value)
+                SQLL.AddParam("@flt_b", frmDGV.DGVdata.Rows(rcount).Cells("FLT_B").Value)
+                SQLL.AddParam("@flt_c", frmDGV.DGVdata.Rows(rcount).Cells("FLT_C").Value)
+                SQLL.AddParam("@oppack", frmDGV.DGVdata.Rows(rcount).Cells("OpPack").Value)
+                SQLL.AddParam("@psorterror", frmDGV.DGVdata.Rows(rcount).Cells("PSORTERROR").Value)
+                SQLL.AddParam("@packendtm", frmDGV.DGVdata.Rows(rcount).Cells("Packendtm").Value)
+                SQLL.AddParam("@packsheet", frmDGV.DGVdata.Rows(rcount).Cells("PACKSHEETBCODE").Value)
+                SQLL.AddParam("@carton", frmDGV.DGVdata.Rows(rcount).Cells("CARTONNUM").Value)
+                SQLL.AddParam("@packidx", frmDGV.DGVdata.Rows(rcount).Cells("PACKIDX").Value)
+
+                '   MsgBox("ID = " & @id.tostring)
+
+                SQLL.ExecQuery(" Update jobs set CONESTATE = @conestate, OPPACK = @oppack, OPNAME = @opname, PACKENDTM = @packendtm, " _
+                            & "SHORTCONE = @shortcone, DEFCONE = @defcone," _
+                            & "FLT_K =  @flt_k, FLT_D = @flt_d, FLT_F = @flt_f, FLT_O = @flt_o, FLT_T = @flt_t, FLT_P = @flt_p, " _
+                            & "FLT_S = @flt_s, FLT_N = @flt_n, FLT_W = @flt_w, FLT_H = @flt_h, FLT_TR = @flt_tr, FLT_B = @flt_b,FLT_C = @flt_c, " _
+                            & "PSORTERROR = @psorterror, CARTENDTM = @cartendtm,RECHK = @rechk,PACKSHEETBCODE = @packsheet, CARTONNUM = @carton, PACKIDX = @packidx " _
+                            & "Where id_product = @id")
+
+
+
             Next
 
-        End If
+        Catch dbcx As DBConcurrencyException
+            Dim Response As String
 
-        For i = 1 To arrayLen
-
-            Sql.AddParam("@id", frmDGV.DGVdata.Rows(i - 1).Cells("id_Product").Value)
-            Sql.AddParam("@opname", DGVPakingRecA.Rows(i - 1).Cells("OpName").Value)
-            Sql.AddParam("@conestate", DGVPakingRecA.Rows(i - 1).Cells("conestate").Value)
-            Sql.AddParam("@shortcone", DGVPakingRecA.Rows(i - 1).Cells("SHORTCONE").Value)
-            Sql.AddParam("@defcone", DGVPakingRecA.Rows(i - 1).Cells("DEFCONE").Value)
-            Sql.AddParam("@cartendtm", DGVPakingRecA.Rows(i - 1).Cells("CartEndTm").Value)
-            Sql.AddParam("@rechk", DGVPakingRecA.Rows(i - 1).Cells("RECHK").Value)
-            Sql.AddParam("@flt_k", DGVPakingRecA.Rows(i - 1).Cells("FLT_K").Value)
-            Sql.AddParam("@flt_d", DGVPakingRecA.Rows(i - 1).Cells("FLT_D").Value)
-            Sql.AddParam("@flt_f", DGVPakingRecA.Rows(i - 1).Cells("FLT_F").Value)
-            Sql.AddParam("@flt_o", DGVPakingRecA.Rows(i - 1).Cells("FLT_O").Value)
-            Sql.AddParam("@flt_t", DGVPakingRecA.Rows(i - 1).Cells("FLT_T").Value)
-            Sql.AddParam("@flt_p", DGVPakingRecA.Rows(i - 1).Cells("FLT_P").Value)
-            Sql.AddParam("@flt_s", DGVPakingRecA.Rows(i - 1).Cells("FLT_S").Value)
-            Sql.AddParam("@flt_n", DGVPakingRecA.Rows(i - 1).Cells("FLT_N").Value)
-            Sql.AddParam("@flt_w", DGVPakingRecA.Rows(i - 1).Cells("FLT_W").Value)
-            Sql.AddParam("@flt_h", DGVPakingRecA.Rows(i - 1).Cells("FLT_H").Value)
-            Sql.AddParam("@flt_tr", DGVPakingRecA.Rows(i - 1).Cells("FLT_TR").Value)
-            Sql.AddParam("@flt_b", DGVPakingRecA.Rows(i - 1).Cells("FLT_B").Value)
-            Sql.AddParam("@flt_c", DGVPakingRecA.Rows(i - 1).Cells("FLT_C").Value)
-            Sql.AddParam("@oppack", DGVPakingRecA.Rows(i - 1).Cells("OpPack").Value)
-            Sql.AddParam("@psorterror", DGVPakingRecA.Rows(i - 1).Cells("PSORTERROR").Value)
-            Sql.AddParam("@packendtm", DGVPakingRecA.Rows(i - 1).Cells("Packendtm").Value)
-            Sql.AddParam("@packsheet", DGVPakingRecA.Rows(i - 1).Cells("PACKSHEETBCODE").Value)
-            Sql.AddParam("@carton", DGVPakingRecA.Rows(i - 1).Cells("CARTONNUM").Value)
-
-
-
-            Sql.ExecQuery(" Update jobs set CONESTATE = @conestate, OPPACK = @oppack, OPNAME = @opname, PACKENDTM = @packendtm, " _
-                        & "SHORTCONE = @shortcone, DEFCONE = @defcone," _
-                        & "FLT_K =  @flt_k, FLT_D = @flt_d, FLT_F = @flt_f, FLT_O = @flt_o, FLT_T = @flt_t, FLT_P = @flt_p, " _
-                        & "FLT_S = @flt_s, FLT_N = @flt_n, FLT_W = @flt_w, FLT_H = @flt_h, FLT_TR = @flt_tr, FLT_B = @flt_b,FLT_C = @flt_c, " _
-                        & "PSORTERROR = @psorterror, CARTENDTM = @cartendtm,RECHK = @rechk,PACKSHEETBCODE = @packsheet, CARTONNUM = @carton, " _
-                        & "Where id_product = @id")
+            Response = dbcx.Row.ToString
+            writeerrorLog.writelog("db B_AL_AD_W Con Error", Response, False, "B_AL_AD_Pk Con Fault")
+            Response = dbcx.RowCount.ToString
+            writeerrorLog.writelog("db B_AL_AD_W_Pk Con Error", Response, False, "B_AL_AD_Pk Con Fault")
 
 
 
 
+        Catch ex As Exception
+            'Write error to Log File
+            Dim ErrorMsg As String = "Computer " & System.Environment.MachineName
+            writeerrorLog.writelog("db B_AL_AD_W Update Error", ErrorMsg, False, "System Fault")
+            writeerrorLog.writelog("db B_AL_AD_W Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("db B_AL_AD_W Update Error", ex.ToString, False, "System Fault")
+
+            MsgBox("Update Error: " & vbNewLine & ex.Message)
+            pauseScan = 0 'Allow barcode entry
+        End Try
 
 
-
-        Next
 
 
         ''Save ReCheck details
@@ -972,43 +1026,43 @@
 
         '******************   THIS WILL WRITE ANY CHANGES MADE TO THE DATAGRID BACK TO THE DATABASE ******************
 
-        Try
+        'Try
 
-            If frmJobEntry.LDS.HasChanges Then
-
-
-                'LDA.UpdateCommand = New Oracle.ManagedDataAccess.Client.OracleCommandBuilder(frmJobEntry.LDA).GetUpdateCommand
-
-                frmJobEntry.LDA.Update(frmJobEntry.LDS.Tables(0))
-
-            End If
+        '    If frmJobEntry.LDS.HasChanges Then
 
 
+        '        'LDA.UpdateCommand = New Oracle.ManagedDataAccess.Client.OracleCommandBuilder(frmJobEntry.LDA).GetUpdateCommand
+
+        '        frmJobEntry.LDA.Update(frmJobEntry.LDS.Tables(0))
+
+        '    End If
 
 
 
 
-        Catch dbcx As DBConcurrencyException
-            Dim Response As String
-
-            Response = dbcx.Row.ToString
-            writeerrorLog.writelog("db B_AL_AD_W Con Error", Response, False, "reChkA_Pk Con Fault")
-            Response = dbcx.RowCount.ToString
-            writeerrorLog.writelog("db B_AL_AD_W_Pk Con Error", Response, False, "ReChkA_Pk Con Fault")
 
 
+        'Catch dbcx As DBConcurrencyException
+        '    Dim Response As String
+
+        '    Response = dbcx.Row.ToString
+        '    writeerrorLog.writelog("db B_AL_AD_W Con Error", Response, False, "reChkA_Pk Con Fault")
+        '    Response = dbcx.RowCount.ToString
+        '    writeerrorLog.writelog("db B_AL_AD_W_Pk Con Error", Response, False, "ReChkA_Pk Con Fault")
 
 
-        Catch ex As Exception
-            'Write error to Log File
-            Dim ErrorMsg As String = "Computer " & System.Environment.MachineName
-            writeerrorLog.writelog("db B_AL_AD_W Update Error", ErrorMsg, False, "System Fault")
-            writeerrorLog.writelog("db B_AL_AD_W Update Error", ex.Message, False, "System Fault")
-            writeerrorLog.writelog("db B_AL_AD_W Update Error", ex.ToString, False, "System Fault")
 
-            MsgBox("Update Error: " & vbNewLine & ex.Message)
-            pauseScan = 0 'Allow barcode entry
-        End Try
+
+        'Catch ex As Exception
+        '    'Write error to Log File
+        '    Dim ErrorMsg As String = "Computer " & System.Environment.MachineName
+        '    writeerrorLog.writelog("db B_AL_AD_W Update Error", ErrorMsg, False, "System Fault")
+        '    writeerrorLog.writelog("db B_AL_AD_W Update Error", ex.Message, False, "System Fault")
+        '    writeerrorLog.writelog("db B_AL_AD_W Update Error", ex.ToString, False, "System Fault")
+
+        '    MsgBox("Update Error: " & vbNewLine & ex.Message)
+        '    pauseScan = 0 'Allow barcode entry
+        'End Try
 
 
 

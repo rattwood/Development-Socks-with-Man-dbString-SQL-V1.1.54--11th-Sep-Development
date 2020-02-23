@@ -620,7 +620,7 @@
                 End If
 
             Case "B", "AL", "AD", "PS20 BS", "PS30 BS", "PS35 BS", "PS15 AS", "PS25 AS", "PS35 AS", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch", "ReCheck"
-                Me.Close()
+
                 frmB_AL_AD_W.Show()
                 frmB_AL_AD_W.txtConeBcode.Clear()
                 frmB_AL_AD_W.txtConeBcode.Focus()
