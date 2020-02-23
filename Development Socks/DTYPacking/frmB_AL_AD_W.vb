@@ -25,6 +25,9 @@
     Dim screenHeight As Integer = Screen.PrimaryScreen.WorkingArea.Height
     Dim pauseScan As Integer = 0  'Stop barcode entry when 0
 
+    'Create an array to get a list of the scanned cheeses
+    Dim conelist(200) As String
+
     'THIS INITIATES WRITING TO ERROR LOG
     Private writeerrorLog As New writeError
 
@@ -544,8 +547,45 @@
                 frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) And frmJobEntry.txtGrade.Text = "ReCheck" And
                 IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value) Then
                     'write to the local DGV grid
-                    DataGridView1.Rows(gridRow).Cells(gridCol).Value = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value  'Write to Grid Cone Bcode
+                    DataGridView1.Rows(gridRow).Cells(gridCol).Value = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
+
+                    'new part to get list of scanned cheeses in to an array which we will use for the database update
+                    Dim arrayLen As Integer
+
+                    For Each element As String In conelist
+                        If element > 0 Then arrayLen = arrayLen + 1
+                    Next
+
+
+
+
+                    If arrayLen = 0 Then
+                        conelist(arrayLen) = frmDGV.DGVdata.Rows(i - 1).Cells("id_product").Value
+                    Else
+                        conelist(arrayLen) = frmDGV.DGVdata.Rows(i - 1).Cells("id_product").Value
+                    End If
+
+                    ListBox1.Items.Clear()
+                    If arrayLen = 0 Then
+                        ListBox1.Items.Add(conelist(0).ToString)
+                    Else
+
+                        For y = 0 To arrayLen
+                            ListBox1.Items.Add(conelist(y).ToString)
+                        Next
+
+                    End If
+
+
+
+
+                    'Write to Grid Cone Bcode
                     DataGridView1.Rows(gridRow).Cells(gridCol).Style.BackColor = Color.LightGreen
+
+
+
+
+
 
                     If frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk = 0 Then  'IF RECHK THEN SET FLAG=1 SET TIME AND SET NUBER 1-32
                         frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 1
@@ -613,7 +653,7 @@
                     txtConeBcode.Focus()
                     Me.KeyPreview = True 'Allows us to look for advace character from barcode
                     Exit Sub
-                ElseIf frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodescan And packedFlag = 0 Then
+                ElseIf frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And packedFlag = 0 Then
 
 
                     frmRemoveCone.Show()
@@ -850,15 +890,67 @@
         tsbtnSave()
 
         ''New save to SQL routine
+        Dim arrayLen As Integer
 
-        Select Case frmJobEntry.txtGrade.Text
-            Case "ReCheck"
+        For Each element As String In conelist
+            If element > 0 Then arrayLen = arrayLen + 1
+        Next
+
+        If arrayLen = 0 Then
+            ListBox1.Items.Add(conelist(0).ToString)
+        Else
+
+            For y = 0 To arrayLen
+                ListBox1.Items.Add(conelist(y).ToString)
+            Next
+
+        End If
+
+        For i = 1 To arrayLen
+
+            Sql.AddParam("@id", frmDGV.DGVdata.Rows(i - 1).Cells("id_Product").Value)
+            Sql.AddParam("@opname", DGVPakingRecA.Rows(i - 1).Cells("OpName").Value)
+            Sql.AddParam("@conestate", DGVPakingRecA.Rows(i - 1).Cells("conestate").Value)
+            Sql.AddParam("@shortcone", DGVPakingRecA.Rows(i - 1).Cells("SHORTCONE").Value)
+            Sql.AddParam("@defcone", DGVPakingRecA.Rows(i - 1).Cells("DEFCONE").Value)
+            Sql.AddParam("@cartendtm", DGVPakingRecA.Rows(i - 1).Cells("CartEndTm").Value)
+            Sql.AddParam("@rechk", DGVPakingRecA.Rows(i - 1).Cells("RECHK").Value)
+            Sql.AddParam("@flt_k", DGVPakingRecA.Rows(i - 1).Cells("FLT_K").Value)
+            Sql.AddParam("@flt_d", DGVPakingRecA.Rows(i - 1).Cells("FLT_D").Value)
+            Sql.AddParam("@flt_f", DGVPakingRecA.Rows(i - 1).Cells("FLT_F").Value)
+            Sql.AddParam("@flt_o", DGVPakingRecA.Rows(i - 1).Cells("FLT_O").Value)
+            Sql.AddParam("@flt_t", DGVPakingRecA.Rows(i - 1).Cells("FLT_T").Value)
+            Sql.AddParam("@flt_p", DGVPakingRecA.Rows(i - 1).Cells("FLT_P").Value)
+            Sql.AddParam("@flt_s", DGVPakingRecA.Rows(i - 1).Cells("FLT_S").Value)
+            Sql.AddParam("@flt_n", DGVPakingRecA.Rows(i - 1).Cells("FLT_N").Value)
+            Sql.AddParam("@flt_w", DGVPakingRecA.Rows(i - 1).Cells("FLT_W").Value)
+            Sql.AddParam("@flt_h", DGVPakingRecA.Rows(i - 1).Cells("FLT_H").Value)
+            Sql.AddParam("@flt_tr", DGVPakingRecA.Rows(i - 1).Cells("FLT_TR").Value)
+            Sql.AddParam("@flt_b", DGVPakingRecA.Rows(i - 1).Cells("FLT_B").Value)
+            Sql.AddParam("@flt_c", DGVPakingRecA.Rows(i - 1).Cells("FLT_C").Value)
+            Sql.AddParam("@oppack", DGVPakingRecA.Rows(i - 1).Cells("OpPack").Value)
+            Sql.AddParam("@psorterror", DGVPakingRecA.Rows(i - 1).Cells("PSORTERROR").Value)
+            Sql.AddParam("@packendtm", DGVPakingRecA.Rows(i - 1).Cells("Packendtm").Value)
+            Sql.AddParam("@packsheet", DGVPakingRecA.Rows(i - 1).Cells("PACKSHEETBCODE").Value)
+            Sql.AddParam("@carton", DGVPakingRecA.Rows(i - 1).Cells("CARTONNUM").Value)
+
+
+
+            Sql.ExecQuery(" Update jobs set CONESTATE = @conestate, OPPACK = @oppack, OPNAME = @opname, PACKENDTM = @packendtm, " _
+                        & "SHORTCONE = @shortcone, DEFCONE = @defcone," _
+                        & "FLT_K =  @flt_k, FLT_D = @flt_d, FLT_F = @flt_f, FLT_O = @flt_o, FLT_T = @flt_t, FLT_P = @flt_p, " _
+                        & "FLT_S = @flt_s, FLT_N = @flt_n, FLT_W = @flt_w, FLT_H = @flt_h, FLT_TR = @flt_tr, FLT_B = @flt_b,FLT_C = @flt_c, " _
+                        & "PSORTERROR = @psorterror, CARTENDTM = @cartendtm,RECHK = @rechk,PACKSHEETBCODE = @packsheet, CARTONNUM = @carton, " _
+                        & "Where id_product = @id")
 
 
 
 
 
-        End Select
+
+
+        Next
+
 
         ''Save ReCheck details
         'If frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk = 0 Then

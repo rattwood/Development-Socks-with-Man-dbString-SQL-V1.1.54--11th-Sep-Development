@@ -482,48 +482,43 @@ Public Class frmPackRchkA
 
             For i = 1 To PRecordCount   'This is all cheese on the DGV
 
-
-
                 'load parameters for cheese to write
-                Dim id As String = DGVPakingRecA.Rows(i - 1).Cells("id_Product").Value
-                    Dim conestate As String = DGVPakingRecA.Rows(i - 1).Cells("conestate").Value
-                    Dim oppack As String = DGVPakingRecA.Rows(i - 1).Cells("OpPack").Value
-                    Dim opname = DGVPakingRecA.Rows(i - 1).Cells("OpName").Value
-                    Dim packendtm = DGVPakingRecA.Rows(i - 1).Cells("Packendtm").Value
-                    Dim psorterror = DGVPakingRecA.Rows(i - 1).Cells("PSORTERROR").Value
-                    Dim cartendtm = DGVPakingRecA.Rows(i - 1).Cells("CartEndTm").Value
-                    Dim recheck = DGVPakingRecA.Rows(i - 1).Cells("RECHK").Value
-                    Dim cartsheet = DGVPakingRecA.Rows(i - 1).Cells("PACKSHEETBCODE").Value
-                    Dim cartonno = DGVPakingRecA.Rows(i - 1).Cells("CARTONNUM").Value
-
-                    SQL.AddParam("@id", DGVPakingRecA.Rows(i - 1).Cells("id_Product").Value)
-                    SQL.AddParam("@conestate", DGVPakingRecA.Rows(i - 1).Cells("conestate").Value)
-                    SQL.AddParam("@oppack", DGVPakingRecA.Rows(i - 1).Cells("OpPack").Value)
-                    SQL.AddParam("@opname", DGVPakingRecA.Rows(i - 1).Cells("OpName").Value)
-                    SQL.AddParam("@packendtm", DGVPakingRecA.Rows(i - 1).Cells("Packendtm").Value)
-                    SQL.AddParam("@psorterror", DGVPakingRecA.Rows(i - 1).Cells("PSORTERROR").Value)
-                    SQL.AddParam("@cartendtm", DGVPakingRecA.Rows(i - 1).Cells("CartEndTm").Value)
-                    SQL.AddParam("@rechk", DGVPakingRecA.Rows(i - 1).Cells("RECHK").Value)
-                    SQL.AddParam("@carton", DGVPakingRecA.Rows(i - 1).Cells("CARTONNUM").Value)
-                    SQL.AddParam("@packsheet", DGVPakingRecA.Rows(i - 1).Cells("PACKSHEETBCODE").Value)
 
 
-
-                'MsgBox("ID = " & id.ToString & vbCrLf _
-                '       & "coneState = " & conestate.ToString & vbCrLf _
-                '       & "rechk =" & recheck.ToString & vbCrLf _
-                '       & "oppack = " & oppack.ToString & vbCrLf _
-                '       & "opname = " & opname.ToString & vbCrLf _
-                '       & "packendtm = " & packendtm.ToString & vbCrLf _
-                '       & "psorterror = " & psorterror.ToString & vbCrLf _
-                '       & "cartendtm = " & cartendtm.ToString & vbCrLf)
+                SQL.AddParam("@id", DGVPakingRecA.Rows(i - 1).Cells("id_Product").Value)
+                SQL.AddParam("@opname", DGVPakingRecA.Rows(i - 1).Cells("OpName").Value)
+                SQL.AddParam("@conestate", DGVPakingRecA.Rows(i - 1).Cells("conestate").Value)
+                SQL.AddParam("@shortcone", DGVPakingRecA.Rows(i - 1).Cells("SHORTCONE").Value)
+                SQL.AddParam("@defcone", DGVPakingRecA.Rows(i - 1).Cells("DEFCONE").Value)
+                SQL.AddParam("@cartendtm", DGVPakingRecA.Rows(i - 1).Cells("CartEndTm").Value)
+                SQL.AddParam("@rechk", DGVPakingRecA.Rows(i - 1).Cells("RECHK").Value)
+                SQL.AddParam("@flt_k", DGVPakingRecA.Rows(i - 1).Cells("FLT_K").Value)
+                SQL.AddParam("@flt_d", DGVPakingRecA.Rows(i - 1).Cells("FLT_D").Value)
+                SQL.AddParam("@flt_f", DGVPakingRecA.Rows(i - 1).Cells("FLT_F").Value)
+                SQL.AddParam("@flt_o", DGVPakingRecA.Rows(i - 1).Cells("FLT_O").Value)
+                SQL.AddParam("@flt_t", DGVPakingRecA.Rows(i - 1).Cells("FLT_T").Value)
+                SQL.AddParam("@flt_p", DGVPakingRecA.Rows(i - 1).Cells("FLT_P").Value)
+                SQL.AddParam("@flt_s", DGVPakingRecA.Rows(i - 1).Cells("FLT_S").Value)
+                SQL.AddParam("@flt_n", DGVPakingRecA.Rows(i - 1).Cells("FLT_N").Value)
+                SQL.AddParam("@flt_w", DGVPakingRecA.Rows(i - 1).Cells("FLT_W").Value)
+                SQL.AddParam("@flt_h", DGVPakingRecA.Rows(i - 1).Cells("FLT_H").Value)
+                SQL.AddParam("@flt_tr", DGVPakingRecA.Rows(i - 1).Cells("FLT_TR").Value)
+                SQL.AddParam("@flt_b", DGVPakingRecA.Rows(i - 1).Cells("FLT_B").Value)
+                SQL.AddParam("@flt_c", DGVPakingRecA.Rows(i - 1).Cells("FLT_C").Value)
+                SQL.AddParam("@oppack", DGVPakingRecA.Rows(i - 1).Cells("OpPack").Value)
+                SQL.AddParam("@psorterror", DGVPakingRecA.Rows(i - 1).Cells("PSORTERROR").Value)
+                SQL.AddParam("@packendtm", DGVPakingRecA.Rows(i - 1).Cells("Packendtm").Value)
+                SQL.AddParam("@packsheet", DGVPakingRecA.Rows(i - 1).Cells("PACKSHEETBCODE").Value)
+                SQL.AddParam("@carton", DGVPakingRecA.Rows(i - 1).Cells("CARTONNUM").Value)
 
 
 
                 SQL.ExecQuery(" Update jobs set CONESTATE = @conestate, OPPACK = @oppack, OPNAME = @opname, PACKENDTM = @packendtm, " _
-                          & "PSORTERROR = @psorterror, CARTENDTM = @cartendtm, RECHK = @rechk,PACKSHEETBCODE = @packsheet, CARTONNUM = @carton  Where id_product = @id")
-
-
+                            & "SHORTCONE = @shortcone, DEFCONE = @defcone," _
+                            & "FLT_K =  @flt_k, FLT_D = @flt_d, FLT_F = @flt_f, FLT_O = @flt_o, FLT_T = @flt_t, FLT_P = @flt_p, " _
+                            & "FLT_S = @flt_s, FLT_N = @flt_n, FLT_W = @flt_w, FLT_H = @flt_h, FLT_TR = @flt_tr, FLT_B = @flt_b,FLT_C = @flt_c, " _
+                            & "PSORTERROR = @psorterror, CARTENDTM = @cartendtm,RECHK = @rechk,PACKSHEETBCODE = @packsheet, CARTONNUM = @carton, " _
+                            & "Where id_product = @id")
 
 
             Next

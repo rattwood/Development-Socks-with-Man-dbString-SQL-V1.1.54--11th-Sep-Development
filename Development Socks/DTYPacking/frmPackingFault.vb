@@ -309,7 +309,7 @@
 
 
                         If shortCone = 2 Then  'NOT SHORT CONE
-                            '  frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "9"  'change cone state back to defect cone
+                            frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("CONESTATE").Value = "9"  'change cone state back to defect cone
                             frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("SHORTCONE").Value = 0 'ReSet shortCone
                             frmPacking.DGVPakingA.Rows(changeConeNum - 1).Cells("FLT_S").Value = "False" 'Re Sets the SHORT fault flag
 

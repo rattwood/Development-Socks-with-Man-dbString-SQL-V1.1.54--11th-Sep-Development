@@ -57,6 +57,7 @@ Partial Class frmB_AL_AD_W
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.txtConeBcode = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -177,6 +178,7 @@ Partial Class frmB_AL_AD_W
         'Panel5
         '
         Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel5.Controls.Add(Me.ListBox1)
         Me.Panel5.Controls.Add(Me.Label8)
         Me.Panel5.Controls.Add(Me.DataGridView1)
         Me.Panel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -461,6 +463,15 @@ Partial Class frmB_AL_AD_W
         Me.Label7.TabIndex = 145
         Me.Label7.Text = "Cheese #"
         '
+        'ListBox1
+        '
+        Me.ListBox1.FormattingEnabled = True
+        Me.ListBox1.ItemHeight = 16
+        Me.ListBox1.Location = New System.Drawing.Point(802, 598)
+        Me.ListBox1.Name = "ListBox1"
+        Me.ListBox1.Size = New System.Drawing.Size(120, 68)
+        Me.ListBox1.TabIndex = 6
+        '
         'frmB_AL_AD_W
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -527,4 +538,5 @@ Partial Class frmB_AL_AD_W
     Friend WithEvents CheeseNum4 As DataGridViewTextBoxColumn
     Friend WithEvents CheeseAloc5 As DataGridViewTextBoxColumn
     Friend WithEvents CheeseNum5 As DataGridViewTextBoxColumn
+    Friend WithEvents ListBox1 As ListBox
 End Class
