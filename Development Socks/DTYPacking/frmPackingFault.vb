@@ -5,6 +5,7 @@
     Dim shortCone As Integer
     Dim chkBcode
     Dim coneNum As String
+    Dim cone_id As Integer
 
     'THIS INITIATES WRITING TO ERROR LOG
     Private writeerrorLog As New writeError
@@ -59,6 +60,7 @@
                             If frmPacking.DGVPakingA.Rows(i - 1).Cells("BCODECONE").Value = chkBcode Then
                                 changeConeNum = i
                                 coneNum = frmPacking.DGVPakingA.Rows(i - 1).Cells("CONENUM").Value   'GET THE ACTUAL CONE NUMBER
+                                cone_id = frmPacking.DGVPakingA.Rows(i - 1).Cells("ID_PRODUCT").Value
                             End If
                         Next
                     Else
@@ -66,6 +68,7 @@
                             If frmPackRchkA.DGVPakingRecA.Rows(i - 1).Cells("BCODECONE").Value = chkBcode Then
                                 changeConeNum = i
                                 coneNum = frmPackRchkA.DGVPakingRecA.Rows(i - 1).Cells("CONENUM").Value   'GET THE ACTUAL CONE NUMBER
+                                cone_id = frmPackRchkA.DGVPakingRecA.Rows(i - 1).Cells("ID_PRODUCT").Value
                             End If
                         Next
 
@@ -76,8 +79,11 @@
                         If frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = chkBcode Then
                             changeConeNum = i
                             coneNum = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value   'GET THE ACTUAL CONE NUMBER
+                            cone_id = frmDGV.DGVdata.Rows(i - 1).Cells("ID_PRODUCT").Value
                         End If
                     Next
+
+
             End Select
 
         Catch ex As Exception
@@ -619,7 +625,7 @@
 
                 End If
 
-            Case "B", "AL", "AD", "PS20 BS", "PS30 BS", "PS35 BS", "PS15 AS", "PS25 AS", "PS35 AS", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch", "ReCheck"
+            Case "B", "AL", "AD", "P20 BS", "P30 BS", "P35 BS", "P15 AS", "P25 AS", "P35 AS", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch", "ReCheck"
 
                 frmB_AL_AD_W.Show()
                 frmB_AL_AD_W.txtConeBcode.Clear()
