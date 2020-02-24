@@ -1111,7 +1111,6 @@ Partial Class frmCart1
         Me.btnFinishedJob.TabIndex = 103
         Me.btnFinishedJob.Text = "Finish Job"
         Me.btnFinishedJob.UseVisualStyleBackColor = False
-        Me.btnFinishedJob.Visible = False
         '
         'btnWaste
         '
