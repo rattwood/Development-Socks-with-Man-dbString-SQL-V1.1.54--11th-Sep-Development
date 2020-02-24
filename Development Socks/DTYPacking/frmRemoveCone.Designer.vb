@@ -116,6 +116,7 @@ Partial Class frmRemoveCone
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmRemoveCone"
         Me.Text = "Remove Cone"
+        Me.TopMost = True
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
