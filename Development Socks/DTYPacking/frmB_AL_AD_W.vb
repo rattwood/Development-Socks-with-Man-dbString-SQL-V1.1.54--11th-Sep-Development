@@ -971,6 +971,11 @@ Public Class frmB_AL_AD_W
                 SQLL.AddParam("@packsheet", frmDGV.DGVdata.Rows(rcount).Cells("PACKSHEETBCODE").Value)
                 SQLL.AddParam("@carton", frmDGV.DGVdata.Rows(rcount).Cells("CARTONNUM").Value)
                 SQLL.AddParam("@packidx", frmDGV.DGVdata.Rows(rcount).Cells("PACKIDX").Value)
+                SQLL.AddParam("@rechkidx", frmDGV.DGVdata.Rows(rcount).Cells("RECHKIDX").Value)
+                SQLL.AddParam("@recheckbarcode", frmDGV.DGVdata.Rows(rcount).Cells("RECHECKBARCODE").Value)
+                SQLL.AddParam("@rechkstarttm", frmDGV.DGVdata.Rows(rcount).Cells("RECHKSTARTTM").Value)
+                SQLL.AddParam("@rechkendtm", frmDGV.DGVdata.Rows(rcount).Cells("RECHKENDTM").Value)
+                SQLL.AddParam("@stdstate", frmDGV.DGVdata.Rows(rcount).Cells("STDSTATE").Value)
 
                 '   MsgBox("ID = " & @id.tostring)
 
@@ -978,7 +983,8 @@ Public Class frmB_AL_AD_W
                             & "SHORTCONE = @shortcone, DEFCONE = @defcone," _
                             & "FLT_K =  @flt_k, FLT_D = @flt_d, FLT_F = @flt_f, FLT_O = @flt_o, FLT_T = @flt_t, FLT_P = @flt_p, " _
                             & "FLT_S = @flt_s, FLT_N = @flt_n, FLT_W = @flt_w, FLT_H = @flt_h, FLT_TR = @flt_tr, FLT_B = @flt_b,FLT_C = @flt_c, " _
-                            & "PSORTERROR = @psorterror, CARTENDTM = @cartendtm,RECHK = @rechk,PACKSHEETBCODE = @packsheet, CARTONNUM = @carton, PACKIDX = @packidx " _
+                            & "PSORTERROR = @psorterror, CARTENDTM = @cartendtm,RECHK = @rechk,PACKSHEETBCODE = @packsheet, CARTONNUM = @carton, PACKIDX = @packidx, " _
+                            & "RECHKIDX = @rechkidx, RECHECKBARCODE = @recheckbarcode, RECHKSTARTTM = @rechkstarttm, RECHKENDTM = rechkendtm, STDSTATE = @stdstate  " _
                             & "Where id_product = @id")
 
 
