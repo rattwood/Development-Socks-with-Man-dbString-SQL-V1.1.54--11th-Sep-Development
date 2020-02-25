@@ -22,6 +22,7 @@
         txtBoxPack.Text = My.Settings.dirPacking
         txtBoxPackReports.Text = My.Settings.dirPackReports
         txtBoxBarcodectrl.Text = My.Settings.barcodeCTRL
+        txtBoxSearchDays.Text = My.Settings.searchDays
 
         If My.Settings.chkUseSpectro Then chkUseSpectro.Checked = True Else chkUseSpectro.Checked = False
         If My.Settings.chkUseColour Then chkUseColour.Checked = True Else chkUseColour.Checked = False
@@ -102,6 +103,7 @@
         My.Settings.dirPacking = txtBoxPack.Text
         My.Settings.dirPackReports = txtBoxPackReports.Text
         My.Settings.barcodeCTRL = txtBoxBarcodectrl.Text
+        My.Settings.searchDays = txtBoxSearchDays.Text
         My.Settings.Save()
         Me.Hide()
     End Sub
@@ -133,5 +135,7 @@
         chkUseColour.Checked = False
     End Sub
 
+    Private Sub txtBoxSearchDays_TextChanged(sender As Object, e As EventArgs) Handles txtBoxSearchDays.TextChanged
 
+    End Sub
 End Class

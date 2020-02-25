@@ -22,16 +22,31 @@ Partial Class frmPackRepMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.DGVSheetDate = New System.Windows.Forms.DataGridView()
+        CType(Me.DGVSheetDate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'DGVSheetDate
+        '
+        Me.DGVSheetDate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGVSheetDate.Location = New System.Drawing.Point(32, 73)
+        Me.DGVSheetDate.Name = "DGVSheetDate"
+        Me.DGVSheetDate.Size = New System.Drawing.Size(240, 150)
+        Me.DGVSheetDate.TabIndex = 0
+        Me.DGVSheetDate.Visible = False
         '
         'frmPackRepMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.Controls.Add(Me.DGVSheetDate)
         Me.Name = "frmPackRepMain"
         Me.Text = "frmPackRepStart"
+        CType(Me.DGVSheetDate, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
+
+    Friend WithEvents DGVSheetDate As DataGridView
 End Class

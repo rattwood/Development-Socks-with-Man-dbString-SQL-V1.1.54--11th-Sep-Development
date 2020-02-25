@@ -1,6 +1,9 @@
 ﻿Imports System.IO
+Imports System.Data.SqlClient
 
 Public Class frmPackRepMain
+
+    Private SQLL As New SQLConn
 
     'STRINGS
     Dim prodNameMod As String
@@ -22,6 +25,11 @@ Public Class frmPackRepMain
     Dim PrevPath1 As String
     Dim PrevPath2 As String
     Dim PrevPath3 As String
+
+    Dim sheetSearch As String
+    Dim sheetDate As String
+    Dim tmp_sheetdate As Date
+    Dim prodNum As String
 
 
 
@@ -51,11 +59,17 @@ Public Class frmPackRepMain
                     'CREATE THE SHEET NAME But as this Cheese is from ReCheck we will assign to A grade sheet
                     sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
 
-                    'CREATE THE FULL NAME FOR SAVING THE FILE
-                    saveString = (prodNameMod & " " _
-                    & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
-                    & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString) & " A"
-                Case "A"
+                'CREATE THE FULL NAME FOR SAVING THE FILE
+                saveString = (prodNameMod & " " _
+                & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString) & " A"
+
+                'CREATE SQL Search String
+                prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+                sheetSearch = prodNum & "______A"
+
+
+            Case "A"
                     'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
                     prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
                     prodNameMod = prodNameMod.Replace("/", "_")
@@ -63,12 +77,16 @@ Public Class frmPackRepMain
                     'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
                     sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
 
-                    'CREATE THE FULL NAME FOR SAVING THE FILE
-                    saveString = (prodNameMod & " " _
-                    & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
-                    & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & " A"
+                'CREATE THE FULL NAME FOR SAVING THE FILE
+                saveString = (prodNameMod & " " _
+                & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & " A"
 
-                Case "Pilot 6Ch"
+                'CREATE SQL Search String
+                prodNum = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString
+                sheetSearch = prodNum & "______A"
+
+            Case "Pilot 6Ch"
                     'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
                     prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
                     prodNameMod = prodNameMod.Replace("/", "_")
@@ -76,12 +94,34 @@ Public Class frmPackRepMain
                     'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
                     sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
 
-                    'CREATE THE FULL NAME FOR SAVING THE FILE
-                    saveString = (prodNameMod & " " _
-                    & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
-                    & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & "_PI6_A"
+                'CREATE THE FULL NAME FOR SAVING THE FILE
+                saveString = (prodNameMod & " " _
+                & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & "_PI6_A"
 
-                Case "Pilot 15Ch"
+                'CREATE SQL Search String
+                prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+                sheetSearch = prodNum & "______PI6"
+
+            Case "Pilot 15Ch"
+                'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+                prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRNAME").Value.ToString
+                prodNameMod = prodNameMod.Replace("/", "_")
+
+                    'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+                    sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
+
+                'CREATE THE FULL NAME FOR SAVING THE FILE
+                saveString = (prodNameMod & " " _
+                & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & "_PI15_A"
+
+                'CREATE SQL Search String
+                prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+                sheetSearch = prodNum & "______PI15"
+
+
+            Case "Pilot 20Ch"
                     'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
                     prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
                     prodNameMod = prodNameMod.Replace("/", "_")
@@ -89,26 +129,16 @@ Public Class frmPackRepMain
                     'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
                     sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
 
-                    'CREATE THE FULL NAME FOR SAVING THE FILE
-                    saveString = (prodNameMod & " " _
-                    & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
-                    & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & "_PI15_A"
+                'CREATE THE FULL NAME FOR SAVING THE FILE
+                saveString = (prodNameMod & " " _
+                & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & "_PI20_A"
 
+                'CREATE SQL Search String
+                prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+                sheetSearch = prodNum & "______PI20"
 
-                Case "Pilot 20Ch"
-                    'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
-                    prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
-                    prodNameMod = prodNameMod.Replace("/", "_")
-
-                    'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
-                    sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
-
-                    'CREATE THE FULL NAME FOR SAVING THE FILE
-                    saveString = (prodNameMod & " " _
-                    & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
-                    & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & "_PI20_A"
-
-                Case Else
+            Case Else
                     'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
                     prodNameMod = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value.ToString
                     prodNameMod = prodNameMod.Replace("/", "_")
@@ -116,12 +146,48 @@ Public Class frmPackRepMain
                     'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
                     sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_" & frmJobEntry.txtGrade.Text
 
-                    'CREATE THE FULL NAME FOR SAVING THE FILE
-                    saveString = (prodNameMod & " " _
-                    & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
-                    & frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString) & " " & frmJobEntry.txtGrade.Text
+                'CREATE THE FULL NAME FOR SAVING THE FILE
+                saveString = (prodNameMod & " " _
+                & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                & frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString) & " " & frmJobEntry.txtGrade.Text
 
-            End Select
+                'CREATE SQL Search String
+
+
+                Select Case frmJobEntry.txtGrade.Text
+
+                    Case "AL"
+                        prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+                        sheetSearch = prodNum & "______AL"
+                    Case "AD"
+                        prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+                        sheetSearch = prodNum & "______AD"
+                    Case "B"
+                        prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+                        sheetSearch = prodNum & "______B"
+                    Case "P15 AS"
+                        prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+                        sheetSearch = prodNum & "______P15AS"
+                    Case "P25 AS"
+                        prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+                        sheetSearch = prodNum & "______P25AS"
+                    Case "P35 AS"
+                        prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+                        sheetSearch = prodNum & "______P35AS"
+                    Case "P20 BS"
+                        prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+                        sheetSearch = prodNum & "______P20BS"
+                    Case "P30 BS"
+                        prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+                        sheetSearch = prodNum & "______P30BS"
+                    Case "P35 BS"
+                        prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+                        sheetSearch = prodNum & "______P35BS"
+
+                End Select
+
+
+        End Select
 
 
 
@@ -226,10 +292,11 @@ Public Class frmPackRepMain
 
 
 
+
         'Create PREVIOUS THREE DAYS CHECK NAMES
         yestname1 = (PrevPath1 & "\" & saveString & ".xlsx").ToString
-        yestname2 = (PrevPath2 & "\" & saveString & ".xlsx").ToString
-        yestname3 = (PrevPath3 & "\" & saveString & ".xlsx").ToString
+        'yestname2 = (PrevPath2 & "\" & saveString & ".xlsx").ToString
+        'yestname3 = (PrevPath3 & "\" & saveString & ".xlsx").ToString
 
         'CHECK TO SEE IF THE TEMPLATE DIRECTORY HAS A REFRENCE OTHERWISE QUIT
         If template = "" Then
@@ -274,26 +341,32 @@ Public Class frmPackRepMain
 
         Else
 
-            If frmJobEntry.txtGrade.Text <> "ReCheck" And frmJobEntry.txtGrade.Text <> "Round1" And frmJobEntry.txtGrade.Text <> "Round2" And frmJobEntry.txtGrade.Text <> "Round3" And frmJobEntry.txtGrade.Text <> "STD" Then  'IF RECHECK DO NOT GET SHEETS FROM PREVIOUS DAY
 
-                If File.Exists(yestname1) Then      'ONE DAY AGO
+
+
+            'If frmJobEntry.txtGrade.Text <> "ReCheck" And frmJobEntry.txtGrade.Text <> "Round1" And frmJobEntry.txtGrade.Text <> "Round2" And frmJobEntry.txtGrade.Text <> "Round3" And frmJobEntry.txtGrade.Text <> "STD" Then  'IF RECHECK DO NOT GET SHEETS FROM PREVIOUS DAY
+            If frmJobEntry.txtGrade.Text <> "Round1" And frmJobEntry.txtGrade.Text <> "Round2" And frmJobEntry.txtGrade.Text <> "Round3" And frmJobEntry.txtGrade.Text <> "STD" Then  'IF RECHECK DO NOT GET SHEETS FROM PREVIOUS DAY
+
+
+
+                If File.Exists(yestname1) Then      'within the days entered in settings
                     prevDaysName = yestname1
-                    prevDays = Date.Now.AddDays(-1).ToString("ddMMyyyy")
+                    prevDays = tmp_sheetdate.ToString("ddMMyyyy")
                     'MsgBox("I am ready to continue with sheet from Yesterday  " & prevDays)
                     frmPackPrvGet.PrvGet()
                     Me.Close()
-                ElseIf File.Exists(yestname2) Then  'TWO DAYS AGO
-                    prevDaysName = yestname2
-                    prevDays = Date.Now.AddDays(-2).ToString("ddMMyyyy")
-                    'MsgBox("I am ready to continue with sheet from Two days ago  " & prevDays)
-                    frmPackPrvGet.PrvGet()
-                    Me.Close()
-                ElseIf File.Exists(yestname3) Then  'THREE DAYS AGO
-                    prevDaysName = yestname3
-                    prevDays = Date.Now.AddDays(-3).ToString("ddMMyyyy")
-                    'MsgBox("I am ready to continue with sheet from three days ago  " & prevDays)
-                    frmPackPrvGet.PrvGet()
-                    Me.Close()
+                    'ElseIf File.Exists(yestname2) Then  'TWO DAYS AGO
+                    '    prevDaysName = yestname2
+                    '    prevDays = Date.Now.AddDays(-2).ToString("ddMMyyyy")
+                    '    'MsgBox("I am ready to continue with sheet from Two days ago  " & prevDays)
+                    '    frmPackPrvGet.PrvGet()
+                    '    Me.Close()
+                    'ElseIf File.Exists(yestname3) Then  'THREE DAYS AGO
+                    '    prevDaysName = yestname3
+                    '    prevDays = Date.Now.AddDays(-3).ToString("ddMMyyyy")
+                    '    'MsgBox("I am ready to continue with sheet from three days ago  " & prevDays)
+                    '    frmPackPrvGet.PrvGet()
+                    '    Me.Close()
                 Else
                     'MsgBox("I am ready to create a new sheet")
                     frmPackCreateNew.CreateNew()
@@ -317,7 +390,31 @@ Public Class frmPackRepMain
     Private Sub todayDir()
 
         ' routine to check if a today directory exists otherwise creat a new one
-        PrevPath1 = (My.Settings.dirPacking & "\" & Date.Now.AddDays(-1).ToString("dd_MM_yyyy"))
+        'Check to see if we have any sheets for this product and Grade in previous days
+        SQLL.AddParam("@searchsheet", sheetSearch)
+        Dim daysstring As Integer = "-" & My.Settings.searchDays
+        SQLL.AddParam("@days", daysstring)
+
+        SQLL.ExecQuery("Select MAX(PACKENDTM) PACKENDTM from jobs where packendtm between DateAdd(DD, @days, GETDATE()) and GetDATE() and (packsheetbcode like  '%' +  @searchsheet  + '%')")
+
+        If SQLL.RecordCount > 0 Then
+
+
+            'LOAD THE DATA FROM dB IN TO THE DATAGRID
+            DGVSheetDate.DataSource = SQLL.SQLDS.Tables(0)
+            DGVSheetDate.Rows(0).Selected = True
+
+
+
+            tmp_sheetdate = DGVSheetDate.Rows(0).Cells("PACKENDTM").Value.ToString()
+
+            sheetDate = tmp_sheetdate.ToString("dd_MM_yyyy")
+
+        End If
+
+
+
+        PrevPath1 = (My.Settings.dirPacking & "\" & sheetDate)
         PrevPath2 = (My.Settings.dirPacking & "\" & Date.Now.AddDays(-2).ToString("dd_MM_yyyy"))
         PrevPath3 = (My.Settings.dirPacking & "\" & Date.Now.AddDays(-3).ToString("dd_MM_yyyy"))
 

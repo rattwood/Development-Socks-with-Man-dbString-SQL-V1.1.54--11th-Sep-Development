@@ -483,28 +483,7 @@ Public Class frmB_AL_AD_W
 
                 End With
 
-
-
-
-
-
-
-
-
-
-
         End Select
-
-
-
-
-
-
-
-
-
-
-
 
     End Sub
 

@@ -57,6 +57,8 @@ Partial Class frmSettings
         Me.txtBoxBarcodectrl = New System.Windows.Forms.TextBox()
         Me.chkDisableCreate = New System.Windows.Forms.CheckBox()
         Me.chkAudioAlarm = New System.Windows.Forms.CheckBox()
+        Me.lblSearchDays = New System.Windows.Forms.Label()
+        Me.txtBoxSearchDays = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'lblSerialPortSelect
@@ -400,11 +402,30 @@ Partial Class frmSettings
         Me.chkAudioAlarm.Text = "Audio Alarm Enable"
         Me.chkAudioAlarm.UseVisualStyleBackColor = True
         '
+        'lblSearchDays
+        '
+        Me.lblSearchDays.AutoSize = True
+        Me.lblSearchDays.Location = New System.Drawing.Point(25, 480)
+        Me.lblSearchDays.Name = "lblSearchDays"
+        Me.lblSearchDays.Size = New System.Drawing.Size(87, 15)
+        Me.lblSearchDays.TabIndex = 57
+        Me.lblSearchDays.Text = "Search Days"
+        '
+        'txtBoxSearchDays
+        '
+        Me.txtBoxSearchDays.Location = New System.Drawing.Point(118, 477)
+        Me.txtBoxSearchDays.MaxLength = 2
+        Me.txtBoxSearchDays.Name = "txtBoxSearchDays"
+        Me.txtBoxSearchDays.Size = New System.Drawing.Size(27, 21)
+        Me.txtBoxSearchDays.TabIndex = 58
+        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(739, 522)
+        Me.Controls.Add(Me.txtBoxSearchDays)
+        Me.Controls.Add(Me.lblSearchDays)
         Me.Controls.Add(Me.chkAudioAlarm)
         Me.Controls.Add(Me.chkDisableCreate)
         Me.Controls.Add(Me.txtBoxBarcodectrl)
@@ -482,4 +503,6 @@ Partial Class frmSettings
     Friend WithEvents txtBoxBarcodectrl As TextBox
     Friend WithEvents chkDisableCreate As CheckBox
     Friend WithEvents chkAudioAlarm As CheckBox
+    Friend WithEvents lblSearchDays As Label
+    Friend WithEvents txtBoxSearchDays As TextBox
 End Class
