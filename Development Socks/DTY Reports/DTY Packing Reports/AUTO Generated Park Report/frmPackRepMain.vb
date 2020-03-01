@@ -163,7 +163,7 @@ Public Class frmPackRepMain
                         prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
                         sheetSearch = prodNum & "______AD"
                     Case "B"
-                        prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+                        prodNum = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString
                         sheetSearch = prodNum & "______B"
                     Case "P15 AS"
                         prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
@@ -405,13 +405,17 @@ Public Class frmPackRepMain
             DGVSheetDate.Rows(0).Selected = True
 
 
+            If Not IsDBNull(DGVSheetDate.Rows(0).Cells("PACKENDTM").Value) Then
+                MsgBox(DGVSheetDate.Rows(0).Cells("PACKENDTM").Value.ToString)
 
-            tmp_sheetdate = DGVSheetDate.Rows(0).Cells("PACKENDTM").Value.ToString()
+                tmp_sheetdate = DGVSheetDate.Rows(0).Cells("0").Value
 
-            sheetDate = tmp_sheetdate.ToString("dd_MM_yyyy")
+                sheetDate = tmp_sheetdate.ToString("dd_MM_yyyy")
 
+
+
+            End If
         End If
-
 
 
         PrevPath1 = (My.Settings.dirPacking & "\" & sheetDate)

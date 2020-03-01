@@ -414,9 +414,9 @@ Partial Class frmSettings
         'txtBoxSearchDays
         '
         Me.txtBoxSearchDays.Location = New System.Drawing.Point(118, 477)
-        Me.txtBoxSearchDays.MaxLength = 2
+        Me.txtBoxSearchDays.MaxLength = 3
         Me.txtBoxSearchDays.Name = "txtBoxSearchDays"
-        Me.txtBoxSearchDays.Size = New System.Drawing.Size(27, 21)
+        Me.txtBoxSearchDays.Size = New System.Drawing.Size(48, 21)
         Me.txtBoxSearchDays.TabIndex = 58
         '
         'frmSettings
