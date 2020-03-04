@@ -69,11 +69,16 @@ Public Class frmPackTodayUpdate
 
                     nfree = 13
 
+                    Dim prodTf As String
+
+                    prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                    'PRODUCT NAME
+                    MyTodyExcel.Cells(7, 4) = prodTf
 
                     'Product Name
-                    MyTodyExcel.Cells(7, 4) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
+                    ' MyTodyExcel.Cells(7, 4) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
                     'Product Code
-                    MyTodyExcel.Cells(7, 5) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
+                    MyTodyExcel.Cells(7, 6) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
                     'Packer Name
                     MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
                     'Barcode in by
@@ -193,9 +198,16 @@ Public Class frmPackTodayUpdate
                                 xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                                 CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
-                                MyTodyExcel.Cells(7, 4) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
+
+                                Dim prodTf As String
+
+                                prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                                'PRODUCT NAME
+                                MyTodyExcel.Cells(7, 4) = prodTf
+
+                                ' MyTodyExcel.Cells(7, 4) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
                                 'Product Code
-                                MyTodyExcel.Cells(7, 5) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
+                                MyTodyExcel.Cells(7, 6) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
                                 'Packer Name
                                 MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
 
@@ -242,9 +254,15 @@ Public Class frmPackTodayUpdate
                         xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                         CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
-                        MyTodyExcel.Cells(7, 4) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
+                        Dim prodTf As String
+
+                        prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                        'PRODUCT NAME
+                        MyTodyExcel.Cells(7, 4) = prodTf
+
+                        ' MyTodyExcel.Cells(7, 4) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
                         'Product Code
-                        MyTodyExcel.Cells(7, 5) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
+                        MyTodyExcel.Cells(7, 6) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
                         'Packer Name
                         MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
 
@@ -281,11 +299,16 @@ Public Class frmPackTodayUpdate
 
                     nfree = 13
 
+                    Dim prodTf As String
+
+                    prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                    'PRODUCT NAME
+                    MyTodyExcel.Cells(7, 4) = prodTf
 
                     'Product Name
-                    MyTodyExcel.Cells(7, 4) = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value
+                    ' MyTodyExcel.Cells(7, 4) = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value
                     'Product Code
-                    MyTodyExcel.Cells(7, 5) = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value
+                    MyTodyExcel.Cells(7, 6) = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value
                     'Packer Name
                     MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
                     'Barcode in by
@@ -400,9 +423,16 @@ Public Class frmPackTodayUpdate
                                 xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                                 CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
-                                MyTodyExcel.Cells(7, 4) = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value
+                                Dim prodTf As String
+
+                                prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                                'PRODUCT NAME
+                                MyTodyExcel.Cells(7, 4) = prodTf
+
+
+                                ' MyTodyExcel.Cells(7, 4) = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value
                                 'Product Code
-                                MyTodyExcel.Cells(7, 5) = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value
+                                MyTodyExcel.Cells(7, 6) = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value
                                 'Packer Name
                                 MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
 
@@ -531,11 +561,16 @@ Public Class frmPackTodayUpdate
 
             nfree = 13
 
+            Dim prodTf As String
+
+            prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+            'PRODUCT NAME
+            MyTodyExcel.Cells(7, 4) = prodTf
 
             'Product Name
-            MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
+            ' MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
             'Product Code
-            MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+            MyTodyExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
             'Packer Name
             MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
             'Packer Name
@@ -649,9 +684,15 @@ Public Class frmPackTodayUpdate
                                 xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                                 CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
-                                MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
+                                Dim prodTf As String
+
+                                prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                                'PRODUCT NAME
+                                MyTodyExcel.Cells(7, 4) = prodTf
+
+                                ' MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
                                 'Product Code
-                                MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+                                MyTodyExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
                                 'Packer Name
                                 MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
                                 'Packer Name
@@ -765,9 +806,15 @@ Public Class frmPackTodayUpdate
 
             nfree = 12
 
+            Dim prodTf As String
+
+            prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+            'PRODUCT NAME
+            MyTodyExcel.Cells(6, 8) = prodTf
+
 
             'Product Name
-            MyTodyExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
+            '  MyTodyExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
             'Product Code
             MyTodyExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
 
@@ -910,9 +957,17 @@ Public Class frmPackTodayUpdate
                         xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                         CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
-                        MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
+                        Dim prodTf As String
+
+                        prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                        'PRODUCT NAME
+                        MyTodyExcel.Cells(6, 8) = prodTf
+
+
+
+                        '  MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
                         'Product Code
-                        MyTodyExcel.Cells(7, 5) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+                        MyTodyExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
                         'Packer Name
                         MyTodyExcel.Cells(43, 4) = frmJobEntry.PackOp
 
@@ -1031,9 +1086,14 @@ Public Class frmPackTodayUpdate
 
             nfree = 12
 
+            Dim prodTf As String
+
+            prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+            'PRODUCT NAME
+            MyTodyExcel.Cells(6, 8) = prodTf
 
             'Product Name
-            MyTodyExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
+            ' MyTodyExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
             'Product Code
             MyTodyExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
 
@@ -1173,7 +1233,16 @@ Public Class frmPackTodayUpdate
                         xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                         CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
-                        MyTodyExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
+
+                        Dim prodTf As String
+
+                        prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                        'PRODUCT NAME
+                        MyTodyExcel.Cells(6, 8) = prodTf
+
+
+
+                        ' MyTodyExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
                         'Product Code
                         MyTodyExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
                         'Packer Name
@@ -1309,11 +1378,16 @@ Public Class frmPackTodayUpdate
 
             nfree = 14
 
+            Dim prodTf As String
+
+            prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+            'PRODUCT NAME
+            MyTodyExcel.Cells(7, 9) = prodTf
 
             'Product Name
-            MyTodyExcel.Cells(7, 9) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
+            '  MyTodyExcel.Cells(7, 9) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
             'Product Code
-            MyTodyExcel.Cells(7, 14) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+            MyTodyExcel.Cells(7, 16) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
 
             'Packer Name
             MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
@@ -1456,9 +1530,17 @@ Public Class frmPackTodayUpdate
                         xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                         CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
-                        MyTodyExcel.Cells(9, 7) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
+                        Dim prodTf As String
+
+                        prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                        'PRODUCT NAME
+                        MyTodyExcel.Cells(7, 9) = prodTf
+
+
+
+                        ' MyTodyExcel.Cells(7, 9) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
                         'Product Code
-                        MyTodyExcel.Cells(14, 7) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+                        MyTodyExcel.Cells(7, 16) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
                         'Packer Name
                         MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
 
@@ -1567,11 +1649,16 @@ Public Class frmPackTodayUpdate
 
             nfree = 13
 
+            Dim prodTf As String
+
+            prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+            'PRODUCT NAME
+            MyTodyExcel.Cells(7, 4) = prodTf
 
             'Product Name
-            MyTodyExcel.Cells(7, 4) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
+            ' MyTodyExcel.Cells(7, 8) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
             'Product Code
-            MyTodyExcel.Cells(7, 5) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
+            MyTodyExcel.Cells(7, 6) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
             'Packer Name
             MyTodyExcel.Cells(61, 14) = frmJobEntry.PackOp
 
@@ -1676,9 +1763,16 @@ Public Class frmPackTodayUpdate
                         xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                         CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
-                        MyTodyExcel.Cells(7, 4) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
+                        Dim prodTf As String
+
+                        prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                        'PRODUCT NAME
+                        MyTodyExcel.Cells(7, 4) = prodTf
+
+
+                        'MyTodyExcel.Cells(7, 4) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
                         'Product Code
-                        MyTodyExcel.Cells(7, 5) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
+                        MyTodyExcel.Cells(7, 6) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
                         'Packer Name
                         MyTodyExcel.Cells(61, 14) = frmJobEntry.PackOp
 
@@ -1802,11 +1896,16 @@ Public Class frmPackTodayUpdate
 
             nfree = 12
 
+            Dim prodTf As String
+
+            prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+            'PRODUCT NAME
+            MyTodyExcel.Cells(6, 8) = prodTf
 
             'Product Name
-            MyTodyExcel.Cells(7, 9) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
+            ' MyTodyExcel.Cells(7, 9) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
             'Product Code
-            MyTodyExcel.Cells(7, 13) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
+            MyTodyExcel.Cells(6, 12) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
 
             'Packer Name
             MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
@@ -1981,7 +2080,7 @@ Public Class frmPackTodayUpdate
 
                         MyTodyExcel.Cells(6, 8) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
                         'Product Code
-                        MyTodyExcel.Cells(6, 11) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
+                        MyTodyExcel.Cells(6, 12) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
                         'Packer Name
                         MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
 
@@ -2105,11 +2204,16 @@ Public Class frmPackTodayUpdate
 
             nfree = 12
 
+            Dim prodTf As String
+
+            prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+            'PRODUCT NAME
+            MyTodyExcel.Cells(6, 8) = prodTf
 
             'Product Name
-            MyTodyExcel.Cells(7, 9) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
+            '  MyTodyExcel.Cells(7, 9) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
             'Product Code
-            MyTodyExcel.Cells(7, 13) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
+            MyTodyExcel.Cells(6, 12) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
 
             'Packer Name
             MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
@@ -2242,9 +2346,15 @@ Public Class frmPackTodayUpdate
                         xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                         CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
-                        MyTodyExcel.Cells(9, 7) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
+                        Dim prodTf As String
+
+                        prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                        'PRODUCT NAME
+                        MyTodyExcel.Cells(6, 8) = prodTf
+
+                        ' MyTodyExcel.Cells(9, 7) = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value
                         'Product Code
-                        MyTodyExcel.Cells(13, 7) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
+                        MyTodyExcel.Cells(6, 12) = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value
                         'Packer Name
                         MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
 
@@ -2433,7 +2543,7 @@ Public Class frmPackTodayUpdate
                             'PRODUCT NAME
                             MyTodyExcel.Cells(5, 4) = prodTf 'frmDGV.DGVdata.Rows(0).Cells(52).Value
                             'Product Code
-                            MyTodyExcel.Cells(5, 5) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+                            MyTodyExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
                             'Packer Name
                             MyTodyExcel.Cells(42, 3) = frmJobEntry.PackOp
                             'CREATE AND WRITE NEW BARCODE TO NEW SHEET
@@ -2540,9 +2650,14 @@ Public Class frmPackTodayUpdate
 
             nfree = 9
 
+            Dim prodTf As String
+
+            prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+            'PRODUCT NAME
+            MyTodyExcel.Cells(5, 4) = prodTf
 
             'Product Name
-            MyTodyExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
+            '  MyTodyExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
             'Product Code
             MyTodyExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
             'Packer Name
@@ -2624,10 +2739,17 @@ Public Class frmPackTodayUpdate
                     'xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                     'CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
 
+                    Dim prodTf As String
+
+                    prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
                     'PRODUCT NAME
-                    MyTodyExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
+                    MyTodyExcel.Cells(5, 4) = prodTf
+
+
+                    'PRODUCT NAME
+                    '  MyTodyExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
                     'Product Code
-                    MyTodyExcel.Cells(5, 5) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+                    MyTodyExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
                     'Packer Name
                     MyTodyExcel.Cells(42, 3) = frmJobEntry.PackOp
                     'CREATE AND WRITE NEW BARCODE TO NEW SHEET
