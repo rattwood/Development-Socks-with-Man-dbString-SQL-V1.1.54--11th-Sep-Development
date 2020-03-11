@@ -301,7 +301,7 @@ Public Class frmPackTodayUpdate
 
                     Dim prodTf As String
 
-                    prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                    prodTf = (frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value & "  " & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("MERGENUM").Value)
                     'PRODUCT NAME
                     MyTodyExcel.Cells(7, 4) = prodTf
 
@@ -425,7 +425,7 @@ Public Class frmPackTodayUpdate
 
                                 Dim prodTf As String
 
-                                prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                                prodTf = (frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value & "  " & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("MERGENUM").Value)
                                 'PRODUCT NAME
                                 MyTodyExcel.Cells(7, 4) = prodTf
 
@@ -563,7 +563,7 @@ Public Class frmPackTodayUpdate
 
             Dim prodTf As String
 
-            prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+            prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
             'PRODUCT NAME
             MyTodyExcel.Cells(7, 4) = prodTf
 
@@ -686,7 +686,7 @@ Public Class frmPackTodayUpdate
 
                                 Dim prodTf As String
 
-                                prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                                prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                                 'PRODUCT NAME
                                 MyTodyExcel.Cells(7, 4) = prodTf
 
@@ -808,7 +808,7 @@ Public Class frmPackTodayUpdate
 
             Dim prodTf As String
 
-            prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+            prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
             'PRODUCT NAME
             MyTodyExcel.Cells(6, 8) = prodTf
 
@@ -959,7 +959,7 @@ Public Class frmPackTodayUpdate
 
                         Dim prodTf As String
 
-                        prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                        prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                         'PRODUCT NAME
                         MyTodyExcel.Cells(6, 8) = prodTf
 
@@ -1088,7 +1088,7 @@ Public Class frmPackTodayUpdate
 
             Dim prodTf As String
 
-            prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+            prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
             'PRODUCT NAME
             MyTodyExcel.Cells(6, 8) = prodTf
 
@@ -1236,7 +1236,7 @@ Public Class frmPackTodayUpdate
 
                         Dim prodTf As String
 
-                        prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                        prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                         'PRODUCT NAME
                         MyTodyExcel.Cells(6, 8) = prodTf
 
@@ -1380,7 +1380,7 @@ Public Class frmPackTodayUpdate
 
             Dim prodTf As String
 
-            prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+            prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
             'PRODUCT NAME
             MyTodyExcel.Cells(7, 9) = prodTf
 
@@ -1532,7 +1532,7 @@ Public Class frmPackTodayUpdate
 
                         Dim prodTf As String
 
-                        prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                        prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                         'PRODUCT NAME
                         MyTodyExcel.Cells(7, 9) = prodTf
 
@@ -2652,7 +2652,7 @@ Public Class frmPackTodayUpdate
 
             Dim prodTf As String
 
-            prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+            prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
             'PRODUCT NAME
             MyTodyExcel.Cells(5, 4) = prodTf
 
@@ -2741,7 +2741,7 @@ Public Class frmPackTodayUpdate
 
                     Dim prodTf As String
 
-                    prodTf = (frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value & "  " & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value)
+                    prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                     'PRODUCT NAME
                     MyTodyExcel.Cells(5, 4) = prodTf
 
