@@ -292,7 +292,7 @@ Public Class frmPackTodayUpdate
 
             Case "ReCheckA"
                 'CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
-                If totCount > 90 Then
+                If totCount = 90 Then
                     xlTodyWorkbook.Sheets(1).Copy(After:=xlTodyWorkbook.Sheets(mycount))
                     'ReName the work sheet 
                     CType(MyTodyExcel.Workbooks(1).Worksheets("Sheet1"), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
