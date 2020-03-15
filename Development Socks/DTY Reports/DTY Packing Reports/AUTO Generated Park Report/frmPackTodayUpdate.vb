@@ -94,7 +94,7 @@ Public Class frmPackTodayUpdate
                     For i = 13 To 102
                         MyTodyExcel.Cells(nfree, 4) = "" 'Clear the contents of cone cells
                     Next
-                    boxCount = boxCount + 1
+                    ' boxCount = boxCount + 1
                 End If
 
 
@@ -325,7 +325,7 @@ Public Class frmPackTodayUpdate
                     For i = 13 To 102
                         MyTodyExcel.Cells(nfree, 4) = "" 'Clear the contents of cone cells
                     Next
-                    boxCount = boxCount + 1
+                    'boxCount = boxCount + 1
                 End If
 
 
