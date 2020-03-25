@@ -1002,6 +1002,7 @@ Public Class frmJobEntry
             Me.txtLotNumber.Clear()
             Me.txtLotNumber.Focus()
             Me.txtLotNumber.Refresh()
+            Me.Cursor = System.Windows.Forms.Cursors.Default
             quit = 1
             Exit Sub
 

@@ -406,9 +406,9 @@ Public Class frmPackRepMain
 
 
             If Not IsDBNull(DGVSheetDate.Rows(0).Cells("PACKENDTM").Value) Then
-                MsgBox(DGVSheetDate.Rows(0).Cells("PACKENDTM").Value.ToString)
+                ' MsgBox(DGVSheetDate.Rows(0).Cells("PACKENDTM").Value.ToString)
 
-                tmp_sheetdate = DGVSheetDate.Rows(0).Cells("0").Value
+                tmp_sheetdate = DGVSheetDate.Rows(0).Cells("PACKENDTM").Value
 
                 sheetDate = tmp_sheetdate.ToString("dd_MM_yyyy")
 
