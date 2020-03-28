@@ -57,6 +57,8 @@ Partial Class frmSettings
         Me.txtBoxBarcodectrl = New System.Windows.Forms.TextBox()
         Me.chkDisableCreate = New System.Windows.Forms.CheckBox()
         Me.chkAudioAlarm = New System.Windows.Forms.CheckBox()
+        Me.txtBoxSearchDays = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblSerialPortSelect
@@ -400,11 +402,31 @@ Partial Class frmSettings
         Me.chkAudioAlarm.Text = "Audio Alarm Enable"
         Me.chkAudioAlarm.UseVisualStyleBackColor = True
         '
+        'txtBoxSearchDays
+        '
+        Me.txtBoxSearchDays.Location = New System.Drawing.Point(118, 477)
+        Me.txtBoxSearchDays.MaxLength = 3
+        Me.txtBoxSearchDays.Name = "txtBoxSearchDays"
+        Me.txtBoxSearchDays.Size = New System.Drawing.Size(48, 21)
+        Me.txtBoxSearchDays.TabIndex = 57
+        Me.txtBoxSearchDays.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(18, 480)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(87, 15)
+        Me.Label10.TabIndex = 58
+        Me.Label10.Text = "Search Days"
+        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(739, 522)
+        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.txtBoxSearchDays)
         Me.Controls.Add(Me.chkAudioAlarm)
         Me.Controls.Add(Me.chkDisableCreate)
         Me.Controls.Add(Me.txtBoxBarcodectrl)
@@ -482,4 +504,6 @@ Partial Class frmSettings
     Friend WithEvents txtBoxBarcodectrl As TextBox
     Friend WithEvents chkDisableCreate As CheckBox
     Friend WithEvents chkAudioAlarm As CheckBox
+    Friend WithEvents txtBoxSearchDays As TextBox
+    Friend WithEvents Label10 As Label
 End Class

@@ -361,6 +361,18 @@ Namespace My
                 Me("audioAlarm") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("3")>  _
+        Public Property searchDays() As String
+            Get
+                Return CType(Me("searchDays"),String)
+            End Get
+            Set
+                Me("searchDays") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
