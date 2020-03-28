@@ -409,11 +409,7 @@ Public Class frmPackRepMain
                 ' MsgBox(DGVSheetDate.Rows(0).Cells("PACKENDTM").Value.ToString)
 
                 tmp_sheetdate = DGVSheetDate.Rows(0).Cells("PACKENDTM").Value
-
                 sheetDate = tmp_sheetdate.ToString("dd_MM_yyyy")
-
-
-
             End If
         End If
 
@@ -436,7 +432,4 @@ Public Class frmPackRepMain
 
     End Sub
 
-    Private Sub frmPackRepMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
 End Class
