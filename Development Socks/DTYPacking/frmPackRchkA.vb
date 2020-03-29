@@ -159,10 +159,14 @@ Public Class frmPackRchkA
         'Go off to Class and get the cone count on any excel sheet for this grade from last 3 days
         getConeCount.xlCheck()
 
-        Dim searchstring = getConeCount.searchBarcode
+        'Dim searchstring = getConeCount.searchBarcode
 
-        SQL.ExecQuery("Select * from jobs where packsheetbcode = '" & searchstring & "'  ")
-        xlcheesecount = SQL.RecordCount
+        'SQL.ExecQuery("Select * from jobs where packsheetbcode = '" & searchstring & "'  ")
+        'xlcheesecount = SQL.RecordCount
+
+        xlcheesecount = getConeCount.nfree
+
+
         If xlcheesecount > 0 Then
             packedCheese = xlcheesecount   'this is the number of cheese already included on the excel sheet
             remainingCheese = 90 - packedCheese
