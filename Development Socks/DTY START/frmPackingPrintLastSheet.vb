@@ -10,17 +10,27 @@ Public Class frmPackingPrintLastSheet
     Dim MyExcel As New Excel.Application
 
 
+
+
     Private Sub MonthCalendar1_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
 
         'Routine to get date range
-        lblDate.Text = MonthCalendar1.SelectionRange.Start.ToString("dd/MM/yyyy")
+        ' lblDate.Text = MonthCalendar1.SelectionRange.Start.ToString("dd/MM/yyyy")
+        lstBoxFiles.Items.Clear()
+
         lblSelectedDate.Text = MonthCalendar1.SelectionRange.Start.ToString("dd/MM/yyyy")
 
         fileStartDate = MonthCalendar1.SelectionRange.Start.ToString("dd_MM_yyyy")
 
-        btnSelect.Enabled = True
-
-
+        ' btnSelect.Enabled = True
+        If Directory.Exists(My.Settings.dirPacking & "\" & fileStartDate) Then
+            lblListJobs.Text = "Jobs Found for "
+            For Each file As String In System.IO.Directory.GetFiles(My.Settings.dirPacking & "\" & fileStartDate)
+                lstBoxFiles.Items.Add(System.IO.Path.GetFileNameWithoutExtension(file))
+            Next
+        Else
+            lblListJobs.Text = " No Jobs for "
+        End If
 
     End Sub
 
@@ -53,29 +63,31 @@ Public Class frmPackingPrintLastSheet
 
     Private Sub lstBoxFiles_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles lstBoxFiles.MouseDoubleClick
         'on double click get the index number of the selected row and use name to open file
-        Dim xlWorkbook As Excel.Workbook
-        Dim sheetCount As Integer
-        Dim xlWorksheet As Excel.Worksheet
+        'Dim xlWorkbook As Excel.Workbook
+        'Dim sheetCount As Integer
+        'Dim xlWorksheet As Excel.Worksheet
+
+        '  Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.My.Settings.dirPacking & " \ " & fileStartDate.MyComputer))
+        Dim findString As String = My.Settings.dirPacking & "\" & fileStartDate
+
+        Process.Start("explorer.exe", findString)
+
+        'fileToOpen = My.Settings.dirPacking & "\" & fileStartDate & "\" & curItem & ".xlsx"
 
 
+        'xlWorkbook = MyExcel.Workbooks.Open(fileToOpen)
+        'sheetCount = xlWorkbook.Worksheets.Count
 
 
-        fileToOpen = My.Settings.dirPacking & "\" & fileStartDate & "\" & curItem & ".xlsx"
+        'xlWorkbook = MyExcel.Workbooks.Open(fileToOpen)
+        'xlWorksheet = CType(xlWorkbook.Worksheets(sheetCount), Excel.Worksheet)
 
+        'MyExcel.Visible = True
 
-        xlWorkbook = MyExcel.Workbooks.Open(fileToOpen)
-        sheetCount = xlWorkbook.Worksheets.Count
+        'DelayTM()
 
-
-        xlWorkbook = MyExcel.Workbooks.Open(fileToOpen)
-        xlWorksheet = CType(xlWorkbook.Worksheets(sheetCount), Excel.Worksheet)
-
-        MyExcel.Visible = True
-
-        DelayTM()
-
-        'xlWorksheet.close()
-        'xlWorkbook.Close()
+        ''xlWorksheet.close()
+        ''xlWorkbook.Close()
 
         'MyExcel.UserControl = True
         'MyExcel.Quit()
@@ -84,7 +96,7 @@ Public Class frmPackingPrintLastSheet
         'ReleaseComObject(MyExcel)
 
 
-        lstBoxFiles.Items.Clear()
+        '  lstBoxFiles.Items.Clear()
 
 
 
@@ -111,7 +123,7 @@ Public Class frmPackingPrintLastSheet
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Me.Close()
         frmJobEntry.Show()
+        Me.Close()
     End Sub
 End Class

@@ -39,8 +39,7 @@ Public Class frmPackRepMain
 
 
         ''CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
-        'prodNameMod = frmPackRchkA.DGVPakingRecA.Rows(0).Cells(52).Value.ToString
-        'prodNameMod = prodNameMod.Replace("/", "_")
+
 
         TmpGrade = frmJobEntry.txtGrade.Text
 
@@ -157,34 +156,34 @@ Public Class frmPackRepMain
                 Select Case frmJobEntry.txtGrade.Text
 
                     Case "AL"
-                        ' prodNum = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString
+
                         sheetSearch = prodNum & "______AL"
                     Case "AD"
-                        '  prodNum = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString
+
                         sheetSearch = prodNum & "______AD"
                     Case "B"
-                        '  prodNum = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString
+
                         sheetSearch = prodNum & "______B"
                     Case "P15 AS"
-                        ' prodNum = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString
+
                         sheetSearch = prodNum & "______P15AS"
                     Case "P25 AS"
-                        '  prodNum = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString
+
                         sheetSearch = prodNum & "______P25AS"
                     Case "P35 AS"
-                        '  prodNum = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString
+
                         sheetSearch = prodNum & "______P35AS"
                     Case "P20 BS"
-                        '   prodNum = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString
+
                         sheetSearch = prodNum & "______P20BS"
                     Case "P30 BS"
-                        '   prodNum = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString
+
                         sheetSearch = prodNum & "______P30BS"
                     Case "P35 BS"
-                        '  prodNum = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString
+
                         sheetSearch = prodNum & "______P35BS"
                     Case "ReCheck"
-                        '  prodNum = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString
+
                         sheetSearch = prodNum & "______ReCheck"
                 End Select
 
@@ -294,7 +293,6 @@ Public Class frmPackRepMain
 
 
 
-            'If frmJobEntry.txtGrade.Text <> "ReCheck" And frmJobEntry.txtGrade.Text <> "Round1" And frmJobEntry.txtGrade.Text <> "Round2" And frmJobEntry.txtGrade.Text <> "Round3" And frmJobEntry.txtGrade.Text <> "STD" Then  'IF RECHECK DO NOT GET SHEETS FROM PREVIOUS DAY
             If frmJobEntry.txtGrade.Text <> "Round1" And frmJobEntry.txtGrade.Text <> "Round2" And frmJobEntry.txtGrade.Text <> "Round3" And frmJobEntry.txtGrade.Text <> "STD" Then  'IF RECHECK DO NOT GET SHEETS FROM PREVIOUS DAY
 
 
@@ -307,12 +305,12 @@ Public Class frmPackRepMain
                     Me.Close()
 
                 Else
-                    'MsgBox("I am ready to create a new sheet")
+
                     frmPackCreateNew.CreateNew()
                     Me.Close()
                 End If
             Else
-                'MsgBox("I am ready to create a new sheet")
+
                 frmPackCreateNew.CreateNew()
                 Me.Close()
             End If
@@ -356,7 +354,7 @@ Public Class frmPackRepMain
 
 
                 If Not IsDBNull(DGVSheetDate.Rows(0).Cells("PACKENDTM").Value) Then
-                    ' MsgBox(DGVSheetDate.Rows(0).Cells("PACKENDTM").Value.ToString)
+
 
                     tmp_sheetdate = DGVSheetDate.Rows(0).Cells("PACKENDTM").Value
                     sheetDate = tmp_sheetdate.ToString("dd_MM_yyyy")

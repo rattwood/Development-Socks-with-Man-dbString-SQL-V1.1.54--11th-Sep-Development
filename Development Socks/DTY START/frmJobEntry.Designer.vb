@@ -238,20 +238,20 @@ Partial Class frmJobEntry
         '
         Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExChangeCheeseToolStripMenuItem, Me.FindCheeseToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
-        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
         Me.ToolsToolStripMenuItem.Text = "Tools"
         Me.ToolsToolStripMenuItem.Visible = False
         '
         'ExChangeCheeseToolStripMenuItem
         '
         Me.ExChangeCheeseToolStripMenuItem.Name = "ExChangeCheeseToolStripMenuItem"
-        Me.ExChangeCheeseToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+        Me.ExChangeCheeseToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.ExChangeCheeseToolStripMenuItem.Text = "ExChange Cheese"
         '
         'FindCheeseToolStripMenuItem
         '
         Me.FindCheeseToolStripMenuItem.Name = "FindCheeseToolStripMenuItem"
-        Me.FindCheeseToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+        Me.FindCheeseToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.FindCheeseToolStripMenuItem.Text = "Find Cheese"
         '
         'PackingGradeToolStripMenuItem
@@ -583,8 +583,8 @@ Partial Class frmJobEntry
         'StatusPanel
         '
         Me.StatusPanel.Name = "StatusPanel"
-        Me.StatusPanel.Size = New System.Drawing.Size(120, 17)
-        Me.StatusPanel.Text = "ToolStripStatusLabel2"
+        Me.StatusPanel.Size = New System.Drawing.Size(81, 17)
+        Me.StatusPanel.Text = "PMP Software"
         '
         'lblGrade
         '

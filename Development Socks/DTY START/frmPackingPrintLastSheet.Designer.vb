@@ -34,8 +34,9 @@ Partial Class frmPackingPrintLastSheet
         '
         'MonthCalendar1
         '
-        Me.MonthCalendar1.Location = New System.Drawing.Point(2, 4)
+        Me.MonthCalendar1.Location = New System.Drawing.Point(18, 27)
         Me.MonthCalendar1.MaxSelectionCount = 1
+        Me.MonthCalendar1.MinDate = New Date(2017, 1, 1, 0, 0, 0, 0)
         Me.MonthCalendar1.Name = "MonthCalendar1"
         Me.MonthCalendar1.TabIndex = 0
         '
@@ -43,38 +44,40 @@ Partial Class frmPackingPrintLastSheet
         '
         Me.lblDate.AutoSize = True
         Me.lblDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDate.Location = New System.Drawing.Point(36, 249)
+        Me.lblDate.Location = New System.Drawing.Point(266, 338)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(50, 24)
         Me.lblDate.TabIndex = 1
         Me.lblDate.Text = "date"
+        Me.lblDate.Visible = False
         '
         'btnSelect
         '
         Me.btnSelect.BackColor = System.Drawing.Color.LimeGreen
         Me.btnSelect.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSelect.Location = New System.Drawing.Point(27, 276)
+        Me.btnSelect.Location = New System.Drawing.Point(257, 365)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(132, 40)
         Me.btnSelect.TabIndex = 2
         Me.btnSelect.Text = "Select Date"
         Me.btnSelect.UseVisualStyleBackColor = False
+        Me.btnSelect.Visible = False
         '
         'lstBoxFiles
         '
         Me.lstBoxFiles.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lstBoxFiles.FormattingEnabled = True
         Me.lstBoxFiles.ItemHeight = 24
-        Me.lstBoxFiles.Location = New System.Drawing.Point(258, 48)
+        Me.lstBoxFiles.Location = New System.Drawing.Point(257, 27)
         Me.lstBoxFiles.Name = "lstBoxFiles"
-        Me.lstBoxFiles.Size = New System.Drawing.Size(311, 580)
+        Me.lstBoxFiles.Size = New System.Drawing.Size(491, 292)
         Me.lstBoxFiles.TabIndex = 3
         '
         'lblListJobs
         '
         Me.lblListJobs.AutoSize = True
         Me.lblListJobs.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblListJobs.Location = New System.Drawing.Point(297, 21)
+        Me.lblListJobs.Location = New System.Drawing.Point(381, 0)
         Me.lblListJobs.Name = "lblListJobs"
         Me.lblListJobs.Size = New System.Drawing.Size(149, 24)
         Me.lblListJobs.TabIndex = 4
@@ -84,21 +87,21 @@ Partial Class frmPackingPrintLastSheet
         '
         Me.lblSelectedDate.AutoSize = True
         Me.lblSelectedDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSelectedDate.Location = New System.Drawing.Point(452, 21)
+        Me.lblSelectedDate.Location = New System.Drawing.Point(536, 0)
         Me.lblSelectedDate.Name = "lblSelectedDate"
-        Me.lblSelectedDate.Size = New System.Drawing.Size(105, 24)
+        Me.lblSelectedDate.Size = New System.Drawing.Size(0, 24)
         Me.lblSelectedDate.TabIndex = 5
-        Me.lblSelectedDate.Text = "selectdate"
         '
         'btnCancel
         '
-        Me.btnCancel.BackColor = System.Drawing.Color.Red
+        Me.btnCancel.BackColor = System.Drawing.Color.Gray
+        Me.btnCancel.BackgroundImage = Global.Development_Socks.My.Resources.Resources.home_icon_silhouette
+        Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(27, 594)
+        Me.btnCancel.Location = New System.Drawing.Point(18, 338)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(132, 40)
+        Me.btnCancel.Size = New System.Drawing.Size(132, 66)
         Me.btnCancel.TabIndex = 6
-        Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = False
         '
         'frmPackingPrintLastSheet
@@ -106,7 +109,7 @@ Partial Class frmPackingPrintLastSheet
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.ClientSize = New System.Drawing.Size(602, 646)
+        Me.ClientSize = New System.Drawing.Size(756, 424)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.lblSelectedDate)
         Me.Controls.Add(Me.lblListJobs)
@@ -114,10 +117,11 @@ Partial Class frmPackingPrintLastSheet
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.MonthCalendar1)
+        Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmPackingPrintLastSheet"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Print Last Sheet"
+        Me.Text = "Show Excel Sheets"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
