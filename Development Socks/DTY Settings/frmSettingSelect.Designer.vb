@@ -26,6 +26,7 @@ Partial Class frmSettingSelect
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Button1
@@ -58,11 +59,23 @@ Partial Class frmSettingSelect
         Me.Button3.Text = "Edit db Connection"
         Me.Button3.UseVisualStyleBackColor = True
         '
+        'btnCancel
+        '
+        Me.btnCancel.BackgroundImage = Global.Development_Socks.My.Resources.Resources.home_icon_silhouette
+        Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.Location = New System.Drawing.Point(83, 313)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(121, 68)
+        Me.btnCancel.TabIndex = 3
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
         'frmSettingSelect
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(441, 261)
+        Me.ClientSize = New System.Drawing.Size(286, 411)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
@@ -76,4 +89,5 @@ Partial Class frmSettingSelect
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
+    Friend WithEvents btnCancel As Button
 End Class

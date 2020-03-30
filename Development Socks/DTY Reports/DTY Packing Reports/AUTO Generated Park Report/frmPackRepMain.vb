@@ -342,30 +342,31 @@ Public Class frmPackRepMain
 
 
 
-            Try
+        Try
 
 
-                SQLL.ExecQuery("Select MAX(PACKENDTM) PACKENDTM from jobs where packendtm between DateAdd(DD, @days, GETDATE()) and GetDATE() and (packsheetbcode like  '%' +  @searchsheet  + '%')")
+            SQLL.ExecQuery("Select MAX(PACKENDTM) PACKENDTM from jobs where packendtm between DateAdd(DD, @days, GETDATE()) and GetDATE() and (packsheetbcode like  '%' +  @searchsheet  + '%')")
 
-                If SQLL.RecordCount > 0 Then
-
-
-                    'LOAD THE DATA FROM dB IN TO THE DATAGRID
-                    DGVSheetDate.DataSource = SQLL.SQLDS.Tables(0)
-                    DGVSheetDate.Rows(0).Selected = True
+            If SQLL.RecordCount > 0 Then
 
 
-                    If Not IsDBNull(DGVSheetDate.Rows(0).Cells("PACKENDTM").Value) Then
-                        ' MsgBox(DGVSheetDate.Rows(0).Cells("PACKENDTM").Value.ToString)
+                'LOAD THE DATA FROM dB IN TO THE DATAGRID
+                DGVSheetDate.DataSource = SQLL.SQLDS.Tables(0)
+                DGVSheetDate.Rows(0).Selected = True
 
-                        tmp_sheetdate = DGVSheetDate.Rows(0).Cells("PACKENDTM").Value
-                        sheetDate = tmp_sheetdate.ToString("dd_MM_yyyy")
-                    End If
+
+                If Not IsDBNull(DGVSheetDate.Rows(0).Cells("PACKENDTM").Value) Then
+                    ' MsgBox(DGVSheetDate.Rows(0).Cells("PACKENDTM").Value.ToString)
+
+                    tmp_sheetdate = DGVSheetDate.Rows(0).Cells("PACKENDTM").Value
+                    sheetDate = tmp_sheetdate.ToString("dd_MM_yyyy")
                 End If
+            End If
 
-            Catch ex As Exception
+        Catch ex As Exception
+            MsgBox(ex.ToString)
 
-            End Try
+        End Try
 
             PrevPath1 = (My.Settings.dirPacking & "\" & sheetDate)
 

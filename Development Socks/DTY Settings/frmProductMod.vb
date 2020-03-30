@@ -123,5 +123,9 @@ Public Class frmProductMod
 
     End Sub
 
-
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        frmPassword.Close()
+        frmJobEntry.Show()
+        Me.Close()
+    End Sub
 End Class

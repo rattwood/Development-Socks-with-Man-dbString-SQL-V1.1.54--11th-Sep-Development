@@ -7,6 +7,7 @@
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         frmProductMod.Show()
+        frmProductMod.txtBoxOperator.Focus()
         frmPassword.Close()
         Me.Close()
     End Sub
@@ -26,4 +27,12 @@
     Private Sub frmSettingSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        frmPassword.Close()
+        frmJobEntry.Show()
+        Me.Close()
+
+    End Sub
+
 End Class

@@ -32,6 +32,7 @@ Partial Class frmProductMod
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtBoxOperator = New System.Windows.Forms.TextBox()
         Me.BbtnEnter = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         CType(Me.DGVProduct, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Toraydb, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ToraydbBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -112,11 +113,23 @@ Partial Class frmProductMod
         Me.BbtnEnter.UseVisualStyleBackColor = False
         Me.BbtnEnter.Visible = False
         '
+        'btnCancel
+        '
+        Me.btnCancel.BackgroundImage = Global.Development_Socks.My.Resources.Resources.home_icon_silhouette
+        Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.Location = New System.Drawing.Point(27, 527)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(121, 68)
+        Me.btnCancel.TabIndex = 7
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
         'frmProductMod
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(894, 594)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.BbtnEnter)
         Me.Controls.Add(Me.txtBoxOperator)
         Me.Controls.Add(Me.Label1)
@@ -143,4 +156,5 @@ Partial Class frmProductMod
     Friend WithEvents Label1 As Label
     Friend WithEvents txtBoxOperator As TextBox
     Friend WithEvents BbtnEnter As Button
+    Friend WithEvents btnCancel As Button
 End Class
