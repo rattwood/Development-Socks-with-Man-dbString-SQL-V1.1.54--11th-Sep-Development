@@ -114,6 +114,7 @@ Public Class frmJobEntry
         If My.Settings.chkUsePack Or My.Settings.chkUseSort Then txtGrade.Visible = True Else txtGrade.Visible = False
 
         If My.Settings.chkUseSort Or My.Settings.chkUsePack Then PrintFormsToolStripMenuItem.Visible = True Else PrintFormsToolStripMenuItem.Visible = False
+        If My.Settings.chkUseColour Or My.Settings.chkUsePack Then PrintToolStripMenuItem.Visible = True Else PrintToolStripMenuItem.Visible = False
 
         If My.Settings.chkUseSort Or My.Settings.chkUsePack Then ReCheckToolStripMenuItem1.Visible = True
 
@@ -702,14 +703,16 @@ Public Class frmJobEntry
 
             End If
         Else
-            If My.Settings.chkUseColour Or My.Settings.chkUsePack Then
-                MsgBox("Job does not Exist, you must create new Job " & vbCrLf & " ไม่พบงานที่ทำ กรุณาสร้างงานใหม่")
-                txtLotNumber.Clear()
-                txtLotNumber.Focus()
-                Exit Sub
-            End If
+            'If My.Settings.chkUseColour Or My.Settings.chkUsePack Then
+            '    MsgBox("Job does not Exist, you must create new Job " & vbCrLf & " ไม่พบงานที่ทำ กรุณาสร้างงานใหม่")
+            '    txtLotNumber.Clear()
+            '    txtLotNumber.Focus()
+            '    Exit Sub
+            'End If
 
-            If My.Settings.chkUseSort And machineCode = 29 Then
+
+
+            If My.Settings.chkUseSort And machineCode = 29 And Not My.Settings.chkDisableCreate Then
                 PilCount()
                 Exit Sub
             End If
