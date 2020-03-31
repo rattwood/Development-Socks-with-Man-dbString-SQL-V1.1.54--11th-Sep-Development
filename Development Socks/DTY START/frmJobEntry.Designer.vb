@@ -245,13 +245,13 @@ Partial Class frmJobEntry
         'ExChangeCheeseToolStripMenuItem
         '
         Me.ExChangeCheeseToolStripMenuItem.Name = "ExChangeCheeseToolStripMenuItem"
-        Me.ExChangeCheeseToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
+        Me.ExChangeCheeseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ExChangeCheeseToolStripMenuItem.Text = "ExChange Cheese"
         '
         'FindCheeseToolStripMenuItem
         '
         Me.FindCheeseToolStripMenuItem.Name = "FindCheeseToolStripMenuItem"
-        Me.FindCheeseToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
+        Me.FindCheeseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.FindCheeseToolStripMenuItem.Text = "Find Cheese"
         '
         'PackingGradeToolStripMenuItem
@@ -558,8 +558,9 @@ Partial Class frmJobEntry
         'PrintToolStripMenuItem
         '
         Me.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem"
-        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
-        Me.PrintToolStripMenuItem.Text = "Print"
+        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(126, 20)
+        Me.PrintToolStripMenuItem.Text = "View Packing Sheets"
+        Me.PrintToolStripMenuItem.Visible = False
         '
         'StatusStrip1
         '
