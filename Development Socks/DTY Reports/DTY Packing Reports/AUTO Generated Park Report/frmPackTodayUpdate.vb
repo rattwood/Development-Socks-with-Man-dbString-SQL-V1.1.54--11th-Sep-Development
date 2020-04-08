@@ -2480,6 +2480,10 @@ Public Class frmPackTodayUpdate
 
             For i = 9 To 40
                 MyTodyExcel.Cells(i, 3) = "" 'Clear the contents of cone cells
+                MyTodyExcel.Cells(i, 4) = "" 'Clear the contents of Result 1
+                MyTodyExcel.Cells(i, 5) = "" 'Clear the contents of Result 2
+                MyTodyExcel.Cells(i, 6) = "" 'Clear the contents of Grade
+                MyTodyExcel.Cells(i, 7) = "" 'Clear the contents of Remark
             Next
 
         End If
@@ -2554,7 +2558,11 @@ Public Class frmPackTodayUpdate
 
 
                             For x = 9 To 40
-                                MyTodyExcel.Cells(x, 3) = "" 'Clear the contents of cone cells
+                                MyTodyExcel.Cells(i, 3) = "" 'Clear the contents of cone cells
+                                MyTodyExcel.Cells(i, 4) = "" 'Clear the contents of Result 1
+                                MyTodyExcel.Cells(i, 5) = "" 'Clear the contents of Result 2
+                                MyTodyExcel.Cells(i, 6) = "" 'Clear the contents of Grade
+                                MyTodyExcel.Cells(i, 7) = "" 'Clear the contents of Remark
                             Next
 
                             nfree = 9
