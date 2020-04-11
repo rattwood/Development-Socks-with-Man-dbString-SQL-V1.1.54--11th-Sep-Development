@@ -228,7 +228,7 @@ Public Class frmPackCreateNew
                         'This will write date to the first two cone columns
                         colcount = 4
                         For ccount = 1 To 2
-                            For rcount = 11 To 51
+                            For rcount = 12 To 51
                                 MyPakExcel.Cells(rcount, colcount) = frmPackRepMain.prevDays
                             Next
                             colcount = colcount + 4
