@@ -457,9 +457,10 @@ Public Class frmPackRchkA
             '**************************************************************************************************************
 
             'frmPackReport.packPrint() 'Print the packing report and go back to Job Entry for the next cart
+            If My.Settings.debugSet Then frmPackRepMain.Show()
             frmPackRepMain.PackRepMainSub()
             frmPackRepMain.Close()
-            UpdateDatabase()
+            '     UpdateDatabase()
             Me.Cursor = System.Windows.Forms.Cursors.Default
 
             saveJob = 0

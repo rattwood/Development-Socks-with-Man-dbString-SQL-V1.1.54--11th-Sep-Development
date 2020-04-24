@@ -92,7 +92,7 @@ Public Class frmPackTodayUpdate
                     MyTodyExcel.Cells(9, 10) = modBarcode
 
                     For i = 13 To 102
-                        MyTodyExcel.Cells(nfree, 4) = "" 'Clear the contents of cone cells
+                        MyTodyExcel.Cells(i, 4) = "" 'Clear the contents of cone cells
                     Next
                     ' boxCount = boxCount + 1
                 End If
@@ -323,7 +323,7 @@ Public Class frmPackTodayUpdate
 
 
                     For i = 13 To 102
-                        MyTodyExcel.Cells(nfree, 4) = "" 'Clear the contents of cone cells
+                        MyTodyExcel.Cells(i, 4) = "" 'Clear the contents of cone cells
                     Next
                     'boxCount = boxCount + 1
                 End If
@@ -492,7 +492,7 @@ Public Class frmPackTodayUpdate
 
 
         MyTodyExcel.Quit()
-        releaseObject(xlTodysheets)
+        ' releaseObject(xlTodysheets)
         releaseObject(xlTodyWorkbook)
         releaseObject(MyTodyExcel)
         Me.Close()

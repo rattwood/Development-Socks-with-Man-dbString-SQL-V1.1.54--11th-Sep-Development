@@ -274,7 +274,7 @@ Public Class frmPackPrvGet
 
         'CLEAN UP
         MyPrevExcel.Quit()
-        releaseObject(xpPrevSheets)
+        ' releaseObject(xpPrevSheets)
         releaseObject(xpPrevWoorkbook)
         releaseObject(MyPrevExcel)
 

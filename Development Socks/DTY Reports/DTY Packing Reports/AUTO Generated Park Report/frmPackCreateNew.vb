@@ -671,7 +671,7 @@ Public Class frmPackCreateNew
 
         'CLEAN UP
         MyPakExcel.Quit()
-        releaseObject(xlSheets)
+        '  releaseObject(xlSheets)
         releaseObject(xlWorkbook)
         releaseObject(MyPakExcel)
 
