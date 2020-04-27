@@ -606,6 +606,9 @@ Public Class frmPackTodayUpdate
                             frmDGV.DGVdata.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
 
+                            'NEW METHOD SO WE CAN IDENTIFY CHEESE THAT HAVE ALREADY BEEEN PACK AND NOT REPRINT THEM
+                            frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "15"
+
                             'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
                             Select Case nfree
                                 Case 13 To 18
@@ -861,6 +864,8 @@ Public Class frmPackTodayUpdate
 
                     frmDGV.DGVdata.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
+                    'NEW METHOD SO WE CAN IDENTIFY CHEESE THAT HAVE ALREADY BEEEN PACK AND NOT REPRINT THEM
+                    frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "15"
 
                     'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
                     Select Case nfree
@@ -1136,7 +1141,8 @@ Public Class frmPackTodayUpdate
                     frmJobEntry.txtGrade.Text = "P25 AS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
                     frmDGV.DGVdata.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
-
+                    'NEW METHOD SO WE CAN IDENTIFY CHEESE THAT HAVE ALREADY BEEEN PACK AND NOT REPRINT THEM
+                    frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "15"
 
 
                     'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
@@ -1436,6 +1442,8 @@ Public Class frmPackTodayUpdate
                     frmJobEntry.txtGrade.Text = "P15 AS" And frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "9" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
                     frmDGV.DGVdata.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
+                    'NEW METHOD SO WE CAN IDENTIFY CHEESE THAT HAVE ALREADY BEEEN PACK AND NOT REPRINT THEM
+                    frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "15"
 
                     'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
                     Select Case nfree
@@ -1685,11 +1693,18 @@ Public Class frmPackTodayUpdate
             MyTodyExcel.Cells(61, 14) = frmJobEntry.PackOp
             For i = 1 To frmPacking.DGVPakingA.Rows.Count
 
-                If frmPacking.DGVPakingA.Rows(i - 1).Cells(9).Value = "15" Then
-                    frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
+                'If frmPacking.DGVPakingA.Rows(i - 1).Cells(9).Value = "14" Then
+                '    frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
-                    'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
-                    Select Case nfree
+                If frmPacking.DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "14" Then
+                        frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
+
+                        'NEW METHOD SO WE CAN IDENTIFY CHEESE THAT HAVE ALREADY BEEEN PACK AND NOT REPRINT THEM
+                        frmPacking.DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15"
+
+
+                        'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
+                        Select Case nfree
                         Case 13 To 18
                             cartonNum = 1
                             cellNum = 13
@@ -1977,15 +1992,19 @@ Public Class frmPackTodayUpdate
             MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
             For i = 1 To frmPacking.DGVPakingA.Rows.Count
 
-                If frmPacking.DGVPakingA.Rows(i - 1).Cells(9).Value = "15" Then
-                    frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
+                'If frmPacking.DGVPakingA.Rows(i - 1).Cells(9).Value = "15" Then
+                '    frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
+
+                If frmPacking.DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "14" Then
+                        frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
+
+                        'NEW METHOD SO WE CAN IDENTIFY CHEESE THAT HAVE ALREADY BEEEN PACK AND NOT REPRINT THEM
+                        frmPacking.DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15"
 
 
 
-
-
-                    'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
-                    Select Case nfree
+                        'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
+                        Select Case nfree
                         Case 12 To 26
                             If ncfree = 4 Then
                                 cartonNum = 1
@@ -2250,14 +2269,18 @@ Public Class frmPackTodayUpdate
             MyTodyExcel.Cells(54, 17) = frmJobEntry.PackOp
             For i = 1 To frmPacking.DGVPakingA.Rows.Count
 
-                If frmPacking.DGVPakingA.Rows(i - 1).Cells(9).Value = "15" Then
-                    frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
+                'If frmPacking.DGVPakingA.Rows(i - 1).Cells(9).Value = "15" Then
+                '    frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
+
+                If frmPacking.DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "14" Then
+                        frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
+
+                        'NEW METHOD SO WE CAN IDENTIFY CHEESE THAT HAVE ALREADY BEEEN PACK AND NOT REPRINT THEM
+                        frmPacking.DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15"
 
 
-
-
-                    'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
-                    Select Case nfree
+                        'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
+                        Select Case nfree
                         Case 12 To 31
                             If ncfree = 4 Then
                                 cartonNum = 1

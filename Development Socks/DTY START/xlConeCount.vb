@@ -81,6 +81,57 @@ Public Class xlConeCount
                     prodNum = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString
                     sheetSearch = prodNum & "______A"
 
+
+                Case "Pilot 6Ch"
+                    'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+                    prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
+                    prodNameMod = prodNameMod.Replace("/", "_")
+
+                    'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+                    sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
+
+                    'CREATE THE FULL NAME FOR SAVING THE FILE
+                    savestring = (prodNameMod & " " _
+                    & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                    & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & " A"
+
+                    'CREATE SQL Search String
+                    prodNum = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString
+                    sheetSearch = prodNum & "______PI6"
+                Case "Pilot 15Ch"
+                    'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+                    prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
+                    prodNameMod = prodNameMod.Replace("/", "_")
+
+                    'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+                    sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
+
+                    'CREATE THE FULL NAME FOR SAVING THE FILE
+                    savestring = (prodNameMod & " " _
+                    & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                    & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & " A"
+
+                    'CREATE SQL Search String
+                    prodNum = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString
+                    sheetSearch = prodNum & "______PI15"
+
+                Case "Pilot 20Ch"
+                    'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+                    prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
+                    prodNameMod = prodNameMod.Replace("/", "_")
+
+                    'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+                    sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
+
+                    'CREATE THE FULL NAME FOR SAVING THE FILE
+                    savestring = (prodNameMod & " " _
+                    & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                    & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & " A"
+
+                    'CREATE SQL Search String
+                    prodNum = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString
+                    sheetSearch = prodNum & "______PI20"
+
                 Case Else
                     'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
                     prodNameMod = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value.ToString
@@ -94,7 +145,60 @@ Public Class xlConeCount
                 & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
                 & frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString) & " " & frmJobEntry.txtGrade.Text
 
+                    Select Case frmJobEntry.txtGrade.Text
+
+                        Case "AL"
+                            sheetSearch = prodNum & "______AL"
+                        Case "AD"
+
+                            sheetSearch = prodNum & "______AD"
+                        Case "B"
+
+                            sheetSearch = prodNum & "______B"
+                        Case "P15 AS"
+
+                            sheetSearch = prodNum & "______P15AS"
+                        Case "P25 AS"
+
+                            sheetSearch = prodNum & "______P25AS"
+                        Case "P35 AS"
+
+                            sheetSearch = prodNum & "______P35AS"
+                        Case "P20 BS"
+
+                            sheetSearch = prodNum & "______P20BS"
+                        Case "P30 BS"
+
+                            sheetSearch = prodNum & "______P30BS"
+                        Case "P35 BS"
+
+                            sheetSearch = prodNum & "______P35BS"
+                        Case "ReCheck"
+                            sheetSearch = prodNum & "______ReCheck"
+                    End Select
+
             End Select
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

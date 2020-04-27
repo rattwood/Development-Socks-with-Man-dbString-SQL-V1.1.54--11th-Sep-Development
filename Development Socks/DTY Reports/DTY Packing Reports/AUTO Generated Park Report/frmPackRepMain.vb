@@ -99,7 +99,7 @@ Public Class frmPackRepMain
                 & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & "_PI6_A"
 
                 'CREATE SQL Search String
-                prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+                prodNum = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString
                 sheetSearch = prodNum & "______PI6"
 
             Case "Pilot 15Ch"
@@ -116,7 +116,7 @@ Public Class frmPackRepMain
                 & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & "_PI15_A"
 
                 'CREATE SQL Search String
-                prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+                prodNum = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString
                 sheetSearch = prodNum & "______PI15"
 
 
@@ -134,7 +134,7 @@ Public Class frmPackRepMain
                 & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & "_PI20_A"
 
                 'CREATE SQL Search String
-                prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+                prodNum = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString
                 sheetSearch = prodNum & "______PI20"
 
             Case Else

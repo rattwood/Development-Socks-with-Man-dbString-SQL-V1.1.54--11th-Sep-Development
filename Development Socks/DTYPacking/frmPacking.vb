@@ -74,157 +74,161 @@ Public Class frmPacking
 
         PExecQuery("Select * FROM jobs WHERE bcodecart = '" & frmJobEntry.dbBarcode & "' Order By CONENUM ;")
 
+
+
         'LOAD THE DATA FROM dB IN TO THE DATAGRID
         DGVPakingA.DataSource = PDS.Tables(0)
-        DGVPakingA.Rows(0).Selected = True
-        Dim PCB As SqlCommandBuilder = New SqlCommandBuilder(PDA)
-        Dim localMCCode = frmJobEntry.varMachineCode
+            DGVPakingA.Rows(0).Selected = True
+
+
+            Dim PCB As SqlCommandBuilder = New SqlCommandBuilder(PDA)
+        Dim localMCCode As Integer = Convert.ToInt32(frmJobEntry.varMachineCode)
 
 
 
-
+        Console.WriteLine(DGVPakingA.Rows.Count.ToString)
 
         'SET number of buttons based on machine number
         If localMCCode = 29 Then
             rowendcount = DGVPakingA.Rows.Count
         ElseIf localMCCode > 29 Then  'Sets buttons for new 12P position machines
             rowendcount = DGVPakingA.Rows.Count
-        Else
+        ElseIf localMCCode < 29 Then
             rowendcount = 32
-        End If
+            End If
 
 
 
-        'Dim localMCCode = frmJobEntry.varMachineCode
-        Dim btnNum As Integer
-        Dim btnNums As String
+            'Dim localMCCode = frmJobEntry.varMachineCode
+            Dim btnNum As Integer
+            Dim btnNums As String
 
-        If frmJobEntry.varMachineCode = 29 Then
+        If frmJobEntry.varMachineCode = "29" Then
             btnNums = 1
         Else
             btnNums = frmJobEntry.varCartSelect
-        End If
-        ''btnNums = frmJobEntry.varCartSelect
+            End If
+            ''btnNums = frmJobEntry.varCartSelect
 
-        ' SELECT CONE NUMBER RANGE BASED ON CART NUMBER
-        Select Case btnNums
-            Case Is = 1
+            ' SELECT CONE NUMBER RANGE BASED ON CART NUMBER
+            Select Case btnNums
+                Case Is = 1
                 If localMCCode = 30 Or localMCCode = 32 Then
                     btnNum = 1
                     coneNumOffset = 0
                 Else
                     btnNum = 1
-                    coneNumOffset = 0
-                End If
+                        coneNumOffset = 0
+                    End If
 
-            Case Is = 2
+                Case Is = 2
                 If localMCCode = 30 Or localMCCode = 32 Then
                     btnNum = 33
                     coneNumOffset = 32
                 Else
                     btnNum = 33
-                    coneNumOffset = 32
-                End If
+                        coneNumOffset = 32
+                    End If
 
-            Case Is = 3
+                Case Is = 3
                 If localMCCode = 30 Or localMCCode = 32 Then
                     btnNum = 65
                     coneNumOffset = 64
                 Else
                     btnNum = 65
-                    coneNumOffset = 64
-                End If
+                        coneNumOffset = 64
+                    End If
 
 
-            Case Is = 4
+                Case Is = 4
                 If localMCCode = 30 Or localMCCode = 32 Then
                     btnNum = 97
                     coneNumOffset = 96
                 Else
                     btnNum = 97
-                    coneNumOffset = 96
-                End If
+                        coneNumOffset = 96
+                    End If
 
 
-            Case Is = 5
+                Case Is = 5
                 If localMCCode = 30 Or localMCCode = 32 Then
                     btnNum = 129
                     coneNumOffset = 128
                 Else
                     btnNum = 129
-                    coneNumOffset = 128
-                End If
+                        coneNumOffset = 128
+                    End If
 
 
-            Case Is = 6
+                Case Is = 6
                 If localMCCode = 31 Or localMCCode = 33 Then
                     btnNum = 145
                     coneNumOffset = 144
                 Else
                     btnNum = 161
-                    coneNumOffset = 160
-                End If
+                        coneNumOffset = 160
+                    End If
 
 
-            Case Is = 7
+                Case Is = 7
                 If localMCCode = 31 Or localMCCode = 33 Then
                     btnNum = 177
                     coneNumOffset = 176
                 Else
                     btnNum = 193
-                    coneNumOffset = 192
-                End If
+                        coneNumOffset = 192
+                    End If
 
 
-            Case Is = 8
+                Case Is = 8
                 If localMCCode = 31 Or localMCCode = 33 Then
                     btnNum = 209
                     coneNumOffset = 208
                 Else
                     btnNum = 225
-                    coneNumOffset = 224
-                End If
+                        coneNumOffset = 224
+                    End If
 
 
-            Case Is = 9
-                If localMCCode = 31 Or localMCCode = 33 Then
-                    btnNum = 241
-                    coneNumOffset = 240
-                Else
-                    btnNum = 257
-                    coneNumOffset = 256
-                End If
+                Case Is = 9
+                    If localMCCode = 31 Or localMCCode = 33 Then
+                        btnNum = 241
+                        coneNumOffset = 240
+                    Else
+                        btnNum = 257
+                        coneNumOffset = 256
+                    End If
 
 
-            Case Is = 10
-                If localMCCode = 31 Or localMCCode = 33 Then
-                    btnNum = 273
-                    coneNumOffset = 272
-                Else
-                    btnNum = 289
-                    coneNumOffset = 288
-                End If
+                Case Is = 10
+                    If localMCCode = 31 Or localMCCode = 33 Then
+                        btnNum = 273
+                        coneNumOffset = 272
+                    Else
+                        btnNum = 289
+                        coneNumOffset = 288
+                    End If
 
 
-            Case Is = 11
-                btnNum = 321
-                coneNumOffset = 320
-
-
-
-            Case Is = 12
-                btnNum = 353
-                coneNumOffset = 352
+                Case Is = 11
+                    btnNum = 321
+                    coneNumOffset = 320
 
 
 
-        End Select
+                Case Is = 12
+                    btnNum = 353
+                    coneNumOffset = 352
+
+
+
+            End Select
 
 
 
 
 
-        For i As Integer = 1 To rowendcount
+            For i As Integer = 1 To rowendcount
 
             Me.Controls("btnCone" & i.ToString).Text = btnNum
             btnNum = btnNum + 1
