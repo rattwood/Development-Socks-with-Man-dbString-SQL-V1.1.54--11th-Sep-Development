@@ -47,17 +47,25 @@ Public Class frmPackTodayUpdate
         createBarcode()
 
         Dim totCount As Integer = 0
-        'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
-        For rcount = 13 To 102
-            If MyTodyExcel.Cells(rcount, 4).Value > 0 Then
-                totCount = totCount + 1
-                Continue For
-            Else
-                nfree = rcount
-                Exit For
-            End If
-        Next
+        Try
 
+
+            'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
+            For rcount = 13 To 102
+                If MyTodyExcel.Cells(rcount, 4).Value > "0" Then
+                    totCount = totCount + 1
+                    Continue For
+                Else
+                    nfree = rcount
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+            writeerrorLog.writelog("Exl Count PacktodayUpdate", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Exl Count PacktodayUpdate", ex.ToString, False, "System Fault")
+
+            MsgBox(ex.ToString)
+        End Try
 
         Select Case frmPackRepMain.TmpGrade
             Case "A"
@@ -537,8 +545,9 @@ Public Class frmPackTodayUpdate
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
         mycount = xlTodyWorkbook.Worksheets.Count
-        createBarcode()
         boxCount = mycount
+        createBarcode()
+
 
         Dim totCount As Integer = 1
         'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
@@ -766,8 +775,9 @@ Public Class frmPackTodayUpdate
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
         mycount = xlTodyWorkbook.Worksheets.Count
-        createBarcode()
         boxCount = mycount
+        createBarcode()
+
 
         Dim totCount As Integer
         'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
@@ -1048,8 +1058,9 @@ Public Class frmPackTodayUpdate
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
         mycount = xlTodyWorkbook.Worksheets.Count
-        createBarcode()
         boxCount = mycount
+        createBarcode()
+
 
         Dim totCount As Integer
         'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
@@ -1326,8 +1337,9 @@ Public Class frmPackTodayUpdate
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
         mycount = xlTodyWorkbook.Worksheets.Count
-        createBarcode()
         boxCount = mycount
+        createBarcode()
+
 
         Dim totCount As Integer
         'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
@@ -1633,8 +1645,9 @@ Public Class frmPackTodayUpdate
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
         mycount = xlTodyWorkbook.Worksheets.Count
-        createBarcode()
         boxCount = mycount
+        createBarcode()
+
 
         Dim totCount As Integer = 1
         'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
@@ -1697,14 +1710,14 @@ Public Class frmPackTodayUpdate
                 '    frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
                 If frmPacking.DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "14" Then
-                        frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
+                    frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
-                        'NEW METHOD SO WE CAN IDENTIFY CHEESE THAT HAVE ALREADY BEEEN PACK AND NOT REPRINT THEM
-                        frmPacking.DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15"
+                    'NEW METHOD SO WE CAN IDENTIFY CHEESE THAT HAVE ALREADY BEEEN PACK AND NOT REPRINT THEM
+                    frmPacking.DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15"
 
 
-                        'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
-                        Select Case nfree
+                    'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
+                    Select Case nfree
                         Case 13 To 18
                             cartonNum = 1
                             cellNum = 13
@@ -1853,8 +1866,9 @@ Public Class frmPackTodayUpdate
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
         mycount = xlTodyWorkbook.Worksheets.Count
-        createBarcode()
         boxCount = mycount
+        createBarcode()
+
 
         Dim totCount As Integer
         'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
@@ -1996,15 +2010,15 @@ Public Class frmPackTodayUpdate
                 '    frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
                 If frmPacking.DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "14" Then
-                        frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
+                    frmPacking.DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
 
-                        'NEW METHOD SO WE CAN IDENTIFY CHEESE THAT HAVE ALREADY BEEEN PACK AND NOT REPRINT THEM
-                        frmPacking.DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15"
+                    'NEW METHOD SO WE CAN IDENTIFY CHEESE THAT HAVE ALREADY BEEEN PACK AND NOT REPRINT THEM
+                    frmPacking.DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "15"
 
 
 
-                        'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
-                        Select Case nfree
+                    'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
+                    Select Case nfree
                         Case 12 To 26
                             If ncfree = 4 Then
                                 cartonNum = 1
@@ -2180,8 +2194,9 @@ Public Class frmPackTodayUpdate
 
         xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
         mycount = xlTodyWorkbook.Worksheets.Count
-        createBarcode()
         boxCount = mycount
+        createBarcode()
+
 
         Dim totCount As Integer
         'FIND NEXT BLANK ROW FOR ON EXCEL SHEET

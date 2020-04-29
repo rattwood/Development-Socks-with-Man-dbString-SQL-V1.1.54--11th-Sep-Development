@@ -260,7 +260,7 @@ Public Class xlConeCount
 
             sheetCount = xlTodyWorkbook.Worksheets.Count
             For rCount As Integer = 13 To 102
-                If MyTodyExcel.Cells(rCount, 4).Value > 0 Then
+                If MyTodyExcel.Cells(rCount, 4).Value > "0" Then
                     tmpCount = tmpCount + 1
                     Continue For
                 Else
