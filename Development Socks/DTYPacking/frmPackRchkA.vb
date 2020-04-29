@@ -460,7 +460,7 @@ Public Class frmPackRchkA
             If My.Settings.debugSet Then frmPackRepMain.Show()
             frmPackRepMain.PackRepMainSub()
             frmPackRepMain.Close()
-            '     UpdateDatabase()
+            UpdateDatabase()
             Me.Cursor = System.Windows.Forms.Cursors.Default
 
             saveJob = 0
