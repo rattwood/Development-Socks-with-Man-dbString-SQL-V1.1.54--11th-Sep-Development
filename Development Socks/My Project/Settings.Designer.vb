@@ -365,12 +365,24 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("3")>  _
-        Public Property searchDays() As String
+        Public Property searchDays() As Integer
             Get
-                Return CType(Me("searchDays"),String)
+                Return CType(Me("searchDays"),Integer)
             End Get
             Set
                 Me("searchDays") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("60")>  _
+        Public Property SearchDaysCheese() As Integer
+            Get
+                Return CType(Me("SearchDaysCheese"),Integer)
+            End Get
+            Set
+                Me("SearchDaysCheese") = value
             End Set
         End Property
     End Class

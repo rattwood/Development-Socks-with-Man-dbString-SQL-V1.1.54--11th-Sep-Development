@@ -7,6 +7,7 @@
 
         If TextBox1.Text = My.Settings.OpPassword Or TextBox1.Text = My.Settings.MasterPassword Then
             frmSettingSelect.Show()
+            Me.Hide()
         Else
             MsgBox("The Password Is Incorrect")
         End If
@@ -19,6 +20,7 @@
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        frmJobEntry.Show()
         Me.Close()
     End Sub
 End Class

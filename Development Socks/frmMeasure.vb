@@ -20,14 +20,13 @@
         Me.btnReMeasuer.Visible = False
 
 
-        Label4.Text = frmSettings.PortCom
+
 
         If Label4.Text = "" Then
             Label4.Text = comerrormsg
             Me.btnSettings.Visible = True
         End If
 
-        Label4.Text = frmSettings.PortCom
 
 
 

@@ -55,7 +55,6 @@ Partial Class frmCart1
         Me.btnDefect = New System.Windows.Forms.Button()
         Me.btnNoCone = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.btnMeasure = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.txtConeNum = New System.Windows.Forms.TextBox()
         Me.txtMissing = New System.Windows.Forms.TextBox()
@@ -566,18 +565,6 @@ Partial Class frmCart1
         Me.Label3.Size = New System.Drawing.Size(102, 20)
         Me.Label3.TabIndex = 63
         Me.Label3.Text = " CHEESE #"
-        '
-        'btnMeasure
-        '
-        Me.btnMeasure.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.btnMeasure.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMeasure.Location = New System.Drawing.Point(13, 554)
-        Me.btnMeasure.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnMeasure.Name = "btnMeasure"
-        Me.btnMeasure.Size = New System.Drawing.Size(100, 62)
-        Me.btnMeasure.TabIndex = 65
-        Me.btnMeasure.Text = "Measure"
-        Me.btnMeasure.UseVisualStyleBackColor = False
         '
         'btnSave
         '
@@ -1623,7 +1610,6 @@ Partial Class frmCart1
         Me.Controls.Add(Me.txtMissing)
         Me.Controls.Add(Me.txtConeNum)
         Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.btnMeasure)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.btnVisGrade)
         Me.Controls.Add(Me.btnClear)
@@ -1706,7 +1692,6 @@ Partial Class frmCart1
     Friend WithEvents btnDefect As Button
     Friend WithEvents btnNoCone As Button
     Friend WithEvents Label3 As Label
-    Friend WithEvents btnMeasure As Button
     Friend WithEvents btnSave As Button
     Friend WithEvents txtConeNum As TextBox
     Friend WithEvents txtMissing As TextBox

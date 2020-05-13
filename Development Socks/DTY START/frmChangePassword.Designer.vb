@@ -84,12 +84,13 @@ Partial Class frmChangePassword
         '
         'Button1
         '
+        Me.Button1.BackColor = System.Drawing.Color.GreenYellow
         Me.Button1.Location = New System.Drawing.Point(169, 202)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(103, 47)
         Me.Button1.TabIndex = 6
         Me.Button1.Text = "Save"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'Label4
         '
@@ -103,17 +104,19 @@ Partial Class frmChangePassword
         '
         'Button2
         '
+        Me.Button2.BackColor = System.Drawing.Color.Yellow
         Me.Button2.Location = New System.Drawing.Point(12, 202)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(103, 47)
         Me.Button2.TabIndex = 8
         Me.Button2.Text = "ReSet to Default  Password"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.UseVisualStyleBackColor = False
         '
         'frmChangePassword
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.LightSkyBlue
         Me.ClientSize = New System.Drawing.Size(284, 261)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)

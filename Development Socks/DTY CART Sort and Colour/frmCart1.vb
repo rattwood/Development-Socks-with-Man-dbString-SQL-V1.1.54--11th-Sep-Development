@@ -245,16 +245,11 @@ Public Class frmCart1
         'SET TEXT ON OVERIDE BUTTON TO OFF
         btnUnlock.Text = "UNLOCK OFF"
 
-        'MEASURE WITH SPECTRO BUTTONS VISABLE OR NOT
-        If frmSettings.chkUseSpectro.Checked Then
 
-            Me.btnMeasure.Visible = True
-            '  Me.txtResult.Visible = True
-        Else
 
-            Me.btnMeasure.Visible = False
-            ' Me.txtResult.Visible = False
-        End If
+
+
+
 
 
 
@@ -315,7 +310,7 @@ Public Class frmCart1
             coneM50 = 0
             coneP50 = 0
 
-            Me.btnMeasure.Visible = False
+
             Me.btnDefect.Enabled = False
             Me.btnNoCone.Enabled = False
             Me.btnShort.Enabled = False
@@ -505,7 +500,7 @@ Public Class frmCart1
     End Sub
 
 
-    Private Sub btnMeasure_Click(sender As Object, e As EventArgs) Handles btnMeasure.Click
+    Private Sub btnMeasure_Click(sender As Object, e As EventArgs)
         If varConeNum > 0 Then
 
             measureOn = 1
@@ -530,7 +525,7 @@ Public Class frmCart1
             Me.btnSave.Enabled = True
             'If frmSettings.chkUseSpectro.Checked Then Me.btnReMeasure.Visible = True  'Show Cancel button when form opens
             Me.btnVisGrade.Enabled = False
-            Me.btnMeasure.Enabled = False
+
 
 
             incoming = ""  'Clear out existing data in incoming String
@@ -677,7 +672,7 @@ Public Class frmCart1
 
             NoCone = 1
 
-            Me.btnMeasure.Enabled = False
+
             Me.btnVisGrade.Enabled = False
             Me.btnShort.Enabled = False
             Me.btnNoCone.Enabled = False
@@ -738,7 +733,7 @@ Public Class frmCart1
             Me.btnClear.Visible = True  'Show Cancel button when form opens
             Me.btnStdCheese.Enabled = False
             Me.btnDefect.Enabled = False
-            Me.btnMeasure.Enabled = False
+
             Me.btnVisGrade.Enabled = False
             Me.btnNoCone.Visible = False
             Me.btnShort.Visible = False
@@ -938,19 +933,15 @@ Public Class frmCart1
                 coneP30 = 0
                 coneM50 = 0
                 coneP50 = 0
-                'Me.btnNoCone.BackColor = Color.LightPink
-                ' Me.btnDefect.BackColor = Color.Yellow
-                ' Me.btnShort.BackColor = Color.Red
-                Me.btnMeasure.Enabled = False
+
+
                 Me.btnVisGrade.Enabled = True
                 Me.btnShort.Enabled = False
                 Me.btnNoCone.Enabled = False
                 Me.btnDefect.Enabled = False
                 Me.btnStdCheese.Enabled = False
                 Me.btnSave.Visible = False
-                'Me.btnNoConeSave.Visible = False
                 Me.btnDefectSave.Visible = False
-                'Me.btnShortSave.Visible = False
                 Me.btnClear.Visible = False
                 Me.chk_K.Visible = False
                 Me.chk_D.Visible = False
@@ -993,10 +984,6 @@ Public Class frmCart1
                 coneP30 = 0
                 coneM50 = 0
                 coneP50 = 0
-                'Me.btnNoCone.BackColor = Color.LightPink
-                ' Me.btnDefect.BackColor = Color.Yellow
-                ' Me.btnShort.BackColor = Color.Red
-                If frmSettings.chkUseSpectro.Checked Then Me.btnMeasure.Enabled = True
                 Me.btnVisGrade.Enabled = True
                 Me.btnShort.Visible = True
                 Me.btnShort.Enabled = True
@@ -1005,9 +992,7 @@ Public Class frmCart1
                 Me.btnNoCone.Enabled = True
                 Me.btnDefect.Enabled = True
                 Me.btnSave.Visible = False
-                'Me.btnNoConeSave.Visible = False
                 Me.btnDefectSave.Visible = False
-                ' Me.btnShortSave.Visible = False
                 Me.btnClear.Visible = False
                 Me.chk_K.Visible = False
                 Me.chk_D.Visible = False
@@ -1050,7 +1035,7 @@ Public Class frmCart1
             Me.btnDefectSave.Visible = True 'Show Save button when form opens
             Me.btnClear.Visible = True  'Show Cancel button when form opens
             Me.btnDefect.Enabled = False
-            Me.btnMeasure.Enabled = False
+
             Me.btnVisGrade.Enabled = False
             Me.btnStdCheese.Enabled = False
             Me.btnNoCone.Enabled = False
@@ -1085,7 +1070,7 @@ Public Class frmCart1
             coneM50 = 0
             coneP50 = 0
 
-            Me.btnMeasure.Visible = False
+
             Me.btnDefect.Enabled = False
             Me.btnNoCone.Enabled = False
             Me.btnShort.Enabled = False
@@ -1111,7 +1096,7 @@ Public Class frmCart1
             coneM50 = 0
             coneP50 = 0
 
-            If frmSettings.chkUseSpectro.Checked Then Me.btnMeasure.Visible = True
+
             Me.btnDefect.Enabled = True
             Me.btnNoCone.Enabled = True
             Me.btnShort.Enabled = True
@@ -2956,7 +2941,7 @@ Public Class frmCart1
 
 
         If varVisConeInspect = 1 Then
-            If frmSettings.chkUseSpectro.Checked Then Me.btnMeasure.Enabled = True
+
             Me.btnVisGrade.Enabled = True
             Me.btnBarley.Enabled = True
             Me.btnWaste.Visible = True
@@ -2981,7 +2966,7 @@ Public Class frmCart1
             'lblConeCount.Text = coneCount
 
         Else
-            If frmSettings.chkUseSpectro.Checked Then Me.btnMeasure.Enabled = True
+
             Me.btnVisGrade.Enabled = True
             Me.btnBarley.Enabled = False
             Me.btnShort.Visible = True
@@ -3077,7 +3062,7 @@ Public Class frmCart1
             StdCone = 1
 
 
-            Me.btnMeasure.Enabled = False
+
             Me.btnVisGrade.Enabled = False
             Me.btnShort.Enabled = False
             Me.btnNoCone.Enabled = False

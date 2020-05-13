@@ -50,12 +50,13 @@ Partial Class frmPassword
         '
         'btnContinue
         '
+        Me.btnContinue.BackColor = System.Drawing.Color.GreenYellow
         Me.btnContinue.Location = New System.Drawing.Point(196, 159)
         Me.btnContinue.Name = "btnContinue"
         Me.btnContinue.Size = New System.Drawing.Size(75, 42)
         Me.btnContinue.TabIndex = 2
         Me.btnContinue.Text = "Continue"
-        Me.btnContinue.UseVisualStyleBackColor = True
+        Me.btnContinue.UseVisualStyleBackColor = False
         '
         'Button2
         '
@@ -68,26 +69,30 @@ Partial Class frmPassword
         '
         'btnCancel
         '
+        Me.btnCancel.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.btnCancel.BackgroundImage = Global.Development_Socks.My.Resources.Resources.home_icon_silhouette
+        Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnCancel.Location = New System.Drawing.Point(104, 159)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 42)
         Me.btnCancel.TabIndex = 4
-        Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = True
+        Me.btnCancel.UseVisualStyleBackColor = False
         '
         'btnChangePassword
         '
+        Me.btnChangePassword.BackColor = System.Drawing.Color.Yellow
         Me.btnChangePassword.Location = New System.Drawing.Point(12, 159)
         Me.btnChangePassword.Name = "btnChangePassword"
         Me.btnChangePassword.Size = New System.Drawing.Size(75, 42)
         Me.btnChangePassword.TabIndex = 5
         Me.btnChangePassword.Text = "Chang Password"
-        Me.btnChangePassword.UseVisualStyleBackColor = True
+        Me.btnChangePassword.UseVisualStyleBackColor = False
         '
         'frmPassword
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.LightSkyBlue
         Me.ClientSize = New System.Drawing.Size(284, 261)
         Me.Controls.Add(Me.btnChangePassword)
         Me.Controls.Add(Me.btnCancel)

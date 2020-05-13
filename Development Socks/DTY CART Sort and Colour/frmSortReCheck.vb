@@ -129,16 +129,11 @@ Public Class frmSortReCheck
         txtMissing.Visible = False
         lblMissing.Visible = False
 
-        'MEASURE WITH SPECTRO BUTTONS VISABLE OR NOT
-        If frmSettings.chkUseSpectro.Checked Then
-            Me.btnReMeasure.Visible = True
-            Me.btnMeasure.Visible = True
-            Me.txtResult.Visible = True
-        Else
-            Me.btnReMeasure.Visible = False
-            Me.btnMeasure.Visible = False
-            Me.txtResult.Visible = False
-        End If
+
+        Me.btnReMeasure.Visible = False
+        Me.btnMeasure.Visible = False
+        Me.txtResult.Visible = False
+
 
 
 
@@ -685,10 +680,7 @@ Public Class frmSortReCheck
                 coneP30 = 0
                 coneM50 = 0
                 coneP50 = 0
-                'Me.btnNoCone.BackColor = Color.LightPink
-                ' Me.btnDefect.BackColor = Color.Yellow
-                ' Me.btnShort.BackColor = Color.Red
-                If frmSettings.chkUseSpectro.Checked Then Me.btnMeasure.Enabled = True
+
                 Me.btnVisGrade.Enabled = True
                 Me.btnShort.Visible = True
                 Me.btnShort.Enabled = True
@@ -799,7 +791,7 @@ Public Class frmSortReCheck
             coneM50 = 0
             coneP50 = 0
 
-            If frmSettings.chkUseSpectro.Checked Then Me.btnMeasure.Visible = True
+
             Me.btnDefect.Enabled = True
             'Me.btnNoCone.Enabled = True
             Me.btnShort.Enabled = True
@@ -969,7 +961,7 @@ Public Class frmSortReCheck
     Private Sub btnReMeasure_Click(sender As Object, e As EventArgs) Handles btnReMeasure.Click
 
 
-        If frmSettings.chkUseSpectro.Checked Then Me.btnMeasure.Enabled = True
+
         Me.btnReMeasure.Visible = False
         Me.btnSave.Visible = False
         Me.btnVisGrade.Enabled = True
@@ -2579,7 +2571,7 @@ Public Class frmSortReCheck
 
 
         If varVisConeInspect = 1 Then
-            If frmSettings.chkUseSpectro.Checked Then Me.btnMeasure.Enabled = True
+
             Me.btnVisGrade.Enabled = True
             Me.btnBarley.Enabled = True
             Me.btnWaste.Visible = True
@@ -2604,7 +2596,7 @@ Public Class frmSortReCheck
             'lblConeCount.Text = coneCount
 
         Else
-            If frmSettings.chkUseSpectro.Checked Then Me.btnMeasure.Enabled = True
+
             Me.btnVisGrade.Enabled = True
             Me.btnBarley.Enabled = False
             Me.btnShort.Visible = True

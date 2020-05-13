@@ -12,50 +12,50 @@
         txtLogReport.Text = My.Settings.dirLogs
         If My.Settings.chkUseLogs Then chkUseLogs.Checked = True Else chkUseLogs.Checked = False
 
-        btnSave.Enabled = False
+        btnSave.Visible = False
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
         FolderBrowserDialog1.ShowDialog()
         txtBoxTemplates.Text = FolderBrowserDialog1.SelectedPath
-        btnSave.Enabled = True
+        btnSave.Visible = True
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
         FolderBrowserDialog1.ShowDialog()
         txtBoxCarts.Text = FolderBrowserDialog1.SelectedPath
-        btnSave.Enabled = True
+        btnSave.Visible = True
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
         FolderBrowserDialog1.ShowDialog()
         txtBoxJobs.Text = FolderBrowserDialog1.SelectedPath
-        btnSave.Enabled = True
+        btnSave.Visible = True
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         FolderBrowserDialog1.ShowDialog()
         txtBoxPack.Text = FolderBrowserDialog1.SelectedPath
-        btnSave.Enabled = True
+        btnSave.Visible = True
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         FolderBrowserDialog1.ShowDialog()
         txtBoxPackReports.Text = FolderBrowserDialog1.SelectedPath
-        btnSave.Enabled = True
+        btnSave.Visible = True
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         FolderBrowserDialog1.ShowDialog()
         txtLogReport.Text = FolderBrowserDialog1.SelectedPath
-        btnSave.Enabled = True
+        btnSave.Visible = True
     End Sub
 
     Private Sub chkUseLogs_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseLogs.CheckedChanged
-        btnSave.Enabled = True
+        btnSave.Visible = True
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -75,12 +75,12 @@
         My.Settings.dirLogs = txtLogReport.Text
         My.Settings.chkUseLogs = chkUseLogs.CheckState
 
-        btnSave.Enabled = False
+        btnSave.Visible = False
         TextBox1.Refresh()
     End Sub
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
-        btnSave.Enabled = True
+        btnSave.Visible = True
     End Sub
 
 
