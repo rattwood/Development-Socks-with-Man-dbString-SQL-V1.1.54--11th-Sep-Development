@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Software solution for tracking DTY cones from Sort, Colour check and Packing")>
 <Assembly: AssemblyCompany("Tecknoserve Co., Ltd")>
 <Assembly: AssemblyProduct("DTYTrack_MSSQL")>
-<Assembly: AssemblyCopyright("Copyright © Tecknoserve Co., Ltd 2018")>
+<Assembly: AssemblyCopyright("Copyright © Tecknoserve Co., Ltd 2018 - 2020")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(true)>
