@@ -1707,11 +1707,11 @@ Public Class frmJobEntry
                 LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 9 And DEFCONE = 0 And CONEBARLEY = 0 And  PACKENDTM is Null")
             Case "P20 BS", "P30 BS", "P35 BS"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True'  And (CONESTATE = 8 or conestate = 13) And (DEFCONE > 0 Or CONEBARLEY > 0 Or M30 > 0 Or P30 > 0) And PACKENDTM is Null  ")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True'  And (CONESTATE = 8 or conestate = 14) And (DEFCONE > 0 Or CONEBARLEY > 0 Or M30 > 0 Or P30 > 0) And PACKENDTM is Null  ")
             Case "ReCheck"  'CREATE RECHECK SHEET
                 packGrade = txtGrade.Text
                 If stdReChk = 0 Then
-                    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And (CONESTATE = 8 Or  CONESTATE = 13) And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null And RECHKSTARTTM is Null And RECHK is Null ")
+                    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And (CONESTATE = 8 Or  CONESTATE = 14) And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null And RECHKSTARTTM is Null And RECHK is Null ")
                 Else
                     'ReCheck creation for std cheese  state 10
                     LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 9 And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null And STDSTATE = 10 and RECHK is Null")
@@ -1721,7 +1721,7 @@ Public Class frmJobEntry
 
             Case "Waste"
                 packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "'  (CONESTATE = 8 Or CONESTATE = 13) And (FLT_W = 'True' Or COLWASTE > 0) And PACKENDTM is Null ")
+                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "'  (CONESTATE = 8 Or CONESTATE = 14) And (FLT_W = 'True' Or COLWASTE > 0) And PACKENDTM is Null ")
         End Select
 
 
