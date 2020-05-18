@@ -344,7 +344,8 @@ Public Class frmPrintCartReport
         MyExcel.Cells(38, 9) = stdCount
 
         'Routine to get the product weight
-        Dim prNum As String = DGVcartReport.Rows(0).Cells(2).Value.ToString
+        Dim prNumInt As Integer = DGVcartReport.Rows(0).Cells(2).Value
+        Dim prNum As String = prNumInt.ToString("000")
         frmJobEntry.LExecQuery("SELECT * FROM product WHERE PRNUM = '" & prNum & "' ")
         If frmJobEntry.LRecordCount > 0 Then
             'LOAD THE DATA FROM dB IN TO THE DATAGRID

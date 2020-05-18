@@ -1566,84 +1566,96 @@ Public Class frmJobEntry
             Exit Sub
         End Try
 
-        'CHECK SCANNED CHEESE IS CORREECT GRADE OTHERWISE RESCAN
-        daysstring = "-" & My.Settings.SearchDaysCheese
-        LAddParam("@days", daysstring)  'This is an integer value
+
+
+        Try
+            'CHECK SCANNED CHEESE IS CORREECT GRADE OTHERWISE RESCAN
+            daysstring = "-" & My.Settings.SearchDaysCheese
+            LAddParam("@days", daysstring)  'This is an integer value
 
 
 
 
-        Select Case txtGrade.Text
-            Case "A"  'Case "ReCheckA"
-                packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & txtLotNumber.Text & "'  And RECHK = 4 And  PACKENDTM is Null And RECHKRESULT = 'A'  ")
-            Case "B"
-                packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 14  And " _
-                           & " (DEFCONE > 0 Or CONEBARLEY > 0 Or RECHKRESULT = 'B') And FLT_W = 'False' And PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
-            Case "AL"
-                packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9 And " _
+            Select Case txtGrade.Text
+                Case "A"  'Case "ReCheckA"
+                    packGrade = txtGrade.Text
+                    LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & txtLotNumber.Text & "'  And RECHK = 4 And  PACKENDTM is Null And RECHKRESULT = 'A'  ")
+                Case "B"
+                    packGrade = txtGrade.Text
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 14  And " _
+                           & " (DEFCONE > 0 Or CONEBARLEY > 0 Or RECHKRESULT = 'B') And FLT_W = 'False' And PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                Case "AL"
+                    packGrade = txtGrade.Text
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9 And " _
                            & " DEFCONE = 0 And CONEBARLEY = 0 And RECHKRESULT = 'AL' And RECHK = 4 And PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
-            Case "AD"
-                packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9 And " _
+                Case "AD"
+                    packGrade = txtGrade.Text
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9 And " _
                            & " DEFCONE = 0 And CONEBARLEY = 0 And RECHKRESULT = 'AD' And RECHK = 4 And PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
-            Case "P15 AS", "P25 AS", "P35 AS"
-                packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE = 9 And " _
+                Case "P15 AS", "P25 AS", "P35 AS"
+                    packGrade = txtGrade.Text
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE = 9 And " _
                            & " DEFCONE = 0 And CONEBARLEY = 0  And FLT_W = 'False' And PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
 
-            Case "P20 BS", "P30 BS", "P35 BS"
-                packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE BETWEEN 8 And 14 And " _
+                Case "P20 BS", "P30 BS", "P35 BS"
+                    packGrade = txtGrade.Text
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'True' And CONESTATE BETWEEN 8 And 14 And " _
                            & " (DEFCONE > 0 Or CONEBARLEY > 0 Or m30 > 0 Or P30 >0) And PACKENDTM Is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
-            Case "ReCheck"
+                Case "ReCheck"
 
-                packGrade = txtGrade.Text
-                If stdReChk = 0 Then
+                    packGrade = txtGrade.Text
+                    If stdReChk = 0 Then
 
-                    LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 14  And " _
+                        LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 14  And " _
                                & " DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM Is Null And RECHKSTARTTM Is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
 
-                Else
+                    Else
 
-                    LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 9 And " _
+                        LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 9 And " _
                                & " DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM Is Null And STDSTATE = 10 and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
-                End If
+                    End If
 
 
-                If LRecordCount > 0 Then
-                    'LOAD THE DATA FROM dB IN TO THE DATAGRID
-                    frmDGV.DGVdata.DataSource = LDS.Tables(0)
-                    frmDGV.DGVdata.Rows(0).Selected = True
+                    If LRecordCount > 0 Then
+                        'LOAD THE DATA FROM dB IN TO THE DATAGRID
+                        frmDGV.DGVdata.DataSource = LDS.Tables(0)
+                        frmDGV.DGVdata.Rows(0).Selected = True
 
 
 
-                    If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("RECHK").Value) Then  'check to see if cheese scanned has already been allocated
-                        If frmDGV.DGVdata.Rows(0).Cells("RECHK").Value > "0" Then
-                            Label3.Visible = True
-                            Label3.Text = "THIS CHEESE HAS ALREADY BEEN ALLOCATED " & vbCrLf & " Cheese ลูกนี้ได้ถูกนำไปใช้แล้ว"
-                            DelayTM()
-                            Label3.Visible = False
-                            quit = 1
-                            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
-                            quit = 1
+                        If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("RECHK").Value) Then  'check to see if cheese scanned has already been allocated
+                            If frmDGV.DGVdata.Rows(0).Cells("RECHK").Value > "0" Then
+                                Label3.Visible = True
+                                Label3.Text = "THIS CHEESE HAS ALREADY BEEN ALLOCATED " & vbCrLf & " Cheese ลูกนี้ได้ถูกนำไปใช้แล้ว"
+                                DelayTM()
+                                Label3.Visible = False
+                                quit = 1
+                                frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                                quit = 1
 
-                            Me.txtLotNumber.Clear()
-                            Me.txtLotNumber.Visible = True
-                            Me.txtLotNumber.Focus()
-                            Exit Sub
+                                Me.txtLotNumber.Clear()
+                                Me.txtLotNumber.Visible = True
+                                Me.txtLotNumber.Focus()
+                                Exit Sub
 
+                            End If
                         End If
                     End If
-                End If
 
 
-            Case "Waste"
-                packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And FLT_W = 'True' And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8  And COLWASTE > 0 And PACKENDTM is Null ")
-        End Select
+                Case "Waste"
+                    packGrade = txtGrade.Text
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And FLT_W = 'True' And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8  And COLWASTE > 0 And PACKENDTM is Null ")
+            End Select
+
+        Catch ex As Exception
+
+            'Write error to Log File
+            writeerrorLog.writelog("SQl Non A Search ", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("SQL Non A Search", ex.ToString, False, "System Fault")
+        End Try
+
+
 
         If LRecordCount = 0 Then
             Me.txtLotNumber.Clear()
@@ -1706,54 +1718,60 @@ Public Class frmJobEntry
         End If
 
 
+        Try
+
+            'Populate DGV with all available grade cheese info
+            LAddParam("@days", daysstring)  'This is an integer value
+            Select Case txtGrade.Text
+
+                Case "A"   '"ReCheckA"
+                    packGrade = txtGrade.Text
+                    LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & txtLotNumber.Text & "' And  RECHK = 4 And RECHKRESULT = 'A' " _
+                                & " and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ORDER BY RECHKIDX ")
+                Case "B"
+                    packGrade = txtGrade.Text
+                    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And (CONESTATE BETWEEN 8 And 9 OR Conestate = 14)  And " _
+                               & " (DEFCONE > 0 Or CONEBARLEY > 0 Or RECHKRESULT = 'B') And FLT_W = 'False' And PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
+                Case "AL"
+                    packGrade = txtGrade.Text
+                    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9 And " _
+                               & " DEFCONE = 0 And CONEBARLEY = 0 And RECHKRESULT = 'AL' And RECHK = 4 And PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
+                Case "AD"
+                    packGrade = txtGrade.Text
+                    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9 And " _
+                               & " DEFCONE = 0 And CONEBARLEY = 0 And RECHKRESULT = 'AD' And RECHK = 4 And PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
+                Case "P15 AS", "P25 AS", "P35 AS"
+                    packGrade = txtGrade.Text
+                    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 9 And " _
+                               & " DEFCONE = 0 And CONEBARLEY = 0 And  PACKENDTM Is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
+                Case "P20 BS", "P30 BS", "P35 BS"
+                    packGrade = txtGrade.Text
+                    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True'  And (CONESTATE = 8 or conestate = 14) And " _
+                               & " (DEFCONE > 0 Or CONEBARLEY > 0 Or M30 > 0 Or P30 > 0) And PACKENDTM Is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
+                Case "ReCheck"  'CREATE RECHECK SHEET
+                    packGrade = txtGrade.Text
+                    If stdReChk = 0 Then
+                        LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And (CONESTATE = 8 Or  CONESTATE = 14) And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null And RECHKSTARTTM is Null And RECHK is Null ")
+                    Else
+                        'ReCheck creation for std cheese  state 10
+                        LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 9 And " _
+                                   & " DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM Is Null And STDSTATE = 10 And RECHK Is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
+
+                    End If
 
 
-        'Populate DGV with all available grade cheese info
-        LAddParam("@days", daysstring)  'This is an integer value
-        Select Case txtGrade.Text
+                Case "Waste"
+                    packGrade = txtGrade.Text
+                    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "'  (CONESTATE = 8 Or CONESTATE = 14) And (FLT_W = 'True' Or COLWASTE > 0) And PACKENDTM is Null ")
+            End Select
 
-            Case "A"   '"ReCheckA"
-                packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where RECHECKBARCODE = '" & txtLotNumber.Text & "' And  RECHK = 4 And RECHKRESULT = 'A' " _
-                            & " and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ORDER BY RECHKIDX ")
-            Case "B"
-                packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And (CONESTATE BETWEEN 8 And 9 OR Conestate = 14  And " _
-                           & " (DEFCONE > 0 Or CONEBARLEY > 0 Or RECHKRESULT = 'B') And FLT_W = 'False' And PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
-            Case "AL"
-                packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9 And " _
-                           & " DEFCONE = 0 And CONEBARLEY = 0 And RECHKRESULT = 'AL' And RECHK = 4 And PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
-            Case "AD"
-                packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 9 And " _
-                           & " DEFCONE = 0 And CONEBARLEY = 0 And RECHKRESULT = 'AD' And RECHK = 4 And PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
-            Case "P15 AS", "P25 AS", "P35 AS"
-                packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True' And CONESTATE = 9 And " _
-                           & " DEFCONE = 0 And CONEBARLEY = 0 And  PACKENDTM Is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
-            Case "P20 BS", "P30 BS", "P35 BS"
-                packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'True'  And (CONESTATE = 8 or conestate = 14) And " _
-                           & " (DEFCONE > 0 Or CONEBARLEY > 0 Or M30 > 0 Or P30 > 0) And PACKENDTM Is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
-            Case "ReCheck"  'CREATE RECHECK SHEET
-                packGrade = txtGrade.Text
-                If stdReChk = 0 Then
-                    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And (CONESTATE = 8 Or  CONESTATE = 14) And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null And RECHKSTARTTM is Null And RECHK is Null ")
-                Else
-                    'ReCheck creation for std cheese  state 10
-                    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 9 And " _
-                               & " DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM Is Null And STDSTATE = 10 And RECHK Is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
+        Catch ex As Exception
 
-                End If
+            'Write error to Log File
+            writeerrorLog.writelog("Non A DGV", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Non A DGV", ex.ToString, False, "System Fault")
 
-
-            Case "Waste"
-                packGrade = txtGrade.Text
-                LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "'  (CONESTATE = 8 Or CONESTATE = 14) And (FLT_W = 'True' Or COLWASTE > 0) And PACKENDTM is Null ")
-        End Select
-
-
+        End Try
 
         If LRecordCount > 0 Then
             'LOAD THE DATA FROM dB IN TO THE DATAGRID
