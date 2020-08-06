@@ -70,8 +70,8 @@ Public Class frmDailyPackProduction
             Label2.Text = "Please wait Creating Stock to process Report"
             processReport()
             Me.Cursor = System.Windows.Forms.Cursors.Default
-            frmJobEntry.Show()
-            Me.Close()
+        frmJobEntry.Show()
+        Me.Close()
 
     End Sub
 
@@ -99,7 +99,7 @@ Public Class frmDailyPackProduction
         Dim endTm As String = searchdate & "23:59:59.997"
 
         'GET LIST OF PRODUCTS TO BE PROCESSED AS OF NOW
-        SQL.ExecQuery("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM,DOFFNUM,MCNUM FROM JOBS WHERE PACKENDTM Between '" & startTm & "' and '" & endTm & "' ")
+        SQL.ExecQuery("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM,DOFFNUM,MCNUM FROM JOBS WHERE PACKENDTM Between '" & startTm & "' and '" & endTm & "' Order by PRODNAME ")
 
         jobcount = SQL.RecordCount
 
@@ -108,10 +108,10 @@ Public Class frmDailyPackProduction
         If jobcount > 0 Then
             'LOAD THE DATA FROM dB IN TO THE DATAGRID
             DGVJobsData.DataSource = SQL.SQLDS.Tables(0)
-            DGVJobsData.Rows(0).Selected = True
+            'DGVJobsData.Rows(0).Selected = True
 
             'SORT GRIDVIEW IN TO CORRECT JOB SEQUENCE
-            DGVJobsData.Sort(DGVJobsData.Columns("PRODNAME"), ListSortDirection.Ascending)  'sorts On cone number
+            'DGVJobsData.Sort(DGVJobsData.Columns("PRODNAME"), ListSortDirection.Ascending)  'sorts On cone number
 
         Else
             MsgBox("No Jobs Found, Please select new date range")
@@ -130,7 +130,11 @@ Public Class frmDailyPackProduction
 
 
 
-            prodNum = DGVJobsData.Rows(count).Cells("PRNUM").Value.ToString
+            '   prodNum = String.Format(DGVJobsData.Rows(count).Cells("PRNUM").Value.ToString, "000")
+
+            Dim tmpprodnum As Integer = DGVJobsData.Rows(count).Cells("PRNUM").Value
+            prodNum = tmpprodnum.ToString("000")
+
             prodName = DGVJobsData.Rows(count).Cells("PRODNAME").Value.ToString
             mcNum = DGVJobsData.Rows(count).Cells("MCNUM").Value.ToString
             mergeNum = DGVJobsData.Rows(count).Cells("MERGENUM").Value.ToString
@@ -201,19 +205,21 @@ Public Class frmDailyPackProduction
 
 
             'GET PRODUCT WEIGHT INFORMATION
-            SQL.ExecQuery("SELECT * FROM Product WHERE PRNUM = '" & prodNum & "' ")
+            SQL.ExecQuery("SELECT * FROM Product WHERE PRNUM = '" & prodNum & "' Order by PRODNAME ")
 
             'IF JOBS HAVE BEEN FOUND THEN CREATE A SORTED LIST OF THESE JOBS
             If SQL.RecordCount > 0 Then
                 'LOAD THE DATA FROM dB IN TO THE DATAGRID
                 DGVProdData.DataSource = SQL.SQLDS.Tables(0)
-                DGVProdData.Rows(0).Selected = True
+                'DGVProdData.Rows(0).Selected = True
 
                 'SORT GRIDVIEW IN TO CORRECT JOB SEQUENCE
-                DGVProdData.Sort(DGVProdData.Columns("PRODNAME"), ListSortDirection.Ascending)  'sorts On cone number
-
+                'DGVProdData.Sort(DGVProdData.Columns("PRODNAME"), ListSortDirection.Ascending)  'sorts On cone number
+                prodWeight = DGVProdData.Rows(0).Cells("PRODWEIGHT").Value.ToString
             Else
-                MsgBox("No Jobs Found, Please select new date range")
+
+                MsgBox("Cannont complete report " & vbCrLf & "no weight information for Product Number " & prodNum & vbCrLf & "Product Name " & prodName)
+
                 DGVProdData.ClearSelection()
                 Exit Sub
             End If
@@ -228,16 +234,16 @@ Public Class frmDailyPackProduction
                           & " PACKENDTM Between '" & startTm & "' and '" & endTm & "' and CONESTATE = 15 OR PRNUM = '" & prodNum & "'  And MCNUM = '" & mcNum & "' And " _
                           & " MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKENDTM Between '" & startTm & "' and '" & endTm & "' and CONESTATE = 8 OR " _
                           & " PRNUM = '" & prodNum & "'  And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And " _
-                          & "PACKCARTTM Between  '" & startTm & "' and '" & endTm & "' and CONESTATE = 14 ")
+                          & "PACKCARTTM Between  '" & startTm & "' and '" & endTm & "' and CONESTATE = 14 Order By PRODNAME")
 
             'IF JOBS HAVE BEEN FOUND THEN CREATE A SORTED LIST OF THESE JOBS
             If SQL.RecordCount > 0 Then
                 'LOAD THE DATA FROM dB IN TO THE DATAGRID
                 DGVJobData.DataSource = SQL.SQLDS.Tables(0)
-                DGVJobData.Rows(0).Selected = True
+                ' DGVJobData.Rows(0).Selected = True
 
                 'SORT GRIDVIEW IN TO CORRECT JOB SEQUENCE
-                DGVJobData.Sort(DGVJobData.Columns("PRODNAME"), ListSortDirection.Ascending)  'sorts On cone number
+                'DGVJobData.Sort(DGVJobData.Columns("PRODNAME"), ListSortDirection.Ascending)  'sorts On cone number
 
             Else
                 'MsgBox("No Jobs Found, Please select new date range")
@@ -320,7 +326,6 @@ Public Class frmDailyPackProduction
         Catch ex As Exception
             'Write error to Log File
             writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
-            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
             MsgBox(ex.Message)
 
         End Try
@@ -345,7 +350,7 @@ Public Class frmDailyPackProduction
         Me.Close()
 
 
-        End Sub
+    End Sub
 
         Private Sub releaseObject(ByVal obj As Object)
 
