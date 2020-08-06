@@ -54,8 +54,10 @@ Public Class frmProdStockWork
         End If
 
         Dim workbookWR As Excel.Workbook
-        Dim startDate = Date.Today
-        Dim endDate = Date.Today.AddDays(-3)
+        Dim startDate = Date.Today.ToString("yyyy-MM-dd") & " 23:59:59.997"
+        Dim endDate = Date.Today.AddDays(-3).tostring("yyyy-MM-dd") & " 00:00:00.000"
+
+
 
         If My.Settings.debugSet Then
             Label2.Visible = True

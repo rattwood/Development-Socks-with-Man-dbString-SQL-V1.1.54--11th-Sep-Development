@@ -93,16 +93,13 @@ Public Class frmDailyPackProduction
 
         savename = (My.Settings.dirPackReports & "\" & "DayPackingReport" & "_" & MonthCalendar1.SelectionRange.Start.ToString("dd_MMM_yyyy") & ".xlsx").ToString
 
-        ' Dim searchdate As String
-        ' searchdate = "2017-07-21"
-        'Dim searchdate As Date = Date.Today                  ' xxxxxxxxxxxxxxxxxxxxxx  needed for final version
-        Dim searchdate As Date = MonthCalendar1.SelectionRange.Start.ToString("dd/MMM/yyyy")
-        'Dim searchdate As Date = "2018-01-24"
+
+        Dim searchdate As String = MonthCalendar1.SelectionRange.Start.ToString("yyyy-MM-dd ")
+        Dim startTm As String = searchdate & "00:00:00.000"
+        Dim endTm As String = searchdate & "23:59:59.997"
 
         'GET LIST OF PRODUCTS TO BE PROCESSED AS OF NOW
-        SQL.ExecQuery("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM,DOFFNUM,MCNUM FROM JOBS WHERE PACKENDTM = '" & searchdate & "' ") 'OR  PACKENDTM = '" & searchdate & "' and CONESTATE = 8 ")
-
-        ' MsgBox("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM,DOFFNUM,MCNUM FROM JOBS WHERE PACKENDTM = '" & searchdate & "' and CONESTATE >= 8")
+        SQL.ExecQuery("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM,DOFFNUM,MCNUM FROM JOBS WHERE PACKENDTM Between '" & startTm & "' and '" & endTm & "' ")
 
         jobcount = SQL.RecordCount
 
@@ -141,47 +138,64 @@ Public Class frmDailyPackProduction
 
 
             'COUNT NUMBER OF CARTS
-            SQL.ExecQuery("SELECT  DISTINCT PRNUM,PRODNAME,MERGENUM,DOFFNUM,CARTNUM  FROM jobs WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And  PACKENDTM = '" & searchdate & "' ")
+            SQL.ExecQuery("SELECT  DISTINCT PRNUM,PRODNAME,MERGENUM,DOFFNUM,CARTNUM  FROM jobs WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And " _
+                          & " MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And  PACKENDTM Between '" & startTm & "' and '" & endTm & "' ")
             Dim totalcarts = SQL.RecordCount
 
             'COUNT NUMBER OF MISSING CONES
-            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM = '" & searchdate & "' And MISSCONE > 0 ")
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' " _
+                          & " And PACKCARTTM  Between  '" & startTm & "' and '" & endTm & "' And MISSCONE > 0 ")
             Dim totalNC = SQL.RecordCount
 
             'COUNT NUMBER OF A CONES
-            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "'  And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKENDTM = '" & searchdate & "' And CONESTATE >= 15 And FLT_S = 'False' OR PRNUM = '" & prodNum & "'  And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKENDTM = '" & searchdate & "' And CONESTATE = 8 And FLT_S = 'False' And RECHKRESULT = 'A' ")
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "'  And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' " _
+                          & " And PACKENDTM Between '" & startTm & "' and '" & endTm & "' And CONESTATE >= 15 And FLT_S = 'False' OR PRNUM = '" & prodNum & "' " _
+                          & " And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKENDTM = '" & searchdate & "' And " _
+                          & " CONESTATE = 8 And FLT_S = 'False' And RECHKRESULT = 'A' ")
             Dim totalA = SQL.RecordCount
 
             'COUNT NUMBER OF  AS Cones
-            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "'  And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM  = '" & searchdate & "' And CONESTATE = 9 And FLT_S = 'True' And DEFCONE = 0 ")
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "'  And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' " _
+                          & " And PACKCARTTM  Between  '" & startTm & "' and '" & endTm & "' And CONESTATE = 9 And FLT_S = 'True' And DEFCONE = 0 ")
             Dim totalAS = SQL.RecordCount
 
             'COUNT NUMBER OF BS CONES
-            'SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM  = '" & searchdate & "' And CONESTATE = 8 And FLT_S = 'True' Or  PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM  = '" & searchdate & "' And CONESTATE = 14 And FLT_S = 'True'  ")
-            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM  = '" & searchdate & "' And (CONESTATE = 8 OR CONESTATE = 14) And FLT_S = 'True' OR  PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM  = '" & searchdate & "' And (CONESTATE = 8 OR CONESTATE = 14) And FLT_S = 'True' And CONEBARLEY > 0 ")
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' " _
+                          & " And PACKCARTTM   Between '" & startTm & "' and '" & endTm & "' And (CONESTATE = 8 OR CONESTATE = 14) And FLT_S = 'True' OR  " _
+                          & " PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And " _
+                          & " PACKCARTTM  = '" & searchdate & "' And (CONESTATE = 8 OR CONESTATE = 14) And FLT_S = 'True' And CONEBARLEY > 0 ")
             Dim totalBS = SQL.RecordCount
 
             'COUNT NUMBER OF B CONES
-            'SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM  = '" & searchdate & "' And CONESTATE = 8 And FLT_S = 'False' And Defcone = 0 And Misscone = 0 Or PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM  = '" & searchdate & "' And CONESTATE = 14 And FLT_S = 'False' And Defcone = 0 And Misscone = 0 ")
-            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM  = '" & searchdate & "' And (CONESTATE = 8 OR CONESTATE = 14) And FLT_S = 'False' And Defcone = 0 And Misscone = 0 And M30 = 0 and P30 = 0 OR PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM  = '" & searchdate & "' And (CONESTATE = 8 OR CONESTATE = 14) And FLT_S = 'False' And Defcone = 0 And Misscone = 0 And M30 = 0 and P30 = 0 And CONEBARLEY > 0 ")
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' " _
+                          & " And PACKCARTTM  Between '" & startTm & "' and '" & endTm & "' And (CONESTATE = 8 OR CONESTATE = 14) And FLT_S = 'False' " _
+                          & " And Defcone = 0 And Misscone = 0 And M30 = 0 And P30 = 0 Or PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' " _
+                          & " And DOFFNUM = '" & doffNum & "' And PACKCARTTM  = '" & searchdate & "' And (CONESTATE = 8 OR CONESTATE = 14) And FLT_S = 'False' " _
+                          & " And Defcone = 0 And Misscone = 0 And M30 = 0 And P30 = 0 And CONEBARLEY > 0 ")
 
             Dim totalB = SQL.RecordCount
 
             'COUNT NUMBER OF DEFECT CONES
-            'SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM  = '" & searchdate & "' And CONESTATE = 8  And FLT_S = 'False' And Defcone > 0 OR PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM  = '" & searchdate & "' And CONESTATE = 14 And FLT_S = 'False' And DEFCONE > 0 ")
-            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM  = '" & searchdate & "' And (CONESTATE = 8 OR CONESTATE = 14) And FLT_S = 'False' And Defcone > 0  ")
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' " _
+                          & "And PACKCARTTM   Between '" & startTm & "' and '" & endTm & "' And (CONESTATE = 8 OR CONESTATE = 14) And FLT_S = 'False' " _
+                          & " And Defcone > 0  ")
             Dim totalDF = SQL.RecordCount
 
             'COUNT NUMBER OF ReCHECK CONES
-            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM = '" & searchdate & "' And CONESTATE = 8 And FLT_S = 'False' And (M30 > 0 OR P30 > 0) And (RECHK is NULL Or RECHK = '') ")
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' " _
+                          & " And PACKCARTTM  Between '" & startTm & "' and '" & endTm & "' And CONESTATE = 8 And FLT_S = 'False' And (M30 > 0 OR P30 > 0) And " _
+                          & " (RECHK Is NULL Or RECHK = '') ")
             Dim totalRC = SQL.RecordCount
 
             'COUNT NUMBER OR AL CONES
-            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM = '" & searchdate & "' And CONESTATE = 8 And FLT_S = 'False'  And RECHKRESULT = 'AL' ")
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' " _
+                          & " And PACKCARTTM  Between '" & startTm & "' and '" & endTm & "' And CONESTATE = 8 And FLT_S = 'False'  And RECHKRESULT = 'AL' ")
+
             Dim totalAL = SQL.RecordCount.ToString
 
             'COUNT NUMBER OF AD CONES
-            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM = '" & searchdate & "' And CONESTATE = 8 And FLT_S = 'False'  And RECHKRESULT = 'AD' ")
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE PRNUM = '" & prodNum & "' And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' " _
+                          & " And PACKCARTTM  Between '" & startTm & "' and '" & endTm & "' And CONESTATE = 8 And FLT_S = 'False'  And RECHKRESULT = 'AD' ")
             Dim totalAD = SQL.RecordCount.ToString
 
 
@@ -210,7 +224,11 @@ Public Class frmDailyPackProduction
 
 
             'GET MACHINE NAME
-            SQL.ExecQuery("SELECT * FROM Jobs WHERE PRNUM = '" & prodNum & "'  And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKENDTM = '" & searchdate & "' and CONESTATE = 15 OR PRNUM = '" & prodNum & "'  And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKENDTM = '" & searchdate & "' and CONESTATE = 8 OR PRNUM = '" & prodNum & "'  And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKCARTTM = '" & searchdate & "' and CONESTATE = 14 ")
+            SQL.ExecQuery("SELECT * FROM Jobs WHERE PRNUM = '" & prodNum & "'  And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And " _
+                          & " PACKENDTM Between '" & startTm & "' and '" & endTm & "' and CONESTATE = 15 OR PRNUM = '" & prodNum & "'  And MCNUM = '" & mcNum & "' And " _
+                          & " MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKENDTM Between '" & startTm & "' and '" & endTm & "' and CONESTATE = 8 OR " _
+                          & " PRNUM = '" & prodNum & "'  And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And " _
+                          & "PACKCARTTM Between  '" & startTm & "' and '" & endTm & "' and CONESTATE = 14 ")
 
             'IF JOBS HAVE BEEN FOUND THEN CREATE A SORTED LIST OF THESE JOBS
             If SQL.RecordCount > 0 Then
@@ -228,7 +246,6 @@ Public Class frmDailyPackProduction
             End If
             Dim mcName As String = DGVJobData.Rows(0).Cells("MCNAME").Value.ToString
 
-            'MsgBox("prodname " & prodName & "   merge #  " & mergeNum & "   McName " & mcName & "   doffNum" & doffNum & "  AL " & totalAL & "   AD " & totalAD)
 
             Dim totalMD = 0 'GRADE MD CONES
             Dim totalML = 0 'GRADE ML CONES
@@ -288,7 +305,6 @@ Public Class frmDailyPackProduction
             DGVJobData.Dispose()
             DGVProdData.Dispose()
             MyPRExcel.Quit()
-            ' frmPackReports.lblMessage.Text = Nothing
             releaseObject(workbookPR)
             releaseObject(MyPRExcel)
             frmJobEntry.Show()
@@ -322,7 +338,6 @@ Public Class frmDailyPackProduction
 
         releaseObject(workbookPR)
         releaseObject(MyPRExcel)
-        'frmPackReports.lblMessage.Text = Nothing
         Me.Cursor = System.Windows.Forms.Cursors.Default
         Label2.Visible = False
         MsgBox("Daily Packing Report " & savename & " Created")
