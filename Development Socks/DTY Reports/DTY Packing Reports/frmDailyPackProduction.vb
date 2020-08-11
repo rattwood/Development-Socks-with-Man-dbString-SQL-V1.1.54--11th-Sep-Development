@@ -45,6 +45,11 @@ Public Class frmDailyPackProduction
     Dim reCheckCount As Integer = 0 'COUNT OF ReCHECK CONES
     Dim startDate As Date
 
+
+    'TOTAL Column results
+
+    Dim tot_carts, A_Master, AD_Master, AL_MAster, B_Master, AS_Master, BS_Master, DEF_MAster, ReC_Master, NoCone_Master, GT_Master As Integer
+
     'THIS INITIATES WRITING TO ERROR LOG
     Private writeerrorLog As New writeError
 
@@ -88,8 +93,8 @@ Public Class frmDailyPackProduction
             End If
 
         Dim workbookPR As Excel.Workbook
-
-
+        Dim worksheetPR As Excel.Worksheet
+        Dim chartRange As Excel.Range
 
         savename = (My.Settings.dirPackReports & "\" & "DayPackingReport" & "_" & MonthCalendar1.SelectionRange.Start.ToString("dd_MMM_yyyy") & ".xlsx").ToString
 
@@ -123,7 +128,7 @@ Public Class frmDailyPackProduction
 
 
         workbookPR = MyPRExcel.Workbooks.Open(template)
-
+        worksheetPR = workbookPR.Sheets("DAILY REPORT 401")
 
         'SERIES OF COUNTS FROM DATABASE TO GET VALUES NEEDED FOR REPORT
         For count As Integer = 0 To jobcount - 1 'DGVSort.Rows.Count
@@ -211,10 +216,9 @@ Public Class frmDailyPackProduction
             If SQL.RecordCount > 0 Then
                 'LOAD THE DATA FROM dB IN TO THE DATAGRID
                 DGVProdData.DataSource = SQL.SQLDS.Tables(0)
-                'DGVProdData.Rows(0).Selected = True
 
-                'SORT GRIDVIEW IN TO CORRECT JOB SEQUENCE
-                'DGVProdData.Sort(DGVProdData.Columns("PRODNAME"), ListSortDirection.Ascending)  'sorts On cone number
+
+
                 prodWeight = DGVProdData.Rows(0).Cells("PRODWEIGHT").Value.ToString
             Else
 
@@ -240,10 +244,7 @@ Public Class frmDailyPackProduction
             If SQL.RecordCount > 0 Then
                 'LOAD THE DATA FROM dB IN TO THE DATAGRID
                 DGVJobData.DataSource = SQL.SQLDS.Tables(0)
-                ' DGVJobData.Rows(0).Selected = True
 
-                'SORT GRIDVIEW IN TO CORRECT JOB SEQUENCE
-                'DGVJobData.Sort(DGVJobData.Columns("PRODNAME"), ListSortDirection.Ascending)  'sorts On cone number
 
             Else
                 'MsgBox("No Jobs Found, Please select new date range")
@@ -280,17 +281,74 @@ Public Class frmDailyPackProduction
             MyPRExcel.Cells(count + 7, 17) = totalRC 'ReCHECK CONES
             MyPRExcel.Cells(count + 7, 18) = totalNC 'NOCONE 
 
+            tot_carts = tot_carts + totalcarts
+            A_Master = A_Master + totalA
+            AD_Master = AD_Master + totalAD
+            AL_MAster = AL_MAster + totalAL
+            B_Master = B_Master + totalB
+            AS_Master = AS_Master + totalAS
+            BS_Master = BS_Master + totalBS
+            DEF_MAster = DEF_MAster + totalDF
+            ReC_Master = ReC_Master + totalRC
+            NoCone_Master = NoCone_Master + totalNC
 
 
 
 
         Next
 
+        GT_Master = A_Master + AD_Master + AL_MAster + B_Master + AS_Master + BS_Master + DEF_MAster + ReC_Master + NoCone_Master
 
-        'LINE NUMBER
+        'fILL IN cOLUMN TOTALS
+
+        'GET LINE NUMBER FOR TOTALS
+        Dim total_line = jobcount + 10
+
+        'Merge Cells for Total
+        chartRange = worksheetPR.Range("A" & total_line, "F" & total_line)
+        chartRange.Merge()
+
+        'clear borders around unwanted cells
+        chartRange = worksheetPR.Range("A" & total_line + 1, "S200")
+        chartRange.Borders.LineStyle = Excel.XlLineStyle.xlLineStyleNone
+
+        'Clear all unused Sum cells
+        chartRange = worksheetPR.Range("S" & total_line + 1, "S200")
+        chartRange.Value = " "
+
+        'Set Border around Total cells
+        chartRange = worksheetPR.Range("A" & total_line, "S" & total_line)
+        chartRange.BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlMedium, Excel.XlColorIndex.xlColorIndexAutomatic, Excel.XlColorIndex.xlColorIndexAutomatic)
+        'Set same range to bold
+        chartRange.Font.Bold = True
+
+
+        'Clear Zeros from 3 cells above totals
+
+        For i = 0 To 2
+            MyPRExcel.Cells((jobcount + 7) + i, 19).value = " "
+        Next
+
+        MyPRExcel.Cells(total_line, 1).value = "Totals"
+
+
+        MyPRExcel.Cells(total_line, 7).value = tot_carts
+        MyPRExcel.Cells(total_line, 8).value = A_Master
+        MyPRExcel.Cells(total_line, 9).value = "0"
+        MyPRExcel.Cells(total_line, 10).value = "0"
+        MyPRExcel.Cells(total_line, 11).value = AD_Master
+        MyPRExcel.Cells(total_line, 12).value = AL_MAster
+        MyPRExcel.Cells(total_line, 13).value = B_Master
+        MyPRExcel.Cells(total_line, 14).value = AS_Master
+        MyPRExcel.Cells(total_line, 15).value = BS_Master
+        MyPRExcel.Cells(total_line, 16).value = DEF_MAster
+        MyPRExcel.Cells(total_line, 17).value = ReC_Master
+        MyPRExcel.Cells(total_line, 18).value = NoCone_Master
+
+
 
         MyPRExcel.Cells(3, 17).value = Date.Today.ToString("dd-MM-yyy")
-        'MyPRExcel.Cells(3, 12).value = TimeOfDay.ToString("hh:mm")
+
 
 
 
@@ -311,6 +369,8 @@ Public Class frmDailyPackProduction
             DGVJobData.Dispose()
             DGVProdData.Dispose()
             MyPRExcel.Quit()
+            releaseObject(chartRange)
+            releaseObject(worksheetPR)
             releaseObject(workbookPR)
             releaseObject(MyPRExcel)
             frmJobEntry.Show()
@@ -340,7 +400,8 @@ Public Class frmDailyPackProduction
 
         'CLEAN UP
         MyPRExcel.Quit()
-
+        releaseObject(chartRange)
+        releaseObject(worksheetPR)
         releaseObject(workbookPR)
         releaseObject(MyPRExcel)
         Me.Cursor = System.Windows.Forms.Cursors.Default
