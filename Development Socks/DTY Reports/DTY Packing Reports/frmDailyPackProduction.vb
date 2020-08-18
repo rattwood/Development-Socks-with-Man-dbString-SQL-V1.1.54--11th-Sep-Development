@@ -43,12 +43,20 @@ Public Class frmDailyPackProduction
     Dim prodWeight As String
     Dim lineCount As Integer = 0
     Dim reCheckCount As Integer = 0 'COUNT OF ReCHECK CONES
-    Dim startDate As Date
+    'Dim startDate As Date
 
 
     'TOTAL Column results
 
     Dim tot_carts, A_Master, AD_Master, AL_MAster, B_Master, AS_Master, BS_Master, DEF_MAster, ReC_Master, NoCone_Master, GT_Master As Integer
+
+    Private Sub frmDailyPackProduction_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If My.Settings.debugSet Then
+            DGVJobData.Show()
+            DGVJobsData.Show()
+            DGVProdData.Show()
+        End If
+    End Sub
 
     'THIS INITIATES WRITING TO ERROR LOG
     Private writeerrorLog As New writeError
@@ -58,11 +66,8 @@ Public Class frmDailyPackProduction
     Private Sub MonthCalendar1_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
         'Routine to get date range
         Label5.Text = MonthCalendar1.SelectionRange.Start.ToString("dd/MMM/yyyy")
+        packDate = MonthCalendar1.SelectionRange.Start.ToString("dd-MM-yyyy")
 
-
-        'STRIPOUT / Characters from date so that they are not used in the file name
-
-        startDate = Label5.Text.Replace("/", "")
 
 
         btnCreate.Enabled = True
@@ -347,7 +352,7 @@ Public Class frmDailyPackProduction
 
 
 
-        MyPRExcel.Cells(3, 17).value = Date.Today.ToString("dd-MM-yyy")
+        MyPRExcel.Cells(3, 17).value = packDate
 
 
 

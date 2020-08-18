@@ -40,27 +40,27 @@ Partial Class frmDailyPackProduction
         'DGVJobsData
         '
         Me.DGVJobsData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVJobsData.Location = New System.Drawing.Point(37, 34)
+        Me.DGVJobsData.Location = New System.Drawing.Point(50, 225)
         Me.DGVJobsData.Name = "DGVJobsData"
-        Me.DGVJobsData.Size = New System.Drawing.Size(240, 150)
+        Me.DGVJobsData.Size = New System.Drawing.Size(644, 150)
         Me.DGVJobsData.TabIndex = 0
         Me.DGVJobsData.Visible = False
         '
         'DGVProdData
         '
         Me.DGVProdData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVProdData.Location = New System.Drawing.Point(454, 34)
+        Me.DGVProdData.Location = New System.Drawing.Point(717, 225)
         Me.DGVProdData.Name = "DGVProdData"
-        Me.DGVProdData.Size = New System.Drawing.Size(240, 150)
+        Me.DGVProdData.Size = New System.Drawing.Size(634, 150)
         Me.DGVProdData.TabIndex = 1
         Me.DGVProdData.Visible = False
         '
         'DGVJobData
         '
         Me.DGVJobData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVJobData.Location = New System.Drawing.Point(7, 258)
+        Me.DGVJobData.Location = New System.Drawing.Point(50, 392)
         Me.DGVJobData.Name = "DGVJobData"
-        Me.DGVJobData.Size = New System.Drawing.Size(782, 150)
+        Me.DGVJobData.Size = New System.Drawing.Size(1301, 374)
         Me.DGVJobData.TabIndex = 2
         Me.DGVJobData.Visible = False
         '
@@ -123,7 +123,7 @@ Partial Class frmDailyPackProduction
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(495, 255)
+        Me.ClientSize = New System.Drawing.Size(1372, 778)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnCreate)
