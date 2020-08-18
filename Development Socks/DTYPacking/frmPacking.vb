@@ -623,14 +623,14 @@ Public Class frmPacking
                 SQL.AddParam("@packendtm", DGVPakingA.Rows(i - 1).Cells("Packendtm").Value)
                 SQL.AddParam("@packsheet", DGVPakingA.Rows(i - 1).Cells("PACKSHEETBCODE").Value)
                 SQL.AddParam("@carton", DGVPakingA.Rows(i - 1).Cells("CARTONNUM").Value)
-
+                SQL.AddParam("@packcarttm", DGVPakingA.Rows(i - 1).Cells("PACKCARTTM").Value)
 
 
                 SQL.ExecQuery(" Update jobs set CONESTATE = @conestate, OPPACK = @oppack, OPNAME = @opname, PACKENDTM = @packendtm, " _
                             & "SHORTCONE = @shortcone, DEFCONE = @defcone," _
                             & "FLT_K =  @flt_k, FLT_D = @flt_d, FLT_F = @flt_f, FLT_O = @flt_o, FLT_T = @flt_t, FLT_P = @flt_p, " _
                             & "FLT_S = @flt_s, FLT_N = @flt_n, FLT_W = @flt_w, FLT_H = @flt_h, FLT_TR = @flt_tr, FLT_B = @flt_b,FLT_C = @flt_c, " _
-                            & "PSORTERROR = @psorterror, CARTENDTM = @cartendtm,PACKSHEETBCODE = @packsheet, CARTONNUM = @carton " _
+                            & "PSORTERROR = @psorterror, CARTENDTM = @cartendtm,PACKSHEETBCODE = @packsheet, CARTONNUM = @carton, PACKCARTTM = @packcarttm " _
                             & "Where id_product = @id")
 
             Next
