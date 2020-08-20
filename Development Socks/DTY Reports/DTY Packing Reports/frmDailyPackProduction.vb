@@ -174,67 +174,90 @@ Public Class frmDailyPackProduction
 
 
             'COUNT NUMBER OF MISSING CONES
-            SQL.AddParam("@bcodejob", bcodejob)
-            SQL.ExecQuery("SELECT misscone FROM JOBS WHERE bcodejob = @bcodejob And PACKCARTTM  Between  '" & startTm & "' and '" & endTm & "' And MISSCONE > 0 ")
-            Dim totalNC = SQL.RecordCount
+            'SQL.AddParam("@bcodejob", bcodejob)
+            'SQL.ExecQuery("SELECT misscone FROM JOBS WHERE bcodejob = @bcodejob And PACKCARTTM  Between  '" & startTm & "' and '" & endTm & "' And MISSCONE > 0 ")
+            'Dim totalNC = SQL.RecordCount
 
             'COUNT NUMBER OF A CONES
             SQL.AddParam("@bcodejob", bcodejob)
-            SQL.AddParam("@bcodejob2", bcodejob)
-            SQL.ExecQuery("SELECT conenum FROM JOBS WHERE bcodejob = @bcodejob  " _
-                          & " And PACKENDTM Between '" & startTm & "' and '" & endTm & "' And CONESTATE >= 15 And FLT_S = 'False' OR bcodejob = @bcodejob2 And PACKENDTM Between '" & startTm & "' and '" & endTm & "' And " _
-                          & " CONESTATE = 8 And FLT_S = 'False' And RECHKRESULT = 'A' ")
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE bcodejob = @bcodejob  " _
+                          & " And PACKENDTM Between '" & startTm & "' and '" & endTm & "' And CONESTATE = 15 And FLT_S = 'False' and (RECHK = 0 or RECHK is Null) " _
+                          & "And DEFCONE = 0 And CONEBARLEY = 0  And M30 = 0 And P30 = 0 ")
+
+
             Dim totalA = SQL.RecordCount
+
+            'COUNT NUMBER OF ReCheck A CONES
+            SQL.AddParam("@bcodejob", bcodejob)
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE bcodejob = @bcodejob  " _
+                          & " And PACKENDTM Between '" & startTm & "' and '" & endTm & "' And CONESTATE = 15 And FLT_S = 'False' And RECHKRESULT = 'A' And (DEFCONE = 0 And CONEBARLEY = 0    " _
+                          & "And DEFCONE = 0 And CONEBARLEY = 0)   ")
+
+            totalA = totalA + SQL.RecordCount  'add recheck A to the A count
+
+
 
             'COUNT NUMBER OF  AS Cones
             SQL.AddParam("@bcodejob", bcodejob)
-            SQL.ExecQuery("SELECT conenum FROM JOBS WHERE bcodejob = @bcodejob " _
-                          & " And PACKCARTTM  Between  '" & startTm & "' and '" & endTm & "' And CONESTATE = 9 And FLT_S = 'True' And DEFCONE = 0 ")
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE bcodejob = @bcodejob  " _
+                          & " And PACKENDTM Between '" & startTm & "' and '" & endTm & "' And CONESTATE = 15 And FLT_S = 'True' and (RECHK = 0 or RECHK is Null) " _
+                          & "And DEFCONE = 0 And CONEBARLEY = 0  And M30 = 0 And P30 = 0  Or  bcodejob = @bcodejob  " _
+                          & " And PACKENDTM Between '" & startTm & "' and '" & endTm & "' And CONESTATE = 15 And FLT_S = 'True' and RECHKRESULT = 'A'  " _
+                          & "And DEFCONE = 0 And CONEBARLEY = 0 ")
+
             Dim totalAS = SQL.RecordCount
 
-            'COUNT NUMBER OF BS CONES
-            SQL.AddParam("@bcodejob", bcodejob)
-            SQL.AddParam("@bcodejob2", bcodejob)
-            SQL.ExecQuery("SELECT conenum FROM JOBS WHERE bcodejob = @bcodejob " _
-                          & " And PACKCARTTM   Between '" & startTm & "' and '" & endTm & "' And (CONESTATE = 8 OR CONESTATE = 14) And FLT_S = 'True' OR  " _
-                          & " bcodejob = @bcodejob2 And PACKCARTTM  Between  '" & startTm & "' and '" & endTm & "' And (CONESTATE = 8 OR CONESTATE = 14) And FLT_S = 'True' And CONEBARLEY > 0 ")
-            Dim totalBS = SQL.RecordCount
+
 
             'COUNT NUMBER OF B CONES
             SQL.AddParam("@bcodejob", bcodejob)
-            SQL.AddParam("@bcodejob2", bcodejob)
-            SQL.ExecQuery("SELECT conenum FROM JOBS WHERE bcodejob = @bcodejob " _
-                          & " And PACKCARTTM  Between '" & startTm & "' and '" & endTm & "' And (CONESTATE = 8 OR CONESTATE = 14) And FLT_S = 'False' " _
-                          & " And Defcone = 0 And Misscone = 0 And M30 = 0 And P30 = 0 Or bcodejob = @bcodejob2 And PACKCARTTM Between  '" & startTm & "' and '" & endTm & "' And (CONESTATE = 8 OR CONESTATE = 14) And FLT_S = 'False' " _
-                          & " And Defcone = 0 And Misscone = 0 And M30 = 0 And P30 = 0 And CONEBARLEY > 0 ")
+            ' SQL.AddParam("@bcodejob2", bcodejob)
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE bcodejob = @bcodejob " _
+                          & " And PACKENDTM Between '" & startTm & "' and '" & endTm & "' And CONESTATE = 15 And FLT_S = 'False' " _
+                          & " And (Defcone > 0 Or CONEBARLEY > 0) OR bcodejob = @bcodejob And PACKENDTM Between '" & startTm & "' and '" & endTm & "' " _
+                          & " And (Defcone > 0 Or CONEBARLEY > '0' OR RECHKRESULT = 'B')  ")
 
             Dim totalB = SQL.RecordCount
 
-            'COUNT NUMBER OF DEFECT CONES
-            SQL.AddParam("@bcodejob", bcodejob)
-            SQL.ExecQuery("SELECT conenum FROM JOBS WHERE bcodejob = @bcodejob " _
-                          & "And PACKCARTTM   Between '" & startTm & "' and '" & endTm & "' And (CONESTATE = 8 OR CONESTATE = 14) And FLT_S = 'False' " _
-                          & " And Defcone > 0  ")
-            Dim totalDF = SQL.RecordCount
 
-            'COUNT NUMBER OF ReCHECK CONES
+
+            'COUNT NUMBER OF BS CONES
             SQL.AddParam("@bcodejob", bcodejob)
-            SQL.ExecQuery("SELECT conenum FROM JOBS WHERE bcodejob = @bcodejob " _
-                          & " And PACKCARTTM  Between '" & startTm & "' and '" & endTm & "' And CONESTATE = 8 And FLT_S = 'False' And (M30 > 0 OR P30 > 0) And " _
-                          & " (RECHK Is NULL Or RECHK = '') ")
-            Dim totalRC = SQL.RecordCount
+            ' SQL.AddParam("@bcodejob2", bcodejob)
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE bcodejob = @bcodejob " _
+                          & " And PACKENDTM Between '" & startTm & "' and '" & endTm & "' And CONESTATE = '15' And FLT_S = 'True' " _
+                          & " And (Defcone > '0' Or CONEBARLEY > '0' OR bcodejob = @bcodejob And PACKENDTM Between '" & startTm & "' and '" & endTm & "' And RECHKRESULT = 'B')  ")
+
+            Dim totalBS = SQL.RecordCount
+
+            'COUNT NUMBER OF DEFECT CONES
+            'SQL.AddParam("@bcodejob", bcodejob)
+            'SQL.ExecQuery("SELECT conenum FROM JOBS WHERE bcodejob = @bcodejob " _
+            '              & "And PACKCARTTM   Between '" & startTm & "' and '" & endTm & "' And (CONESTATE = 8 OR CONESTATE = 14) And FLT_S = 'False' " _
+            '              & " And Defcone > 0  ")
+            'Dim totalDF = SQL.RecordCount
+
+            ''COUNT NUMBER OF ReCHECK CONES
+            'SQL.AddParam("@bcodejob", bcodejob)
+            'SQL.ExecQuery("SELECT conenum FROM JOBS WHERE bcodejob = @bcodejob " _
+            '              & " And PACKCARTTM  Between '" & startTm & "' and '" & endTm & "' And CONESTATE = 8 And FLT_S = 'False' And (M30 > 0 OR P30 > 0) And " _
+            '              & " (RECHK Is NULL Or RECHK = '') ")
+            'Dim totalRC = SQL.RecordCount
 
             'COUNT NUMBER OR AL CONES
             SQL.AddParam("@bcodejob", bcodejob)
             SQL.ExecQuery("SELECT * FROM JOBS WHERE bcodejob = @bcodejob " _
-                          & " And PACKCARTTM  Between '" & startTm & "' and '" & endTm & "' And CONESTATE = 8 And FLT_S = 'False'  And RECHKRESULT = 'AL' ")
+                          & " And PACKENDTM  Between '" & startTm & "' and '" & endTm & "' And (CONESTATE = 8 or conestate = 15) And FLT_S = 'False'  And RECHK > '0' and RECHKRESULT = 'AL' " _
+                          & "And Defcone = '0' And CONEBARLEY = '0'   ")
+
 
             Dim totalAL = SQL.RecordCount.ToString
 
             'COUNT NUMBER OF AD CONES
             SQL.AddParam("@bcodejob", bcodejob)
-            SQL.ExecQuery("SELECT conenum FROM JOBS WHERE bcodejob = @bcodejob " _
-                          & " And PACKCARTTM  Between '" & startTm & "' and '" & endTm & "' And CONESTATE = 8 And FLT_S = 'False'  And RECHKRESULT = 'AD' ")
+            SQL.ExecQuery("SELECT * FROM JOBS WHERE bcodejob = @bcodejob " _
+                          & " And PACKENDTM  Between '" & startTm & "' and '" & endTm & "' And (CONESTATE = 8 or CONESTATE = 15) And FLT_S = 'False' And RECHK > 0  And RECHKRESULT = 'AD' " _
+                          & "And Defcone = '0' And CONEBARLEY = '0' ")
             Dim totalAD = SQL.RecordCount.ToString
 
 
@@ -307,9 +330,9 @@ Public Class frmDailyPackProduction
             MyPRExcel.Cells(count + 7, 13) = totalB 'GRADE B CONES
             MyPRExcel.Cells(count + 7, 14) = totalAS 'GRADE AS CONES
             MyPRExcel.Cells(count + 7, 15) = totalBS    'GRADE BS CONES
-            MyPRExcel.Cells(count + 7, 16) = totalDF  'GRADE DEFECT CONES
-            MyPRExcel.Cells(count + 7, 17) = totalRC 'ReCHECK CONES
-            MyPRExcel.Cells(count + 7, 18) = totalNC 'NOCONE 
+            'MyPRExcel.Cells(count + 7, 16) = totalDF  'GRADE DEFECT CONES
+            ' MyPRExcel.Cells(count + 7, 17) = totalRC 'ReCHECK CONES
+            'MyPRExcel.Cells(count + 7, 18) = totalNC 'NOCONE 
 
             tot_carts = tot_carts + totalcarts
             A_Master = A_Master + totalA
@@ -318,9 +341,9 @@ Public Class frmDailyPackProduction
             B_Master = B_Master + totalB
             AS_Master = AS_Master + totalAS
             BS_Master = BS_Master + totalBS
-            DEF_MAster = DEF_MAster + totalDF
-            ReC_Master = ReC_Master + totalRC
-            NoCone_Master = NoCone_Master + totalNC
+            ' DEF_MAster = DEF_MAster + totalDF
+            ' ReC_Master = ReC_Master + totalRC
+            ' NoCone_Master = NoCone_Master + totalNC
 
 
 
