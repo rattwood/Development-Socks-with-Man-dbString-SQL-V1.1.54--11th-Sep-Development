@@ -136,7 +136,7 @@ Partial Class frmDailyPackProduction
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(453, 328)
+        Me.ClientSize = New System.Drawing.Size(534, 328)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
@@ -148,6 +148,7 @@ Partial Class frmDailyPackProduction
         Me.Controls.Add(Me.DGVProdData)
         Me.Controls.Add(Me.DGVJobsData)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximumSize = New System.Drawing.Size(550, 367)
         Me.Name = "frmDailyPackProduction"
         Me.Text = "frmDailyPackProduction"
         CType(Me.DGVJobsData, System.ComponentModel.ISupportInitialize).EndInit()

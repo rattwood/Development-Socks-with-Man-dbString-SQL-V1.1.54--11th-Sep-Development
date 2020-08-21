@@ -50,7 +50,7 @@ Public Class frmDailyPackProduction
 
     'TOTAL Column results
 
-    Dim tot_carts, A_Master, AD_Master, AL_MAster, B_Master, AS_Master, BS_Master, DEF_MAster, ReC_Master, NoCone_Master, GT_Master As Integer
+    Dim tot_carts, A_Master, ReA_Master, AD_Master, AL_MAster, B_Master, AS_Master, BS_Master, DEF_MAster, ReC_Master, NoCone_Master, GT_Master As Integer
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Close()
@@ -83,26 +83,26 @@ Public Class frmDailyPackProduction
     Private Sub btnCreate_Click(sender As Object, e As EventArgs) Handles btnCreate.Click
 
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
-            Label2.Visible = True
-            Label2.Text = "Please wait Creating Stock to process Report"
-            processReport()
-            Me.Cursor = System.Windows.Forms.Cursors.Default
+        Label2.Visible = True
+        Label2.Text = "Please wait Creating Packing Report for " & Label5.Text
+        processReport()
+        Me.Cursor = System.Windows.Forms.Cursors.Default
         frmJobEntry.Show()
         Me.Close()
 
     End Sub
 
     Public Sub processReport()
-            'Excel Items
-            Dim savename As String
+        'Excel Items
+        Dim savename As String
 
 
         template = (My.Settings.dirTemplate & "\" & "Daily Production Report Packing Template.xlsx").ToString
 
         If template = "" Then
-                MsgBox("Please set template file location in Settings")
-                Exit Sub
-            End If
+            MsgBox("Please set template file location in Settings")
+            Exit Sub
+        End If
 
         Dim workbookPR As Excel.Workbook
         Dim worksheetPR As Excel.Worksheet
@@ -198,7 +198,7 @@ Public Class frmDailyPackProduction
                           & " And PACKENDTM Between '" & startTm & "' and '" & endTm & "' And CONESTATE = 15 And FLT_S = 'False' And RECHKRESULT = 'A' And DEFCONE = 0 And CONEBARLEY = 0 ")
 
 
-            totalA = totalA + SQL.RecordCount  'add recheck A to the A count
+            Dim totalReA = SQL.RecordCount  'add recheck A to the A count
 
 
 
@@ -325,19 +325,21 @@ Public Class frmDailyPackProduction
             MyPRExcel.Cells(count + 7, 7) = totalcarts 'NUMBER OF CARTS
             ' Dim CheeseFull = fullCount + reCheckCount
             MyPRExcel.Cells(count + 7, 8) = totalA  'GRADE A CONES
-            MyPRExcel.Cells(count + 7, 9) = totalMD  'GRADE MD CONES
-            MyPRExcel.Cells(count + 7, 10) = totalML 'GRADE ML CONES
-            MyPRExcel.Cells(count + 7, 11) = totalAD 'GRADE AD CONES
-            MyPRExcel.Cells(count + 7, 12) = totalAL 'GRADE AL CONES
-            MyPRExcel.Cells(count + 7, 13) = totalB 'GRADE B CONES
-            MyPRExcel.Cells(count + 7, 14) = totalAS 'GRADE AS CONES
-            MyPRExcel.Cells(count + 7, 15) = totalBS    'GRADE BS CONES
+            MyPRExcel.Cells(count + 7, 9) = totalReA  'GRADE ReCheck A's CONES
+            MyPRExcel.Cells(count + 7, 10) = totalMD  'GRADE MD CONES
+            MyPRExcel.Cells(count + 7, 11) = totalML 'GRADE ML CONES
+            MyPRExcel.Cells(count + 7, 12) = totalAD 'GRADE AD CONES
+            MyPRExcel.Cells(count + 7, 13) = totalAL 'GRADE AL CONES
+            MyPRExcel.Cells(count + 7, 14) = totalB 'GRADE B CONES
+            MyPRExcel.Cells(count + 7, 15) = totalAS 'GRADE AS CONES
+            MyPRExcel.Cells(count + 7, 16) = totalBS    'GRADE BS CONES
             'MyPRExcel.Cells(count + 7, 16) = totalDF  'GRADE DEFECT CONES
             ' MyPRExcel.Cells(count + 7, 17) = totalRC 'ReCHECK CONES
             'MyPRExcel.Cells(count + 7, 18) = totalNC 'NOCONE 
 
             tot_carts = tot_carts + totalcarts
             A_Master = A_Master + totalA
+            ReA_Master = ReA_Master + totalReA
             AD_Master = AD_Master + totalAD
             AL_MAster = AL_MAster + totalAL
             B_Master = B_Master + totalB
@@ -352,7 +354,7 @@ Public Class frmDailyPackProduction
 
         Next
 
-        GT_Master = A_Master + AD_Master + AL_MAster + B_Master + AS_Master + BS_Master + DEF_MAster + ReC_Master + NoCone_Master
+        GT_Master = A_Master + ReA_Master + AD_Master + AL_MAster + B_Master + AS_Master + BS_Master
 
         'fILL IN cOLUMN TOTALS
 
@@ -389,16 +391,17 @@ Public Class frmDailyPackProduction
 
         MyPRExcel.Cells(total_line, 7).value = tot_carts
         MyPRExcel.Cells(total_line, 8).value = A_Master
-        MyPRExcel.Cells(total_line, 9).value = "0"
+        MyPRExcel.Cells(total_line, 9).value = ReA_Master
         MyPRExcel.Cells(total_line, 10).value = "0"
-        MyPRExcel.Cells(total_line, 11).value = AD_Master
-        MyPRExcel.Cells(total_line, 12).value = AL_MAster
-        MyPRExcel.Cells(total_line, 13).value = B_Master
-        MyPRExcel.Cells(total_line, 14).value = AS_Master
-        MyPRExcel.Cells(total_line, 15).value = BS_Master
-        MyPRExcel.Cells(total_line, 16).value = DEF_MAster
-        MyPRExcel.Cells(total_line, 17).value = ReC_Master
-        MyPRExcel.Cells(total_line, 18).value = NoCone_Master
+        MyPRExcel.Cells(total_line, 11).value = "0"
+        MyPRExcel.Cells(total_line, 12).value = AD_Master
+        MyPRExcel.Cells(total_line, 13).value = AL_MAster
+        MyPRExcel.Cells(total_line, 14).value = B_Master
+        MyPRExcel.Cells(total_line, 15).value = AS_Master
+        MyPRExcel.Cells(total_line, 16).value = BS_Master
+        '  MyPRExcel.Cells(total_line, 17).value = DEF_MAster
+        ' MyPRExcel.Cells(total_line, 18).value = ReC_Master
+        '  MyPRExcel.Cells(total_line, 19).value = NoCone_Master
 
 
 
