@@ -24,10 +24,10 @@ Public Class frmProdStockWork
 
 
 
-    Private jobcount As Integer = Nothing
-    Private count As Integer = Nothing
-    Public startDate As String
-    Public endDate As String
+    Dim jobcount As Integer = Nothing
+    Dim count As Integer = Nothing
+    Dim startDate As String
+    Dim endDate As String
 
 
     Dim sp_nums As String
@@ -39,6 +39,19 @@ Public Class frmProdStockWork
     'THIS INITIATES WRITING TO ERROR LOG
     Private writeerrorLog As New writeError
 
+    Private Sub frmProdStockWork_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        btnFullReport.Visible = True
+
+        startDate = Date.Today.AddDays(-3).ToString("yyyy-MM-dd") & " 00:00:00.000"
+        endDate = Date.Today.ToString("yyyy-MM-dd") & " 23:59:59.997"
+
+
+        Dim tmpStart As String = Date.Today.AddDays(-3).ToString("dd-MM-yyyy")
+        Dim tmpEnd As String = Date.Today.ToString("dd-MM-yyyy")
+
+        lblSearchRange.Text = "Search  is from " & tmpStart & " to " & tmpEnd
+
+    End Sub
 
 
     Public Sub processReport()
@@ -54,23 +67,19 @@ Public Class frmProdStockWork
         End If
 
         Dim workbookWR As Excel.Workbook
-        Dim startDate = Date.Today.ToString("yyyy-MM-dd") & " 23:59:59.997"
-        Dim endDate = Date.Today.AddDays(-3).tostring("yyyy-MM-dd") & " 00:00:00.000"
+        Dim endDate = Date.Today.ToString("yyyy-MM-dd") & " 23:59:59.997"
+        Dim startDate = Date.Today.AddDays(-3).ToString("yyyy-MM-dd") & " 00:00:00.000"
 
 
-
-        If My.Settings.debugSet Then
-            Label2.Visible = True
-            Label3.Visible = True
-            Label2.Text = startDate
-            Label3.Text = endDate
-        End If
 
         savename = (My.Settings.dirPackReports & "\" & "StockWorkFullReport" & "_" & Date.Today.ToString("dd_MM_yyy") & ".xlsx").ToString
 
 
         'GET LIST OF PRODUCTS TO BE PROCESSED AS OF NOW
-        SQL.ExecQuery("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM FROM JOBS WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' ")
+        '  SQL.ExecQuery("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM FROM JOBS WHERE SORTENDTM Between '" & startDate & "' And '" & endDate & "' ")
+
+        SQL.ExecQuery("SELECT DISTINCT a.PRNUM, a.PRODNAME, a.MERGENUM, b.PRODWEIGHT " _
+                       & "FROM JOBS a INNER JOIN product b on a.prnum = b.prnum WHERE a.SORTENDTM Between '" & startDate & "' And '" & endDate & "' Order by a.PRNUM ")
 
         jobcount = SQL.RecordCount
 
@@ -105,10 +114,26 @@ Public Class frmProdStockWork
         'SERIES OF COUNTS FROM DATABASE TO GET VALUES NEEDED FOR REPORT
         For count As Integer = 1 To jobcount 'DGVSort.Rows.Count
             prodnum = DGVNextJobsData.Rows(count - 1).Cells("PRNUM").Value.ToString
+            If Not IsDBNull(DGVNextJobsData.Rows(count - 1).Cells("PRODWEIGHT").Value) Then
+                prodWeight = DGVNextJobsData.Rows(count - 1).Cells("PRODWEIGHT").Value.ToString
+            Else
+                MsgBox("No Product Weight found, cannot continue" & vbCrLf & "Please ask someone to check product " & prodName & vbCrLf & "Has a weight value")
+                DGVPackWeight.ClearSelection()
+                workbookWR.Close()
+                MyWRExcel.Quit()
+                releaseObject(workbookWR)
+                releaseObject(MyWRExcel)
+                DGVOutputData.Dispose()
+                DGVNextJobsData.Dispose()
+                DGVPackWeight.Dispose()
+                Exit Sub
+            End If
+
+
 
             'COUNT NUMBER OF CONES THAT ARE FULL INCLUDING WASTE OR COLOUR WASTE CHEESE
             'SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And  PRNUM = '" & prodnum & "' And CONESTATE Between  5 and  14 And FLT_S = 'False' AND PACKENDTM IS NULL")
-            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And  PRNUM = '" & prodnum & "' And CONESTATE Between  5 and  14 And FLT_S = 'False' and SHORTCONE = 0 And FLT_W = 'False' And COLWASTE = 0 And  (RECHK = 0 OR RECHK Is Null) AND MISSCONE = 0 And PACKENDTM IS NULL")
+            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & startDate & "' And '" & endDate & "' And  PRNUM = '" & prodnum & "' And CONESTATE Between  5 and  14 And FLT_S = 'False' and SHORTCONE = 0 And FLT_W = 'False' And COLWASTE = 0 And  (RECHK = 0 OR RECHK Is Null) AND MISSCONE = 0 And PACKENDTM IS NULL")
 
             fullCount = SQL.RecordCount
 
@@ -126,7 +151,7 @@ Public Class frmProdStockWork
 
 
             'COUNT NUMBER OF CONE THAT ARE SHORT
-            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And PRNUM = '" & prodnum & "' And CONESTATE Between  5 And  14 and FLT_S = 'TRUE' And FLT_W = 'False' And COLWASTE = 0  And PACKENDTM IS NULL ")
+            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & startDate & "' And '" & endDate & "' And PRNUM = '" & prodnum & "' And CONESTATE Between  5 And  14 and FLT_S = 'TRUE' And FLT_W = 'False' And COLWASTE = 0  And PACKENDTM IS NULL ")
             shortCone = SQL.RecordCount
 
             If shortCone > 0 And tblOpen = 0 Then
@@ -144,7 +169,7 @@ Public Class frmProdStockWork
 
 
             'COUNT ReCheck
-            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And PRNUM = '" & prodnum & "' And  RECHK Between 2 and 4 And  PACKENDTM IS NULL")
+            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & startDate & "' And '" & endDate & "' And PRNUM = '" & prodnum & "' And  RECHK Between 2 and 4 And  PACKENDTM IS NULL")
             reCheckCount = SQL.RecordCount
 
 
@@ -163,26 +188,26 @@ Public Class frmProdStockWork
 
 
 
-            'GET PRODUCT WEIGHT INFORMATION
-            SQL.ExecQuery("SELECT * FROM Product WHERE PRNUM = '" & prodnum & "' ")
+            ''GET PRODUCT WEIGHT INFORMATION
+            'SQL.ExecQuery("SELECT * FROM Product WHERE PRNUM = '" & prodnum & "' ")
 
-            'IF JOBS HAVE BEEN FOUND THEN CREATE A SORTED LIST OF THESE JOBS
-            If SQL.RecordCount > 0 Then
-                'LOAD THE DATA FROM dB IN TO THE DATAGRID
-                DGVPackWeight.DataSource = SQL.SQLDS.Tables(0)
-                DGVPackWeight.Rows(0).Selected = True
+            ''IF JOBS HAVE BEEN FOUND THEN CREATE A SORTED LIST OF THESE JOBS
+            'If SQL.RecordCount > 0 Then
+            '    'LOAD THE DATA FROM dB IN TO THE DATAGRID
+            '    DGVPackWeight.DataSource = SQL.SQLDS.Tables(0)
+            '    DGVPackWeight.Rows(0).Selected = True
 
-                'SORT GRIDVIEW IN TO CORRECT JOB SEQUENCE
-                DGVPackWeight.Sort(DGVPackWeight.Columns("PRODNAME"), ListSortDirection.Ascending)  'sorts On cone number
+            '    'SORT GRIDVIEW IN TO CORRECT JOB SEQUENCE
+            '    DGVPackWeight.Sort(DGVPackWeight.Columns("PRODNAME"), ListSortDirection.Ascending)  'sorts On cone number
 
-            Else
-                MsgBox("No Jobs Found, Please select new date range")
-                DGVPackWeight.ClearSelection()
-                Exit Sub
-            End If
+            'Else
+            '    MsgBox("No Jobs Found, Please select new date range")
+            '    DGVPackWeight.ClearSelection()
+            '    Exit Sub
+            'End If
 
 
-            prodWeight = DGVPackWeight.Rows(0).Cells("PRODWEIGHT").Value.ToString
+            'prodWeight = DGVPackWeight.Rows(0).Cells("PRODWEIGHT").Value.ToString
 
 
             'MsgBox("Total =" & conecount & "  Full =" & fullCount & "   ReCheck =" & reCheckCount & "   Short =" & shortCone & "  Missount =" & missCone & "  Waste =" & wasteCone)
@@ -289,22 +314,17 @@ Public Class frmProdStockWork
             Exit Sub
         End If
 
-        Dim workbookWR As Excel.Workbook
-        Dim startDate = Date.Today
-        Dim endDate = Date.Today.AddDays(-3)
 
-        If My.Settings.debugSet Then
-            Label2.Visible = True
-            Label3.Visible = True
-            Label2.Text = startDate
-            Label3.Text = endDate
-        End If
 
         savename = (My.Settings.dirPackReports & "\" & "StockWorkShortReport" & "_" & Date.Today.ToString("dd_MM_yyy") & ".xlsx").ToString
 
 
         'GET LIST OF PRODUCTS TO BE PROCESSED AS OF NOW
-        SQL.ExecQuery("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM FROM JOBS WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "'  ") ' And CONESTATE Between 5 And  9 And (PACKCARTTM is Null Or RECHK between 2 and 4)
+        'SQL.ExecQuery("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM FROM JOBS WHERE SORTENDTM Between '" & startDate & "' And '" & endDate & "'  ") ' And CONESTATE Between 5 And  9 And (PACKCARTTM is Null Or RECHK between 2 and 4)
+
+        SQL.ExecQuery("SELECT DISTINCT a.PRNUM, a.PRODNAME, a.MERGENUM, b.PRODWEIGHT " _
+                       & "FROM JOBS a INNER JOIN product b on a.prnum = b.prnum WHERE a.SORTENDTM Between '" & startDate & "' And '" & endDate & "' Order by a.PRNUM ")
+
 
         jobcount = SQL.RecordCount
 
@@ -317,16 +337,16 @@ Public Class frmProdStockWork
             DGVNextJobsData.Rows(0).Selected = True
 
             'SORT GRIDVIEW IN TO CORRECT JOB SEQUENCE
-            DGVNextJobsData.Sort(DGVNextJobsData.Columns("PRNUM"), ListSortDirection.Ascending)  'sorts On Product Number
+            '   DGVNextJobsData.Sort(DGVNextJobsData.Columns("PRNUM"), ListSortDirection.Ascending)  'sorts On Product Number
 
         Else
-            MsgBox("No Jobs Found, Please select new date range")
+            MsgBox("No Jobs Found for this date range")
             DGVNextJobsData.ClearSelection()
             Exit Sub
         End If
 
 
-
+        Dim workbookWR As Excel.Workbook
         workbookWR = MyWRExcel.Workbooks.Open(template)
 
         Dim lineCount As Integer = 0
@@ -339,9 +359,27 @@ Public Class frmProdStockWork
         For count As Integer = 1 To jobcount 'DGVSort.Rows.Count
             prodnum = DGVNextJobsData.Rows(count - 1).Cells("PRNUM").Value.ToString
 
+            If Not IsDBNull(DGVNextJobsData.Rows(count - 1).Cells("PRODWEIGHT").Value) Then
+                prodWeight = DGVNextJobsData.Rows(count - 1).Cells("PRODWEIGHT").Value.ToString
+            Else
+                MsgBox("No Product Weight found, cannot continue" & vbCrLf & "Please ask someone to check product " & prodName & vbCrLf & "Has a weight value")
+                DGVPackWeight.ClearSelection()
+                workbookWR.Close()
+                MyWRExcel.Quit()
+                releaseObject(workbookWR)
+                releaseObject(MyWRExcel)
+                DGVOutputData.Dispose()
+                DGVNextJobsData.Dispose()
+                DGVPackWeight.Dispose()
+                Exit Sub
+            End If
+
+
+
+
             'COUNT NUMBER OF CONES THAT ARE FULL
             'SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And  PRNUM = '" & prodnum & "' And CONESTATE Between  5 and  9 And FLT_S = 'False' And PACKCARTTM IS NULL ")
-            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And  PRNUM = '" & prodnum & "' And CONESTATE Between  5 and  9 And FLT_S = 'False' and SHORTCONE = 0 And FLT_W = 'False' And COLWASTE = 0 And  (RECHK = 0 OR RECHK Is Null) AND MISSCONE = 0 And PACKCARTTM IS NULL")
+            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & startDate & "' And '" & endDate & "' And  PRNUM = '" & prodnum & "' And CONESTATE Between  5 and  9 And FLT_S = 'False' and SHORTCONE = 0 And FLT_W = 'False' And COLWASTE = 0 And  (RECHK = 0 OR RECHK Is Null) AND MISSCONE = 0 And PACKCARTTM IS NULL")
             fullCount = SQL.RecordCount
 
 
@@ -364,7 +402,7 @@ Public Class frmProdStockWork
 
 
             'COUNT NUMBER OF CONE THAT ARE SHORT
-            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And PRNUM = '" & prodnum & "' And CONESTATE Between  5 And  9 and (FLT_S = 'TRUE' Or SHORTCONE > 0) And FLT_W = 'False' And COLWASTE = 0  And  PACKCARTTM IS NULL ")
+            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & startDate & "' And '" & endDate & "' And PRNUM = '" & prodnum & "' And CONESTATE Between  5 And  9 and (FLT_S = 'TRUE' Or SHORTCONE > 0) And FLT_W = 'False' And COLWASTE = 0  And  PACKCARTTM IS NULL ")
             shortCone = SQL.RecordCount
 
             If shortCone > 0 And tblOpen = 0 Then
@@ -382,7 +420,7 @@ Public Class frmProdStockWork
 
 
             'COUNT ReCheck
-            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & endDate & "' And '" & startDate & "' And PRNUM = '" & prodnum & "' And  RECHK Between 2 and 4 And  PACKENDTM IS NULL")
+            SQL.ExecQuery("SELECT * FROM jobs WHERE SORTENDTM Between '" & startDate & "' And '" & endDate & "' And PRNUM = '" & prodnum & "' And  RECHK Between 2 and 4 And  PACKENDTM IS NULL")
             reCheckCount = SQL.RecordCount
 
             If reCheckCount > 0 And tblOpen = 0 Then
@@ -399,26 +437,33 @@ Public Class frmProdStockWork
             prodName = DGVOutputData.Rows(0).Cells("PRODNAME").Value.ToString
 
 
-            'GET PRODUCT WEIGHT INFORMATION
-            SQL.ExecQuery("SELECT * FROM Product WHERE PRNUM = '" & prodnum & "' ")
+            ''GET PRODUCT WEIGHT INFORMATION
+            'SQL.ExecQuery("SELECT * FROM Product WHERE PRNUM = '" & prodnum & "' ")
 
-            'IF JOBS HAVE BEEN FOUND THEN CREATE A SORTED LIST OF THESE JOBS
-            If SQL.RecordCount > 0 Then
-                'LOAD THE DATA FROM dB IN TO THE DATAGRID
-                DGVPackWeight.DataSource = SQL.SQLDS.Tables(0)
-                DGVPackWeight.Rows(0).Selected = True
+            ''IF JOBS HAVE BEEN FOUND THEN CREATE A SORTED LIST OF THESE JOBS
+            'If SQL.RecordCount > 0 Then
+            '    'LOAD THE DATA FROM dB IN TO THE DATAGRID
+            '    DGVPackWeight.DataSource = SQL.SQLDS.Tables(0)
+            '    DGVPackWeight.Rows(0).Selected = True
 
-                'SORT GRIDVIEW IN TO CORRECT JOB SEQUENCE
-                DGVPackWeight.Sort(DGVPackWeight.Columns("PRODNAME"), ListSortDirection.Ascending)  'sorts On cone number
+            '    'SORT GRIDVIEW IN TO CORRECT JOB SEQUENCE
+            '    DGVPackWeight.Sort(DGVPackWeight.Columns("PRODNAME"), ListSortDirection.Ascending)  'sorts On cone number
 
-            Else
-                MsgBox("No Jobs Found, Please select new date range")
-                DGVPackWeight.ClearSelection()
-                Exit Sub
-            End If
+            'Else
+            '    MsgBox("No Jobs Found, Please select new date range")
+            '    DGVPackWeight.ClearSelection()
+            '    workbookWR.Close()
+            '    MyWRExcel.Quit()
+            '    releaseObject(workbookWR)
+            '    releaseObject(MyWRExcel)
+            '    DGVOutputData.Dispose()
+            '    DGVNextJobsData.Dispose()
+            '    DGVPackWeight.Dispose()
+            '    Exit Sub
+            'End If
 
 
-            prodWeight = DGVPackWeight.Rows(0).Cells("PRODWEIGHT").Value.ToString
+            'prodWeight = DGVPackWeight.Rows(0).Cells("PRODWEIGHT").Value.ToString
 
 
 
@@ -522,14 +567,12 @@ Public Class frmProdStockWork
         End Try
     End Sub
 
-    Private Sub frmProdStockWork_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        btnFullReport.Visible = True
-    End Sub
+
 
     Private Sub btnShortReport_Click(sender As Object, e As EventArgs) Handles btnShortReport.Click
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         lblmessage.Visible = True
-        lblMessage.Text = "Please Wait Creating Sort and Colour" & vbCrLf & "    Work in Progress Report"
+        lblMessage.Text = "Please Wait Creating Sort and Colour" & vbCrLf & " Work in Progress Report"
         processShortReport()
         lblmessage.Visible = False
         Me.Cursor = System.Windows.Forms.Cursors.Default
@@ -552,7 +595,7 @@ Public Class frmProdStockWork
 
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
         frmJobEntry.Show()
         Me.Close()
     End Sub

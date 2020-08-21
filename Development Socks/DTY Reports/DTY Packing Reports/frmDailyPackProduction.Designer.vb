@@ -150,7 +150,8 @@ Partial Class frmDailyPackProduction
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximumSize = New System.Drawing.Size(550, 367)
         Me.Name = "frmDailyPackProduction"
-        Me.Text = "frmDailyPackProduction"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Single Day Packing Report"
         CType(Me.DGVJobsData, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DGVProdData, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DGVJobData, System.ComponentModel.ISupportInitialize).EndInit()

@@ -115,9 +115,11 @@ Public Class frmDailyPackProduction
         Dim startTm As String = searchdate & "00:00:00.000"
         Dim endTm As String = searchdate & "23:59:59.997"
 
-        'GET LIST OF PRODUCTS TO BE PROCESSED AS OF NOW
-        ' SQL.ExecQuery("SELECT DISTINCT PRNUM,PRODNAME,MERGENUM,DOFFNUM,MCNUM,bcodejob FROM JOBS WHERE PACKENDTM Between '" & startTm & "' and '" & endTm & "' Order by PRODNAME ")
 
+
+
+
+        'GET LIST OF PRODUCTS TO BE PROCESSED AS OF NOW
         SQL.ExecQuery("SELECT DISTINCT a.PRNUM, a.PRODNAME, a.MERGENUM, a.DOFFNUM, a.MCNUM, a.bcodejob, a.mcname, b.PRODWEIGHT FROM JOBS a INNER JOIN product b on a.prnum = b.prnum WHERE PACKENDTM Between '" & startTm & "' and '" & endTm & "' Order by a.PRODNAME ")
 
 
@@ -134,7 +136,6 @@ Public Class frmDailyPackProduction
             DGVJobsData.ClearSelection()
             Exit Sub
         End If
-
 
 
 
@@ -178,10 +179,8 @@ Public Class frmDailyPackProduction
             Dim totalcarts = SQL.RecordCount
 
 
-            'COUNT NUMBER OF MISSING CONES
-            'SQL.AddParam("@bcodejob", bcodejob)
-            'SQL.ExecQuery("SELECT misscone FROM JOBS WHERE bcodejob = @bcodejob And PACKCARTTM  Between  '" & startTm & "' and '" & endTm & "' And MISSCONE > 0 ")
-            'Dim totalNC = SQL.RecordCount
+
+
 
             'COUNT NUMBER OF A CONES
             SQL.AddParam("@bcodejob", bcodejob)
@@ -191,6 +190,8 @@ Public Class frmDailyPackProduction
 
 
             Dim totalA = SQL.RecordCount
+
+
 
             'COUNT NUMBER OF ReCheck A CONES
             SQL.AddParam("@bcodejob", bcodejob)
@@ -232,19 +233,9 @@ Public Class frmDailyPackProduction
 
             Dim totalBS = SQL.RecordCount
 
-            'COUNT NUMBER OF DEFECT CONES
-            'SQL.AddParam("@bcodejob", bcodejob)
-            'SQL.ExecQuery("SELECT conenum FROM JOBS WHERE bcodejob = @bcodejob " _
-            '              & "And PACKCARTTM   Between '" & startTm & "' and '" & endTm & "' And (CONESTATE = 8 OR CONESTATE = 14) And FLT_S = 'False' " _
-            '              & " And Defcone > 0  ")
-            'Dim totalDF = SQL.RecordCount
 
-            ''COUNT NUMBER OF ReCHECK CONES
-            'SQL.AddParam("@bcodejob", bcodejob)
-            'SQL.ExecQuery("SELECT conenum FROM JOBS WHERE bcodejob = @bcodejob " _
-            '              & " And PACKCARTTM  Between '" & startTm & "' and '" & endTm & "' And CONESTATE = 8 And FLT_S = 'False' And (M30 > 0 OR P30 > 0) And " _
-            '              & " (RECHK Is NULL Or RECHK = '') ")
-            'Dim totalRC = SQL.RecordCount
+
+
 
             'COUNT NUMBER OR AL CONES
             SQL.AddParam("@bcodejob", bcodejob)
@@ -255,6 +246,8 @@ Public Class frmDailyPackProduction
 
             Dim totalAL = SQL.RecordCount.ToString
 
+
+
             'COUNT NUMBER OF AD CONES
             SQL.AddParam("@bcodejob", bcodejob)
             SQL.ExecQuery("SELECT * FROM JOBS WHERE bcodejob = @bcodejob " _
@@ -264,55 +257,11 @@ Public Class frmDailyPackProduction
 
 
 
-            ''GET PRODUCT WEIGHT INFORMATION
-            'SQL.ExecQuery("SELECT * FROM Product WHERE PRNUM = '" & prodNum & "' Order by PRODNAME ")
-
-            ''IF JOBS HAVE BEEN FOUND THEN CREATE A SORTED LIST OF THESE JOBS
-            'If SQL.RecordCount > 0 Then
-            '    'LOAD THE DATA FROM dB IN TO THE DATAGRID
-            '    DGVProdData.DataSource = SQL.SQLDS.Tables(0)
-
-
-
-            '    prodWeight = DGVProdData.Rows(0).Cells("PRODWEIGHT").Value.ToString
-            'Else
-
-            '    MsgBox("Cannont complete report " & vbCrLf & "no weight information for Product Number " & prodNum & vbCrLf & "Product Name " & prodName)
-
-            '    DGVProdData.ClearSelection()
-            '    Exit Sub
-            'End If
-
-
-            'prodWeight = DGVProdData.Rows(0).Cells("PRODWEIGHT").Value.ToString
-
-
-
-            ''GET MACHINE NAME
-            'SQL.ExecQuery("SELECT * FROM Jobs WHERE PRNUM = '" & prodNum & "'  And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And " _
-            '              & " PACKENDTM Between '" & startTm & "' and '" & endTm & "' and CONESTATE = 15 OR PRNUM = '" & prodNum & "'  And MCNUM = '" & mcNum & "' And " _
-            '              & " MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And PACKENDTM Between '" & startTm & "' and '" & endTm & "' and CONESTATE = 8 OR " _
-            '              & " PRNUM = '" & prodNum & "'  And MCNUM = '" & mcNum & "' And MERGENUM = '" & mergeNum & "' and DOFFNUM = '" & doffNum & "' And " _
-            '              & "PACKCARTTM Between  '" & startTm & "' and '" & endTm & "' and CONESTATE = 14 Order By PRODNAME")
-
-            ''IF JOBS HAVE BEEN FOUND THEN CREATE A SORTED LIST OF THESE JOBS
-            'If SQL.RecordCount > 0 Then
-            '    'LOAD THE DATA FROM dB IN TO THE DATAGRID
-            '    DGVJobData.DataSource = SQL.SQLDS.Tables(0)
-
-
-            'Else
-            '    'MsgBox("No Jobs Found, Please select new date range")
-            '    DGVJobData.ClearSelection()
-            '    Continue For
-            'End If
-            'Dim mcName As String = DGVJobData.Rows(0).Cells("MCNAME").Value.ToString
 
 
             Dim totalMD = 0 'GRADE MD CONES
             Dim totalML = 0 'GRADE ML CONES
-            'Dim totalAD = 0 'GRADE AD CONES
-            ' Dim totalAL = 0 'GRADE AL CONES
+
 
             lineCount = lineCount + 1
 
@@ -353,6 +302,9 @@ Public Class frmDailyPackProduction
 
 
         Next
+
+
+
 
         GT_Master = A_Master + ReA_Master + AD_Master + AL_MAster + B_Master + AS_Master + BS_Master
 
@@ -449,11 +401,13 @@ Public Class frmDailyPackProduction
         End Try
 
 
+
+
         DGVJobsData.Dispose()
         DGVJobData.Dispose()
         DGVProdData.Dispose()
 
-
+        'Write total time
 
 
         'CLEAN UP
