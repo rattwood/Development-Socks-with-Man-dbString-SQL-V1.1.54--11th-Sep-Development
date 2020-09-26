@@ -53,13 +53,13 @@ Partial Class frmSTDColChk
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnResults = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.rechkinx = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bocdecone = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.rechk1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.rechkGrade = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.rechkdef = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -111,7 +111,7 @@ Partial Class frmSTDColChk
         '
         'btnFinish
         '
-        Me.btnFinish.Location = New System.Drawing.Point(760, 587)
+        Me.btnFinish.Location = New System.Drawing.Point(836, 533)
         Me.btnFinish.Name = "btnFinish"
         Me.btnFinish.Size = New System.Drawing.Size(87, 23)
         Me.btnFinish.TabIndex = 62
@@ -121,7 +121,7 @@ Partial Class frmSTDColChk
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(908, 587)
+        Me.btnCancel.Location = New System.Drawing.Point(822, 737)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(87, 23)
         Me.btnCancel.TabIndex = 61
@@ -312,24 +312,6 @@ Partial Class frmSTDColChk
         Me.DataGridView1.Size = New System.Drawing.Size(616, 773)
         Me.DataGridView1.TabIndex = 37
         '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(910, 477)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(13, 13)
-        Me.Label5.TabIndex = 69
-        Me.Label5.Text = "0"
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(824, 477)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(71, 13)
-        Me.Label8.TabIndex = 68
-        Me.Label8.Text = "Total BARRE"
-        '
         'rechkinx
         '
         Me.rechkinx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
@@ -406,6 +388,24 @@ Partial Class frmSTDColChk
         Me.rechkdef.Name = "rechkdef"
         Me.rechkdef.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.rechkdef.Width = 200
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(910, 477)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(13, 13)
+        Me.Label5.TabIndex = 69
+        Me.Label5.Text = "0"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(824, 477)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(71, 13)
+        Me.Label8.TabIndex = 68
+        Me.Label8.Text = "Total BARRE"
         '
         'frmSTDColChk
         '
