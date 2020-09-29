@@ -253,6 +253,8 @@ Public Class frmSTDColChk
 
     Private Sub btnFinish_Click(sender As Object, e As EventArgs) Handles btnFinish.Click
 
+        Dim YorN As String
+
         Dim finishResult As DialogResult = MessageBox.Show("Yes เพื่อบันทึกและจบกระบวนการเลือก Standard " _
                                                            & vbCrLf & vbCrLf &
                                                            "No เพื่อบันทึกและเข้ากระบวนการเลือก Standard รอบต่อไป " _
@@ -263,10 +265,13 @@ Public Class frmSTDColChk
                                                             MessageBoxIcon.Question)
 
 
-        Select Case finishResult
-            Case "Cancel"
-                Exit Sub
-        End Select
+        If finishResult = DialogResult.Cancel Then
+            Exit Sub
+        ElseIf finishResult = DialogResult.Yes Then
+            YorN = "Y"
+        ElseIf finishResult = DialogResult.No Then
+            YorN = "N"
+        End If
 
 
         Dim today As String = DateAndTime.Today
@@ -321,33 +326,33 @@ Public Class frmSTDColChk
             Select Case DataGridView1.Rows(i - 1).Cells(2).Value
                 Case "OK"
 
-                    If finishResult = "Y" Then   'If Yes set to finished and std cheese
+                    If YorN = "Y" Then   'If Yes set to finished and std cheese
                         frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 8
                     Else
                         frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = tmpstate + 1
                     End If
 
                 Case "-"
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 10
-                        frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8  'RESETS CHEESE TO STATE SO CREATE RECHECK CAN FIND IT
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDCHEESE").Value = DBNull.Value
-                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = DBNull.Value
-                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = DBNull.Value
-                        frmDGV.DGVdata.Rows(i - 1).Cells("M30").Value = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value
-                        Case "+"
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 10
-                        frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8  'RESETS CHEESE TO STATE SO CREATE RECHECK CAN FIND IT
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDCHEESE").Value = DBNull.Value
-                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = DBNull.Value
-                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = DBNull.Value
-                        frmDGV.DGVdata.Rows(i - 1).Cells("P30").Value = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value
-                        Case "@"
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = DBNull.Value
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDCHEESE").Value = DBNull.Value
-                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = DBNull.Value
-                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = DBNull.Value
-                        frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8  'RESETS CHEESE TO STATE SO CREATE RECHECK CAN FIND IT
-                        frmDGV.DGVdata.Rows(i - 1).Cells("CONEBARLEY").Value = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value
+                    frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 10
+                    frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8  'RESETS CHEESE TO STATE SO CREATE RECHECK CAN FIND IT
+                    frmDGV.DGVdata.Rows(i - 1).Cells("STDCHEESE").Value = DBNull.Value
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = DBNull.Value
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = DBNull.Value
+                    frmDGV.DGVdata.Rows(i - 1).Cells("M30").Value = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value
+                Case "+"
+                    frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 10
+                    frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8  'RESETS CHEESE TO STATE SO CREATE RECHECK CAN FIND IT
+                    frmDGV.DGVdata.Rows(i - 1).Cells("STDCHEESE").Value = DBNull.Value
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = DBNull.Value
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = DBNull.Value
+                    frmDGV.DGVdata.Rows(i - 1).Cells("P30").Value = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value
+                Case "@"
+                    frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = DBNull.Value
+                    frmDGV.DGVdata.Rows(i - 1).Cells("STDCHEESE").Value = DBNull.Value
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = DBNull.Value
+                    frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = DBNull.Value
+                    frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = 8  'RESETS CHEESE TO STATE SO CREATE RECHECK CAN FIND IT
+                    frmDGV.DGVdata.Rows(i - 1).Cells("CONEBARLEY").Value = frmDGV.DGVdata.Rows(i - 1).Cells("CONENUM").Value
 
             End Select
 
