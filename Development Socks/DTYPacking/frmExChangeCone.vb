@@ -147,6 +147,7 @@ Public Class frmExChangeCone
     Private Sub checkBcode()
 
 
+
         frmJobEntry.LExecQuery("SELECT * FROM jobs WHERE BCODECONE = '" & chkBcode & "' ORDER BY CONENUM ")
 
 
@@ -158,7 +159,7 @@ Public Class frmExChangeCone
                 Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(frmJobEntry.LDA)
 
                 'SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
+                'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
 
                 dcState = frmDGV.DGVdata.Rows(0).Cells("CONESTATE").Value
                 dcCarton = frmDGV.DGVdata.Rows(0).Cells("CARTONNUM").Value
@@ -171,7 +172,7 @@ Public Class frmExChangeCone
 
                 End If
                 If removeSelected Then
-                    removeCone = 2
+                    'removeCone = 2
                     btnShort.Visible = True
                     btnShort.Enabled = True
                     btnDefect.Visible = True
@@ -181,7 +182,7 @@ Public Class frmExChangeCone
                 End If
                 removeCone = 2
             Else
-                MsgBox("Defect Cheese does Not Exist")
+                    MsgBox("Cheese to remove, cannot be found")
                 removeCone = 0
                 txtRemoveCone.Clear()
                 txtRemoveCone.Focus()
@@ -403,6 +404,8 @@ Public Class frmExChangeCone
 
             'UPDATE DEFECTIVE CONE INFORMATION
             If defectCone = 1 Then
+
+
 
 
                 frmJobEntry.LExecQuery("UPDATE jobs SET CONESTATE = '14' WHERE BCODECONE = '" & txtRemoveCone.Text & "' ")

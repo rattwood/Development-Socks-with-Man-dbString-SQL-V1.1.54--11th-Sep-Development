@@ -247,13 +247,10 @@ Public Class frmConeSearch
                         Else
                             txtBoxGrad.Text = "Grade A"
                         End If
-
                 End Select
             End If
             'SHORT
             If DataGridView1.Rows(0).Cells("SHORTCONE").Value > "0" Or DataGridView1.Rows(0).Cells("FLT_S").Value = True Then txtBoxShort.Text = "Yes" Else txtBoxShort.Text = "No"
-
-
 
             'ReCHECK DISPLAYS
             If Not IsDBNull(DataGridView1.Rows(0).Cells("RECHK").Value) Then
@@ -318,9 +315,6 @@ Public Class frmConeSearch
             'RECHECK GRADES
             If Not IsDBNull(DataGridView1.Rows(0).Cells("RECHKRESULT").Value) Then txtReChkGrade.Text = DataGridView1.Rows(0).Cells("RECHKRESULT").Value Else txtReChkGrade.Text = "-"
 
-
-
-
             'ReCheck DEFECTS
             If Not IsDBNull(DataGridView1.Rows(0).Cells("RECHKDEFCODE").Value) Then txtReChkDef.Text = "Yes" Else txtBoxDef.Text = "No"
 
@@ -343,14 +337,6 @@ Public Class frmConeSearch
             DataGridView1.Visible = True
 
         End If
-
-
-
-
-
-
-
-
 
     End Sub
 
