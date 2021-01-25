@@ -90,6 +90,8 @@ Public Class frmJobEntry
     Dim coneM50 As String = 0
     Dim coneP50 As String = 0
 
+    Public MDML, HHLL As String  'Identification is product is HHLL or MDML  grading methids
+
     'days to look back for cheeses to be packed
     Dim daysstring As Integer
 
@@ -215,10 +217,6 @@ Public Class frmJobEntry
         Dim chkBCode As String
         Dim chkBCode2 As String
 
-
-        'Routine to check Barcode is TRUE
-        'Check to see if PILOT Cheese, if it is force operatoer to select correct packing grade.
-
         If txtLotNumber.Text = "" Then
             MsgBox("Please scan Barcode")
             txtLotNumber.Clear()
@@ -324,8 +322,15 @@ Public Class frmJobEntry
             Exit Sub
         End Try
 
-        CreateJob()
+        'section to check product type is HHLL
+        'LAddParam("@prodnum", txtLotNumber.Text.Substring(2, 3))
+        'LExecQuery("select * from Product where prnum = @prodnum and PROD_HHLL is Not Null ")
 
+        'If LRecordCount > 0 Then
+
+        ' Else
+        CreateJob()
+        ' End If
 
     End Sub
 
@@ -580,10 +585,6 @@ Public Class frmJobEntry
 
 
 
-
-
-
-
             varMachineCode = machineCode
             varMachineName = machineName
             varProductCode = productCode
@@ -602,9 +603,6 @@ Public Class frmJobEntry
         End If
 
 
-
-
-
         If reCheck Or stdcheck Then
             dbBarcode = txtLotNumber.Text
             productCode = txtLotNumber.Text.Substring(0, 3)
@@ -615,7 +613,26 @@ Public Class frmJobEntry
             reCheckJob()
             Exit Sub
         Else
-            If My.Settings.chkUseColour Or My.Settings.chkUseSort Then CheckJob()
+            If My.Settings.chkUseColour Or My.Settings.chkUseSort Then
+
+                'Check Product Type HHLL or MDML
+                LAddParam("@prnum", productCode)
+                LExecQuery("Select * From PRODUCT where prnum = @prnum and prod_HHLL is Not Null")
+                If LRecordCount > 0 Then
+                    HHLL = "YES"
+                End If
+
+                If Not HHLL = "YES" Then
+                    LAddParam("@prnum", productCode)
+                    LExecQuery("Select * From PRODUCT where prnum = @prnum and prod_MDML = 'YES'")
+                    If LRecordCount > 0 Then
+                        MDML = "YES"
+                    End If
+                End If
+
+                CheckJob()
+
+            End If
         End If
 
         'THIS Selects "A" Packing Routine
@@ -687,10 +704,6 @@ Public Class frmJobEntry
                 LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
 
 
-
-
-
-
                 coneValUpdate = 1
 
                 frmCart1.Show()
@@ -706,14 +719,6 @@ Public Class frmJobEntry
 
             End If
         Else
-            'If My.Settings.chkUseColour Or My.Settings.chkUsePack Then
-            '    MsgBox("Job does not Exist, you must create new Job " & vbCrLf & " ไม่พบงานที่ทำ กรุณาสร้างงานใหม่")
-            '    txtLotNumber.Clear()
-            '    txtLotNumber.Focus()
-            '    Exit Sub
-            'End If
-
-
 
             If My.Settings.chkUseSort And machineCode = 29 And Not My.Settings.chkDisableCreate Then
                 PilCount()
@@ -741,8 +746,9 @@ Public Class frmJobEntry
             LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
             frmDGV.DGVdata.DataSource = LDS.Tables(0)
             frmDGV.DGVdata.Rows(0).Selected = True
-            frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
+
             frmCart1.Show()
+
 
             Me.Hide()
         End If
@@ -826,8 +832,7 @@ Public Class frmJobEntry
                 ElseIf My.Settings.chkUseColour Then
 
                     If stdcheck Then frmSTDColChk.Show() Else frmColReCheck.Show()
-                    'ElseIf My.Settings.chkUsePack Then
-                    '    nonAPacking()
+
                 End If
 
 
@@ -1130,7 +1135,7 @@ Public Class frmJobEntry
                 LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
                 frmDGV.DGVdata.DataSource = LDS.Tables(0)
                 frmDGV.DGVdata.Rows(0).Selected = True
-                frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  ' sorts On cone number
+                ' frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  ' sorts On cone number
                 frmCart1.Show()
 
                 If My.Settings.debugSet Then frmDGV.Show()
@@ -1180,7 +1185,21 @@ Public Class frmJobEntry
         End If
 
         Try
-            LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '9' and FLT_S = 'False'  ")
+
+            'Check Product Type HHLL or MDML
+            LAddParam("@prnum", productCode)
+                LExecQuery("Select * From PRODUCT where prnum = @prnum and prod_HHLL Is Not Null")
+                If LRecordCount > 0 Then
+                    HHLL = "YES"
+                End If
+
+
+            If Not HHLL = "YES" Then
+                LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '9' and FLT_S = 'False'  ")
+            Else
+                LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND HHLL Is NOT NULL  ")
+            End If
+
 
             If LRecordCount > 0 Then
                 LExecQuery("Select * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ORDER BY CONENUM")
