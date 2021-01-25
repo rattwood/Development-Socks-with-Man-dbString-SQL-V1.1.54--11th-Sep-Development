@@ -63,6 +63,31 @@ Partial Class frmJobEntry
         Me.Pilot6ChToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Pilot15ChToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Pilot20ChToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HDDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HDDToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HDToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HMMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HLLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SHDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SHMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SHLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SHBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LFullToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LDDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LMMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LLLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LBToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LSmallToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SLDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SLMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SLLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SLBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WasteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripTextBox2 = New System.Windows.Forms.ToolStripTextBox()
@@ -245,18 +270,18 @@ Partial Class frmJobEntry
         'ExChangeCheeseToolStripMenuItem
         '
         Me.ExChangeCheeseToolStripMenuItem.Name = "ExChangeCheeseToolStripMenuItem"
-        Me.ExChangeCheeseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ExChangeCheeseToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.ExChangeCheeseToolStripMenuItem.Text = "ExChange Cheese"
         '
         'FindCheeseToolStripMenuItem
         '
         Me.FindCheeseToolStripMenuItem.Name = "FindCheeseToolStripMenuItem"
-        Me.FindCheeseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.FindCheeseToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.FindCheeseToolStripMenuItem.Text = "Find Cheese"
         '
         'PackingGradeToolStripMenuItem
         '
-        Me.PackingGradeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox3, Me.AGradeToolStripMenuItem, Me.ASGradeToolStripMenuItem, Me.BALADGradeToolStripMenuItem, Me.BSGradesToolStripMenuItem, Me.ToolStripMenuItem2, Me.WasteToolStripMenuItem, Me.ToolStripSeparator3, Me.ToolStripTextBox2, Me.ReCheckToolStripMenuItem})
+        Me.PackingGradeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox3, Me.AGradeToolStripMenuItem, Me.ASGradeToolStripMenuItem, Me.BALADGradeToolStripMenuItem, Me.BSGradesToolStripMenuItem, Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.WasteToolStripMenuItem, Me.ToolStripSeparator3, Me.ToolStripTextBox2, Me.ReCheckToolStripMenuItem})
         Me.PackingGradeToolStripMenuItem.Name = "PackingGradeToolStripMenuItem"
         Me.PackingGradeToolStripMenuItem.Size = New System.Drawing.Size(95, 20)
         Me.PackingGradeToolStripMenuItem.Text = "Packing Grade"
@@ -400,6 +425,162 @@ Partial Class frmJobEntry
         Me.Pilot20ChToolStripMenuItem.Name = "Pilot20ChToolStripMenuItem"
         Me.Pilot20ChToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
         Me.Pilot20ChToolStripMenuItem.Text = "Pilot 20Ch"
+        '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HDDToolStripMenuItem, Me.HDToolStripMenuItem, Me.LFullToolStripMenuItem, Me.LSmallToolStripMenuItem})
+        Me.ToolStripMenuItem3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(185, 22)
+        Me.ToolStripMenuItem3.Text = "HH and LL "
+        '
+        'HDDToolStripMenuItem
+        '
+        Me.HDDToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HDDToolStripMenuItem1, Me.HDToolStripMenuItem1, Me.HMMToolStripMenuItem, Me.HLToolStripMenuItem, Me.HLLToolStripMenuItem, Me.HBToolStripMenuItem})
+        Me.HDDToolStripMenuItem.Name = "HDDToolStripMenuItem"
+        Me.HDDToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.HDDToolStripMenuItem.Text = "H Full"
+        '
+        'HDDToolStripMenuItem1
+        '
+        Me.HDDToolStripMenuItem1.Name = "HDDToolStripMenuItem1"
+        Me.HDDToolStripMenuItem1.Size = New System.Drawing.Size(108, 22)
+        Me.HDDToolStripMenuItem1.Text = "H DD"
+        '
+        'HDToolStripMenuItem1
+        '
+        Me.HDToolStripMenuItem1.Name = "HDToolStripMenuItem1"
+        Me.HDToolStripMenuItem1.Size = New System.Drawing.Size(108, 22)
+        Me.HDToolStripMenuItem1.Text = "H D"
+        '
+        'HMMToolStripMenuItem
+        '
+        Me.HMMToolStripMenuItem.Name = "HMMToolStripMenuItem"
+        Me.HMMToolStripMenuItem.Size = New System.Drawing.Size(108, 22)
+        Me.HMMToolStripMenuItem.Text = "H MM"
+        '
+        'HLToolStripMenuItem
+        '
+        Me.HLToolStripMenuItem.Name = "HLToolStripMenuItem"
+        Me.HLToolStripMenuItem.Size = New System.Drawing.Size(108, 22)
+        Me.HLToolStripMenuItem.Text = "H L"
+        '
+        'HLLToolStripMenuItem
+        '
+        Me.HLLToolStripMenuItem.Name = "HLLToolStripMenuItem"
+        Me.HLLToolStripMenuItem.Size = New System.Drawing.Size(108, 22)
+        Me.HLLToolStripMenuItem.Text = "H LL"
+        '
+        'HBToolStripMenuItem
+        '
+        Me.HBToolStripMenuItem.Name = "HBToolStripMenuItem"
+        Me.HBToolStripMenuItem.Size = New System.Drawing.Size(108, 22)
+        Me.HBToolStripMenuItem.Text = "H B"
+        '
+        'HDToolStripMenuItem
+        '
+        Me.HDToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SHDToolStripMenuItem, Me.SHMToolStripMenuItem, Me.SHLToolStripMenuItem, Me.SHBToolStripMenuItem})
+        Me.HDToolStripMenuItem.Name = "HDToolStripMenuItem"
+        Me.HDToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.HDToolStripMenuItem.Text = "H Small"
+        '
+        'SHDToolStripMenuItem
+        '
+        Me.SHDToolStripMenuItem.Name = "SHDToolStripMenuItem"
+        Me.SHDToolStripMenuItem.Size = New System.Drawing.Size(104, 22)
+        Me.SHDToolStripMenuItem.Text = "SH D"
+        '
+        'SHMToolStripMenuItem
+        '
+        Me.SHMToolStripMenuItem.Name = "SHMToolStripMenuItem"
+        Me.SHMToolStripMenuItem.Size = New System.Drawing.Size(104, 22)
+        Me.SHMToolStripMenuItem.Text = "SH M"
+        '
+        'SHLToolStripMenuItem
+        '
+        Me.SHLToolStripMenuItem.Name = "SHLToolStripMenuItem"
+        Me.SHLToolStripMenuItem.Size = New System.Drawing.Size(104, 22)
+        Me.SHLToolStripMenuItem.Text = "SH L"
+        '
+        'SHBToolStripMenuItem
+        '
+        Me.SHBToolStripMenuItem.Name = "SHBToolStripMenuItem"
+        Me.SHBToolStripMenuItem.Size = New System.Drawing.Size(104, 22)
+        Me.SHBToolStripMenuItem.Text = "SH B"
+        '
+        'LFullToolStripMenuItem
+        '
+        Me.LFullToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LDDToolStripMenuItem, Me.LDToolStripMenuItem, Me.LMMToolStripMenuItem, Me.LLLToolStripMenuItem, Me.LBToolStripMenuItem, Me.LBToolStripMenuItem1})
+        Me.LFullToolStripMenuItem.Name = "LFullToolStripMenuItem"
+        Me.LFullToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.LFullToolStripMenuItem.Text = "L Full"
+        '
+        'LDDToolStripMenuItem
+        '
+        Me.LDDToolStripMenuItem.Name = "LDDToolStripMenuItem"
+        Me.LDDToolStripMenuItem.Size = New System.Drawing.Size(105, 22)
+        Me.LDDToolStripMenuItem.Text = "L DD"
+        '
+        'LDToolStripMenuItem
+        '
+        Me.LDToolStripMenuItem.Name = "LDToolStripMenuItem"
+        Me.LDToolStripMenuItem.Size = New System.Drawing.Size(105, 22)
+        Me.LDToolStripMenuItem.Text = "L D"
+        '
+        'LMMToolStripMenuItem
+        '
+        Me.LMMToolStripMenuItem.Name = "LMMToolStripMenuItem"
+        Me.LMMToolStripMenuItem.Size = New System.Drawing.Size(105, 22)
+        Me.LMMToolStripMenuItem.Text = "L MM"
+        '
+        'LLLToolStripMenuItem
+        '
+        Me.LLLToolStripMenuItem.Name = "LLLToolStripMenuItem"
+        Me.LLLToolStripMenuItem.Size = New System.Drawing.Size(105, 22)
+        Me.LLLToolStripMenuItem.Text = "L L"
+        '
+        'LBToolStripMenuItem
+        '
+        Me.LBToolStripMenuItem.Name = "LBToolStripMenuItem"
+        Me.LBToolStripMenuItem.Size = New System.Drawing.Size(105, 22)
+        Me.LBToolStripMenuItem.Text = "L LL"
+        '
+        'LBToolStripMenuItem1
+        '
+        Me.LBToolStripMenuItem1.Name = "LBToolStripMenuItem1"
+        Me.LBToolStripMenuItem1.Size = New System.Drawing.Size(105, 22)
+        Me.LBToolStripMenuItem1.Text = "L B"
+        '
+        'LSmallToolStripMenuItem
+        '
+        Me.LSmallToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SLDToolStripMenuItem, Me.SLMToolStripMenuItem, Me.SLLToolStripMenuItem, Me.SLBToolStripMenuItem})
+        Me.LSmallToolStripMenuItem.Name = "LSmallToolStripMenuItem"
+        Me.LSmallToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.LSmallToolStripMenuItem.Text = "L Small"
+        '
+        'SLDToolStripMenuItem
+        '
+        Me.SLDToolStripMenuItem.Name = "SLDToolStripMenuItem"
+        Me.SLDToolStripMenuItem.Size = New System.Drawing.Size(101, 22)
+        Me.SLDToolStripMenuItem.Text = "SL D"
+        '
+        'SLMToolStripMenuItem
+        '
+        Me.SLMToolStripMenuItem.Name = "SLMToolStripMenuItem"
+        Me.SLMToolStripMenuItem.Size = New System.Drawing.Size(101, 22)
+        Me.SLMToolStripMenuItem.Text = "SL M"
+        '
+        'SLLToolStripMenuItem
+        '
+        Me.SLLToolStripMenuItem.Name = "SLLToolStripMenuItem"
+        Me.SLLToolStripMenuItem.Size = New System.Drawing.Size(101, 22)
+        Me.SLLToolStripMenuItem.Text = "SL L"
+        '
+        'SLBToolStripMenuItem
+        '
+        Me.SLBToolStripMenuItem.Name = "SLBToolStripMenuItem"
+        Me.SLBToolStripMenuItem.Size = New System.Drawing.Size(101, 22)
+        Me.SLBToolStripMenuItem.Text = "SL B"
         '
         'WasteToolStripMenuItem
         '
@@ -742,7 +923,6 @@ Partial Class frmJobEntry
     Friend WithEvents Pilot6ChToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Pilot15ChToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Pilot20ChToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents ToolStripTextBox2 As ToolStripTextBox
     Friend WithEvents ToolStripTextBox3 As ToolStripTextBox
     Friend WithEvents ToolStripTextBox4 As ToolStripTextBox
@@ -753,4 +933,30 @@ Partial Class frmJobEntry
     Friend WithEvents GradeAReCheckAToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SpecialToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PrintToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents HDDToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HDDToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents HDToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents HMMToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HLToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HLLToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HBToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HDToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SHDToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SHMToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SHLToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SHBToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LFullToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LDDToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LDToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LMMToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LLLToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LBToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LBToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents LSmallToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SLDToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SLMToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SLLToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SLBToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
 End Class

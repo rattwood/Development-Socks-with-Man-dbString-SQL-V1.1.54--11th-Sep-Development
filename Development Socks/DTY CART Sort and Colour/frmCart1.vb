@@ -28,6 +28,12 @@ Public Class frmCart1
     Dim coneP30 As String = 0
     Dim coneM50 As String = 0
     Dim coneP50 As String = 0
+    Dim valHH As String
+    Dim valLL As String
+    Dim valHStd As String
+
+    Dim dbHHLL As String = Nothing
+
     Dim btnImage As Image
     Dim keepDefcodes As Integer
 
@@ -62,6 +68,9 @@ Public Class frmCart1
     Dim fltconeNum As String
     Dim csvRowNum As Integer
     Dim rptTime As String
+    Dim lclHHLL, lclMDML As String
+    Dim remaincount As Integer
+    Dim tmpCartType As String = Nothing
 
     'THIS INITIATES WRITING TO ERROR LOG
     Private writeerrorLog As New writeError
@@ -249,16 +258,24 @@ Public Class frmCart1
 
 
 
+        lclHHLL = frmJobEntry.HHLL
+        lclMDML = frmJobEntry.MDML
+
+        'Check to see if cart has alrady had Pattern Seperation
+        If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("HHLL").Value) Then
+            dbHHLL = "YES"
+        End If
+
+        frmJobEntry.HHLL = Nothing
+        frmJobEntry.MDML = Nothing
 
 
-
-
+        tmpCartType = frmJobEntry.txtLotNumber.Text.Substring(12, 1)
 
         'VISUAL CHECK BUTTONS VISABLE OR NOT
-        If My.Settings.chkUseColour Then
+        If My.Settings.chkUseColour And (String.IsNullOrWhiteSpace(lclHHLL) Or lclHHLL = "NO") Then  'do normal colour grading
 
             Me.btnVisGrade.Visible = False  'Hide visgrade button
-            btnBarley.Visible = True
             btnBarley.Visible = True
             btnWaste.Visible = True
             btnZero.Visible = True
@@ -315,9 +332,84 @@ Public Class frmCart1
             Me.btnNoCone.Enabled = False
             Me.btnShort.Enabled = False
 
-        Else
-            'COLOUR CHECK BUTTONS NOT VISIBLE
-            Me.btnVisGrade.Visible = False
+
+
+
+
+        ElseIf My.Settings.chkUseColour And lclHHLL = "YES" And tmpCartType = "B" Then '(lclHHLL = "YES" And Not dbHHLL = "YES") Then  'Do H and L seperation grading
+                GroupBoxHHLL.Show()
+                Me.btnVisGrade.Visible = False  'Hide visgrade button
+                btnBarley.Visible = False
+                btnZero.Visible = False
+                btnM10.Visible = False
+                btnM30.Visible = False
+                btnM50.Visible = False
+                btnP10.Visible = False
+                btnP30.Visible = False
+                btnP50.Visible = False
+                btnStdCheese.Visible = False
+                lblBarley.Visible = False
+                lblWaste.Visible = False
+                lblZero.Visible = False
+                lblM10.Visible = False
+                lblP10.Visible = False
+                lblM30.Visible = False
+                lblP30.Visible = False
+                lblM50.Visible = False
+                lblP50.Visible = False
+                txtBarley.Visible = False
+                txtWaste.Visible = False
+                txtZero.Visible = False
+                txtM10.Visible = False
+                txtP10.Visible = False
+                txtM30.Visible = False
+                txtP30.Visible = False
+                txtM50.Visible = False
+                txtP50.Visible = False
+
+                txtHH.Show()
+                txtLL.Show()
+                txtHSTD.Show()
+                ' txtLSTD.Show()
+
+                lblZero.Text = "H"
+                lblM10.Text = "L"
+                lblP10.Text = "H Std"
+
+                lblZero.Visible = True
+                lblM10.Visible = True
+                lblP10.Visible = True
+
+
+                lblHLSeperation.Visible = True
+                lblRemain.Visible = True
+                txtBoxRemain.Visible = True
+
+
+                varVisConeInspect = 1
+                coneBarley = 0
+                coneZero = 0
+                coneM10 = 0
+                coneP10 = 0
+                coneM30 = 0
+                coneP30 = 0
+                coneM50 = 0
+                coneP50 = 0
+                valHH = 0
+                valLL = 0
+                valHStd = 0
+
+
+                Me.btnDefect.Enabled = False
+                Me.btnNoCone.Enabled = False
+                Me.btnShort.Enabled = False
+                btnFinishedJob.Hide()
+
+
+
+            Else  ' Do not show any colour grading
+                'COLOUR CHECK BUTTONS NOT VISIBLE
+                Me.btnVisGrade.Visible = False
             btnBarley.Visible = False
             btnZero.Visible = False
             btnM10.Visible = False
@@ -352,14 +444,108 @@ Public Class frmCart1
             Me.btnNoCone.Visible = True
             Me.btnDefect.Visible = True
             Me.btnShort.Visible = True
-            'If IsDBNull(frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value) Then Me.btnStdCheese.Visible = True
+            btnFinishedJob.Show()
             Me.btnStdCheese.Visible = True
+
+                If lclHHLL = "YES" Then
+                    txtHH.Show()
+                    txtLL.Show()
+                    txtHSTD.Show()
+
+                    lblZero.Text = "H"
+                    lblM10.Text = "L"
+                    lblP10.Text = "H Std"
+
+                    lblZero.Visible = True
+                    lblM10.Visible = True
+                    lblP10.Visible = True
+                    lblHLSeperation.Visible = True
+                End If
+
+
+
         Else
             Me.btnNoCone.Visible = False
             Me.btnDefect.Visible = False
             Me.btnShort.Visible = False
-            'Me.btnStdCheese.Visible = True
+
         End If
+
+
+        If My.Settings.chkUsePack And dbHHLL = "YES" Then
+            btnBarley.Visible = False
+            btnZero.Visible = False
+            btnM10.Visible = False
+            btnM30.Visible = False
+            btnM50.Visible = False
+            btnP10.Visible = False
+            btnP30.Visible = False
+            btnP50.Visible = False
+            btnStdCheese.Visible = False
+
+            lblBarley.Visible = False
+            lblWaste.Visible = False
+            lblZero.Visible = False
+            lblM10.Visible = False
+            lblP10.Visible = False
+            lblM30.Visible = False
+            lblP30.Visible = False
+            lblM50.Visible = False
+            lblP50.Visible = False
+
+            txtBarley.Visible = False
+            txtWaste.Visible = False
+            txtZero.Visible = False
+            txtM10.Visible = False
+            txtP10.Visible = False
+            txtM30.Visible = False
+            txtP30.Visible = False
+            txtM50.Visible = False
+            txtP50.Visible = False
+
+            txtHH.Show()
+            txtLL.Show()
+            ' txtHSTD.Show()
+            ' txtLSTD.Show()
+
+            lblZero.Text = "H"
+            lblM10.Text = "L"
+            ' lblP10.Text = "H Std"
+            ' lblM30.Text = "L Std"
+            lblZero.Visible = True
+            lblM10.Visible = True
+            ' lblP10.Visible = True
+            ' lblM30.Visible = True
+
+            lblHLSeperation.Visible = True
+            'lblRemain.Visible = True
+            'txtBoxRemain.Visible = True
+
+
+            varVisConeInspect = 1
+            coneBarley = 0
+            coneZero = 0
+            coneM10 = 0
+            coneP10 = 0
+            coneM30 = 0
+            coneP30 = 0
+            coneM50 = 0
+            coneP50 = 0
+            valHH = 0
+            valLL = 0
+            ' valHStd = 0
+            ' valLStd = 0
+
+            Me.btnDefect.Enabled = False
+            Me.btnNoCone.Enabled = False
+            Me.btnShort.Enabled = False
+            btnFinishedJob.Hide()
+
+
+
+        End If
+
+
 
 
 
@@ -373,7 +559,7 @@ Public Class frmCart1
     Private Sub UpdateConeVal()
 
         Dim cellVal As String
-
+        remaincount = 32
 
         For rw As Integer = 1 To frmDGV.DGVdata.Rows.Count '32
 
@@ -396,6 +582,7 @@ Public Class frmCart1
                 If cl = 11 And cellVal > 0 Then
                     Me.Controls("btnCone" & rw).BackColor = Color.Pink      'NOCONE
                     Me.Controls("btnCone" & rw).Enabled = False
+                    remaincount = remaincount - 1
                 End If
 
                 If cl = 12 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackColor = Color.Yellow    'DEFECT
@@ -414,15 +601,6 @@ Public Class frmCart1
 
 
 
-                'If cl = 43 And cellVal = True Then
-                '    Me.Controls("btnCone" & rw).BackColor = Color.Red       'SHORT
-                '    Me.Controls("btnCone" & rw).Enabled = True
-                'End If
-
-                'If cl > 43 And cl < 66 Then Continue For
-
-                'If cl = 66 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
-                'If cl = 46 And cellVal = True Then Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
 
             Next
 
@@ -446,12 +624,54 @@ Public Class frmCart1
             End If
 
 
-                'WASTE CELL in db
-                If frmDGV.DGVdata.Rows(rw - 1).Cells("COLWASTE").Value > 0 Then Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
+            'WASTE CELL in db
+            If frmDGV.DGVdata.Rows(rw - 1).Cells("COLWASTE").Value > 0 Then Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
             If frmDGV.DGVdata.Rows(rw - 1).Cells("FLT_W").Value = True Then Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
+
+            'new section to Display H and L values if a standard Cart and HHLL
+
+
+            If lclHHLL = "YES" And tmpCartType = "B" Then
+
+                If Not IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value) Then
+                    If frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value = "H" Then
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.PatH
+                        Me.Controls("btnCone" & rw).Enabled = False
+                        remaincount = remaincount - 1
+
+
+                    ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value = "L" Then
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.PatL
+                        Me.Controls("btnCone" & rw).Enabled = False
+                        remaincount = remaincount - 1
+
+                    ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value = "H Std" Then
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.PatHSTD
+                        Me.Controls("btnCone" & rw).Enabled = False
+                        remaincount = remaincount - 1
+
+                    End If
+
+                    'check to see if all cheeses are graded and show finish button if they are
+                    If My.Settings.chkUseColour Then
+                        If remaincount = 0 Then 'All have values
+                            btnFinishedJob.Show()
+                        Else
+                            btnFinishedJob.Hide()
+                        End If
+                    End If
+
+                End If
+            End If
+
+
         Next
 
+        txtBoxRemain.Text = remaincount
+
         txtBoxUpdates()
+
+
 
 
     End Sub
@@ -865,7 +1085,10 @@ Public Class frmCart1
                     shortC(varConeNum - coneNumOffset) = 0
                     Me.Controls("btnCone" & varConeNum - coneNumOffset).BackColor = SystemColors.ControlDark
                     Me.Controls("btnCone" & varConeNum - coneNumOffset).BackgroundImage = Nothing
-                    ' txtBoxUpdates()
+
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("HHLL").Value = Nothing
+                    frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("HHLL_Res").Value = Nothing
+
                     UpdateConeVal()
 
                     Dim department As String
@@ -933,6 +1156,10 @@ Public Class frmCart1
                 coneP30 = 0
                 coneM50 = 0
                 coneP50 = 0
+
+                valHH = 0
+                valLL = 0
+                valHStd = 0
 
 
                 Me.btnVisGrade.Enabled = True
@@ -1264,74 +1491,139 @@ Public Class frmCart1
     End Sub
 
 
+    Private Sub btnHH_Click(sender As Object, e As EventArgs) Handles btnHH.Click
+        If varConeNum > 0 Then
+
+            Me.btnSave.Visible = True 'Show Save button when form opens
+            Me.btnClear.Visible = True  'Show Cancel button when form opens
+
+            valHH = 1
+            valLL = 0
+            valHStd = 0
+
+        Else
+            MsgBox("You must select a  Cheese number first")
+        End If
+    End Sub
+
+    Private Sub btnLL_Click(sender As Object, e As EventArgs) Handles btnLL.Click
+        If varConeNum > 0 Then
+
+
+            Me.btnSave.Visible = True 'Show Save button when form opens
+            Me.btnClear.Visible = True  'Show Cancel button when form opens
+
+            valHH = 0
+            valLL = 1
+            valHStd = 0
+
+
+        Else
+            MsgBox("You must select a  Cheese number first")
+        End If
+    End Sub
+
+    'Private Sub btnHSTD_Click(sender As Object, e As EventArgs) Handles btnHSTD.Click
+    '    If varConeNum > 0 Then
+
+
+    '        Me.btnSave.Visible = True 'Show Save button when form opens
+    '        Me.btnClear.Visible = True  'Show Cancel button when form opens
+
+
+    '        valHH = 0
+    '        valLL = 0
+    '        valHStd = 1
+    '        valLStd = 0
+    '    Else
+    '        MsgBox("You must select a  Cheese number first")
+    '    End If
+    'End Sub
+
+    'Private Sub btnLSTD_Click(sender As Object, e As EventArgs) Handles btnLSTD.Click
+    '    If varConeNum > 0 Then
+
+
+    '        Me.btnSave.Visible = True 'Show Save button when form opens
+    '        Me.btnClear.Visible = True  'Show Cancel button when form opens
+
+
+    '        valHH = 0
+    '        valLL = 0
+    '        valHStd = 0
+    '        valLStd = 1
+
+    '    Else
+    '        MsgBox("You must select a  Cheese number first")
+    '    End If
+    'End Sub
 
     Private Sub btnCone1_Click(sender As Object, e As EventArgs) Handles btnCone1.Click
         varConeNum = btnCone1.Text
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
-        Me.txtConeNum.Refresh()
+
     End Sub
 
     Private Sub btnCone2_Click(sender As Object, e As EventArgs) Handles btnCone2.Click
         varConeNum = btnCone2.Text                 'Sets the cone Number
         txtConeNum.Text = varConeNum
-        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone3_Click(sender As Object, e As EventArgs) Handles btnCone3.Click
         varConeNum = btnCone3.Text                  'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone4_Click(sender As Object, e As EventArgs) Handles btnCone4.Click
         varConeNum = btnCone4.Text                   'Sets the cone Number
         txtConeNum.Text = varConeNum
-        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone5_Click(sender As Object, e As EventArgs) Handles btnCone5.Click
         varConeNum = btnCone5.Text                  'Sets the cone Number
         txtConeNum.Text = varConeNum
-        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone6_Click(sender As Object, e As EventArgs) Handles btnCone6.Click
         varConeNum = btnCone6.Text                   'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone7_Click(sender As Object, e As EventArgs) Handles btnCone7.Click
         varConeNum = btnCone7.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone8_Click(sender As Object, e As EventArgs) Handles btnCone8.Click
         varConeNum = btnCone8.Text                   'Sets the cone Number
         txtConeNum.Text = varConeNum
-        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone9_Click(sender As Object, e As EventArgs) Handles btnCone9.Click
         varConeNum = btnCone9.Text                   'Sets the cone Number
         txtConeNum.Text = varConeNum
-        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone10_Click(sender As Object, e As EventArgs) Handles btnCone10.Click
         varConeNum = btnCone10.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
@@ -1357,154 +1649,154 @@ Public Class frmCart1
     Private Sub btnCone11_Click(sender As Object, e As EventArgs) Handles btnCone11.Click
         varConeNum = btnCone11.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone12_Click(sender As Object, e As EventArgs) Handles btnCone12.Click
         varConeNum = btnCone12.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone13_Click(sender As Object, e As EventArgs) Handles btnCone13.Click
         varConeNum = btnCone13.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone14_Click(sender As Object, e As EventArgs) Handles btnCone14.Click
         varConeNum = btnCone14.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone15_Click(sender As Object, e As EventArgs) Handles btnCone15.Click
         varConeNum = btnCone15.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone16_Click(sender As Object, e As EventArgs) Handles btnCone16.Click
         varConeNum = btnCone16.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone17_Click(sender As Object, e As EventArgs) Handles btnCone17.Click
         varConeNum = btnCone17.Text                  'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '   varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone18_Click(sender As Object, e As EventArgs) Handles btnCone18.Click
         varConeNum = btnCone18.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone19_Click(sender As Object, e As EventArgs) Handles btnCone19.Click
         varConeNum = btnCone19.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone20_Click(sender As Object, e As EventArgs) Handles btnCone20.Click
         varConeNum = btnCone20.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone21_Click(sender As Object, e As EventArgs) Handles btnCone21.Click
         varConeNum = btnCone21.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone22_Click(sender As Object, e As EventArgs) Handles btnCone22.Click
         varConeNum = btnCone22.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone23_Click(sender As Object, e As EventArgs) Handles btnCone23.Click
         varConeNum = btnCone23.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone24_Click(sender As Object, e As EventArgs) Handles btnCone24.Click
         varConeNum = btnCone24.Text                   'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone25_Click(sender As Object, e As EventArgs) Handles btnCone25.Click
         varConeNum = btnCone25.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone26_Click(sender As Object, e As EventArgs) Handles btnCone26.Click
         varConeNum = btnCone26.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone27_Click(sender As Object, e As EventArgs) Handles btnCone27.Click
         varConeNum = btnCone27.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone28_Click(sender As Object, e As EventArgs) Handles btnCone28.Click
         varConeNum = btnCone28.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '   varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone29_Click(sender As Object, e As EventArgs) Handles btnCone29.Click
         varConeNum = btnCone29.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone30_Click(sender As Object, e As EventArgs) Handles btnCone30.Click
         varConeNum = btnCone30.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone31_Click(sender As Object, e As EventArgs) Handles btnCone31.Click
         varConeNum = btnCone31.Text                    'Sets the cone Number
         txtConeNum.Text = varConeNum
-        '  varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
     Private Sub btnCone32_Click(sender As Object, e As EventArgs) Handles btnCone32.Click
         varConeNum = btnCone32.Text                     'Sets the cone Number
         txtConeNum.Text = varConeNum
-        ' varCartStartTime = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+
         Me.txtConeNum.Refresh()
     End Sub
 
@@ -1565,7 +1857,7 @@ Public Class frmCart1
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
-        'jobArrayUpdate()
+
         readsave()
 
     End Sub
@@ -1661,27 +1953,27 @@ Public Class frmCart1
         For rw As Integer = 1 To frmDGV.DGVdata.Rows.Count
 
             If My.Settings.chkUseSort Then
-                If frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "0" Then
-                    frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "5"
-                    frmDGV.DGVdata.Rows(rw - 1).Cells(31).Value = today
-                    frmDGV.DGVdata.Rows(rw - 1).Cells(32).Value = today
+                If frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value = "0" Then
+                    frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value = "5"
+                    frmDGV.DGVdata.Rows(rw - 1).Cells("CARTSTARTTM").Value = today
+                    frmDGV.DGVdata.Rows(rw - 1).Cells("CARTENDTM").Value = today
                 End If
 
             End If
 
-            If My.Settings.chkUseColour And frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value.ToString IsNot "8" Then
-                If frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value < 14 Then frmDGV.DGVdata.Rows(rw - 1).Cells(9).Value = "9"  'No Faults recorded so set to 9 Unless already Packed then do not change state
+            If My.Settings.chkUseColour And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value.ToString IsNot "8" Then
+                If frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value < 14 Then frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value = "9"  'No Faults recorded so set to 9 Unless already Packed then do not change state
             End If
 
             If My.Settings.chkUseColour Then
-                frmDGV.DGVdata.Rows(rw - 1).Cells(57).Value = frmJobEntry.ColorOP
-                frmDGV.DGVdata.Rows(rw - 1).Cells(32).Value = today
+                frmDGV.DGVdata.Rows(rw - 1).Cells("OPCOLOUR").Value = frmJobEntry.ColorOP
+                frmDGV.DGVdata.Rows(rw - 1).Cells("CARTENDTM").Value = today
                 If IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("COLENDTM").Value) Then
                     frmDGV.DGVdata.Rows(rw - 1).Cells("COLENDTM").Value = today 'COLOUR CHECK END TIME
                 End If
             ElseIf My.Settings.chkUseSort Then
-                frmDGV.DGVdata.Rows(rw - 1).Cells(56).Value = frmJobEntry.SortOP
-                frmDGV.DGVdata.Rows(rw - 1).Cells(32).Value = today
+                frmDGV.DGVdata.Rows(rw - 1).Cells("OPSORT").Value = frmJobEntry.SortOP
+                frmDGV.DGVdata.Rows(rw - 1).Cells("CARTENDTM").Value = today
                 If IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("SORTENDTM").Value) Then
                     frmDGV.DGVdata.Rows(rw - 1).Cells("SORTENDTM").Value = today 'SORT END TIME
                 End If
@@ -1707,26 +1999,7 @@ Public Class frmCart1
 
         UpdateDatabase()
 
-        'this was second save for database incase of problem
-        'If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
-        'frmDGV.DGVdata.ClearSelection()
 
-
-        ''RE Load Database and then save again to try and get correct conestates
-
-        'frmJobEntry.LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & frmJobEntry.dbBarcode & "'")
-
-        ''LOAD THE DATA FROM dB IN TO THE DATAGRID
-        'frmDGV.DGVdata.DataSource = frmJobEntry.LDS.Tables(0)
-        'frmDGV.DGVdata.Rows(0).Selected = True
-        '' Dim LCB As frmJobEntry.SqlCommandBuilder = New SqlCommandBuilder(LDA)
-
-
-        ''SORT GRIDVIEW IN TO CORRECT CONE SEQUENCE
-        'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  'sorts On cone number
-
-
-        'UpdateDatabase()
 
         If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
         frmDGV.DGVdata.ClearSelection()
@@ -1737,6 +2010,8 @@ Public Class frmCart1
         Me.Close()
 
     End Sub
+
+
 
     Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
         If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
@@ -2044,130 +2319,226 @@ Public Class frmCart1
                 btnCone1.Enabled = False
                 btnCone1.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 2 Then
                 btnCone2.Enabled = False
                 btnCone2.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 3 Then
                 btnCone3.Enabled = False
                 btnCone3.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 4 Then
                 btnCone4.Enabled = False
                 btnCone4.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 5 Then
                 btnCone5.Enabled = False
                 btnCone5.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 6 Then
                 btnCone6.Enabled = False
                 btnCone6.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 7 Then
                 btnCone7.Enabled = False
                 btnCone7.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 8 Then
                 btnCone8.Enabled = False
                 btnCone8.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 9 Then
                 btnCone9.Enabled = False
                 btnCone9.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 10 Then
                 btnCone10.Enabled = False
                 btnCone10.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 11 Then
                 btnCone11.Enabled = False
                 btnCone11.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 12 Then
                 btnCone12.Enabled = False
                 btnCone12.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 13 Then
                 btnCone13.Enabled = False
                 btnCone13.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 14 Then
                 btnCone14.Enabled = False
                 btnCone14.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 15 Then
                 btnCone15.Enabled = False
                 btnCone15.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 16 Then
                 btnCone16.Enabled = False
                 btnCone16.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 17 Then
                 btnCone17.Enabled = False
                 btnCone17.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 18 Then
                 btnCone18.Enabled = False
                 btnCone18.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 19 Then
                 btnCone19.Enabled = False
                 btnCone19.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 20 Then
                 btnCone20.Enabled = False
                 btnCone20.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 21 Then
                 btnCone21.Enabled = False
                 btnCone21.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 22 Then
                 btnCone22.Enabled = False
                 btnCone22.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 23 Then
                 btnCone23.Enabled = False
                 btnCone23.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 24 Then
                 btnCone24.Enabled = False
                 btnCone24.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 25 Then
                 btnCone25.Enabled = False
                 btnCone25.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 26 Then
                 btnCone26.Enabled = False
                 btnCone26.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 27 Then
                 btnCone27.Enabled = False
                 btnCone27.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 28 Then
                 btnCone28.Enabled = False
                 btnCone28.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 29 Then
                 btnCone29.Enabled = False
                 btnCone29.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 30 Then
                 btnCone30.Enabled = False
                 btnCone30.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 31 Then
                 btnCone31.Enabled = False
                 btnCone31.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             ElseIf varConeNum - coneNumOffset = 32 Then
                 btnCone32.Enabled = False
                 btnCone32.BackColor = Color.Orange
                 StdCone = varConeNum
+                If lclHHLL = "YES" Then
+                    valHStd = 1
+                End If
             End If
 
         End If
@@ -2768,6 +3139,17 @@ Public Class frmCart1
 
                 btnImage = My.Resources.Zero
                 coneZero = varConeNum
+            ElseIf valHH Then
+                btnImage = My.Resources.PatH
+                valHH = varConeNum
+
+            ElseIf valLL Then
+                btnImage = My.Resources.PatL
+                valLL = varConeNum
+
+            ElseIf valHStd Then
+                btnImage = My.Resources.PatHSTD
+                valHStd = varConeNum
 
             End If
 
@@ -2961,13 +3343,19 @@ Public Class frmCart1
             btnDelete.Visible = False
             'Me.btnShortSave.Visible = False
             Me.btnClear.Visible = False
-            Me.btnStdCheese.Visible = False
+
+            If My.Settings.chkUseSort And lclHHLL = "YES" Then
+                Me.btnStdCheese.Visible = True
+            Else
+                Me.btnStdCheese.Visible = False
+            End If
+
             If shortCone = 1 Then coneCount = coneCount Else coneCount = coneCount + 1  'if Short being set do not add to cone count
-            'lblConeCount.Text = coneCount
+                'lblConeCount.Text = coneCount
 
-        Else
+            Else
 
-            Me.btnVisGrade.Enabled = True
+                Me.btnVisGrade.Enabled = True
             Me.btnBarley.Enabled = False
             Me.btnShort.Visible = True
             Me.btnShort.Enabled = True
@@ -3022,6 +3410,11 @@ Public Class frmCart1
             coneM50 = 0
             coneP50 = 0
             coneWaste = 0
+            valHH = 0
+            valLL = 0
+            valHStd = 0
+
+
             Me.chk_K.Checked = False
             Me.chk_D.Checked = False
             Me.chk_F.Checked = False
@@ -3189,6 +3582,22 @@ Public Class frmCart1
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("M50").Value = coneM50   'coneM50
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("P50").Value = coneP50  'coneP50
 
+        If valHH > 0 Then
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("HHLL").Value = "H"
+        End If
+
+        If valLL > 0 Then
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("HHLL").Value = "L"
+        End If
+
+        If valHStd > 0 Then
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("HHLL").Value = "H Std"
+        End If
+
+        If lclHHLL = "YES" And NoCone > 0 Then
+            frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("HHLL").Value = "MISS"
+        End If
+
 
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CARTENDTM").Value = varCartEndTime 'cartEndTime
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("RECHK").Value = reChecked    'Cone has been reChecked    
@@ -3265,9 +3674,14 @@ Public Class frmCart1
         Dim visConeM50ID As String = Nothing
         Dim visConeP50ID As String = Nothing
 
+        Dim visConeHH As String = Nothing
+        Dim visConeLL As String = Nothing
+        Dim visConeHSTD As String = Nothing
+        Dim visConeLSTD As String = Nothing
 
         Dim fmt As String = "000"    'FORMAT STRING FOR NUMBER 
         Dim tmpConeNum = ""
+
 
         txtShort.Text = ""
         txtMissing.Text = ""
@@ -3281,7 +3695,9 @@ Public Class frmCart1
         txtM50.Text = ""
         txtP50.Text = ""
 
-
+        txtHH.Text = ""
+        txtLL.Text = ""
+        ' txtHSTD.Text = ""
 
         For rw As Integer = 1 To frmDGV.DGVdata.Rows.Count
 
@@ -3294,6 +3710,9 @@ Public Class frmCart1
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 coneMissingID = coneMissingID & tmpConeNum & ","
                 txtMissing.Text = coneMissingID
+
+
+
             ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("DEFCONE").Value > 0 Then
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 coneDefectID = coneDefectID & tmpConeNum & ","
@@ -3336,6 +3755,26 @@ Public Class frmCart1
                 tmpConeNum = rw + coneNumOffset.ToString(fmt)
                 visConeWasteID = visConeWasteID & tmpConeNum & ","
                 txtWaste.Text = visConeWasteID
+            End If
+
+            If lclHHLL = "YES" And tmpCartType = "B" Then
+                If Not IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value) Then
+                    If frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value = "H" Then
+                        tmpConeNum = rw + coneNumOffset.ToString(fmt)
+                        visConeHH = visConeHH & tmpConeNum & ","
+                        txtHH.Text = visConeHH
+                    ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value = "H Std" Then
+                        tmpConeNum = rw + coneNumOffset.ToString(fmt)
+                        visConeHSTD = visConeHSTD & tmpConeNum & ","
+                        txtHSTD.Text = visConeHSTD
+
+                    ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value = "L" Then
+                        tmpConeNum = rw + coneNumOffset.ToString(fmt)
+                        visConeLL = visConeLL & tmpConeNum & ","
+                        txtLL.Text = visConeLL
+
+                    End If
+                End If
             End If
             tmpConeNum = 0
         Next
@@ -3420,11 +3859,27 @@ Public Class frmCart1
                 If frmDGV.DGVdata.Rows(rows - 1).Cells("STDCHEESE").Value > "0" Then
                     frmJobEntry.LExecQuery("UPDATE jobs SET stdcheese = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("STDCHEESE").Value & "' Where bcodecone = '" & coneref & "' ")
                     frmJobEntry.LExecQuery("UPDATE jobs SET stdstate = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("STDSTATE").Value & "' Where bcodecone = '" & coneref & "' ")
+
+                    If lclHHLL = "YES" Then
+                        If Not IsDBNull(frmDGV.DGVdata.Rows(rows - 1).Cells("HHLL").Value) Then
+                            frmJobEntry.LExecQuery("UPDATE jobs SET HHLL = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("HHLL").Value & "' Where bcodecone = '" & coneref & "' ")
+                            ' frmJobEntry.LExecQuery("UPDATE jobs SET HHLL_Res = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("HHLL_Res").Value & "' Where bcodecone = '" & coneref & "' ")
+                        End If
+                    End If
+
                 Else
                     frmJobEntry.LExecQuery("UPDATE jobs SET stdcheese = NULL Where bcodecone = '" & coneref & "' ")
                     frmJobEntry.LExecQuery("UPDATE jobs SET stdstate = NULL Where bcodecone = '" & coneref & "' ")
+
+                    If lclHHLL = "YES" Then
+                        frmJobEntry.LExecQuery("UPDATE jobs SET HHLL = NULL Where bcodecone = '" & coneref & "' ")
+                        ' frmJobEntry.LExecQuery("UPDATE jobs SET HHLL_Res = NULL Where bcodecone = '" & coneref & "' ")
+                    End If
+
                 End If
             End If
+
+
         Next
     End Sub
 

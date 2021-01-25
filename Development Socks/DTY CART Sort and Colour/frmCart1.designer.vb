@@ -137,6 +137,17 @@ Partial Class frmCart1
         Me.Label7 = New System.Windows.Forms.Label()
         Me.lblDoffNum = New System.Windows.Forms.Label()
         Me.btnHome = New System.Windows.Forms.Button()
+        Me.GroupBoxHHLL = New System.Windows.Forms.GroupBox()
+        Me.btnHH = New System.Windows.Forms.Button()
+        Me.btnLL = New System.Windows.Forms.Button()
+        Me.txtHH = New System.Windows.Forms.TextBox()
+        Me.txtLL = New System.Windows.Forms.TextBox()
+        Me.txtHSTD = New System.Windows.Forms.TextBox()
+        Me.txtLSTD = New System.Windows.Forms.TextBox()
+        Me.lblHLSeperation = New System.Windows.Forms.Label()
+        Me.txtBoxRemain = New System.Windows.Forms.TextBox()
+        Me.lblRemain = New System.Windows.Forms.Label()
+        Me.GroupBoxHHLL.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnCone4
@@ -659,7 +670,7 @@ Partial Class frmCart1
         Me.txtM30.Cursor = System.Windows.Forms.Cursors.Default
         Me.txtM30.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.txtM30.ForeColor = System.Drawing.Color.White
-        Me.txtM30.Location = New System.Drawing.Point(677, 587)
+        Me.txtM30.Location = New System.Drawing.Point(677, 588)
         Me.txtM30.Name = "txtM30"
         Me.txtM30.ReadOnly = True
         Me.txtM30.Size = New System.Drawing.Size(331, 24)
@@ -883,7 +894,7 @@ Partial Class frmCart1
         Me.btnStdCheese.BackColor = System.Drawing.Color.Orange
         Me.btnStdCheese.Cursor = System.Windows.Forms.Cursors.Default
         Me.btnStdCheese.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnStdCheese.Location = New System.Drawing.Point(219, 380)
+        Me.btnStdCheese.Location = New System.Drawing.Point(219, 376)
         Me.btnStdCheese.Margin = New System.Windows.Forms.Padding(2)
         Me.btnStdCheese.Name = "btnStdCheese"
         Me.btnStdCheese.Size = New System.Drawing.Size(85, 80)
@@ -1105,7 +1116,7 @@ Partial Class frmCart1
         Me.btnWaste.Cursor = System.Windows.Forms.Cursors.Arrow
         Me.btnWaste.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnWaste.ForeColor = System.Drawing.Color.Black
-        Me.btnWaste.Location = New System.Drawing.Point(271, 370)
+        Me.btnWaste.Location = New System.Drawing.Point(271, 373)
         Me.btnWaste.Margin = New System.Windows.Forms.Padding(2)
         Me.btnWaste.Name = "btnWaste"
         Me.btnWaste.Size = New System.Drawing.Size(100, 80)
@@ -1121,7 +1132,7 @@ Partial Class frmCart1
         Me.btnBarley.Enabled = False
         Me.btnBarley.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBarley.ForeColor = System.Drawing.Color.Black
-        Me.btnBarley.Location = New System.Drawing.Point(152, 370)
+        Me.btnBarley.Location = New System.Drawing.Point(152, 373)
         Me.btnBarley.Margin = New System.Windows.Forms.Padding(2)
         Me.btnBarley.Name = "btnBarley"
         Me.btnBarley.Size = New System.Drawing.Size(100, 80)
@@ -1533,12 +1544,146 @@ Partial Class frmCart1
         Me.btnHome.TabIndex = 142
         Me.btnHome.UseVisualStyleBackColor = False
         '
+        'GroupBoxHHLL
+        '
+        Me.GroupBoxHHLL.Controls.Add(Me.btnHH)
+        Me.GroupBoxHHLL.Controls.Add(Me.btnLL)
+        Me.GroupBoxHHLL.Location = New System.Drawing.Point(384, 362)
+        Me.GroupBoxHHLL.Name = "GroupBoxHHLL"
+        Me.GroupBoxHHLL.Size = New System.Drawing.Size(212, 96)
+        Me.GroupBoxHHLL.TabIndex = 143
+        Me.GroupBoxHHLL.TabStop = False
+        Me.GroupBoxHHLL.Visible = False
+        '
+        'btnHH
+        '
+        Me.btnHH.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.btnHH.Cursor = System.Windows.Forms.Cursors.Arrow
+        Me.btnHH.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnHH.ForeColor = System.Drawing.Color.Black
+        Me.btnHH.Location = New System.Drawing.Point(5, 11)
+        Me.btnHH.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnHH.Name = "btnHH"
+        Me.btnHH.Size = New System.Drawing.Size(85, 80)
+        Me.btnHH.TabIndex = 47
+        Me.btnHH.Text = "H"
+        Me.btnHH.UseVisualStyleBackColor = False
+        '
+        'btnLL
+        '
+        Me.btnLL.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.btnLL.Cursor = System.Windows.Forms.Cursors.Arrow
+        Me.btnLL.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLL.ForeColor = System.Drawing.Color.Black
+        Me.btnLL.Location = New System.Drawing.Point(118, 11)
+        Me.btnLL.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnLL.Name = "btnLL"
+        Me.btnLL.Size = New System.Drawing.Size(85, 80)
+        Me.btnLL.TabIndex = 46
+        Me.btnLL.Text = "L"
+        Me.btnLL.UseVisualStyleBackColor = False
+        '
+        'txtHH
+        '
+        Me.txtHH.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.txtHH.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtHH.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.txtHH.ForeColor = System.Drawing.Color.White
+        Me.txtHH.Location = New System.Drawing.Point(677, 506)
+        Me.txtHH.Name = "txtHH"
+        Me.txtHH.ReadOnly = True
+        Me.txtHH.Size = New System.Drawing.Size(331, 24)
+        Me.txtHH.TabIndex = 145
+        Me.txtHH.Visible = False
+        '
+        'txtLL
+        '
+        Me.txtLL.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.txtLL.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtLL.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.txtLL.ForeColor = System.Drawing.Color.White
+        Me.txtLL.Location = New System.Drawing.Point(677, 533)
+        Me.txtLL.Name = "txtLL"
+        Me.txtLL.ReadOnly = True
+        Me.txtLL.Size = New System.Drawing.Size(331, 24)
+        Me.txtLL.TabIndex = 144
+        Me.txtLL.Visible = False
+        '
+        'txtHSTD
+        '
+        Me.txtHSTD.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.txtHSTD.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtHSTD.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.txtHSTD.ForeColor = System.Drawing.Color.White
+        Me.txtHSTD.Location = New System.Drawing.Point(677, 560)
+        Me.txtHSTD.Name = "txtHSTD"
+        Me.txtHSTD.ReadOnly = True
+        Me.txtHSTD.Size = New System.Drawing.Size(331, 24)
+        Me.txtHSTD.TabIndex = 146
+        Me.txtHSTD.Visible = False
+        '
+        'txtLSTD
+        '
+        Me.txtLSTD.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.txtLSTD.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtLSTD.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.txtLSTD.ForeColor = System.Drawing.Color.White
+        Me.txtLSTD.Location = New System.Drawing.Point(677, 588)
+        Me.txtLSTD.Name = "txtLSTD"
+        Me.txtLSTD.ReadOnly = True
+        Me.txtLSTD.Size = New System.Drawing.Size(331, 24)
+        Me.txtLSTD.TabIndex = 147
+        Me.txtLSTD.Visible = False
+        '
+        'lblHLSeperation
+        '
+        Me.lblHLSeperation.AutoSize = True
+        Me.lblHLSeperation.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHLSeperation.ForeColor = System.Drawing.Color.ForestGreen
+        Me.lblHLSeperation.Location = New System.Drawing.Point(730, 5)
+        Me.lblHLSeperation.Name = "lblHLSeperation"
+        Me.lblHLSeperation.Size = New System.Drawing.Size(191, 25)
+        Me.lblHLSeperation.TabIndex = 148
+        Me.lblHLSeperation.Text = "H && L Seperation"
+        Me.lblHLSeperation.Visible = False
+        '
+        'txtBoxRemain
+        '
+        Me.txtBoxRemain.Enabled = False
+        Me.txtBoxRemain.Font = New System.Drawing.Font("Microsoft Sans Serif", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.txtBoxRemain.Location = New System.Drawing.Point(1013, 159)
+        Me.txtBoxRemain.MaxLength = 2
+        Me.txtBoxRemain.Name = "txtBoxRemain"
+        Me.txtBoxRemain.ReadOnly = True
+        Me.txtBoxRemain.Size = New System.Drawing.Size(69, 62)
+        Me.txtBoxRemain.TabIndex = 149
+        Me.txtBoxRemain.TabStop = False
+        Me.txtBoxRemain.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtBoxRemain.Visible = False
+        '
+        'lblRemain
+        '
+        Me.lblRemain.AutoSize = True
+        Me.lblRemain.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRemain.Location = New System.Drawing.Point(1017, 143)
+        Me.lblRemain.Name = "lblRemain"
+        Me.lblRemain.Size = New System.Drawing.Size(61, 16)
+        Me.lblRemain.TabIndex = 150
+        Me.lblRemain.Text = "Remain"
+        Me.lblRemain.Visible = False
+        '
         'frmCart1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(1086, 699)
+        Me.Controls.Add(Me.lblRemain)
+        Me.Controls.Add(Me.txtBoxRemain)
+        Me.Controls.Add(Me.lblHLSeperation)
+        Me.Controls.Add(Me.GroupBoxHHLL)
+        Me.Controls.Add(Me.txtP10)
+        Me.Controls.Add(Me.txtHSTD)
         Me.Controls.Add(Me.btnHome)
         Me.Controls.Add(Me.lblDoffNum)
         Me.Controls.Add(Me.Label7)
@@ -1570,13 +1715,9 @@ Partial Class frmCart1
         Me.Controls.Add(Me.chk_D)
         Me.Controls.Add(Me.chk_X)
         Me.Controls.Add(Me.chk_K)
-        Me.Controls.Add(Me.btnZero)
         Me.Controls.Add(Me.lblZero)
-        Me.Controls.Add(Me.txtZero)
         Me.Controls.Add(Me.lblBarley)
         Me.Controls.Add(Me.txtBarley)
-        Me.Controls.Add(Me.btnWaste)
-        Me.Controls.Add(Me.btnBarley)
         Me.Controls.Add(Me.btnFinishedJob)
         Me.Controls.Add(Me.btnNextJob)
         Me.Controls.Add(Me.btnDefectSave)
@@ -1584,7 +1725,6 @@ Partial Class frmCart1
         Me.Controls.Add(Me.lblMcNum)
         Me.Controls.Add(Me.lblFinished)
         Me.Controls.Add(Me.lblP50)
-        Me.Controls.Add(Me.txtP50)
         Me.Controls.Add(Me.lblM50)
         Me.Controls.Add(Me.lblP30)
         Me.Controls.Add(Me.lblM30)
@@ -1597,14 +1737,7 @@ Partial Class frmCart1
         Me.Controls.Add(Me.txtCartNum)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.btnStdCheese)
-        Me.Controls.Add(Me.btnP10)
-        Me.Controls.Add(Me.btnM10)
         Me.Controls.Add(Me.btnShort)
-        Me.Controls.Add(Me.txtM50)
-        Me.Controls.Add(Me.txtP30)
-        Me.Controls.Add(Me.txtM30)
-        Me.Controls.Add(Me.txtP10)
-        Me.Controls.Add(Me.txtM10)
         Me.Controls.Add(Me.txtShort)
         Me.Controls.Add(Me.txtDefect)
         Me.Controls.Add(Me.txtMissing)
@@ -1615,10 +1748,6 @@ Partial Class frmCart1
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.btnDefect)
         Me.Controls.Add(Me.btnNoCone)
-        Me.Controls.Add(Me.btnP50)
-        Me.Controls.Add(Me.btnM50)
-        Me.Controls.Add(Me.btnP30)
-        Me.Controls.Add(Me.btnM30)
         Me.Controls.Add(Me.btnCone32)
         Me.Controls.Add(Me.btnCone24)
         Me.Controls.Add(Me.btnCone16)
@@ -1651,12 +1780,31 @@ Partial Class frmCart1
         Me.Controls.Add(Me.btnCone2)
         Me.Controls.Add(Me.btnCone1)
         Me.Controls.Add(Me.btnCone4)
+        Me.Controls.Add(Me.btnZero)
+        Me.Controls.Add(Me.btnP10)
+        Me.Controls.Add(Me.btnM10)
+        Me.Controls.Add(Me.btnP50)
+        Me.Controls.Add(Me.btnM50)
+        Me.Controls.Add(Me.btnP30)
+        Me.Controls.Add(Me.btnM30)
+        Me.Controls.Add(Me.txtP50)
+        Me.Controls.Add(Me.txtM50)
+        Me.Controls.Add(Me.txtP30)
+        Me.Controls.Add(Me.txtM30)
+        Me.Controls.Add(Me.txtHH)
+        Me.Controls.Add(Me.txtLL)
+        Me.Controls.Add(Me.txtZero)
+        Me.Controls.Add(Me.txtM10)
+        Me.Controls.Add(Me.txtLSTD)
+        Me.Controls.Add(Me.btnWaste)
+        Me.Controls.Add(Me.btnBarley)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "frmCart1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Operation Screen"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        Me.GroupBoxHHLL.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1774,4 +1922,14 @@ Partial Class frmCart1
     Friend WithEvents Label7 As Label
     Friend WithEvents lblDoffNum As Label
     Friend WithEvents btnHome As Button
+    Friend WithEvents GroupBoxHHLL As GroupBox
+    Friend WithEvents btnHH As Button
+    Friend WithEvents btnLL As Button
+    Friend WithEvents txtHH As TextBox
+    Friend WithEvents txtLL As TextBox
+    Friend WithEvents txtHSTD As TextBox
+    Friend WithEvents txtLSTD As TextBox
+    Friend WithEvents lblHLSeperation As Label
+    Friend WithEvents txtBoxRemain As TextBox
+    Friend WithEvents lblRemain As Label
 End Class

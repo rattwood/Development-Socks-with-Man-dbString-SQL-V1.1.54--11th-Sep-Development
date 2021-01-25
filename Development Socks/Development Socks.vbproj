@@ -871,5 +871,26 @@
   <ItemGroup>
     <None Include="Resources\DefectStrip.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PatLL.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PatHH.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PatSTD.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PatHSTD.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PatL.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PatLStd.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PatH.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
