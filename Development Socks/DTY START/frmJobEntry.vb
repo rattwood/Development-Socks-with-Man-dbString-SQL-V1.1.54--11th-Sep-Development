@@ -198,6 +198,9 @@ Public Class frmJobEntry
             Case "Round1", "Round2", "Round3", "STD"
                 lblScanType.Text = "Scan First Cheese On Cart"
                 txtLotNumber.Visible = True
+            Case "HLRound1", "HLRound2", "HLRound3", "HL STD"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
         End Select
 
 
@@ -682,6 +685,10 @@ Public Class frmJobEntry
 
     End Sub
 
+    Public Sub AddParam(Name As String, Value As Object)
+        Dim NewParam As New SqlParameter(Name, Value)
+        LParams.Add(NewParam)
+    End Sub
 
 
     Public Sub CheckJob()
@@ -1300,8 +1307,6 @@ Public Class frmJobEntry
 
             'Write error to Log File
             writeerrorLog.writelog("Barcode Error", ex.Message, False, "User Fault")
-            writeerrorLog.writelog("Barcode Error", ex.ToString, False, "User Fault")
-
             Label3.Visible = True
             Label3.Text = "BarCcode Is Not Valid" & vbCrLf & " ไม่พบหมายเลข บาร์โค็ด นี้"
             DelayTM()
@@ -1352,8 +1357,34 @@ Public Class frmJobEntry
                 Me.txtLotNumber.Focus()
                 Exit Sub
             Else
+
+                'Check to see if HHLL grade
+                LAddParam("@prnum", txtLotNumber.Text.Substring(2, 3))
+                LExecQuery("Select * From PRODUCT where prnum = @prnum and prod_HHLL is Not Null")
+                If LRecordCount > 0 Then
+                    HHLL = "YES"
+                End If  'Check to see if HHLL grade
+
+
+
                 Select Case txtGrade.Text
                     Case "Round1"
+                        If HHLL = "YES" Then
+                            Label3.Visible = True
+                            Label3.Text = "THIS CHEESE IS HL Product and CANNOT BE USED" & vbCrLf & " ใม่สามารถใช้ cheese นี้ได้"
+                            DelayTM()
+                            Label3.Visible = False
+                            quit = 1
+                            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                            quit = 1
+
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Visible = True
+                            Me.txtLotNumber.Focus()
+                            Exit Sub
+                        End If
+
+
                         If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 1 Then
                             Label3.Visible = True
                             Label3.Text = "THIS CHEESE CANNOT BE USED" & vbCrLf & " ใม่สามารถใช้ cheese นี้ได้"
@@ -1368,7 +1399,23 @@ Public Class frmJobEntry
                             Me.txtLotNumber.Focus()
                             Exit Sub
                         End If
+
                     Case "Round2"
+                        If HHLL = "YES" Then
+                            Label3.Visible = True
+                            Label3.Text = "THIS CHEESE IS HL Product and CANNOT BE USED" & vbCrLf & " ใม่สามารถใช้ cheese นี้ได้"
+                            DelayTM()
+                            Label3.Visible = False
+                            quit = 1
+                            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                            quit = 1
+
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Visible = True
+                            Me.txtLotNumber.Focus()
+                            Exit Sub
+                        End If
+
                         If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 3 Then
                             Label3.Visible = True
                             Label3.Text = "THIS CHEESE CANNOT BE USED" & vbCrLf & " ใม่สามารถใช้ cheese นี้ได้"
@@ -1384,6 +1431,21 @@ Public Class frmJobEntry
                             Exit Sub
                         End If
                     Case "Round3"
+                        If HHLL = "YES" Then
+                            Label3.Visible = True
+                            Label3.Text = "THIS CHEESE IS HL Product and CANNOT BE USED" & vbCrLf & " ใม่สามารถใช้ cheese นี้ได้"
+                            DelayTM()
+                            Label3.Visible = False
+                            quit = 1
+                            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                            quit = 1
+
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Visible = True
+                            Me.txtLotNumber.Focus()
+                            Exit Sub
+                        End If
+
                         If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 5 Then
                             Label3.Visible = True
                             Label3.Text = "THIS CHEESE CANNOT BE USED" & vbCrLf & " ใม่สามารถใช้ cheese นี้ได้"
@@ -1399,9 +1461,101 @@ Public Class frmJobEntry
                             Exit Sub
                         End If
                     Case "STD"
+                        If HHLL = "YES" Then
+                            Label3.Visible = True
+                            Label3.Text = "THIS CHEESE IS HL Product and CANNOT BE USED" & vbCrLf & " ใม่สามารถใช้ cheese นี้ได้"
+                            DelayTM()
+                            Label3.Visible = False
+                            quit = 1
+                            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                            quit = 1
+
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Visible = True
+                            Me.txtLotNumber.Focus()
+                            Exit Sub
+                        End If
+
                         If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 7 Then
                             Label3.Visible = True
                             Label3.Text = "THIS CHEESE CANNOT BE USED" & vbCrLf & " ใม่สามารถใช้ cheese นี้ได้"
+                            DelayTM()
+                            Label3.Visible = False
+                            quit = 1
+                            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                            quit = 1
+
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Visible = True
+                            Me.txtLotNumber.Focus()
+                            Exit Sub
+                        End If
+
+                    Case "HLRound1"
+                        If Not HHLL = "YES" Then
+                            Label3.Visible = True
+                            Label3.Text = "THIS CHEESE IS NOT HL PRODUCT and CANNOT BE USED" & vbCrLf & "cheese ลูกนี้ ไม่ใช่ HL product และ ไม่สามารถนำมาใช้ได้"
+                            DelayTM()
+                            Label3.Visible = False
+                            quit = 1
+                            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                            quit = 1
+
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Visible = True
+                            Me.txtLotNumber.Focus()
+                            Exit Sub
+
+
+                        End If
+                        If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 1 Then
+                            Label3.Visible = True
+                            Label3.Text = "THIS CHEESE IS NOT HL PRODUCT and CANNOT BE USED" & vbCrLf & "cheese ลูกนี้ ไม่ใช่ HL product และ ไม่สามารถนำมาใช้ได้"
+                            DelayTM()
+                            Label3.Visible = False
+                            quit = 1
+                            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                            quit = 1
+
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Visible = True
+                            Me.txtLotNumber.Focus()
+                            Exit Sub
+                        End If
+                    Case "HLRound2"
+                        If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 3 Then
+                            Label3.Visible = True
+                            Label3.Text = "THIS CHEESE IS NOT HL PRODUCT and CANNOT BE USED" & vbCrLf & "cheese ลูกนี้ ไม่ใช่ HL product และ ไม่สามารถนำมาใช้ได้"
+                            DelayTM()
+                            Label3.Visible = False
+                            quit = 1
+                            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                            quit = 1
+
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Visible = True
+                            Me.txtLotNumber.Focus()
+                            Exit Sub
+                        End If
+                    Case "HLRound3"
+                        If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 5 Then
+                            Label3.Visible = True
+                            Label3.Text = "THIS CHEESE IS NOT HL PRODUCT and CANNOT BE USED" & vbCrLf & "cheese ลูกนี้ ไม่ใช่ HL product และ ไม่สามารถนำมาใช้ได้"
+                            DelayTM()
+                            Label3.Visible = False
+                            quit = 1
+                            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                            quit = 1
+
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Visible = True
+                            Me.txtLotNumber.Focus()
+                            Exit Sub
+                        End If
+                    Case "HL STD"
+                        If frmDGV.DGVdata.Rows(0).Cells("STDSTATE").Value <> 7 Then
+                            Label3.Visible = True
+                            Label3.Text = "THIS CHEESE IS NOT HL PRODUCT and CANNOT BE USED" & vbCrLf & "cheese ลูกนี้ ไม่ใช่ HL product และ ไม่สามารถนำมาใช้ได้"
                             DelayTM()
                             Label3.Visible = False
                             quit = 1
@@ -1418,6 +1572,9 @@ Public Class frmJobEntry
         End If
 
         'Extract requierd Informatiom
+
+
+
         varProductCode = txtLotNumber.Text.Substring(2, 3)
         year = txtLotNumber.Text.Substring(5, 2)
         month = txtLotNumber.Text.Substring(7, 2)
@@ -1497,6 +1654,14 @@ Public Class frmJobEntry
             Case "Round3"
                 LExecQuery("Select * FROM Jobs Where Stdstate  = 5 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "'ORDER BY CONENUM ")
             Case "STD"
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 7 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "'ORDER BY CONENUM ")
+            Case "HLRound1"
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 1 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' ORDER BY CONENUM ")
+            Case "HLRound2"
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 3 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' ORDER BY CONENUM")
+            Case "HLRound3"
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 5 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "'ORDER BY CONENUM ")
+            Case "HL STD"
                 LExecQuery("Select * FROM Jobs Where Stdstate  = 7 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "'ORDER BY CONENUM ")
 
 
@@ -2214,6 +2379,46 @@ Public Class frmJobEntry
         stdcheck = 1
     End Sub
 
+    Private Sub Round1ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles Round1ToolStripMenuItem1.Click
+        stdReChk = 0
+        txtGrade.Text = Round1ToolStripMenuItem1.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan First Cheese on Cart"
+        stdcheck = 1
+    End Sub
+
+    Private Sub Round2ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles Round2ToolStripMenuItem1.Click
+        stdReChk = 0
+        txtGrade.Text = Round2ToolStripMenuItem1.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan First Cheese on Cart"
+        stdcheck = 1
+    End Sub
+
+    Private Sub Round3ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles Round3ToolStripMenuItem1.Click
+        stdReChk = 0
+        txtGrade.Text = Round3ToolStripMenuItem1.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan First Cheese on Cart"
+        stdcheck = 1
+    End Sub
+
+    Private Sub HLStdToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HLStdToolStripMenuItem.Click
+        stdReChk = 0
+        txtGrade.Text = HLStdToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan First Cheese on Cart"
+        stdcheck = 1
+    End Sub
+
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
         stdReChk = 0
         txtGrade.Text = ToolStripMenuItem1.Text
@@ -2282,6 +2487,8 @@ Public Class frmJobEntry
         txtOperator.Focus()
         lblScanType.Text = "Scan Job Sheet"
     End Sub
+
+
 
     Private Sub PrintToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintToolStripMenuItem.Click
         Me.Hide()
