@@ -48,6 +48,25 @@ Public Class frmStdCreate
             Case "STD"
                 Label2.Text = "Final"
                 stdChkNum = 7
+            Case "HLRound1"
+                Label1.Text = "Compare HL Std -"
+                Label2.Text = "1"
+                stdChkNum = 1
+                reqstate = 2
+            Case "HLRound2"
+                Label1.Text = "Compare HL Std -"
+                Label2.Text = "2"
+                stdChkNum = 3
+                reqstate = 4
+            Case "HLRound3"
+                Label1.Text = "Compare HL Std -"
+                Label2.Text = "3"
+                stdChkNum = 5
+                reqstate = 6
+            Case "HL STD"
+                Label1.Text = "Compare HL Std -"
+                Label2.Text = "Final"
+                stdChkNum = 7
         End Select
 
         'Header Information
@@ -129,6 +148,18 @@ Public Class frmStdCreate
                         frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 65            ' CREATE 3rd Round SHEET 1
                     Case "STD"
                         frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 75            'CREATE Final Sheet
+                    Case "HLRound1"
+                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 25            ' CREATE 1st Round  SHEET 1&2
+                    Case "HLRound2"
+                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 45            ' CREATE 2nd Round SHEET 1
+                    Case "HLRound3"
+                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 65            ' CREATE 3rd Round SHEET 1
+                    Case "HL STD"
+                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 75            'CREATE Final Sheet
+
+
+
+
                 End Select
 
                 If My.Settings.debugSet Then
@@ -235,6 +266,15 @@ Public Class frmStdCreate
                 frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 65 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
             Case "STD"
                 frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 75 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+            Case "HLRound1"
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 25 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "'  ORDER BY RECHKIDX ")
+            Case "HLRound2"
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 45 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+            Case "HLRound3"
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 65 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+            Case "HL STD"
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 75 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+
         End Select
 
         Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(frmJobEntry.LDA)
@@ -260,6 +300,22 @@ Public Class frmStdCreate
                         frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 6
                     Next
                 Case "STD"
+                    For i = 1 To frmJobEntry.LRecordCount
+                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 8
+                    Next
+                Case "HLRound1"
+                    For i = 1 To frmJobEntry.LRecordCount
+                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 2
+                    Next
+                Case "HLRound2"
+                    For i = 1 To frmJobEntry.LRecordCount
+                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 4
+                    Next
+                Case "HLRound3"
+                    For i = 1 To frmJobEntry.LRecordCount
+                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 6
+                    Next
+                Case "HL STD"
                     For i = 1 To frmJobEntry.LRecordCount
                         frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 8
                     Next
@@ -330,10 +386,6 @@ Public Class frmStdCreate
     Private Sub UpdateDatabase()
 
         tsbtnSave()
-
-
-
-
 
         '******************   THIS WILL WRITE ANY CHANGES MADE TO THE DATAGRID BACK TO THE DATABASE ******************
 

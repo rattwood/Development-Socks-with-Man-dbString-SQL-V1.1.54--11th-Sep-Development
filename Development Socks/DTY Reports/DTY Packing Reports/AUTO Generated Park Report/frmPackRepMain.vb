@@ -237,7 +237,7 @@ Public Class frmPackRepMain
                 template = (My.Settings.dirTemplate & "\" & "Packing P35 BS Template.xlsx").ToString
             Case "ReCheck"
                 template = (My.Settings.dirTemplate & "\" & "Recheck Template.xlsx").ToString
-            Case "Round1", "Round2", "Round3", "STD" 'FORM FOR STANDARd COMPARE FROM SORT
+            Case "Round1", "Round2", "Round3", "STD", "HLRound1", "HLRound2", "HLRound3", "HL STD" 'FORM FOR STANDARd COMPARE FROM SORT
                 template = (My.Settings.dirTemplate & "\" & "STDCompare Template.xlsx").ToString
             Case "Pilot 6Ch"
                 template = (My.Settings.dirTemplate & "\" & "PILOT 6Ch..xlsx").ToString
@@ -281,7 +281,7 @@ Public Class frmPackRepMain
                     frmPackTodayUpdate.TodayUpdateBS_AS_20()
                 Case "ReCheck"
                     frmPackTodayUpdate.todayUpdate_ReCheck()
-                Case "Round1", "Round2", "Round3", "STD" 'FORM FOR STANDARE COMPARE FROM SORT
+                Case "Round1", "Round2", "Round3", "STD", "HLRound1", "HLRound2", "HLRound3", "HL STD" 'FORM FOR STANDARE COMPARE FROM SORT
                     frmPackTodayUpdate.todayUpdate_STD()
                 Case "Pilot 6Ch"
                     frmPackTodayUpdate.todayUpdate_pilot6()
@@ -301,7 +301,16 @@ Public Class frmPackRepMain
 
 
 
-            If frmJobEntry.txtGrade.Text <> "Round1" And frmJobEntry.txtGrade.Text <> "Round2" And frmJobEntry.txtGrade.Text <> "Round3" And frmJobEntry.txtGrade.Text <> "STD" Then  'IF RECHECK DO NOT GET SHEETS FROM PREVIOUS DAY
+            If frmJobEntry.txtGrade.Text <> "Round1" And
+                frmJobEntry.txtGrade.Text <> "Round2" And
+                frmJobEntry.txtGrade.Text <> "Round3" And
+                frmJobEntry.txtGrade.Text <> "STD" And
+                frmJobEntry.txtGrade.Text <> "HLRound1" And
+                frmJobEntry.txtGrade.Text <> "HLRound2" And
+                frmJobEntry.txtGrade.Text <> "HLRound3" And
+                frmJobEntry.txtGrade.Text <> "HL STD" Then
+
+                'IF RECHECK DO NOT GET SHEETS FROM PREVIOUS DAY
 
 
 
@@ -337,47 +346,52 @@ Public Class frmPackRepMain
 
 
 
-        '   If frmJobEntry.txtGrade.Text <> "Round1" And frmJobEntry.txtGrade.Text <> "Round2" And frmJobEntry.txtGrade.Text <> "Round3" And frmJobEntry.txtGrade.Text <> "STD" And frmJobEntry.txtGrade.Text <> "ReCheck" Then  'IF RECHECK DO NOT GET SHEETS FROM PREVIOUS DAY
+        If frmJobEntry.txtGrade.Text <> "Round1" And frmJobEntry.txtGrade.Text <> "Round2" And
+            frmJobEntry.txtGrade.Text <> "Round3" And frmJobEntry.txtGrade.Text <> "STD" And
+            frmJobEntry.txtGrade.Text <> "HLRound1" And frmJobEntry.txtGrade.Text <> "HLRound2" And
+            frmJobEntry.txtGrade.Text <> "HLRound3" And frmJobEntry.txtGrade.Text <> "HLSTD" And
+            frmJobEntry.txtGrade.Text <> "ReCheck" Then  'IF RECHECK DO NOT GET SHEETS FROM PREVIOUS DAY
 
-        ' routine to check if a today directory exists otherwise creat a new one
-        'Check to see if we have any sheets for this product and Grade in previous days
-        SQLL.AddParam("@searchsheet", sheetSearch)
+            ' routine to check if a today directory exists otherwise creat a new one
+            'Check to see if we have any sheets for this product and Grade in previous days
+            SQLL.AddParam("@searchsheet", sheetSearch)
             Dim daysstring As Integer = "-" & My.Settings.searchDays
             SQLL.AddParam("@days", daysstring)
 
 
 
 
-        Try
+            Try
 
 
-            SQLL.ExecQuery("Select MAX(PACKENDTM) PACKENDTM from jobs where packendtm between DateAdd(DD, @days, GETDATE()) and GetDATE() and (packsheetbcode like  '%' +  @searchsheet  + '%')")
+                SQLL.ExecQuery("Select MAX(PACKENDTM) PACKENDTM from jobs where packendtm between DateAdd(DD, @days, GETDATE()) and GetDATE() and (packsheetbcode like  '%' +  @searchsheet  + '%')")
 
-            If SQLL.RecordCount > 0 Then
-
-
-                'LOAD THE DATA FROM dB IN TO THE DATAGRID
-                DGVSheetDate.DataSource = SQLL.SQLDS.Tables(0)
-                DGVSheetDate.Rows(0).Selected = True
+                If SQLL.RecordCount > 0 Then
 
 
-                If Not IsDBNull(DGVSheetDate.Rows(0).Cells("PACKENDTM").Value) Then
+                    'LOAD THE DATA FROM dB IN TO THE DATAGRID
+                    DGVSheetDate.DataSource = SQLL.SQLDS.Tables(0)
+                    DGVSheetDate.Rows(0).Selected = True
 
 
-                    tmp_sheetdate = DGVSheetDate.Rows(0).Cells("PACKENDTM").Value
-                    sheetDate = tmp_sheetdate.ToString("dd_MM_yyyy")
+                    If Not IsDBNull(DGVSheetDate.Rows(0).Cells("PACKENDTM").Value) Then
+
+
+                        tmp_sheetdate = DGVSheetDate.Rows(0).Cells("PACKENDTM").Value
+                        sheetDate = tmp_sheetdate.ToString("dd_MM_yyyy")
+                    End If
                 End If
-            End If
 
-        Catch ex As Exception
-            writeerrorLog.writelog("xlConeCount", ex.Message, True, "System_Fault")
-            writeerrorLog.writelog("xlConeCount", ex.ToString, True, "System_Fault")
+            Catch ex As Exception
+                writeerrorLog.writelog("xlConeCount", ex.Message, True, "System_Fault")
+                writeerrorLog.writelog("xlConeCount", ex.ToString, True, "System_Fault")
 
-            MsgBox(ex.ToString)
+                MsgBox(ex.ToString)
 
-        End Try
+            End Try
+        End If
 
-            PrevPath1 = (My.Settings.dirPacking & "\" & sheetDate)
+        PrevPath1 = (My.Settings.dirPacking & "\" & sheetDate)
 
 
         todayPath = (My.Settings.dirPacking & "\" & Date.Now.ToString("dd_MM_yyyy"))

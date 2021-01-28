@@ -1548,7 +1548,7 @@ Partial Class frmCart1
         '
         Me.GroupBoxHHLL.Controls.Add(Me.btnHH)
         Me.GroupBoxHHLL.Controls.Add(Me.btnLL)
-        Me.GroupBoxHHLL.Location = New System.Drawing.Point(384, 362)
+        Me.GroupBoxHHLL.Location = New System.Drawing.Point(369, 359)
         Me.GroupBoxHHLL.Name = "GroupBoxHHLL"
         Me.GroupBoxHHLL.Size = New System.Drawing.Size(212, 96)
         Me.GroupBoxHHLL.TabIndex = 143
@@ -1557,7 +1557,7 @@ Partial Class frmCart1
         '
         'btnHH
         '
-        Me.btnHH.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.btnHH.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
         Me.btnHH.Cursor = System.Windows.Forms.Cursors.Arrow
         Me.btnHH.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnHH.ForeColor = System.Drawing.Color.Black
@@ -1571,7 +1571,7 @@ Partial Class frmCart1
         '
         'btnLL
         '
-        Me.btnLL.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.btnLL.BackColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.btnLL.Cursor = System.Windows.Forms.Cursors.Arrow
         Me.btnLL.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLL.ForeColor = System.Drawing.Color.Black

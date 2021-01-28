@@ -590,14 +590,47 @@ Public Class frmCart1
                 'If cl > 12 And cl < 15 Then Continue For
 
 
-                If cl = 15 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.Zero       'ZERO CONE
-                If cl = 16 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.BARRE     'BARLEY
-                If cl = 17 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M10  'M10
-                If cl = 18 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P10     'P10
-                If cl = 19 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M30    'M30
-                If cl = 20 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P30   'P30
-                If cl = 21 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M50      'M50
-                If cl = 22 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P50     'P50
+                If cl = 15 And cellVal > 0 Then
+                    If lclHHLL = "YES" Then
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.BARRE     'BARLEY
+                    Else
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.Zero       'ZERO CONE
+                    End If
+
+
+                End If
+                If cl = 16 And cellVal > 0 Then
+                    If lclHHLL = "YES" Then
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.BARRE     'BARLEY
+                    Else
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.BARRE     'BARLEY
+                    End If
+                End If
+
+                If cl = 17 And cellVal > 0 Then
+                    Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M10  'M10
+
+                End If
+                If cl = 18 And cellVal > 0 Then
+                    Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P10     'P10
+
+                End If
+                If cl = 19 And cellVal > 0 Then
+                    Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M30    'M30
+
+                End If
+                If cl = 20 And cellVal > 0 Then
+                    Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P30   'P30
+
+                End If
+                If cl = 21 And cellVal > 0 Then
+                    Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M50      'M50
+
+                End If
+                If cl = 22 And cellVal > 0 Then
+                    Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P50     'P50
+
+                End If
 
 
 
@@ -635,18 +668,20 @@ Public Class frmCart1
 
                 If Not IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value) Then
                     If frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value = "H" Then
-                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.PatH
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.H
                         Me.Controls("btnCone" & rw).Enabled = False
                         remaincount = remaincount - 1
 
 
                     ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value = "L" Then
-                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.PatL
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.L
                         Me.Controls("btnCone" & rw).Enabled = False
                         remaincount = remaincount - 1
 
                     ElseIf frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value = "H Std" Then
-                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.PatHSTD
+
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.H_Std
+
                         Me.Controls("btnCone" & rw).Enabled = False
                         remaincount = remaincount - 1
 
@@ -2002,7 +2037,8 @@ Public Class frmCart1
 
 
         If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
-        frmDGV.DGVdata.ClearSelection()
+        frmDGV.DGVdata.DataSource = Nothing
+        'frmDGV.DGVdata.ClearSelection()
         frmJobEntry.Show()
         frmJobEntry.txtLotNumber.Clear()
         frmJobEntry.txtLotNumber.Focus()
@@ -2015,7 +2051,8 @@ Public Class frmCart1
 
     Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
         If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
-        frmDGV.DGVdata.ClearSelection()
+        'frmDGV.DGVdata.ClearSelection()
+        frmDGV.DGVdata.DataSource = Nothing
         frmJobEntry.Show()
         frmJobEntry.txtLotNumber.Clear()
         frmJobEntry.txtLotNumber.Focus()
@@ -3326,8 +3363,15 @@ Public Class frmCart1
 
             Me.btnVisGrade.Enabled = True
             Me.btnBarley.Enabled = True
-            Me.btnWaste.Visible = True
-            Me.btnWaste.Enabled = True
+
+            If lclHHLL = "YES" And btnLL.Visible Then
+                Me.btnWaste.Visible = False
+            Else
+                Me.btnWaste.Visible = True
+                Me.btnWaste.Enabled = True
+            End If
+
+
             Me.btnShort.Enabled = False
             Me.btnNoCone.Enabled = False
             Me.btnDefect.Enabled = False
@@ -3344,13 +3388,13 @@ Public Class frmCart1
             'Me.btnShortSave.Visible = False
             Me.btnClear.Visible = False
 
-            If My.Settings.chkUseSort And lclHHLL = "YES" Then
-                Me.btnStdCheese.Visible = True
-            Else
-                Me.btnStdCheese.Visible = False
-            End If
+                If My.Settings.chkUseSort And lclHHLL = "YES" Then
+                    Me.btnStdCheese.Visible = True
+                Else
+                    Me.btnStdCheese.Visible = False
+                End If
 
-            If shortCone = 1 Then coneCount = coneCount Else coneCount = coneCount + 1  'if Short being set do not add to cone count
+                If shortCone = 1 Then coneCount = coneCount Else coneCount = coneCount + 1  'if Short being set do not add to cone count
                 'lblConeCount.Text = coneCount
 
             Else
@@ -3559,7 +3603,7 @@ Public Class frmCart1
 
         'list of Array Feilds to Update
 
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells(8).Value = frmJobEntry.varUserName  'operatorName   fron entry screen
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("OPNAME").Value = frmJobEntry.varUserName  'operatorName   fron entry screen
 
         If My.Settings.chkUseSort Or My.Settings.chkUseColour Then
 
@@ -3569,6 +3613,12 @@ Public Class frmCart1
 
 
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("MISSCONE").Value = NoCone  'missingCone
+
+
+            If lclHHLL = "YES" And Val(NoCone) > 0 Then
+                frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("HHLL").Value = "MISS"
+            End If
+
 
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("DEFCONE").Value = defect  'defectCone
         End If
@@ -3582,19 +3632,19 @@ Public Class frmCart1
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("M50").Value = coneM50   'coneM50
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("P50").Value = coneP50  'coneP50
 
-        If valHH > 0 Then
+        If Val(valHH) > 0 Then
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("HHLL").Value = "H"
         End If
 
-        If valLL > 0 Then
+        If Val(valLL) > 0 Then
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("HHLL").Value = "L"
         End If
 
-        If valHStd > 0 Then
+        If Val(valHStd) > 0 Then
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("HHLL").Value = "H Std"
         End If
 
-        If lclHHLL = "YES" And NoCone > 0 Then
+        If lclHHLL = "YES" And Val(NoCone) > 0 Then
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("HHLL").Value = "MISS"
         End If
 
@@ -3812,9 +3862,6 @@ Public Class frmCart1
 
             If frmJobEntry.LDS.HasChanges Then
 
-
-                'frmJobEntry.LDA.UpdateCommand = New Oracle.ManagedDataAccess.Client.OracleCommandBuilder(frmJobEntry.LDA).GetUpdateCommand
-
                 frmJobEntry.LDA.Update(frmJobEntry.LDS.Tables(0))
 
             End If
@@ -3855,32 +3902,45 @@ Public Class frmCart1
 
             coneref = frmDGV.DGVdata.Rows(rows - 1).Cells("BCODECONE").Value
 
+
             If Not IsDBNull(frmDGV.DGVdata.Rows(rows - 1).Cells("STDCHEESE").Value) Then
                 If frmDGV.DGVdata.Rows(rows - 1).Cells("STDCHEESE").Value > "0" Then
-                    frmJobEntry.LExecQuery("UPDATE jobs SET stdcheese = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("STDCHEESE").Value & "' Where bcodecone = '" & coneref & "' ")
-                    frmJobEntry.LExecQuery("UPDATE jobs SET stdstate = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("STDSTATE").Value & "' Where bcodecone = '" & coneref & "' ")
+
+                    frmJobEntry.AddParam("@bcodecart", frmJobEntry.txtLotNumber.Text)
+                    frmJobEntry.AddParam("@bcodecone", coneref)
+
+                    frmJobEntry.LExecQuery("UPDATE Jobs SET STDCHEESE = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("STDCHEESE").Value & "' ," _
+                                           & "  STDSTATE = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("STDSTATE").Value & "'  Where bcodecart = @bcodecart and bcodecone = @bcodecone ")
+
+                    ' frmJobEntry.LExecQuery("UPDATE Jobs SET STDSTATE = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("STDSTATE").Value & "' Where bcodecone = '" & coneref & "' ")
+
+
+                    frmJobEntry.AddParam("@bcodecart", frmJobEntry.txtLotNumber.Text)
+                    frmJobEntry.AddParam("@bcodecone", coneref)
 
                     If lclHHLL = "YES" Then
                         If Not IsDBNull(frmDGV.DGVdata.Rows(rows - 1).Cells("HHLL").Value) Then
-                            frmJobEntry.LExecQuery("UPDATE jobs SET HHLL = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("HHLL").Value & "' Where bcodecone = '" & coneref & "' ")
-                            ' frmJobEntry.LExecQuery("UPDATE jobs SET HHLL_Res = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("HHLL_Res").Value & "' Where bcodecone = '" & coneref & "' ")
+                            frmJobEntry.LExecQuery("UPDATE jobs SET HHLL = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("HHLL").Value & "' Where bcodecart =  @bcodecart and bcodecone = @bcodecone ")
+                            '        ' frmJobEntry.LExecQuery("UPDATE jobs SET HHLL_Res = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("HHLL_Res").Value & "' Where bcodecone = '" & coneref & "' ")
                         End If
                     End If
 
                 Else
-                    frmJobEntry.LExecQuery("UPDATE jobs SET stdcheese = NULL Where bcodecone = '" & coneref & "' ")
-                    frmJobEntry.LExecQuery("UPDATE jobs SET stdstate = NULL Where bcodecone = '" & coneref & "' ")
+                    frmJobEntry.AddParam("@bcodecart", frmJobEntry.txtLotNumber.Text)
+                    frmJobEntry.AddParam("@bcodecone", coneref)
 
-                    If lclHHLL = "YES" Then
-                        frmJobEntry.LExecQuery("UPDATE jobs SET HHLL = NULL Where bcodecone = '" & coneref & "' ")
-                        ' frmJobEntry.LExecQuery("UPDATE jobs SET HHLL_Res = NULL Where bcodecone = '" & coneref & "' ")
-                    End If
+                    frmJobEntry.LExecQuery("UPDATE jobs SET stdcheese = NULL,stdstate = NULL Where bcodecart = @bcodecart and  bcodecone = @bcodecone ")
+                    'frmJobEntry.LExecQuery("UPDATE jobs SET stdstate = NULL Where bcodecone = '" & coneref & "' ")
+
+                    'If lclHHLL = "YES" Then
+                    '    frmJobEntry.LExecQuery("UPDATE jobs SET HHLL = NULL Where bcodecone = '" & coneref & "' ")
+                    '    '    ' frmJobEntry.LExecQuery("UPDATE jobs SET HHLL_Res = NULL Where bcodecone = '" & coneref & "' ")
+                    'End If
 
                 End If
             End If
-
-
         Next
+
     End Sub
 
 

@@ -2762,6 +2762,35 @@ Public Class frmPackTodayUpdate
                             frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = modBarcode
                             nfree = nfree + 1
                         End If
+                    Case "HLRound1"
+                        'WRITE CONE NUMBER TO SHEET
+                        If frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 2 Then
+                            MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
+                            frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = modBarcode
+                            nfree = nfree + 1
+                        End If
+                    Case "HLRound2"
+                        'WRITE CONE NUMBER TO SHEET
+                        If frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 4 Then
+                            MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
+                            frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = modBarcode
+                            nfree = nfree + 1
+                        End If
+                    Case "HLRound3"
+                        'WRITE CONE NUMBER TO SHEET
+                        If frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 6 Then
+                            MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
+                            frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = modBarcode
+                            nfree = nfree + 1
+                        End If
+                    Case "HL STD"
+                        'WRITE CONE NUMBER TO SHEET
+                        If frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 8 Then
+                            MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
+                            frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = modBarcode
+                            nfree = nfree + 1
+                        End If
+
                 End Select
 
 

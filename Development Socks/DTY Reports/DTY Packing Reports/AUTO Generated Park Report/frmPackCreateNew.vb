@@ -376,7 +376,7 @@ Public Class frmPackCreateNew
                 createBarcode()
                 MyPakExcel.Cells(1, 3) = SheetCodeString
 
-            Case "Round1", "Round2", "Round3", "STD"
+            Case "Round1", "Round2", "Round3", "STD", "HLRound1", "HLRound2", "HLRound3", "HL STD"
                 nfree = 9
                 Dim prodTf As String
 
@@ -410,6 +410,18 @@ Public Class frmPackCreateNew
                     Case "STD"
                         'Sheet Name
                         MyPakExcel.Cells(2, 2) = "Compare STD"
+                    Case "HLRound1"
+                        'Sheet Name
+                        MyPakExcel.Cells(2, 2) = "Compare HL STD 1"
+                    Case "HLRound2"
+                        'Sheet Name
+                        MyPakExcel.Cells(2, 2) = "Compare HL STD 2"
+                    Case "HLRound3"
+                        'Sheet Name
+                        MyPakExcel.Cells(2, 2) = "Compare HL STD 3"
+                    Case "HL STD"
+                        'Sheet Name
+                        MyPakExcel.Cells(2, 2) = "Compare HL STD"
                 End Select
 
 
@@ -689,7 +701,7 @@ Public Class frmPackCreateNew
                 frmPackTodayUpdate.TodayUpdateBS_AS_20()
             Case "ReCheck"
                 frmPackTodayUpdate.todayUpdate_ReCheck()
-            Case "Round1", "Round2", "Round3", "STD"
+            Case "Round1", "Round2", "Round3", "STD", "HLRound1", "HLRound2", "HLRound3", "HL STD"
                 frmPackTodayUpdate.todayUpdate_STD()
             Case "Pilot 6Ch"
                 frmPackTodayUpdate.todayUpdate_pilot6()
@@ -699,11 +711,6 @@ Public Class frmPackCreateNew
                 frmPackTodayUpdate.todayUpdate_pilot20()
 
         End Select
-
-
-
-
-
 
         Me.Close()
 
@@ -768,6 +775,14 @@ Public Class frmPackCreateNew
             Case "Round3"
                 gradeTxt = "R3" 'ReCheck Grade
             Case "STD"
+                gradeTxt = "STD" 'ReCheck Grade
+            Case "HLRound1"
+                gradeTxt = "R1" 'ReCheck Grade
+            Case "HLRound2"
+                gradeTxt = "R2" 'ReCheck Grade
+            Case "HLRound3"
+                gradeTxt = "R3" 'ReCheck Grade
+            Case "HL STD"
                 gradeTxt = "STD" 'ReCheck Grade
             Case "Pilot 6Ch"
                 gradeTxt = "PI06" 'A Grade 6 Cheese per box

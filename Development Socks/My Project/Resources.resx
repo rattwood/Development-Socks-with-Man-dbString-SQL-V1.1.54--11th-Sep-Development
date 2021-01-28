@@ -175,4 +175,61 @@
   <data name="PatLSTD" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PatLStd.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="L_B" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\L B.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="L_D" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\L D.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="L_DD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\L DD.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="L_L" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\L L.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="L_LL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\L LL.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="L_MM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\L MM.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SH_B" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SH B.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SH_D" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SH D.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SH_L" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SH L.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SH_M" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SH M.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="H_B" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\H B.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="H_MM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\H MM.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="H" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\H.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="H_D" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\H D.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="H_DD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\H DD.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="H_L" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\H L.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="H_LL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\H LL.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="H_Std" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\H Std.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="L" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\L.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -892,5 +892,86 @@
   <ItemGroup>
     <None Include="Resources\PatH.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H B - Copy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H D - Copy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H DD - Copy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H L - Copy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H LL - Copy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H MM - Copy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L B - Copy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SH B.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SH D.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SH L.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SH M.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H B.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H D.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H DD.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H L.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H LL.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H MM.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H Std.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L B.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L D.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L DD.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L L.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L LL.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L MM.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

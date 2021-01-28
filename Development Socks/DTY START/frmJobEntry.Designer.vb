@@ -109,6 +109,11 @@ Partial Class frmJobEntry
         Me.Round2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Round3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StdSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Round1ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Round2ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Round3ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HLStdToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripTextBox5 = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ReCheckToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -637,7 +642,7 @@ Partial Class frmJobEntry
         '
         'PrintFormsToolStripMenuItem
         '
-        Me.PrintFormsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox4, Me.ToolStripSeparator6, Me.ToolStripMenuItem1, Me.ToolStripSeparator2, Me.ToolStripSeparator1, Me.ToolStripTextBox1, Me.ToolStripSeparator4, Me.CompareSTDToolStripMenuItem, Me.ToolStripTextBox5, Me.ToolStripSeparator5, Me.ReCheckToolStripMenuItem1})
+        Me.PrintFormsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox4, Me.ToolStripSeparator6, Me.ToolStripMenuItem1, Me.ToolStripSeparator2, Me.ToolStripSeparator1, Me.ToolStripTextBox1, Me.ToolStripSeparator4, Me.CompareSTDToolStripMenuItem, Me.ToolStripMenuItem4, Me.ToolStripTextBox5, Me.ToolStripSeparator5, Me.ReCheckToolStripMenuItem1})
         Me.PrintFormsToolStripMenuItem.Name = "PrintFormsToolStripMenuItem"
         Me.PrintFormsToolStripMenuItem.Size = New System.Drawing.Size(79, 20)
         Me.PrintFormsToolStripMenuItem.Text = "Sort Grades"
@@ -696,26 +701,57 @@ Partial Class frmJobEntry
         '
         Me.Round1ToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Round1ToolStripMenuItem.Name = "Round1ToolStripMenuItem"
-        Me.Round1ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
+        Me.Round1ToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.Round1ToolStripMenuItem.Text = "Round1"
         '
         'Round2ToolStripMenuItem
         '
         Me.Round2ToolStripMenuItem.Name = "Round2ToolStripMenuItem"
-        Me.Round2ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
+        Me.Round2ToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.Round2ToolStripMenuItem.Text = "Round2"
         '
         'Round3ToolStripMenuItem
         '
         Me.Round3ToolStripMenuItem.Name = "Round3ToolStripMenuItem"
-        Me.Round3ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
+        Me.Round3ToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.Round3ToolStripMenuItem.Text = "Round3"
         '
         'StdSheetToolStripMenuItem
         '
         Me.StdSheetToolStripMenuItem.Name = "StdSheetToolStripMenuItem"
-        Me.StdSheetToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
+        Me.StdSheetToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.StdSheetToolStripMenuItem.Text = "STD"
+        '
+        'ToolStripMenuItem4
+        '
+        Me.ToolStripMenuItem4.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Round1ToolStripMenuItem1, Me.Round2ToolStripMenuItem1, Me.Round3ToolStripMenuItem1, Me.HLStdToolStripMenuItem})
+        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(270, 22)
+        Me.ToolStripMenuItem4.Text = "Create HL STD Compare Sheets "
+        '
+        'Round1ToolStripMenuItem1
+        '
+        Me.Round1ToolStripMenuItem1.Name = "Round1ToolStripMenuItem1"
+        Me.Round1ToolStripMenuItem1.Size = New System.Drawing.Size(130, 22)
+        Me.Round1ToolStripMenuItem1.Text = "HLRound1"
+        '
+        'Round2ToolStripMenuItem1
+        '
+        Me.Round2ToolStripMenuItem1.Name = "Round2ToolStripMenuItem1"
+        Me.Round2ToolStripMenuItem1.Size = New System.Drawing.Size(130, 22)
+        Me.Round2ToolStripMenuItem1.Text = "HLRound2"
+        '
+        'Round3ToolStripMenuItem1
+        '
+        Me.Round3ToolStripMenuItem1.Name = "Round3ToolStripMenuItem1"
+        Me.Round3ToolStripMenuItem1.Size = New System.Drawing.Size(130, 22)
+        Me.Round3ToolStripMenuItem1.Text = "HLRound3"
+        '
+        'HLStdToolStripMenuItem
+        '
+        Me.HLStdToolStripMenuItem.Name = "HLStdToolStripMenuItem"
+        Me.HLStdToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
+        Me.HLStdToolStripMenuItem.Text = "HL STD"
         '
         'ToolStripTextBox5
         '
@@ -959,4 +995,9 @@ Partial Class frmJobEntry
     Friend WithEvents SLLToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SLBToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem4 As ToolStripMenuItem
+    Friend WithEvents Round1ToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents Round2ToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents Round3ToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents HLStdToolStripMenuItem As ToolStripMenuItem
 End Class
