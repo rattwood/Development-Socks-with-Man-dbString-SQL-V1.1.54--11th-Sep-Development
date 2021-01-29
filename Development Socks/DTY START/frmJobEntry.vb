@@ -110,6 +110,7 @@ Public Class frmJobEntry
 
         If My.Settings.chkUsePack Then ToolsToolStripMenuItem.Visible = True Else ToolsToolStripMenuItem.Visible = False
         If My.Settings.chkUsePack Then PackingGradeToolStripMenuItem.Visible = True Else PackingGradeToolStripMenuItem.Visible = False
+        If My.Settings.chkUsePack Then PackingHLProductsToolStripMenuItem.Visible = True Else PackingHLProductsToolStripMenuItem.Visible = False
         If My.Settings.chkUsePack Then ReportsToolStripMenuItem.Visible = True Else ReportsToolStripMenuItem.Visible = False
         If My.Settings.chkUsePack Then btnSearchCone.Visible = False Else btnSearchCone.Visible = True
 
@@ -179,7 +180,7 @@ Public Class frmJobEntry
 
         'New section to display correct text for scan type
         Select Case txtGrade.Text
-            Case "A", "Normal", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch", "ReCheckA"
+            Case "A", "Normal", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch", "ReCheckA", "HL Seperation"
                 lblScanType.Text = "Scan Job Sheet"
                 txtLotNumber.Visible = True
 
@@ -638,8 +639,16 @@ Public Class frmJobEntry
             End If
         End If
 
-        'THIS Selects "A" Packing Routine
-        If My.Settings.chkUsePack Then APacking()
+        'THIS Selects "A" Packing Routine and if HL master cart show seperation
+        If My.Settings.chkUsePack Then
+            If HHLL = "Yes" Then
+                MsgBox("we have arrived at seperation screen")
+            Else
+                APacking()
+            End If
+
+            'APacking()
+        End If
 
 
 
@@ -1205,10 +1214,24 @@ Public Class frmJobEntry
                 LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '9' and FLT_S = 'False'  ")
             Else
                 LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND HHLL Is NOT NULL  ")
+
+                If LRecordCount = 0 Then
+                    Label3.Visible = True
+
+                    Label3.Text = "This Cart has not been graded in to H and L by colour section"
+
+                    DelayTM()
+                    Label3.Visible = False
+
+                    Me.txtLotNumber.Clear()
+                    Me.txtLotNumber.Focus()
+                    Exit Sub
+                End If
+
             End If
 
 
-            If LRecordCount > 0 Then
+                If LRecordCount > 0 Then
                 LExecQuery("Select * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ORDER BY CONENUM")
 
                 'LOAD THE DATA FROM dB IN TO THE DATAGRID
@@ -1238,6 +1261,15 @@ Public Class frmJobEntry
                     Label3.Visible = False
 
                 Else
+                    If HHLL = "Yes" Then
+                        Label3.Visible = True
+
+                        Label3.Text = "This Cart has not been graded in to H and L by colour section"
+
+                        DelayTM()
+                        Label3.Visible = False
+                    End If
+
                     LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' AND CONESTATE = '5'")
                     If LRecordCount > 0 Then
 
@@ -2152,7 +2184,7 @@ Public Class frmJobEntry
                     cartReportSub()
                 ElseIf My.Settings.chkUseSort And (stdcheck = 0 And txtGrade.Text <> "ReCheck") Or My.Settings.chkUseColour Then
                     prgContinue()
-                ElseIf (My.Settings.chkUsePack And txtGrade.Text = "A") Or (My.Settings.chkUsePack And (txtGrade.Text = "Pilot 6Ch" Or txtGrade.Text = "Pilot 15Ch" Or txtGrade.Text = "Pilot 20Ch")) Then
+                ElseIf (My.Settings.chkUsePack And txtGrade.Text = "A") Or (My.Settings.chkUsePack And (txtGrade.Text = "Pilot 6Ch" Or txtGrade.Text = "Pilot 15Ch" Or txtGrade.Text = "Pilot 20Ch") Or My.Settings.chkUsePack And txtGrade.Text = "HL Seperation") Then
                     prgContinue()
                 ElseIf My.Settings.chkUseSort And stdcheck Or My.Settings.chkUsePack And stdcheck Then
                     STDCreate()
@@ -2489,10 +2521,20 @@ Public Class frmJobEntry
     End Sub
 
 
+    Private Sub ToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem5.Click
+
+    End Sub
+
+    Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
+        stdReChk = 0
+        txtGrade.Text = "HL Seperation"
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+    End Sub
 
     Private Sub PrintToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintToolStripMenuItem.Click
         Me.Hide()
         frmPackingPrintLastSheet.Show()
-
     End Sub
 End Class

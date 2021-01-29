@@ -232,4 +232,58 @@
   <data name="L" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\L.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="HPK" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HPK.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HPK_B" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HPK B.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HPK_D" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HPK D.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HPK_DD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HPK DD.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HPK_L" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HPK L.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HPK_LL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HPK LL.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HPK_MM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HPK MM.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LPK" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LPK.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LPK_B" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LPK B.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LPK_D" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LPK D.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LPK_DD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LPK DD.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LPK_L" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LPK L.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LPK_LL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LPK LL.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LPK_MM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LPK MM.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SHPK_B" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SHPK B.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SHPK_D" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SHPK D.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SHPK_L" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SHPK L.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SHPK_M" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SHPK M.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

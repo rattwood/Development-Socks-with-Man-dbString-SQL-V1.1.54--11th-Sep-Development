@@ -123,13 +123,27 @@
   <metadata name="Toraydb.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="Toraydb.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <metadata name="MenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>288, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="SettingsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAAARVJREFUOE+tk80NgzAMhbl1AhZgFAZAnBkCMVBuIAZgA2CEjsEVOHBx86UxSoGq
+        qtpITw328/NPnSg867re/G9iIQckIed0rCO2uFsYi2IYBknT1GEcRwQK74MT+7DnwYCjaRrpug7y1rbt
+        LsAdGz44cInR4BsGHBpQVZXkeb5/Z1kmZVnu34HIsx17Magr4RN8lUaDGRj9bWEWQGYQ2qgOro9JEJC+
+        76Wu6xeyMUaWZXHgrnZaYyYMdp5ncQLqVCBEID7A/VgJmKbpTwKUQ1nh5N+1gBDt0ra2sA+RASlRycfM
+        DBquj3HbichPf+NpkcgSZqa1sLqrRTqtMn0eAq5XWQ8G73CPiSGpwMfHpMc6vnzOUfQArIBZA0tRb04A
+        AAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="StatusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>403, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAUAEBAAAAEAIABoBAAAVgAAABgYAAABACAAiAkAAL4EAAAgIAAAAQAgAKgQAABGDgAAMDAAAAEA

@@ -66,6 +66,7 @@ Public Class frmPacking
     Dim remainingCheese As Integer
 
 
+
     'Faults
 
 
@@ -256,12 +257,27 @@ Public Class frmPacking
 
 
         'GET NUMBER OF CONES THAT NEED ALLOCATING Count agains Job Barcode
+        If Not frmJobEntry.HHLL = "YES" Then  ' only display unload information on screen
+            For i = 1 To rowendcount
+                If DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "9" And DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = False And (IsDBNull(DGVPakingA.Rows(i - 1).Cells("STDSTATE").Value)) Then
+                    toAllocatedCount = toAllocatedCount + 1
+                End If
+            Next
 
-        For i = 1 To rowendcount
-            If DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "9" And DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = False And (IsDBNull(DGVPakingA.Rows(i - 1).Cells("STDSTATE").Value)) Then
-                toAllocatedCount = toAllocatedCount + 1
-            End If
-        Next
+        Else
+            For i = 1 To rowendcount
+                If (DGVPakingA.Rows(i - 1).Cells("HHLL").Value = "H" Or DGVPakingA.Rows(i - 1).Cells("HHLL").Value = "L") And (IsDBNull(DGVPakingA.Rows(i - 1).Cells("STDSTATE").Value)) Then
+                    toAllocatedCount = toAllocatedCount + 1
+                End If
+            Next
+            lblCheese.Text = "Total to Remove"
+        End If
+
+        'For i = 1 To rowendcount
+        '    If DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "9" And DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = False And (IsDBNull(DGVPakingA.Rows(i - 1).Cells("STDSTATE").Value)) Then
+        '        toAllocatedCount = toAllocatedCount + 1
+        '    End If
+        'Next
 
 
 
@@ -275,10 +291,23 @@ Public Class frmPacking
         End If
 
         'THIS SECTION GETS THE COUNT OF CHEESE ON THE LAST EXCEL SHEET TO DISPLAY NUMBER LEFT TO COMPLETE THE PACK SHEET 
-        sheetconecount()
+        If Not frmJobEntry.HHLL = "YES" Then
+            sheetconecount()
 
-        txtBoxToFinish.Text = remainingCheese
-        txtBoxOnSheet.Text = packedCheese
+
+            txtBoxToFinish.Text = remainingCheese
+            txtBoxOnSheet.Text = packedCheese
+        Else  ' change screen buttons
+            btnDefect.Hide()
+            btnSaveJob.Hide()
+            btnFinJob.Hide()
+            Label3.Hide()
+            Label6.Hide()
+            txtConeBcode.Hide()
+            txtBoxToFinish.Hide()
+            lblHLSeperation.Show()
+
+        End If
 
 
         txtboxTotal.Text = toAllocatedCount
@@ -367,23 +396,50 @@ Public Class frmPacking
         If My.Settings.debugSet Then frmDGV.Show()
 
 
+        If Not frmJobEntry.HHLL = "YES" Then
+            For rw As Integer = 1 To rowendcount
 
-        For rw As Integer = 1 To rowendcount
+                If DGVPakingA.Rows(rw - 1).Cells("CONESTATE").Value = "9" And DGVPakingA.Rows(rw - 1).Cells("FLT_S").Value = False And (IsDBNull(DGVPakingA.Rows(rw - 1).Cells("STDSTATE").Value)) Then
 
-            If DGVPakingA.Rows(rw - 1).Cells("CONESTATE").Value = "9" And DGVPakingA.Rows(rw - 1).Cells("FLT_S").Value = False And (IsDBNull(DGVPakingA.Rows(rw - 1).Cells("STDSTATE").Value)) Then
+                    Me.Controls("btnCone" & rw).BackColor = Color.Green       'Grade A Cone
+                End If
 
-                Me.Controls("btnCone" & rw).BackColor = Color.Green       'Grade A Cone
-            End If
+                If DGVPakingA.Rows(rw - 1).Cells("CONESTATE").Value = "15" Then
+                    Me.Controls("btnCone" & rw).BackColor = Color.LightGreen       'Grade A Cone
+                End If
 
-            If DGVPakingA.Rows(rw - 1).Cells("CONESTATE").Value = "15" Then
-                Me.Controls("btnCone" & rw).BackColor = Color.LightGreen       'Grade A Cone
-            End If
+                Me.Controls("btnCone" & rw).Enabled = False
+            Next
 
-            Me.Controls("btnCone" & rw).Enabled = False
-        Next
+        Else
 
+            For rw As Integer = 1 To rowendcount
 
+                If Not IsDBNull(DGVPakingA.Rows(rw - 1).Cells("HHLL").Value) Then
+                    If DGVPakingA.Rows(rw - 1).Cells("HHLL").Value = "H" Then
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.HPK
+                        Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(26, 169, 238)
+                        Me.Controls("btnCone" & rw).Enabled = False
+                    ElseIf DGVPakingA.Rows(rw - 1).Cells("HHLL").Value = "L" Then
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.LPK
+                        Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(126, 125, 250)
+                        Me.Controls("btnCone" & rw).Enabled = False
+                        'ElseIf DGVPakingA.Rows(rw - 1).Cells("HHLL").Value = "H Std" Then
+                        '    Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.H_Std
+                        '    Me.Controls("btnCone" & rw).BackColor = Color.Orange
+                        '    Me.Controls("btnCone" & rw).Enabled = False
+                        'ElseIf DGVPakingA.Rows(rw - 1).Cells("HHLL").Value = "MISS" Then
+                        '    ' Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.H_Std
+                        '    Me.Controls("btnCone" & rw).BackColor = Color.Red
+                        '    Me.Controls("btnCone" & rw).Enabled = False
 
+                    End If
+                End If
+            Next
+            txtBoxCancel.Focus()  'set focus to text box for cancel barcode
+        End If
+
+        txtBoxCancel.Focus()
 
     End Sub
 
@@ -738,12 +794,19 @@ Public Class frmPacking
 
 
 
+
+
     'THIS LOOKS FOR ENTER key to be pressed or received via barcode
     Private Sub frmJobEntry_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
 
         If e.KeyCode = Keys.Return Then
+            If txtBoxCancel.Text = "cancel" Then
+                btnBack.PerformClick()
+            Else
+                prgContinue()
 
-            prgContinue()
+            End If
+
 
 
         End If

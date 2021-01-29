@@ -973,5 +973,59 @@
   <ItemGroup>
     <None Include="Resources\L.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HPK.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HPK B.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HPK D.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HPK DD.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HPK L.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HPK LL.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HPK MM.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LPK B.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LPK D.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LPK DD.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LPK L.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LPK LL.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LPK MM.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LPK.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SHPK B.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SHPK D.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SHPK L.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SHPK M.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

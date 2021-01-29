@@ -173,6 +173,76 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property HPK() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("HPK", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property HPK_B() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("HPK_B", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property HPK_D() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("HPK_D", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property HPK_DD() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("HPK_DD", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property HPK_L() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("HPK_L", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property HPK_LL() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("HPK_LL", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property HPK_MM() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("HPK_MM", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property L() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("L", resourceCulture)
@@ -236,6 +306,76 @@ Namespace My.Resources
         Friend ReadOnly Property L_MM() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("L_MM", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property LPK() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("LPK", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property LPK_B() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("LPK_B", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property LPK_D() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("LPK_D", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property LPK_DD() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("LPK_DD", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property LPK_L() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("LPK_L", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property LPK_LL() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("LPK_LL", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property LPK_MM() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("LPK_MM", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -386,6 +526,46 @@ Namespace My.Resources
         Friend ReadOnly Property SH_M() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("SH_M", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property SHPK_B() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("SHPK_B", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property SHPK_D() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("SHPK_D", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property SHPK_L() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("SHPK_L", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property SHPK_M() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("SHPK_M", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

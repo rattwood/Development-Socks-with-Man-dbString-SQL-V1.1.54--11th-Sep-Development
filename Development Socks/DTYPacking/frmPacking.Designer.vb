@@ -73,6 +73,8 @@ Partial Class frmPacking
         Me.txtBoxToFinish = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblHLSeperation = New System.Windows.Forms.Label()
+        Me.txtBoxCancel = New System.Windows.Forms.TextBox()
         CType(Me.DGVPakingA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -645,14 +647,14 @@ Partial Class frmPacking
         '
         'lblCheese
         '
-        Me.lblCheese.AutoSize = True
         Me.lblCheese.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCheese.Location = New System.Drawing.Point(42, 180)
+        Me.lblCheese.Location = New System.Drawing.Point(6, 180)
         Me.lblCheese.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblCheese.Name = "lblCheese"
-        Me.lblCheese.Size = New System.Drawing.Size(93, 20)
+        Me.lblCheese.Size = New System.Drawing.Size(146, 20)
         Me.lblCheese.TabIndex = 176
         Me.lblCheese.Text = "'A' on Cart"
+        Me.lblCheese.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'DGVPakingA
         '
@@ -720,11 +722,34 @@ Partial Class frmPacking
         Me.Label6.TabIndex = 183
         Me.Label6.Text = "To Finsh Sheet"
         '
+        'lblHLSeperation
+        '
+        Me.lblHLSeperation.AutoSize = True
+        Me.lblHLSeperation.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHLSeperation.ForeColor = System.Drawing.Color.ForestGreen
+        Me.lblHLSeperation.Location = New System.Drawing.Point(722, 9)
+        Me.lblHLSeperation.Name = "lblHLSeperation"
+        Me.lblHLSeperation.Size = New System.Drawing.Size(191, 25)
+        Me.lblHLSeperation.TabIndex = 184
+        Me.lblHLSeperation.Text = "H && L Seperation"
+        Me.lblHLSeperation.Visible = False
+        '
+        'txtBoxCancel
+        '
+        Me.txtBoxCancel.Location = New System.Drawing.Point(90, 741)
+        Me.txtBoxCancel.MaxLength = 5
+        Me.txtBoxCancel.Name = "txtBoxCancel"
+        Me.txtBoxCancel.Size = New System.Drawing.Size(45, 20)
+        Me.txtBoxCancel.TabIndex = 185
+        Me.txtBoxCancel.Text = "cancel"
+        '
         'frmPacking
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1584, 861)
+        Me.Controls.Add(Me.txtBoxCancel)
+        Me.Controls.Add(Me.lblHLSeperation)
         Me.Controls.Add(Me.DGVPakingA)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label4)
@@ -835,4 +860,6 @@ Partial Class frmPacking
     Friend WithEvents txtBoxToFinish As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label6 As Label
+    Friend WithEvents lblHLSeperation As Label
+    Friend WithEvents txtBoxCancel As TextBox
 End Class
