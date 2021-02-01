@@ -180,7 +180,7 @@ Public Class frmJobEntry
 
         'New section to display correct text for scan type
         Select Case txtGrade.Text
-            Case "A", "Normal", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch", "ReCheckA", "HL Seperation"
+            Case "A", "Normal", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch", "ReCheckA", "HL Seperation", "H Colour Grade", "L Colour Grade"
                 lblScanType.Text = "Scan Job Sheet"
                 txtLotNumber.Visible = True
 
@@ -1974,6 +1974,16 @@ Public Class frmJobEntry
                                    & " DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM Is Null And STDSTATE = 10 And RECHK Is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
 
                     End If
+                Case "Create H Cart"
+                    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And (CONESTATE = 9 or conestate = '8') And " _
+                                   & " HHLL = 'H' And PACKENDTM Is Null And STDSTATE = 10 And RECHK Is Null and " _
+                                   & " CARTSTARTTM between DateAdd(DD, @days, GETDATE()) And GetDATE() ")
+
+
+                Case "Create L Cart"
+
+                    LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And (CONESTATE = 9 or conestate = '8') And " _
+                                   & " HHLL = 'L' And PACKENDTM Is Null And STDSTATE = 10 And RECHK Is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
 
 
                 Case "Waste"
@@ -2532,6 +2542,27 @@ Public Class frmJobEntry
         txtOperator.Visible = True
         txtOperator.Focus()
     End Sub
+
+    Private Sub CreatHCartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreatHCartToolStripMenuItem.Click
+        stdReChk = 0
+        txtGrade.Text = ReCheckToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub CreateLCartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreateLCartToolStripMenuItem.Click
+        stdReChk = 0
+        txtGrade.Text = ReCheckToolStripMenuItem.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+
+
 
     Private Sub PrintToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintToolStripMenuItem.Click
         Me.Hide()

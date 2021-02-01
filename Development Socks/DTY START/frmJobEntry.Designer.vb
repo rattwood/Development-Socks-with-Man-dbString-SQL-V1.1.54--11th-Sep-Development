@@ -69,6 +69,7 @@ Partial Class frmJobEntry
         Me.ReCheckToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PackingHLProductsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripTextBox11 = New System.Windows.Forms.ToolStripTextBox()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripTextBox12 = New System.Windows.Forms.ToolStripTextBox()
@@ -180,7 +181,6 @@ Partial Class frmJobEntry
         Me.lblSelectGrade = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtPilotCount = New System.Windows.Forms.TextBox()
-        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.ToraydbBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Toraydb, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
@@ -193,7 +193,7 @@ Partial Class frmJobEntry
         Me.txtOperator.Location = New System.Drawing.Point(281, 86)
         Me.txtOperator.Name = "txtOperator"
         Me.txtOperator.Size = New System.Drawing.Size(292, 44)
-        Me.txtOperator.TabIndex = 2
+        Me.txtOperator.TabIndex = 5
         Me.txtOperator.Visible = False
         '
         'Label1
@@ -203,7 +203,7 @@ Partial Class frmJobEntry
         Me.Label1.Location = New System.Drawing.Point(18, 92)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(213, 31)
-        Me.Label1.TabIndex = 2
+        Me.Label1.TabIndex = 4
         Me.Label1.Text = "Operator Name"
         '
         'lblScanType
@@ -213,7 +213,7 @@ Partial Class frmJobEntry
         Me.lblScanType.Location = New System.Drawing.Point(18, 159)
         Me.lblScanType.Name = "lblScanType"
         Me.lblScanType.Size = New System.Drawing.Size(0, 31)
-        Me.lblScanType.TabIndex = 3
+        Me.lblScanType.TabIndex = 7
         '
         'txtLotNumber
         '
@@ -221,14 +221,14 @@ Partial Class frmJobEntry
         Me.txtLotNumber.Location = New System.Drawing.Point(399, 153)
         Me.txtLotNumber.Name = "txtLotNumber"
         Me.txtLotNumber.Size = New System.Drawing.Size(369, 44)
-        Me.txtLotNumber.TabIndex = 4
+        Me.txtLotNumber.TabIndex = 6
         '
         'btnJobReport
         '
         Me.btnJobReport.Location = New System.Drawing.Point(580, 377)
         Me.btnJobReport.Name = "btnJobReport"
         Me.btnJobReport.Size = New System.Drawing.Size(113, 47)
-        Me.btnJobReport.TabIndex = 8
+        Me.btnJobReport.TabIndex = 16
         Me.btnJobReport.Text = "M/C Report"
         Me.btnJobReport.UseVisualStyleBackColor = True
         Me.btnJobReport.Visible = False
@@ -248,7 +248,7 @@ Partial Class frmJobEntry
         Me.btnCartReport.Location = New System.Drawing.Point(20, 297)
         Me.btnCartReport.Name = "btnCartReport"
         Me.btnCartReport.Size = New System.Drawing.Size(113, 47)
-        Me.btnCartReport.TabIndex = 9
+        Me.btnCartReport.TabIndex = 11
         Me.btnCartReport.Text = "Create Cart Report"
         Me.btnCartReport.UseVisualStyleBackColor = True
         '
@@ -257,7 +257,7 @@ Partial Class frmJobEntry
         Me.btnSearchCone.Location = New System.Drawing.Point(350, 377)
         Me.btnSearchCone.Name = "btnSearchCone"
         Me.btnSearchCone.Size = New System.Drawing.Size(113, 47)
-        Me.btnSearchCone.TabIndex = 12
+        Me.btnSearchCone.TabIndex = 15
         Me.btnSearchCone.Text = "Search  Cheese"
         Me.btnSearchCone.UseVisualStyleBackColor = True
         '
@@ -267,7 +267,7 @@ Partial Class frmJobEntry
         Me.txtBoxCartReport.Location = New System.Drawing.Point(139, 300)
         Me.txtBoxCartReport.Name = "txtBoxCartReport"
         Me.txtBoxCartReport.Size = New System.Drawing.Size(471, 44)
-        Me.txtBoxCartReport.TabIndex = 13
+        Me.txtBoxCartReport.TabIndex = 12
         Me.txtBoxCartReport.Visible = False
         '
         'btnCancelReport
@@ -275,7 +275,7 @@ Partial Class frmJobEntry
         Me.btnCancelReport.Location = New System.Drawing.Point(20, 373)
         Me.btnCancelReport.Name = "btnCancelReport"
         Me.btnCancelReport.Size = New System.Drawing.Size(113, 47)
-        Me.btnCancelReport.TabIndex = 14
+        Me.btnCancelReport.TabIndex = 13
         Me.btnCancelReport.Text = "Cancel"
         Me.btnCancelReport.UseVisualStyleBackColor = True
         '
@@ -288,7 +288,7 @@ Partial Class frmJobEntry
         Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(119, 37)
-        Me.Label3.TabIndex = 175
+        Me.Label3.TabIndex = 8
         Me.Label3.Text = "Label3"
         Me.Label3.Visible = False
         '
@@ -297,7 +297,7 @@ Partial Class frmJobEntry
         Me.btnDefRep.Location = New System.Drawing.Point(269, 377)
         Me.btnDefRep.Name = "btnDefRep"
         Me.btnDefRep.Size = New System.Drawing.Size(113, 47)
-        Me.btnDefRep.TabIndex = 178
+        Me.btnDefRep.TabIndex = 14
         Me.btnDefRep.Text = "Defect Report"
         Me.btnDefRep.UseVisualStyleBackColor = True
         Me.btnDefRep.Visible = False
@@ -308,7 +308,7 @@ Partial Class frmJobEntry
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(821, 24)
-        Me.MenuStrip1.TabIndex = 179
+        Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
         'SettingsToolStripMenuItem
@@ -528,6 +528,13 @@ Partial Class frmJobEntry
         Me.ToolStripTextBox11.Size = New System.Drawing.Size(100, 22)
         Me.ToolStripTextBox11.Text = "Step 1"
         '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(320, 26)
+        Me.ToolStripMenuItem3.Text = "Seperate Cart to HL Carts"
+        '
         'ToolStripSeparator12
         '
         Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
@@ -557,7 +564,7 @@ Partial Class frmJobEntry
         '
         Me.CreatHCartToolStripMenuItem.Name = "CreatHCartToolStripMenuItem"
         Me.CreatHCartToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
-        Me.CreatHCartToolStripMenuItem.Text = "Creat H Cart"
+        Me.CreatHCartToolStripMenuItem.Text = "Create H Cart"
         '
         'CreateLCartToolStripMenuItem
         '
@@ -1218,7 +1225,7 @@ Partial Class frmJobEntry
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 448)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(821, 22)
-        Me.StatusStrip1.TabIndex = 180
+        Me.StatusStrip1.TabIndex = 17
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'ToolStripStatusLabel1
@@ -1244,7 +1251,7 @@ Partial Class frmJobEntry
         Me.lblGrade.Location = New System.Drawing.Point(15, 35)
         Me.lblGrade.Name = "lblGrade"
         Me.lblGrade.Size = New System.Drawing.Size(216, 31)
-        Me.lblGrade.TabIndex = 181
+        Me.lblGrade.TabIndex = 1
         Me.lblGrade.Text = "Selected Grade"
         '
         'txtGrade
@@ -1254,7 +1261,7 @@ Partial Class frmJobEntry
         Me.txtGrade.Location = New System.Drawing.Point(281, 29)
         Me.txtGrade.Name = "txtGrade"
         Me.txtGrade.Size = New System.Drawing.Size(329, 44)
-        Me.txtGrade.TabIndex = 1
+        Me.txtGrade.TabIndex = 2
         Me.txtGrade.Text = " "
         '
         'lblSelectGrade
@@ -1265,7 +1272,7 @@ Partial Class frmJobEntry
         Me.lblSelectGrade.Location = New System.Drawing.Point(612, 27)
         Me.lblSelectGrade.Name = "lblSelectGrade"
         Me.lblSelectGrade.Size = New System.Drawing.Size(157, 50)
-        Me.lblSelectGrade.TabIndex = 183
+        Me.lblSelectGrade.TabIndex = 3
         Me.lblSelectGrade.Text = "Please Select" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " Grade First"
         Me.lblSelectGrade.Visible = False
         '
@@ -1276,7 +1283,7 @@ Partial Class frmJobEntry
         Me.Label2.Location = New System.Drawing.Point(233, 254)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(363, 33)
-        Me.Label2.TabIndex = 184
+        Me.Label2.TabIndex = 10
         Me.Label2.Text = "Enter Total Piolt Cheese "
         Me.Label2.Visible = False
         '
@@ -1287,15 +1294,8 @@ Partial Class frmJobEntry
         Me.txtPilotCount.MaxLength = 2
         Me.txtPilotCount.Name = "txtPilotCount"
         Me.txtPilotCount.Size = New System.Drawing.Size(44, 44)
-        Me.txtPilotCount.TabIndex = 185
+        Me.txtPilotCount.TabIndex = 9
         Me.txtPilotCount.Visible = False
-        '
-        'ToolStripMenuItem3
-        '
-        Me.ToolStripMenuItem3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(320, 26)
-        Me.ToolStripMenuItem3.Text = "Seperate Cart to HL Carts"
         '
         'frmJobEntry
         '
