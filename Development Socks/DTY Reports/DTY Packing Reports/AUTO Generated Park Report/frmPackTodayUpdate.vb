@@ -2659,6 +2659,206 @@ Public Class frmPackTodayUpdate
         Me.Close()
     End Sub
 
+    'ROUTINE TO CREATE RECHECK SHEET
+    Public Sub todayUpdate_CreateHL()
+        Dim xlTodyWorkbook As Excel.Workbook
+        Dim xlTodysheets As Excel.Worksheet
+
+
+        xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
+        mycount = xlTodyWorkbook.Worksheets.Count
+        boxCount = mycount
+        createBarcode()
+
+        Dim totCount As Integer
+
+
+
+        'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
+        For rcount = 9 To 40
+
+            ' Only single Column to look at
+            If MyTodyExcel.Cells(rcount, 3).Value > 0 Then
+                totCount = totCount + 1
+                Continue For
+            Else
+                nfree = rcount
+                Exit For
+            End If
+        Next
+
+
+
+        ''CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
+        If totCount > 0 Then
+
+            xlTodyWorkbook.Sheets(1).Copy(After:=xlTodyWorkbook.Sheets(mycount))
+            'ReName the work sheet 
+            'CType(MyTodyExcel.Workbooks(1).Worksheets("Sheet1"), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
+
+            nfree = 9
+
+
+            'Product Name
+            Dim prodTf As String
+
+            prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
+
+            MyTodyExcel.Cells(5, 4) = prodTf 'frmDGV.DGVdata.Rows(0).Cells(52).Value
+            'Product Code
+            MyTodyExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+            'Packer Name
+            MyTodyExcel.Cells(42, 3) = frmJobEntry.PackOp
+            'CREATE AND WRITE NEW BARCODE TO NEW SHEET
+            mycount = mycount + 1
+            createBarcode()
+            MyTodyExcel.Cells(1, 3) = SheetCodeString
+
+
+            For i = 9 To 40
+                MyTodyExcel.Cells(i, 3) = "" 'Clear the contents of cone cells
+                MyTodyExcel.Cells(i, 4) = "" 'Clear the contents of Result 1
+                MyTodyExcel.Cells(i, 5) = "" 'Clear the contents of Result 2
+                MyTodyExcel.Cells(i, 6) = "" 'Clear the contents of Grade
+                MyTodyExcel.Cells(i, 7) = "" 'Clear the contents of Remark
+            Next
+
+        End If
+
+
+
+        Try
+            'Packer Name
+            MyTodyExcel.Cells(42, 3) = frmJobEntry.PackOp
+            'New routine to print ReCheck cones in order they were scanned
+            Dim fmt As String = "00"
+            Dim idxCount As Integer = 1
+            Dim chkIdx As String
+
+            ' createBarcode()
+            For coneCount = 1 To 32
+                For i = 1 To frmDGV.DGVdata.Rows.Count
+                    chkIdx = coneCount.ToString(fmt)
+
+                    'If frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+                    'If Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value) Then
+                    '    If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "8" And frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = "1" Or
+                    '        frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = "1" Then
+                    ''If Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value) Then
+                    'Temp mod to try and get around the error when re check and no cone state
+
+                    'If frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "8" And frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = chkIdx Or
+                    '    frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "9" And frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = chkIdx Then
+
+                    '******************************************************************
+                    If IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value) Then Continue For
+
+                    If frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = chkIdx Then
+                        '******************************************************************
+                        'WRITE CONE NUMBER TO SHEET
+                        MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
+
+                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = modBarcode
+                        nfree = nfree + 1
+
+                        frmDGV.DGVdata.Rows(i - 1).Cells("HHLLState").Value = "2"  'to show it has been added to the sheet and will not be read again
+
+                        frmDGV.DGVdata.Rows(i - 1).Cells("rechkidx").Value = DBNull.Value
+
+                        'ROUTINE IF SHEET IS FULL TO COPY SHEET AND CREATE A NEW SHEET IN THE WORKBOOK
+
+                        If nfree = 41 Then
+                            Dim tmpsaveName As String
+
+                            tmpsaveName = (frmPackRepMain.finPath & "\" & frmPackRepMain.sheetName & "_" & mycount & ".xlsx")
+                            MyTodyExcel.DisplayAlerts = False
+                            xlTodyWorkbook.Sheets(mycount).SaveAs(Filename:=tmpsaveName, FileFormat:=51)
+
+                            MyTodyExcel.DisplayAlerts = True
+                            xlTodyWorkbook.Sheets(1).Copy(After:=xlTodyWorkbook.Sheets(mycount))
+                            'xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
+                            'CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
+
+                            Dim prodTf As String
+
+                            prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells(7).Value)
+                            'PRODUCT NAME
+                            MyTodyExcel.Cells(5, 4) = prodTf 'frmDGV.DGVdata.Rows(0).Cells(52).Value
+                            'Product Code
+                            MyTodyExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+                            'Packer Name
+                            MyTodyExcel.Cells(42, 3) = frmJobEntry.PackOp
+                            'CREATE AND WRITE NEW BARCODE TO NEW SHEET
+                            mycount = mycount + 1
+                            createBarcode()
+                            MyTodyExcel.Cells(1, 3) = SheetCodeString
+
+
+
+                            For x = 9 To 40
+                                MyTodyExcel.Cells(x, 3) = "" 'Clear the contents of cone cells
+                                MyTodyExcel.Cells(x, 4) = "" 'Clear the contents of Result 1
+                                MyTodyExcel.Cells(x, 5) = "" 'Clear the contents of Result 2
+                                MyTodyExcel.Cells(x, 6) = "" 'Clear the contents of Grade
+                                MyTodyExcel.Cells(x, 7) = "" 'Clear the contents of Remark
+                            Next
+
+                            nfree = 9
+
+                            Exit For
+
+                        End If
+                        ' End If
+                    End If
+                Next
+            Next
+        Catch ex As Exception
+
+            'Write error to Log File
+            writeerrorLog.writelog("File Update Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Update Error", ex.ToString, False, "System Fault")
+            MsgBox(ex.ToString)
+
+        End Try
+
+        Try
+
+
+            'Save changes to new file in Paking Dir
+            MyTodyExcel.DisplayAlerts = False
+            xlTodyWorkbook.SaveAs(Filename:=frmPackRepMain.savename, FileFormat:=51)
+
+        Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
+            MsgBox(ex.Message)
+
+        End Try
+
+        Try
+            'Close template file but do not save updates to it
+            xlTodyWorkbook.Close(SaveChanges:=False)
+        Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
+            MsgBox(ex.Message)
+            MsgBox("Please make sure excel does not have any open Excel sheets. Close and then select Finish to retry")
+            MyTodyExcel.Quit()
+            releaseObject(xlTodysheets)
+            releaseObject(xlTodyWorkbook)
+            releaseObject(MyTodyExcel)
+            prtError = 1
+        End Try
+
+        MyTodyExcel.Quit()
+        releaseObject(xlTodysheets)
+        releaseObject(xlTodyWorkbook)
+        releaseObject(MyTodyExcel)
+        Me.Close()
+    End Sub
+
     'ROUTINE TO CREATE STD SHEET
     Public Sub todayUpdate_STD()
         Dim xlTodyWorkbook As Excel.Workbook
@@ -2973,6 +3173,12 @@ Public Class frmPackTodayUpdate
                 boxCount = mycount
             Case "STD"
                 gradeTxt = "STD" 'ReCheck Grade
+                boxCount = mycount
+            Case "Create H Cart"
+                gradeTxt = "H_ColChk" 'ReCheck Grade
+                boxCount = mycount
+            Case "Create L Cart"
+                gradeTxt = "L_ColCHK" 'ReCheck Grade
                 boxCount = mycount
             Case "Pilot 6Ch"
                 gradeTxt = "PI06" 'A Grade 6 per box

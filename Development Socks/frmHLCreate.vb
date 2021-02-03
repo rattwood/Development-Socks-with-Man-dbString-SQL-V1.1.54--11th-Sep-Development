@@ -1,13 +1,16 @@
 ﻿Imports System.ComponentModel
 Imports System.Data.SqlClient
 
-Public Class frmStdCreate
+
+
+
+Public Class frmHLCreate
 
     Public packingActive = 0
     Public bcodeScan As String = ""
     Public toAllocatedCount As Integer 'count of cones requierd to be scanned
     Public allocatedCount As Integer 'count of cones scanned
-    ' Public varCartEndTime As String
+
     Public packedFlag As Integer
     Dim stdChkNum As Integer = 0
     Dim reqstate As Integer = 0
@@ -19,7 +22,7 @@ Public Class frmStdCreate
     Dim dgv1gridCol As Integer = 0
     'Index for changing input location in DGV
 
-
+    Dim cartType As String = Nothing
     Dim coneCount As Integer = 0
 
     Dim dgvRows As Integer
@@ -27,46 +30,18 @@ Public Class frmStdCreate
     'THIS INITIATES WRITING TO ERROR LOG
     Private writeerrorLog As New writeError
 
-    Private Sub frmStdCreate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmHLCreate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         txtConeBcode.Focus()
 
 
         Select Case frmJobEntry.txtGrade.Text
-            Case "Round1"
-                Label2.Text = "1"
-                stdChkNum = 1
-                reqstate = 2
-            Case "Round2"
-                Label2.Text = "2"
-                stdChkNum = 3
-                reqstate = 4
-            Case "Round3"
-                Label2.Text = "3"
-                stdChkNum = 5
-                reqstate = 6
-            Case "STD"
-                Label2.Text = "Final"
-                stdChkNum = 7
-            Case "HLRound1"
-                Label1.Text = "Compare HL Std -"
-                Label2.Text = "1"
-                stdChkNum = 1
-                reqstate = 2
-            Case "HLRound2"
-                Label1.Text = "Compare HL Std -"
-                Label2.Text = "2"
-                stdChkNum = 3
-                reqstate = 4
-            Case "HLRound3"
-                Label1.Text = "Compare HL Std -"
-                Label2.Text = "3"
-                stdChkNum = 5
-                reqstate = 6
-            Case "HL STD"
-                Label1.Text = "Compare HL Std -"
-                Label2.Text = "Final"
-                stdChkNum = 7
+            Case "Create H Cart"
+                Label2.Text = "H"
+                cartType = "H"
+            Case "Create L Cart"
+                Label2.Text = "L"
+                cartType = "L"
         End Select
 
         'Header Information
@@ -129,7 +104,7 @@ Public Class frmStdCreate
             'CHECK FOR UNPACKED CHEESE AND ALLOCATE
 
 
-            If frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = stdChkNum Then
+            If frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value) Then
                 'write to the local DGV grid
                 DataGridView1.Rows(gridRow).Cells(gridCol).Value = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value  'Write to Grid Cone Bcode
                 DataGridView1.Rows(gridRow).Cells(gridCol).Style.BackColor = Color.LightGreen
@@ -137,30 +112,9 @@ Public Class frmStdCreate
                 Dim tmpNum As Integer = DataGridView1.Rows(gridRow).Cells(0).Value
                 modIdxNum = tmpNum.ToString(fmt)
                 frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value = modIdxNum
+                frmDGV.DGVdata.Rows(i - 1).Cells("HHLLState").Value = 1
 
 
-                Select Case frmJobEntry.txtGrade.Text
-                    Case "Round1"
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 25            ' CREATE 1st Round  SHEET 1&2
-                    Case "Round2"
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 45            ' CREATE 2nd Round SHEET 1
-                    Case "Round3"
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 65            ' CREATE 3rd Round SHEET 1
-                    Case "STD"
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 75            'CREATE Final Sheet
-                    Case "HLRound1"
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 25            ' CREATE 1st Round  SHEET 1&2
-                    Case "HLRound2"
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 45            ' CREATE 2nd Round SHEET 1
-                    Case "HLRound3"
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 65            ' CREATE 3rd Round SHEET 1
-                    Case "HL STD"
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 75            'CREATE Final Sheet
-
-
-
-
-                End Select
 
                 If My.Settings.debugSet Then
                     Label9.Text = ("Row " & gridRow)
@@ -173,21 +127,9 @@ Public Class frmStdCreate
                 Exit For
 
                 'CHECK FOR ALREADY PACKED CHEESE
-            ElseIf frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value > stdChkNum Then
+            ElseIf frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("RECHKIDX").Value) Then
                 Label8.Visible = True
-                Label8.Text = "Cheese already allocated"
-                Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
-                DelayTM()
-                Label8.Visible = False
-                cheeseOK = 0
-                txtConeBcode.Clear()
-                txtConeBcode.Focus()
-                Me.KeyPreview = True 'Allows us to look for advace character from barcode
-                Exit Sub
-                'CHECK FOR WRONG CHEESE SCANNED
-            ElseIf Not frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value = bcodeScan And i - 1 = dgvRows - 1 Then
-                Label8.Visible = True
-                Label8.Text = "This is not a STD Cheese"
+                Label8.Text = "This cheese has already been alocated"
                 Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
                 DelayTM()
                 Label8.Visible = False
@@ -197,7 +139,20 @@ Public Class frmStdCreate
                 Me.KeyPreview = True 'Allows us to look for advace character from barcode
                 Exit Sub
 
+            ElseIf i = dgvRows Then 'This is not in the cheese list if we have gone through the whole list
+
+                Label8.Visible = True
+                Label8.Text = "This is not an '" & cartType & "' Grade cheese"
+                Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
+                DelayTM()
+                Label8.Visible = False
+                cheeseOK = 0
+                txtConeBcode.Clear()
+                txtConeBcode.Focus()
+                Me.KeyPreview = True 'Allows us to look for advace character from barcode
+                Exit Sub
             End If
+
         Next
 
 
@@ -247,33 +202,22 @@ Public Class frmStdCreate
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         Label8.Visible = True
         Me.KeyPreview = False 'Turns off BARCODE INPUT WHILE ERROR MESSAGE
-        Label8.Text = ("Please wait creating packing Excel sheet")
+        Label8.Text = ("Please wait creating Cart " & cartType & " Excel sheet")
 
 
         '****************************** Routine to save database and then recall it from SQL and index on Recheck idx
         UpdateDatabase()
 
-        'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
-        If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
-        frmDGV.DGVdata.ClearSelection()
 
+        If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
+        frmDGV.DGVdata.DataSource = Nothing
+
+        frmJobEntry.LAddParam("@gradetype", cartType)
         Select Case frmJobEntry.txtGrade.Text
-            Case "Round1"
-                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 25 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "'  ORDER BY RECHKIDX ")
-            Case "Round2"
-                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 45 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
-            Case "Round3"
-                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 65 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
-            Case "STD"
-                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 75 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
-            Case "HLRound1"
-                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 25 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "'  ORDER BY RECHKIDX ")
-            Case "HLRound2"
-                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 45 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
-            Case "HLRound3"
-                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 65 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
-            Case "HL STD"
-                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 75 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+            Case "Create H Cart"
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where HHLLState  = 1 And  PRNUM = '" & frmJobEntry.varProductCode & "' And HHLL = @gradetype  ORDER BY RECHKIDX ")
+            Case "Create L Cart"
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where HHLLState  = 1 And  PRNUM = '" & frmJobEntry.varProductCode & "' And HHLL = @gradetype ORDER BY RECHKIDX ")
 
         End Select
 
@@ -286,52 +230,9 @@ Public Class frmStdCreate
 
 
 
-            Select Case frmJobEntry.txtGrade.Text
-                Case "Round1"
-                    For i = 1 To frmJobEntry.LRecordCount
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 2
-                    Next
-                Case "Round2"
-                    For i = 1 To frmJobEntry.LRecordCount
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 4
-                    Next
-                Case "Round3"
-                    For i = 1 To frmJobEntry.LRecordCount
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 6
-                    Next
-                Case "STD"
-                    For i = 1 To frmJobEntry.LRecordCount
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 8
-                    Next
-                Case "HLRound1"
-                    For i = 1 To frmJobEntry.LRecordCount
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 2
-                    Next
-                Case "HLRound2"
-                    For i = 1 To frmJobEntry.LRecordCount
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 4
-                    Next
-                Case "HLRound3"
-                    For i = 1 To frmJobEntry.LRecordCount
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 6
-                    Next
-                Case "HL STD"
-                    For i = 1 To frmJobEntry.LRecordCount
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 8
-                    Next
-            End Select
+            frmPackRepMain.PackRepMainSub()
 
-        End If
-
-
-
-
-
-        frmPackRepMain.PackRepMainSub()
-        UpdateDatabase()
-
-
-        If frmPackTodayUpdate.prtError Then
+        ElseIf frmPackTodayUpdate.prtError Then
             frmPackRepMain.Close()
             Me.Cursor = System.Windows.Forms.Cursors.Default
             Label8.Visible = False
@@ -342,19 +243,22 @@ Public Class frmStdCreate
             frmJobEntry.Show()
             Me.Close()
             Exit Sub
-        Else
-            UpdateDatabase()
-            'frmPackRepMain.Close()
+        End If
+
+        'If all Ok update the database
+
+        UpdateDatabase()
+            frmPackRepMain.Close()
             Label8.Visible = False
             Me.Cursor = System.Windows.Forms.Cursors.Default
             If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
-            frmDGV.DGVdata.ClearSelection()
+            frmDGV.DGVdata.DataSource = Nothing
             frmJobEntry.txtLotNumber.Clear()
             frmJobEntry.txtLotNumber.Focus()
             frmJobEntry.Show()
             Me.Close()
 
-        End If
+
 
 
     End Sub
@@ -393,9 +297,6 @@ Public Class frmStdCreate
 
             If frmJobEntry.LDS.HasChanges Then
 
-
-                'LDA.UpdateCommand = New Oracle.ManagedDataAccess.Client.OracleCommandBuilder(frmJobEntry.LDA).GetUpdateCommand
-
                 frmJobEntry.LDA.Update(frmJobEntry.LDS.Tables(0))
 
             End If
@@ -409,12 +310,6 @@ Public Class frmStdCreate
 
 
 
-        'If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
-        'frmDGV.DGVdata.ClearSelection()
-        'frmJobEntry.txtLotNumber.Clear()
-        'frmJobEntry.txtLotNumber.Focus()
-        'frmJobEntry.Show()
-        'Me.Close()
 
 
 
@@ -435,7 +330,7 @@ Public Class frmStdCreate
     End Sub
 
     'THIS LOOKS FOR ENTER key to be pressed or received via barcode
-    Private Sub frmStdCreate_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
+    Private Sub frmHLCreate_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
 
         If e.KeyCode = Keys.Return Then
 

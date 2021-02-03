@@ -239,6 +239,8 @@ Public Class frmPackRepMain
                 template = (My.Settings.dirTemplate & "\" & "Recheck Template.xlsx").ToString
             Case "Round1", "Round2", "Round3", "STD", "HLRound1", "HLRound2", "HLRound3", "HL STD" 'FORM FOR STANDARd COMPARE FROM SORT
                 template = (My.Settings.dirTemplate & "\" & "STDCompare Template.xlsx").ToString
+            Case "Create H Cart", "Create L Cart"
+                template = (My.Settings.dirTemplate & "\" & "HL ColGrade Template.xlsx").ToString
             Case "Pilot 6Ch"
                 template = (My.Settings.dirTemplate & "\" & "PILOT 6Ch..xlsx").ToString
             Case "Pilot 15Ch"
@@ -283,6 +285,8 @@ Public Class frmPackRepMain
                     frmPackTodayUpdate.todayUpdate_ReCheck()
                 Case "Round1", "Round2", "Round3", "STD", "HLRound1", "HLRound2", "HLRound3", "HL STD" 'FORM FOR STANDARE COMPARE FROM SORT
                     frmPackTodayUpdate.todayUpdate_STD()
+                Case "Create H Cart", "Create L Cart"
+                    frmPackTodayUpdate.todayUpdate_CreateHL()
                 Case "Pilot 6Ch"
                     frmPackTodayUpdate.todayUpdate_pilot6()
                 Case "Pilot 15Ch"
@@ -308,7 +312,11 @@ Public Class frmPackRepMain
                 frmJobEntry.txtGrade.Text <> "HLRound1" And
                 frmJobEntry.txtGrade.Text <> "HLRound2" And
                 frmJobEntry.txtGrade.Text <> "HLRound3" And
-                frmJobEntry.txtGrade.Text <> "HL STD" Then
+                frmJobEntry.txtGrade.Text <> "HL STD" And
+                frmJobEntry.txtGrade.Text <> "Create H Cart" And
+                frmJobEntry.txtGrade.Text <> "Create L Cart" Then
+
+
 
                 'IF RECHECK DO NOT GET SHEETS FROM PREVIOUS DAY
 
@@ -350,7 +358,9 @@ Public Class frmPackRepMain
             frmJobEntry.txtGrade.Text <> "Round3" And frmJobEntry.txtGrade.Text <> "STD" And
             frmJobEntry.txtGrade.Text <> "HLRound1" And frmJobEntry.txtGrade.Text <> "HLRound2" And
             frmJobEntry.txtGrade.Text <> "HLRound3" And frmJobEntry.txtGrade.Text <> "HLSTD" And
-            frmJobEntry.txtGrade.Text <> "ReCheck" Then  'IF RECHECK DO NOT GET SHEETS FROM PREVIOUS DAY
+            frmJobEntry.txtGrade.Text <> "ReCheck" And
+            frmJobEntry.txtGrade.Text <> "Create H Cart" And
+            frmJobEntry.txtGrade.Text <> "Create L Cart" Then  'IF RECHECK DO NOT GET SHEETS FROM PREVIOUS DAY
 
             ' routine to check if a today directory exists otherwise creat a new one
             'Check to see if we have any sheets for this product and Grade in previous days

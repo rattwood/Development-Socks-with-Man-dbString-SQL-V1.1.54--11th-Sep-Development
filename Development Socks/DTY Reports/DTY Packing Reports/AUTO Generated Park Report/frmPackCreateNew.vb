@@ -2,7 +2,7 @@
 
 
 Public Class frmPackCreateNew
-    'Dim MyCrExcel As New Excel.Application
+
     Dim SheetCodeString As String
 
     'THIS INITIATES WRITING TO ERROR LOG
@@ -427,6 +427,37 @@ Public Class frmPackCreateNew
 
                 createBarcode()
                 MyPakExcel.Cells(1, 3) = SheetCodeString
+
+            Case "Create H Cart", "Create L Cart"
+                nfree = 9
+                Dim prodTf As String
+
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
+                'PRODUCT NAME
+                MyPakExcel.Cells(5, 4) = prodTf
+
+                ''Product Name
+                'MyPakExcel.Cells(5, 4) = frmDGV.DGVdata.Rows(0).Cells(52).Value       'D5
+                'Product Code
+                MyPakExcel.Cells(5, 7) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value       'G5
+                'DATE
+                MyPakExcel.Cells(4, 7) = Date.Now.ToString("dd MM yyyy")              'G4
+                'CHEESE WEIGHT
+                MyPakExcel.Cells(4, 5) = frmJobEntry.varProdWeight                   'E4
+                'PACKER NAME
+                MyPakExcel.Cells(42, 3) = frmJobEntry.txtOperator.Text      'D53
+                'Machine Number
+                MyPakExcel.Cells(4, 3) = "Mix"
+
+                Select Case frmJobEntry.txtGrade.Text
+                    Case "Create H Cart"
+                        'Sheet Name
+                        MyPakExcel.Cells(2, 2) = "Col Check H Product"
+                    Case "Create L Cart"
+                        'Sheet Name
+                        MyPakExcel.Cells(2, 2) = "Col Check L Product"
+                End Select
+
             Case "Pilot 6Ch"
 
                 nfree = 13
@@ -703,6 +734,8 @@ Public Class frmPackCreateNew
                 frmPackTodayUpdate.todayUpdate_ReCheck()
             Case "Round1", "Round2", "Round3", "STD", "HLRound1", "HLRound2", "HLRound3", "HL STD"
                 frmPackTodayUpdate.todayUpdate_STD()
+            Case "Create H Cart", "Create L Cart"
+                frmPackTodayUpdate.todayUpdate_CreateHL()
             Case "Pilot 6Ch"
                 frmPackTodayUpdate.todayUpdate_pilot6()
             Case "Pilot 15Ch"

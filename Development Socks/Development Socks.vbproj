@@ -344,6 +344,12 @@
     <Compile Include="DTY CART Sort and Colour\frmStdCreate.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmHLCreate.Designer.vb">
+      <DependentUpon>frmHLCreate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmHLCreate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="InfoStore.Designer.vb">
       <DependentUpon>InfoStore.vb</DependentUpon>
     </Compile>
@@ -538,6 +544,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DTY CART Sort and Colour\frmStdCreate.resx">
       <DependentUpon>frmStdCreate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHLCreate.resx">
+      <DependentUpon>frmHLCreate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoStore.resx">
       <DependentUpon>InfoStore.vb</DependentUpon>

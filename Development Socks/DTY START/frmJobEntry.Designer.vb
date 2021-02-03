@@ -74,7 +74,7 @@ Partial Class frmJobEntry
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripTextBox12 = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CreatHCartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CreateHCartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CreateLCartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
@@ -554,17 +554,17 @@ Partial Class frmJobEntry
         '
         'ToolStripMenuItem5
         '
-        Me.ToolStripMenuItem5.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreatHCartToolStripMenuItem, Me.CreateLCartToolStripMenuItem})
+        Me.ToolStripMenuItem5.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreateHCartToolStripMenuItem, Me.CreateLCartToolStripMenuItem})
         Me.ToolStripMenuItem5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
         Me.ToolStripMenuItem5.Size = New System.Drawing.Size(320, 26)
         Me.ToolStripMenuItem5.Text = "Create H && L Carts"
         '
-        'CreatHCartToolStripMenuItem
+        'CreateHCartToolStripMenuItem
         '
-        Me.CreatHCartToolStripMenuItem.Name = "CreatHCartToolStripMenuItem"
-        Me.CreatHCartToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
-        Me.CreatHCartToolStripMenuItem.Text = "Create H Cart"
+        Me.CreateHCartToolStripMenuItem.Name = "CreateHCartToolStripMenuItem"
+        Me.CreateHCartToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
+        Me.CreateHCartToolStripMenuItem.Text = "Create H Cart"
         '
         'CreateLCartToolStripMenuItem
         '
@@ -1431,7 +1431,7 @@ Partial Class frmJobEntry
     Friend WithEvents ToolStripTextBox14 As ToolStripTextBox
     Friend WithEvents ToolStripTextBox15 As ToolStripTextBox
     Friend WithEvents ToolStripMenuItem5 As ToolStripMenuItem
-    Friend WithEvents CreatHCartToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CreateHCartToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CreateLCartToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem6 As ToolStripMenuItem
     Friend WithEvents CreateHCartsToolStripMenuItem As ToolStripMenuItem

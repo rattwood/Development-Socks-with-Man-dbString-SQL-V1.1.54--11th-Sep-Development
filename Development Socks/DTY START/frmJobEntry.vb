@@ -202,6 +202,9 @@ Public Class frmJobEntry
             Case "HLRound1", "HLRound2", "HLRound3", "HL STD"
                 lblScanType.Text = "Scan First Cheese On Cart"
                 txtLotNumber.Visible = True
+            Case "Create H Cart", "Create L Cart"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
         End Select
 
 
@@ -1741,6 +1744,230 @@ Public Class frmJobEntry
 
     End Sub
 
+
+    Private Sub createHL()
+
+        'Check Barcode is a valid Chees number, it must be 15 characters and no "B" in it
+        Dim chkBCode As String
+
+        Try
+
+            chkBCode = txtLotNumber.Text.Substring(12, 1)
+
+            If chkBCode = "B" Then
+
+                Label3.Visible = True
+                Label3.Text = "This is not a Valid Cheese Number" & vbCrLf & " ไม่พบหมายเลข cheese นี้ "
+                DelayTM()
+                Label3.Visible = False
+                Me.txtLotNumber.Clear()
+                Me.txtLotNumber.Focus()
+                Me.txtLotNumber.Refresh()
+                Exit Sub
+            Else
+
+
+                cheeseBcode = txtLotNumber.Text
+            End If
+
+        Catch ex As Exception
+
+            'Write error to Log File
+            writeerrorLog.writelog("Barcode Error", ex.Message, False, "User Fault")
+            Label3.Visible = True
+            Label3.Text = "BarCcode Is Not Valid" & vbCrLf & " ไม่พบหมายเลข บาร์โค็ด นี้"
+            DelayTM()
+            Label3.Visible = False
+
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Focus()
+            Me.txtLotNumber.Refresh()
+            Exit Sub
+        End Try
+
+        'Routine to find out what grade we wish to create sheet for  H or L
+        Dim reqGrade As String = Nothing
+
+        Select Case txtGrade.Text
+            Case "Create H Cart"
+                reqGrade = "H"
+            Case "Create L Cart"
+                reqGrade = "L"
+        End Select
+
+
+
+        LAddParam("@barcodenum", txtLotNumber.Text)
+        LExecQuery("Select * FROM Jobs Where BCODECONE = @barcodenum and HHLL_Res is not Null ")  'Check cheese has not been clour graded
+        If LRecordCount > 0 Then
+
+            Label3.Visible = True
+            Label3.Text = "This cheese has already been colour graded"
+            DelayTM()
+            Label3.Visible = False
+            quit = 1
+            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+            quit = 1
+
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Visible = True
+            Me.txtLotNumber.Focus()
+            Exit Sub
+        End If
+
+
+        LAddParam("@barcodenum", txtLotNumber.Text)
+        LAddParam("@gradereq", reqGrade)
+
+        LExecQuery("Select * FROM Jobs Where BCODECONE = @barcodenum and HHLL = @gradereq ")  'Check cheese grade is correct for grade requiered
+
+        If LRecordCount > 0 Then
+            'LOAD THE DATA FROM dB IN TO THE DATAGRID
+            frmDGV.DGVdata.DataSource = LDS.Tables(0)
+            frmDGV.DGVdata.Rows(0).Selected = True
+
+
+
+        Else  'Error wrong cheese type
+
+            Label3.Visible = True
+            Label3.Text = "This is not a " & reqGrade & " Type Cheese"
+            DelayTM()
+            Label3.Visible = False
+            quit = 1
+            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+            quit = 1
+
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Visible = True
+            Me.txtLotNumber.Focus()
+            Exit Sub
+
+        End If
+
+
+
+
+        'Extract requierd Informatiom
+
+        varProductCode = txtLotNumber.Text.Substring(2, 3)
+        year = txtLotNumber.Text.Substring(5, 2)
+        month = txtLotNumber.Text.Substring(7, 2)
+        doffingNum = txtLotNumber.Text.Substring(9, 3)
+        machineCode = txtLotNumber.Text.Substring(0, 2)
+
+
+
+        Select Case machineCode
+            Case 21
+                varMachineName = "11D1"        'Left Side
+            Case 22
+                varMachineName = "11D2"        'Right Side
+            Case 23
+                varMachineName = "12D1"        'Left Side
+            Case 24
+                varMachineName = "12D2"        'Right Side
+            Case 25
+                varMachineName = "21D1"        'Left Side
+            Case 26
+                varMachineName = "21D2"        'Right Side
+            Case 27
+                varMachineName = "22D1"        'Left Side
+            Case 28
+                varMachineName = "22D2"        'Right Side
+            Case 29
+                varMachineName = "Pilot"
+            Case 30
+                varMachineName = "31D1"        'Left Side 1 - 144
+            Case 31
+                varMachineName = "31D2"        'Right Side  145 - 288
+            Case 32
+                varMachineName = "32D1"        'Left Side  1 - 144
+            Case 33
+                varMachineName = "32D2"        'Right Side  145 - 288
+        End Select
+
+
+
+
+        'GET PRODUCT WEIGHT INFORMATION
+        LExecQuery("SELECT PRODNAME,PRODWEIGHT,WEIGHTCODE FROM PRODUCT WHERE PRNUM = '" & varProductCode & "'")
+
+        If LRecordCount > 0 Then
+            'LOAD THE DATA FROM dB IN TO THE DATAGRID
+            frmDGV.DGVdata.DataSource = LDS.Tables(0)
+            frmDGV.DGVdata.Rows(0).Selected = True
+
+            varProductName = frmDGV.DGVdata.Rows(0).Cells(0).Value.ToString
+            varProdWeight = frmDGV.DGVdata.Rows(0).Cells(1).Value.ToString
+            varweightcode = frmDGV.DGVdata.Rows(0).Cells(2).Value.ToString
+
+
+            frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+
+        Else
+            Label3.Visible = True
+            Label3.Text = "PRODUCT NUMBER " & varProductCode & " THIS PRODUCT IS NOT IN THE PRODUCT LIST" & vbCrLf &
+                "หมายเลขโปรดักส์ “ & varProductCode & ” นี้ ไม่พบอยู่ในรายการสินค้า"
+            DelayTM()
+            Label3.Visible = False
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Focus()
+            Me.txtLotNumber.Refresh()
+            quit = 1
+            Exit Sub
+
+        End If
+
+
+        'CHECK SCANNED CHEESE IS CORREECT GRADE OTHERWISE RESCAN
+        daysstring = "-" & My.Settings.SearchDaysCheese
+        LAddParam("@days", daysstring)  'This is an integer value
+
+
+        Select Case txtGrade.Text
+            Case "Create H Cart"
+                LExecQuery("Select * FROM Jobs Where HHLL = 'H' And HHLL_Res is Null and PRNUM = '" & varProductCode & "' And  CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ORDER BY CONENUM ")
+            Case "Create L Cart"
+                LExecQuery("Select * FROM Jobs Where HHLL = 'L' And HHLL_Res is Null and PRNUM = '" & varProductCode & "' And  CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ORDER BY CONENUM ")
+        End Select
+
+
+        If LRecordCount > 0 Then
+            'LOAD THE DATA FROM dB IN TO THE DATAGRID
+            frmDGV.DGVdata.DataSource = LDS.Tables(0)
+            frmDGV.DGVdata.Rows(0).Selected = True
+            Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
+
+
+        Else
+            Label3.Visible = True
+            Label3.Text = "NO GRADE " & "'" & reqGrade & "'" & " CHEESES CAN BE FOUND" & vbCrLf &
+                "ไม่มีค่าสี “ & reqGrade & ” พบ cheese ลูกนี้แล้ว"
+            DelayTM()
+            Label3.Visible = False
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Visible = True
+            quit = 1
+            Exit Sub
+
+        End If
+
+
+
+        Me.Hide()
+        If My.Settings.debugSet Then frmDGV.Show()
+
+        varCartNum = 1
+
+        frmHLCreate.txtConeBcode.Clear()
+        frmHLCreate.txtConeBcode.Focus()
+        frmHLCreate.Show()
+
+
+
+    End Sub
+
     Private Sub nonAPacking()
 
         'Check Barcode is a valid Chees number, it must be 15 characters and no "B" in it
@@ -2198,6 +2425,8 @@ Public Class frmJobEntry
                     prgContinue()
                 ElseIf My.Settings.chkUseSort And stdcheck Or My.Settings.chkUsePack And stdcheck Then
                     STDCreate()
+                ElseIf My.Settings.chkUsePack And txtGrade.Text = "Create H Cart" Or My.Settings.chkUsePack And txtGrade.Text = "Create L Cart" Then
+                    createHL()
                 Else
 
                     nonAPacking()
@@ -2531,9 +2760,7 @@ Public Class frmJobEntry
     End Sub
 
 
-    Private Sub ToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem5.Click
 
-    End Sub
 
     Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
         stdReChk = 0
@@ -2543,9 +2770,9 @@ Public Class frmJobEntry
         txtOperator.Focus()
     End Sub
 
-    Private Sub CreatHCartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreatHCartToolStripMenuItem.Click
+    Private Sub CreatHCartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreateHCartToolStripMenuItem.Click
         stdReChk = 0
-        txtGrade.Text = ReCheckToolStripMenuItem.Text
+        txtGrade.Text = CreateHCartToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
         txtOperator.Focus()
@@ -2554,7 +2781,7 @@ Public Class frmJobEntry
 
     Private Sub CreateLCartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreateLCartToolStripMenuItem.Click
         stdReChk = 0
-        txtGrade.Text = ReCheckToolStripMenuItem.Text
+        txtGrade.Text = CreateLCartToolStripMenuItem.Text
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
         txtOperator.Focus()
