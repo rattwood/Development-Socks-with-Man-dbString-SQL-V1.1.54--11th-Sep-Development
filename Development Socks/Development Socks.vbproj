@@ -719,152 +719,152 @@
   <ItemGroup>
     <PublishFile Include="Microsoft.SqlServer.ConnectionInfo">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.SqlServer.Diagnostics.STrace">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.SqlServer.Dmf.Common">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.SqlServer.DtsMsg">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.SqlServer.DTSPipelineWrap">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.SqlServer.DTSRuntimeWrap">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.SqlServer.ManagedConnections">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.SqlServer.ManagedDTS">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.SqlServer.Management.Sdk.Sfc">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.SqlServer.Msxml6_interop">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.SqlServer.PipelineHost">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.SqlServer.ServiceBrokerEnum">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.SqlServer.Smo">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.SqlServer.SqlClrProvider">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.SqlServer.SqlEnum">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>
@@ -938,6 +938,48 @@
     <None Include="Resources\SH M.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\HPK.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SHPK B.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SHPK D.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SHPK L.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SHPK M.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LS D.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LS L.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LS M.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LS.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LSPK B.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LSPK D.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LSPK L.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LSPK M.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LSPK.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\H B.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -983,9 +1025,6 @@
     <None Include="Resources\L.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\HPK.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\HPK B.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -1002,6 +1041,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\HPK MM.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HPK Waste.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HS B.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HS D.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HS L.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HS M.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HS.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HSPK B.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HSPK D.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HSPK L.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HSPK M.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\LPK B.jpg" />
@@ -1022,19 +1091,19 @@
     <None Include="Resources\LPK MM.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\LPK Waste.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\LPK.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\SHPK B.jpg" />
+    <None Include="Resources\LS B.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\SHPK D.jpg" />
+    <None Include="Resources\L Waste.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\SHPK L.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\SHPK M.jpg" />
+    <None Include="Resources\H Waste.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -1,9 +1,11 @@
-﻿
+﻿Imports System.IO
 Imports Excel = Microsoft.Office.Interop.Excel
 Imports System.ComponentModel
 
 
 Public Class frmCart1
+
+    Dim MyHLGradeUpdate As New Excel.Application
 
     'Colour related variables
     Dim dC, Blue, BlueGreen, Green, GreenYellow, Yellow, YellowRed, Red, RedBlue As String
@@ -71,6 +73,13 @@ Public Class frmCart1
     Dim lclHHLL, lclMDML As String
     Dim remaincount As Integer
     Dim tmpCartType As String = Nothing
+    Dim HLColCheck As Integer
+    Dim HorL As String = Nothing
+
+    'Printing
+    Dim prodNameMod As String = Nothing
+    Dim sheetName As String = Nothing
+    Dim SaveString As String = Nothing
 
     'THIS INITIATES WRITING TO ERROR LOG
     Private writeerrorLog As New writeError
@@ -92,7 +101,14 @@ Public Class frmCart1
         Dim btnNum As Integer
         Dim btnNums As String
 
-        btnNums = frmJobEntry.varCartSelect
+        If Not frmJobEntry.HLColChk = Nothing Then
+            HorL = frmJobEntry.HLColChk
+            HLColCheck = 1
+            btnNums = 1  'set to 1 as mixed cheese numbers so we will always use positions 1-32 on display
+        Else
+            btnNums = frmJobEntry.varCartSelect
+        End If
+        ' btnNums = frmJobEntry.varCartSelect
 
         ' SELECT CONE NUMBER RANGE BASED ON CART NUMBER
         Select Case btnNums
@@ -224,9 +240,15 @@ Public Class frmCart1
             Me.Controls("btnCone" & i.ToString).Visible = False
         Next
 
+        If Not HLColCheck = 1 Then
+            Me.txtCartNum.Text = frmJobEntry.cartSelect
+            Me.lblMcNum.Text = frmDGV.DGVdata.Rows(0).Cells("MCNAME").Value.ToString
+        Else
+            Me.txtCartNum.Text = HorL
+            Me.lblMcNum.Text = "MIX"
+        End If
 
-        Me.txtCartNum.Text = frmJobEntry.cartSelect
-        Me.lblMcNum.Text = frmDGV.DGVdata.Rows(0).Cells("MCNAME").Value.ToString
+
         lblProdName.Text = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value.ToString
         lblTFNum.Text = frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value.ToString
         lblDoffNum.Text = frmDGV.DGVdata.Rows(0).Cells("DOFFNUM").Value.ToString
@@ -257,20 +279,20 @@ Public Class frmCart1
 
 
 
+            If Not HLColCheck Then 'If we are not doinf hl colour check then check for HL seperation
+                lclHHLL = frmJobEntry.HHLL
+                lclMDML = frmJobEntry.MDML
 
-        lclHHLL = frmJobEntry.HHLL
-        lclMDML = frmJobEntry.MDML
+                'Check to see if cart has alrady had Pattern Seperation
+                If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("HHLL").Value) Then
+                    dbHHLL = "YES"
+                End If
 
-        'Check to see if cart has alrady had Pattern Seperation
-        If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("HHLL").Value) Then
-            dbHHLL = "YES"
-        End If
+                frmJobEntry.HHLL = Nothing
+                frmJobEntry.MDML = Nothing
+            End If
 
-        frmJobEntry.HHLL = Nothing
-        frmJobEntry.MDML = Nothing
-
-
-        tmpCartType = frmJobEntry.txtLotNumber.Text.Substring(12, 1)
+            tmpCartType = frmJobEntry.txtLotNumber.Text.Substring(12, 1)
 
         'VISUAL CHECK BUTTONS VISABLE OR NOT
         If My.Settings.chkUseColour And (String.IsNullOrWhiteSpace(lclHHLL) Or lclHHLL = "NO") Then  'do normal colour grading
@@ -315,6 +337,16 @@ Public Class frmCart1
             txtM50.Visible = True
             txtP50.Visible = True
 
+            If Not HorL = Nothing Then
+                Select Case HorL
+                    Case "H"
+                        lblHLSeperation.Text = "H Colour Grading"
+                        lblHLSeperation.Visible = True
+                    Case "L"
+                        lblHLSeperation.Text = "L Colour Grading"
+                        lblHLSeperation.Visible = True
+                End Select
+            End If
 
 
             varVisConeInspect = 1
@@ -561,7 +593,39 @@ Public Class frmCart1
         Dim cellVal As String
         remaincount = 32
 
-        For rw As Integer = 1 To frmDGV.DGVdata.Rows.Count '32
+        'H Images
+        Dim im_HDD As Image = My.Resources.H_DD
+        Dim im_HD As Image = My.Resources.H_D
+        Dim im_HMM As Image = My.Resources.H_MM
+        Dim im_HL As Image = My.Resources.H_L
+        Dim im_HLL As Image = My.Resources.H_LL
+        Dim im_HB As Image = My.Resources.H_B
+
+        'H Short images
+        Dim im_HSD As Image = My.Resources.HS_D
+        Dim im_HSM As Image = My.Resources.HS_M
+        Dim im_HSL As Image = My.Resources.HS_L
+        Dim im_HSB As Image = My.Resources.HS_B
+
+        'L Images
+        Dim im_LDD As Image = My.Resources.L_DD
+        Dim im_LD As Image = My.Resources.L_D
+        Dim im_LMM As Image = My.Resources.L_MM
+        Dim im_LL As Image = My.Resources.L_L
+        Dim im_LLL As Image = My.Resources.L_LL
+        Dim im_LB As Image = My.Resources.L_B
+
+        'H Short images
+        Dim im_LSD As Image = My.Resources.LS_D
+        Dim im_LSM As Image = My.Resources.LS_M
+        Dim im_LSL As Image = My.Resources.LS_L
+        Dim im_LSB As Image = My.Resources.LS_B
+
+        'Waste
+        Dim im_LW As Image = My.Resources.L_Waste
+        Dim im_HW As Image = My.Resources.H_Waste
+
+        For rw As Integer = 1 To frmDGV.DGVdata.Rows.Count 'cheese count
 
             For cl As Integer = 10 To 22
 
@@ -587,52 +651,192 @@ Public Class frmCart1
 
                 If cl = 12 And cellVal > 0 Then Me.Controls("btnCone" & rw).BackColor = Color.Yellow    'DEFECT
 
-                'If cl > 12 And cl < 15 Then Continue For
 
 
                 If cl = 15 And cellVal > 0 Then
-                    If lclHHLL = "YES" Then
-                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.BARRE     'BARLEY
+                    If HLColCheck Then
+                        Select Case HorL
+                            Case "H"
+                                If shortC(rw) = 1 Then
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_HSM
+                                Else
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_HMM   'My.Resources.H_MM
+                                End If
+
+                            Case "L"
+                                If shortC(rw) = 1 Then
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LSM
+                                Else
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LMM
+                                End If
+                        End Select
                     Else
                         Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.Zero       'ZERO CONE
                     End If
-
-
                 End If
+
+
                 If cl = 16 And cellVal > 0 Then
-                    If lclHHLL = "YES" Then
-                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.BARRE     'BARLEY
+                    If HLColCheck Then
+                        Select Case HorL
+                            Case "H"
+                                If shortC(rw) = 1 Then
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_HSB
+                                Else
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_HB
+                                End If
+
+                            Case "L"
+                                If shortC(rw) = 1 Then
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LSB
+                                Else
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LB
+                                End If
+                        End Select
                     Else
-                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.BARRE     'BARLEY
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.BARRE        'BARRE
                     End If
                 End If
 
+
                 If cl = 17 And cellVal > 0 Then
-                    Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M10  'M10
+                    If HLColCheck Then
+                        Select Case HorL
+                            Case "H"
+                                If shortC(rw) = 1 Then
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_HSL       'M10
+                                Else
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_HL       'M10
+                                End If
 
+                            Case "L"
+                                If shortC(rw) = 1 Then
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LSL  'M10
+                                Else
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LL  'M10
+                                End If
+                        End Select
+                    Else
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M10  'M10
+                    End If
                 End If
+
+
                 If cl = 18 And cellVal > 0 Then
-                    Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P10     'P10
+                    If HLColCheck Then
+                        Select Case HorL
+                            Case "H"
+                                If shortC(rw) = 1 Then
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_HSD       'P10
+                                Else
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_HD        'P10
+                                End If
 
+                            Case "L"
+                                If shortC(rw) = 1 Then
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LSD  'P10
+                                Else
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LD  'P10
+                                End If
+                        End Select
+                    Else
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P10     'P10
+                    End If
                 End If
+
+
                 If cl = 19 And cellVal > 0 Then
-                    Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M30    'M30
+                    If HLColCheck Then
+                        Select Case HorL
+                            Case "H"
+                                If shortC(rw) = 1 Then
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_HSB       'M30
+                                Else
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_HLL        'M30
+                                End If
 
+                            Case "L"
+                                If shortC(rw) = 1 Then
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LSB   'M30
+                                Else
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LLL    'M30
+                                End If
+                        End Select
+                    Else
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M30    'M30
+                    End If
                 End If
+
+
+
                 If cl = 20 And cellVal > 0 Then
-                    Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P30   'P30
+                    If HLColCheck Then
+                        Select Case HorL
+                            Case "H"
+                                If shortC(rw) = 1 Then
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_HSB      'P30
+                                Else
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_HDD       'P30
+                                End If
 
+                            Case "L"
+                                If shortC(rw) = 1 Then
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LSB 'P30
+                                Else
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LDD   'P30
+                                End If
+                        End Select
+                    Else
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P30   'P30
+                    End If
                 End If
+
+
+
                 If cl = 21 And cellVal > 0 Then
-                    Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M50      'M50
+                    If HLColCheck Then
+                        Select Case HorL
+                            Case "H"
+                                If shortC(rw) = 1 Then
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_HSB        'M50
+                                Else
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_HB        'M50
+                                End If
 
+                            Case "L"
+                                If shortC(rw) = 1 Then
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LSB 'M50
+                                Else
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LB  'M50
+                                End If
+                        End Select
+                    Else
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.M50      'M50
+                    End If
                 End If
+
+
                 If cl = 22 And cellVal > 0 Then
-                    Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P50     'P50
+                    If HLColCheck Then
+                        Select Case HorL
+                            Case "H"
+                                If shortC(rw) = 1 Then
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_HSB       'P50
+                                Else
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_HB       'P50
+                                End If
 
+                            Case "L"
+                                If shortC(rw) = 1 Then
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LSB  'P50
+                                Else
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LSB   'P50
+                                End If
+                        End Select
+                    Else
+                        Me.Controls("btnCone" & rw).BackgroundImage = My.Resources.P50     'P50
+                    End If
                 End If
-
-
 
 
             Next
@@ -657,9 +861,104 @@ Public Class frmCart1
             End If
 
 
-            'WASTE CELL in db
-            If frmDGV.DGVdata.Rows(rw - 1).Cells("COLWASTE").Value > 0 Then Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
-            If frmDGV.DGVdata.Rows(rw - 1).Cells("FLT_W").Value = True Then Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
+            'WASTE CELLS in db
+
+            If frmDGV.DGVdata.Rows(rw - 1).Cells("COLWASTE").Value > 0 Or
+                    frmDGV.DGVdata.Rows(rw - 1).Cells("FLT_W").Value = "True" Then
+
+                If HorL = Nothing Then
+                    Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
+                    'If frmDGV.DGVdata.Rows(rw - 1).Cells("FLT_W").Value = True Then Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
+                Else
+
+                    Select Case HorL
+                        Case "H"
+                            Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
+                            Me.Controls("btnCone" & rw).BackgroundImage = im_HW
+                        Case "L"
+                            Me.Controls("btnCone" & rw).BackColor = Color.Purple  'WASTE
+                            Me.Controls("btnCone" & rw).BackgroundImage = im_LW
+                    End Select
+
+                End If
+
+            End If
+
+
+
+            If Not HorL = Nothing Then
+
+                If Me.Controls("btnCone" & (rw)).BackgroundImage IsNot Nothing Then
+
+                    'H Full values
+                    If Me.Controls("btnCone" & (rw)).BackgroundImage Is im_HDD Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "H_DD"
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_HD Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "H_D"
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_HMM Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "H_MM"
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_HL Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "H_L"
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_HLL Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "H_LL"
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_HB Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "H_B"
+
+                        'L Full values
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_LDD Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "L_DD"
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_LD Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "L_D"
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage.Tag Is im_LMM Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "L_MM"
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_LL Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "L_L"
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_LLL Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "L_LL"
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_LB Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "L_B"
+
+                        'SMALL H
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_HSD Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "HS_D"
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_HSM Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "HS_M"
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_HSL Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "HS_L"
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_HSB Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "HS_B"
+
+                        'Small L
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_LSD Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "LS_D"
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage.Tag Is im_LMM Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "LS_M"
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_LSL Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "LS_L"
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_LSB Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "LS_B"
+
+                        'H and L waste
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_HW Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "H_W"
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_LW Then
+                        frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "L_W"
+                    End If
+                Else
+                    Me.Controls("btnCone" & (rw)).BackgroundImage = Nothing
+                End If
+            End If
+
+
+
+
+
+
+
+
+
+
+
 
             'new section to Display H and L values if a standard Cart and HHLL
 
@@ -2006,6 +2305,12 @@ Public Class frmCart1
                 If IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("COLENDTM").Value) Then
                     frmDGV.DGVdata.Rows(rw - 1).Cells("COLENDTM").Value = today 'COLOUR CHECK END TIME
                 End If
+
+                If Not HorL = Nothing Then
+                    frmDGV.DGVdata.Rows(rw - 1).Cells("HHLLState").Value = 3
+                End If
+
+
             ElseIf My.Settings.chkUseSort Then
                 frmDGV.DGVdata.Rows(rw - 1).Cells("OPSORT").Value = frmJobEntry.SortOP
                 frmDGV.DGVdata.Rows(rw - 1).Cells("CARTENDTM").Value = today
@@ -2015,6 +2320,8 @@ Public Class frmCart1
             End If
 
         Next
+
+
 
         'CART LOG File entry
         Dim cartMessage As String
@@ -2032,6 +2339,8 @@ Public Class frmCart1
         writeerrorLog.writelog("Cart Opened for edit ", cartMessage, False, "Cart Edit Opened")
 
 
+
+        printSheet()
         UpdateDatabase()
 
 
@@ -3176,15 +3485,15 @@ Public Class frmCart1
 
                 btnImage = My.Resources.Zero
                 coneZero = varConeNum
-            ElseIf valHH Then
+            ElseIf valHH > 0 Then
                 btnImage = My.Resources.PatH
                 valHH = varConeNum
 
-            ElseIf valLL Then
+            ElseIf valLL > 0 Then
                 btnImage = My.Resources.PatL
                 valLL = varConeNum
 
-            ElseIf valHStd Then
+            ElseIf valHStd > 0 Then
                 btnImage = My.Resources.PatHSTD
                 valHStd = varConeNum
 
@@ -3623,7 +3932,9 @@ Public Class frmCart1
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("DEFCONE").Value = defect  'defectCone
         End If
 
-        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CONEZERO").Value = coneZero  'passCone  Zero Colour Difference    
+
+        frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CONEZERO").Value = coneZero  'passCone  Zero Colour Difference   
+
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CONEBARLEY").Value = coneBarley 'Cone with large colour defect
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("M10").Value = coneM10   'coneM10
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("P10").Value = coneP10   'coneP10
@@ -3647,6 +3958,8 @@ Public Class frmCart1
         If lclHHLL = "YES" And Val(NoCone) > 0 Then
             frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("HHLL").Value = "MISS"
         End If
+
+
 
 
         frmDGV.DGVdata.Rows((varConeNum - 1) - coneNumOffset).Cells("CARTENDTM").Value = varCartEndTime 'cartEndTime
@@ -3941,6 +4254,267 @@ Public Class frmCart1
             End If
         Next
 
+    End Sub
+    Private Sub printSheet()
+
+        'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+        prodNameMod = frmDGV.DGVdata.Rows(0).Cells(52).Value.ToString
+        prodNameMod = prodNameMod.Replace("/", "_")
+
+        'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+        sheetName = prodNameMod.Substring(prodNameMod.Length - 4) & "_" & frmJobEntry.txtGrade.Text
+
+        Dim endsheetname As String = Nothing
+
+
+
+        Select Case HorL
+            Case "H"
+                endsheetname = "Create H Cart"
+            Case "L"
+                endsheetname = "Create L Cart"
+        End Select
+
+
+        'CREATE THE FULL NAME FOR SAVING THE FILE
+        SaveString = (prodNameMod & " " _
+            & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+            & frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString) & " " & endsheetname
+
+
+        'CREATE Date STRING
+        Dim finddate As String
+
+
+
+        Dim YY, MM, DD As String
+        Dim todaypath As String
+        Dim savename As String
+        Dim SheetNum As Integer
+
+
+        finddate = frmJobEntry.txtLotNumber.Text 'gets the date the file was created
+        YY = finddate.Substring(3, 2)
+        MM = finddate.Substring(5, 2)
+        DD = finddate.Substring(7, 2)
+
+
+        finddate = (DD & "_" & MM & "_20" & YY)
+
+        todaypath = (My.Settings.dirPacking & "\" & finddate) 'path of date the file shuld be stored in
+
+        'create the save name of the file
+        savename = (todaypath & "\" & saveString & ".xlsx").ToString
+
+
+        Dim sheetNumber As Integer = 0
+        If frmJobEntry.txtLotNumber.Text.Length > 18 Then
+            sheetNumber = frmJobEntry.txtLotNumber.Text.Substring(17, 2)
+        Else
+            sheetNumber = frmJobEntry.txtLotNumber.Text.Substring(17, 1)
+        End If
+
+
+        'CHECK TO SEE IF THERE IS ALREADY A FILE STARTED FOR PRODUCT NUMBER
+        'IN TODATY DIRECTORY
+        ' todayDir()
+
+        'UPDATE THE EXCEL SHEET FOR THIS JOB
+
+
+        Dim ReCheckworkbook As Excel.Workbook
+        Dim ReChecksheets As Excel.Worksheet
+
+
+        ReCheckworkbook = MyHLGradeUpdate.Workbooks.Open(savename)
+        ReChecksheets = ReCheckworkbook.Worksheets(sheetNumber)
+        ReChecksheets.Activate()
+
+
+
+
+        Try
+            If File.Exists(savename) Then
+
+                For i = 1 To frmDGV.DGVdata.Rows.Count
+
+                    If IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value) Then Continue For
+
+                    Select Case frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                        'H Grades
+
+                        Case "H_DD"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.DarkBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "+30"
+                        Case "H_D"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.DarkBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "+10"
+                        Case "H_MM"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Blue
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "0"
+                        Case "H_L"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.LightBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "-10"
+                        Case "H_LL"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.LightBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "-30"
+                        Case "H_B"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "B"
+                        Case "H_W"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Purple
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "Waste"
+                        'L grades
+                        Case "L_DD"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.DarkBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "+30"
+                        Case "L_D"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.DarkBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "+10"
+                        Case "L_MM"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Blue
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "0"
+                        Case "L_L"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.LightBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "-10"
+                        Case "L_LL"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.LightBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "-30"
+                        Case "L_B"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "B"
+                        Case "L_W"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Purple
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "Waste"
+                            'Short Grades H
+                        Case "HS_D"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.DarkBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "+10 Short"
+                        Case "HS_M"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Blue
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "0 Short"
+                        Case "HS_L"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.LightBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "-10 Short"
+                        Case "HS_B"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "B Short"
+                               'Short Grades H
+                        Case "LS_D"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.DarkBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "+10 Short"
+                        Case "LS_M"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Blue
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "0 Short"
+                        Case "LS_L"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.LightBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "-10 Short"
+                        Case "LS_B"
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
+                            MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
+                            MyHLGradeUpdate.Cells(8 + i, 6) = "B Short"
+                    End Select
+                Next
+
+                MyHLGradeUpdate.Cells(45, 3) = frmJobEntry.varUserName  'Puts user name on the form
+
+
+            Else
+                MsgBox("No previous sheet found, please check and copy in to a today directory to continue")
+                Exit Sub
+            End If
+
+
+
+        Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Error", ex.ToString, False, "System Fault")
+            MsgBox(ex.Message)
+        End Try
+
+
+
+        Try
+
+            'Save changes to new file in Paking Dir
+            MyHLGradeUpdate.DisplayAlerts = False
+            ReCheckworkbook.SaveAs(Filename:=savename, FileFormat:=51)
+
+        Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
+
+            MsgBox(ex.Message)
+
+        End Try
+
+        Try
+            'Close template file but do not save updates to it
+            ReCheckworkbook.Close(SaveChanges:=False)
+        Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
+            MsgBox(ex.Message)
+        End Try
+
+
+        MyHLGradeUpdate.Quit()
+        releaseObject(ReCheckworkbook)
+        releaseObject(MyHLGradeUpdate)
+        Me.Close()
+
+    End Sub
+
+    'Private Sub todayDir()
+
+    '    ' routine to check if a today directory exists otherwise creat a new one
+    '    PrevPath1 = (My.Settings.dirPacking & "\" & Date.Now.AddDays(-1).ToString("dd_MM_yyyy"))
+    '    PrevPath2 = (My.Settings.dirPacking & "\" & Date.Now.AddDays(-2).ToString("dd_MM_yyyy"))
+    '    PrevPath3 = (My.Settings.dirPacking & "\" & Date.Now.AddDays(-3).ToString("dd_MM_yyyy"))
+
+
+    '    todayPath = (My.Settings.dirPacking & "\" & Date.Now.ToString("dd_MM_yyyy"))
+
+
+
+
+    'End Sub
+
+
+    Private Sub releaseObject(ByVal obj As Object)
+
+        Try
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(obj)
+            obj = Nothing
+        Catch ex As Exception
+            obj = Nothing
+        Finally
+            GC.Collect()
+        End Try
     End Sub
 
 

@@ -90,6 +90,8 @@ Public Class frmJobEntry
     Dim coneM50 As String = 0
     Dim coneP50 As String = 0
 
+    Public HLColChk As String = Nothing
+
     Public MDML, HHLL As String  'Identification is product is HHLL or MDML  grading methids
 
     'days to look back for cheeses to be packed
@@ -221,8 +223,9 @@ Public Class frmJobEntry
 
 
 
-        Dim chkBCode As String
-        Dim chkBCode2 As String
+        Dim chkBCode As String = Nothing
+        Dim chkBCode2 As String = Nothing
+        Dim chkBcode3 As String = Nothing
 
         If txtLotNumber.Text = "" Then
             MsgBox("Please scan Barcode")
@@ -250,6 +253,7 @@ Public Class frmJobEntry
 
             chkBCode = txtLotNumber.Text.Substring(9, 1)
             chkBCode2 = txtLotNumber.Text.Substring(9, 3)
+            chkBcode3 = txtLotNumber.Text.Substring(9, 5)
 
 
             'CHECK TO SEE IT STANDARD RECHECK OR RECHECK CART
@@ -261,6 +265,16 @@ Public Class frmJobEntry
                 stdcheck = 0
                 reCheck = 1
                 dbBarcode = txtLotNumber.Text
+            ElseIf chkBcode3 = "H_Col" Or chkBCode3 = "L_Col" Then
+                Select Case txtLotNumber.Text.Substring(9, 5)
+
+                    Case "H_Col"
+                        HLColChk = "H"
+                        dbBarcode = txtLotNumber.Text
+                    Case "L_Col"
+                        HLColChk = "L"
+                        dbBarcode = txtLotNumber.Text
+                End Select
 
             ElseIf txtLotNumber.Text.Substring(12, 1) = "B" Then
                 chkBCode = txtLotNumber.Text.Substring(12, 1)
@@ -268,6 +282,7 @@ Public Class frmJobEntry
 
                 stdcheck = 0
                 reCheck = 0
+                HLColChk = Nothing
                 machineCode = txtLotNumber.Text.Substring(0, 2)
 
                 Select Case txtLotNumber.TextLength
@@ -344,7 +359,8 @@ Public Class frmJobEntry
     Private Sub CreateJob()
 
         'For A packing on normal cart
-        If reCheck = 0 And stdcheck = 0 Then
+        If reCheck = 0 And stdcheck = 0 And HLColChk = Nothing Then
+
             If txtLotNumber.TextLength > 14 Then  ' For carts B10,11 & 12
                 machineName = ""
                 machineCode = txtLotNumber.Text.Substring(0, 2)
@@ -610,7 +626,8 @@ Public Class frmJobEntry
         End If
 
 
-        If reCheck Or stdcheck Then
+        ' If reCheck Or stdcheck Then
+        If rechkA Or stdReChk Then
             dbBarcode = txtLotNumber.Text
             productCode = txtLotNumber.Text.Substring(0, 3)
             year = txtLotNumber.Text.Substring(3, 2)
@@ -622,36 +639,39 @@ Public Class frmJobEntry
         Else
             If My.Settings.chkUseColour Or My.Settings.chkUseSort Then
 
-                'Check Product Type HHLL or MDML
-                LAddParam("@prnum", productCode)
-                LExecQuery("Select * From PRODUCT where prnum = @prnum and prod_HHLL is Not Null")
-                If LRecordCount > 0 Then
-                    HHLL = "YES"
-                End If
 
-                If Not HHLL = "YES" Then
+                If Not HLColChk = Nothing Then
+                    CheckJob()
+                Else
+                    'Check Product Type HHLL or MDML
                     LAddParam("@prnum", productCode)
-                    LExecQuery("Select * From PRODUCT where prnum = @prnum and prod_MDML = 'YES'")
+                    LExecQuery("Select * From PRODUCT where prnum = @prnum and prod_HHLL is Not Null")
+
                     If LRecordCount > 0 Then
-                        MDML = "YES"
+                        HHLL = "YES"
                     End If
+
+                    If Not HHLL = "YES" Then
+                        LAddParam("@prnum", productCode)
+                        LExecQuery("Select * From PRODUCT where prnum = @prnum and prod_MDML = 'YES'")
+                        If LRecordCount > 0 Then
+                            MDML = "YES"
+                        End If
+                    End If
+
+                    CheckJob()
+
                 End If
-
-                CheckJob()
-
             End If
         End If
 
         'THIS Selects "A" Packing Routine and if HL master cart show seperation
         If My.Settings.chkUsePack Then
-            If HHLL = "Yes" Then
-                MsgBox("we have arrived at seperation screen")
-            Else
                 APacking()
             End If
 
-            'APacking()
-        End If
+        'APacking()
+
 
 
 
@@ -706,7 +726,13 @@ Public Class frmJobEntry
     Public Sub CheckJob()
 
 
-        LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ORDER BY CONENUM")
+
+        If Not HLColChk = Nothing Then
+            LExecQuery("SELECT * FROM jobs WHERE recheckbarcode = '" & dbBarcode & "' ORDER BY rechkidx")
+        Else
+            LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ORDER BY CONENUM")
+        End If
+
 
         If LRecordCount > 0 Then
 

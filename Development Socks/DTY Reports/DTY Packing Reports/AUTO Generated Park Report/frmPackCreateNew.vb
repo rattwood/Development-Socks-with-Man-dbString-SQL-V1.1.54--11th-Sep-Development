@@ -458,6 +458,9 @@ Public Class frmPackCreateNew
                         MyPakExcel.Cells(2, 2) = "Col Check L Product"
                 End Select
 
+                createBarcode()
+                MyPakExcel.Cells(1, 3) = SheetCodeString
+
             Case "Pilot 6Ch"
 
                 nfree = 13
