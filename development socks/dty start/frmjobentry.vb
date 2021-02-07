@@ -91,7 +91,7 @@ Public Class frmJobEntry
     Dim coneP50 As String = 0
 
     Public HLColChk As String = Nothing
-
+    Dim HLPackGrade As String = Nothing
     Public MDML, HHLL As String  'Identification is product is HHLL or MDML  grading methids
 
     'days to look back for cheeses to be packed
@@ -205,6 +205,72 @@ Public Class frmJobEntry
                 lblScanType.Text = "Scan First Cheese On Cart"
                 txtLotNumber.Visible = True
             Case "Create H Cart", "Create L Cart"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "H DD"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "H D"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "H MM"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "H L"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "H LL"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "H B"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "H W"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "L DD"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "L D"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "L MM"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "L L"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "L LL"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "L B"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "L W"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "HS D"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "HS M"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "HS L"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "HS B"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "LS D"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "LS M"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "LS L"
+                lblScanType.Text = "Scan First Cheese On Cart"
+                txtLotNumber.Visible = True
+            Case "LS B"
                 lblScanType.Text = "Scan First Cheese On Cart"
                 txtLotNumber.Visible = True
         End Select
@@ -2115,8 +2181,122 @@ Public Class frmJobEntry
                 Case "Waste"
                     packGrade = txtGrade.Text
                     LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8 And FLT_W = 'True' And PACKENDTM is Null Or BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE = 8  And COLWASTE > 0 And PACKENDTM is Null ")
-            End Select
 
+                Case "H DD"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                Case "H D"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                Case "H MM"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                Case "H L"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                Case "H LL"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                Case "H B"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                Case "H W"
+
+                Case "L DD"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                Case "L D"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                Case "H MM"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                Case "L L"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                Case "L LL"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                Case "L B"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                Case "L W"
+
+
+                Case "HS D"
+                Case "HS M"
+                Case "HS L"
+                Case "HS B"
+
+                Case "LS D"
+                Case "LS M"
+                Case "LS L"
+                Case "LS B"
+
+
+
+
+            End Select
         Catch ex As Exception
 
             'Write error to Log File
@@ -2131,7 +2311,7 @@ Public Class frmJobEntry
             Me.txtLotNumber.Visible = True
             Me.txtLotNumber.Focus()
             Label3.Visible = True
-            Label3.Text = "NO Grade " & "'" & txtGrade.Text & "'" & " CHEESES PLEASE RE-SCAN" & vbCrLf & "ไม่มีค่าสี “ & txtGrade.Text & ” กรุณาสแกน cheese ลูกนี้อีกครั้ง"
+            Label3.Text = "Not Grade " & "'" & txtGrade.Text & "'" & " CHEESES PLEASE RE-SCAN" & vbCrLf & "ไม่มีค่าสี “ & txtGrade.Text & ” กรุณาสแกน cheese ลูกนี้อีกครั้ง"
             DelayTM()
             Label3.Visible = False
 
@@ -2234,10 +2414,89 @@ Public Class frmJobEntry
 
 
                 Case "Create L Cart"
-
                     LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And (CONESTATE = 9 or conestate = '8') And " _
                                    & " HHLL = 'L' And PACKENDTM Is Null And STDSTATE = 10 And RECHK Is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
 
+                    'H and L Packing Full and Short
+                Case "H DD"
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@prodnum", varProductCode)
+                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                Case "H D"
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@prodnum", varProductCode)
+                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                Case "H MM"
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@prodnum", varProductCode)
+                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                Case "H L"
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@prodnum", varProductCode)
+                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                Case "H LL"
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@prodnum", varProductCode)
+                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                Case "H B"
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@prodnum", varProductCode)
+                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                Case "H W"
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@prodnum", varProductCode)
+                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                Case "L DD"
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@prodnum", varProductCode)
+                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                Case "L D"
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@prodnum", varProductCode)
+                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                Case "H MM"
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@prodnum", varProductCode)
+                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                Case "L L"
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@prodnum", varProductCode)
+                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                Case "L LL"
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@prodnum", varProductCode)
+                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                Case "L B"
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@prodnum", varProductCode)
+                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                Case "L W"
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@prodnum", varProductCode)
+                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                Case "HS D"
+                Case "HS M"
+                Case "HS L"
+                Case "HS B"
+
+                Case "LS D"
+                Case "LS M"
+                Case "LS L"
+                Case "LS B"
 
                 Case "Waste"
                     packGrade = txtGrade.Text
@@ -2762,14 +3021,6 @@ Public Class frmJobEntry
 
     End Sub
 
-    'Private Sub ReCheckAToolStripMenuItem4_Click(sender As Object, e As EventArgs)
-    '    stdReChk = 0
-    '    txtGrade.Text = ReCheckAToolStripMenuItem4.Text
-    '    lblSelectGrade.Visible = False
-    '    txtOperator.Visible = True
-    '    txtOperator.Focus()
-    '    lblScanType.Text = "Scan Job Sheet"
-    'End Sub
 
     Private Sub StockToProcessReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StockToProcessReportToolStripMenuItem.Click
         frmProdStockWork.Show()
@@ -2814,8 +3065,185 @@ Public Class frmJobEntry
         lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
+    Private Sub HDDToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles HDDToolStripMenuItem3.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = HDDToolStripMenuItem3.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan Job Sheet"
+    End Sub
 
+    Private Sub HDToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles HDToolStripMenuItem3.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = HDToolStripMenuItem3.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan Job Sheet"
+    End Sub
 
+    Private Sub HMMToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles HMMToolStripMenuItem2.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = HMMToolStripMenuItem2.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan Job Sheet"
+    End Sub
+
+    Private Sub HLToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles HLToolStripMenuItem2.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = HLToolStripMenuItem2.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan Job Sheet"
+    End Sub
+
+    Private Sub HLLToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles HLLToolStripMenuItem2.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = HLLToolStripMenuItem2.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan Job Sheet"
+    End Sub
+
+    Private Sub HBToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles HBToolStripMenuItem2.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = HBToolStripMenuItem2.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan Job Sheet"
+    End Sub
+
+    Private Sub SHDToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles HSDToolStripMenuItem2.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = HSDToolStripMenuItem2.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan Job Sheet"
+    End Sub
+
+    Private Sub SHMToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles HSMToolStripMenuItem2.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = HSMToolStripMenuItem2.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan Job Sheet"
+    End Sub
+
+    Private Sub SHLToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles HSLToolStripMenuItem2.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = HSLToolStripMenuItem2.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan Job Sheet"
+    End Sub
+
+    Private Sub SHBToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles HSBToolStripMenuItem2.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = HSBToolStripMenuItem2.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub LDDToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles LDDToolStripMenuItem4.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = LDDToolStripMenuItem4.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub LDToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles LDToolStripMenuItem4.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = LDToolStripMenuItem4.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub LMMToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles LMMToolStripMenuItem3.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = LMMToolStripMenuItem3.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub LLToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles LLToolStripMenuItem3.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = LLToolStripMenuItem3.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub LLLToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles LLLToolStripMenuItem3.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = LLLToolStripMenuItem3.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub LBToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles LBToolStripMenuItem3.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = LBToolStripMenuItem3.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub LSDToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles LSDToolStripMenuItem2.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = LSDToolStripMenuItem2.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub LSMToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles LSMToolStripMenuItem2.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = LSMToolStripMenuItem2.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub LSLToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles LSLToolStripMenuItem2.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = LSLToolStripMenuItem2.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub LSBToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles LSBToolStripMenuItem2.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = LSBToolStripMenuItem2.Text
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
 
     Private Sub PrintToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintToolStripMenuItem.Click
         Me.Hide()
