@@ -1,4 +1,5 @@
-﻿Imports Excel = Microsoft.Office.Interop.Excel
+﻿Imports Microsoft.Office.Core
+Imports Excel = Microsoft.Office.Interop.Excel
 
 
 Public Class frmPackCreateNew
@@ -122,6 +123,8 @@ Public Class frmPackCreateNew
                 createBarcode()
                 MyPakExcel.Cells(1, 4) = SheetCodeString
 
+                MyPakExcel.Cells(64, 14) = frmJobEntry.PackOp
+
                 'THIS IS USED TO WRITE DATE IN TO USED ROWS
                 If frmPackPrvGet.nfree > 0 Then
                     nfree = frmPackPrvGet.nfree
@@ -131,13 +134,52 @@ Public Class frmPackCreateNew
 
                 End If
 
-                Select Case frmJobEntry.txtGrade.Text
-                    Case "B", "AL", "AD"
-                        MyPakExcel.Cells(64, 14) = frmJobEntry.PackOp
+                createBarcode()
+                MyPakExcel.Cells(1, 4) = SheetCodeString
 
-                        createBarcode()
-                        MyPakExcel.Cells(1, 4) = SheetCodeString
-                End Select
+
+            Case "H DD", "H D", "H MM", "H L", "H LL", "H B", "L DD", "L D", "L MM", "L L", "L LL", "L B"
+                nfree = 13
+
+                Dim prodTf As String
+
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
+                'PRODUCT NAME
+                MyPakExcel.Cells(7, 4) = prodTf
+
+                'Product Code
+                MyPakExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value        'F7
+                'DATE
+                MyPakExcel.Cells(5, 3) = Date.Now.ToString("dd MM yyyy")              'C5
+                'CHEESE WEIGHT
+                MyPakExcel.Cells(13, 5) = frmJobEntry.varProdWeight                   'E13
+
+                'Update the packing Grade
+                MyPakExcel.Cells(30, 10) = frmJobEntry.txtGrade.Text
+
+                'Update the grade header
+                MyPakExcel.Cells(3, 2) = frmJobEntry.txtGrade.Text & " - Grade"
+
+                'PACKER NAME
+                MyPakExcel.Cells(13, 8) = frmJobEntry.PackOp     'H13
+
+                MyPakExcel.Cells(64, 14) = frmJobEntry.PackOp
+
+                createBarcode()
+                MyPakExcel.Cells(1, 4) = SheetCodeString
+
+                'THIS IS USED TO WRITE DATE IN TO USED ROWS
+                If frmPackPrvGet.nfree > 0 Then
+                    nfree = frmPackPrvGet.nfree
+                    For usedrow = 13 To nfree - 1
+                        MyPakExcel.Cells(usedrow, 4) = frmPackRepMain.prevDays
+                    Next
+
+                End If
+
+
+                createBarcode()
+                MyPakExcel.Cells(1, 4) = SheetCodeString
 
             Case "P35 AS", "P35 BS"
                 nfree = 12
@@ -727,6 +769,8 @@ Public Class frmPackCreateNew
                 frmPackTodayUpdate.TodayUpdate()
             Case "B", "AL", "AD"
                 frmPackTodayUpdate.TodayUpdateB_AL_AD()
+            Case "H DD", "H D", "H MM", "H L", "H LL", "H B", "L DD", "L D", "L MM", "L L", "L LL", "L B"
+                frmPackTodayUpdate.TodayUpdateHL()
             Case "P35 AS", "P35 BS"
                 frmPackTodayUpdate.TodatUpdateBS_AS_35()
             Case "P25 AS", "P30 BS"
@@ -790,6 +834,44 @@ Public Class frmPackCreateNew
                 gradeTxt = "AL" 'AL Grade
             Case "AD"
                 gradeTxt = "AD" 'AD Grade
+                     'H and L Packing Full and Short
+            Case "H DD"
+                gradeTxt = "H DD" 'AD Grade
+            Case "H D"
+                gradeTxt = "H D" 'AD Grade
+            Case "H MM"
+                gradeTxt = "H MM" 'AD Grade
+            Case "H L"
+                gradeTxt = "H L" 'AD Grade
+            Case "H LL"
+                gradeTxt = "H LL" 'AD Grade
+            Case "H B"
+                gradeTxt = "H B" 'AD Grade
+            Case "H W"
+                gradeTxt = "H W" 'AD Grade
+            Case "L DD"
+                gradeTxt = "L DD" 'AD Grade
+            Case "L D"
+                gradeTxt = "L D" 'AD Grade
+            Case "H MM"
+                gradeTxt = "L MM" 'AD Grade
+            Case "L L"
+                gradeTxt = "L L" 'AD Grade
+            Case "L LL"
+                gradeTxt = "L LL" 'AD Grade
+            Case "L B"
+                gradeTxt = "L B" 'AD Grade
+            Case "L W"
+                gradeTxt = "L W" 'AD Grade
+            Case "HS D"
+            Case "HS M"
+            Case "HS L"
+            Case "HS B"
+
+            Case "LS D"
+            Case "LS M"
+            Case "LS L"
+            Case "LS B"
             Case "P35 AS"
                 gradeTxt = "P35AS" 'P35 AS Grade
             Case "P35 BS"

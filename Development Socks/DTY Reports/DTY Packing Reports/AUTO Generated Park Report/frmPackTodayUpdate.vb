@@ -553,7 +553,7 @@ Public Class frmPackTodayUpdate
         'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
         For rcount = 13 To 102
             If MyTodyExcel.Cells(rcount, 4).Value > 0 Then
-                totCount = totCount = 1
+                totCount = totCount + 1
                 Continue For
             Else
                 nfree = rcount
@@ -617,6 +617,7 @@ Public Class frmPackTodayUpdate
 
                             'NEW METHOD SO WE CAN IDENTIFY CHEESE THAT HAVE ALREADY BEEEN PACK AND NOT REPRINT THEM
                             frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "15"
+
 
                             'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
                             Select Case nfree
@@ -731,6 +732,248 @@ Public Class frmPackTodayUpdate
             'Write error to Log File
             writeerrorLog.writelog("Excel Update Error", ex.Message, False, "System Fault")
             writeerrorLog.writelog("Excel Update Error", ex.ToString, False, "System Fault")
+            MsgBox(ex.ToString)
+
+        End Try
+
+        Try
+
+            'Save changes to new file in Paking Dir
+            MyTodyExcel.DisplayAlerts = False
+            xlTodyWorkbook.SaveAs(Filename:=frmPackRepMain.savename, FileFormat:=51)
+
+        Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
+            MsgBox(ex.Message)
+
+        End Try
+
+        Try
+            'Close template file but do not save updates to it
+            xlTodyWorkbook.Close(SaveChanges:=False)
+        Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
+            MsgBox(ex.Message)
+        End Try
+
+
+        MyTodyExcel.Quit()
+        releaseObject(xlTodysheets)
+        releaseObject(xlTodyWorkbook)
+        releaseObject(MyTodyExcel)
+        Me.Close()
+
+    End Sub
+
+    Public Sub TodayUpdateHL()
+
+        Dim xlTodyWorkbook As Excel.Workbook
+        Dim xlTodysheets As Excel.Worksheet
+
+
+        xlTodyWorkbook = MyTodyExcel.Workbooks.Open(frmPackRepMain.savename)
+        mycount = xlTodyWorkbook.Worksheets.Count
+        boxCount = mycount
+        createBarcode()
+
+
+        Dim totCount As Integer = 1
+        'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
+        For rcount = 13 To 102
+            If MyTodyExcel.Cells(rcount, 4).Value > 0 Then
+                totCount = totCount + 1
+                Continue For
+            Else
+                nfree = rcount
+                Exit For
+            End If
+        Next
+
+
+        'CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
+        If totCount = 90 Then
+            xlTodyWorkbook.Sheets(1).Copy(After:=xlTodyWorkbook.Sheets(mycount))
+            'ReName the work sheet 
+            CType(MyTodyExcel.Workbooks(1).Worksheets("Sheet1"), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
+
+            nfree = 13
+
+            Dim prodTf As String
+
+            prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
+            'PRODUCT NAME
+            MyTodyExcel.Cells(7, 4) = prodTf
+
+
+            'Product Code
+            MyTodyExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+            'Packer Name
+            MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
+            'Packer Name
+            MyTodyExcel.Cells(61, 14) = frmJobEntry.PackOp
+
+            'Update the packing Grade
+            MyTodyExcel.Cells(30, 10) = frmJobEntry.txtGrade.Text
+
+            'Update the grade header
+            MyTodyExcel.Cells(3, 2) = frmJobEntry.txtGrade.Text & " - Grade"
+
+            boxCount = boxCount + 1
+            createBarcode()
+            MyTodyExcel.Cells(1, 4) = SheetCodeString
+
+            For i = 13 To 102
+                MyTodyExcel.Cells(nfree, 4) = "" 'Clear the contents of cone cells
+            Next
+
+        End If
+
+
+        'Routine to go through the rows and extract Grade A cones plus keep count
+        Dim cartonNum As String = ""
+        Dim cellNum As Integer
+
+
+        Try
+            'Packer Name
+            MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
+            'Packer Name
+            MyTodyExcel.Cells(61, 14) = frmJobEntry.PackOp
+            For i = 1 To frmDGV.DGVdata.Rows.Count
+
+                Select Case frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value
+                    Case 8, 9
+                        'frmDGV.DGVdata.Rows(i - 1).Cells(9).Value = "8" And
+                        If Not IsDBNull(frmDGV.DGVdata.Rows(i - 1).Cells("PACKENDTM").Value) Then
+                            frmDGV.DGVdata.Rows(i - 1).Cells("PACKSHEETBCODE").Value = modBarcode
+
+
+                            'NEW METHOD SO WE CAN IDENTIFY CHEESE THAT HAVE ALREADY BEEEN PACK AND NOT REPRINT THEM
+                            frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value = "15"
+                            frmDGV.DGVdata.Rows(i - 1).Cells("HHLLState").Value = "4"
+
+
+                            'USED TO ALLOCATE BOX NUMBER USED WHEN PACKED
+                            Select Case nfree
+                                Case 13 To 18
+                                    cartonNum = 1
+                                    cellNum = 13
+                                Case 19 To 24
+                                    cartonNum = 2
+                                    cellNum = 19
+                                Case 25 To 30
+                                    cartonNum = 3
+                                    cellNum = 25
+                                Case 31 To 36
+                                    cartonNum = 4
+                                    cellNum = 31
+                                Case 37 To 42
+                                    cartonNum = 5
+                                    cellNum = 37
+                                Case 43 To 48
+                                    cartonNum = 6
+                                    cellNum = 43
+                                Case 49 To 54
+                                    cartonNum = 7
+                                    cellNum = 49
+                                Case 55 To 60
+                                    cartonNum = 8
+                                    cellNum = 55
+                                Case 61 To 66
+                                    cartonNum = 9
+                                    cellNum = 61
+                                Case 67 To 72
+                                    cartonNum = 10
+                                    cellNum = 67
+                                Case 73 To 78
+                                    cartonNum = 11
+                                    cellNum = 73
+                                Case 79 To 84
+                                    cartonNum = 12
+                                    cellNum = 79
+                                Case 85 To 90
+                                    cartonNum = 13
+                                    cellNum = 85
+                                Case 91 To 96
+                                    cartonNum = 14
+                                    cellNum = 91
+                                Case 97 To 102
+                                    cartonNum = 15
+                                    cellNum = 97
+                            End Select
+
+
+                            cartonNum = (cartonNum & "-" & boxCount).ToString
+
+                            'WRITE CONE NUMBER TO SHEET
+                            ' MsgBox("I value = " & i & " Cone Number = " & frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value & " nfree Value = " & nfree)
+                            MyTodyExcel.Cells(nfree, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
+
+
+
+
+
+                            'WRITE CARTON NUMBER (TraceNumber) TO SHEET AND PUT IN DGV
+                            MyTodyExcel.Cells(cellNum, 2) = cartonNum
+                            frmDGV.DGVdata.Rows(i - 1).Cells(61).Value = cartonNum
+                            nfree = nfree + 1
+
+                            'ROUTINE IF SHEET IS FULL TO COPY SHEET AND CREATE A NEW SHEET IN THE WORKBOOK
+                            If nfree = 103 Then
+                                Dim tmpsaveName As String
+
+                                tmpsaveName = (frmPackRepMain.finPath & "\" & frmPackRepMain.sheetName & "_" & mycount & ".xlsx")
+                                MyTodyExcel.DisplayAlerts = False
+                                xlTodyWorkbook.Sheets(mycount).SaveAs(Filename:=tmpsaveName, FileFormat:=51)
+
+                                MyTodyExcel.DisplayAlerts = True
+
+                                xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
+                                CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
+
+                                Dim prodTf As String
+
+                                prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
+                                'PRODUCT NAME
+                                MyTodyExcel.Cells(7, 4) = prodTf
+
+                                'Update the packing Grade
+                                MyTodyExcel.Cells(30, 10) = frmJobEntry.txtGrade.Text
+
+                                'Update the grade header
+                                MyTodyExcel.Cells(3, 2) = frmJobEntry.txtGrade.Text & " - Grade"
+
+
+                                MyTodyExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+                                'Packer Name
+                                MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
+                                'Packer Name
+                                MyTodyExcel.Cells(61, 14) = frmJobEntry.PackOp
+
+                                boxCount = boxCount + 1
+                                createBarcode()
+                                MyTodyExcel.Cells(1, 4) = SheetCodeString
+
+
+
+                                For x = 13 To 102
+                                    MyTodyExcel.Cells(x, 4) = "" 'Clear the contents of cone cells
+                                Next
+
+                                nfree = 13
+
+                            End If
+                        End If
+                End Select
+            Next
+
+        Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Excel Update Error", ex.Message, False, "System Fault")
             MsgBox(ex.ToString)
 
         End Try
@@ -1653,7 +1896,7 @@ Public Class frmPackTodayUpdate
         'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
         For rcount = 13 To 102
             If MyTodyExcel.Cells(rcount, 4).Value > 0 Then
-                totCount = totCount = 1
+                totCount = totCount + 1
                 Continue For
             Else
                 nfree = rcount

@@ -140,6 +140,9 @@ Public Class frmPackRepMain
                     prodNum = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString
                     sheetSearch = prodNum & "______PI20"
 
+
+
+
                 Case Else
                     'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
                     prodNameMod = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value.ToString
@@ -188,6 +191,48 @@ Public Class frmPackRepMain
                         Case "ReCheck"
 
                             sheetSearch = prodNum & "______ReCheck"
+                        Case "H DD"
+
+                            sheetSearch = prodNum & "______H DD"
+                        Case "H D"
+
+                            sheetSearch = prodNum & "______H D"
+                        Case "H MM"
+
+                            sheetSearch = prodNum & "______H MM"
+                        Case "H L"
+
+                            sheetSearch = prodNum & "______H L"
+                        Case "H LL"
+
+                            sheetSearch = prodNum & "______H LL"
+                        Case "H B"
+
+                            sheetSearch = prodNum & "______H B"
+                        Case "L DD"
+
+                            sheetSearch = prodNum & "______L DD"
+                        Case "L D"
+
+                            sheetSearch = prodNum & "______L D"
+                        Case "L MM"
+
+                            sheetSearch = prodNum & "______L MM"
+                        Case "L L"
+
+                            sheetSearch = prodNum & "______L L"
+                        Case "L LL"
+
+                            sheetSearch = prodNum & "______L LL"
+                        Case "L B"
+
+                            sheetSearch = prodNum & "______L B"
+
+
+
+
+
+
                     End Select
 
 
@@ -221,6 +266,8 @@ Public Class frmPackRepMain
                 template = (My.Settings.dirTemplate & "\" & "Packing Template Grade AL.xlsx").ToString
             Case "AD"
                 template = (My.Settings.dirTemplate & "\" & "Packing Template Grade AD.xlsx").ToString
+            Case "H DD", "H D", "H MM", "H L", "H LL", "H B", "L DD", "L D", "L MM", "L L", "L LL", "L B"
+                template = (My.Settings.dirTemplate & "\" & "Packing Template Grade HL Full.xlsx").ToString
             Case "Waste"
                 template = (My.Settings.dirTemplate & "\" & "Packing Template Grade B.xlsx").ToString
             Case "P15 AS"
@@ -275,6 +322,8 @@ Public Class frmPackRepMain
                     frmPackTodayUpdate.TodayUpdate()
                 Case "B", "AD", "AL", "Waste"
                     frmPackTodayUpdate.TodayUpdateB_AL_AD()
+                Case "H DD", "H D", "H MM", "H L", "H LL", "H B", "L DD", "L D", "L MM", "L L", "L LL", "L B"
+                    frmPackTodayUpdate.TodayUpdateHL()
                 Case "P35 AS", "P35 BS"
                     frmPackTodayUpdate.TodatUpdateBS_AS_35()
                 Case "P25 AS", "P30 BS"
@@ -301,8 +350,6 @@ Public Class frmPackRepMain
 
 
         Else
-
-
 
 
             If frmJobEntry.txtGrade.Text <> "Round1" And

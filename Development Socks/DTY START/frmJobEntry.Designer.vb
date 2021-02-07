@@ -82,40 +82,6 @@ Partial Class frmJobEntry
         Me.ToolStripTextBox7 = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripTextBox14 = New System.Windows.Forms.ToolStripTextBox()
-        Me.ToolStripMenuItem6 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CreateHCartsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripTextBox8 = New System.Windows.Forms.ToolStripTextBox()
-        Me.HDDToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HDToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HMMToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HLToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HLLToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HBToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripTextBox9 = New System.Windows.Forms.ToolStripTextBox()
-        Me.SHDToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SHMToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SHLToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SHBToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CreateLCartsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripTextBox16 = New System.Windows.Forms.ToolStripTextBox()
-        Me.LDDToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LDToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LMMToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LLLToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LBToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripTextBox17 = New System.Windows.Forms.ToolStripTextBox()
-        Me.SLDToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SLMToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SLLToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SLBToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripTextBox15 = New System.Windows.Forms.ToolStripTextBox()
         Me.PackGradedHLCartsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HCartsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -129,23 +95,23 @@ Partial Class frmJobEntry
         Me.ToolStripSeparator19 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripTextBox18 = New System.Windows.Forms.ToolStripTextBox()
-        Me.SHDToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SHMToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SHLToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SHBToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HSDToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HSMToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HSLToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HSBToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.LCartsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripTextBox19 = New System.Windows.Forms.ToolStripTextBox()
-        Me.HDDToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HDToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HMMToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HLToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HLLToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HBToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LDDToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LDToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LMMToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LLToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LLLToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LBToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripTextBox20 = New System.Windows.Forms.ToolStripTextBox()
-        Me.SLDToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SLMToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SLLToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SLBToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LSDToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LSMToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LSLToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LSBToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DailyPackingReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EndOfDayReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -514,7 +480,7 @@ Partial Class frmJobEntry
         '
         'PackingHLProductsToolStripMenuItem
         '
-        Me.PackingHLProductsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox11, Me.ToolStripMenuItem3, Me.ToolStripSeparator12, Me.ToolStripSeparator7, Me.ToolStripTextBox12, Me.ToolStripMenuItem5, Me.ToolStripSeparator13, Me.ToolStripSeparator9, Me.ToolStripTextBox13, Me.ToolStripTextBox7, Me.ToolStripSeparator14, Me.ToolStripSeparator8, Me.ToolStripTextBox14, Me.ToolStripMenuItem6, Me.ToolStripSeparator10, Me.ToolStripSeparator11, Me.ToolStripTextBox15, Me.PackGradedHLCartsToolStripMenuItem})
+        Me.PackingHLProductsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox11, Me.ToolStripMenuItem3, Me.ToolStripSeparator12, Me.ToolStripSeparator7, Me.ToolStripTextBox12, Me.ToolStripMenuItem5, Me.ToolStripSeparator13, Me.ToolStripSeparator9, Me.ToolStripTextBox13, Me.ToolStripTextBox7, Me.ToolStripSeparator14, Me.ToolStripSeparator8, Me.ToolStripTextBox15, Me.PackGradedHLCartsToolStripMenuItem})
         Me.PackingHLProductsToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PackingHLProductsToolStripMenuItem.Name = "PackingHLProductsToolStripMenuItem"
         Me.PackingHLProductsToolStripMenuItem.Size = New System.Drawing.Size(129, 20)
@@ -606,251 +572,12 @@ Partial Class frmJobEntry
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
         Me.ToolStripSeparator8.Size = New System.Drawing.Size(317, 6)
         '
-        'ToolStripTextBox14
-        '
-        Me.ToolStripTextBox14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ToolStripTextBox14.Name = "ToolStripTextBox14"
-        Me.ToolStripTextBox14.Size = New System.Drawing.Size(100, 22)
-        Me.ToolStripTextBox14.Text = "Step 4"
-        '
-        'ToolStripMenuItem6
-        '
-        Me.ToolStripMenuItem6.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreateHCartsToolStripMenuItem, Me.CreateLCartsToolStripMenuItem})
-        Me.ToolStripMenuItem6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
-        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(320, 26)
-        Me.ToolStripMenuItem6.Text = "Create H && L Packing Carts"
-        '
-        'CreateHCartsToolStripMenuItem
-        '
-        Me.CreateHCartsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox8, Me.HDDToolStripMenuItem2, Me.HDToolStripMenuItem2, Me.HMMToolStripMenuItem1, Me.HLToolStripMenuItem1, Me.HLLToolStripMenuItem1, Me.HBToolStripMenuItem1, Me.ToolStripSeparator15, Me.ToolStripSeparator16, Me.ToolStripTextBox9, Me.SHDToolStripMenuItem1, Me.SHMToolStripMenuItem1, Me.SHLToolStripMenuItem1, Me.SHBToolStripMenuItem1})
-        Me.CreateHCartsToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CreateHCartsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
-        Me.CreateHCartsToolStripMenuItem.Name = "CreateHCartsToolStripMenuItem"
-        Me.CreateHCartsToolStripMenuItem.Size = New System.Drawing.Size(187, 26)
-        Me.CreateHCartsToolStripMenuItem.Text = "Create H Carts"
-        '
-        'ToolStripTextBox8
-        '
-        Me.ToolStripTextBox8.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ToolStripTextBox8.Name = "ToolStripTextBox8"
-        Me.ToolStripTextBox8.Size = New System.Drawing.Size(100, 29)
-        Me.ToolStripTextBox8.Text = "Full Cheese"
-        '
-        'HDDToolStripMenuItem2
-        '
-        Me.HDDToolStripMenuItem2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.HDDToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
-        Me.HDDToolStripMenuItem2.Name = "HDDToolStripMenuItem2"
-        Me.HDDToolStripMenuItem2.Size = New System.Drawing.Size(160, 26)
-        Me.HDDToolStripMenuItem2.Text = "H DD"
-        '
-        'HDToolStripMenuItem2
-        '
-        Me.HDToolStripMenuItem2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.HDToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
-        Me.HDToolStripMenuItem2.Name = "HDToolStripMenuItem2"
-        Me.HDToolStripMenuItem2.Size = New System.Drawing.Size(160, 26)
-        Me.HDToolStripMenuItem2.Text = "H D"
-        '
-        'HMMToolStripMenuItem1
-        '
-        Me.HMMToolStripMenuItem1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.HMMToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
-        Me.HMMToolStripMenuItem1.Name = "HMMToolStripMenuItem1"
-        Me.HMMToolStripMenuItem1.Size = New System.Drawing.Size(160, 26)
-        Me.HMMToolStripMenuItem1.Text = "H MM"
-        '
-        'HLToolStripMenuItem1
-        '
-        Me.HLToolStripMenuItem1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.HLToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
-        Me.HLToolStripMenuItem1.Name = "HLToolStripMenuItem1"
-        Me.HLToolStripMenuItem1.Size = New System.Drawing.Size(160, 26)
-        Me.HLToolStripMenuItem1.Text = "H L"
-        '
-        'HLLToolStripMenuItem1
-        '
-        Me.HLLToolStripMenuItem1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.HLLToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
-        Me.HLLToolStripMenuItem1.Name = "HLLToolStripMenuItem1"
-        Me.HLLToolStripMenuItem1.Size = New System.Drawing.Size(160, 26)
-        Me.HLLToolStripMenuItem1.Text = "H LL"
-        '
-        'HBToolStripMenuItem1
-        '
-        Me.HBToolStripMenuItem1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.HBToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
-        Me.HBToolStripMenuItem1.Name = "HBToolStripMenuItem1"
-        Me.HBToolStripMenuItem1.Size = New System.Drawing.Size(160, 26)
-        Me.HBToolStripMenuItem1.Text = "H B"
-        '
-        'ToolStripSeparator15
-        '
-        Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
-        Me.ToolStripSeparator15.Size = New System.Drawing.Size(157, 6)
-        '
-        'ToolStripSeparator16
-        '
-        Me.ToolStripSeparator16.Name = "ToolStripSeparator16"
-        Me.ToolStripSeparator16.Size = New System.Drawing.Size(157, 6)
-        '
-        'ToolStripTextBox9
-        '
-        Me.ToolStripTextBox9.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ToolStripTextBox9.Name = "ToolStripTextBox9"
-        Me.ToolStripTextBox9.Size = New System.Drawing.Size(100, 29)
-        Me.ToolStripTextBox9.Text = "Short Cheese"
-        '
-        'SHDToolStripMenuItem1
-        '
-        Me.SHDToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
-        Me.SHDToolStripMenuItem1.Name = "SHDToolStripMenuItem1"
-        Me.SHDToolStripMenuItem1.Size = New System.Drawing.Size(160, 26)
-        Me.SHDToolStripMenuItem1.Text = "SH D"
-        '
-        'SHMToolStripMenuItem1
-        '
-        Me.SHMToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
-        Me.SHMToolStripMenuItem1.Name = "SHMToolStripMenuItem1"
-        Me.SHMToolStripMenuItem1.Size = New System.Drawing.Size(160, 26)
-        Me.SHMToolStripMenuItem1.Text = "SH M"
-        '
-        'SHLToolStripMenuItem1
-        '
-        Me.SHLToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
-        Me.SHLToolStripMenuItem1.Name = "SHLToolStripMenuItem1"
-        Me.SHLToolStripMenuItem1.Size = New System.Drawing.Size(160, 26)
-        Me.SHLToolStripMenuItem1.Text = "SH L"
-        '
-        'SHBToolStripMenuItem1
-        '
-        Me.SHBToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
-        Me.SHBToolStripMenuItem1.Name = "SHBToolStripMenuItem1"
-        Me.SHBToolStripMenuItem1.Size = New System.Drawing.Size(160, 26)
-        Me.SHBToolStripMenuItem1.Text = "SH B"
-        '
-        'CreateLCartsToolStripMenuItem
-        '
-        Me.CreateLCartsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox16, Me.LDDToolStripMenuItem1, Me.LDToolStripMenuItem1, Me.LMMToolStripMenuItem1, Me.LLToolStripMenuItem, Me.LLLToolStripMenuItem1, Me.LBToolStripMenuItem2, Me.ToolStripSeparator17, Me.ToolStripSeparator18, Me.ToolStripTextBox17, Me.SLDToolStripMenuItem1, Me.SLMToolStripMenuItem1, Me.SLLToolStripMenuItem1, Me.SLBToolStripMenuItem1})
-        Me.CreateLCartsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.CreateLCartsToolStripMenuItem.Name = "CreateLCartsToolStripMenuItem"
-        Me.CreateLCartsToolStripMenuItem.Size = New System.Drawing.Size(187, 26)
-        Me.CreateLCartsToolStripMenuItem.Text = "Create L Carts"
-        '
-        'ToolStripTextBox16
-        '
-        Me.ToolStripTextBox16.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ToolStripTextBox16.Name = "ToolStripTextBox16"
-        Me.ToolStripTextBox16.Size = New System.Drawing.Size(100, 29)
-        Me.ToolStripTextBox16.Text = "Full Cheese"
-        '
-        'LDDToolStripMenuItem1
-        '
-        Me.LDDToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LDDToolStripMenuItem1.Name = "LDDToolStripMenuItem1"
-        Me.LDDToolStripMenuItem1.Size = New System.Drawing.Size(160, 26)
-        Me.LDDToolStripMenuItem1.Text = "L DD"
-        '
-        'LDToolStripMenuItem1
-        '
-        Me.LDToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LDToolStripMenuItem1.Name = "LDToolStripMenuItem1"
-        Me.LDToolStripMenuItem1.Size = New System.Drawing.Size(160, 26)
-        Me.LDToolStripMenuItem1.Text = "L D"
-        '
-        'LMMToolStripMenuItem1
-        '
-        Me.LMMToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LMMToolStripMenuItem1.Name = "LMMToolStripMenuItem1"
-        Me.LMMToolStripMenuItem1.Size = New System.Drawing.Size(160, 26)
-        Me.LMMToolStripMenuItem1.Text = "L MM"
-        '
-        'LLToolStripMenuItem
-        '
-        Me.LLToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LLToolStripMenuItem.Name = "LLToolStripMenuItem"
-        Me.LLToolStripMenuItem.Size = New System.Drawing.Size(160, 26)
-        Me.LLToolStripMenuItem.Text = "L L"
-        '
-        'LLLToolStripMenuItem1
-        '
-        Me.LLLToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LLLToolStripMenuItem1.Name = "LLLToolStripMenuItem1"
-        Me.LLLToolStripMenuItem1.Size = New System.Drawing.Size(160, 26)
-        Me.LLLToolStripMenuItem1.Text = "L LL"
-        '
-        'LBToolStripMenuItem2
-        '
-        Me.LBToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBToolStripMenuItem2.Name = "LBToolStripMenuItem2"
-        Me.LBToolStripMenuItem2.Size = New System.Drawing.Size(160, 26)
-        Me.LBToolStripMenuItem2.Text = "L B"
-        '
-        'ToolStripSeparator17
-        '
-        Me.ToolStripSeparator17.Name = "ToolStripSeparator17"
-        Me.ToolStripSeparator17.Size = New System.Drawing.Size(157, 6)
-        '
-        'ToolStripSeparator18
-        '
-        Me.ToolStripSeparator18.Name = "ToolStripSeparator18"
-        Me.ToolStripSeparator18.Size = New System.Drawing.Size(157, 6)
-        '
-        'ToolStripTextBox17
-        '
-        Me.ToolStripTextBox17.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ToolStripTextBox17.Name = "ToolStripTextBox17"
-        Me.ToolStripTextBox17.Size = New System.Drawing.Size(100, 29)
-        Me.ToolStripTextBox17.Text = "Short Cheese"
-        '
-        'SLDToolStripMenuItem1
-        '
-        Me.SLDToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.SLDToolStripMenuItem1.Name = "SLDToolStripMenuItem1"
-        Me.SLDToolStripMenuItem1.Size = New System.Drawing.Size(160, 26)
-        Me.SLDToolStripMenuItem1.Text = "SL D"
-        '
-        'SLMToolStripMenuItem1
-        '
-        Me.SLMToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.SLMToolStripMenuItem1.Name = "SLMToolStripMenuItem1"
-        Me.SLMToolStripMenuItem1.Size = New System.Drawing.Size(160, 26)
-        Me.SLMToolStripMenuItem1.Text = "SL M"
-        '
-        'SLLToolStripMenuItem1
-        '
-        Me.SLLToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.SLLToolStripMenuItem1.Name = "SLLToolStripMenuItem1"
-        Me.SLLToolStripMenuItem1.Size = New System.Drawing.Size(160, 26)
-        Me.SLLToolStripMenuItem1.Text = "SL L"
-        '
-        'SLBToolStripMenuItem1
-        '
-        Me.SLBToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.SLBToolStripMenuItem1.Name = "SLBToolStripMenuItem1"
-        Me.SLBToolStripMenuItem1.Size = New System.Drawing.Size(160, 26)
-        Me.SLBToolStripMenuItem1.Text = "SL B"
-        '
-        'ToolStripSeparator10
-        '
-        Me.ToolStripSeparator10.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
-        Me.ToolStripSeparator10.Size = New System.Drawing.Size(317, 6)
-        '
-        'ToolStripSeparator11
-        '
-        Me.ToolStripSeparator11.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.ToolStripSeparator11.ForeColor = System.Drawing.SystemColors.ActiveCaption
-        Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
-        Me.ToolStripSeparator11.Size = New System.Drawing.Size(317, 6)
-        '
         'ToolStripTextBox15
         '
         Me.ToolStripTextBox15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolStripTextBox15.Name = "ToolStripTextBox15"
         Me.ToolStripTextBox15.Size = New System.Drawing.Size(100, 22)
-        Me.ToolStripTextBox15.Text = "Step 5"
+        Me.ToolStripTextBox15.Text = "Step 4"
         '
         'PackGradedHLCartsToolStripMenuItem
         '
@@ -862,10 +589,10 @@ Partial Class frmJobEntry
         '
         'HCartsToolStripMenuItem
         '
-        Me.HCartsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox10, Me.HDDToolStripMenuItem3, Me.HDToolStripMenuItem3, Me.HMMToolStripMenuItem2, Me.HLToolStripMenuItem2, Me.HLLToolStripMenuItem2, Me.HBToolStripMenuItem2, Me.ToolStripSeparator19, Me.ToolStripSeparator20, Me.ToolStripTextBox18, Me.SHDToolStripMenuItem2, Me.SHMToolStripMenuItem2, Me.SHLToolStripMenuItem2, Me.SHBToolStripMenuItem2})
+        Me.HCartsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox10, Me.HDDToolStripMenuItem3, Me.HDToolStripMenuItem3, Me.HMMToolStripMenuItem2, Me.HLToolStripMenuItem2, Me.HLLToolStripMenuItem2, Me.HBToolStripMenuItem2, Me.ToolStripSeparator19, Me.ToolStripSeparator20, Me.ToolStripTextBox18, Me.HSDToolStripMenuItem2, Me.HSMToolStripMenuItem2, Me.HSLToolStripMenuItem2, Me.HSBToolStripMenuItem2})
         Me.HCartsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
         Me.HCartsToolStripMenuItem.Name = "HCartsToolStripMenuItem"
-        Me.HCartsToolStripMenuItem.Size = New System.Drawing.Size(134, 26)
+        Me.HCartsToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
         Me.HCartsToolStripMenuItem.Text = "H Carts"
         '
         'ToolStripTextBox10
@@ -879,53 +606,53 @@ Partial Class frmJobEntry
         '
         Me.HDDToolStripMenuItem3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
         Me.HDDToolStripMenuItem3.Name = "HDDToolStripMenuItem3"
-        Me.HDDToolStripMenuItem3.Size = New System.Drawing.Size(160, 26)
+        Me.HDDToolStripMenuItem3.Size = New System.Drawing.Size(180, 26)
         Me.HDDToolStripMenuItem3.Text = "H DD"
         '
         'HDToolStripMenuItem3
         '
         Me.HDToolStripMenuItem3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
         Me.HDToolStripMenuItem3.Name = "HDToolStripMenuItem3"
-        Me.HDToolStripMenuItem3.Size = New System.Drawing.Size(160, 26)
+        Me.HDToolStripMenuItem3.Size = New System.Drawing.Size(180, 26)
         Me.HDToolStripMenuItem3.Text = "H D"
         '
         'HMMToolStripMenuItem2
         '
         Me.HMMToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
         Me.HMMToolStripMenuItem2.Name = "HMMToolStripMenuItem2"
-        Me.HMMToolStripMenuItem2.Size = New System.Drawing.Size(160, 26)
+        Me.HMMToolStripMenuItem2.Size = New System.Drawing.Size(180, 26)
         Me.HMMToolStripMenuItem2.Text = "H MM"
         '
         'HLToolStripMenuItem2
         '
         Me.HLToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
         Me.HLToolStripMenuItem2.Name = "HLToolStripMenuItem2"
-        Me.HLToolStripMenuItem2.Size = New System.Drawing.Size(160, 26)
+        Me.HLToolStripMenuItem2.Size = New System.Drawing.Size(180, 26)
         Me.HLToolStripMenuItem2.Text = "H L"
         '
         'HLLToolStripMenuItem2
         '
         Me.HLLToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
         Me.HLLToolStripMenuItem2.Name = "HLLToolStripMenuItem2"
-        Me.HLLToolStripMenuItem2.Size = New System.Drawing.Size(160, 26)
+        Me.HLLToolStripMenuItem2.Size = New System.Drawing.Size(180, 26)
         Me.HLLToolStripMenuItem2.Text = "H LL"
         '
         'HBToolStripMenuItem2
         '
         Me.HBToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
         Me.HBToolStripMenuItem2.Name = "HBToolStripMenuItem2"
-        Me.HBToolStripMenuItem2.Size = New System.Drawing.Size(160, 26)
+        Me.HBToolStripMenuItem2.Size = New System.Drawing.Size(180, 26)
         Me.HBToolStripMenuItem2.Text = "H B"
         '
         'ToolStripSeparator19
         '
         Me.ToolStripSeparator19.Name = "ToolStripSeparator19"
-        Me.ToolStripSeparator19.Size = New System.Drawing.Size(157, 6)
+        Me.ToolStripSeparator19.Size = New System.Drawing.Size(177, 6)
         '
         'ToolStripSeparator20
         '
         Me.ToolStripSeparator20.Name = "ToolStripSeparator20"
-        Me.ToolStripSeparator20.Size = New System.Drawing.Size(157, 6)
+        Me.ToolStripSeparator20.Size = New System.Drawing.Size(177, 6)
         '
         'ToolStripTextBox18
         '
@@ -934,40 +661,40 @@ Partial Class frmJobEntry
         Me.ToolStripTextBox18.Size = New System.Drawing.Size(100, 29)
         Me.ToolStripTextBox18.Text = "Short Cheese"
         '
-        'SHDToolStripMenuItem2
+        'HSDToolStripMenuItem2
         '
-        Me.SHDToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
-        Me.SHDToolStripMenuItem2.Name = "SHDToolStripMenuItem2"
-        Me.SHDToolStripMenuItem2.Size = New System.Drawing.Size(160, 26)
-        Me.SHDToolStripMenuItem2.Text = "SH D"
+        Me.HSDToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(77, Byte), Integer), CType(CType(221, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.HSDToolStripMenuItem2.Name = "HSDToolStripMenuItem2"
+        Me.HSDToolStripMenuItem2.Size = New System.Drawing.Size(180, 26)
+        Me.HSDToolStripMenuItem2.Text = "HS D"
         '
-        'SHMToolStripMenuItem2
+        'HSMToolStripMenuItem2
         '
-        Me.SHMToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
-        Me.SHMToolStripMenuItem2.Name = "SHMToolStripMenuItem2"
-        Me.SHMToolStripMenuItem2.Size = New System.Drawing.Size(160, 26)
-        Me.SHMToolStripMenuItem2.Text = "SH M"
+        Me.HSMToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(77, Byte), Integer), CType(CType(221, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.HSMToolStripMenuItem2.Name = "HSMToolStripMenuItem2"
+        Me.HSMToolStripMenuItem2.Size = New System.Drawing.Size(180, 26)
+        Me.HSMToolStripMenuItem2.Text = "HS M"
         '
-        'SHLToolStripMenuItem2
+        'HSLToolStripMenuItem2
         '
-        Me.SHLToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
-        Me.SHLToolStripMenuItem2.Name = "SHLToolStripMenuItem2"
-        Me.SHLToolStripMenuItem2.Size = New System.Drawing.Size(160, 26)
-        Me.SHLToolStripMenuItem2.Text = "SH L"
+        Me.HSLToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(77, Byte), Integer), CType(CType(221, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.HSLToolStripMenuItem2.Name = "HSLToolStripMenuItem2"
+        Me.HSLToolStripMenuItem2.Size = New System.Drawing.Size(180, 26)
+        Me.HSLToolStripMenuItem2.Text = "HS L"
         '
-        'SHBToolStripMenuItem2
+        'HSBToolStripMenuItem2
         '
-        Me.SHBToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
-        Me.SHBToolStripMenuItem2.Name = "SHBToolStripMenuItem2"
-        Me.SHBToolStripMenuItem2.Size = New System.Drawing.Size(160, 26)
-        Me.SHBToolStripMenuItem2.Text = "SH B"
+        Me.HSBToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(77, Byte), Integer), CType(CType(221, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.HSBToolStripMenuItem2.Name = "HSBToolStripMenuItem2"
+        Me.HSBToolStripMenuItem2.Size = New System.Drawing.Size(180, 26)
+        Me.HSBToolStripMenuItem2.Text = "SH B"
         '
         'LCartsToolStripMenuItem
         '
-        Me.LCartsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox19, Me.HDDToolStripMenuItem4, Me.HDToolStripMenuItem4, Me.HMMToolStripMenuItem3, Me.HLToolStripMenuItem3, Me.HLLToolStripMenuItem3, Me.HBToolStripMenuItem3, Me.ToolStripTextBox20, Me.SLDToolStripMenuItem2, Me.SLMToolStripMenuItem2, Me.SLLToolStripMenuItem2, Me.SLBToolStripMenuItem2})
+        Me.LCartsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox19, Me.LDDToolStripMenuItem4, Me.LDToolStripMenuItem4, Me.LMMToolStripMenuItem3, Me.LLToolStripMenuItem3, Me.LLLToolStripMenuItem3, Me.LBToolStripMenuItem3, Me.ToolStripTextBox20, Me.LSDToolStripMenuItem2, Me.LSMToolStripMenuItem2, Me.LSLToolStripMenuItem2, Me.LSBToolStripMenuItem2})
         Me.LCartsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LCartsToolStripMenuItem.Name = "LCartsToolStripMenuItem"
-        Me.LCartsToolStripMenuItem.Size = New System.Drawing.Size(134, 26)
+        Me.LCartsToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
         Me.LCartsToolStripMenuItem.Text = "L Carts"
         '
         'ToolStripTextBox19
@@ -977,47 +704,47 @@ Partial Class frmJobEntry
         Me.ToolStripTextBox19.Size = New System.Drawing.Size(100, 29)
         Me.ToolStripTextBox19.Text = "Full Cheese"
         '
-        'HDDToolStripMenuItem4
+        'LDDToolStripMenuItem4
         '
-        Me.HDDToolStripMenuItem4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.HDDToolStripMenuItem4.Name = "HDDToolStripMenuItem4"
-        Me.HDDToolStripMenuItem4.Size = New System.Drawing.Size(160, 26)
-        Me.HDDToolStripMenuItem4.Text = "H DD"
+        Me.LDDToolStripMenuItem4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LDDToolStripMenuItem4.Name = "LDDToolStripMenuItem4"
+        Me.LDDToolStripMenuItem4.Size = New System.Drawing.Size(180, 26)
+        Me.LDDToolStripMenuItem4.Text = "L DD"
         '
-        'HDToolStripMenuItem4
+        'LDToolStripMenuItem4
         '
-        Me.HDToolStripMenuItem4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.HDToolStripMenuItem4.Name = "HDToolStripMenuItem4"
-        Me.HDToolStripMenuItem4.Size = New System.Drawing.Size(160, 26)
-        Me.HDToolStripMenuItem4.Text = "H D"
+        Me.LDToolStripMenuItem4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LDToolStripMenuItem4.Name = "LDToolStripMenuItem4"
+        Me.LDToolStripMenuItem4.Size = New System.Drawing.Size(180, 26)
+        Me.LDToolStripMenuItem4.Text = "L D"
         '
-        'HMMToolStripMenuItem3
+        'LMMToolStripMenuItem3
         '
-        Me.HMMToolStripMenuItem3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.HMMToolStripMenuItem3.Name = "HMMToolStripMenuItem3"
-        Me.HMMToolStripMenuItem3.Size = New System.Drawing.Size(160, 26)
-        Me.HMMToolStripMenuItem3.Text = "H MM"
+        Me.LMMToolStripMenuItem3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LMMToolStripMenuItem3.Name = "LMMToolStripMenuItem3"
+        Me.LMMToolStripMenuItem3.Size = New System.Drawing.Size(180, 26)
+        Me.LMMToolStripMenuItem3.Text = "L MM"
         '
-        'HLToolStripMenuItem3
+        'LLToolStripMenuItem3
         '
-        Me.HLToolStripMenuItem3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.HLToolStripMenuItem3.Name = "HLToolStripMenuItem3"
-        Me.HLToolStripMenuItem3.Size = New System.Drawing.Size(160, 26)
-        Me.HLToolStripMenuItem3.Text = "H L"
+        Me.LLToolStripMenuItem3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LLToolStripMenuItem3.Name = "LLToolStripMenuItem3"
+        Me.LLToolStripMenuItem3.Size = New System.Drawing.Size(180, 26)
+        Me.LLToolStripMenuItem3.Text = "L L"
         '
-        'HLLToolStripMenuItem3
+        'LLLToolStripMenuItem3
         '
-        Me.HLLToolStripMenuItem3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.HLLToolStripMenuItem3.Name = "HLLToolStripMenuItem3"
-        Me.HLLToolStripMenuItem3.Size = New System.Drawing.Size(160, 26)
-        Me.HLLToolStripMenuItem3.Text = "H LL"
+        Me.LLLToolStripMenuItem3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LLLToolStripMenuItem3.Name = "LLLToolStripMenuItem3"
+        Me.LLLToolStripMenuItem3.Size = New System.Drawing.Size(180, 26)
+        Me.LLLToolStripMenuItem3.Text = "L LL"
         '
-        'HBToolStripMenuItem3
+        'LBToolStripMenuItem3
         '
-        Me.HBToolStripMenuItem3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.HBToolStripMenuItem3.Name = "HBToolStripMenuItem3"
-        Me.HBToolStripMenuItem3.Size = New System.Drawing.Size(160, 26)
-        Me.HBToolStripMenuItem3.Text = "H B"
+        Me.LBToolStripMenuItem3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBToolStripMenuItem3.Name = "LBToolStripMenuItem3"
+        Me.LBToolStripMenuItem3.Size = New System.Drawing.Size(180, 26)
+        Me.LBToolStripMenuItem3.Text = "L B"
         '
         'ToolStripTextBox20
         '
@@ -1026,33 +753,33 @@ Partial Class frmJobEntry
         Me.ToolStripTextBox20.Size = New System.Drawing.Size(100, 29)
         Me.ToolStripTextBox20.Text = "Short Cheese"
         '
-        'SLDToolStripMenuItem2
+        'LSDToolStripMenuItem2
         '
-        Me.SLDToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.SLDToolStripMenuItem2.Name = "SLDToolStripMenuItem2"
-        Me.SLDToolStripMenuItem2.Size = New System.Drawing.Size(160, 26)
-        Me.SLDToolStripMenuItem2.Text = "SL D"
+        Me.LSDToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(172, Byte), Integer), CType(CType(210, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.LSDToolStripMenuItem2.Name = "LSDToolStripMenuItem2"
+        Me.LSDToolStripMenuItem2.Size = New System.Drawing.Size(180, 26)
+        Me.LSDToolStripMenuItem2.Text = "SL D"
         '
-        'SLMToolStripMenuItem2
+        'LSMToolStripMenuItem2
         '
-        Me.SLMToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.SLMToolStripMenuItem2.Name = "SLMToolStripMenuItem2"
-        Me.SLMToolStripMenuItem2.Size = New System.Drawing.Size(160, 26)
-        Me.SLMToolStripMenuItem2.Text = "SL M"
+        Me.LSMToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(172, Byte), Integer), CType(CType(210, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.LSMToolStripMenuItem2.Name = "LSMToolStripMenuItem2"
+        Me.LSMToolStripMenuItem2.Size = New System.Drawing.Size(180, 26)
+        Me.LSMToolStripMenuItem2.Text = "SL M"
         '
-        'SLLToolStripMenuItem2
+        'LSLToolStripMenuItem2
         '
-        Me.SLLToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.SLLToolStripMenuItem2.Name = "SLLToolStripMenuItem2"
-        Me.SLLToolStripMenuItem2.Size = New System.Drawing.Size(160, 26)
-        Me.SLLToolStripMenuItem2.Text = "SL L"
+        Me.LSLToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(172, Byte), Integer), CType(CType(210, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.LSLToolStripMenuItem2.Name = "LSLToolStripMenuItem2"
+        Me.LSLToolStripMenuItem2.Size = New System.Drawing.Size(180, 26)
+        Me.LSLToolStripMenuItem2.Text = "SL L"
         '
-        'SLBToolStripMenuItem2
+        'LSBToolStripMenuItem2
         '
-        Me.SLBToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.SLBToolStripMenuItem2.Name = "SLBToolStripMenuItem2"
-        Me.SLBToolStripMenuItem2.Size = New System.Drawing.Size(160, 26)
-        Me.SLBToolStripMenuItem2.Text = "SL B"
+        Me.LSBToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(172, Byte), Integer), CType(CType(210, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.LSBToolStripMenuItem2.Name = "LSBToolStripMenuItem2"
+        Me.LSBToolStripMenuItem2.Size = New System.Drawing.Size(180, 26)
+        Me.LSBToolStripMenuItem2.Text = "SL B"
         '
         'ReportsToolStripMenuItem
         '
@@ -1420,50 +1147,16 @@ Partial Class frmJobEntry
     Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
     Friend WithEvents ToolStripTextBox7 As ToolStripTextBox
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
-    Friend WithEvents ToolStripSeparator10 As ToolStripSeparator
-    Friend WithEvents ToolStripSeparator11 As ToolStripSeparator
     Friend WithEvents ToolStripTextBox11 As ToolStripTextBox
     Friend WithEvents ToolStripSeparator12 As ToolStripSeparator
     Friend WithEvents ToolStripTextBox12 As ToolStripTextBox
     Friend WithEvents ToolStripSeparator13 As ToolStripSeparator
     Friend WithEvents ToolStripTextBox13 As ToolStripTextBox
     Friend WithEvents ToolStripSeparator14 As ToolStripSeparator
-    Friend WithEvents ToolStripTextBox14 As ToolStripTextBox
     Friend WithEvents ToolStripTextBox15 As ToolStripTextBox
     Friend WithEvents ToolStripMenuItem5 As ToolStripMenuItem
     Friend WithEvents CreateHCartToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CreateLCartToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem6 As ToolStripMenuItem
-    Friend WithEvents CreateHCartsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripTextBox8 As ToolStripTextBox
-    Friend WithEvents HDDToolStripMenuItem2 As ToolStripMenuItem
-    Friend WithEvents HDToolStripMenuItem2 As ToolStripMenuItem
-    Friend WithEvents HMMToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents HLToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents HLLToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents HBToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator15 As ToolStripSeparator
-    Friend WithEvents ToolStripSeparator16 As ToolStripSeparator
-    Friend WithEvents ToolStripTextBox9 As ToolStripTextBox
-    Friend WithEvents SHDToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents SHMToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents SHLToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents SHBToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents CreateLCartsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripTextBox16 As ToolStripTextBox
-    Friend WithEvents LDDToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents LDToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents LMMToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents LLToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents LLLToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents LBToolStripMenuItem2 As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator17 As ToolStripSeparator
-    Friend WithEvents ToolStripSeparator18 As ToolStripSeparator
-    Friend WithEvents ToolStripTextBox17 As ToolStripTextBox
-    Friend WithEvents SLDToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents SLMToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents SLLToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents SLBToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents PackGradedHLCartsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents HCartsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripTextBox10 As ToolStripTextBox
@@ -1476,22 +1169,22 @@ Partial Class frmJobEntry
     Friend WithEvents ToolStripSeparator19 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator20 As ToolStripSeparator
     Friend WithEvents ToolStripTextBox18 As ToolStripTextBox
-    Friend WithEvents SHDToolStripMenuItem2 As ToolStripMenuItem
-    Friend WithEvents SHMToolStripMenuItem2 As ToolStripMenuItem
-    Friend WithEvents SHLToolStripMenuItem2 As ToolStripMenuItem
-    Friend WithEvents SHBToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents HSDToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents HSMToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents HSLToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents HSBToolStripMenuItem2 As ToolStripMenuItem
     Friend WithEvents LCartsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripTextBox19 As ToolStripTextBox
-    Friend WithEvents HDDToolStripMenuItem4 As ToolStripMenuItem
-    Friend WithEvents HDToolStripMenuItem4 As ToolStripMenuItem
-    Friend WithEvents HMMToolStripMenuItem3 As ToolStripMenuItem
-    Friend WithEvents HLToolStripMenuItem3 As ToolStripMenuItem
-    Friend WithEvents HLLToolStripMenuItem3 As ToolStripMenuItem
-    Friend WithEvents HBToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents LDDToolStripMenuItem4 As ToolStripMenuItem
+    Friend WithEvents LDToolStripMenuItem4 As ToolStripMenuItem
+    Friend WithEvents LMMToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents LLToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents LLLToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents LBToolStripMenuItem3 As ToolStripMenuItem
     Friend WithEvents ToolStripTextBox20 As ToolStripTextBox
-    Friend WithEvents SLDToolStripMenuItem2 As ToolStripMenuItem
-    Friend WithEvents SLMToolStripMenuItem2 As ToolStripMenuItem
-    Friend WithEvents SLLToolStripMenuItem2 As ToolStripMenuItem
-    Friend WithEvents SLBToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents LSDToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents LSMToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents LSLToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents LSBToolStripMenuItem2 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
 End Class

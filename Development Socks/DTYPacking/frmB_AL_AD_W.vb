@@ -50,7 +50,7 @@ Public Class frmB_AL_AD_W
         If screenHeight <= 770 Then Me.WindowState = FormWindowState.Maximized Else Me.WindowState = FormWindowState.Normal
 
         Select Case frmJobEntry.txtGrade.Text
-            Case "B", "AL", "AD", "P35 AS", "P35 BS"
+            Case "B", "AL", "AD", "P35 AS", "P35 BS", "H DD", "H D", "H MM", "H L", "H LL", "H B", "L DD", "L D", "L MM", "L L", "L LL", "L B"
 
                 SetupDGV()
 
@@ -194,7 +194,7 @@ Public Class frmB_AL_AD_W
 
         Select Case frmJobEntry.txtGrade.Text
 
-            Case "B", "AL", "AD", "P35 AS", "P35 BS"
+            Case "B", "AL", "AD", "P35 AS", "P35 BS", "H DD", "H D", "H MM", "H L", "H LL", "H B", "L DD", "L D", "L MM", "L L", "L LL", "L B"
 
                 With DataGridView1.ColumnHeadersDefaultCellStyle
                     .BackColor = Color.Navy
@@ -531,6 +531,7 @@ Public Class frmB_AL_AD_W
 
         dgvRows = toAllocatedCount
 
+
         If txtConeBcode.TextLength <> 15 Then
             Label8.Visible = True
             Label8.Text = "BARCODE ERROR not a cheese BARCODE"
@@ -725,7 +726,7 @@ Public Class frmB_AL_AD_W
 
 
 
-            Case "B", "AL", "AD", "P35 AS", "P35 BS"
+            Case "B", "AL", "AD", "P35 AS", "P35 BS", "H DD", "H D", "H MM", "H L", "H LL", "H B", "L DD", "L D", "L MM", "L L", "L LL", "L B"
 
                 If gridRow < 29 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow + 1)
 
@@ -830,7 +831,6 @@ Public Class frmB_AL_AD_W
             frmPackRepMain.PackRepMainSub()
 
 
-            'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(0), System.ComponentModel.ListSortDirection.Ascending)  ' Is this needed ?
 
 
             If frmPackTodayUpdate.prtError Then
@@ -910,7 +910,7 @@ Public Class frmB_AL_AD_W
 
         pauseScan = 1 'Stop Barcode entry
 
-        'tsbtnSave()
+
 
         ''New save to SQL routine
         Dim arrayLen As Integer 'used to store the count of entries in the array
@@ -919,15 +919,7 @@ Public Class frmB_AL_AD_W
             If element > 0 Then arrayLen = arrayLen + 1
         Next
 
-        'If arrayLen = 0 Then
-        '    ListBox1.Items.Add(conelist(0).ToString)
-        'Else
 
-        'For y = 0 To arrayLen
-        '        ListBox1.Items.Add(conelist(y).ToString)
-        '    Next
-
-        ' End If
         Try
             Dim rcount As Integer
 
@@ -935,7 +927,7 @@ Public Class frmB_AL_AD_W
 
 
 
-                SQLL.AddParam("@id", conelist(i - 1).ToString) 'frmDGV.DGVdata.Rows(i - 1).Cells("id_Product").Value)
+                SQLL.AddParam("@id", conelist(i - 1).ToString)
                 Dim id_val As String = (conelist(i - 1).ToString)
                 'We must find correct row in dgv to get data for parameters
 
@@ -976,16 +968,15 @@ Public Class frmB_AL_AD_W
                 SQLL.AddParam("@rechkstarttm", frmDGV.DGVdata.Rows(rcount).Cells("RECHKSTARTTM").Value)
                 SQLL.AddParam("@rechkendtm", frmDGV.DGVdata.Rows(rcount).Cells("RECHKENDTM").Value)
                 SQLL.AddParam("@stdstate", frmDGV.DGVdata.Rows(rcount).Cells("STDSTATE").Value)
-
-                '   MsgBox("ID = " & @id.tostring)
+                SQLL.AddParam("@hlstate", frmDGV.DGVdata.Rows(rcount).Cells("HHLLState").Value)
 
                 SQLL.ExecQuery(" Update jobs set CONESTATE = @conestate, OPPACK = @oppack, OPNAME = @opname, PACKENDTM = @packendtm, " _
                             & "SHORTCONE = @shortcone, DEFCONE = @defcone," _
                             & "FLT_K =  @flt_k, FLT_D = @flt_d, FLT_F = @flt_f, FLT_O = @flt_o, FLT_T = @flt_t, FLT_P = @flt_p, " _
                             & "FLT_S = @flt_s, FLT_N = @flt_n, FLT_W = @flt_w, FLT_H = @flt_h, FLT_TR = @flt_tr, FLT_B = @flt_b,FLT_C = @flt_c, " _
                             & "PSORTERROR = @psorterror, CARTENDTM = @cartendtm,RECHK = @rechk,PACKSHEETBCODE = @packsheet, CARTONNUM = @carton, PACKIDX = @packidx, " _
-                            & "RECHKIDX = @rechkidx, RECHECKBARCODE = @recheckbarcode, RECHKSTARTTM = @rechkstarttm, RECHKENDTM = rechkendtm, STDSTATE = @stdstate  " _
-                            & "Where id_product = @id")
+                            & "RECHKIDX = @rechkidx, RECHECKBARCODE = @recheckbarcode, RECHKSTARTTM = @rechkstarttm, RECHKENDTM = rechkendtm, STDSTATE = @stdstate,  " _
+                            & " HHLLState = @hlstate Where id_product = @id")
 
 
 
@@ -1016,63 +1007,7 @@ Public Class frmB_AL_AD_W
 
 
 
-        ''Save ReCheck details
-        'If frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk = 0 Then
 
-
-        'End If
-
-
-        ''Save details for stdrecheck
-        'If frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk Then
-
-
-
-
-
-        'End If
-
-
-
-        '******************   THIS WILL WRITE ANY CHANGES MADE TO THE DATAGRID BACK TO THE DATABASE ******************
-
-        'Try
-
-        '    If frmJobEntry.LDS.HasChanges Then
-
-
-        '        'LDA.UpdateCommand = New Oracle.ManagedDataAccess.Client.OracleCommandBuilder(frmJobEntry.LDA).GetUpdateCommand
-
-        '        frmJobEntry.LDA.Update(frmJobEntry.LDS.Tables(0))
-
-        '    End If
-
-
-
-
-
-
-        'Catch dbcx As DBConcurrencyException
-        '    Dim Response As String
-
-        '    Response = dbcx.Row.ToString
-        '    writeerrorLog.writelog("db B_AL_AD_W Con Error", Response, False, "reChkA_Pk Con Fault")
-        '    Response = dbcx.RowCount.ToString
-        '    writeerrorLog.writelog("db B_AL_AD_W_Pk Con Error", Response, False, "ReChkA_Pk Con Fault")
-
-
-
-
-        'Catch ex As Exception
-        '    'Write error to Log File
-        '    Dim ErrorMsg As String = "Computer " & System.Environment.MachineName
-        '    writeerrorLog.writelog("db B_AL_AD_W Update Error", ErrorMsg, False, "System Fault")
-        '    writeerrorLog.writelog("db B_AL_AD_W Update Error", ex.Message, False, "System Fault")
-        '    writeerrorLog.writelog("db B_AL_AD_W Update Error", ex.ToString, False, "System Fault")
-
-        '    MsgBox("Update Error: " & vbNewLine & ex.Message)
-        '    pauseScan = 0 'Allow barcode entry
-        'End Try
 
 
 
