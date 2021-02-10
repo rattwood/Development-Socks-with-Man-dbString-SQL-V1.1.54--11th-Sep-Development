@@ -834,6 +834,12 @@ Public Class frmPackCreateNew
                 gradeTxt = "AL" 'AL Grade
             Case "AD"
                 gradeTxt = "AD" 'AD Grade
+
+                'Create H and L carts
+            Case "Create H Cart"
+                gradeTxt = "H_ColCHK"
+            Case "Create L Cart"
+                gradeTxt = "L_ColCHK"
                      'H and L Packing Full and Short
             Case "H DD"
                 gradeTxt = "H DD" 'AD Grade

@@ -85,7 +85,7 @@ Partial Class frmPacking
         Me.Label5.Location = New System.Drawing.Point(27, 12)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(87, 24)
-        Me.Label5.TabIndex = 165
+        Me.Label5.TabIndex = 1
         Me.Label5.Text = "Job Ref:"
         '
         'lblJobNum
@@ -95,7 +95,7 @@ Partial Class frmPacking
         Me.lblJobNum.Location = New System.Drawing.Point(120, 12)
         Me.lblJobNum.Name = "lblJobNum"
         Me.lblJobNum.Size = New System.Drawing.Size(72, 24)
-        Me.lblJobNum.TabIndex = 164
+        Me.lblJobNum.TabIndex = 2
         Me.lblJobNum.Text = "Label4"
         '
         'txtCartNum
@@ -106,7 +106,7 @@ Partial Class frmPacking
         Me.txtCartNum.Name = "txtCartNum"
         Me.txtCartNum.ReadOnly = True
         Me.txtCartNum.Size = New System.Drawing.Size(112, 62)
-        Me.txtCartNum.TabIndex = 153
+        Me.txtCartNum.TabIndex = 4
         Me.txtCartNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label2
@@ -117,7 +117,7 @@ Partial Class frmPacking
         Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(110, 20)
-        Me.Label2.TabIndex = 152
+        Me.Label2.TabIndex = 3
         Me.Label2.Text = "Cart Number"
         '
         'txtConeBcode
@@ -126,7 +126,7 @@ Partial Class frmPacking
         Me.txtConeBcode.Location = New System.Drawing.Point(361, 692)
         Me.txtConeBcode.Name = "txtConeBcode"
         Me.txtConeBcode.Size = New System.Drawing.Size(433, 62)
-        Me.txtConeBcode.TabIndex = 143
+        Me.txtConeBcode.TabIndex = 44
         '
         'Label3
         '
@@ -136,7 +136,7 @@ Partial Class frmPacking
         Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(73, 20)
-        Me.Label3.TabIndex = 142
+        Me.Label3.TabIndex = 43
         Me.Label3.Text = "CONE #"
         '
         'btnCone32
@@ -149,7 +149,7 @@ Partial Class frmPacking
         Me.btnCone32.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone32.Name = "btnCone32"
         Me.btnCone32.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone32.TabIndex = 141
+        Me.btnCone32.TabIndex = 39
         Me.btnCone32.Text = "32"
         Me.btnCone32.UseVisualStyleBackColor = False
         '
@@ -163,7 +163,7 @@ Partial Class frmPacking
         Me.btnCone24.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone24.Name = "btnCone24"
         Me.btnCone24.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone24.TabIndex = 133
+        Me.btnCone24.TabIndex = 28
         Me.btnCone24.Text = "24"
         Me.btnCone24.UseVisualStyleBackColor = False
         '
@@ -177,7 +177,7 @@ Partial Class frmPacking
         Me.btnCone16.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone16.Name = "btnCone16"
         Me.btnCone16.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone16.TabIndex = 125
+        Me.btnCone16.TabIndex = 16
         Me.btnCone16.Text = "16"
         Me.btnCone16.UseVisualStyleBackColor = False
         '
@@ -191,7 +191,7 @@ Partial Class frmPacking
         Me.btnCone29.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone29.Name = "btnCone29"
         Me.btnCone29.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone29.TabIndex = 138
+        Me.btnCone29.TabIndex = 36
         Me.btnCone29.Text = "29"
         Me.btnCone29.UseVisualStyleBackColor = False
         '
@@ -205,7 +205,7 @@ Partial Class frmPacking
         Me.btnCone8.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone8.Name = "btnCone8"
         Me.btnCone8.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone8.TabIndex = 117
+        Me.btnCone8.TabIndex = 6
         Me.btnCone8.Text = "8"
         Me.btnCone8.UseVisualStyleBackColor = False
         '
@@ -219,7 +219,7 @@ Partial Class frmPacking
         Me.btnCone30.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone30.Name = "btnCone30"
         Me.btnCone30.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone30.TabIndex = 139
+        Me.btnCone30.TabIndex = 33
         Me.btnCone30.Text = "30"
         Me.btnCone30.UseVisualStyleBackColor = False
         '
@@ -233,7 +233,7 @@ Partial Class frmPacking
         Me.btnCone31.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone31.Name = "btnCone31"
         Me.btnCone31.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone31.TabIndex = 140
+        Me.btnCone31.TabIndex = 40
         Me.btnCone31.Text = "31"
         Me.btnCone31.UseVisualStyleBackColor = False
         '
@@ -247,7 +247,7 @@ Partial Class frmPacking
         Me.btnCone27.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone27.Name = "btnCone27"
         Me.btnCone27.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone27.TabIndex = 136
+        Me.btnCone27.TabIndex = 35
         Me.btnCone27.Text = "27"
         Me.btnCone27.UseVisualStyleBackColor = False
         '
@@ -261,7 +261,7 @@ Partial Class frmPacking
         Me.btnCone26.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone26.Name = "btnCone26"
         Me.btnCone26.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone26.TabIndex = 135
+        Me.btnCone26.TabIndex = 37
         Me.btnCone26.Text = "26"
         Me.btnCone26.UseVisualStyleBackColor = False
         '
@@ -275,7 +275,7 @@ Partial Class frmPacking
         Me.btnCone28.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone28.Name = "btnCone28"
         Me.btnCone28.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone28.TabIndex = 137
+        Me.btnCone28.TabIndex = 34
         Me.btnCone28.Text = "28"
         Me.btnCone28.UseVisualStyleBackColor = False
         '
@@ -289,7 +289,7 @@ Partial Class frmPacking
         Me.btnCone25.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone25.Name = "btnCone25"
         Me.btnCone25.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone25.TabIndex = 134
+        Me.btnCone25.TabIndex = 38
         Me.btnCone25.Text = "25"
         Me.btnCone25.UseVisualStyleBackColor = False
         '
@@ -303,7 +303,7 @@ Partial Class frmPacking
         Me.btnCone21.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone21.Name = "btnCone21"
         Me.btnCone21.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone21.TabIndex = 130
+        Me.btnCone21.TabIndex = 30
         Me.btnCone21.Text = "21"
         Me.btnCone21.UseVisualStyleBackColor = False
         '
@@ -317,7 +317,7 @@ Partial Class frmPacking
         Me.btnCone22.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone22.Name = "btnCone22"
         Me.btnCone22.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone22.TabIndex = 131
+        Me.btnCone22.TabIndex = 24
         Me.btnCone22.Text = "22"
         Me.btnCone22.UseVisualStyleBackColor = False
         '
@@ -331,7 +331,7 @@ Partial Class frmPacking
         Me.btnCone23.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone23.Name = "btnCone23"
         Me.btnCone23.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone23.TabIndex = 132
+        Me.btnCone23.TabIndex = 29
         Me.btnCone23.Text = "23"
         Me.btnCone23.UseVisualStyleBackColor = False
         '
@@ -345,7 +345,7 @@ Partial Class frmPacking
         Me.btnCone19.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone19.Name = "btnCone19"
         Me.btnCone19.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone19.TabIndex = 128
+        Me.btnCone19.TabIndex = 26
         Me.btnCone19.Text = "19"
         Me.btnCone19.UseVisualStyleBackColor = False
         '
@@ -359,7 +359,7 @@ Partial Class frmPacking
         Me.btnCone18.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone18.Name = "btnCone18"
         Me.btnCone18.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone18.TabIndex = 127
+        Me.btnCone18.TabIndex = 27
         Me.btnCone18.Text = "18"
         Me.btnCone18.UseVisualStyleBackColor = False
         '
@@ -373,7 +373,7 @@ Partial Class frmPacking
         Me.btnCone17.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone17.Name = "btnCone17"
         Me.btnCone17.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone17.TabIndex = 126
+        Me.btnCone17.TabIndex = 31
         Me.btnCone17.Text = "17"
         Me.btnCone17.UseVisualStyleBackColor = False
         '
@@ -387,7 +387,7 @@ Partial Class frmPacking
         Me.btnCone20.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone20.Name = "btnCone20"
         Me.btnCone20.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone20.TabIndex = 129
+        Me.btnCone20.TabIndex = 25
         Me.btnCone20.Text = "20"
         Me.btnCone20.UseVisualStyleBackColor = False
         '
@@ -401,7 +401,7 @@ Partial Class frmPacking
         Me.btnCone13.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone13.Name = "btnCone13"
         Me.btnCone13.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone13.TabIndex = 122
+        Me.btnCone13.TabIndex = 19
         Me.btnCone13.Text = "13"
         Me.btnCone13.UseVisualStyleBackColor = False
         '
@@ -415,7 +415,7 @@ Partial Class frmPacking
         Me.btnCone14.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone14.Name = "btnCone14"
         Me.btnCone14.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone14.TabIndex = 123
+        Me.btnCone14.TabIndex = 15
         Me.btnCone14.Text = "14"
         Me.btnCone14.UseVisualStyleBackColor = False
         '
@@ -429,7 +429,7 @@ Partial Class frmPacking
         Me.btnCone15.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone15.Name = "btnCone15"
         Me.btnCone15.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone15.TabIndex = 124
+        Me.btnCone15.TabIndex = 17
         Me.btnCone15.Text = "15"
         Me.btnCone15.UseVisualStyleBackColor = False
         '
@@ -443,7 +443,7 @@ Partial Class frmPacking
         Me.btnCone11.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone11.Name = "btnCone11"
         Me.btnCone11.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone11.TabIndex = 120
+        Me.btnCone11.TabIndex = 20
         Me.btnCone11.Text = "11"
         Me.btnCone11.UseVisualStyleBackColor = False
         '
@@ -457,7 +457,7 @@ Partial Class frmPacking
         Me.btnCone10.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone10.Name = "btnCone10"
         Me.btnCone10.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone10.TabIndex = 119
+        Me.btnCone10.TabIndex = 21
         Me.btnCone10.Text = "10"
         Me.btnCone10.UseVisualStyleBackColor = False
         '
@@ -471,7 +471,7 @@ Partial Class frmPacking
         Me.btnCone9.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone9.Name = "btnCone9"
         Me.btnCone9.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone9.TabIndex = 118
+        Me.btnCone9.TabIndex = 22
         Me.btnCone9.Text = "9"
         Me.btnCone9.UseVisualStyleBackColor = False
         '
@@ -485,7 +485,7 @@ Partial Class frmPacking
         Me.btnCone12.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone12.Name = "btnCone12"
         Me.btnCone12.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone12.TabIndex = 121
+        Me.btnCone12.TabIndex = 18
         Me.btnCone12.Text = "12"
         Me.btnCone12.UseVisualStyleBackColor = False
         '
@@ -499,7 +499,7 @@ Partial Class frmPacking
         Me.btnCone5.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone5.Name = "btnCone5"
         Me.btnCone5.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone5.TabIndex = 114
+        Me.btnCone5.TabIndex = 9
         Me.btnCone5.Text = "5"
         Me.btnCone5.UseVisualStyleBackColor = False
         '
@@ -513,7 +513,7 @@ Partial Class frmPacking
         Me.btnCone6.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone6.Name = "btnCone6"
         Me.btnCone6.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone6.TabIndex = 115
+        Me.btnCone6.TabIndex = 8
         Me.btnCone6.Text = "6"
         Me.btnCone6.UseVisualStyleBackColor = False
         '
@@ -527,7 +527,7 @@ Partial Class frmPacking
         Me.btnCone7.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone7.Name = "btnCone7"
         Me.btnCone7.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone7.TabIndex = 116
+        Me.btnCone7.TabIndex = 7
         Me.btnCone7.Text = "7"
         Me.btnCone7.UseVisualStyleBackColor = False
         '
@@ -541,7 +541,7 @@ Partial Class frmPacking
         Me.btnCone3.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone3.Name = "btnCone3"
         Me.btnCone3.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone3.TabIndex = 112
+        Me.btnCone3.TabIndex = 11
         Me.btnCone3.Text = "3"
         Me.btnCone3.UseVisualStyleBackColor = False
         '
@@ -555,7 +555,7 @@ Partial Class frmPacking
         Me.btnCone2.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone2.Name = "btnCone2"
         Me.btnCone2.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone2.TabIndex = 111
+        Me.btnCone2.TabIndex = 12
         Me.btnCone2.Text = "2"
         Me.btnCone2.UseVisualStyleBackColor = False
         '
@@ -569,7 +569,7 @@ Partial Class frmPacking
         Me.btnCone1.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone1.Name = "btnCone1"
         Me.btnCone1.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone1.TabIndex = 110
+        Me.btnCone1.TabIndex = 13
         Me.btnCone1.Text = "1"
         Me.btnCone1.UseVisualStyleBackColor = False
         '
@@ -583,7 +583,7 @@ Partial Class frmPacking
         Me.btnCone4.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCone4.Name = "btnCone4"
         Me.btnCone4.Size = New System.Drawing.Size(160, 150)
-        Me.btnCone4.TabIndex = 113
+        Me.btnCone4.TabIndex = 10
         Me.btnCone4.Text = "4"
         Me.btnCone4.UseVisualStyleBackColor = False
         '
@@ -594,7 +594,7 @@ Partial Class frmPacking
         Me.btnSaveJob.Location = New System.Drawing.Point(299, 763)
         Me.btnSaveJob.Name = "btnSaveJob"
         Me.btnSaveJob.Size = New System.Drawing.Size(197, 84)
-        Me.btnSaveJob.TabIndex = 170
+        Me.btnSaveJob.TabIndex = 49
         Me.btnSaveJob.Text = "SAVE JOB"
         Me.btnSaveJob.UseVisualStyleBackColor = False
         '
@@ -605,7 +605,7 @@ Partial Class frmPacking
         Me.btnBack.Location = New System.Drawing.Point(31, 767)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(197, 80)
-        Me.btnBack.TabIndex = 172
+        Me.btnBack.TabIndex = 48
         Me.btnBack.Text = "CANCEL"
         Me.btnBack.UseVisualStyleBackColor = False
         '
@@ -617,7 +617,7 @@ Partial Class frmPacking
         Me.btnDefect.Margin = New System.Windows.Forms.Padding(2)
         Me.btnDefect.Name = "btnDefect"
         Me.btnDefect.Size = New System.Drawing.Size(138, 80)
-        Me.btnDefect.TabIndex = 173
+        Me.btnDefect.TabIndex = 32
         Me.btnDefect.Text = "Enter Defect"
         Me.btnDefect.UseVisualStyleBackColor = False
         '
@@ -630,7 +630,7 @@ Partial Class frmPacking
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(117, 37)
-        Me.Label1.TabIndex = 174
+        Me.Label1.TabIndex = 23
         Me.Label1.Text = "Label1"
         Me.Label1.Visible = False
         '
@@ -642,7 +642,7 @@ Partial Class frmPacking
         Me.txtboxTotal.Name = "txtboxTotal"
         Me.txtboxTotal.ReadOnly = True
         Me.txtboxTotal.Size = New System.Drawing.Size(112, 62)
-        Me.txtboxTotal.TabIndex = 177
+        Me.txtboxTotal.TabIndex = 14
         Me.txtboxTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblCheese
@@ -652,7 +652,7 @@ Partial Class frmPacking
         Me.lblCheese.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblCheese.Name = "lblCheese"
         Me.lblCheese.Size = New System.Drawing.Size(146, 20)
-        Me.lblCheese.TabIndex = 176
+        Me.lblCheese.TabIndex = 5
         Me.lblCheese.Text = "'A' on Cart"
         Me.lblCheese.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -661,10 +661,10 @@ Partial Class frmPacking
         Me.DGVPakingA.AllowUserToAddRows = False
         Me.DGVPakingA.AllowUserToDeleteRows = False
         Me.DGVPakingA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVPakingA.Location = New System.Drawing.Point(1106, 657)
+        Me.DGVPakingA.Location = New System.Drawing.Point(1145, 669)
         Me.DGVPakingA.Name = "DGVPakingA"
         Me.DGVPakingA.Size = New System.Drawing.Size(285, 190)
-        Me.DGVPakingA.TabIndex = 178
+        Me.DGVPakingA.TabIndex = 51
         Me.DGVPakingA.Visible = False
         '
         'btnFinJob
@@ -674,7 +674,7 @@ Partial Class frmPacking
         Me.btnFinJob.Location = New System.Drawing.Point(561, 765)
         Me.btnFinJob.Name = "btnFinJob"
         Me.btnFinJob.Size = New System.Drawing.Size(197, 84)
-        Me.btnFinJob.TabIndex = 179
+        Me.btnFinJob.TabIndex = 50
         Me.btnFinJob.Text = "FINISH JOB"
         Me.btnFinJob.UseVisualStyleBackColor = False
         '
@@ -686,7 +686,7 @@ Partial Class frmPacking
         Me.txtBoxOnSheet.Location = New System.Drawing.Point(1188, 711)
         Me.txtBoxOnSheet.Name = "txtBoxOnSheet"
         Me.txtBoxOnSheet.Size = New System.Drawing.Size(166, 116)
-        Me.txtBoxOnSheet.TabIndex = 180
+        Me.txtBoxOnSheet.TabIndex = 47
         Me.txtBoxOnSheet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtBoxToFinish
@@ -697,7 +697,7 @@ Partial Class frmPacking
         Me.txtBoxToFinish.Location = New System.Drawing.Point(835, 711)
         Me.txtBoxToFinish.Name = "txtBoxToFinish"
         Me.txtBoxToFinish.Size = New System.Drawing.Size(166, 116)
-        Me.txtBoxToFinish.TabIndex = 181
+        Me.txtBoxToFinish.TabIndex = 46
         Me.txtBoxToFinish.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label4
@@ -708,7 +708,7 @@ Partial Class frmPacking
         Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(148, 20)
-        Me.Label4.TabIndex = 182
+        Me.Label4.TabIndex = 42
         Me.Label4.Text = "Cheese on Sheet"
         '
         'Label6
@@ -719,7 +719,7 @@ Partial Class frmPacking
         Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(131, 20)
-        Me.Label6.TabIndex = 183
+        Me.Label6.TabIndex = 41
         Me.Label6.Text = "To Finsh Sheet"
         '
         'lblHLSeperation
@@ -730,18 +730,19 @@ Partial Class frmPacking
         Me.lblHLSeperation.Location = New System.Drawing.Point(722, 9)
         Me.lblHLSeperation.Name = "lblHLSeperation"
         Me.lblHLSeperation.Size = New System.Drawing.Size(191, 25)
-        Me.lblHLSeperation.TabIndex = 184
+        Me.lblHLSeperation.TabIndex = 0
         Me.lblHLSeperation.Text = "H && L Seperation"
         Me.lblHLSeperation.Visible = False
         '
         'txtBoxCancel
         '
+        Me.txtBoxCancel.AcceptsReturn = True
         Me.txtBoxCancel.Location = New System.Drawing.Point(90, 741)
-        Me.txtBoxCancel.MaxLength = 5
+        Me.txtBoxCancel.MaxLength = 6
         Me.txtBoxCancel.Name = "txtBoxCancel"
-        Me.txtBoxCancel.Size = New System.Drawing.Size(45, 20)
-        Me.txtBoxCancel.TabIndex = 185
-        Me.txtBoxCancel.Text = "cancel"
+        Me.txtBoxCancel.Size = New System.Drawing.Size(75, 20)
+        Me.txtBoxCancel.TabIndex = 45
+        Me.txtBoxCancel.Visible = False
         '
         'frmPacking
         '

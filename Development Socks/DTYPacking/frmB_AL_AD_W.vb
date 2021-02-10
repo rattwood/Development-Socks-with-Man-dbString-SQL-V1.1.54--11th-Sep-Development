@@ -569,6 +569,9 @@ Public Class frmB_AL_AD_W
                     'write to the local DGV grid
                     DataGridView1.Rows(gridRow).Cells(gridCol).Value = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
 
+                    'New section to write index value in to rechkidx
+
+
                     'new part to get list of scanned cheeses in to an array which we will use for the database update
                     Dim arrayLen As Integer
 

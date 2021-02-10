@@ -909,7 +909,7 @@ Public Class frmCart1
                         frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "L_DD"
                     ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_LD Then
                         frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "L_D"
-                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage.Tag Is im_LMM Then
+                    ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_LMM Then
                         frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "L_MM"
                     ElseIf Me.Controls("btnCone" & (rw)).BackgroundImage Is im_LL Then
                         frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL_Res").Value = "L_L"
@@ -2339,8 +2339,10 @@ Public Class frmCart1
         writeerrorLog.writelog("Cart Opened for edit ", cartMessage, False, "Cart Edit Opened")
 
 
+        If Not frmJobEntry.HLColChk = Nothing Then
+            printSheet()
+        End If
 
-        printSheet()
         UpdateDatabase()
 
 
@@ -4228,10 +4230,12 @@ Public Class frmCart1
                     ' frmJobEntry.LExecQuery("UPDATE Jobs SET STDSTATE = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("STDSTATE").Value & "' Where bcodecone = '" & coneref & "' ")
 
 
-                    frmJobEntry.AddParam("@bcodecart", frmJobEntry.txtLotNumber.Text)
-                    frmJobEntry.AddParam("@bcodecone", coneref)
 
                     If lclHHLL = "YES" Then
+                        frmJobEntry.AddParam("@bcodecart", frmJobEntry.txtLotNumber.Text)
+                        frmJobEntry.AddParam("@bcodecone", coneref)
+
+
                         If Not IsDBNull(frmDGV.DGVdata.Rows(rows - 1).Cells("HHLL").Value) Then
                             frmJobEntry.LExecQuery("UPDATE jobs SET HHLL = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("HHLL").Value & "' Where bcodecart =  @bcodecart and bcodecone = @bcodecone ")
                             '        ' frmJobEntry.LExecQuery("UPDATE jobs SET HHLL_Res = '" & frmDGV.DGVdata.Rows(rows - 1).Cells("HHLL_Res").Value & "' Where bcodecone = '" & coneref & "' ")
@@ -4281,6 +4285,8 @@ Public Class frmCart1
             & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
             & frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString) & " " & endsheetname
 
+        'Use save same name as we need to update existing file
+        'SaveString = frmJobEntry.txtLotNumber.Text
 
         'CREATE Date STRING
         Dim finddate As String

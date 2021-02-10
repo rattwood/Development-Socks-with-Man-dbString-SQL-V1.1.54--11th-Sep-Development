@@ -91,6 +91,7 @@ Public Class frmJobEntry
     Dim coneP50 As String = 0
 
     Public HLColChk As String = Nothing
+    Public HLColSep As String = Nothing
     Dim HLPackGrade As String = Nothing
     Public MDML, HHLL As String  'Identification is product is HHLL or MDML  grading methids
 
@@ -182,7 +183,7 @@ Public Class frmJobEntry
 
         'New section to display correct text for scan type
         Select Case txtGrade.Text
-            Case "A", "Normal", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch", "ReCheckA", "HL Seperation", "H Colour Grade", "L Colour Grade"
+            Case "A", "Normal", "Pilot 6Ch", "Pilot 15Ch", "Pilot 20Ch", "ReCheckA", "HL Seperation", "H Colour Grade", "L Colour Grade", "Colour Seperation"
                 lblScanType.Text = "Scan Job Sheet"
                 txtLotNumber.Visible = True
 
@@ -331,7 +332,7 @@ Public Class frmJobEntry
                 stdcheck = 0
                 reCheck = 1
                 dbBarcode = txtLotNumber.Text
-            ElseIf chkBcode3 = "H_Col" Or chkBCode3 = "L_Col" Then
+            ElseIf my.Settings.chkUseColour And (chkBcode3 = "H_Col" Or chkBCode3 = "L_Col") Then
                 Select Case txtLotNumber.Text.Substring(9, 5)
 
                     Case "H_Col"
@@ -341,6 +342,18 @@ Public Class frmJobEntry
                         HLColChk = "L"
                         dbBarcode = txtLotNumber.Text
                 End Select
+
+            ElseIf my.Settings.chkUsePack And (chkBcode3 = "H_Col" Or chkBCode3 = "L_Col") Then
+                Select Case chkBcode3
+
+                    Case "H_Col"
+                        HLColSep = "H"
+                        dbBarcode = txtLotNumber.Text
+                    Case "L_Col"
+                        HLColSep = "L"
+                        dbBarcode = txtLotNumber.Text
+                End Select
+
 
             ElseIf txtLotNumber.Text.Substring(12, 1) = "B" Then
                 chkBCode = txtLotNumber.Text.Substring(12, 1)
@@ -425,7 +438,7 @@ Public Class frmJobEntry
     Private Sub CreateJob()
 
         'For A packing on normal cart
-        If reCheck = 0 And stdcheck = 0 And HLColChk = Nothing Then
+        If reCheck = 0 And stdcheck = 0 And HLColChk = Nothing And HLColSep = Nothing Then
 
             If txtLotNumber.TextLength > 14 Then  ' For carts B10,11 & 12
                 machineName = ""
@@ -732,9 +745,11 @@ Public Class frmJobEntry
         End If
 
         'THIS Selects "A" Packing Routine and if HL master cart show seperation
-        If My.Settings.chkUsePack Then
-                APacking()
-            End If
+        If My.Settings.chkUsePack And HLColSep = Nothing Then
+            APacking()
+        Else
+            HLColGradeSep()
+        End If
 
         'APacking()
 
@@ -1400,7 +1415,106 @@ Public Class frmJobEntry
 
     End Sub
 
+    Private Sub HLColGradeSep()
 
+
+        ''GET PRODUCT WEIGHT INFORMATION
+        'LExecQuery("SELECT PRODWEIGHT,WEIGHTCODE FROM PRODUCT WHERE PRNUM = '" & varProductCode & "'")
+
+        'If LRecordCount > 0 Then
+        '    'LOAD THE DATA FROM dB IN TO THE DATAGRID
+        '    frmDGV.DGVdata.DataSource = LDS.Tables(0)
+        '    frmDGV.DGVdata.Rows(0).Selected = True
+
+        '    varProdWeight = frmDGV.DGVdata.Rows(0).Cells(0).Value.ToString
+        '    varweightcode = frmDGV.DGVdata.Rows(0).Cells(1).Value.ToString
+
+
+        '    frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+
+        'Else
+        '    MsgBox("PRODUCT NUMBER " & varProductCode & " THIS PRODUCT IS NOT IN THE PRODUCT LIST" & vbCrLf & " หมายเลขโปรดักส์นี้ไม่มมีในรายการโปรดักส์")
+        '    Me.txtLotNumber.Clear()
+        '    Me.txtLotNumber.Focus()
+        '    Me.txtLotNumber.Refresh()
+        '    quit = 1
+        '    Exit Sub
+
+        'End If
+
+        Try
+
+            ''Check Product Type HHLL or MDML
+            'LAddParam("@prnum", productCode)
+            'LExecQuery("Select * From PRODUCT where prnum = @prnum and prod_HHLL Is Not Null")
+            'If LRecordCount > 0 Then
+            '    HHLL = "YES"
+            'End If
+
+
+
+            LExecQuery("SELECT * FROM jobs WHERE recheckbarcode = '" & dbBarcode & "' and HHLLState = 3 order by rechkidx   ")
+
+                If LRecordCount = 0 Then
+                    Label3.Visible = True
+
+                    Label3.Text = "This Cart has not been graded in to H and L by colour section"
+
+                    DelayTM()
+                    Label3.Visible = False
+
+                    Me.txtLotNumber.Clear()
+                    Me.txtLotNumber.Focus()
+                    Exit Sub
+                End If
+
+
+
+
+            If LRecordCount > 0 Then
+                LExecQuery("Select * FROM jobs WHERE recheckbarcode = '" & dbBarcode & "' ORDER BY rechkidx")
+
+                'LOAD THE DATA FROM dB IN TO THE DATAGRID
+                frmDGV.DGVdata.DataSource = LDS.Tables(0)
+                frmDGV.DGVdata.Rows(0).Selected = True
+                Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
+
+
+
+                If LConn.State = ConnectionState.Open Then LConn.Close()
+                frmDGV.DGVdata.ClearSelection()
+                frmDGV.DGVdata.DataSource = Nothing  'used to clear DGV
+                coneValUpdate = 1
+                Me.Hide()
+                frmPacking.Show()
+
+            Else
+
+                LExecQuery("SELECT * FROM jobs WHERE recheckbarcode = '" & dbBarcode & "' AND HHLLState = 4'")
+
+                If LRecordCount > 0 Then
+                    Label3.Visible = True
+
+                    Label3.Text = "This cart has already been seperated"
+
+                    DelayTM()
+                    Label3.Visible = False
+
+                End If
+
+                Me.txtLotNumber.Clear()
+                Me.txtLotNumber.Focus()
+
+            End If
+        Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("Scan Error", ex.Message, False, "System Fault")
+            writeerrorLog.writelog("Scan Error", ex.ToString, False, "System Fault")
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Focus()
+        End Try
+
+    End Sub
 
 
 
@@ -2706,7 +2820,9 @@ Public Class frmJobEntry
                     cartReportSub()
                 ElseIf My.Settings.chkUseSort And (stdcheck = 0 And txtGrade.Text <> "ReCheck") Or My.Settings.chkUseColour Then
                     prgContinue()
-                ElseIf (My.Settings.chkUsePack And txtGrade.Text = "A") Or (My.Settings.chkUsePack And (txtGrade.Text = "Pilot 6Ch" Or txtGrade.Text = "Pilot 15Ch" Or txtGrade.Text = "Pilot 20Ch") Or My.Settings.chkUsePack And txtGrade.Text = "HL Seperation") Then
+                ElseIf (My.Settings.chkUsePack And txtGrade.Text = "A") Or (My.Settings.chkUsePack And (txtGrade.Text = "Pilot 6Ch" Or
+                    txtGrade.Text = "Pilot 15Ch" Or txtGrade.Text = "Pilot 20Ch") Or
+                    My.Settings.chkUsePack And txtGrade.Text = "HL Seperation" Or My.Settings.chkUsePack And txtGrade.Text = "Colour Seperation") Then
                     prgContinue()
                 ElseIf My.Settings.chkUseSort And stdcheck Or My.Settings.chkUsePack And stdcheck Then
                     STDCreate()
@@ -3071,7 +3187,7 @@ Public Class frmJobEntry
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
         txtOperator.Focus()
-        lblScanType.Text = "Scan Job Sheet"
+        lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
     Private Sub HDToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles HDToolStripMenuItem3.Click
@@ -3080,7 +3196,7 @@ Public Class frmJobEntry
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
         txtOperator.Focus()
-        lblScanType.Text = "Scan Job Sheet"
+        lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
     Private Sub HMMToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles HMMToolStripMenuItem2.Click
@@ -3089,7 +3205,7 @@ Public Class frmJobEntry
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
         txtOperator.Focus()
-        lblScanType.Text = "Scan Job Sheet"
+        lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
     Private Sub HLToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles HLToolStripMenuItem2.Click
@@ -3098,7 +3214,7 @@ Public Class frmJobEntry
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
         txtOperator.Focus()
-        lblScanType.Text = "Scan Job Sheet"
+        lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
     Private Sub HLLToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles HLLToolStripMenuItem2.Click
@@ -3107,7 +3223,7 @@ Public Class frmJobEntry
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
         txtOperator.Focus()
-        lblScanType.Text = "Scan Job Sheet"
+        lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
     Private Sub HBToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles HBToolStripMenuItem2.Click
@@ -3116,7 +3232,7 @@ Public Class frmJobEntry
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
         txtOperator.Focus()
-        lblScanType.Text = "Scan Job Sheet"
+        lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
     Private Sub SHDToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles HSDToolStripMenuItem2.Click
@@ -3125,7 +3241,7 @@ Public Class frmJobEntry
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
         txtOperator.Focus()
-        lblScanType.Text = "Scan Job Sheet"
+        lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
     Private Sub SHMToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles HSMToolStripMenuItem2.Click
@@ -3134,7 +3250,7 @@ Public Class frmJobEntry
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
         txtOperator.Focus()
-        lblScanType.Text = "Scan Job Sheet"
+        lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
     Private Sub SHLToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles HSLToolStripMenuItem2.Click
@@ -3143,7 +3259,7 @@ Public Class frmJobEntry
         lblSelectGrade.Visible = False
         txtOperator.Visible = True
         txtOperator.Focus()
-        lblScanType.Text = "Scan Job Sheet"
+        lblScanType.Text = "Scan First Cheese on Cart"
     End Sub
 
     Private Sub SHBToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles HSBToolStripMenuItem2.Click
@@ -3243,6 +3359,15 @@ Public Class frmJobEntry
         txtOperator.Visible = True
         txtOperator.Focus()
         lblScanType.Text = "Scan First Cheese on Cart"
+    End Sub
+
+    Private Sub ToolStripMenuItem6_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem6.Click
+        stdReChk = 0  ' changed from 1 for STD recheck to 0 for normal Recheck
+        txtGrade.Text = "Colour Seperation"
+        lblSelectGrade.Visible = False
+        txtOperator.Visible = True
+        txtOperator.Focus()
+        lblScanType.Text = "Scan Job Sheet"
     End Sub
 
     Private Sub PrintToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintToolStripMenuItem.Click

@@ -3006,7 +3006,7 @@ Public Class frmPackTodayUpdate
 
                         frmDGV.DGVdata.Rows(i - 1).Cells("HHLLState").Value = "2"  'to show it has been added to the sheet and will not be read again
 
-                        frmDGV.DGVdata.Rows(i - 1).Cells("rechkidx").Value = DBNull.Value
+                        'frmDGV.DGVdata.Rows(i - 1).Cells("rechkidx").Value = DBNull.Value
 
                         'ROUTINE IF SHEET IS FULL TO COPY SHEET AND CREATE A NEW SHEET IN THE WORKBOOK
 
@@ -3418,7 +3418,7 @@ Public Class frmPackTodayUpdate
                 gradeTxt = "STD" 'ReCheck Grade
                 boxCount = mycount
             Case "Create H Cart"
-                gradeTxt = "H_ColChk" 'ReCheck Grade
+                gradeTxt = "H_ColCHK" 'ReCheck Grade
                 boxCount = mycount
             Case "Create L Cart"
                 gradeTxt = "L_ColCHK" 'ReCheck Grade

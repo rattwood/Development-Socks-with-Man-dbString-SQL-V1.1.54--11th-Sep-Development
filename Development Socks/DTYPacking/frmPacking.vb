@@ -72,8 +72,12 @@ Public Class frmPacking
 
     Private Sub frmPacking_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
-        PExecQuery("Select * FROM jobs WHERE bcodecart = '" & frmJobEntry.dbBarcode & "' Order By CONENUM ;")
+        If frmJobEntry.HLColSep = Nothing Then
+            PExecQuery("Select * FROM jobs WHERE bcodecart = '" & frmJobEntry.dbBarcode & "' Order By CONENUM ;")
+        Else
+            PExecQuery("Select * FROM jobs WHERE recheckbarcode = '" & frmJobEntry.dbBarcode & "' Order By rechkidx ;")
+        End If
+        'PExecQuery("Select * FROM jobs WHERE bcodecart = '" & frmJobEntry.dbBarcode & "' Order By CONENUM ;")
 
 
 
@@ -104,7 +108,7 @@ Public Class frmPacking
             Dim btnNum As Integer
             Dim btnNums As String
 
-        If frmJobEntry.varMachineCode = "29" Then
+        If frmJobEntry.varMachineCode = "29" Or Not frmJobEntry.HLColSep = Nothing Then
             btnNums = 1
         Else
             btnNums = frmJobEntry.varCartSelect
@@ -257,22 +261,34 @@ Public Class frmPacking
 
 
         'GET NUMBER OF CONES THAT NEED ALLOCATING Count agains Job Barcode
-        If Not frmJobEntry.HHLL = "YES" Then  ' only display unload information on screen
+        If Not frmJobEntry.HHLL = "YES" AndAlso frmJobEntry.HLColSep = Nothing Then  ' only display unload information on screen
             For i = 1 To rowendcount
                 If DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "9" And DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = False And (IsDBNull(DGVPakingA.Rows(i - 1).Cells("STDSTATE").Value)) Then
                     toAllocatedCount = toAllocatedCount + 1
                 End If
             Next
 
-        Else
+        ElseIf frmJobEntry.HHLL = "YES" And frmJobEntry.HLColSep = Nothing Then
             For i = 1 To rowendcount
                 If (DGVPakingA.Rows(i - 1).Cells("HHLL").Value = "H" Or DGVPakingA.Rows(i - 1).Cells("HHLL").Value = "L") And (IsDBNull(DGVPakingA.Rows(i - 1).Cells("STDSTATE").Value)) Then
-                    toAllocatedCount = toAllocatedCount + 1
+                    toAllocatedCount = rowendcount
                 End If
             Next
             lblCheese.Text = "Total to Remove"
-        End If
 
+        ElseIf Not frmJobEntry.HLColSep = Nothing Then
+            If frmJobEntry.HLColSep = "H" Then
+
+                toAllocatedCount = DGVPakingA.Rows.Count
+                lblCheese.Text = "Total to Remove"
+
+            ElseIf frmJobEntry.HLColSep = "L" Then
+
+                toAllocatedCount = DGVPakingA.Rows.Count
+                lblCheese.Text = "Total to Remove"
+
+            End If
+        End If
         'For i = 1 To rowendcount
         '    If DGVPakingA.Rows(i - 1).Cells("CONESTATE").Value = "9" And DGVPakingA.Rows(i - 1).Cells("FLT_S").Value = False And (IsDBNull(DGVPakingA.Rows(i - 1).Cells("STDSTATE").Value)) Then
         '        toAllocatedCount = toAllocatedCount + 1
@@ -290,14 +306,14 @@ Public Class frmPacking
             Next
         End If
 
-        'THIS SECTION GETS THE COUNT OF CHEESE ON THE LAST EXCEL SHEET TO DISPLAY NUMBER LEFT TO COMPLETE THE PACK SHEET 
-        If Not frmJobEntry.HHLL = "YES" Then
-            sheetconecount()
+            'THIS SECTION GETS THE COUNT OF CHEESE ON THE LAST EXCEL SHEET TO DISPLAY NUMBER LEFT TO COMPLETE THE PACK SHEET 
+            If Not frmJobEntry.HHLL = "YES" AndAlso frmJobEntry.HLColSep = Nothing Then
+                sheetconecount()
 
 
-            txtBoxToFinish.Text = remainingCheese
-            txtBoxOnSheet.Text = packedCheese
-        Else  ' change screen buttons
+                txtBoxToFinish.Text = remainingCheese
+                txtBoxOnSheet.Text = packedCheese
+            Else  ' change screen buttons
             btnDefect.Hide()
             btnSaveJob.Hide()
             btnFinJob.Hide()
@@ -305,17 +321,26 @@ Public Class frmPacking
             Label6.Hide()
             txtConeBcode.Hide()
             txtBoxToFinish.Hide()
+
+            If Not frmJobEntry.HLColSep = Nothing Then
+                lblHLSeperation.Text = frmJobEntry.HLColSep & " Colour Seperation Removal"
+                txtCartNum.Text = frmJobEntry.HLColSep
+            End If
+
             lblHLSeperation.Show()
+                Label4.Hide()
+                txtBoxOnSheet.Hide()
 
-        End If
+
+            End If
 
 
-        txtboxTotal.Text = toAllocatedCount
+            txtboxTotal.Text = toAllocatedCount
 
         Me.KeyPreview = True  'Allows us to look for advace character from barcode
 
         'IF THIS IS AN EXISTING JOB THEN CALL BACK VALUES FROM DATABASE
-        If frmJobEntry.coneValUpdate Then UpdateConeVal()
+        If frmJobEntry.coneValUpdate = 1 Then UpdateConeVal()
 
 
         If My.Settings.debugSet Then DGVPakingA.Visible = True
@@ -396,7 +421,7 @@ Public Class frmPacking
         If My.Settings.debugSet Then frmDGV.Show()
 
 
-        If Not frmJobEntry.HHLL = "YES" Then
+        If Not frmJobEntry.HHLL = "YES" AndAlso frmJobEntry.HLColSep = Nothing Then
             For rw As Integer = 1 To rowendcount
 
                 If DGVPakingA.Rows(rw - 1).Cells("CONESTATE").Value = "9" And DGVPakingA.Rows(rw - 1).Cells("FLT_S").Value = False And (IsDBNull(DGVPakingA.Rows(rw - 1).Cells("STDSTATE").Value)) Then
@@ -411,7 +436,7 @@ Public Class frmPacking
                 Me.Controls("btnCone" & rw).Enabled = False
             Next
 
-        Else
+        ElseIf frmJobEntry.HHLL = "YES" AndAlso frmJobEntry.HLColSep = Nothing Then
 
             For rw As Integer = 1 To rowendcount
 
@@ -436,7 +461,155 @@ Public Class frmPacking
                     End If
                 End If
             Next
-            txtBoxCancel.Focus()  'set focus to text box for cancel barcode
+        ElseIf Not frmJobEntry.HLColSep = Nothing Then
+
+
+
+            'H Images
+            Dim im_HDD As Image = My.Resources.HPK_DD
+            Dim im_HD As Image = My.Resources.HPK_D
+            Dim im_HMM As Image = My.Resources.HPK_MM
+            Dim im_HL As Image = My.Resources.HPK_L
+            Dim im_HLL As Image = My.Resources.HPK_LL
+            Dim im_HB As Image = My.Resources.HPK_B
+
+            'H Short images
+            Dim im_HSD As Image = My.Resources.HSPK_D
+            Dim im_HSM As Image = My.Resources.HSPK_M
+            Dim im_HSL As Image = My.Resources.HSPK_L
+            Dim im_HSB As Image = My.Resources.HSPK_B
+
+            'L Images
+            Dim im_LDD As Image = My.Resources.LPK_DD
+            Dim im_LD As Image = My.Resources.LPK_D
+            Dim im_LMM As Image = My.Resources.LPK_MM
+            Dim im_LL As Image = My.Resources.LPK_L
+            Dim im_LLL As Image = My.Resources.LPK_LL
+            Dim im_LB As Image = My.Resources.LPK_B
+
+            'H Short images
+            Dim im_LSD As Image = My.Resources.LSPK_D
+            Dim im_LSM As Image = My.Resources.LSPK_M
+            Dim im_LSL As Image = My.Resources.LSPK_L
+            Dim im_LSB As Image = My.Resources.LSPK_B
+
+            'Waste
+            Dim im_LW As Image = My.Resources.LPK_Waste
+            Dim im_HW As Image = My.Resources.HPK_Waste
+
+            For rw As Integer = 1 To rowendcount
+
+                If Not IsDBNull(DGVPakingA.Rows(rw - 1).Cells("HHLL_Res").Value) Then
+                    If frmJobEntry.HLColSep = "H" Then
+                        Select Case DGVPakingA.Rows(rw - 1).Cells("HHLL_Res").Value.ToString
+                            Case "H_DD"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_HDD
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(26, 169, 238)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                            Case "H_D"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_HD
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(26, 169, 238)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                            Case "H_MM"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_HMM
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(26, 169, 238)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                            Case "H_L"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_HL
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(26, 169, 238)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                            Case "H_LL"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_HLL
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(26, 169, 238)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                            Case "H_B"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_HB
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(26, 169, 238)
+                                Me.Controls("btnCone" & rw).Enabled = False
+
+                            Case "HS_D"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_HSD
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(26, 169, 238)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                            Case "HS_M"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_HSM
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(26, 169, 238)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                            Case "HS_L"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_HSL
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(26, 169, 238)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                            Case "HS_B"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_HSB
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(26, 169, 238)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                            Case "H_W"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_HW
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(26, 169, 238)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                        End Select
+                    End If
+
+
+                    If frmJobEntry.HLColSep = "L" Then
+                        Select Case DGVPakingA.Rows(rw - 1).Cells("HHLL_Res").Value.ToString
+                            Case "L_DD"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_LDD
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(126, 125, 250)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                            Case "L_D"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_LD
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(126, 125, 250)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                            Case "L_MM"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_LMM
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(126, 125, 250)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                            Case "L_L"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_LL
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(126, 125, 250)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                            Case "L_LL"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_LLL
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(126, 125, 250)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                            Case "L_B"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_LB
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(126, 125, 250)
+                                Me.Controls("btnCone" & rw).Enabled = False
+
+
+
+                            Case "LS_D"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_LSD
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(26, 169, 238)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                            Case "LS_M"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_LSM
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(26, 169, 238)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                            Case "LS_L"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_LSL
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(26, 169, 238)
+                                Me.Controls("btnCone" & rw).Enabled = False
+                            Case "LS_B"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_LSB
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(26, 169, 238)
+                                Me.Controls("btnCone" & rw).Enabled = False
+
+
+
+                            Case "L_W"
+                                Me.Controls("btnCone" & rw).BackgroundImage = im_LW
+                                Me.Controls("btnCone" & rw).BackColor = Color.FromArgb(126, 125, 250)
+                                Me.Controls("btnCone" & rw).Enabled = False
+
+
+                        End Select
+                    End If
+                End If
+            Next
+
         End If
 
         txtBoxCancel.Focus()
@@ -796,11 +969,13 @@ Public Class frmPacking
 
 
 
+
+
     'THIS LOOKS FOR ENTER key to be pressed or received via barcode
     Private Sub frmJobEntry_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
 
         If e.KeyCode = Keys.Return Then
-            If txtBoxCancel.Text = "cancel" Then
+            If txtBoxCancel.Text = "CANCEL" Then
                 btnBack.PerformClick()
             Else
                 prgContinue()
