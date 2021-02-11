@@ -3,7 +3,7 @@ Imports Excel = Microsoft.Office.Interop.Excel
 Imports System.ComponentModel
 
 
-Public Class frmCart1
+Public Class lblL
 
     Dim MyHLGradeUpdate As New Excel.Application
 

@@ -123,7 +123,7 @@ Public Class frmFaultTrend
 
 
 
-        coneNum = frmCart1.coneNumOffset + 1
+        coneNum = lblL.coneNumOffset + 1
         Dim cheeseNum As Integer
 
         For cheeseNum = coneNum To (coneNum + 32) - 1

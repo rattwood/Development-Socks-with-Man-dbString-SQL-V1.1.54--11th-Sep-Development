@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmCart1
+Partial Class lblL
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class frmCart1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCart1))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(lblL))
         Me.btnCone4 = New System.Windows.Forms.Button()
         Me.btnCone1 = New System.Windows.Forms.Button()
         Me.btnCone2 = New System.Windows.Forms.Button()
@@ -147,6 +147,8 @@ Partial Class frmCart1
         Me.lblHLSeperation = New System.Windows.Forms.Label()
         Me.txtBoxRemain = New System.Windows.Forms.TextBox()
         Me.lblRemain = New System.Windows.Forms.Label()
+        Me.lblHKey = New System.Windows.Forms.Label()
+        Me.lblLkey = New System.Windows.Forms.Label()
         Me.GroupBoxHHLL.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -1672,12 +1674,37 @@ Partial Class frmCart1
         Me.lblRemain.Text = "Remain"
         Me.lblRemain.Visible = False
         '
-        'frmCart1
+        'lblHKey
+        '
+        Me.lblHKey.ForeColor = System.Drawing.Color.Teal
+        Me.lblHKey.Location = New System.Drawing.Point(256, 487)
+        Me.lblHKey.Name = "lblHKey"
+        Me.lblHKey.Size = New System.Drawing.Size(143, 149)
+        Me.lblHKey.TabIndex = 0
+        Me.lblHKey.Text = "HL and Colour refrence" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "H_DD  =  +30" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "H_D   =  +10" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "H_MM  =     0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "H_L   " &
+    "  =   -10" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "H_LL   =   -30" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "H_B    =  +-50 or defect B" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "H_W   =  Waste or d" &
+    "efect W"
+        Me.lblHKey.Visible = False
+        '
+        'lblLkey
+        '
+        Me.lblLkey.ForeColor = System.Drawing.Color.Teal
+        Me.lblLkey.Location = New System.Drawing.Point(254, 489)
+        Me.lblLkey.Name = "lblLkey"
+        Me.lblLkey.Size = New System.Drawing.Size(143, 149)
+        Me.lblLkey.TabIndex = 151
+        Me.lblLkey.Text = "L and Colour refrence" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "L_DD  =  +30" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "L_D   =  +10" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "L_MM  =     0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "L_L    " &
+    " =   -10" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "L_LL   =   -30" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "L_B    =  +-50 or defect B" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "L_W   =  Waste or de" &
+    "fect W"
+        Me.lblLkey.Visible = False
+        '
+        'lblL
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(1086, 699)
+        Me.Controls.Add(Me.lblHKey)
         Me.Controls.Add(Me.lblRemain)
         Me.Controls.Add(Me.txtBoxRemain)
         Me.Controls.Add(Me.lblHLSeperation)
@@ -1798,9 +1825,10 @@ Partial Class frmCart1
         Me.Controls.Add(Me.txtLSTD)
         Me.Controls.Add(Me.btnWaste)
         Me.Controls.Add(Me.btnBarley)
+        Me.Controls.Add(Me.lblLkey)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2)
-        Me.Name = "frmCart1"
+        Me.Name = "lblL"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Operation Screen"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -1932,4 +1960,6 @@ Partial Class frmCart1
     Friend WithEvents lblHLSeperation As Label
     Friend WithEvents txtBoxRemain As TextBox
     Friend WithEvents lblRemain As Label
+    Friend WithEvents lblHKey As Label
+    Friend WithEvents lblLkey As Label
 End Class

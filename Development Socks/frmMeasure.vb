@@ -10,7 +10,7 @@
         Dim comerrormsg As String
         comerrormsg = "Please Select Go to SETTINGS and select Com Port"
 
-        Me.ConeNumTextBox.Text = frmCart1.varConeNum
+        Me.ConeNumTextBox.Text = lblL.varConeNum
 
 
         Me.btnSave.Visible = False 'Hide Save button when form opens
@@ -234,129 +234,129 @@
 
 
         'Set the color of Measuerd button if Spectro used
-        If frmCart1.varConeNum = 1 Then
-            frmCart1.btnCone1.Enabled = False
-            frmCart1.btnCone1.BackColor = Color.Green
+        If lblL.varConeNum = 1 Then
+            lblL.btnCone1.Enabled = False
+            lblL.btnCone1.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 2 Then
-            frmCart1.btnCone2.Enabled = False
-            frmCart1.btnCone2.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 2 Then
+            lblL.btnCone2.Enabled = False
+            lblL.btnCone2.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 3 Then
-            frmCart1.btnCone3.Enabled = False
-            frmCart1.btnCone3.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 3 Then
+            lblL.btnCone3.Enabled = False
+            lblL.btnCone3.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 4 Then
-            frmCart1.btnCone4.Enabled = False
-            frmCart1.btnCone4.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 4 Then
+            lblL.btnCone4.Enabled = False
+            lblL.btnCone4.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 5 Then
-            frmCart1.btnCone5.Enabled = False
-            frmCart1.btnCone5.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 5 Then
+            lblL.btnCone5.Enabled = False
+            lblL.btnCone5.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 6 Then
-            frmCart1.btnCone6.Enabled = False
-            frmCart1.btnCone6.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 6 Then
+            lblL.btnCone6.Enabled = False
+            lblL.btnCone6.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 7 Then
-            frmCart1.btnCone7.Enabled = False
-            frmCart1.btnCone7.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 7 Then
+            lblL.btnCone7.Enabled = False
+            lblL.btnCone7.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 8 Then
-            frmCart1.btnCone8.Enabled = False
-            frmCart1.btnCone8.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 8 Then
+            lblL.btnCone8.Enabled = False
+            lblL.btnCone8.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 9 Then
-            frmCart1.btnCone9.Enabled = False
-            frmCart1.btnCone9.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 9 Then
+            lblL.btnCone9.Enabled = False
+            lblL.btnCone9.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 10 Then
-            frmCart1.btnCone10.Enabled = False
-            frmCart1.btnCone10.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 10 Then
+            lblL.btnCone10.Enabled = False
+            lblL.btnCone10.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 11 Then
-            frmCart1.btnCone11.Enabled = False
-            frmCart1.btnCone11.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 11 Then
+            lblL.btnCone11.Enabled = False
+            lblL.btnCone11.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 12 Then
-            frmCart1.btnCone12.Enabled = False
-            frmCart1.btnCone12.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 12 Then
+            lblL.btnCone12.Enabled = False
+            lblL.btnCone12.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 13 Then
-            frmCart1.btnCone13.Enabled = False
-            frmCart1.btnCone13.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 13 Then
+            lblL.btnCone13.Enabled = False
+            lblL.btnCone13.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 14 Then
-            frmCart1.btnCone14.Enabled = False
-            frmCart1.btnCone14.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 14 Then
+            lblL.btnCone14.Enabled = False
+            lblL.btnCone14.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 15 Then
-            frmCart1.btnCone15.Enabled = False
-            frmCart1.btnCone15.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 15 Then
+            lblL.btnCone15.Enabled = False
+            lblL.btnCone15.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 16 Then
-            frmCart1.btnCone16.Enabled = False
-            frmCart1.btnCone16.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 16 Then
+            lblL.btnCone16.Enabled = False
+            lblL.btnCone16.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 17 Then
-            frmCart1.btnCone17.Enabled = False
-            frmCart1.btnCone17.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 17 Then
+            lblL.btnCone17.Enabled = False
+            lblL.btnCone17.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 18 Then
-            frmCart1.btnCone18.Enabled = False
-            frmCart1.btnCone18.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 18 Then
+            lblL.btnCone18.Enabled = False
+            lblL.btnCone18.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 19 Then
-            frmCart1.btnCone20.Enabled = False
-            frmCart1.btnCone20.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 19 Then
+            lblL.btnCone20.Enabled = False
+            lblL.btnCone20.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 21 Then
-            frmCart1.btnCone21.Enabled = False
-            frmCart1.btnCone21.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 21 Then
+            lblL.btnCone21.Enabled = False
+            lblL.btnCone21.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 22 Then
-            frmCart1.btnCone22.Enabled = False
-            frmCart1.btnCone22.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 22 Then
+            lblL.btnCone22.Enabled = False
+            lblL.btnCone22.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 23 Then
-            frmCart1.btnCone23.Enabled = False
-            frmCart1.btnCone23.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 23 Then
+            lblL.btnCone23.Enabled = False
+            lblL.btnCone23.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 24 Then
-            frmCart1.btnCone24.Enabled = False
-            frmCart1.btnCone24.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 24 Then
+            lblL.btnCone24.Enabled = False
+            lblL.btnCone24.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 25 Then
-            frmCart1.btnCone25.Enabled = False
-            frmCart1.btnCone25.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 25 Then
+            lblL.btnCone25.Enabled = False
+            lblL.btnCone25.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 26 Then
-            frmCart1.btnCone26.Enabled = False
-            frmCart1.btnCone26.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 26 Then
+            lblL.btnCone26.Enabled = False
+            lblL.btnCone26.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 27 Then
-            frmCart1.btnCone27.Enabled = False
-            frmCart1.btnCone27.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 27 Then
+            lblL.btnCone27.Enabled = False
+            lblL.btnCone27.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 28 Then
-            frmCart1.btnCone28.Enabled = False
-            frmCart1.btnCone28.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 28 Then
+            lblL.btnCone28.Enabled = False
+            lblL.btnCone28.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 29 Then
-            frmCart1.btnCone29.Enabled = False
-            frmCart1.btnCone29.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 29 Then
+            lblL.btnCone29.Enabled = False
+            lblL.btnCone29.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 30 Then
-            frmCart1.btnCone30.Enabled = False
-            frmCart1.btnCone30.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 30 Then
+            lblL.btnCone30.Enabled = False
+            lblL.btnCone30.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 31 Then
-            frmCart1.btnCone31.Enabled = False
-            frmCart1.btnCone31.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 31 Then
+            lblL.btnCone31.Enabled = False
+            lblL.btnCone31.BackColor = Color.Green
 
-        ElseIf frmCart1.varConeNum = 32 Then
-            frmCart1.btnCone32.Enabled = False
-            frmCart1.btnCone32.BackColor = Color.Green
+        ElseIf lblL.varConeNum = 32 Then
+            lblL.btnCone32.Enabled = False
+            lblL.btnCone32.BackColor = Color.Green
 
         End If
 
@@ -364,27 +364,27 @@
 
 
 
-        If frmCart1.coneCount = 31 Then 'this value needs to be one less than total as 
+        If lblL.coneCount = 31 Then 'this value needs to be one less than total as 
             'Clean Up and return to cone selection screen
 
             Me.btnMeasure.Enabled = True
-            frmCart1.coneCount = 1 + frmCart1.coneCount
+            lblL.coneCount = 1 + lblL.coneCount
             'frmCart1.endCount()
             'frmCart1.lblConeCount.Text = frmCart1.coneCount
-            frmCart1.Show()
+            lblL.Show()
             Me.Close()
         Else
             'Clean Up and return to cone selection screen
 
             Me.btnMeasure.Enabled = True
-            frmCart1.coneCount = 1 + frmCart1.coneCount
+            lblL.coneCount = 1 + lblL.coneCount
             'frmCart1.lblConeCount.Text = frmCart1.coneCount
-            frmCart1.Show()
+            lblL.Show()
             Me.Close()
         End If
 
         CSV()
-        frmCart1.Show()
+        lblL.Show()
         Me.Close()
 
     End Sub
@@ -397,7 +397,7 @@
         Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, False)
 
         outFile.WriteLine("Cone# , Defect, No Cone, DL")
-        outFile.WriteLine(frmCart1.varConeNum, "", "", Original_incoming)
+        outFile.WriteLine(lblL.varConeNum, "", "", Original_incoming)
         outFile.Close()
 
 

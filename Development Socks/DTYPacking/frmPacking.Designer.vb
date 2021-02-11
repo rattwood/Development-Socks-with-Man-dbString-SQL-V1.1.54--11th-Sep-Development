@@ -143,7 +143,7 @@ Partial Class frmPacking
         '
         Me.btnCone32.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone32.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone32.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone32.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone32.ForeColor = System.Drawing.Color.Black
         Me.btnCone32.Location = New System.Drawing.Point(155, 515)
         Me.btnCone32.Margin = New System.Windows.Forms.Padding(2)
@@ -157,7 +157,7 @@ Partial Class frmPacking
         '
         Me.btnCone24.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone24.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone24.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone24.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone24.ForeColor = System.Drawing.Color.Black
         Me.btnCone24.Location = New System.Drawing.Point(155, 360)
         Me.btnCone24.Margin = New System.Windows.Forms.Padding(2)
@@ -171,7 +171,7 @@ Partial Class frmPacking
         '
         Me.btnCone16.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone16.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone16.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone16.ForeColor = System.Drawing.Color.Black
         Me.btnCone16.Location = New System.Drawing.Point(155, 205)
         Me.btnCone16.Margin = New System.Windows.Forms.Padding(2)
@@ -185,7 +185,7 @@ Partial Class frmPacking
         '
         Me.btnCone29.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone29.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone29.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone29.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone29.ForeColor = System.Drawing.Color.Black
         Me.btnCone29.Location = New System.Drawing.Point(650, 514)
         Me.btnCone29.Margin = New System.Windows.Forms.Padding(2)
@@ -199,7 +199,7 @@ Partial Class frmPacking
         '
         Me.btnCone8.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone8.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone8.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone8.ForeColor = System.Drawing.Color.Black
         Me.btnCone8.Location = New System.Drawing.Point(155, 50)
         Me.btnCone8.Margin = New System.Windows.Forms.Padding(2)
@@ -213,7 +213,7 @@ Partial Class frmPacking
         '
         Me.btnCone30.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone30.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone30.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone30.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone30.ForeColor = System.Drawing.Color.Black
         Me.btnCone30.Location = New System.Drawing.Point(484, 512)
         Me.btnCone30.Margin = New System.Windows.Forms.Padding(2)
@@ -227,7 +227,7 @@ Partial Class frmPacking
         '
         Me.btnCone31.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone31.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone31.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone31.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone31.ForeColor = System.Drawing.Color.Black
         Me.btnCone31.Location = New System.Drawing.Point(320, 515)
         Me.btnCone31.Margin = New System.Windows.Forms.Padding(2)
@@ -241,7 +241,7 @@ Partial Class frmPacking
         '
         Me.btnCone27.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone27.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone27.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone27.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone27.ForeColor = System.Drawing.Color.Black
         Me.btnCone27.Location = New System.Drawing.Point(980, 513)
         Me.btnCone27.Margin = New System.Windows.Forms.Padding(2)
@@ -255,7 +255,7 @@ Partial Class frmPacking
         '
         Me.btnCone26.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone26.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone26.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone26.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone26.ForeColor = System.Drawing.Color.Black
         Me.btnCone26.Location = New System.Drawing.Point(1145, 514)
         Me.btnCone26.Margin = New System.Windows.Forms.Padding(2)
@@ -269,7 +269,7 @@ Partial Class frmPacking
         '
         Me.btnCone28.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone28.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone28.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone28.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone28.ForeColor = System.Drawing.Color.Black
         Me.btnCone28.Location = New System.Drawing.Point(815, 513)
         Me.btnCone28.Margin = New System.Windows.Forms.Padding(2)
@@ -283,7 +283,7 @@ Partial Class frmPacking
         '
         Me.btnCone25.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone25.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone25.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone25.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone25.ForeColor = System.Drawing.Color.Black
         Me.btnCone25.Location = New System.Drawing.Point(1310, 514)
         Me.btnCone25.Margin = New System.Windows.Forms.Padding(2)
@@ -297,7 +297,7 @@ Partial Class frmPacking
         '
         Me.btnCone21.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone21.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone21.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone21.ForeColor = System.Drawing.Color.Black
         Me.btnCone21.Location = New System.Drawing.Point(650, 360)
         Me.btnCone21.Margin = New System.Windows.Forms.Padding(2)
@@ -311,7 +311,7 @@ Partial Class frmPacking
         '
         Me.btnCone22.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone22.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone22.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone22.ForeColor = System.Drawing.Color.Black
         Me.btnCone22.Location = New System.Drawing.Point(484, 358)
         Me.btnCone22.Margin = New System.Windows.Forms.Padding(2)
@@ -325,7 +325,7 @@ Partial Class frmPacking
         '
         Me.btnCone23.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone23.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone23.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone23.ForeColor = System.Drawing.Color.Black
         Me.btnCone23.Location = New System.Drawing.Point(320, 360)
         Me.btnCone23.Margin = New System.Windows.Forms.Padding(2)
@@ -339,7 +339,7 @@ Partial Class frmPacking
         '
         Me.btnCone19.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone19.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone19.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone19.ForeColor = System.Drawing.Color.Black
         Me.btnCone19.Location = New System.Drawing.Point(980, 359)
         Me.btnCone19.Margin = New System.Windows.Forms.Padding(2)
@@ -353,7 +353,7 @@ Partial Class frmPacking
         '
         Me.btnCone18.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone18.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone18.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone18.ForeColor = System.Drawing.Color.Black
         Me.btnCone18.Location = New System.Drawing.Point(1145, 359)
         Me.btnCone18.Margin = New System.Windows.Forms.Padding(2)
@@ -367,7 +367,7 @@ Partial Class frmPacking
         '
         Me.btnCone17.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone17.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone17.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone17.ForeColor = System.Drawing.Color.Black
         Me.btnCone17.Location = New System.Drawing.Point(1310, 360)
         Me.btnCone17.Margin = New System.Windows.Forms.Padding(2)
@@ -381,7 +381,7 @@ Partial Class frmPacking
         '
         Me.btnCone20.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone20.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone20.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone20.ForeColor = System.Drawing.Color.Black
         Me.btnCone20.Location = New System.Drawing.Point(815, 359)
         Me.btnCone20.Margin = New System.Windows.Forms.Padding(2)
@@ -395,7 +395,7 @@ Partial Class frmPacking
         '
         Me.btnCone13.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone13.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone13.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone13.ForeColor = System.Drawing.Color.Black
         Me.btnCone13.Location = New System.Drawing.Point(650, 206)
         Me.btnCone13.Margin = New System.Windows.Forms.Padding(2)
@@ -409,7 +409,7 @@ Partial Class frmPacking
         '
         Me.btnCone14.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone14.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone14.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone14.ForeColor = System.Drawing.Color.Black
         Me.btnCone14.Location = New System.Drawing.Point(484, 204)
         Me.btnCone14.Margin = New System.Windows.Forms.Padding(2)
@@ -423,7 +423,7 @@ Partial Class frmPacking
         '
         Me.btnCone15.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone15.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone15.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone15.ForeColor = System.Drawing.Color.Black
         Me.btnCone15.Location = New System.Drawing.Point(320, 205)
         Me.btnCone15.Margin = New System.Windows.Forms.Padding(2)
@@ -437,7 +437,7 @@ Partial Class frmPacking
         '
         Me.btnCone11.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone11.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone11.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone11.ForeColor = System.Drawing.Color.Black
         Me.btnCone11.Location = New System.Drawing.Point(980, 206)
         Me.btnCone11.Margin = New System.Windows.Forms.Padding(2)
@@ -451,7 +451,7 @@ Partial Class frmPacking
         '
         Me.btnCone10.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone10.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone10.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone10.ForeColor = System.Drawing.Color.Black
         Me.btnCone10.Location = New System.Drawing.Point(1145, 206)
         Me.btnCone10.Margin = New System.Windows.Forms.Padding(2)
@@ -465,7 +465,7 @@ Partial Class frmPacking
         '
         Me.btnCone9.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone9.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone9.ForeColor = System.Drawing.Color.Black
         Me.btnCone9.Location = New System.Drawing.Point(1310, 206)
         Me.btnCone9.Margin = New System.Windows.Forms.Padding(2)
@@ -479,7 +479,7 @@ Partial Class frmPacking
         '
         Me.btnCone12.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone12.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone12.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone12.ForeColor = System.Drawing.Color.Black
         Me.btnCone12.Location = New System.Drawing.Point(815, 205)
         Me.btnCone12.Margin = New System.Windows.Forms.Padding(2)
@@ -493,7 +493,7 @@ Partial Class frmPacking
         '
         Me.btnCone5.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone5.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone5.ForeColor = System.Drawing.Color.Black
         Me.btnCone5.Location = New System.Drawing.Point(650, 50)
         Me.btnCone5.Margin = New System.Windows.Forms.Padding(2)
@@ -507,7 +507,7 @@ Partial Class frmPacking
         '
         Me.btnCone6.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone6.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone6.ForeColor = System.Drawing.Color.Black
         Me.btnCone6.Location = New System.Drawing.Point(485, 50)
         Me.btnCone6.Margin = New System.Windows.Forms.Padding(2)
@@ -521,7 +521,7 @@ Partial Class frmPacking
         '
         Me.btnCone7.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone7.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone7.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone7.ForeColor = System.Drawing.Color.Black
         Me.btnCone7.Location = New System.Drawing.Point(320, 50)
         Me.btnCone7.Margin = New System.Windows.Forms.Padding(2)
@@ -535,7 +535,7 @@ Partial Class frmPacking
         '
         Me.btnCone3.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone3.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone3.ForeColor = System.Drawing.Color.Black
         Me.btnCone3.Location = New System.Drawing.Point(980, 50)
         Me.btnCone3.Margin = New System.Windows.Forms.Padding(2)
@@ -549,7 +549,7 @@ Partial Class frmPacking
         '
         Me.btnCone2.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone2.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone2.ForeColor = System.Drawing.Color.Black
         Me.btnCone2.Location = New System.Drawing.Point(1145, 50)
         Me.btnCone2.Margin = New System.Windows.Forms.Padding(2)
@@ -563,7 +563,7 @@ Partial Class frmPacking
         '
         Me.btnCone1.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone1.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone1.ForeColor = System.Drawing.Color.Black
         Me.btnCone1.Location = New System.Drawing.Point(1310, 50)
         Me.btnCone1.Margin = New System.Windows.Forms.Padding(2)
@@ -577,7 +577,7 @@ Partial Class frmPacking
         '
         Me.btnCone4.BackColor = System.Drawing.SystemColors.ControlDark
         Me.btnCone4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCone4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCone4.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCone4.ForeColor = System.Drawing.Color.Black
         Me.btnCone4.Location = New System.Drawing.Point(815, 50)
         Me.btnCone4.Margin = New System.Windows.Forms.Padding(2)
@@ -748,7 +748,7 @@ Partial Class frmPacking
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1584, 861)
+        Me.ClientSize = New System.Drawing.Size(1370, 749)
         Me.Controls.Add(Me.txtBoxCancel)
         Me.Controls.Add(Me.lblHLSeperation)
         Me.Controls.Add(Me.DGVPakingA)

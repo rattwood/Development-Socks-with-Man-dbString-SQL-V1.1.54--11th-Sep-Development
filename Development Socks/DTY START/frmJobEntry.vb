@@ -832,7 +832,7 @@ Public Class frmJobEntry
 
                 coneValUpdate = 1
 
-                frmCart1.Show()
+                lblL.Show()
 
 
                 Me.Hide()
@@ -873,7 +873,7 @@ Public Class frmJobEntry
             frmDGV.DGVdata.DataSource = LDS.Tables(0)
             frmDGV.DGVdata.Rows(0).Selected = True
 
-            frmCart1.Show()
+            lblL.Show()
 
 
             Me.Hide()
@@ -1262,7 +1262,7 @@ Public Class frmJobEntry
                 frmDGV.DGVdata.DataSource = LDS.Tables(0)
                 frmDGV.DGVdata.Rows(0).Selected = True
                 ' frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  ' sorts On cone number
-                frmCart1.Show()
+                lblL.Show()
 
                 If My.Settings.debugSet Then frmDGV.Show()
                 Me.Hide()
