@@ -149,6 +149,9 @@ Partial Class lblL
         Me.lblRemain = New System.Windows.Forms.Label()
         Me.lblHKey = New System.Windows.Forms.Label()
         Me.lblLkey = New System.Windows.Forms.Label()
+        Me.btnALL_H = New System.Windows.Forms.Button()
+        Me.btnAll_L = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBoxHHLL.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -896,7 +899,7 @@ Partial Class lblL
         Me.btnStdCheese.BackColor = System.Drawing.Color.Orange
         Me.btnStdCheese.Cursor = System.Windows.Forms.Cursors.Default
         Me.btnStdCheese.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnStdCheese.Location = New System.Drawing.Point(219, 376)
+        Me.btnStdCheese.Location = New System.Drawing.Point(219, 374)
         Me.btnStdCheese.Margin = New System.Windows.Forms.Padding(2)
         Me.btnStdCheese.Name = "btnStdCheese"
         Me.btnStdCheese.Size = New System.Drawing.Size(85, 80)
@@ -932,7 +935,7 @@ Partial Class lblL
         Me.txtResult.Cursor = System.Windows.Forms.Cursors.Default
         Me.txtResult.Enabled = False
         Me.txtResult.Font = New System.Drawing.Font("Microsoft Sans Serif", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.txtResult.Location = New System.Drawing.Point(238, 554)
+        Me.txtResult.Location = New System.Drawing.Point(133, 541)
         Me.txtResult.Name = "txtResult"
         Me.txtResult.ReadOnly = True
         Me.txtResult.Size = New System.Drawing.Size(87, 55)
@@ -1539,20 +1542,23 @@ Partial Class lblL
         Me.btnHome.BackgroundImage = Global.Development_Socks.My.Resources.Resources.home_icon_silhouette
         Me.btnHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnHome.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnHome.Location = New System.Drawing.Point(15, 600)
+        Me.btnHome.Location = New System.Drawing.Point(17, 603)
         Me.btnHome.Margin = New System.Windows.Forms.Padding(2)
         Me.btnHome.Name = "btnHome"
-        Me.btnHome.Size = New System.Drawing.Size(173, 62)
+        Me.btnHome.Size = New System.Drawing.Size(97, 62)
         Me.btnHome.TabIndex = 142
         Me.btnHome.UseVisualStyleBackColor = False
         '
         'GroupBoxHHLL
         '
+        Me.GroupBoxHHLL.Controls.Add(Me.Label4)
+        Me.GroupBoxHHLL.Controls.Add(Me.btnALL_H)
+        Me.GroupBoxHHLL.Controls.Add(Me.btnAll_L)
         Me.GroupBoxHHLL.Controls.Add(Me.btnHH)
         Me.GroupBoxHHLL.Controls.Add(Me.btnLL)
         Me.GroupBoxHHLL.Location = New System.Drawing.Point(369, 359)
         Me.GroupBoxHHLL.Name = "GroupBoxHHLL"
-        Me.GroupBoxHHLL.Size = New System.Drawing.Size(212, 96)
+        Me.GroupBoxHHLL.Size = New System.Drawing.Size(212, 218)
         Me.GroupBoxHHLL.TabIndex = 143
         Me.GroupBoxHHLL.TabStop = False
         Me.GroupBoxHHLL.Visible = False
@@ -1677,26 +1683,59 @@ Partial Class lblL
         'lblHKey
         '
         Me.lblHKey.ForeColor = System.Drawing.Color.Teal
-        Me.lblHKey.Location = New System.Drawing.Point(256, 487)
+        Me.lblHKey.Location = New System.Drawing.Point(120, 542)
         Me.lblHKey.Name = "lblHKey"
-        Me.lblHKey.Size = New System.Drawing.Size(143, 149)
+        Me.lblHKey.Size = New System.Drawing.Size(277, 120)
         Me.lblHKey.TabIndex = 0
-        Me.lblHKey.Text = "HL and Colour refrence" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "H_DD  =  +30" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "H_D   =  +10" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "H_MM  =     0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "H_L   " &
-    "  =   -10" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "H_LL   =   -30" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "H_B    =  +-50 or defect B" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "H_W   =  Waste or d" &
-    "efect W"
+        Me.lblHKey.Text = resources.GetString("lblHKey.Text")
         Me.lblHKey.Visible = False
         '
         'lblLkey
         '
         Me.lblLkey.ForeColor = System.Drawing.Color.Teal
-        Me.lblLkey.Location = New System.Drawing.Point(254, 489)
+        Me.lblLkey.Location = New System.Drawing.Point(119, 544)
         Me.lblLkey.Name = "lblLkey"
-        Me.lblLkey.Size = New System.Drawing.Size(143, 149)
+        Me.lblLkey.Size = New System.Drawing.Size(266, 119)
         Me.lblLkey.TabIndex = 151
-        Me.lblLkey.Text = "L and Colour refrence" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "L_DD  =  +30" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "L_D   =  +10" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "L_MM  =     0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "L_L    " &
-    " =   -10" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "L_LL   =   -30" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "L_B    =  +-50 or defect B" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "L_W   =  Waste or de" &
-    "fect W"
+        Me.lblLkey.Text = resources.GetString("lblLkey.Text")
         Me.lblLkey.Visible = False
+        '
+        'btnALL_H
+        '
+        Me.btnALL_H.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
+        Me.btnALL_H.Cursor = System.Windows.Forms.Cursors.Arrow
+        Me.btnALL_H.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnALL_H.ForeColor = System.Drawing.Color.Black
+        Me.btnALL_H.Location = New System.Drawing.Point(7, 127)
+        Me.btnALL_H.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnALL_H.Name = "btnALL_H"
+        Me.btnALL_H.Size = New System.Drawing.Size(85, 80)
+        Me.btnALL_H.TabIndex = 49
+        Me.btnALL_H.Text = "All H"
+        Me.btnALL_H.UseVisualStyleBackColor = False
+        '
+        'btnAll_L
+        '
+        Me.btnAll_L.BackColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.btnAll_L.Cursor = System.Windows.Forms.Cursors.Arrow
+        Me.btnAll_L.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAll_L.ForeColor = System.Drawing.Color.Black
+        Me.btnAll_L.Location = New System.Drawing.Point(120, 127)
+        Me.btnAll_L.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnAll_L.Name = "btnAll_L"
+        Me.btnAll_L.Size = New System.Drawing.Size(85, 80)
+        Me.btnAll_L.TabIndex = 48
+        Me.btnAll_L.Text = "All L"
+        Me.btnAll_L.UseVisualStyleBackColor = False
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(6, 104)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(201, 26)
+        Me.Label4.TabIndex = 50
+        Me.Label4.Text = "These buttons will set all remaing Cheese" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " to H or L"
         '
         'lblL
         '
@@ -1705,10 +1744,10 @@ Partial Class lblL
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(1086, 699)
         Me.Controls.Add(Me.lblHKey)
+        Me.Controls.Add(Me.GroupBoxHHLL)
         Me.Controls.Add(Me.lblRemain)
         Me.Controls.Add(Me.txtBoxRemain)
         Me.Controls.Add(Me.lblHLSeperation)
-        Me.Controls.Add(Me.GroupBoxHHLL)
         Me.Controls.Add(Me.txtP10)
         Me.Controls.Add(Me.txtHSTD)
         Me.Controls.Add(Me.btnHome)
@@ -1833,6 +1872,7 @@ Partial Class lblL
         Me.Text = "Operation Screen"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.GroupBoxHHLL.ResumeLayout(False)
+        Me.GroupBoxHHLL.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1962,4 +2002,7 @@ Partial Class lblL
     Friend WithEvents lblRemain As Label
     Friend WithEvents lblHKey As Label
     Friend WithEvents lblLkey As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents btnALL_H As Button
+    Friend WithEvents btnAll_L As Button
 End Class

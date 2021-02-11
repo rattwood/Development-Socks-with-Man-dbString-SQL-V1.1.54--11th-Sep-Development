@@ -120,6 +120,29 @@
   <metadata name="VeriColorCom.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="lblHKey.Text" xml:space="preserve">
+    <value>                         H to Colour refrence
+
+H_DD  =  +30                                
+H_D   =  +10                                 HS_D  =  +10
+H_MM  =     0                               HS_M =  0
+H_L     =   -10                                HS_L   =  -10
+H_LL   =   -30                                HS_B  &gt;  30 
+H_B    =  +-50 OR Def B              HS_W = Waste 
+H_W   =  Waste or Def W
+</value>
+  </data>
+  <data name="lblLkey.Text" xml:space="preserve">
+    <value>                         L to Colour refrence
+
+L_DD  =  +30                                
+L_D   =  +10                                 LS_D  =  +10
+L_MM  =     0                               LS_M =  0
+L_L     =   -10                                LS_L   =  -10
+L_LL   =   -30                                LS_B  &gt;  30 
+L_B    =  +-50 OR Def B               LS_W = Waste 
+L_W   =  Waste or Def W</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>35</value>
   </metadata>
