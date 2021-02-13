@@ -138,6 +138,9 @@ Partial Class lblL
         Me.lblDoffNum = New System.Windows.Forms.Label()
         Me.btnHome = New System.Windows.Forms.Button()
         Me.GroupBoxHHLL = New System.Windows.Forms.GroupBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.btnALL_H = New System.Windows.Forms.Button()
+        Me.btnAll_L = New System.Windows.Forms.Button()
         Me.btnHH = New System.Windows.Forms.Button()
         Me.btnLL = New System.Windows.Forms.Button()
         Me.txtHH = New System.Windows.Forms.TextBox()
@@ -149,9 +152,6 @@ Partial Class lblL
         Me.lblRemain = New System.Windows.Forms.Label()
         Me.lblHKey = New System.Windows.Forms.Label()
         Me.lblLkey = New System.Windows.Forms.Label()
-        Me.btnALL_H = New System.Windows.Forms.Button()
-        Me.btnAll_L = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBoxHHLL.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -1563,6 +1563,43 @@ Partial Class lblL
         Me.GroupBoxHHLL.TabStop = False
         Me.GroupBoxHHLL.Visible = False
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(6, 104)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(201, 26)
+        Me.Label4.TabIndex = 50
+        Me.Label4.Text = "These buttons will set all remaing Cheese" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " to H or L"
+        '
+        'btnALL_H
+        '
+        Me.btnALL_H.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
+        Me.btnALL_H.Cursor = System.Windows.Forms.Cursors.Arrow
+        Me.btnALL_H.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnALL_H.ForeColor = System.Drawing.Color.Black
+        Me.btnALL_H.Location = New System.Drawing.Point(7, 127)
+        Me.btnALL_H.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnALL_H.Name = "btnALL_H"
+        Me.btnALL_H.Size = New System.Drawing.Size(85, 80)
+        Me.btnALL_H.TabIndex = 49
+        Me.btnALL_H.Text = "All H"
+        Me.btnALL_H.UseVisualStyleBackColor = False
+        '
+        'btnAll_L
+        '
+        Me.btnAll_L.BackColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.btnAll_L.Cursor = System.Windows.Forms.Cursors.Arrow
+        Me.btnAll_L.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAll_L.ForeColor = System.Drawing.Color.Black
+        Me.btnAll_L.Location = New System.Drawing.Point(120, 127)
+        Me.btnAll_L.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnAll_L.Name = "btnAll_L"
+        Me.btnAll_L.Size = New System.Drawing.Size(85, 80)
+        Me.btnAll_L.TabIndex = 48
+        Me.btnAll_L.Text = "All L"
+        Me.btnAll_L.UseVisualStyleBackColor = False
+        '
         'btnHH
         '
         Me.btnHH.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
@@ -1699,43 +1736,6 @@ Partial Class lblL
         Me.lblLkey.TabIndex = 151
         Me.lblLkey.Text = resources.GetString("lblLkey.Text")
         Me.lblLkey.Visible = False
-        '
-        'btnALL_H
-        '
-        Me.btnALL_H.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
-        Me.btnALL_H.Cursor = System.Windows.Forms.Cursors.Arrow
-        Me.btnALL_H.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnALL_H.ForeColor = System.Drawing.Color.Black
-        Me.btnALL_H.Location = New System.Drawing.Point(7, 127)
-        Me.btnALL_H.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnALL_H.Name = "btnALL_H"
-        Me.btnALL_H.Size = New System.Drawing.Size(85, 80)
-        Me.btnALL_H.TabIndex = 49
-        Me.btnALL_H.Text = "All H"
-        Me.btnALL_H.UseVisualStyleBackColor = False
-        '
-        'btnAll_L
-        '
-        Me.btnAll_L.BackColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.btnAll_L.Cursor = System.Windows.Forms.Cursors.Arrow
-        Me.btnAll_L.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAll_L.ForeColor = System.Drawing.Color.Black
-        Me.btnAll_L.Location = New System.Drawing.Point(120, 127)
-        Me.btnAll_L.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnAll_L.Name = "btnAll_L"
-        Me.btnAll_L.Size = New System.Drawing.Size(85, 80)
-        Me.btnAll_L.TabIndex = 48
-        Me.btnAll_L.Text = "All L"
-        Me.btnAll_L.UseVisualStyleBackColor = False
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 104)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(201, 26)
-        Me.Label4.TabIndex = 50
-        Me.Label4.Text = "These buttons will set all remaing Cheese" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " to H or L"
         '
         'lblL
         '

@@ -1857,40 +1857,84 @@ Public Class lblL
         End If
     End Sub
 
-    'Private Sub btnHSTD_Click(sender As Object, e As EventArgs) Handles btnHSTD.Click
-    '    If varConeNum > 0 Then
+    Private Sub btnALL_H_Click(sender As Object, e As EventArgs) Handles btnALL_H.Click
 
 
-    '        Me.btnSave.Visible = True 'Show Save button when form opens
-    '        Me.btnClear.Visible = True  'Show Cancel button when form opens
+        If Not remaincount = "0" Then
+            valHH = 0
+            valLL = 1
+            valHStd = 0
+            setAllCheese()
+        Else
+            MsgBox("All cheeses alreay have a value so this option cannot be used")
+        End If
+
+    End Sub
+
+    Private Sub btnAll_L_Click(sender As Object, e As EventArgs) Handles btnAll_L.Click
+
+        If Not remaincount = "0" Then
+            valHH = 0
+            valLL = 1
+            valHStd = 0
+            setAllCheese()
+        Else
+            MsgBox("All cheeses alreay have a value so this option cannot be used")
+        End If
 
 
-    '        valHH = 0
-    '        valLL = 0
-    '        valHStd = 1
-    '        valLStd = 0
-    '    Else
-    '        MsgBox("You must select a  Cheese number first")
-    '    End If
-    'End Sub
+    End Sub
 
-    'Private Sub btnLSTD_Click(sender As Object, e As EventArgs) Handles btnLSTD.Click
-    '    If varConeNum > 0 Then
+    Private Sub setAllCheese()
+
+        Dim HHFound As Integer
+        Dim llFound As Integer
+
+        If valHH = 1 Then
+            For rw = 1 To frmDGV.DGVdata.Rows.Count
+                'Chek to see if an H values already set
+                If frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value = "H" Then
+                    HHFound = 1
+                    Exit For
+                End If
+            Next
+
+            If HHFound = 1 Then
+                Dim result = MessageBox.Show("H values already on cart are you sure you wish to remaining Cheeses to H ", "YES or NO", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+
+                If result = DialogResult.Yes Then
+                    'just contine to next part
+                End If
+
+                If result = DialogResult.No Then
+                    valHH = 0
+                    Exit Sub
+                End If
+            End If
+
+            For rw = 1 To frmDGV.DGVdata.Rows.Count
+                'Chek to see if an H values already set
+                If IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value) Then
+                    frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value = "H"
+                End If
+            Next
+
+            UpdateConeVal()
 
 
-    '        Me.btnSave.Visible = True 'Show Save button when form opens
-    '        Me.btnClear.Visible = True  'Show Cancel button when form opens
+        End If
 
 
-    '        valHH = 0
-    '        valLL = 0
-    '        valHStd = 0
-    '        valLStd = 1
 
-    '    Else
-    '        MsgBox("You must select a  Cheese number first")
-    '    End If
-    'End Sub
+
+
+
+
+
+
+    End Sub
+
+
 
     Private Sub btnCone1_Click(sender As Object, e As EventArgs) Handles btnCone1.Click
         varConeNum = btnCone1.Text
@@ -3803,6 +3847,8 @@ Public Class lblL
 
 
     End Sub
+
+
 
     Private Sub btnStdCheese_Click(sender As Object, e As EventArgs) Handles btnStdCheese.Click
         If varConeNum > 0 Then
