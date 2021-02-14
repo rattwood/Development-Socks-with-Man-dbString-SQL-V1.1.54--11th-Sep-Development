@@ -75,6 +75,10 @@ Partial Class frmPacking
         Me.Label6 = New System.Windows.Forms.Label()
         Me.lblHLSeperation = New System.Windows.Forms.Label()
         Me.txtBoxCancel = New System.Windows.Forms.TextBox()
+        Me.txtBoxHCount = New System.Windows.Forms.TextBox()
+        Me.lblHGrade = New System.Windows.Forms.Label()
+        Me.txtBoxLCount = New System.Windows.Forms.TextBox()
+        Me.lblLGrade = New System.Windows.Forms.Label()
         CType(Me.DGVPakingA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -744,11 +748,65 @@ Partial Class frmPacking
         Me.txtBoxCancel.TabIndex = 45
         Me.txtBoxCancel.Visible = False
         '
+        'txtBoxHCount
+        '
+        Me.txtBoxHCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(238, Byte), Integer))
+        Me.txtBoxHCount.Enabled = False
+        Me.txtBoxHCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.txtBoxHCount.Location = New System.Drawing.Point(29, 301)
+        Me.txtBoxHCount.Name = "txtBoxHCount"
+        Me.txtBoxHCount.ReadOnly = True
+        Me.txtBoxHCount.Size = New System.Drawing.Size(112, 62)
+        Me.txtBoxHCount.TabIndex = 53
+        Me.txtBoxHCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtBoxHCount.Visible = False
+        '
+        'lblHGrade
+        '
+        Me.lblHGrade.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHGrade.Location = New System.Drawing.Point(7, 275)
+        Me.lblHGrade.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblHGrade.Name = "lblHGrade"
+        Me.lblHGrade.Size = New System.Drawing.Size(146, 20)
+        Me.lblHGrade.TabIndex = 52
+        Me.lblHGrade.Text = "'H' on Cart"
+        Me.lblHGrade.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblHGrade.Visible = False
+        '
+        'txtBoxLCount
+        '
+        Me.txtBoxLCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(121, Byte), Integer), CType(CType(125, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.txtBoxLCount.Enabled = False
+        Me.txtBoxLCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.txtBoxLCount.Location = New System.Drawing.Point(29, 416)
+        Me.txtBoxLCount.Name = "txtBoxLCount"
+        Me.txtBoxLCount.ReadOnly = True
+        Me.txtBoxLCount.Size = New System.Drawing.Size(112, 62)
+        Me.txtBoxLCount.TabIndex = 55
+        Me.txtBoxLCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtBoxLCount.Visible = False
+        '
+        'lblLGrade
+        '
+        Me.lblLGrade.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLGrade.Location = New System.Drawing.Point(7, 390)
+        Me.lblLGrade.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblLGrade.Name = "lblLGrade"
+        Me.lblLGrade.Size = New System.Drawing.Size(146, 20)
+        Me.lblLGrade.TabIndex = 54
+        Me.lblLGrade.Text = "'L' on Cart"
+        Me.lblLGrade.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblLGrade.Visible = False
+        '
         'frmPacking
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1370, 749)
+        Me.Controls.Add(Me.txtBoxLCount)
+        Me.Controls.Add(Me.lblLGrade)
+        Me.Controls.Add(Me.txtBoxHCount)
+        Me.Controls.Add(Me.lblHGrade)
         Me.Controls.Add(Me.txtBoxCancel)
         Me.Controls.Add(Me.lblHLSeperation)
         Me.Controls.Add(Me.DGVPakingA)
@@ -863,4 +921,8 @@ Partial Class frmPacking
     Friend WithEvents Label6 As Label
     Friend WithEvents lblHLSeperation As Label
     Friend WithEvents txtBoxCancel As TextBox
+    Friend WithEvents txtBoxHCount As TextBox
+    Friend WithEvents lblHGrade As Label
+    Friend WithEvents txtBoxLCount As TextBox
+    Friend WithEvents lblLGrade As Label
 End Class

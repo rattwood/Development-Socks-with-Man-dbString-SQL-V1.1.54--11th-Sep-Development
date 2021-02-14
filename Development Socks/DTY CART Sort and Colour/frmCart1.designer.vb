@@ -1578,7 +1578,7 @@ Partial Class lblL
         Me.btnALL_H.Cursor = System.Windows.Forms.Cursors.Arrow
         Me.btnALL_H.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnALL_H.ForeColor = System.Drawing.Color.Black
-        Me.btnALL_H.Location = New System.Drawing.Point(7, 127)
+        Me.btnALL_H.Location = New System.Drawing.Point(7, 135)
         Me.btnALL_H.Margin = New System.Windows.Forms.Padding(2)
         Me.btnALL_H.Name = "btnALL_H"
         Me.btnALL_H.Size = New System.Drawing.Size(85, 80)
@@ -1592,7 +1592,7 @@ Partial Class lblL
         Me.btnAll_L.Cursor = System.Windows.Forms.Cursors.Arrow
         Me.btnAll_L.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAll_L.ForeColor = System.Drawing.Color.Black
-        Me.btnAll_L.Location = New System.Drawing.Point(120, 127)
+        Me.btnAll_L.Location = New System.Drawing.Point(120, 135)
         Me.btnAll_L.Margin = New System.Windows.Forms.Padding(2)
         Me.btnAll_L.Name = "btnAll_L"
         Me.btnAll_L.Size = New System.Drawing.Size(85, 80)

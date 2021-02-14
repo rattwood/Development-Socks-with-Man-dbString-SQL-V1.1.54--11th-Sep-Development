@@ -269,12 +269,29 @@ Public Class frmPacking
             Next
 
         ElseIf frmJobEntry.HHLL = "YES" And frmJobEntry.HLColSep = Nothing Then
+
+            Dim hCount As Integer
+            Dim lCount As Integer
+
             For i = 1 To rowendcount
-                If (DGVPakingA.Rows(i - 1).Cells("HHLL").Value = "H" Or DGVPakingA.Rows(i - 1).Cells("HHLL").Value = "L") And (IsDBNull(DGVPakingA.Rows(i - 1).Cells("STDSTATE").Value)) Then
-                    toAllocatedCount = rowendcount
+                If DGVPakingA.Rows(i - 1).Cells("HHLL").Value = "H" Or DGVPakingA.Rows(i - 1).Cells("HHLL").Value = "L" Then
+
+                    If DGVPakingA.Rows(i - 1).Cells("HHLL").Value = "H" Then hCount = hCount + 1
+                    If DGVPakingA.Rows(i - 1).Cells("HHLL").Value = "L" Then lCount = lCount + 1
+
+
+                    toAllocatedCount = hCount + lCount
                 End If
             Next
             lblCheese.Text = "Total to Remove"
+
+            lblHGrade.Show()
+            txtBoxHCount.Show()
+            txtBoxHCount.Text = hCount
+
+            lblLGrade.Show()
+            txtBoxLCount.Show()
+            txtBoxLCount.Text = lCount
 
         ElseIf Not frmJobEntry.HLColSep = Nothing Then
             If frmJobEntry.HLColSep = "H" Then

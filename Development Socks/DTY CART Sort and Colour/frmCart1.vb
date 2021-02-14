@@ -399,14 +399,23 @@ Public Class lblL
                 txtM50.Visible = False
                 txtP50.Visible = False
 
-                txtHH.Show()
-                txtLL.Show()
-                txtHSTD.Show()
-                ' txtLSTD.Show()
 
-                lblZero.Text = "H"
-                lblM10.Text = "L"
-                lblP10.Text = "H Std"
+            txtHH.Location = New Point(160, 603)
+            txtHH.Size = New Size(922, 24)
+            txtHH.Show()
+            txtLL.Location = New Point(160, 630)
+            txtLL.Size = New Size(922, 24)
+            txtLL.Show()
+            txtHSTD.Location = New Point(160, 657)
+            txtHSTD.Size = New Size(922, 24)
+            txtHSTD.Show()
+
+            lblZero.Location = New Point(126, 608)
+            lblZero.Text = "H"
+            lblM10.Location = New Point(126, 635)
+            lblM10.Text = "L"
+            lblP10.Location = New Point(126, 664)
+            lblP10.Text = "H Std"
 
                 lblZero.Visible = True
                 lblM10.Visible = True
@@ -1861,8 +1870,8 @@ Public Class lblL
 
 
         If Not remaincount = "0" Then
-            valHH = 0
-            valLL = 1
+            valHH = 1
+            valLL = 0
             valHStd = 0
             setAllCheese()
         Else
@@ -1890,12 +1899,16 @@ Public Class lblL
         Dim HHFound As Integer
         Dim llFound As Integer
 
+
+        'Process set H values
         If valHH = 1 Then
             For rw = 1 To frmDGV.DGVdata.Rows.Count
                 'Chek to see if an H values already set
-                If frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value = "H" Then
-                    HHFound = 1
-                    Exit For
+
+                If Not IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value) Then
+                    If frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value.ToString = "H" Then
+                        HHFound = 1
+                    End If
                 End If
             Next
 
@@ -1907,7 +1920,7 @@ Public Class lblL
                 End If
 
                 If result = DialogResult.No Then
-                    valHH = 0
+                    valHH = 0   '280372102001B3
                     Exit Sub
                 End If
             End If
@@ -1920,17 +1933,47 @@ Public Class lblL
             Next
 
             UpdateConeVal()
-
+            ' Me.btnSave.Visible = True 'Show Save button when form opens
 
         End If
 
 
+        'Process set HLvalues
+        If valLL = 1 Then
+            For rw = 1 To frmDGV.DGVdata.Rows.Count
+                'Chek to see if an H values already set
 
+                If Not IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value) Then
+                    If frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value.ToString = "L" Then
+                        HHFound = 1
+                    End If
+                End If
+            Next
 
+            If HHFound = 1 Then
+                Dim result = MessageBox.Show("L values already on cart are you sure you wish to remaining Cheeses to L ", "YES or NO", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
 
+                If result = DialogResult.Yes Then
+                    'just contine to next part
+                End If
 
+                If result = DialogResult.No Then
+                    valHH = 0   '280372102001B3
+                    Exit Sub
+                End If
+            End If
 
+            For rw = 1 To frmDGV.DGVdata.Rows.Count
+                'Chek to see if an H values already set
+                If IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value) Then
+                    frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value = "L"
+                End If
+            Next
 
+            UpdateConeVal()
+            ' Me.btnSave.Visible = True 'Show Save button when form opens
+
+        End If
 
     End Sub
 
