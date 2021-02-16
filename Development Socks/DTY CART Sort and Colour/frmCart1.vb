@@ -1,9 +1,9 @@
 ﻿Imports System.IO
 Imports Excel = Microsoft.Office.Interop.Excel
 Imports System.ComponentModel
+Imports System.Data.SqlClient
 
-
-Public Class lblL
+Public Class frmCart1
 
     Dim MyHLGradeUpdate As New Excel.Application
 
@@ -279,20 +279,20 @@ Public Class lblL
 
 
 
-            If Not HLColCheck Then 'If we are not doinf hl colour check then check for HL seperation
-                lclHHLL = frmJobEntry.HHLL
-                lclMDML = frmJobEntry.MDML
+        If Not HLColCheck Then 'If we are not doinf hl colour check then check for HL seperation
+            lclHHLL = frmJobEntry.HHLL
+            lclMDML = frmJobEntry.MDML
 
-                'Check to see if cart has alrady had Pattern Seperation
-                If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("HHLL").Value) Then
-                    dbHHLL = "YES"
-                End If
-
-                frmJobEntry.HHLL = Nothing
-                frmJobEntry.MDML = Nothing
+            'Check to see if cart has alrady had Pattern Seperation
+            If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("HHLL").Value) Then
+                dbHHLL = "YES"
             End If
 
-            tmpCartType = frmJobEntry.txtLotNumber.Text.Substring(12, 1)
+            frmJobEntry.HHLL = Nothing
+            frmJobEntry.MDML = Nothing
+        End If
+
+        tmpCartType = frmJobEntry.txtLotNumber.Text.Substring(12, 1)
 
         'VISUAL CHECK BUTTONS VISABLE OR NOT
         If My.Settings.chkUseColour And (String.IsNullOrWhiteSpace(lclHHLL) Or lclHHLL = "NO") Then  'do normal colour grading
@@ -369,35 +369,35 @@ Public Class lblL
 
 
         ElseIf My.Settings.chkUseColour And lclHHLL = "YES" And tmpCartType = "B" Then '(lclHHLL = "YES" And Not dbHHLL = "YES") Then  'Do H and L seperation grading
-                GroupBoxHHLL.Show()
-                Me.btnVisGrade.Visible = False  'Hide visgrade button
-                btnBarley.Visible = False
-                btnZero.Visible = False
-                btnM10.Visible = False
-                btnM30.Visible = False
-                btnM50.Visible = False
-                btnP10.Visible = False
-                btnP30.Visible = False
-                btnP50.Visible = False
-                btnStdCheese.Visible = False
-                lblBarley.Visible = False
-                lblWaste.Visible = False
-                lblZero.Visible = False
-                lblM10.Visible = False
-                lblP10.Visible = False
-                lblM30.Visible = False
-                lblP30.Visible = False
-                lblM50.Visible = False
-                lblP50.Visible = False
-                txtBarley.Visible = False
-                txtWaste.Visible = False
-                txtZero.Visible = False
-                txtM10.Visible = False
-                txtP10.Visible = False
-                txtM30.Visible = False
-                txtP30.Visible = False
-                txtM50.Visible = False
-                txtP50.Visible = False
+            GroupBoxHHLL.Show()
+            Me.btnVisGrade.Visible = False  'Hide visgrade button
+            btnBarley.Visible = False
+            btnZero.Visible = False
+            btnM10.Visible = False
+            btnM30.Visible = False
+            btnM50.Visible = False
+            btnP10.Visible = False
+            btnP30.Visible = False
+            btnP50.Visible = False
+            btnStdCheese.Visible = False
+            lblBarley.Visible = False
+            lblWaste.Visible = False
+            lblZero.Visible = False
+            lblM10.Visible = False
+            lblP10.Visible = False
+            lblM30.Visible = False
+            lblP30.Visible = False
+            lblM50.Visible = False
+            lblP50.Visible = False
+            txtBarley.Visible = False
+            txtWaste.Visible = False
+            txtZero.Visible = False
+            txtM10.Visible = False
+            txtP10.Visible = False
+            txtM30.Visible = False
+            txtP30.Visible = False
+            txtM50.Visible = False
+            txtP50.Visible = False
 
 
             txtHH.Location = New Point(160, 603)
@@ -417,40 +417,40 @@ Public Class lblL
             lblP10.Location = New Point(126, 664)
             lblP10.Text = "H Std"
 
-                lblZero.Visible = True
-                lblM10.Visible = True
-                lblP10.Visible = True
+            lblZero.Visible = True
+            lblM10.Visible = True
+            lblP10.Visible = True
 
 
-                lblHLSeperation.Visible = True
-                lblRemain.Visible = True
-                txtBoxRemain.Visible = True
+            lblHLSeperation.Visible = True
+            lblRemain.Visible = True
+            txtBoxRemain.Visible = True
 
 
-                varVisConeInspect = 1
-                coneBarley = 0
-                coneZero = 0
-                coneM10 = 0
-                coneP10 = 0
-                coneM30 = 0
-                coneP30 = 0
-                coneM50 = 0
-                coneP50 = 0
-                valHH = 0
-                valLL = 0
-                valHStd = 0
+            varVisConeInspect = 1
+            coneBarley = 0
+            coneZero = 0
+            coneM10 = 0
+            coneP10 = 0
+            coneM30 = 0
+            coneP30 = 0
+            coneM50 = 0
+            coneP50 = 0
+            valHH = 0
+            valLL = 0
+            valHStd = 0
 
 
-                Me.btnDefect.Enabled = False
-                Me.btnNoCone.Enabled = False
-                Me.btnShort.Enabled = False
-                btnFinishedJob.Hide()
+            Me.btnDefect.Enabled = False
+            Me.btnNoCone.Enabled = False
+            Me.btnShort.Enabled = False
+            btnFinishedJob.Hide()
 
 
 
-            Else  ' Do not show any colour grading
-                'COLOUR CHECK BUTTONS NOT VISIBLE
-                Me.btnVisGrade.Visible = False
+        Else  ' Do not show any colour grading
+            'COLOUR CHECK BUTTONS NOT VISIBLE
+            Me.btnVisGrade.Visible = False
             btnBarley.Visible = False
             btnZero.Visible = False
             btnM10.Visible = False
@@ -488,20 +488,20 @@ Public Class lblL
             btnFinishedJob.Show()
             Me.btnStdCheese.Visible = True
 
-                If lclHHLL = "YES" Then
-                    txtHH.Show()
-                    txtLL.Show()
-                    txtHSTD.Show()
+            If lclHHLL = "YES" Then
+                txtHH.Show()
+                txtLL.Show()
+                txtHSTD.Show()
 
-                    lblZero.Text = "H"
-                    lblM10.Text = "L"
-                    lblP10.Text = "H Std"
+                lblZero.Text = "H"
+                lblM10.Text = "L"
+                lblP10.Text = "H Std"
 
-                    lblZero.Visible = True
-                    lblM10.Visible = True
-                    lblP10.Visible = True
-                    lblHLSeperation.Visible = True
-                End If
+                lblZero.Visible = True
+                lblM10.Visible = True
+                lblP10.Visible = True
+                lblHLSeperation.Visible = True
+            End If
 
 
 
@@ -2379,7 +2379,6 @@ Public Class lblL
                     frmDGV.DGVdata.Rows(rw - 1).Cells("CARTSTARTTM").Value = today
                     frmDGV.DGVdata.Rows(rw - 1).Cells("CARTENDTM").Value = today
                 End If
-
             End If
 
             If My.Settings.chkUseColour And frmDGV.DGVdata.Rows(rw - 1).Cells("CONESTATE").Value.ToString IsNot "8" Then
@@ -2435,8 +2434,7 @@ Public Class lblL
 
 
         If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
-        frmDGV.DGVdata.DataSource = Nothing
-        'frmDGV.DGVdata.ClearSelection()
+        'frmDGV.DGVdata.DataSource = Nothing
         frmJobEntry.Show()
         frmJobEntry.txtLotNumber.Clear()
         frmJobEntry.txtLotNumber.Focus()
@@ -3786,18 +3784,18 @@ Public Class lblL
             'Me.btnShortSave.Visible = False
             Me.btnClear.Visible = False
 
-                If My.Settings.chkUseSort And lclHHLL = "YES" Then
-                    Me.btnStdCheese.Visible = True
-                Else
-                    Me.btnStdCheese.Visible = False
-                End If
-
-                If shortCone = 1 Then coneCount = coneCount Else coneCount = coneCount + 1  'if Short being set do not add to cone count
-                'lblConeCount.Text = coneCount
-
+            If My.Settings.chkUseSort And lclHHLL = "YES" Then
+                Me.btnStdCheese.Visible = True
             Else
+                Me.btnStdCheese.Visible = False
+            End If
 
-                Me.btnVisGrade.Enabled = True
+            If shortCone = 1 Then coneCount = coneCount Else coneCount = coneCount + 1  'if Short being set do not add to cone count
+            'lblConeCount.Text = coneCount
+
+        Else
+
+            Me.btnVisGrade.Enabled = True
             Me.btnBarley.Enabled = False
             Me.btnShort.Visible = True
             Me.btnShort.Enabled = True
@@ -4399,7 +4397,7 @@ Public Class lblL
         todaypath = (My.Settings.dirPacking & "\" & finddate) 'path of date the file shuld be stored in
 
         'create the save name of the file
-        savename = (todaypath & "\" & saveString & ".xlsx").ToString
+        savename = (todaypath & "\" & SaveString & ".xlsx").ToString
 
 
         Dim sheetNumber As Integer = 0

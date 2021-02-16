@@ -8,7 +8,7 @@
         Loop
         sw.Stop()
 
-        lblL.Show()
+        frmCart1.Show()
         Me.Close()
     End Sub
 End Class

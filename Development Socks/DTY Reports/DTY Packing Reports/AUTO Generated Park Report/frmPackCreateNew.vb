@@ -145,7 +145,7 @@ Public Class frmPackCreateNew
 
                 prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
-                MyPakExcel.Cells(7, 4) = prodTf
+                MyPakExcel.Cells(7, 4) = prodTf    'D7
 
                 'Product Code
                 MyPakExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value        'F7
@@ -155,18 +155,19 @@ Public Class frmPackCreateNew
                 MyPakExcel.Cells(13, 5) = frmJobEntry.varProdWeight                   'E13
 
                 'Update the packing Grade
-                MyPakExcel.Cells(30, 10) = frmJobEntry.txtGrade.Text
+                ' MyPakExcel.Cells(30, 10) = frmJobEntry.txtGrade.Text
 
                 'Update the grade header
                 MyPakExcel.Cells(3, 2) = frmJobEntry.txtGrade.Text & " - Grade"
 
                 'PACKER NAME
-                MyPakExcel.Cells(13, 8) = frmJobEntry.PackOp     'H13
+                MyPakExcel.Cells(13, 8) = frmJobEntry.PackOp     'H8
 
-                MyPakExcel.Cells(64, 14) = frmJobEntry.PackOp
+                MyPakExcel.Cells(64, 14) = frmJobEntry.PackOp    'M64
 
                 createBarcode()
-                MyPakExcel.Cells(1, 4) = SheetCodeString
+                MyPakExcel.Cells(5, 7) = SheetCodeString  'H5
+                MyPakExcel.Cells(8, 7) = modBarcode
 
                 'THIS IS USED TO WRITE DATE IN TO USED ROWS
                 If frmPackPrvGet.nfree > 0 Then
@@ -179,7 +180,71 @@ Public Class frmPackCreateNew
 
 
                 createBarcode()
-                MyPakExcel.Cells(1, 4) = SheetCodeString
+                MyPakExcel.Cells(5, 7) = SheetCodeString
+                MyPakExcel.Cells(8, 7) = modBarcode
+            Case "HS D", "HS M", "HS L", "HS B", "LS D", "LS M", "LS L", "LS B"
+                nfree = 12
+
+                Dim prodTf As String
+
+                prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
+                'PRODUCT NAME
+                MyPakExcel.Cells(6, 12) = prodTf  'L6
+
+                'Product Code
+                MyPakExcel.Cells(6, 15) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value       'O6
+                'DATE
+                MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D5
+
+                'PACKER NAME
+                MyPakExcel.Cells(43, 5) = frmJobEntry.PackOp 'frmDGV.DGVdata.Rows(0).Cells(55).Value      'E43
+
+                'THIS IS USED TO WRITE DATE IN TO USED ROWS
+                Select Case frmPackPrvGet.ncfree
+                    Case 12
+                        'This will write date to the first two cone columns
+                        colcount = 4
+                        For ccount = 1 To 2
+                            For rcount = 12 To 41
+                                MyPakExcel.Cells(rcount, colcount) = frmPackRepMain.prevDays
+                            Next
+                            colcount = colcount + 4
+                        Next
+
+                        If frmPackPrvGet.nfree > 0 Then
+                            nfree = frmPackPrvGet.nfree
+                            For usedrow = 12 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 12) = frmPackRepMain.prevDays
+                            Next
+
+                        End If
+                    Case 8
+                        'This will write date to the first One cone columns
+                        For rcount = 12 To 41
+                            MyPakExcel.Cells(rcount, 4) = frmPackRepMain.prevDays
+                        Next
+
+
+                        If frmPackPrvGet.nfree > 0 Then
+                            nfree = frmPackPrvGet.nfree
+                            For usedrow = 11 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 8) = frmPackRepMain.prevDays
+                            Next
+
+                        End If
+                    Case 4
+
+                        If frmPackPrvGet.nfree > 0 Then
+                            nfree = frmPackPrvGet.nfree
+                            For usedrow = 12 To nfree - 1
+                                MyPakExcel.Cells(usedrow, 4) = frmPackRepMain.prevDays
+                            Next
+                        End If
+                End Select
+
+                createBarcode()
+                MyPakExcel.Cells(1, 5) = SheetCodeString
+                MyPakExcel.Cells(1, 16) = modBarcode
 
             Case "P35 AS", "P35 BS"
                 nfree = 12
@@ -771,6 +836,8 @@ Public Class frmPackCreateNew
                 frmPackTodayUpdate.TodayUpdateB_AL_AD()
             Case "H DD", "H D", "H MM", "H L", "H LL", "H B", "L DD", "L D", "L MM", "L L", "L LL", "L B"
                 frmPackTodayUpdate.TodayUpdateHL()
+            Case "HS D", "HS M", "HS L", "HS B", "LS D", "LS M", "LS L", "LS B"
+                frmPackTodayUpdate.TodatUpdateHS_LS35()
             Case "P35 AS", "P35 BS"
                 frmPackTodayUpdate.TodatUpdateBS_AS_35()
             Case "P25 AS", "P30 BS"
@@ -842,42 +909,49 @@ Public Class frmPackCreateNew
                 gradeTxt = "L_ColCHK"
                      'H and L Packing Full and Short
             Case "H DD"
-                gradeTxt = "H DD" 'AD Grade
+                gradeTxt = "HDD" 'H DD Grade
             Case "H D"
-                gradeTxt = "H D" 'AD Grade
+                gradeTxt = "HD" 'H D Grade
             Case "H MM"
-                gradeTxt = "H MM" 'AD Grade
+                gradeTxt = "HMM" 'H MM Grade
             Case "H L"
-                gradeTxt = "H L" 'AD Grade
+                gradeTxt = "HL" 'H L Grade
             Case "H LL"
-                gradeTxt = "H LL" 'AD Grade
+                gradeTxt = "HLL" 'H LL Grade
             Case "H B"
-                gradeTxt = "H B" 'AD Grade
+                gradeTxt = "HB" 'H B Grade
             Case "H W"
-                gradeTxt = "H W" 'AD Grade
+                gradeTxt = "HW" 'H W Grade
             Case "L DD"
-                gradeTxt = "L DD" 'AD Grade
+                gradeTxt = "LDD" 'L DD Grade
             Case "L D"
-                gradeTxt = "L D" 'AD Grade
+                gradeTxt = "LD" 'L D Grade
             Case "H MM"
-                gradeTxt = "L MM" 'AD Grade
+                gradeTxt = "LMM" 'L MM Grade
             Case "L L"
-                gradeTxt = "L L" 'AD Grade
+                gradeTxt = "LL" 'L L Grade
             Case "L LL"
-                gradeTxt = "L LL" 'AD Grade
+                gradeTxt = "LLL" 'L LL Grade
             Case "L B"
-                gradeTxt = "L B" 'AD Grade
+                gradeTxt = "LB" 'L B Grade
             Case "L W"
-                gradeTxt = "L W" 'AD Grade
+                gradeTxt = "LW" 'L W Grade
             Case "HS D"
+                gradeTxt = "HSD" 'HS D Grade
             Case "HS M"
+                gradeTxt = "HSM" 'HS M Grade
             Case "HS L"
+                gradeTxt = "HSL" 'HS L Grade
             Case "HS B"
-
+                gradeTxt = "HSB" 'HS B Grade
             Case "LS D"
+                gradeTxt = "LSD" 'LS D Grade
             Case "LS M"
+                gradeTxt = "LSM" 'LS W  Grade
             Case "LS L"
+                gradeTxt = "LSL" 'LS L Grade
             Case "LS B"
+                gradeTxt = "LSB" 'LS B Grade
             Case "P35 AS"
                 gradeTxt = "P35AS" 'P35 AS Grade
             Case "P35 BS"
@@ -917,9 +991,15 @@ Public Class frmPackCreateNew
 
         End Select
 
+        Select Case frmJobEntry.txtGrade.Text
+            Case "HLRound1", "HLRound2", "HLRound3", "HL STD"
+                SheetCodeString = ("*" & frmJobEntry.varProductCode & year & month & day & gradeTxt & "1" & "H*")
+            Case Else
+                SheetCodeString = ("*" & frmJobEntry.varProductCode & year & month & day & gradeTxt & "1" & "*")
+        End Select
 
 
-        SheetCodeString = ("*" & frmJobEntry.varProductCode & year & month & day & gradeTxt & "1" & "*")
+        'SheetCodeString = ("*" & frmJobEntry.varProductCode & year & month & day & gradeTxt & "1" & "*")
         modBarcode = SheetCodeString.Replace("*", "")
     End Sub
 

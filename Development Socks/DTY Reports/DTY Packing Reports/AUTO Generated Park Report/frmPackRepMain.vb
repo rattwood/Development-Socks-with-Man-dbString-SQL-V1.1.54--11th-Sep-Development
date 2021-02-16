@@ -193,45 +193,64 @@ Public Class frmPackRepMain
                             sheetSearch = prodNum & "______ReCheck"
                         Case "H DD"
 
-                            sheetSearch = prodNum & "______H DD"
+                            sheetSearch = prodNum & "______HDD"
                         Case "H D"
 
-                            sheetSearch = prodNum & "______H D"
+                            sheetSearch = prodNum & "______HD"
                         Case "H MM"
 
-                            sheetSearch = prodNum & "______H MM"
+                            sheetSearch = prodNum & "______HMM"
                         Case "H L"
 
-                            sheetSearch = prodNum & "______H L"
+                            sheetSearch = prodNum & "______HL"
                         Case "H LL"
 
-                            sheetSearch = prodNum & "______H LL"
+                            sheetSearch = prodNum & "______HLL"
                         Case "H B"
 
-                            sheetSearch = prodNum & "______H B"
+                            sheetSearch = prodNum & "______HB"
                         Case "L DD"
 
-                            sheetSearch = prodNum & "______L DD"
+                            sheetSearch = prodNum & "______LDD"
                         Case "L D"
 
-                            sheetSearch = prodNum & "______L D"
+                            sheetSearch = prodNum & "______LD"
                         Case "L MM"
 
-                            sheetSearch = prodNum & "______L MM"
+                            sheetSearch = prodNum & "______LMM"
                         Case "L L"
 
-                            sheetSearch = prodNum & "______L L"
+                            sheetSearch = prodNum & "______LL"
                         Case "L LL"
 
-                            sheetSearch = prodNum & "______L LL"
+                            sheetSearch = prodNum & "______LLL"
                         Case "L B"
 
-                            sheetSearch = prodNum & "______L B"
+                            sheetSearch = prodNum & "______LB"
+                        Case "HS D"
 
+                            sheetSearch = prodNum & "______HSD"
+                        Case "HS M"
 
+                            sheetSearch = prodNum & "______HSM"
+                        Case "HS L"
 
+                            sheetSearch = prodNum & "______HSL"
+                        Case "HS B"
 
+                            sheetSearch = prodNum & "______HSB"
+                        Case "LS D"
 
+                            sheetSearch = prodNum & "______LSD"
+                        Case "LS M"
+
+                            sheetSearch = prodNum & "______LSM"
+                        Case "LS L"
+
+                            sheetSearch = prodNum & "______LSL"
+                        Case "LS B"
+
+                            sheetSearch = prodNum & "______LSB"
 
                     End Select
 
@@ -268,6 +287,8 @@ Public Class frmPackRepMain
                 template = (My.Settings.dirTemplate & "\" & "Packing Template Grade AD.xlsx").ToString
             Case "H DD", "H D", "H MM", "H L", "H LL", "H B", "L DD", "L D", "L MM", "L L", "L LL", "L B"
                 template = (My.Settings.dirTemplate & "\" & "Packing Template Grade HL Full.xlsx").ToString
+            Case "HS D", "HS M", "HS L", "HS B", "LS D", "LS M", "LS L", "LS B"
+                template = (My.Settings.dirTemplate & "\" & "HL Short Template.xlsx").ToString
             Case "Waste"
                 template = (My.Settings.dirTemplate & "\" & "Packing Template Grade B.xlsx").ToString
             Case "P15 AS"

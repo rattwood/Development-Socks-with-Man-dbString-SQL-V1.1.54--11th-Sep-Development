@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class lblL
+Partial Class frmCart1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class lblL
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(lblL))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCart1))
         Me.btnCone4 = New System.Windows.Forms.Button()
         Me.btnCone1 = New System.Windows.Forms.Button()
         Me.btnCone2 = New System.Windows.Forms.Button()
@@ -1737,7 +1737,7 @@ Partial Class lblL
         Me.lblLkey.Text = resources.GetString("lblLkey.Text")
         Me.lblLkey.Visible = False
         '
-        'lblL
+        'frmCart1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -1867,7 +1867,7 @@ Partial Class lblL
         Me.Controls.Add(Me.lblLkey)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2)
-        Me.Name = "lblL"
+        Me.Name = "frmCart1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Operation Screen"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
