@@ -294,6 +294,7 @@ Public Class frmJobEntry
         Dim chkBCode2 As String = Nothing
         Dim chkBcode3 As String = Nothing
 
+
         If txtLotNumber.Text = "" Then
             MsgBox("Please scan Barcode")
             txtLotNumber.Clear()
@@ -318,13 +319,19 @@ Public Class frmJobEntry
 
         Try
 
-            chkBCode = txtLotNumber.Text.Substring(9, 1)
-            chkBCode2 = txtLotNumber.Text.Substring(9, 3)
-            chkBcode3 = txtLotNumber.Text.Substring(9, 5)
 
+
+            chkBCode = txtLotNumber.Text.Substring(9, 1)
+            chkBCode2 = txtLotNumber.Text.Substring(9, 2)
+            chkBcode3 = txtLotNumber.Text.Substring(9, 3)
+
+            If My.Settings.chkUseColour And txtLotNumber.Text.Length = 14 Or My.Settings.chkUsePack And txtLotNumber.Text.Length = 14 Then
+                chkBcode3 = txtLotNumber.Text.Substring(9, 5)
+            End If
 
             'CHECK TO SEE IT STANDARD RECHECK OR RECHECK CART
-            If chkBCode2 = "R11" Or chkBCode2 = "R12" Or chkBCode2 = "R21" Or chkBCode2 = "R31" Or chkBCode2 = "STD" Then  ' we must check this way first otherwise we will always get R and use recheck
+            'If chkBCode2 = "R11" Or chkBCode2 = "R12" Or chkBCode2 = "R21" Or chkBCode2 = "R31" Or chkBCode2 = "STD" Then  ' we must check this way first otherwise we will always get R and use recheck
+            If chkBCode2 = "R1" Or chkBCode2 = "R2" Or chkBCode2 = "R3" Or chkBcode3 = "STD" Then
                 reCheck = 0
                 stdcheck = 1
                 dbBarcode = txtLotNumber.Text
@@ -332,8 +339,8 @@ Public Class frmJobEntry
                 stdcheck = 0
                 reCheck = 1
                 dbBarcode = txtLotNumber.Text
-            ElseIf my.Settings.chkUseColour And (chkBcode3 = "H_Col" Or chkBCode3 = "L_Col") Then
-                Select Case txtLotNumber.Text.Substring(9, 5)
+            ElseIf My.Settings.chkUseColour And (chkBcode3 = "H_Col" Or chkBcode3 = "L_Col") Or My.Settings.chkUsePack And (chkBcode3 = "H_Col" Or chkBcode3 = "L_Col") Then
+                Select Case chkBcode3
 
                     Case "H_Col"
                         HLColChk = "H"
@@ -343,16 +350,16 @@ Public Class frmJobEntry
                         dbBarcode = txtLotNumber.Text
                 End Select
 
-            ElseIf my.Settings.chkUsePack And (chkBcode3 = "H_Col" Or chkBCode3 = "L_Col") Then
-                Select Case chkBcode3
+                'ElseIf my.Settings.chkUsePack And (chkBcode3 = "H_Col" Or chkBCode3 = "L_Col") Then
+                '    Select Case chkBcode3
 
-                    Case "H_Col"
-                        HLColSep = "H"
-                        dbBarcode = txtLotNumber.Text
-                    Case "L_Col"
-                        HLColSep = "L"
-                        dbBarcode = txtLotNumber.Text
-                End Select
+                '        Case "H_Col"
+                '            HLColSep = "H"
+                '            dbBarcode = txtLotNumber.Text
+                '        Case "L_Col"
+                '            HLColSep = "L"
+                '            dbBarcode = txtLotNumber.Text
+                '    End Select
 
 
             ElseIf txtLotNumber.Text.Substring(12, 1) = "B" Then
@@ -378,7 +385,7 @@ Public Class frmJobEntry
                     Case 15
                         If txtLotNumber.Text.Substring(13, 2) = "10" Or txtLotNumber.Text.Substring(13, 2) = "11" Or txtLotNumber.Text.Substring(13, 2) = "12" Then
                             If machineCode >= 30 Then  'check that carts B10, B11 and B12 are not used on machines 30,31,32,33
-                                MsgBox("This CART No. " + txtLotNumber.Text.Substring(13, 2) + " Is Not valid for this machine Please check Barcode" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
+                                MsgBox("This CART No. " + txtLotNumber.Text.Substring(13, 2) + " Is Not valid For this machine Please check Barcode" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
                                 Me.txtLotNumber.Clear()
                                 Me.txtLotNumber.Focus()
                                 Me.txtLotNumber.Refresh()
@@ -410,7 +417,7 @@ Public Class frmJobEntry
         Catch ex As Exception
             'Write error to Log File
             Dim tmpMessage As String
-            tmpMessage = "Faulty Barcode for this error is " & txtLotNumber.Text
+            tmpMessage = "Faulty Barcode For this Error Is " & txtLotNumber.Text
 
             writeerrorLog.writelog("Barcode Error", ex.Message, False, "User Fault")
             writeerrorLog.writelog("Barcode Error", ex.ToString, False, "User Fault")
@@ -425,7 +432,7 @@ Public Class frmJobEntry
 
         'section to check product type is HHLL
         'LAddParam("@prodnum", txtLotNumber.Text.Substring(2, 3))
-        'LExecQuery("select * from Product where prnum = @prodnum and PROD_HHLL is Not Null ")
+        'LExecQuery("Select * from Product where prnum = @prodnum And PROD_HHLL Is Not Null ")
 
         'If LRecordCount > 0 Then
 
@@ -724,7 +731,7 @@ Public Class frmJobEntry
                 Else
                     'Check Product Type HHLL or MDML
                     LAddParam("@prnum", productCode)
-                    LExecQuery("Select * From PRODUCT where prnum = @prnum and prod_HHLL is Not Null")
+                    LExecQuery("Select * From PRODUCT where prnum = @prnum And prod_HHLL Is Not Null")
 
                     If LRecordCount > 0 Then
                         HHLL = "YES"
@@ -732,22 +739,28 @@ Public Class frmJobEntry
 
                     If Not HHLL = "YES" Then
                         LAddParam("@prnum", productCode)
-                        LExecQuery("Select * From PRODUCT where prnum = @prnum and prod_MDML = 'YES'")
+                        LExecQuery("Select * From PRODUCT where prnum = @prnum And prod_MDML = 'YES'")
                         If LRecordCount > 0 Then
-                            MDML = "YES"
-                        End If
-                    End If
+                    MDML = "YES"
+                End If
+            End If
 
-                    CheckJob()
+            CheckJob()
 
                 End If
             End If
         End If
 
+        Dim tmpHHLLstate As String = Nothing
+        If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("HHLLstate").Value) Then
+            tmpHHLLstate = frmDGV.DGVdata.Rows(0).Cells("HHLLstate").Value
+        End If
+
+
         'THIS Selects "A" Packing Routine and if HL master cart show seperation
         If My.Settings.chkUsePack And HLColSep = Nothing Then
             APacking()
-        Else
+        ElseIf tmpHHLLstate = 3 Then
             HLColGradeSep()
         End If
 
@@ -824,15 +837,17 @@ Public Class frmJobEntry
             If result = DialogResult.Yes Then
 
                 'LOAD THE DATA FROM dB IN TO THE DATAGRID
+
                 frmDGV.DGVdata.DataSource = LDS.Tables(0)
                 frmDGV.DGVdata.Rows(0).Selected = True
-                Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
+                LCB = New SqlCommandBuilder(LDA)
                 LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
+
 
 
                 coneValUpdate = 1
 
-                lblL.Show()
+                frmCart1.Show()
 
 
                 Me.Hide()
@@ -873,7 +888,7 @@ Public Class frmJobEntry
             frmDGV.DGVdata.DataSource = LDS.Tables(0)
             frmDGV.DGVdata.Rows(0).Selected = True
 
-            lblL.Show()
+            frmCart1.Show()
 
 
             Me.Hide()
@@ -912,7 +927,7 @@ Public Class frmJobEntry
             End Select
         ElseIf My.Settings.chkUseSort And txtGrade.Text = "ReCheck" Then
             LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 10 ORDER BY RECHKIDX")
-        Else
+        Else 'Checking of HL colour 
             LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' ORDER BY RECHKIDX ")
         End If
 
@@ -1262,7 +1277,7 @@ Public Class frmJobEntry
                 frmDGV.DGVdata.DataSource = LDS.Tables(0)
                 frmDGV.DGVdata.Rows(0).Selected = True
                 ' frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns(6), ListSortDirection.Ascending)  ' sorts On cone number
-                lblL.Show()
+                frmCart1.Show()
 
                 If My.Settings.debugSet Then frmDGV.Show()
                 Me.Hide()
