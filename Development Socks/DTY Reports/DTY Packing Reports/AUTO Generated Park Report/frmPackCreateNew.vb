@@ -187,17 +187,21 @@ Public Class frmPackCreateNew
 
                 Dim prodTf As String
 
+                'Update the grade header
+                MyPakExcel.Cells(3, 2) = frmJobEntry.txtGrade.Text & " - Grade" & "   ( WEIGHT RANGE STD. ≥ 3,001  G. )"
+
+
                 prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
-                MyPakExcel.Cells(6, 8) = prodTf  'L6
+                MyPakExcel.Cells(6, 12) = prodTf  'L6
 
                 'Product Code
-                MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value       'O6
+                MyPakExcel.Cells(6, 13) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value       'O6
                 'DATE
-                MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D5
+                MyPakExcel.Cells(5, 5) = Date.Now.ToString("dd MM yyyy")              'D5
 
                 'PACKER NAME
-                MyPakExcel.Cells(43, 4) = frmJobEntry.PackOp 'frmDGV.DGVdata.Rows(0).Cells(55).Value      'E43
+                MyPakExcel.Cells(43, 5) = frmJobEntry.PackOp 'frmDGV.DGVdata.Rows(0).Cells(55).Value      'E43
 
                 'THIS IS USED TO WRITE DATE IN TO USED ROWS
                 Select Case frmPackPrvGet.ncfree
@@ -243,8 +247,8 @@ Public Class frmPackCreateNew
                 End Select
 
                 createBarcode()
-                MyPakExcel.Cells(1, 4) = SheetCodeString
-                MyPakExcel.Cells(1, 12) = modBarcode
+                MyPakExcel.Cells(1, 5) = SheetCodeString
+                MyPakExcel.Cells(1, 19) = modBarcode
 
             Case "P35 AS", "P35 BS"
                 nfree = 12

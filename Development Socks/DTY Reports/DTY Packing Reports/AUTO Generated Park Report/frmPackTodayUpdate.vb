@@ -1062,28 +1062,31 @@ Public Class frmPackTodayUpdate
 
             nfree = 12
 
+            'Update the grade header
+            MyTodyExcel.Cells(3, 2) = frmJobEntry.txtGrade.Text & " - Grade" & "   ( WEIGHT RANGE STD. ≥ 3,001  G. )"
+
             Dim prodTf As String
 
             prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
             'PRODUCT NAME
-            MyTodyExcel.Cells(6, 8) = prodTf
+            MyTodyExcel.Cells(6, 12) = prodTf
 
 
             'Product Name
             '  MyTodyExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
             'Product Code
-            MyTodyExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+            MyTodyExcel.Cells(6, 13) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
 
             'Packer Name
-            MyTodyExcel.Cells(43, 4) = frmJobEntry.PackOp
+            MyTodyExcel.Cells(43, 5) = frmJobEntry.PackOp
 
 
 
             'Add Barcode to Sheet
             boxCount = boxCount + 1
             createBarcode()
-            MyTodyExcel.Cells(1, 4) = SheetCodeString
-            MyTodyExcel.Cells(1, 12) = modBarcode
+            MyTodyExcel.Cells(1, 5) = SheetCodeString
+            MyTodyExcel.Cells(1, 19) = modBarcode
 
             colCount = 4
             For ccount = 1 To 3
@@ -1108,7 +1111,7 @@ Public Class frmPackTodayUpdate
             ' Label2.Text = nfree
             ' Label4.Text = ncfree
             'Packer Name
-            MyTodyExcel.Cells(43, 4) = frmJobEntry.PackOp
+            MyTodyExcel.Cells(43, 5) = frmJobEntry.PackOp
 
 
             For i = 1 To frmDGV.DGVdata.Rows.Count
@@ -1217,25 +1220,28 @@ Public Class frmPackTodayUpdate
 
                         Dim prodTf As String
 
+                        'Update the grade header
+                        MyTodyExcel.Cells(3, 2) = frmJobEntry.txtGrade.Text & " - Grade" & "   ( WEIGHT RANGE STD. ≥ 3,001  G. )"
+
                         prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                         'PRODUCT NAME
-                        MyTodyExcel.Cells(6, 8) = prodTf
+                        MyTodyExcel.Cells(6, 12) = prodTf
 
 
 
                         '  MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
                         'Product Code
-                        MyTodyExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+                        MyTodyExcel.Cells(6, 13) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
                         'Packer Name
-                        MyTodyExcel.Cells(43, 4) = frmJobEntry.PackOp
+                        MyTodyExcel.Cells(43, 5) = frmJobEntry.PackOp
 
 
 
                         'Add Barcode to Sheet
                         boxCount = boxCount + 1
                         createBarcode()
-                        MyTodyExcel.Cells(1, 4) = SheetCodeString
-                        MyTodyExcel.Cells(1, 12) = modBarcode
+                        MyTodyExcel.Cells(1, 5) = SheetCodeString
+                        MyTodyExcel.Cells(1, 19) = modBarcode
 
                         ncfree = 4
                         For nCol = 1 To 3

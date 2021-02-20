@@ -178,7 +178,7 @@ Public Class frmJobEntry
 
 
 
-        'If stdcheck Or txtGrade.Text = "ReCheck" Then lblScanType.Text = "Scan First Cheese on Cart"
+
         If My.Settings.chkUseColour Then txtGrade.Text = "Normal"  'Fix grade value for colour check
 
         'New section to display correct text for scan type
@@ -293,7 +293,8 @@ Public Class frmJobEntry
         Dim chkBCode As String = Nothing
         Dim chkBCode2 As String = Nothing
         Dim chkBcode3 As String = Nothing
-
+        Dim chkBcode4 As String = Nothing
+        Dim chkBcode5 As String = Nothing
 
         If txtLotNumber.Text = "" Then
             MsgBox("Please scan Barcode")
@@ -325,89 +326,95 @@ Public Class frmJobEntry
             chkBCode2 = txtLotNumber.Text.Substring(9, 2)
             chkBcode3 = txtLotNumber.Text.Substring(9, 3)
 
+            'Check to see if theis is Std HL form
             If My.Settings.chkUseColour And txtLotNumber.Text.Length = 14 Or My.Settings.chkUsePack And txtLotNumber.Text.Length = 14 Then
-                chkBcode3 = txtLotNumber.Text.Substring(9, 5)
+                If txtLotNumber.Text.Substring(13, 1) = "H" Then
+                    chkBcode4 = "H"
+                End If
+            End If
+
+
+            'check length of barcode and see it it is H or L color check form
+            If My.Settings.chkUseColour And txtLotNumber.Text.Length = 18 Or My.Settings.chkUsePack And txtLotNumber.Text.Length = 18 Then
+                chkBcode5 = txtLotNumber.Text.Substring(9, 5)
             End If
 
             'CHECK TO SEE IT STANDARD RECHECK OR RECHECK CART
             'If chkBCode2 = "R11" Or chkBCode2 = "R12" Or chkBCode2 = "R21" Or chkBCode2 = "R31" Or chkBCode2 = "STD" Then  ' we must check this way first otherwise we will always get R and use recheck
             If chkBCode2 = "R1" Or chkBCode2 = "R2" Or chkBCode2 = "R3" Or chkBcode3 = "STD" Then
-                reCheck = 0
-                stdcheck = 1
+                If chkBcode4 = "H" Then
+                    reCheck = 0
+                    stdcheck = 1
+                Else
+                    reCheck = 0
+                    stdcheck = 1
+                End If
+
                 dbBarcode = txtLotNumber.Text
-            ElseIf chkBCode = "R" Then
-                stdcheck = 0
-                reCheck = 1
-                dbBarcode = txtLotNumber.Text
-            ElseIf My.Settings.chkUseColour And (chkBcode3 = "H_Col" Or chkBcode3 = "L_Col") Or My.Settings.chkUsePack And (chkBcode3 = "H_Col" Or chkBcode3 = "L_Col") Then
-                Select Case chkBcode3
+                ElseIf chkBCode = "R" Then
+                    stdcheck = 0
+                    reCheck = 1
+                    dbBarcode = txtLotNumber.Text
 
-                    Case "H_Col"
-                        HLColChk = "H"
-                        dbBarcode = txtLotNumber.Text
-                    Case "L_Col"
-                        HLColChk = "L"
-                        dbBarcode = txtLotNumber.Text
-                End Select
+                ElseIf My.Settings.chkUseColour And (chkBcode5 = "H_Col" Or chkBcode5 = "L_Col") Or My.Settings.chkUsePack And (chkBcode5 = "H_Col" Or chkBcode5 = "L_Col") Then
+                    Select Case chkBcode5
 
-                'ElseIf my.Settings.chkUsePack And (chkBcode3 = "H_Col" Or chkBCode3 = "L_Col") Then
-                '    Select Case chkBcode3
-
-                '        Case "H_Col"
-                '            HLColSep = "H"
-                '            dbBarcode = txtLotNumber.Text
-                '        Case "L_Col"
-                '            HLColSep = "L"
-                '            dbBarcode = txtLotNumber.Text
-                '    End Select
+                        Case "H_Col"
+                            HLColChk = "H"
+                            dbBarcode = txtLotNumber.Text
+                        Case "L_Col"
+                            HLColChk = "L"
+                            dbBarcode = txtLotNumber.Text
+                    End Select
 
 
-            ElseIf txtLotNumber.Text.Substring(12, 1) = "B" Then
-                chkBCode = txtLotNumber.Text.Substring(12, 1)
+
+                ElseIf txtLotNumber.Text.Substring(12, 1) = "B" Then
+                    chkBCode = txtLotNumber.Text.Substring(12, 1)
 
 
-                stdcheck = 0
-                reCheck = 0
-                HLColChk = Nothing
-                machineCode = txtLotNumber.Text.Substring(0, 2)
+                    stdcheck = 0
+                    reCheck = 0
+                    HLColChk = Nothing
+                    machineCode = txtLotNumber.Text.Substring(0, 2)
 
-                Select Case txtLotNumber.TextLength
-                    Case 14
-                        If txtLotNumber.Text.Substring(13, 1) >= 1 And txtLotNumber.Text.Substring(13, 1) <= 9 Then
-                            cartNum = txtLotNumber.Text.Substring(12, 2)
-                        Else
-                            MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
-                            Me.txtLotNumber.Clear()
-                            Me.txtLotNumber.Focus()
-                            Me.txtLotNumber.Refresh()
-                            Exit Sub
-                        End If
-                    Case 15
-                        If txtLotNumber.Text.Substring(13, 2) = "10" Or txtLotNumber.Text.Substring(13, 2) = "11" Or txtLotNumber.Text.Substring(13, 2) = "12" Then
-                            If machineCode >= 30 Then  'check that carts B10, B11 and B12 are not used on machines 30,31,32,33
-                                MsgBox("This CART No. " + txtLotNumber.Text.Substring(13, 2) + " Is Not valid For this machine Please check Barcode" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
+                    Select Case txtLotNumber.TextLength
+                        Case 14
+                            If txtLotNumber.Text.Substring(13, 1) >= 1 And txtLotNumber.Text.Substring(13, 1) <= 9 Then
+                                cartNum = txtLotNumber.Text.Substring(12, 2)
+                            Else
+                                MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
                                 Me.txtLotNumber.Clear()
                                 Me.txtLotNumber.Focus()
                                 Me.txtLotNumber.Refresh()
                                 Exit Sub
                             End If
-                            cartNum = txtLotNumber.Text.Substring(12, 3)
-                        Else
+                        Case 15
+                            If txtLotNumber.Text.Substring(13, 2) = "10" Or txtLotNumber.Text.Substring(13, 2) = "11" Or txtLotNumber.Text.Substring(13, 2) = "12" Then
+                                If machineCode >= 30 Then  'check that carts B10, B11 and B12 are not used on machines 30,31,32,33
+                                    MsgBox("This CART No. " + txtLotNumber.Text.Substring(13, 2) + " Is Not valid For this machine Please check Barcode" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
+                                    Me.txtLotNumber.Clear()
+                                    Me.txtLotNumber.Focus()
+                                    Me.txtLotNumber.Refresh()
+                                    Exit Sub
+                                End If
+                                cartNum = txtLotNumber.Text.Substring(12, 3)
+                            Else
+                                MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
+                                Me.txtLotNumber.Clear()
+                                Me.txtLotNumber.Focus()
+                                Me.txtLotNumber.Refresh()
+                                Exit Sub
+                            End If
+                        Case > 15
                             MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
                             Me.txtLotNumber.Clear()
                             Me.txtLotNumber.Focus()
                             Me.txtLotNumber.Refresh()
                             Exit Sub
-                        End If
-                    Case > 15
-                        MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
-                        Me.txtLotNumber.Clear()
-                        Me.txtLotNumber.Focus()
-                        Me.txtLotNumber.Refresh()
-                        Exit Sub
-                End Select
-            Else
-                MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
+                    End Select
+                Else
+                    MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
                 Me.txtLotNumber.Clear()
                 Me.txtLotNumber.Focus()
                 Me.txtLotNumber.Refresh()
@@ -712,8 +719,8 @@ Public Class frmJobEntry
         End If
 
 
-        ' If reCheck Or stdcheck Then
-        If rechkA Or stdReChk Then
+        If reCheck Or stdcheck Then
+            'If rechkA Or stdReChk Then
             dbBarcode = txtLotNumber.Text
             productCode = txtLotNumber.Text.Substring(0, 3)
             year = txtLotNumber.Text.Substring(3, 2)
@@ -751,10 +758,22 @@ Public Class frmJobEntry
             End If
         End If
 
+
+
+
         Dim tmpHHLLstate As String = Nothing
-        If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("HHLLstate").Value) Then
-            tmpHHLLstate = frmDGV.DGVdata.Rows(0).Cells("HHLLstate").Value
+        If Not HLColChk = Nothing Then
+
+            CheckJob()
+            If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("HHLLState").Value) Then
+                If frmDGV.DGVdata.Rows(0).Cells("HHLLState").Value = 3 Then
+                    tmpHHLLstate = "3"
+                    HLColSep = txtLotNumber.Text.Substring(9, 1)
+                End If
+            End If
         End If
+
+
 
 
         'THIS Selects "A" Packing Routine and if HL master cart show seperation
@@ -804,7 +823,7 @@ Public Class frmJobEntry
             writeerrorLog.writelog("ExecQuery Error", ex.Message, False, "System Fault")
             writeerrorLog.writelog("ExecQuery Error", ex.ToString, False, "System Fault")
 
-            LException = "ExecQuery Error:  " & vbNewLine & ex.Message
+            LException = "ExecQuery Error  " & vbNewLine & ex.Message
             MsgBox(LException)
 
         End Try
@@ -820,79 +839,94 @@ Public Class frmJobEntry
     Public Sub CheckJob()
 
 
-
-        If Not HLColChk = Nothing Then
-            LExecQuery("SELECT * FROM jobs WHERE recheckbarcode = '" & dbBarcode & "' ORDER BY rechkidx")
-        Else
-            LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ORDER BY CONENUM")
-        End If
-
-
-        If LRecordCount > 0 Then
+        Try
+            If Not HLColChk = Nothing Then
+                LExecQuery("SELECT * FROM jobs WHERE recheckbarcode = '" & dbBarcode & "' ORDER BY rechkidx")
+            Else
+                    LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ORDER BY CONENUM")
+            End If
 
 
-
-            Dim result = MessageBox.Show("Edit Job Yes Or No", "JOB ALREADY EXISTS", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
-
-            If result = DialogResult.Yes Then
+            If LRecordCount > 0 Then
 
                 'LOAD THE DATA FROM dB IN TO THE DATAGRID
-
+                Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
                 frmDGV.DGVdata.DataSource = LDS.Tables(0)
-                frmDGV.DGVdata.Rows(0).Selected = True
+                'frmDGV.DGVdata.Rows(0).Selected = True
                 LCB = New SqlCommandBuilder(LDA)
                 LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
 
 
+                Dim result = MessageBox.Show("Edit Job Yes Or No", "JOB ALREADY EXISTS", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
 
-                coneValUpdate = 1
+                If result = DialogResult.Yes Then
+
+
+
+
+                    coneValUpdate = 1
+
+                    If Not HLColChk = Nothing Then
+                        Exit Sub
+                    Else
+                        frmCart1.Show()
+                        Me.Hide()
+                        Exit Sub
+                    End If
+                    'frmCart1.Show()
+
+
+                    'Me.Hide()
+                    ' Exit Sub
+                End If
+
+                If result = DialogResult.No Then
+                    Me.txtLotNumber.Clear()
+                    Me.txtLotNumber.Focus()
+
+                End If
+            Else
+
+                If My.Settings.chkUseSort And machineCode = 29 And Not My.Settings.chkDisableCreate Then
+                    PilCount()
+                    Exit Sub
+                End If
+
+                If My.Settings.chkDisableCreate Then
+                    MsgBox("Job does not Exist, It must be created on 2nd Floor " & vbCrLf & " ไม่พบงานที่ทำ งานต้องสร้างมาจากชั้นที่ 2 ")
+                    txtLotNumber.Clear()
+                    txtLotNumber.Focus()
+                    Exit Sub
+                Else
+                    CreatNewJob()
+                End If
+
+
+                If quit Then
+                    quit = 0
+                    txtLotNumber.Clear()
+                    txtLotNumber.Focus()
+                    Exit Sub
+                End If
+
+                Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
+                LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
+                frmDGV.DGVdata.DataSource = LDS.Tables(0)
+                frmDGV.DGVdata.Rows(0).Selected = True
 
                 frmCart1.Show()
 
 
                 Me.Hide()
-                Exit Sub
             End If
+        Catch ex As Exception
+            'Write error to Log File
+            writeerrorLog.writelog("ExecQuery Error", ex.Message, False, "System Fault")
 
-            If result = DialogResult.No Then
-                Me.txtLotNumber.Clear()
-                Me.txtLotNumber.Focus()
+            LException = "ExecQuery Error:  " & vbNewLine & ex.Message
+            MsgBox(LException)
 
-            End If
-        Else
-
-            If My.Settings.chkUseSort And machineCode = 29 And Not My.Settings.chkDisableCreate Then
-                PilCount()
-                Exit Sub
-            End If
-
-            If My.Settings.chkDisableCreate Then
-                MsgBox("Job does not Exist, It must be created on 2nd Floor " & vbCrLf & " ไม่พบงานที่ทำ งานต้องสร้างมาจากชั้นที่ 2 ")
-                txtLotNumber.Clear()
-                txtLotNumber.Focus()
-                Exit Sub
-            Else
-                CreatNewJob()
-            End If
-
-
-            If quit Then
-                quit = 0
-                txtLotNumber.Clear()
-                txtLotNumber.Focus()
-                Exit Sub
-            End If
-
-            Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(LDA)
-            LDA.UpdateCommand = New SqlCommandBuilder(LDA).GetUpdateCommand
-            frmDGV.DGVdata.DataSource = LDS.Tables(0)
-            frmDGV.DGVdata.Rows(0).Selected = True
-
-            frmCart1.Show()
-
-
-            Me.Hide()
-        End If
+        End Try
 
     End Sub
 
@@ -975,9 +1009,6 @@ Public Class frmJobEntry
                     If stdcheck Then frmSTDColChk.Show() Else frmColReCheck.Show()
 
                 End If
-
-
-
 
                 Me.Hide()
                 Exit Sub
@@ -2318,7 +2349,7 @@ Public Class frmJobEntry
                     LAddParam("@hlgrade", HLPackGrade)
                     LAddParam("@conebcd", txtLotNumber.Text)
                     LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
                 Case "H D"
                     HLPackGrade = txtGrade.Text.Replace(" ", "_")
                     packGrade = txtGrade.Text
@@ -2326,7 +2357,7 @@ Public Class frmJobEntry
                     LAddParam("@hlgrade", HLPackGrade)
                     LAddParam("@conebcd", txtLotNumber.Text)
                     LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
                 Case "H MM"
                     HLPackGrade = txtGrade.Text.Replace(" ", "_")
                     packGrade = txtGrade.Text
@@ -2334,7 +2365,7 @@ Public Class frmJobEntry
                     LAddParam("@hlgrade", HLPackGrade)
                     LAddParam("@conebcd", txtLotNumber.Text)
                     LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                           & "  PACKENDTM is Null and HHLLState = '3'and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
                 Case "H L"
                     HLPackGrade = txtGrade.Text.Replace(" ", "_")
                     packGrade = txtGrade.Text
@@ -2342,7 +2373,7 @@ Public Class frmJobEntry
                     LAddParam("@hlgrade", HLPackGrade)
                     LAddParam("@conebcd", txtLotNumber.Text)
                     LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
                 Case "H LL"
                     HLPackGrade = txtGrade.Text.Replace(" ", "_")
                     packGrade = txtGrade.Text
@@ -2350,7 +2381,7 @@ Public Class frmJobEntry
                     LAddParam("@hlgrade", HLPackGrade)
                     LAddParam("@conebcd", txtLotNumber.Text)
                     LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                           & "  PACKENDTM is Null and HHLLState = '3'and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
                 Case "H B"
                     HLPackGrade = txtGrade.Text.Replace(" ", "_")
                     packGrade = txtGrade.Text
@@ -2358,7 +2389,7 @@ Public Class frmJobEntry
                     LAddParam("@hlgrade", HLPackGrade)
                     LAddParam("@conebcd", txtLotNumber.Text)
                     LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
                 Case "H W"
 
                 Case "L DD"
@@ -2368,7 +2399,7 @@ Public Class frmJobEntry
                     LAddParam("@hlgrade", HLPackGrade)
                     LAddParam("@conebcd", txtLotNumber.Text)
                     LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
                 Case "L D"
                     HLPackGrade = txtGrade.Text.Replace(" ", "_")
                     packGrade = txtGrade.Text
@@ -2376,15 +2407,15 @@ Public Class frmJobEntry
                     LAddParam("@hlgrade", HLPackGrade)
                     LAddParam("@conebcd", txtLotNumber.Text)
                     LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
-                Case "H MM"
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                Case "L MM"
                     HLPackGrade = txtGrade.Text.Replace(" ", "_")
                     packGrade = txtGrade.Text
 
                     LAddParam("@hlgrade", HLPackGrade)
                     LAddParam("@conebcd", txtLotNumber.Text)
                     LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
                 Case "L L"
                     HLPackGrade = txtGrade.Text.Replace(" ", "_")
                     packGrade = txtGrade.Text
@@ -2392,7 +2423,7 @@ Public Class frmJobEntry
                     LAddParam("@hlgrade", HLPackGrade)
                     LAddParam("@conebcd", txtLotNumber.Text)
                     LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
                 Case "L LL"
                     HLPackGrade = txtGrade.Text.Replace(" ", "_")
                     packGrade = txtGrade.Text
@@ -2400,7 +2431,7 @@ Public Class frmJobEntry
                     LAddParam("@hlgrade", HLPackGrade)
                     LAddParam("@conebcd", txtLotNumber.Text)
                     LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
                 Case "L B"
                     HLPackGrade = txtGrade.Text.Replace(" ", "_")
                     packGrade = txtGrade.Text
@@ -2408,20 +2439,80 @@ Public Class frmJobEntry
                     LAddParam("@hlgrade", HLPackGrade)
                     LAddParam("@conebcd", txtLotNumber.Text)
                     LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
                 Case "L W"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
 
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
 
                 Case "HS D"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
                 Case "HS M"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
                 Case "HS L"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
                 Case "HS B"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
 
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
                 Case "LS D"
-                Case "LS M"
-                Case "LS L"
-                Case "LS B"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
 
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                Case "LS M"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                Case "LS L"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                Case "LS B"
+                    HLPackGrade = txtGrade.Text.Replace(" ", "_")
+                    packGrade = txtGrade.Text
+
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@conebcd", txtLotNumber.Text)
+                    LExecQuery("Select * FROM Jobs Where BCODECONE = @conebcd and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
 
 
 
@@ -2449,20 +2540,21 @@ Public Class frmJobEntry
 
         End If
 
+        Select Case txtGrade.Text
+            Case "A"
+                'Extract requierd Informatiom from 'Recheck sheet
+                varProductCode = txtLotNumber.Text.Substring(0, 3)
+                year = txtLotNumber.Text.Substring(3, 2)
+                month = txtLotNumber.Text.Substring(5, 2)
 
-        If txtGrade.Text = "A" Then  'txtGrade.Text = "ReCheckA" Then
-            'Extract requierd Informatiom
-            varProductCode = txtLotNumber.Text.Substring(0, 3)
-            year = txtLotNumber.Text.Substring(3, 2)
-            month = txtLotNumber.Text.Substring(5, 2)
-        Else
-            'Extract requierd Informatiom
-            varProductCode = txtLotNumber.Text.Substring(2, 3)
-            year = txtLotNumber.Text.Substring(5, 2)
-            month = txtLotNumber.Text.Substring(7, 2)
 
-        End If
 
+            Case Else 'Recheck sheet
+                'Extract requierd Informatiom from cone barcode
+                varProductCode = txtLotNumber.Text.Substring(2, 3)
+                year = txtLotNumber.Text.Substring(5, 2)
+                month = txtLotNumber.Text.Substring(7, 2)
+        End Select
 
 
 
@@ -2547,85 +2639,102 @@ Public Class frmJobEntry
                                    & " HHLL = 'L' And PACKENDTM Is Null And STDSTATE = 10 And RECHK Is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE() ")
 
                     'H and L Packing Full and Short
-                Case "H DD"
-                    LAddParam("@hlgrade", HLPackGrade)
-                    LAddParam("@prodnum", varProductCode)
-                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                Case "H D"
-                    LAddParam("@hlgrade", HLPackGrade)
-                    LAddParam("@prodnum", varProductCode)
-                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                Case "H MM"
-                    LAddParam("@hlgrade", HLPackGrade)
-                    LAddParam("@prodnum", varProductCode)
-                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                Case "H L"
-                    LAddParam("@hlgrade", HLPackGrade)
-                    LAddParam("@prodnum", varProductCode)
-                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                Case "H LL"
-                    LAddParam("@hlgrade", HLPackGrade)
-                    LAddParam("@prodnum", varProductCode)
-                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                Case "H B"
-                    LAddParam("@hlgrade", HLPackGrade)
-                    LAddParam("@prodnum", varProductCode)
-                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                Case "H W"
-                    LAddParam("@hlgrade", HLPackGrade)
-                    LAddParam("@prodnum", varProductCode)
-                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                Case "L DD"
-                    LAddParam("@hlgrade", HLPackGrade)
-                    LAddParam("@prodnum", varProductCode)
-                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                Case "L D"
-                    LAddParam("@hlgrade", HLPackGrade)
-                    LAddParam("@prodnum", varProductCode)
-                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                Case "H MM"
-                    LAddParam("@hlgrade", HLPackGrade)
-                    LAddParam("@prodnum", varProductCode)
-                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                Case "L L"
-                    LAddParam("@hlgrade", HLPackGrade)
-                    LAddParam("@prodnum", varProductCode)
-                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                Case "L LL"
-                    LAddParam("@hlgrade", HLPackGrade)
-                    LAddParam("@prodnum", varProductCode)
-                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                Case "L B"
-                    LAddParam("@hlgrade", HLPackGrade)
-                    LAddParam("@prodnum", varProductCode)
-                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                Case "L W"
-                    LAddParam("@hlgrade", HLPackGrade)
-                    LAddParam("@prodnum", varProductCode)
-                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                           & "  PACKENDTM is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                Case "HS D"
-                Case "HS M"
-                Case "HS L"
-                Case "HS B"
+                Case "H DD", "H D", "H MM", "H L", "H LL", "H B", "H W", "L DD", "L D", "L MM", "L L", "L LL", "L B", "L W",
+                 "HS D", "HS M", "HS L", "HS B", "LS D", "LS M", "LS L", "LS B"
 
-                Case "LS D"
-                Case "LS M"
-                Case "LS L"
-                Case "LS B"
+                    '    'Case "H DD"
+                    LAddParam("@hlgrade", HLPackGrade)
+                    LAddParam("@prodnum", varProductCode)
+                    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                'Case "H D"
+                '    LAddParam("@hlgrade", HLPackGrade)
+                '    LAddParam("@prodnum", varProductCode)
+                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                'Case "H MM"
+                '    LAddParam("@hlgrade", HLPackGrade)
+                '    LAddParam("@prodnum", varProductCode)
+                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                'Case "H L"
+                '    LAddParam("@hlgrade", HLPackGrade)
+                '    LAddParam("@prodnum", varProductCode)
+                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                'Case "H LL"
+                '    LAddParam("@hlgrade", HLPackGrade)
+                '    LAddParam("@prodnum", varProductCode)
+                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                'Case "H B"
+                '    LAddParam("@hlgrade", HLPackGrade)
+                '    LAddParam("@prodnum", varProductCode)
+                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                'Case "H W"
+                '    LAddParam("@hlgrade", HLPackGrade)
+                '    LAddParam("@prodnum", varProductCode)
+                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                'Case "L DD"
+                '    LAddParam("@hlgrade", HLPackGrade)
+                '    LAddParam("@prodnum", varProductCode)
+                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                'Case "L D"
+                '    LAddParam("@hlgrade", HLPackGrade)
+                '    LAddParam("@prodnum", varProductCode)
+                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                'Case "H MM"
+                '    LAddParam("@hlgrade", HLPackGrade)
+                '    LAddParam("@prodnum", varProductCode)
+                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                'Case "L L"
+                '    LAddParam("@hlgrade", HLPackGrade)
+                '    LAddParam("@prodnum", varProductCode)
+                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                'Case "L LL"
+                '    LAddParam("@hlgrade", HLPackGrade)
+                '    LAddParam("@prodnum", varProductCode)
+                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                'Case "L B"
+                '    LAddParam("@hlgrade", HLPackGrade)
+                '    LAddParam("@prodnum", varProductCode)
+                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                'Case "L W"
+                '    LAddParam("@hlgrade", HLPackGrade)
+                '    LAddParam("@prodnum", varProductCode)
+                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+
+                ''HL SHORTS
+                'Case "HS D"
+                '    LAddParam("@hlgrade", HLPackGrade)
+                '    LAddParam("@prodnum", varProductCode)
+                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                'Case "HS M"
+                '    LAddParam("@hlgrade", HLPackGrade)
+                '    LAddParam("@prodnum", varProductCode)
+                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
+                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
+                'Case "HS L"
+
+                'Case "HS B"
+
+                'Case "LS D"
+
+                'Case "LS M"
+
+                'Case "LS L"
+
+                'Case "LS B"
 
                 Case "Waste"
                     packGrade = txtGrade.Text
@@ -2677,7 +2786,7 @@ Public Class frmJobEntry
             DelayTM()
             Label3.Visible = False
             Me.txtLotNumber.Clear()
-            Me.txtLotNumber.Visible = False
+            Me.txtLotNumber.Visible = True
             quit = 1
             Exit Sub
 
@@ -3384,6 +3493,8 @@ Public Class frmJobEntry
         txtOperator.Focus()
         lblScanType.Text = "Scan Job Sheet"
     End Sub
+
+
 
     Private Sub PrintToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintToolStripMenuItem.Click
         Me.Hide()
