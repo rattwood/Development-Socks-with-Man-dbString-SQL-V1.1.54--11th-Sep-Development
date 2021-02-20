@@ -145,14 +145,14 @@ Public Class frmPackCreateNew
 
                 prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
-                MyPakExcel.Cells(7, 4) = prodTf    'D7
+                MyPakExcel.Cells(7, 5) = prodTf    'D7
 
                 'Product Code
                 MyPakExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value        'F7
                 'DATE
                 MyPakExcel.Cells(5, 3) = Date.Now.ToString("dd MM yyyy")              'C5
                 'CHEESE WEIGHT
-                MyPakExcel.Cells(13, 5) = frmJobEntry.varProdWeight                   'E13
+                MyPakExcel.Cells(13, 7) = frmJobEntry.varProdWeight                   'E13
 
                 'Update the packing Grade
                 ' MyPakExcel.Cells(30, 10) = frmJobEntry.txtGrade.Text
@@ -161,9 +161,9 @@ Public Class frmPackCreateNew
                 MyPakExcel.Cells(3, 2) = frmJobEntry.txtGrade.Text & " - Grade"
 
                 'PACKER NAME
-                MyPakExcel.Cells(13, 8) = frmJobEntry.PackOp     'H8
+                'MyPakExcel.Cells(13, 8) = frmJobEntry.PackOp     'H8
 
-                MyPakExcel.Cells(64, 14) = frmJobEntry.PackOp    'M64
+                MyPakExcel.Cells(64, 15) = frmJobEntry.PackOp    'M64
 
                 createBarcode()
                 MyPakExcel.Cells(5, 7) = SheetCodeString  'H5
@@ -189,15 +189,15 @@ Public Class frmPackCreateNew
 
                 prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                 'PRODUCT NAME
-                MyPakExcel.Cells(6, 12) = prodTf  'L6
+                MyPakExcel.Cells(6, 8) = prodTf  'L6
 
                 'Product Code
-                MyPakExcel.Cells(6, 15) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value       'O6
+                MyPakExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value       'O6
                 'DATE
                 MyPakExcel.Cells(5, 4) = Date.Now.ToString("dd MM yyyy")              'D5
 
                 'PACKER NAME
-                MyPakExcel.Cells(43, 5) = frmJobEntry.PackOp 'frmDGV.DGVdata.Rows(0).Cells(55).Value      'E43
+                MyPakExcel.Cells(43, 4) = frmJobEntry.PackOp 'frmDGV.DGVdata.Rows(0).Cells(55).Value      'E43
 
                 'THIS IS USED TO WRITE DATE IN TO USED ROWS
                 Select Case frmPackPrvGet.ncfree
@@ -243,8 +243,8 @@ Public Class frmPackCreateNew
                 End Select
 
                 createBarcode()
-                MyPakExcel.Cells(1, 5) = SheetCodeString
-                MyPakExcel.Cells(1, 16) = modBarcode
+                MyPakExcel.Cells(1, 4) = SheetCodeString
+                MyPakExcel.Cells(1, 12) = modBarcode
 
             Case "P35 AS", "P35 BS"
                 nfree = 12

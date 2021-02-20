@@ -50,7 +50,9 @@ Public Class frmB_AL_AD_W
         If screenHeight <= 770 Then Me.WindowState = FormWindowState.Maximized Else Me.WindowState = FormWindowState.Normal
 
         Select Case frmJobEntry.txtGrade.Text
-            Case "B", "AL", "AD", "P35 AS", "P35 BS", "H DD", "H D", "H MM", "H L", "H LL", "H B", "L DD", "L D", "L MM", "L L", "L LL", "L B"
+            Case "B", "AL", "AD", "P35 AS", "P35 BS", "H DD", "H D", "H MM", "H L", "H LL", "H B", "H W", "L DD", "L D", "L MM", "L L", "L LL", "L B", "L W",
+                 "HS D", "HS M", "HS L", "HS B", "LS D", "LS M", "LS L", "LS B"
+
 
                 SetupDGV()
 
@@ -194,7 +196,8 @@ Public Class frmB_AL_AD_W
 
         Select Case frmJobEntry.txtGrade.Text
 
-            Case "B", "AL", "AD", "P35 AS", "P35 BS", "H DD", "H D", "H MM", "H L", "H LL", "H B", "L DD", "L D", "L MM", "L L", "L LL", "L B"
+            Case "B", "AL", "AD", "P35 AS", "P35 BS", "H DD", "H D", "H MM", "H L", "H LL", "H B", "H W", "L DD", "L D", "L MM", "L L", "L LL", "L B", "L W",
+                 "HS D", "HS M", "HS L", "HS B", "LS D", "LS M", "LS L", "LS B"
 
                 With DataGridView1.ColumnHeadersDefaultCellStyle
                     .BackColor = Color.Navy
@@ -729,7 +732,8 @@ Public Class frmB_AL_AD_W
 
 
 
-            Case "B", "AL", "AD", "P35 AS", "P35 BS", "H DD", "H D", "H MM", "H L", "H LL", "H B", "L DD", "L D", "L MM", "L L", "L LL", "L B"
+            Case "B", "AL", "AD", "P35 AS", "P35 BS", "H DD", "H D", "H MM", "H L", "H LL", "H B", "H W", "L DD", "L D", "L MM", "L L", "L LL", "L B", "H W",
+                  "HS D", "HS M", "HS L", "HS B", "LS D", "LS M", "LS L", "LS B"
 
                 If gridRow < 29 Then DataGridView1.CurrentCell = DataGridView1(gridCol, gridRow + 1)
 

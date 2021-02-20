@@ -116,9 +116,9 @@ Partial Class frmHLCreate
         Me.lbltotScan.ForeColor = System.Drawing.Color.Red
         Me.lbltotScan.Location = New System.Drawing.Point(592, 203)
         Me.lbltotScan.Name = "lbltotScan"
-        Me.lbltotScan.Size = New System.Drawing.Size(80, 33)
+        Me.lbltotScan.Size = New System.Drawing.Size(2, 33)
         Me.lbltotScan.TabIndex = 228
-        Me.lbltotScan.Text = "5554"
+        Me.lbltotScan.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbltotCount
         '
@@ -128,9 +128,9 @@ Partial Class frmHLCreate
         Me.lbltotCount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.lbltotCount.Location = New System.Drawing.Point(592, 58)
         Me.lbltotCount.Name = "lbltotCount"
-        Me.lbltotCount.Size = New System.Drawing.Size(80, 33)
+        Me.lbltotCount.Size = New System.Drawing.Size(2, 33)
         Me.lbltotCount.TabIndex = 227
-        Me.lbltotCount.Text = "4444"
+        Me.lbltotCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label16
         '
@@ -250,9 +250,9 @@ Partial Class frmHLCreate
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(824, 25)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(168, 24)
+        Me.Label1.Size = New System.Drawing.Size(180, 24)
         Me.Label1.TabIndex = 213
-        Me.Label1.Text = "Creat Cart Type -"
+        Me.Label1.Text = "Create Cart Type -"
         '
         'Label3
         '

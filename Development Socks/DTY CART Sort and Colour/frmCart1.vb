@@ -4437,23 +4437,23 @@ Public Class frmCart1
                         'H Grades
 
                         Case "H_DD"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.DarkBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "+30"
                         Case "H_D"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.DarkBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "+10"
                         Case "H_MM"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Blue
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "0"
                         Case "H_L"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.LightBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "-10"
                         Case "H_LL"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.LightBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "-30"
                         Case "H_B"
@@ -4461,28 +4461,28 @@ Public Class frmCart1
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "B"
                         Case "H_W"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Purple
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "Waste"
                         'L grades
                         Case "L_DD"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.DarkBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "+30"
                         Case "L_D"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.DarkBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "+10"
                         Case "L_MM"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Blue
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "0"
                         Case "L_L"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.LightBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "-10"
                         Case "L_LL"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.LightBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "-30"
                         Case "L_B"
@@ -4490,20 +4490,20 @@ Public Class frmCart1
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "B"
                         Case "L_W"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Purple
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "Waste"
                             'Short Grades H
                         Case "HS_D"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.DarkBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "+10 Short"
                         Case "HS_M"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Blue
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "0 Short"
                         Case "HS_L"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.LightBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "-10 Short"
                         Case "HS_B"
@@ -4512,15 +4512,15 @@ Public Class frmCart1
                             MyHLGradeUpdate.Cells(8 + i, 6) = "B Short"
                                'Short Grades H
                         Case "LS_D"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.DarkBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "+10 Short"
                         Case "LS_M"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Blue
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "0 Short"
                         Case "LS_L"
-                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.LightBlue
+                            MyHLGradeUpdate.Cells(8 + i, 4).Font.Color = Color.Black
                             MyHLGradeUpdate.Cells(8 + i, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("HHLL_Res").Value
                             MyHLGradeUpdate.Cells(8 + i, 6) = "-10 Short"
                         Case "LS_B"

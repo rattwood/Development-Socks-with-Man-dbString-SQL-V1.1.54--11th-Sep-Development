@@ -806,15 +806,15 @@ Public Class frmPackTodayUpdate
 
             prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
             'PRODUCT NAME
-            MyTodyExcel.Cells(7, 4) = prodTf
+            MyTodyExcel.Cells(7, 5) = prodTf
 
 
             'Product Code
             MyTodyExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
             'Packer Name
-            MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
+            ' MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
             'Packer Name
-            MyTodyExcel.Cells(64, 13) = frmJobEntry.PackOp
+            MyTodyExcel.Cells(64, 15) = frmJobEntry.PackOp
 
             'Update the packing Grade
             ' MyTodyExcel.Cells(30, 10) = frmJobEntry.txtGrade.Text
@@ -840,9 +840,9 @@ Public Class frmPackTodayUpdate
 
         Try
             'Packer Name
-            MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
+            '  MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
             'Packer Name
-            MyTodyExcel.Cells(64, 14) = frmJobEntry.PackOp
+            MyTodyExcel.Cells(64, 15) = frmJobEntry.PackOp
             For i = 1 To frmDGV.DGVdata.Rows.Count
 
                 Select Case frmDGV.DGVdata.Rows(i - 1).Cells("CONESTATE").Value
@@ -911,7 +911,7 @@ Public Class frmPackTodayUpdate
 
                             'WRITE CONE NUMBER TO SHEET
                             ' MsgBox("I value = " & i & " Cone Number = " & frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value & " nfree Value = " & nfree)
-                            MyTodyExcel.Cells(nfree, 4) = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
+                            MyTodyExcel.Cells(nfree, 5) = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
 
 
 
@@ -939,7 +939,7 @@ Public Class frmPackTodayUpdate
 
                                 prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                                 'PRODUCT NAME
-                                MyTodyExcel.Cells(7, 4) = prodTf
+                                MyTodyExcel.Cells(7, 5) = prodTf
 
                                 'Update the packing Grade
                                 'MyTodyExcel.Cells(30, 10) = frmJobEntry.txtGrade.Text
@@ -950,9 +950,9 @@ Public Class frmPackTodayUpdate
 
                                 MyTodyExcel.Cells(7, 6) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
                                 'Packer Name
-                                MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
+                                'MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
                                 'Packer Name
-                                MyTodyExcel.Cells(64, 13) = frmJobEntry.PackOp
+                                MyTodyExcel.Cells(64, 15) = frmJobEntry.PackOp
 
                                 boxCount = boxCount + 1
                                 createBarcode()
@@ -1066,16 +1066,16 @@ Public Class frmPackTodayUpdate
 
             prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
             'PRODUCT NAME
-            MyTodyExcel.Cells(6, 12) = prodTf
+            MyTodyExcel.Cells(6, 8) = prodTf
 
 
             'Product Name
             '  MyTodyExcel.Cells(6, 8) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
             'Product Code
-            MyTodyExcel.Cells(6, 15) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+            MyTodyExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
 
             'Packer Name
-            MyTodyExcel.Cells(43, 5) = frmJobEntry.PackOp
+            MyTodyExcel.Cells(43, 4) = frmJobEntry.PackOp
 
 
 
@@ -1083,7 +1083,7 @@ Public Class frmPackTodayUpdate
             boxCount = boxCount + 1
             createBarcode()
             MyTodyExcel.Cells(1, 4) = SheetCodeString
-            MyTodyExcel.Cells(1, 16) = modBarcode
+            MyTodyExcel.Cells(1, 12) = modBarcode
 
             colCount = 4
             For ccount = 1 To 3
@@ -1219,23 +1219,23 @@ Public Class frmPackTodayUpdate
 
                         prodTf = (frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value & "  " & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value)
                         'PRODUCT NAME
-                        MyTodyExcel.Cells(6, 12) = prodTf
+                        MyTodyExcel.Cells(6, 8) = prodTf
 
 
 
                         '  MyTodyExcel.Cells(7, 4) = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value
                         'Product Code
-                        MyTodyExcel.Cells(6, 15) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
+                        MyTodyExcel.Cells(6, 12) = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value
                         'Packer Name
-                        MyTodyExcel.Cells(43, 5) = frmJobEntry.PackOp
+                        MyTodyExcel.Cells(43, 4) = frmJobEntry.PackOp
 
 
 
                         'Add Barcode to Sheet
                         boxCount = boxCount + 1
                         createBarcode()
-                        MyTodyExcel.Cells(1, 5) = SheetCodeString
-                        MyTodyExcel.Cells(1, 15) = modBarcode
+                        MyTodyExcel.Cells(1, 4) = SheetCodeString
+                        MyTodyExcel.Cells(1, 12) = modBarcode
 
                         ncfree = 4
                         For nCol = 1 To 3

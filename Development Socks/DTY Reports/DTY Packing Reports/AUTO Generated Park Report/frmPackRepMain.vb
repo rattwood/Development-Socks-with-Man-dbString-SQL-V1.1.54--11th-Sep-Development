@@ -345,6 +345,8 @@ Public Class frmPackRepMain
                     frmPackTodayUpdate.TodayUpdateB_AL_AD()
                 Case "H DD", "H D", "H MM", "H L", "H LL", "H B", "L DD", "L D", "L MM", "L L", "L LL", "L B"
                     frmPackTodayUpdate.TodayUpdateHL()
+                Case "HS D", "HS M", "HS L", "HS B", "LS D", "LS M", "LS L", "LS B"
+                    frmPackTodayUpdate.TodatUpdateHS_LS35()
                 Case "P35 AS", "P35 BS"
                     frmPackTodayUpdate.TodatUpdateBS_AS_35()
                 Case "P25 AS", "P30 BS"

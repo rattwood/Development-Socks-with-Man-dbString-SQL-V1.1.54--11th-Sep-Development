@@ -116,9 +116,9 @@ Partial Class frmB_AL_AD_W
         Me.lbltotCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbltotCount.Location = New System.Drawing.Point(149, 16)
         Me.lbltotCount.Name = "lbltotCount"
-        Me.lbltotCount.Size = New System.Drawing.Size(110, 31)
+        Me.lbltotCount.Size = New System.Drawing.Size(30, 31)
         Me.lbltotCount.TabIndex = 189
-        Me.lbltotCount.Text = "123456"
+        Me.lbltotCount.Text = "1"
         '
         'Label15
         '
@@ -428,9 +428,9 @@ Partial Class frmB_AL_AD_W
         Me.lbltotScan.ForeColor = System.Drawing.Color.Red
         Me.lbltotScan.Location = New System.Drawing.Point(189, 9)
         Me.lbltotScan.Name = "lbltotScan"
-        Me.lbltotScan.Size = New System.Drawing.Size(62, 31)
+        Me.lbltotScan.Size = New System.Drawing.Size(30, 31)
         Me.lbltotScan.TabIndex = 190
-        Me.lbltotScan.Text = "456"
+        Me.lbltotScan.Text = "0"
         '
         'Label16
         '
