@@ -392,17 +392,33 @@ Public Class frmSTDColChk
         sheetName = prodNameMod.Substring(prodNameMod.Length - 4) & "_" & frmJobEntry.txtGrade.Text
 
         Dim endsheetname As String
+        If frmJobEntry.txtLotNumber.Text.Length = 12 Then
+            Select Case frmJobEntry.txtLotNumber.Text.Substring(9, 2)
+                Case "R1", "R1"
+                    endsheetname = "Round1"
+                Case "R2"
+                    endsheetname = "Round2"
+                Case "R3"
+                    endsheetname = "Round3"
+                Case "STD"
+                    endsheetname = "STD"
 
-        Select Case frmJobEntry.txtLotNumber.Text.Substring(9, 3)
-            Case "R11", "R12"
-                endsheetname = "Round1"
-            Case "R21"
-                endsheetname = "Round2"
-            Case "R31"
-                endsheetname = "Round3"
-            Case "STD"
-                endsheetname = "STD"
-        End Select
+            End Select
+        ElseIf frmJobEntry.txtLotNumber.Text.Length = 13 Then
+            Dim HtestString1 As String = frmJobEntry.txtLotNumber.Text.Substring(12, 1)
+            Dim roundTestString As String = frmJobEntry.txtLotNumber.Text.Substring(9, 2)
+            Select Case roundTestString
+                Case "R1"
+                    endsheetname = "HLRound1"
+                Case "R2"
+                    endsheetname = "HLRound2"
+                Case "R3"
+                    endsheetname = "HLRound3"
+                Case "STDH"
+                    endsheetname = "HLSTD"
+            End Select
+        End If
+
 
 
         'CREATE THE FULL NAME FOR SAVING THE FILE
