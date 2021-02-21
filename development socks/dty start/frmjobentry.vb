@@ -951,12 +951,12 @@ Public Class frmJobEntry
     Public Sub reCheckJob()  'This is to find existing ReCheck job using sheet number
 
         If stdcheck Then
-            Select Case txtLotNumber.Text.Substring(9, 3)
-                Case "R11", "R12"
+            Select Case txtLotNumber.Text.Substring(9, 2)
+                Case "R1"
                     LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 2  ORDER BY RECHKIDX   ")
-                Case "R21"
+                Case "R2"
                     LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 4  ORDER BY RECHKIDX")
-                Case "R31"
+                Case "R3"
                     LExecQuery("SELECT * FROM jobs WHERE RECHECKBARCODE = '" & dbBarcode & "' And STDSTATE = 6  ORDER BY RECHKIDX")
             End Select
         ElseIf My.Settings.chkUseSort And txtGrade.Text = "ReCheck" Then
@@ -2647,94 +2647,7 @@ Public Class frmJobEntry
                     LAddParam("@prodnum", varProductCode)
                     LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
                            & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                'Case "H D"
-                '    LAddParam("@hlgrade", HLPackGrade)
-                '    LAddParam("@prodnum", varProductCode)
-                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                'Case "H MM"
-                '    LAddParam("@hlgrade", HLPackGrade)
-                '    LAddParam("@prodnum", varProductCode)
-                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                'Case "H L"
-                '    LAddParam("@hlgrade", HLPackGrade)
-                '    LAddParam("@prodnum", varProductCode)
-                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                'Case "H LL"
-                '    LAddParam("@hlgrade", HLPackGrade)
-                '    LAddParam("@prodnum", varProductCode)
-                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                'Case "H B"
-                '    LAddParam("@hlgrade", HLPackGrade)
-                '    LAddParam("@prodnum", varProductCode)
-                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                'Case "H W"
-                '    LAddParam("@hlgrade", HLPackGrade)
-                '    LAddParam("@prodnum", varProductCode)
-                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                'Case "L DD"
-                '    LAddParam("@hlgrade", HLPackGrade)
-                '    LAddParam("@prodnum", varProductCode)
-                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                'Case "L D"
-                '    LAddParam("@hlgrade", HLPackGrade)
-                '    LAddParam("@prodnum", varProductCode)
-                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                'Case "H MM"
-                '    LAddParam("@hlgrade", HLPackGrade)
-                '    LAddParam("@prodnum", varProductCode)
-                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                'Case "L L"
-                '    LAddParam("@hlgrade", HLPackGrade)
-                '    LAddParam("@prodnum", varProductCode)
-                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                'Case "L LL"
-                '    LAddParam("@hlgrade", HLPackGrade)
-                '    LAddParam("@prodnum", varProductCode)
-                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                'Case "L B"
-                '    LAddParam("@hlgrade", HLPackGrade)
-                '    LAddParam("@prodnum", varProductCode)
-                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                'Case "L W"
-                '    LAddParam("@hlgrade", HLPackGrade)
-                '    LAddParam("@prodnum", varProductCode)
-                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
 
-                ''HL SHORTS
-                'Case "HS D"
-                '    LAddParam("@hlgrade", HLPackGrade)
-                '    LAddParam("@prodnum", varProductCode)
-                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                'Case "HS M"
-                '    LAddParam("@hlgrade", HLPackGrade)
-                '    LAddParam("@prodnum", varProductCode)
-                '    LExecQuery("Select * FROM Jobs Where PRNUM = @prodnum and HHLL_Res = @hlgrade And  " _
-                '           & "  PACKENDTM is Null and HHLLState = '3' and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()   ")
-                'Case "HS L"
-
-                'Case "HS B"
-
-                'Case "LS D"
-
-                'Case "LS M"
-
-                'Case "LS L"
-
-                'Case "LS B"
 
                 Case "Waste"
                     packGrade = txtGrade.Text
