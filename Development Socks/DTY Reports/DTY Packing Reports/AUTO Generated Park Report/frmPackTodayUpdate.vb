@@ -3630,10 +3630,6 @@ Public Class frmPackTodayUpdate
     End Sub
 
 
-
-
-
-
     Private Sub releaseObject(ByVal obj As Object)
 
         Try
@@ -3737,9 +3733,9 @@ Public Class frmPackTodayUpdate
 
         Select Case frmJobEntry.txtGrade.Text
             Case "HLRound1", "HLRound2", "HLRound3", "HL STD"
-                SheetCodeString = ("*" & frmJobEntry.varProductCode & year & month & day & gradeTxt & "1" & "H*")
+                SheetCodeString = ("*" & frmJobEntry.varProductCode & year & month & day & gradeTxt & boxCount & "H*")
             Case Else
-                SheetCodeString = ("*" & frmJobEntry.varProductCode & year & month & day & gradeTxt & "1" & "*")
+                SheetCodeString = ("*" & frmJobEntry.varProductCode & year & month & day & gradeTxt & boxCount & "*")
         End Select
 
 
