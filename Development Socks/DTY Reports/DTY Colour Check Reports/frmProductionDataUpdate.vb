@@ -327,9 +327,25 @@ Public Class frmProductionDataUpdate
 
         End If
 
+        'FIND Full Waste CHEESE
+        DGVProdDataSend.DataSource = Nothing  'THIS CLEARS ANY OLD DATA OUT OF DGV
+        LExecQuery("SELECT conenum FROM jobs WHERE (DYEFLECK > 0 Or COLWASTE > 0) and FLT_S = 'False'  and BCODEJOB = '" & jobNum & "' ORDER BY CONENUM ")
+
+        If LRecordCount > 0 Then
+            'LOAD THE DATA FROM dB IN TO THE DATAGRID
+            DGVProdDataSend.DataSource = LDS.Tables(0)
+            DGVProdDataSend.Rows(0).Selected = True
+            DGVProdDataSend.Sort(DGVProdDataSend.Columns(0), ListSortDirection.Ascending)
+            For rCount = 1 To DGVProdDataSend.Rows.Count - 1
+                MyUpdateExcel.Cells((rCount - 1) + 8, ncfree + 2) = DGVProdDataSend.Rows(rCount - 1).Cells(0).Value.ToString 'Start on row 8 and advance
+                MyUpdateExcel.Cells((rCount - 1) + 8, ncfree + 2).interior.color = Color.LightGreen
+            Next
+
+        End If
+
         'FIND SAB CHEESE
         DGVProdDataSend.DataSource = Nothing  'THIS CLEARS ANY OLD DATA OUT OF DGV
-        LExecQuery("SELECT conenum FROM jobs WHERE (conebarley > 0 or M50 > 0 or P50 > 0) and FLT_S = 'True'  and BCODEJOB = '" & jobNum & "' ORDER BY CONENUM ")
+        LExecQuery("SELECT conenum FROM jobs WHERE (DYEFLECK > 0 Or COLWASTE > 0) and FLT_S = 'True'  and BCODEJOB = '" & jobNum & "' ORDER BY CONENUM ")
 
         If LRecordCount > 0 Then
             'LOAD THE DATA FROM dB IN TO THE DATAGRID
@@ -342,6 +358,23 @@ Public Class frmProductionDataUpdate
             Next
 
         End If
+
+        'FIND SAB WASTE CHEESE
+        DGVProdDataSend.DataSource = Nothing  'THIS CLEARS ANY OLD DATA OUT OF DGV
+        LExecQuery("SELECT conenum FROM jobs WHERE (DYEFLECK > 0 Or COLWASTE > 0) and FLT_S = 'True'  and BCODEJOB = '" & jobNum & "' ORDER BY CONENUM ")
+
+        If LRecordCount > 0 Then
+            'LOAD THE DATA FROM dB IN TO THE DATAGRID
+            DGVProdDataSend.DataSource = LDS.Tables(0)
+            DGVProdDataSend.Rows(0).Selected = True
+            DGVProdDataSend.Sort(DGVProdDataSend.Columns(0), ListSortDirection.Ascending)
+            For rCount = 1 To DGVProdDataSend.Rows.Count - 1
+                MyUpdateExcel.Cells((rCount - 1) + 8, ncfree + 3) = DGVProdDataSend.Rows(rCount - 1).Cells(0).Value.ToString 'Start on row 8 and advance
+                MyUpdateExcel.Cells((rCount - 1) + 8, ncfree + 3).interior.color = Color.LightGreen
+            Next
+
+        End If
+
 
 
 
