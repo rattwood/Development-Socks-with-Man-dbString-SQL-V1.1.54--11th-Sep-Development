@@ -345,7 +345,7 @@ Public Class frmProductionDataUpdate
 
         'FIND SAB CHEESE
         DGVProdDataSend.DataSource = Nothing  'THIS CLEARS ANY OLD DATA OUT OF DGV
-        LExecQuery("SELECT conenum FROM jobs WHERE (DYEFLECK > 0 Or COLWASTE > 0) and FLT_S = 'True'  and BCODEJOB = '" & jobNum & "' ORDER BY CONENUM ")
+        LExecQuery("SELECT conenum FROM jobs WHERE (conebarley > 0 or M50 > 0 or P50 > 0) and FLT_S = 'True'  and BCODEJOB = '" & jobNum & "' ORDER BY CONENUM ")
 
         If LRecordCount > 0 Then
             'LOAD THE DATA FROM dB IN TO THE DATAGRID
