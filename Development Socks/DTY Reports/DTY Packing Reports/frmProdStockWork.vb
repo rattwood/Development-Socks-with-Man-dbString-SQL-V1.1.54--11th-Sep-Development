@@ -42,7 +42,7 @@ Public Class frmProdStockWork
     Private Sub frmProdStockWork_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         btnFullReport.Visible = True
 
-        startDate = Date.Today.AddDays(-3).ToString("yyyy-MM-dd") & " 00:00:00.000"
+        startDate = Date.Today.AddDays(-15).ToString("yyyy-MM-dd") & " 00:00:00.000"
         endDate = Date.Today.ToString("yyyy-MM-dd") & " 23:59:59.997"
 
 

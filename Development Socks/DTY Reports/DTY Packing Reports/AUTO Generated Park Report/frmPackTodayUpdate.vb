@@ -234,6 +234,7 @@ Public Class frmPackTodayUpdate
 
                             End If
                         End If
+
                     Next
 
                     'check if this is an early finish and if it is print part sheet
@@ -241,6 +242,8 @@ Public Class frmPackTodayUpdate
                         printOut()
                         frmPacking.saveJob = 0
                     End If
+
+
 
                     'CHECK for early finish to job print and create new black sheet ready for next cart to be scanned in
                     If frmPacking.finJob = 1 Then

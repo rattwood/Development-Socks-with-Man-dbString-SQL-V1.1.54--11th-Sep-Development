@@ -111,12 +111,9 @@ Public Class frmDailyPackProduction
         savename = (My.Settings.dirPackReports & "\" & "DayPackingReport" & "_" & MonthCalendar1.SelectionRange.Start.ToString("dd_MMM_yyyy") & ".xlsx").ToString
 
 
-        Dim searchdate As String = MonthCalendar1.SelectionRange.Start.ToString("yyyy-MM-dd ")
-        Dim startTm As String = searchdate & "00:00:00.000"
-        Dim endTm As String = searchdate & "23:59:59.997"
-
-
-
+        Dim searchdate As Date = MonthCalendar1.SelectionRange.Start.ToString("yyyy-MM-dd ")
+        Dim startTm As String = searchdate.AddDays(-1) & " 15:00:00.000"
+        Dim endTm As String = searchdate & " 14:59:59.999"
 
 
         'GET LIST OF PRODUCTS TO BE PROCESSED AS OF NOW

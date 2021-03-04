@@ -816,7 +816,7 @@ Public Class frmPacking
             'frmPackReport.packPrint() 'Print the packing report and go back to Job Entry for the next cart
             frmPackRepMain.PackRepMainSub()
             frmPackRepMain.Close()
-            UpdateDatabase()
+            ' UpdateDatabase()
             Me.Cursor = System.Windows.Forms.Cursors.Default
             saveJob = 0
             frmJobEntry.Show()
@@ -978,6 +978,8 @@ Public Class frmPacking
 
 
     End Sub
+
+
 
 
 
