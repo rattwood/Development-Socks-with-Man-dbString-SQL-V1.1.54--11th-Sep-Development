@@ -301,6 +301,41 @@ Public Class frmPackTodayUpdate
 
                 End Try
 
+                'Try
+
+                '    'Save changes to new file in Paking Dir
+                '    MyTodyExcel.DisplayAlerts = False
+                '    xlTodyWorkbook.SaveAs(Filename:=frmPackRepMain.savename, FileFormat:=51)
+
+                'Catch ex As Exception
+                '    'Write error to Log File
+                '    writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
+                '    writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
+                '    MsgBox(ex.Message)
+
+                'End Try
+
+                'Try
+                '    'Close template file but do not save updates to it
+                '    xlTodyWorkbook.Close(SaveChanges:=False)
+                'Catch ex As Exception
+                '    'Write error to Log File
+                '    writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
+                '    writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
+                '    MsgBox(ex.Message)
+                'End Try
+
+
+                ''MyTodyExcel.Quit()
+                '' releaseObject(xlTodysheets)
+                'releaseObject(xlTodyWorkbook)
+                'releaseObject(MyTodyExcel)
+                'Me.Close()
+
+
+
+
+
             Case "ReCheckA"
                 'CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
                 If totCount = 90 Then
@@ -463,6 +498,62 @@ Public Class frmPackTodayUpdate
                         End If
                     Next
 
+                    'check if this is an early finish and if it is print part sheet
+                    If frmPackRchkA.saveJob = 1 Then
+                        printOut()
+                        frmPacking.saveJob = 0
+                    End If
+
+
+                    Console.WriteLine("fin Job = " & frmPacking.finJob)
+                    'CHECK for early finish to job print and create new black sheet ready for next cart to be scanned in
+                    If frmPackRchkA.finJob = 1 Then
+                        Dim tmpsaveName As String
+
+                        tmpsaveName = (frmPackRepMain.finPath & "\" & frmPackRepMain.sheetName & "_" & mycount & ".xlsx")
+                        MyTodyExcel.DisplayAlerts = False
+
+
+                        xlTodyWorkbook.Sheets(mycount).SaveAs(Filename:=tmpsaveName, FileFormat:=51)
+
+                        MyTodyExcel.DisplayAlerts = True
+
+                        'Call to auto print full sheeet on default printer
+                        printOut()
+
+
+                        'Create new blank worksheet in Excel
+                        xlTodyWorkbook.Sheets(frmPackRepMain.sheetName).Copy(After:=xlTodyWorkbook.Sheets(mycount))
+                        CType(MyTodyExcel.Workbooks(1).Worksheets(frmPackRepMain.sheetName), Microsoft.Office.Interop.Excel.Worksheet).Name = frmPackRepMain.sheetName
+
+                        Dim prodTf As String
+
+                        prodTf = (frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRODNAME").Value & "  " & frmPackRchkA.DGVPakingRecA.Rows(0).Cells("MERGENUM").Value)
+                        'PRODUCT NAME
+                        MyTodyExcel.Cells(7, 4) = prodTf
+
+
+                        'Product Code
+                        MyTodyExcel.Cells(7, 6) = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value
+                        'Packer Name
+                        MyTodyExcel.Cells(13, 8) = frmJobEntry.PackOp
+
+                        boxCount = boxCount + 1
+                        createBarcode()
+
+                        'New positions for barcode
+                        MyTodyExcel.Cells(5, 8) = SheetCodeString
+                        MyTodyExcel.Cells(9, 10) = modBarcode
+
+                        For x = 13 To 102
+                            MyTodyExcel.Cells(x, 4) = "" 'Clear the contents of cone cells
+                        Next
+
+                        nfree = 13
+
+                    End If
+
+
                 Catch ex As Exception
                     'Write error to Log File
                     writeerrorLog.writelog("ReCheck A Error", ex.Message, False, "System Fault")
@@ -471,12 +562,9 @@ Public Class frmPackTodayUpdate
 
                 End Try
 
-
-
-
-
         End Select
 
+        'This section saves the file and closes excel down for A and Recheck A grades
         Try
 
             'Save changes to new file in Paking Dir
