@@ -301,36 +301,7 @@ Public Class frmPackTodayUpdate
 
                 End Try
 
-                'Try
 
-                '    'Save changes to new file in Paking Dir
-                '    MyTodyExcel.DisplayAlerts = False
-                '    xlTodyWorkbook.SaveAs(Filename:=frmPackRepMain.savename, FileFormat:=51)
-
-                'Catch ex As Exception
-                '    'Write error to Log File
-                '    writeerrorLog.writelog("File Save Error", ex.Message, False, "System Fault")
-                '    writeerrorLog.writelog("File Save Error", ex.ToString, False, "System Fault")
-                '    MsgBox(ex.Message)
-
-                'End Try
-
-                'Try
-                '    'Close template file but do not save updates to it
-                '    xlTodyWorkbook.Close(SaveChanges:=False)
-                'Catch ex As Exception
-                '    'Write error to Log File
-                '    writeerrorLog.writelog("File Close Error", ex.Message, False, "System Fault")
-                '    writeerrorLog.writelog("File Close Error", ex.ToString, False, "System Fault")
-                '    MsgBox(ex.Message)
-                'End Try
-
-
-                ''MyTodyExcel.Quit()
-                '' releaseObject(xlTodysheets)
-                'releaseObject(xlTodyWorkbook)
-                'releaseObject(MyTodyExcel)
-                'Me.Close()
 
 
 
@@ -641,17 +612,20 @@ Public Class frmPackTodayUpdate
 
 
         Dim totCount As Integer = 1
-        'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
-        For rcount = 13 To 102
-            If MyTodyExcel.Cells(rcount, 4).Value > 0 Then
-                totCount = totCount + 1
-                Continue For
-            Else
-                nfree = rcount
-                Exit For
-            End If
-        Next
-
+        Try
+            'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
+            For rcount = 13 To 102
+                If MyTodyExcel.Cells(rcount, 4).Value > "0" Then
+                    totCount = totCount + 1
+                    Continue For
+                Else
+                    nfree = rcount
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+            writeerrorLog.writelog("Exl Count B_AL_AD", ex.Message, False, "System Fault")
+        End Try
 
         'CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
         If totCount = 90 Then
@@ -873,17 +847,21 @@ Public Class frmPackTodayUpdate
 
 
         Dim totCount As Integer = 1
-        'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
-        For rcount = 13 To 102
-            If MyTodyExcel.Cells(rcount, 4).Value > 0 Then
-                totCount = totCount + 1
-                Continue For
-            Else
-                nfree = rcount
-                Exit For
-            End If
-        Next
+        Try
+            'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
+            For rcount = 13 To 102
+                If MyTodyExcel.Cells(rcount, 4).Value > "0" Then
+                    totCount = totCount + 1
+                    Continue For
+                Else
+                    nfree = rcount
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+            writeerrorLog.writelog("Exl Count HL PacktodayUpdate", ex.Message, False, "System Fault")
 
+        End Try
 
         'CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
         If totCount = 90 Then
@@ -1119,26 +1097,29 @@ Public Class frmPackTodayUpdate
         Dim colCount As Integer = 4
         Dim endloop As Integer
 
-        For ccount = 1 To 3  'Three sets of columns
-            For rcount = 12 To 41
-                If MyTodyExcel.Cells(rcount, colCount).Value > 0 Then  'C9-C40
-                    totCount = totCount + 1
-                    Continue For
-                Else
-                    nfree = rcount
-                    ncfree = colCount
-                    endloop = 1
+        Try
+            For ccount = 1 To 3  'Three sets of columns
+                For rcount = 12 To 41
+                    If MyTodyExcel.Cells(rcount, colCount).Value > "0" Then  'C9-C40
+                        totCount = totCount + 1
+                        Continue For
+                    Else
+                        nfree = rcount
+                        ncfree = colCount
+                        endloop = 1
+                        Exit For
+                    End If
+                Next
+                If endloop Then
+
                     Exit For
+                Else
+                    colCount = colCount + 4
                 End If
             Next
-            If endloop Then
-
-                Exit For
-            Else
-                colCount = colCount + 4
-            End If
-        Next
-
+        Catch ex As Exception
+            writeerrorLog.writelog("Exl Count LS35 PacktodayUpdate", ex.Message, False, "System Fault")
+        End Try
 
 
 
@@ -1410,27 +1391,31 @@ Public Class frmPackTodayUpdate
         Dim colCount As Integer = 4
         Dim endloop As Integer
 
-        For ccount = 1 To 3  'Three sets of columns
-            For rcount = 12 To 41
-                If MyTodyExcel.Cells(rcount, colCount).Value > 0 Then  'C9-C40
-                    totCount = totCount + 1
-                    Continue For
-                Else
-                    nfree = rcount
-                    ncfree = colCount
-                    endloop = 1
+        Try
+            For ccount = 1 To 3  'Three sets of columns
+                For rcount = 12 To 41
+                    If MyTodyExcel.Cells(rcount, colCount).Value > "0" Then  'C9-C40
+                        totCount = totCount + 1
+                        Continue For
+                    Else
+                        nfree = rcount
+                        ncfree = colCount
+                        endloop = 1
+                        Exit For
+                    End If
+                Next
+                If endloop Then
+
                     Exit For
+                Else
+                    colCount = colCount + 4
                 End If
             Next
-            If endloop Then
 
-                Exit For
-            Else
-                colCount = colCount + 4
-            End If
-        Next
+        Catch ex As Exception
+            writeerrorLog.writelog("Exl Count LS35 PacktodayUpdate", ex.Message, False, "System Fault")
 
-
+        End Try
 
 
 
@@ -1693,27 +1678,31 @@ Public Class frmPackTodayUpdate
         Dim colCount As Integer = 4
         Dim endloop As Integer
 
-        For ccount = 1 To 3  'Three sets of columns
-            For rcount = 12 To 51
-                If MyTodyExcel.Cells(rcount, colCount).Value > 0 Then  'C9-C40
-                    totCount = totCount + 1
-                    Continue For
-                Else
-                    nfree = rcount
-                    ncfree = colCount
-                    endloop = 1
+        Try
+            For ccount = 1 To 3  'Three sets of columns
+                For rcount = 12 To 51
+                    If MyTodyExcel.Cells(rcount, colCount).Value > "0" Then  'C9-C40
+                        totCount = totCount + 1
+                        Continue For
+                    Else
+                        nfree = rcount
+                        ncfree = colCount
+                        endloop = 1
+                        Exit For
+                    End If
+                Next
+                If endloop Then
+
                     Exit For
+                Else
+                    colCount = colCount + 4
                 End If
             Next
-            If endloop Then
 
-                Exit For
-            Else
-                colCount = colCount + 4
-            End If
-        Next
+        Catch ex As Exception
+            writeerrorLog.writelog("Exl BS_AS30 Count PacktodayUpdate", ex.Message, False, "System Fault")
 
-
+        End Try
 
 
 
@@ -1973,43 +1962,46 @@ Public Class frmPackTodayUpdate
         Dim endloop As Integer
 
 
-
-        For ccount = 1 To 4  'Three sets of columns
-            If ccount < 4 Then
-                For rcount = 14 To 65
-                    If MyTodyExcel.Cells(rcount, colCount).Value > 0 Then
-                        totCount = totCount + 1
-                        Continue For
-                    Else
-                        nfree = rcount
-                        ncfree = colCount
-                        endloop = 1
-                        Exit For
-                    End If
-                Next
-            Else
-                For rcount = 12 To 52
-                    If MyTodyExcel.Cells(rcount, colCount).Value > "0" Then
-                        totCount = totCount + 1
-                        Continue For
-                    Else
-                        nfree = rcount
-                        ncfree = colCount
-                        endloop = 1
-                        Exit For
-                    End If
-                Next
-            End If
-
-
-            If endloop Then
-                Exit For
-            Else
-                If colCount < 16 Then colCount = colCount + 4
-            End If
-        Next
+        Try
+            For ccount = 1 To 4  'Three sets of columns
+                If ccount < 4 Then
+                    For rcount = 14 To 65
+                        If MyTodyExcel.Cells(rcount, colCount).Value > "0" Then
+                            totCount = totCount + 1
+                            Continue For
+                        Else
+                            nfree = rcount
+                            ncfree = colCount
+                            endloop = 1
+                            Exit For
+                        End If
+                    Next
+                Else
+                    For rcount = 12 To 52
+                        If MyTodyExcel.Cells(rcount, colCount).Value > "0" Then
+                            totCount = totCount + 1
+                            Continue For
+                        Else
+                            nfree = rcount
+                            ncfree = colCount
+                            endloop = 1
+                            Exit For
+                        End If
+                    Next
+                End If
 
 
+                If endloop Then
+                    Exit For
+                Else
+                    If colCount < 16 Then colCount = colCount + 4
+                End If
+            Next
+
+        Catch ex As Exception
+            writeerrorLog.writelog("Exl Count AS20 PacktodayUpdate", ex.Message, False, "System Fault")
+
+        End Try
 
 
         'CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
@@ -2275,17 +2267,20 @@ Public Class frmPackTodayUpdate
 
 
         Dim totCount As Integer = 1
-        'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
-        For rcount = 13 To 102
-            If MyTodyExcel.Cells(rcount, 4).Value > 0 Then
-                totCount = totCount + 1
-                Continue For
-            Else
-                nfree = rcount
-                Exit For
-            End If
-        Next
-
+        Try
+            'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
+            For rcount = 13 To 102
+                If MyTodyExcel.Cells(rcount, 4).Value > "0" Then
+                    totCount = totCount + 1
+                    Continue For
+                Else
+                    nfree = rcount
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+            writeerrorLog.writelog("Exl Count P6 PacktodayUpdate", ex.Message, False, "System Fault")
+        End Try
 
         'CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
         If totCount = 90 Then
@@ -2501,41 +2496,45 @@ Public Class frmPackTodayUpdate
         Dim colCount As Integer = 4
         Dim endloop As Integer
 
-        For ccount = 1 To 4  'Three sets of columns
-            If ccount < 4 Then
-                For rcount = 12 To 71
-                    If MyTodyExcel.Cells(rcount, colCount).Value > 0 Then
-                        totCount = totCount + 1
-                        Continue For
-                    Else
-                        nfree = rcount
-                        ncfree = colCount
-                        endloop = 1
-                        Exit For
-                    End If
-                Next
-            Else
-                For rcount = 12 To 56
-                    If MyTodyExcel.Cells(rcount, colCount).Value > "0" Then
-                        totCount = totCount + 1
-                        Continue For
-                    Else
-                        nfree = rcount
-                        ncfree = colCount
-                        endloop = 1
-                        Exit For
-                    End If
-                Next
-            End If
+        Try
+            For ccount = 1 To 4  'Three sets of columns
+                If ccount < 4 Then
+                    For rcount = 12 To 71
+                        If MyTodyExcel.Cells(rcount, colCount).Value > "0" Then
+                            totCount = totCount + 1
+                            Continue For
+                        Else
+                            nfree = rcount
+                            ncfree = colCount
+                            endloop = 1
+                            Exit For
+                        End If
+                    Next
+                Else
+                    For rcount = 12 To 56
+                        If MyTodyExcel.Cells(rcount, colCount).Value > "0" Then
+                            totCount = totCount + 1
+                            Continue For
+                        Else
+                            nfree = rcount
+                            ncfree = colCount
+                            endloop = 1
+                            Exit For
+                        End If
+                    Next
+                End If
 
 
-            If endloop Then
-                Exit For
-            Else
-                If colCount < 16 Then colCount = colCount + 4
-            End If
-        Next
+                If endloop Then
+                    Exit For
+                Else
+                    If colCount < 16 Then colCount = colCount + 4
+                End If
+            Next
+        Catch ex As Exception
+            writeerrorLog.writelog("Exl Count P15 PacktodayUpdate", ex.Message, False, "System Fault")
 
+        End Try
 
 
 
@@ -2597,28 +2596,6 @@ Public Class frmPackTodayUpdate
         End If
 
 
-
-
-
-        ''    ncfree = 4
-        ''    For nCol = 1 To 4
-        ''        If nCol < 4 Then
-        ''            For x = 12 To 71
-        ''                MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
-        ''                MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
-        ''            Next
-        ''            ncfree = ncfree + 4
-        ''        Else
-        ''            For x = 12 To 56
-        ''                MyTodyExcel.Cells(x, ncfree) = "" 'Clear the contents of cone cells
-        ''                MyTodyExcel.Cells(x, ncfree - 2) = "" 'Clear the contents of Carton cells
-        ''            Next
-        ''        End If
-        ''    Next
-
-        ''    nfree = 12
-        ''    'ncfree = 4
-        ''End If
 
 
         'Routine to go through the rows and extract Grade A cones plus keep count
@@ -2829,26 +2806,30 @@ Public Class frmPackTodayUpdate
         Dim colCount As Integer = 4
         Dim endloop As Integer
 
-        For ccount = 1 To 5  'Three sets of columns
-            For rcount = 12 To 71
-                If MyTodyExcel.Cells(rcount, colCount).Value > "0" Then  'C9-C40
-                    totCount = totCount + 1
-                    Continue For
-                Else
-                    nfree = rcount
-                    ncfree = colCount
-                    endloop = 1
+        Try
+            For ccount = 1 To 5  'Three sets of columns
+                For rcount = 12 To 71
+                    If MyTodyExcel.Cells(rcount, colCount).Value > "0" Then  'C9-C40
+                        totCount = totCount + 1
+                        Continue For
+                    Else
+                        nfree = rcount
+                        ncfree = colCount
+                        endloop = 1
+                        Exit For
+                    End If
+                Next
+                If endloop Then
+
                     Exit For
+                Else
+                    colCount = colCount + 4
                 End If
             Next
-            If endloop Then
+        Catch ex As Exception
+            writeerrorLog.writelog("Exl Count P20 PacktodayUpdate", ex.Message, False, "System Fault")
 
-                Exit For
-            Else
-                colCount = colCount + 4
-            End If
-        Next
-
+        End Try
 
 
 
@@ -3099,20 +3080,23 @@ Public Class frmPackTodayUpdate
         Dim totCount As Integer
 
 
+        Try
+            'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
+            For rcount = 9 To 40
 
-        'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
-        For rcount = 9 To 40
+                ' Only single Column to look at
+                If MyTodyExcel.Cells(rcount, 3).Value > "0" Then
+                    totCount = totCount + 1
+                    Continue For
+                Else
+                    nfree = rcount
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+            writeerrorLog.writelog("Exl Count REChk PacktodayUpdate", ex.Message, False, "System Fault")
 
-            ' Only single Column to look at
-            If MyTodyExcel.Cells(rcount, 3).Value > 0 Then
-                totCount = totCount + 1
-                Continue For
-            Else
-                nfree = rcount
-                Exit For
-            End If
-        Next
-
+        End Try
 
 
         ''CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
@@ -3284,7 +3268,7 @@ Public Class frmPackTodayUpdate
         Me.Close()
     End Sub
 
-    'ROUTINE TO CREATE RECHECK SHEET
+    'ROUTINE TO CREATE HL ReChk SHEET
     Public Sub todayUpdate_CreateHL()
         Dim xlTodyWorkbook As Excel.Workbook
         Dim xlTodysheets As Excel.Worksheet
@@ -3298,20 +3282,23 @@ Public Class frmPackTodayUpdate
         Dim totCount As Integer
 
 
+        Try
+            'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
+            For rcount = 9 To 40
 
-        'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
-        For rcount = 9 To 40
+                ' Only single Column to look at
+                If MyTodyExcel.Cells(rcount, 3).Value > "0" Then
+                    totCount = totCount + 1
+                    Continue For
+                Else
+                    nfree = rcount
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+            writeerrorLog.writelog("Exl Count ReChk HL PacktodayUpdate", ex.Message, False, "System Fault")
 
-            ' Only single Column to look at
-            If MyTodyExcel.Cells(rcount, 3).Value > 0 Then
-                totCount = totCount + 1
-                Continue For
-            Else
-                nfree = rcount
-                Exit For
-            End If
-        Next
-
+        End Try
 
 
         ''CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
@@ -3496,20 +3483,23 @@ Public Class frmPackTodayUpdate
         Dim totCount As Integer
 
 
+        Try
+            'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
+            For rcount = 9 To 40
 
-        'FIND NEXT BLANK ROW FOR ON EXCEL SHEET
-        For rcount = 9 To 40
+                ' Only single Column to look at
+                If MyTodyExcel.Cells(rcount, 3).Value > "0" Then
+                    totCount = totCount + 1
+                    Continue For
+                Else
+                    nfree = rcount
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+            writeerrorLog.writelog("Exl Count Create Std PacktodayUpdate", ex.Message, False, "System Fault")
 
-            ' Only single Column to look at
-            If MyTodyExcel.Cells(rcount, 3).Value > 0 Then
-                totCount = totCount + 1
-                Continue For
-            Else
-                nfree = rcount
-                Exit For
-            End If
-        Next
-
+        End Try
 
 
         ''CHECK TO SEE IF THE NEW CURRENT SHEET IS FULL IF SO ADD A NEW SHEET
@@ -3734,16 +3724,7 @@ Public Class frmPackTodayUpdate
     End Sub
 
 
-    'Private Sub DelayTM()
-    '    Dim interval As Integer = "2000"
-    '    Dim sw As New Stopwatch
-    '    sw.Start()
-    '    Do While sw.ElapsedMilliseconds < interval
-    '        Application.DoEvents()
-    '    Loop
-    '    sw.Stop()
 
-    'End Sub
 
     Public Sub createBarcode()
 
@@ -3830,7 +3811,7 @@ Public Class frmPackTodayUpdate
         End Select
 
 
-        'SheetCodeString = ("*" & frmJobEntry.varProductCode & year & month & day & gradeTxt & boxCount & "*")
+
         modBarcode = SheetCodeString.Replace("*", "")
 
 
