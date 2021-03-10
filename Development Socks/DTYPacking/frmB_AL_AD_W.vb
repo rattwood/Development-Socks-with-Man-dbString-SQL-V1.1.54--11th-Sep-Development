@@ -822,6 +822,58 @@ Public Class frmB_AL_AD_W
 
     Private Sub jobEnd()
 
+        Dim prodNameMod As String
+        Dim PathFileName As String
+        Dim sheetname As String
+        Dim FileName As String
+
+
+
+
+        prodNameMod = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value.ToString
+        prodNameMod = prodNameMod.Replace("/", "_")
+
+        'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+        sheetname = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
+
+        'Search for last date for file
+
+
+        FileName = prodNameMod & " " _
+                    & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                    & frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString & " A" & ".xlsx"
+
+        'CREATE THE FULL NAME FOR SAVING THE FILE
+        PathFileName = "C:\Users\TSSERVER\Desktop\ColorCheckFiles\CKPacking\10_03_2021\" & FileName
+
+
+
+
+        Try
+
+            ' Dim tmpFileName As String = ""
+            Dim fOpen As IO.FileStream = IO.File.Open(PathFileName, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.None)
+            fOpen.Close()
+            fOpen.Dispose()
+            fOpen = Nothing
+        Catch e1 As IO.IOException
+            writeerrorLog.writelog("Excel File Open", "File " & FileName & "Cannot Save, file is Open", False, "Packing sheet")
+
+            Dim result = MessageBox.Show("The file " & FileName & " is open on this computer or another computer." & vbCrLf &
+                                    "Please find out who has the file open and close it." & vbCrLf & vbCrLf &
+                                    vbCrLf &
+                                    "When file has been closed Press OK and then press FINISH on the Cart screen which will Retry the save operation",
+                                    "Excel File Open Cannot Save", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            If result = DialogResult.OK Then
+                Exit Sub
+            End If
+
+
+        End Try
+
+
+
+
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         Label8.Visible = True
 
@@ -1058,6 +1110,10 @@ Public Class frmB_AL_AD_W
     End Sub
 
     Private Sub btnFinish_Click(sender As Object, e As EventArgs) Handles btnFinish.Click
+
+        Dim btnpress As String = "Operator " & frmJobEntry.varUserName & "  Pressed STOP on Grade " & frmJobEntry.txtGrade.Text & " Packing sheet"
+
+        writeerrorLog.writelog("Packing Stop/Finish pressed", btnpress, False, "Packing sheet")
 
         jobEnd()
 
