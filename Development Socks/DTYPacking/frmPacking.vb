@@ -3,8 +3,7 @@ Imports Excel = Microsoft.Office.Interop.Excel
 Imports System.Data.SqlClient
 Imports System.ComponentModel
 Imports System.Text
-
-
+Imports System.IO
 
 Public Class frmPacking
     'GIVES ACCESS TO GLOBAL SQL CLASS
@@ -65,6 +64,18 @@ Public Class frmPacking
     Dim packedCheese As Integer
     Dim remainingCheese As Integer
 
+    'DIRECTORY PATHS ALL PUBLIC
+    Public finPath As String
+    Dim todayPath As String
+    Dim PrevPath1 As String
+    Dim PrevPath2 As String
+    Dim PrevPath3 As String
+
+    Dim sheetSearch As String
+    Dim sheetDate As String
+    Dim tmp_sheetdate As Date
+    Dim prodNum As String
+
 
 
     'Faults
@@ -83,10 +94,10 @@ Public Class frmPacking
 
         'LOAD THE DATA FROM dB IN TO THE DATAGRID
         DGVPakingA.DataSource = PDS.Tables(0)
-            DGVPakingA.Rows(0).Selected = True
+        DGVPakingA.Rows(0).Selected = True
 
 
-            Dim PCB As SqlCommandBuilder = New SqlCommandBuilder(PDA)
+        Dim PCB As SqlCommandBuilder = New SqlCommandBuilder(PDA)
         Dim localMCCode As Integer = Convert.ToInt32(frmJobEntry.varMachineCode)
 
 
@@ -100,140 +111,140 @@ Public Class frmPacking
             rowendcount = DGVPakingA.Rows.Count
         ElseIf localMCCode < 29 Then
             rowendcount = 32
-            End If
+        End If
 
 
 
-            'Dim localMCCode = frmJobEntry.varMachineCode
-            Dim btnNum As Integer
-            Dim btnNums As String
+        'Dim localMCCode = frmJobEntry.varMachineCode
+        Dim btnNum As Integer
+        Dim btnNums As String
 
         If frmJobEntry.varMachineCode = "29" Or Not frmJobEntry.HLColSep = Nothing Then
             btnNums = 1
         Else
             btnNums = frmJobEntry.varCartSelect
-            End If
-            ''btnNums = frmJobEntry.varCartSelect
+        End If
+        ''btnNums = frmJobEntry.varCartSelect
 
-            ' SELECT CONE NUMBER RANGE BASED ON CART NUMBER
-            Select Case btnNums
-                Case Is = 1
+        ' SELECT CONE NUMBER RANGE BASED ON CART NUMBER
+        Select Case btnNums
+            Case Is = 1
                 If localMCCode = 30 Or localMCCode = 32 Then
                     btnNum = 1
                     coneNumOffset = 0
                 Else
                     btnNum = 1
-                        coneNumOffset = 0
-                    End If
+                    coneNumOffset = 0
+                End If
 
-                Case Is = 2
+            Case Is = 2
                 If localMCCode = 30 Or localMCCode = 32 Then
                     btnNum = 33
                     coneNumOffset = 32
                 Else
                     btnNum = 33
-                        coneNumOffset = 32
-                    End If
+                    coneNumOffset = 32
+                End If
 
-                Case Is = 3
+            Case Is = 3
                 If localMCCode = 30 Or localMCCode = 32 Then
                     btnNum = 65
                     coneNumOffset = 64
                 Else
                     btnNum = 65
-                        coneNumOffset = 64
-                    End If
+                    coneNumOffset = 64
+                End If
 
 
-                Case Is = 4
+            Case Is = 4
                 If localMCCode = 30 Or localMCCode = 32 Then
                     btnNum = 97
                     coneNumOffset = 96
                 Else
                     btnNum = 97
-                        coneNumOffset = 96
-                    End If
+                    coneNumOffset = 96
+                End If
 
 
-                Case Is = 5
+            Case Is = 5
                 If localMCCode = 30 Or localMCCode = 32 Then
                     btnNum = 129
                     coneNumOffset = 128
                 Else
                     btnNum = 129
-                        coneNumOffset = 128
-                    End If
+                    coneNumOffset = 128
+                End If
 
 
-                Case Is = 6
+            Case Is = 6
                 If localMCCode = 31 Or localMCCode = 33 Then
                     btnNum = 145
                     coneNumOffset = 144
                 Else
                     btnNum = 161
-                        coneNumOffset = 160
-                    End If
+                    coneNumOffset = 160
+                End If
 
 
-                Case Is = 7
+            Case Is = 7
                 If localMCCode = 31 Or localMCCode = 33 Then
                     btnNum = 177
                     coneNumOffset = 176
                 Else
                     btnNum = 193
-                        coneNumOffset = 192
-                    End If
+                    coneNumOffset = 192
+                End If
 
 
-                Case Is = 8
+            Case Is = 8
                 If localMCCode = 31 Or localMCCode = 33 Then
                     btnNum = 209
                     coneNumOffset = 208
                 Else
                     btnNum = 225
-                        coneNumOffset = 224
-                    End If
+                    coneNumOffset = 224
+                End If
 
 
-                Case Is = 9
-                    If localMCCode = 31 Or localMCCode = 33 Then
-                        btnNum = 241
-                        coneNumOffset = 240
-                    Else
-                        btnNum = 257
-                        coneNumOffset = 256
-                    End If
+            Case Is = 9
+                If localMCCode = 31 Or localMCCode = 33 Then
+                    btnNum = 241
+                    coneNumOffset = 240
+                Else
+                    btnNum = 257
+                    coneNumOffset = 256
+                End If
 
 
-                Case Is = 10
-                    If localMCCode = 31 Or localMCCode = 33 Then
-                        btnNum = 273
-                        coneNumOffset = 272
-                    Else
-                        btnNum = 289
-                        coneNumOffset = 288
-                    End If
+            Case Is = 10
+                If localMCCode = 31 Or localMCCode = 33 Then
+                    btnNum = 273
+                    coneNumOffset = 272
+                Else
+                    btnNum = 289
+                    coneNumOffset = 288
+                End If
 
 
-                Case Is = 11
-                    btnNum = 321
-                    coneNumOffset = 320
-
-
-
-                Case Is = 12
-                    btnNum = 353
-                    coneNumOffset = 352
+            Case Is = 11
+                btnNum = 321
+                coneNumOffset = 320
 
 
 
-            End Select
+            Case Is = 12
+                btnNum = 353
+                coneNumOffset = 352
+
+
+
+        End Select
 
 
 
 
 
-            For i As Integer = 1 To rowendcount
+        For i As Integer = 1 To rowendcount
 
             Me.Controls("btnCone" & i.ToString).Text = btnNum
             btnNum = btnNum + 1
@@ -323,14 +334,14 @@ Public Class frmPacking
             Next
         End If
 
-            'THIS SECTION GETS THE COUNT OF CHEESE ON THE LAST EXCEL SHEET TO DISPLAY NUMBER LEFT TO COMPLETE THE PACK SHEET 
-            If Not frmJobEntry.HHLL = "YES" AndAlso frmJobEntry.HLColSep = Nothing Then
-                sheetconecount()
+        'THIS SECTION GETS THE COUNT OF CHEESE ON THE LAST EXCEL SHEET TO DISPLAY NUMBER LEFT TO COMPLETE THE PACK SHEET 
+        If Not frmJobEntry.HHLL = "YES" AndAlso frmJobEntry.HLColSep = Nothing Then
+            sheetconecount()
 
 
-                txtBoxToFinish.Text = remainingCheese
-                txtBoxOnSheet.Text = packedCheese
-            Else  ' change screen buttons
+            txtBoxToFinish.Text = remainingCheese
+            txtBoxOnSheet.Text = packedCheese
+        Else  ' change screen buttons
             btnDefect.Hide()
             btnSaveJob.Hide()
             btnFinJob.Hide()
@@ -345,14 +356,14 @@ Public Class frmPacking
             End If
 
             lblHLSeperation.Show()
-                Label4.Hide()
-                txtBoxOnSheet.Hide()
+            Label4.Hide()
+            txtBoxOnSheet.Hide()
 
 
-            End If
+        End If
 
 
-            txtboxTotal.Text = toAllocatedCount
+        txtboxTotal.Text = toAllocatedCount
 
         Me.KeyPreview = True  'Allows us to look for advace character from barcode
 
@@ -806,7 +817,7 @@ Public Class frmPacking
             Dim sheetname As String
             Dim FileName As String
 
-
+            todayDir()
 
 
             prodNameMod = DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
@@ -822,87 +833,89 @@ Public Class frmPacking
                     & DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString & " A" & ".xlsx"
 
 
-            'CREATE THE FULL NAME FOR SAVING THE FILE
-            PathFileName = "C:\Users\TSSERVER\Desktop\ColorCheckFiles\CKPacking\10_03_2021\" & FileName
+
+            If Not PrevPath1 = Nothing Then  'If we have a previous date then do a file open check, otherwise do not check
+                PathFileName = PrevPath1 & "\" & FileName
 
 
-            Try
+                Try
 
-                ' Dim tmpFileName As String = ""
-                Dim fOpen As IO.FileStream = IO.File.Open(PathFileName, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.None)
-                fOpen.Close()
-                fOpen.Dispose()
-                fOpen = Nothing
-            Catch e1 As IO.IOException
-                writeerrorLog.writelog("Excel File Open", "File " & FileName & "Cannot Save, file is Open", False, "Packing sheet")
-                If saveJob = 1 Then
-                    Dim result = MessageBox.Show("The file " & FileName & " is open on this computer or another computer." & vbCrLf &
+                    ' Dim tmpFileName As String = ""
+                    Dim fOpen As IO.FileStream = IO.File.Open(PathFileName, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.None)
+                    fOpen.Close()
+                    fOpen.Dispose()
+                    fOpen = Nothing
+                Catch e1 As IO.IOException
+                    writeerrorLog.writelog("Excel File Open", "File " & PathFileName & "Cannot Save, file is Open", False, "Packing sheet")
+
+
+                    If saveJob = 1 Then
+                        Dim result = MessageBox.Show("The file " & PathFileName & " is open on this computer or another computer." & vbCrLf &
                    "Please find out who has the file open and close it." & vbCrLf & vbCrLf &
                    vbCrLf &
                    "When file has been closed Press OK and then press SAVE on the Cart screen which will Retry the save",
                    "Excel File Open Cannot Save", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
 
-                    If result = DialogResult.OK Then
-                        saveJob = 0
-                        finJob = 0
-                        Exit Sub
-                    End If
-                ElseIf finJob = 1 Then
-                    Dim result = MessageBox.Show("The file " & FileName & " is open on this computer or another computer." & vbCrLf &
+                        If result = DialogResult.OK Then
+                            saveJob = 0
+                            finJob = 0
+                            Exit Sub
+                        End If
+                    ElseIf finJob = 1 Then
+                        Dim result = MessageBox.Show("The file " & PathFileName & " is open on this computer or another computer." & vbCrLf &
                 "Please find out who has the file open and close it." & vbCrLf & vbCrLf &
                 vbCrLf &
                 "When file has been closed Press OK and then press FINISH on the Cart screen which will Retry the finish operation",
                 "Excel File Open Cannot Save", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
 
-                    If result = DialogResult.OK Then
-                        saveJob = 0
-                        finJob = 0
-                        Exit Sub
-                    End If
-                Else
-                    Dim result = MessageBox.Show("The file " & FileName & " is open on this computer or another computer." & vbCrLf &
+                        If result = DialogResult.OK Then
+                            saveJob = 0
+                            finJob = 0
+                            Exit Sub
+                        End If
+                    Else
+                        Dim result = MessageBox.Show("The file " & PathFileName & " is open on this computer or another computer." & vbCrLf &
                                     "Please find out who has the file open and close it." & vbCrLf & vbCrLf &
                                     vbCrLf &
                                     "When file has been closed Press OK and then press SAVE on the Cart screen which will Retry the save",
                                     "Excel File Open Cannot Save", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
 
-                    If result = DialogResult.OK Then
-                        saveJob = 0
-                        finJob = 0
-                        Exit Sub
+                        If result = DialogResult.OK Then
+                            saveJob = 0
+                            finJob = 0
+                            Exit Sub
+                        End If
                     End If
-                End If
 
-            End Try
-
+                End Try
+            End If
 
 
             curcone = 0
-            Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
-            Label1.Visible = True
+                Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+                Label1.Visible = True
 
-            'pauseScan = 1 'Stop Barcode entry
-            Label1.Text = ("Please wait creating packing Excel sheet")
+                'pauseScan = 1 'Stop Barcode entry
+                Label1.Text = ("Please wait creating packing Excel sheet")
 
 
+                '**************************************************************************************************************
+                'UPDATE ALL CHEESE ON CART AS PROCESSED TODAY FOR DAILY PACKING REPORT TO WORK
+
+
+                If IsDBNull(DGVPakingA.Rows(0).Cells("PACKCARTTM").Value) Then
+                    For x As Integer = 1 To rowendcount
+                        DGVPakingA.Rows(x - 1).Cells("PACKCARTTM").Value = Today 'PACKING CHECK END TIME
+                    Next
+                End If
             '**************************************************************************************************************
-            'UPDATE ALL CHEESE ON CART AS PROCESSED TODAY FOR DAILY PACKING REPORT TO WORK
-
-
-            If IsDBNull(DGVPakingA.Rows(0).Cells("PACKCARTTM").Value) Then
-                For x As Integer = 1 To rowendcount
-                    DGVPakingA.Rows(x - 1).Cells("PACKCARTTM").Value = Today 'PACKING CHECK END TIME
-                Next
-            End If
-            '**************************************************************************************************************
 
 
 
 
-            'frmPackReport.packPrint() 'Print the packing report and go back to Job Entry for the next cart
             frmPackRepMain.PackRepMainSub()
             frmPackRepMain.Close()
             UpdateDatabase()
@@ -916,8 +929,8 @@ Public Class frmPacking
 
 
 
-        End If
-        Me.Cursor = System.Windows.Forms.Cursors.Default
+            End If
+            Me.Cursor = System.Windows.Forms.Cursors.Default
     End Sub
 
 
@@ -1079,7 +1092,72 @@ Public Class frmPacking
     End Sub
 
 
+    'SUBROUTINE TO CHECK IF DAY DIRECTORIES EXIST IF NOT THEY ARE CREATED
+    Private Sub todayDir()
 
+        prodNum = DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString
+        sheetSearch = prodNum & "______A"
+
+
+        If frmJobEntry.txtGrade.Text <> "Round1" And frmJobEntry.txtGrade.Text <> "Round2" And
+            frmJobEntry.txtGrade.Text <> "Round3" And frmJobEntry.txtGrade.Text <> "STD" And
+            frmJobEntry.txtGrade.Text <> "HLRound1" And frmJobEntry.txtGrade.Text <> "HLRound2" And
+            frmJobEntry.txtGrade.Text <> "HLRound3" And frmJobEntry.txtGrade.Text <> "HLSTD" And
+            frmJobEntry.txtGrade.Text <> "ReCheck" And
+            frmJobEntry.txtGrade.Text <> "Create H Cart" And
+            frmJobEntry.txtGrade.Text <> "Create L Cart" Then  'IF RECHECK DO NOT GET SHEETS FROM PREVIOUS DAY
+
+            ' routine to check if a today directory exists otherwise creat a new one
+            'Check to see if we have any sheets for this product and Grade in previous days
+            SQL.AddParam("@searchsheet", sheetSearch)
+            Dim daysstring As Integer = "-" & My.Settings.searchDays
+            SQL.AddParam("@days", daysstring)
+
+
+
+
+            Try
+
+
+                SQL.ExecQuery("Select MAX(PACKENDTM) PACKENDTM from jobs where packendtm between DateAdd(DD, @days, GETDATE()) and GetDATE() and (packsheetbcode like  '%' +  @searchsheet  + '%')")
+
+                If SQL.RecordCount > 0 Then
+
+
+                    'LOAD THE DATA FROM dB IN TO THE DATAGRID
+                    frmDGV.DGVdata.DataSource = SQL.SQLDS.Tables(0)
+                    frmDGV.DGVdata.Rows(0).Selected = True
+
+
+                    If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
+
+
+                        tmp_sheetdate = frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value
+                        sheetDate = tmp_sheetdate.ToString("dd_MM_yyyy")
+                    End If
+
+
+                    PrevPath1 = (My.Settings.dirPacking & "\" & sheetDate)
+                Else
+
+                    PrevPath1 = Nothing
+
+                End If
+
+
+            Catch ex As Exception
+                writeerrorLog.writelog("xl Find Old Sheet", ex.Message, True, "System_Fault")
+                MsgBox(ex.ToString)
+
+            End Try
+        End If
+
+
+
+
+
+
+    End Sub
 
 
 

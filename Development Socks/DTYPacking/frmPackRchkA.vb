@@ -65,7 +65,17 @@ Public Class frmPackRchkA
     Dim remainingCheese As Integer
     Dim pauseScan As Integer = 0  'Stop barcode entry when 1
 
+    'DIRECTORY PATHS ALL PUBLIC
+    Public finPath As String
+    Dim todayPath As String
+    Dim PrevPath1 As String
+    Dim PrevPath2 As String
+    Dim PrevPath3 As String
 
+    Dim sheetSearch As String
+    Dim sheetDate As String
+    Dim tmp_sheetdate As Date
+    Dim prodNum As String
 
 
 
@@ -450,6 +460,9 @@ Public Class frmPackRchkA
             Dim sheetname As String
             Dim FileName As String
 
+            todayDir()
+
+
             prodNameMod = DGVPakingRecA.Rows(0).Cells("PRODNAME").Value.ToString
             prodNameMod = prodNameMod.Replace("/", "_")
 
@@ -463,61 +476,65 @@ Public Class frmPackRchkA
                     & DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString & " A" & ".xlsx"
 
 
-            'CREATE THE FULL NAME FOR SAVING THE FILE
-            PathFileName = "C:\Users\TSSERVER\Desktop\ColorCheckFiles\CKPacking\10_03_2021\" & FileName
 
-            Try
+            If Not PrevPath1 = Nothing Then  'If we have a previous date then do a file open check, otherwise do not check
+                PathFileName = PrevPath1 & "\" & FileName
 
-                ' Dim tmpFileName As String = ""
-                Dim fOpen As IO.FileStream = IO.File.Open(PathFileName, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.None)
-                fOpen.Close()
-                fOpen.Dispose()
-                fOpen = Nothing
-            Catch e1 As IO.IOException
-                writeerrorLog.writelog("Excel File Open", "File " & FileName & "Cannot Save, file is Open", False, "Packing sheet")
 
-                If saveJob = 1 Then
-                    Dim result = MessageBox.Show("The file " & FileName & " is open on this computer or another computer." & vbCrLf &
+                Try
+
+                    ' Dim tmpFileName As String = ""
+                    Dim fOpen As IO.FileStream = IO.File.Open(PathFileName, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.None)
+                    fOpen.Close()
+                    fOpen.Dispose()
+                    fOpen = Nothing
+                Catch e1 As IO.IOException
+                    writeerrorLog.writelog("Excel File Open", "File " & PathFileName & "Cannot Save, file is Open", False, "Packing sheet")
+
+
+                    If saveJob = 1 Then
+                        Dim result = MessageBox.Show("The file " & PathFileName & " is open on this computer or another computer." & vbCrLf &
                    "Please find out who has the file open and close it." & vbCrLf & vbCrLf &
                    vbCrLf &
                    "When file has been closed Press OK and then press SAVE on the Cart screen which will Retry the save",
                    "Excel File Open Cannot Save", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
 
-                    If result = DialogResult.OK Then
-                        saveJob = 0
-                        finJob = 0
-                        Exit Sub
-                    End If
-                ElseIf finJob = 1 Then
-                    Dim result = MessageBox.Show("The file " & FileName & " is open on this computer or another computer." & vbCrLf &
-                "Please find out who has the file open and close it." & vbCrLf & vbCrLf &
-                vbCrLf &
-                "When file has been closed Press OK and then press FINISH on the Cart screen which will Retry the finish operation",
-                "Excel File Open Cannot Save", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        If result = DialogResult.OK Then
+                            saveJob = 0
+                            finJob = 0
+                            Exit Sub
+                        End If
+                    ElseIf finJob = 1 Then
+                        Dim result = MessageBox.Show("The file " & PathFileName & " is open on this computer or another computer." & vbCrLf &
+                    "Please find out who has the file open and close it." & vbCrLf & vbCrLf &
+                    vbCrLf &
+                    "When file has been closed Press OK and then press FINISH on the Cart screen which will Retry the finish operation",
+                    "Excel File Open Cannot Save", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
 
-                    If result = DialogResult.OK Then
-                        saveJob = 0
-                        finJob = 0
-                        Exit Sub
-                    End If
-                Else
-                    Dim result = MessageBox.Show("The file " & FileName & " is open on this computer or another computer." & vbCrLf &
+                        If result = DialogResult.OK Then
+                            saveJob = 0
+                            finJob = 0
+                            Exit Sub
+                        End If
+                    Else
+                        Dim result = MessageBox.Show("The file " & PathFileName & " is open on this computer or another computer." & vbCrLf &
                                     "Please find out who has the file open and close it." & vbCrLf & vbCrLf &
                                     vbCrLf &
                                     "When file has been closed Press OK and then press SAVE on the Cart screen which will Retry the save",
                                     "Excel File Open Cannot Save", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
 
-                    If result = DialogResult.OK Then
-                        saveJob = 0
-                        finJob = 0
-                        Exit Sub
+                        If result = DialogResult.OK Then
+                            saveJob = 0
+                            finJob = 0
+                            Exit Sub
+                        End If
                     End If
-                End If
 
-            End Try
+                End Try
+            End If
 
 
 
@@ -707,7 +724,7 @@ Public Class frmPackRchkA
 
 
         Dim bAddState As Boolean = DGVPakingRecA.AllowUserToAddRows
-        'Dim iRow As Integer =  DGVPakingA.CurrentRow.Index
+
         DGVPakingRecA.AllowUserToAddRows = True
         DGVPakingRecA.CurrentCell = DGVPakingRecA.Rows(DGVPakingRecA.Rows.Count - 1).Cells(0) ' move to add row
         DGVPakingRecA.CurrentCell = DGVPakingRecA.Rows(0).Cells(0) ' move back to current row  Changed Rows(iRow) to (0)
@@ -739,6 +756,70 @@ Public Class frmPackRchkA
 
 
     End Sub
+
+
+    'SUBROUTINE TO CHECK IF DAY DIRECTORIES EXIST IF NOT THEY ARE CREATED
+    Private Sub todayDir()
+
+        prodNum = DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
+        sheetSearch = prodNum & "______A"
+
+
+        If frmJobEntry.txtGrade.Text <> "Round1" And frmJobEntry.txtGrade.Text <> "Round2" And
+            frmJobEntry.txtGrade.Text <> "Round3" And frmJobEntry.txtGrade.Text <> "STD" And
+            frmJobEntry.txtGrade.Text <> "HLRound1" And frmJobEntry.txtGrade.Text <> "HLRound2" And
+            frmJobEntry.txtGrade.Text <> "HLRound3" And frmJobEntry.txtGrade.Text <> "HLSTD" And
+            frmJobEntry.txtGrade.Text <> "ReCheck" And
+            frmJobEntry.txtGrade.Text <> "Create H Cart" And
+            frmJobEntry.txtGrade.Text <> "Create L Cart" Then  'IF RECHECK DO NOT GET SHEETS FROM PREVIOUS DAY
+
+            ' routine to check if a today directory exists otherwise creat a new one
+            'Check to see if we have any sheets for this product and Grade in previous days
+            SQL.AddParam("@searchsheet", sheetSearch)
+            Dim daysstring As Integer = "-" & My.Settings.searchDays
+            SQL.AddParam("@days", daysstring)
+
+
+
+
+            Try
+
+
+                SQL.ExecQuery("Select MAX(PACKENDTM) PACKENDTM from jobs where packendtm between DateAdd(DD, @days, GETDATE()) and GetDATE() and (packsheetbcode like  '%' +  @searchsheet  + '%')")
+
+                If SQL.RecordCount > 0 Then
+
+
+                    'LOAD THE DATA FROM dB IN TO THE DATAGRID
+                    frmDGV.DGVdata.DataSource = SQL.SQLDS.Tables(0)
+                    frmDGV.DGVdata.Rows(0).Selected = True
+
+
+                    If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value) Then
+
+
+                        tmp_sheetdate = frmDGV.DGVdata.Rows(0).Cells("PACKENDTM").Value
+                        sheetDate = tmp_sheetdate.ToString("dd_MM_yyyy")
+                    End If
+
+
+                    PrevPath1 = (My.Settings.dirPacking & "\" & sheetDate)
+                Else
+
+                    PrevPath1 = Nothing
+
+                End If
+
+
+            Catch ex As Exception
+                writeerrorLog.writelog("xl Find Old Sheet", ex.Message, True, "System_Fault")
+                MsgBox(ex.ToString)
+
+            End Try
+        End If
+
+    End Sub
+
 
     'THIS LOOKS FOR ENTER key to be pressed or received via barcode
     Private Sub frmJobEntry_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
