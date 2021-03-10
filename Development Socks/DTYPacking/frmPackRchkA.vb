@@ -445,6 +445,11 @@ Public Class frmPackRchkA
             Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
             curcone = 0
 
+            Label1.Visible = True
+
+            'pauseScan = 1 'Stop Barcode entry
+            Label1.Text = ("Please wait creating packing Excel sheet")
+
             '**************************************************************************************************************
             'UPDATE ALL CHEESE ON CART AS PROCESSED TODAY FOR DAILY PACKING REPORT TO WORK
 
@@ -461,6 +466,9 @@ Public Class frmPackRchkA
             frmPackRepMain.PackRepMainSub()
             frmPackRepMain.Close()
             UpdateDatabase()
+
+            Label1.Visible = False
+
             Me.Cursor = System.Windows.Forms.Cursors.Default
 
             saveJob = 0

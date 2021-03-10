@@ -802,6 +802,12 @@ Public Class frmPacking
         If toAllocatedCount = allocatedCount Or saveJob = 1 Or finJob = 1 Then
             curcone = 0
             Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+            Label1.Visible = True
+
+            'pauseScan = 1 'Stop Barcode entry
+            Label1.Text = ("Please wait creating packing Excel sheet")
+
+
             '**************************************************************************************************************
             'UPDATE ALL CHEESE ON CART AS PROCESSED TODAY FOR DAILY PACKING REPORT TO WORK
 
@@ -817,6 +823,7 @@ Public Class frmPacking
             frmPackRepMain.PackRepMainSub()
             frmPackRepMain.Close()
             UpdateDatabase()
+            Label1.Visible = False
             Me.Cursor = System.Windows.Forms.Cursors.Default
             saveJob = 0
             frmJobEntry.Show()
