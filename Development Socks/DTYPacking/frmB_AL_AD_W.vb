@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports Excel = Microsoft.Office.Interop.Excel
+Imports System.IO
 
 Public Class frmB_AL_AD_W
 
@@ -34,6 +36,22 @@ Public Class frmB_AL_AD_W
 
     'THIS INITIATES WRITING TO ERROR LOG
     Private writeerrorLog As New writeError
+
+    'DIRECTORY PATHS ALL PUBLIC
+    Public finPath As String = Nothing
+    Dim todayPath As String = Nothing
+    Dim PrevPath1 As String = Nothing
+    Dim PrevPath2 As String = Nothing
+    Dim PrevPath3 As String = Nothing
+
+    Dim sheetSearch As String = Nothing
+    Dim sheetDate As String = Nothing
+    Dim tmp_sheetdate As Date
+    Dim prodNum As String = Nothing
+    Dim prodNameMod As String = Nothing
+    Dim PathFileName As String = Nothing
+    Dim sheetname As String = Nothing
+    Dim FileName As String = Nothing
 
 
 
@@ -486,28 +504,7 @@ Public Class frmB_AL_AD_W
 
                 End With
 
-
-
-
-
-
-
-
-
-
-
         End Select
-
-
-
-
-
-
-
-
-
-
-
 
     End Sub
 
@@ -822,54 +819,47 @@ Public Class frmB_AL_AD_W
 
     Private Sub jobEnd()
 
-        'Dim prodNameMod As String
-        'Dim PathFileName As String
-        'Dim sheetname As String
-        'Dim FileName As String
+        'prodNameMod = Nothing
+        'PathFileName = Nothing
+        'sheetname = Nothing
+        'FileName = Nothing
+
+        todayDir()
 
 
 
-
-        'prodNameMod = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value.ToString
-        'prodNameMod = prodNameMod.Replace("/", "_")
-
-        ''CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
-        'sheetname = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
-
-        ''Search for last date for file
+        If Not PrevPath1 = Nothing Then  'If we have a previous date then do a file open check, otherwise do not check
+            PathFileName = PrevPath1 & "\" & FileName
 
 
-        'FileName = prodNameMod & " " _
-        '            & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
-        '            & frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString & " A" & ".xlsx"
+            Try
 
-        ''CREATE THE FULL NAME FOR SAVING THE FILE
-        'PathFileName = "C:\Users\TSSERVER\Desktop\ColorCheckFiles\CKPacking\10_03_2021\" & FileName
+                ' Dim tmpFileName As String = ""
+                Dim fOpen As IO.FileStream = IO.File.Open(PathFileName, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.None)
+                fOpen.Close()
+                fOpen.Dispose()
+                fOpen = Nothing
+            Catch e1 As IO.IOException
+                writeerrorLog.writelog("Excel File Open", "File " & PathFileName & "Cannot Save, file is Open", False, "Packing sheet")
 
 
 
-
-        'Try
-
-        '    ' Dim tmpFileName As String = ""
-        '    Dim fOpen As IO.FileStream = IO.File.Open(PathFileName, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.None)
-        '    fOpen.Close()
-        '    fOpen.Dispose()
-        '    fOpen = Nothing
-        'Catch e1 As IO.IOException
-        '    writeerrorLog.writelog("Excel File Open", "File " & FileName & "Cannot Save, file is Open", False, "Packing sheet")
-
-        '    Dim result = MessageBox.Show("The file " & FileName & " is open on this computer or another computer." & vbCrLf &
-        '                            "Please find out who has the file open and close it." & vbCrLf & vbCrLf &
-        '                            vbCrLf &
-        '                            "When file has been closed Press OK and then press FINISH on the Cart screen which will Retry the save operation",
-        '                            "Excel File Open Cannot Save", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        '    If result = DialogResult.OK Then
-        '        Exit Sub
-        '    End If
+                Dim result = MessageBox.Show("The file " & PathFileName & " is open on this computer or another computer." & vbCrLf &
+                                    "Please find out who has the file open and close it." & vbCrLf & vbCrLf &
+                                    vbCrLf &
+                                    "When file has been closed Press OK and then press FINISH on the Cart screen which will Retry the save",
+                                    "Excel File Open Cannot Save", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
 
-        'End Try
+                If result = DialogResult.OK Then
+                    Exit Sub
+                End If
+
+
+            End Try
+        End If
+
+
 
 
 
@@ -1111,11 +1101,244 @@ Public Class frmB_AL_AD_W
 
     Private Sub btnFinish_Click(sender As Object, e As EventArgs) Handles btnFinish.Click
 
-        Dim btnpress As String = "Operator " & frmJobEntry.varUserName & "  Pressed STOP on Grade " & frmJobEntry.txtGrade.Text & " Packing sheet"
+        Dim btnpress As String = "Operator " & frmJobEntry.varUserName & "  Pressed Finish on Grade " & frmJobEntry.txtGrade.Text & " Packing sheet"
 
         writeerrorLog.writelog("Packing Stop/Finish pressed", btnpress, False, "Packing sheet")
 
         jobEnd()
+
+    End Sub
+
+    'SUBROUTINE TO CHECK IF DAY DIRECTORIES EXIST IF NOT THEY ARE CREATED
+    Private Sub todayDir()
+
+
+
+        Select Case frmJobEntry.txtGrade.Text
+
+            Case "Pilot 6Ch"
+                'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+                prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
+                prodNameMod = prodNameMod.Replace("/", "_")
+
+                'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+                sheetname = prodNameMod.Substring(prodNameMod.Length - 5) & "_A" & ".xlxs"
+
+                'CREATE THE FULL NAME FOR CHECKING THE FILE
+                FileName = (prodNameMod & " " _
+                            & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                            & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & "_PI6_A" & ".xlsx"
+
+                'CREATE SQL Search String
+                prodNum = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString
+                sheetSearch = prodNum & "______PI6"
+
+            Case "Pilot 15Ch"
+                'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+                prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
+                prodNameMod = prodNameMod.Replace("/", "_")
+
+                'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+                sheetname = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
+
+                'CREATE THE FULL NAME FOR CHECK THE FILE
+                FileName = (prodNameMod & " " _
+                            & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                            & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & "_PI15_A" & ".xlsx"
+
+                'CREATE SQL Search String
+                prodNum = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString
+                sheetSearch = prodNum & "______PI15"
+
+
+            Case "Pilot 20Ch"
+                'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+                prodNameMod = frmPacking.DGVPakingA.Rows(0).Cells("PRODNAME").Value.ToString
+                prodNameMod = prodNameMod.Replace("/", "_")
+
+                'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+                sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_A"
+
+                'CREATE THE FULL NAME FOR CHECK THE FILE
+                FileName = (prodNameMod & " " _
+                            & frmPacking.DGVPakingA.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                            & frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString) & "_PI20_A" & ".xlsx"
+
+                'CREATE SQL Search String
+                prodNum = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString
+                sheetSearch = prodNum & "______PI20"
+
+
+
+
+            Case Else
+                'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
+                prodNameMod = frmDGV.DGVdata.Rows(0).Cells("PRODNAME").Value.ToString
+                prodNameMod = prodNameMod.Replace("/", "_")
+
+                'CREATE THE SHEET NAME WHICH IS THE 4 LETTER REFRENCE AT THE END OF PRODUCT NAME
+                sheetName = prodNameMod.Substring(prodNameMod.Length - 5) & "_" & frmJobEntry.txtGrade.Text
+
+                'CREATE THE FULL NAME FOR CHECK THE FILE
+                FileName = (prodNameMod & " " _
+                            & frmDGV.DGVdata.Rows(0).Cells("MERGENUM").Value.ToString & "_" _
+                            & frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString) & " " & frmJobEntry.txtGrade.Text & ".xlsx"
+
+                'CREATE SQL Search String
+
+                prodNum = frmDGV.DGVdata.Rows(0).Cells("PRNUM").Value.ToString
+
+
+
+                Select Case frmJobEntry.txtGrade.Text
+
+                    Case "AL"
+
+                        sheetSearch = prodNum & "______AL"
+                    Case "AD"
+
+                        sheetSearch = prodNum & "______AD"
+                    Case "B"
+
+                        sheetSearch = prodNum & "______B"
+                    Case "P15 AS"
+
+                        sheetSearch = prodNum & "______P15AS"
+                    Case "P25 AS"
+
+                        sheetSearch = prodNum & "______P25AS"
+                    Case "P35 AS"
+
+                        sheetSearch = prodNum & "______P35AS"
+                    Case "P20 BS"
+
+                        sheetSearch = prodNum & "______P20BS"
+                    Case "P30 BS"
+
+                        sheetSearch = prodNum & "______P30BS"
+                    Case "P35 BS"
+
+                        sheetSearch = prodNum & "______P35BS"
+                    Case "ReCheck"
+
+                        sheetSearch = prodNum & "______ReCheck"
+                    Case "H DD"
+
+                        sheetSearch = prodNum & "______HDD"
+                    Case "H D"
+
+                        sheetSearch = prodNum & "______HD"
+                    Case "H MM"
+
+                        sheetSearch = prodNum & "______HMM"
+                    Case "H L"
+
+                        sheetSearch = prodNum & "______HL"
+                    Case "H LL"
+
+                        sheetSearch = prodNum & "______HLL"
+                    Case "H B"
+
+                        sheetSearch = prodNum & "______HB"
+                    Case "L DD"
+
+                        sheetSearch = prodNum & "______LDD"
+                    Case "L D"
+
+                        sheetSearch = prodNum & "______LD"
+                    Case "L MM"
+
+                        sheetSearch = prodNum & "______LMM"
+                    Case "L L"
+
+                        sheetSearch = prodNum & "______LL"
+                    Case "L LL"
+
+                        sheetSearch = prodNum & "______LLL"
+                    Case "L B"
+
+                        sheetSearch = prodNum & "______LB"
+                    Case "HS D"
+
+                        sheetSearch = prodNum & "______HSD"
+                    Case "HS M"
+
+                        sheetSearch = prodNum & "______HSM"
+                    Case "HS L"
+
+                        sheetSearch = prodNum & "______HSL"
+                    Case "HS B"
+
+                        sheetSearch = prodNum & "______HSB"
+                    Case "LS D"
+
+                        sheetSearch = prodNum & "______LSD"
+                    Case "LS M"
+
+                        sheetSearch = prodNum & "______LSM"
+                    Case "LS L"
+
+                        sheetSearch = prodNum & "______LSL"
+                    Case "LS B"
+
+                        sheetSearch = prodNum & "______LSB"
+
+                End Select
+
+        End Select
+
+
+
+
+
+        ' routine to check if a today directory exists otherwise creat a new one
+        'Check to see if we have any sheets for this product and Grade in previous days
+        SQLL.AddParam("@searchsheet", sheetSearch)
+        Dim daysstring As Integer = "-" & My.Settings.searchDays
+        SQLL.AddParam("@days", daysstring)
+
+
+
+
+        Try
+
+
+                SQLL.ExecQuery("Select MAX(PACKENDTM) PACKENDTM from jobs where packendtm between DateAdd(DD, @days, GETDATE()) and GetDATE() and (packsheetbcode like  '%' +  @searchsheet  + '%')")
+
+                If SQLL.RecordCount > 0 Then
+
+
+                    'LOAD THE DATA FROM dB IN TO THE DATAGRID
+                    DGVMaxDate.DataSource = SQLL.SQLDS.Tables(0)
+                    DGVMaxDate.Rows(0).Selected = True
+
+
+                    If Not IsDBNull(DGVMaxDate.Rows(0).Cells("PACKENDTM").Value) Then
+
+
+                        tmp_sheetdate = DGVMaxDate.Rows(0).Cells("PACKENDTM").Value
+                        sheetDate = tmp_sheetdate.ToString("dd_MM_yyyy")
+                    End If
+
+                If sheetDate = Nothing Then
+                    PrevPath1 = Nothing
+                Else
+
+                    PrevPath1 = (My.Settings.dirPacking & "\" & sheetDate)
+                End If
+            Else
+
+                    PrevPath1 = Nothing
+
+
+            End If
+
+
+        Catch ex As Exception
+                writeerrorLog.writelog("xl Find Old Sheet", ex.Message, True, "System_Fault")
+                MsgBox(ex.ToString)
+
+            End Try
 
     End Sub
 

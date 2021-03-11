@@ -1434,7 +1434,7 @@ Public Class frmCart1
 
                     UpdateConeVal()
 
-                    Dim department As String
+                    Dim department As String = " "
 
                     If My.Settings.chkUseSort Then department = "SORTING"
                     If My.Settings.chkUseColour Then department = "COLOUR"
@@ -1945,12 +1945,12 @@ Public Class frmCart1
 
                 If Not IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value) Then
                     If frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value.ToString = "L" Then
-                        HHFound = 1
+                        llFound = 1
                     End If
                 End If
             Next
 
-            If HHFound = 1 Then
+            If llFound = 1 Then
                 Dim result = MessageBox.Show("L values already on cart are you sure you wish to remaining Cheeses to L ", "YES or NO", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
 
                 If result = DialogResult.Yes Then
@@ -1958,7 +1958,7 @@ Public Class frmCart1
                 End If
 
                 If result = DialogResult.No Then
-                    valHH = 0   '280372102001B3
+                    valLL = 0   '280372102001B3
                     Exit Sub
                 End If
             End If
@@ -4383,7 +4383,7 @@ Public Class frmCart1
         Dim YY, MM, DD As String
         Dim todaypath As String
         Dim savename As String
-        Dim SheetNum As Integer
+        'Dim SheetNum As Integer
 
 
         finddate = frmJobEntry.txtLotNumber.Text 'gets the date the file was created

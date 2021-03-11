@@ -803,7 +803,12 @@ Public Class frmPackRchkA
                     End If
 
 
-                    PrevPath1 = (My.Settings.dirPacking & "\" & sheetDate)
+                    If sheetDate = Nothing Then
+                        PrevPath1 = Nothing
+                    Else
+
+                        PrevPath1 = (My.Settings.dirPacking & "\" & sheetDate)
+                    End If
                 Else
 
                     PrevPath1 = Nothing

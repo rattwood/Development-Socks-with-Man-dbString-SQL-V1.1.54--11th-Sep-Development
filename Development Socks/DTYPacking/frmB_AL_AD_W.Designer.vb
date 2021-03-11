@@ -58,6 +58,7 @@ Partial Class frmB_AL_AD_W
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.txtConeBcode = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.DGVMaxDate = New System.Windows.Forms.DataGridView()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -66,6 +67,7 @@ Partial Class frmB_AL_AD_W
         Me.Panel2.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.Panel7.SuspendLayout()
+        CType(Me.DGVMaxDate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -133,6 +135,7 @@ Partial Class frmB_AL_AD_W
         'Panel4
         '
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel4.Controls.Add(Me.DGVMaxDate)
         Me.Panel4.Controls.Add(Me.btnDefect)
         Me.Panel4.Controls.Add(Me.btnCancel)
         Me.Panel4.Controls.Add(Me.btnFinish)
@@ -473,6 +476,15 @@ Partial Class frmB_AL_AD_W
         Me.Label7.TabIndex = 145
         Me.Label7.Text = "Cheese #"
         '
+        'DGVMaxDate
+        '
+        Me.DGVMaxDate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGVMaxDate.Location = New System.Drawing.Point(40, 91)
+        Me.DGVMaxDate.Name = "DGVMaxDate"
+        Me.DGVMaxDate.Size = New System.Drawing.Size(47, 29)
+        Me.DGVMaxDate.TabIndex = 180
+        Me.DGVMaxDate.Visible = False
+        '
         'frmB_AL_AD_W
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -501,6 +513,7 @@ Partial Class frmB_AL_AD_W
         Me.Panel6.PerformLayout()
         Me.Panel7.ResumeLayout(False)
         Me.Panel7.PerformLayout()
+        CType(Me.DGVMaxDate, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -540,4 +553,5 @@ Partial Class frmB_AL_AD_W
     Friend WithEvents CheeseAloc5 As DataGridViewTextBoxColumn
     Friend WithEvents CheeseNum5 As DataGridViewTextBoxColumn
     Friend WithEvents ListBox1 As ListBox
+    Friend WithEvents DGVMaxDate As DataGridView
 End Class
