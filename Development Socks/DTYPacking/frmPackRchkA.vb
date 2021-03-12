@@ -57,7 +57,7 @@ Public Class frmPackRchkA
     Dim csvRowNum As String
 
     Public saveJob As Integer = 0
-    Public finJob As Integer
+    Public finJob As Integer = 0
 
     'Variables used to display remaining on sheet and number left to finish sheet
     Dim xlcheesecount As Integer
@@ -762,7 +762,7 @@ Public Class frmPackRchkA
     Private Sub todayDir()
 
         prodNum = DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
-        sheetSearch = prodNum & "______A"
+        sheetSearch = prodNum & "______A[0-9]"
 
 
         If frmJobEntry.txtGrade.Text <> "Round1" And frmJobEntry.txtGrade.Text <> "Round2" And
@@ -785,7 +785,7 @@ Public Class frmPackRchkA
             Try
 
 
-                SQL.ExecQuery("Select MAX(PACKENDTM) PACKENDTM from jobs where packendtm between DateAdd(DD, @days, GETDATE()) and GetDATE() and (packsheetbcode like  '%' +  @searchsheet  + '%')")
+                SQL.ExecQuery("Select MAX(PACKENDTM) PACKENDTM from jobs where packendtm between DateAdd(DD, @days, GETDATE()) and GetDATE() and (packsheetbcode like  '%' +  @searchsheet + '%' )")
 
                 If SQL.RecordCount > 0 Then
 

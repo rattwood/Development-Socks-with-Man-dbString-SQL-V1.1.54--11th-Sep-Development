@@ -477,7 +477,7 @@ Public Class frmPackTodayUpdate
                     End If
 
 
-                    Console.WriteLine("fin Job = " & frmPacking.finJob)
+
                     'CHECK for early finish to job print and create new black sheet ready for next cart to be scanned in
                     If frmPackRchkA.finJob = 1 Then
                         Dim tmpsaveName As String

@@ -795,21 +795,11 @@ Public Class frmB_AL_AD_W
         End Select
 
 
-
-
-
         packedFlag = 0
-
-
 
 
         txtConeBcode.Clear()
         txtConeBcode.Focus()
-
-
-
-
-
 
 
     End Sub
@@ -840,6 +830,7 @@ Public Class frmB_AL_AD_W
                 fOpen.Dispose()
                 fOpen = Nothing
             Catch e1 As IO.IOException
+
                 writeerrorLog.writelog("Excel File Open", "File " & PathFileName & "Cannot Save, file is Open", False, "Packing sheet")
 
 
@@ -912,7 +903,6 @@ Public Class frmB_AL_AD_W
 
             writeerrorLog.writelog("Error during Print", errorDetail, False, "System Fault")
             writeerrorLog.writelog("Error during Print", ex.Message, False, "System Fault")
-            writeerrorLog.writelog("Error during Print", ex.ToString, False, "System Fault")
             Me.Close()
             frmJobEntry.Show()
             frmJobEntry.txtLotNumber.Clear()
@@ -1303,9 +1293,9 @@ Public Class frmB_AL_AD_W
         Try
 
 
-                SQLL.ExecQuery("Select MAX(PACKENDTM) PACKENDTM from jobs where packendtm between DateAdd(DD, @days, GETDATE()) and GetDATE() and (packsheetbcode like  '%' +  @searchsheet  + '%')")
+            SQLL.ExecQuery("Select MAX(PACKENDTM) PACKENDTM from jobs where packendtm between DateAdd(DD, @days, GETDATE()) and GetDATE() and (packsheetbcode like  '%' +  @searchsheet + '%' )")
 
-                If SQLL.RecordCount > 0 Then
+            If SQLL.RecordCount > 0 Then
 
 
                     'LOAD THE DATA FROM dB IN TO THE DATAGRID

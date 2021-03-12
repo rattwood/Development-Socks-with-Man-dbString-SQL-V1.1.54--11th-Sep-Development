@@ -68,7 +68,7 @@ Public Class frmPackRepMain
 
                     'CREATE SQL Search String
                     prodNum = frmPackRchkA.DGVPakingRecA.Rows(0).Cells("PRNUM").Value.ToString
-                    sheetSearch = prodNum & "______A"
+                    sheetSearch = prodNum & "______A[0-9]"
 
 
                 Case "A"
@@ -86,7 +86,7 @@ Public Class frmPackRepMain
 
                     'CREATE SQL Search String
                     prodNum = frmPacking.DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString
-                    sheetSearch = prodNum & "______A"
+                    sheetSearch = prodNum & "______A[0-9]"
 
                 Case "Pilot 6Ch"
                     'CREATE PRODUCT NAME STRING USED WHEN SAVING FILE
@@ -444,7 +444,7 @@ Public Class frmPackRepMain
             Try
 
 
-                SQLL.ExecQuery("Select MAX(PACKENDTM) PACKENDTM from jobs where packendtm between DateAdd(DD, @days, GETDATE()) and GetDATE() and (packsheetbcode like  '%' +  @searchsheet  + '%')")
+                SQLL.ExecQuery("Select MAX(PACKENDTM) PACKENDTM from jobs where packendtm between DateAdd(DD, @days, GETDATE()) and GetDATE() and (packsheetbcode like  '%' +  @searchsheet + '%' )")
 
                 If SQLL.RecordCount > 0 Then
 

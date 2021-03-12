@@ -846,6 +846,9 @@ Public Class frmPacking
                     fOpen.Dispose()
                     fOpen = Nothing
                 Catch e1 As IO.IOException
+
+
+
                     writeerrorLog.writelog("Excel File Open", "File " & PathFileName & "Cannot Save, file is Open", False, "Packing sheet")
 
 
@@ -1096,7 +1099,7 @@ Public Class frmPacking
     Private Sub todayDir()
 
         prodNum = DGVPakingA.Rows(0).Cells("PRNUM").Value.ToString
-        sheetSearch = prodNum & "______A"
+        sheetSearch = prodNum & "______A[0-9]"
 
 
         If frmJobEntry.txtGrade.Text <> "Round1" And frmJobEntry.txtGrade.Text <> "Round2" And
@@ -1119,7 +1122,7 @@ Public Class frmPacking
             Try
 
 
-                SQL.ExecQuery("Select MAX(PACKENDTM) PACKENDTM from jobs where packendtm between DateAdd(DD, @days, GETDATE()) and GetDATE() and (packsheetbcode like  '%' +  @searchsheet  + '%')")
+                SQL.ExecQuery("Select MAX(PACKENDTM) PACKENDTM from jobs where packendtm between DateAdd(DD, @days, GETDATE()) and GetDATE() and (packsheetbcode like  '%' +  @searchsheet + '%'  )")
 
                 If SQL.RecordCount > 0 Then
 
