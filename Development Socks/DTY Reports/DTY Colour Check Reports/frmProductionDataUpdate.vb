@@ -313,7 +313,7 @@ Public Class frmProductionDataUpdate
 
         'FIND Full AB CHEESE
         DGVProdDataSend.DataSource = Nothing  'THIS CLEARS ANY OLD DATA OUT OF DGV
-        LExecQuery("SELECT conenum FROM jobs WHERE (conebarley > 0 or M50 > 0 or P50 > 0) and FLT_S = 'False'  and BCODEJOB = '" & jobNum & "' ORDER BY CONENUM ")
+        LExecQuery("SELECT conenum FROM jobs WHERE (conebarley > 0 or M50 > 0 or P50 > 0 or DEFCONE > 0) and FLT_S = 'False'  and BCODEJOB = '" & jobNum & "' ORDER BY CONENUM ")
 
         If LRecordCount > 0 Then
             'LOAD THE DATA FROM dB IN TO THE DATAGRID
@@ -345,7 +345,7 @@ Public Class frmProductionDataUpdate
 
         'FIND SAB CHEESE
         DGVProdDataSend.DataSource = Nothing  'THIS CLEARS ANY OLD DATA OUT OF DGV
-        LExecQuery("SELECT conenum FROM jobs WHERE (conebarley > 0 or M50 > 0 or P50 > 0) and FLT_S = 'True'  and BCODEJOB = '" & jobNum & "' ORDER BY CONENUM ")
+        LExecQuery("SELECT conenum FROM jobs WHERE (conebarley > 0 or M50 > 0 or P50 > 0 or defcone > 0) and FLT_S = 'True'  and BCODEJOB = '" & jobNum & "' ORDER BY CONENUM ")
 
         If LRecordCount > 0 Then
             'LOAD THE DATA FROM dB IN TO THE DATAGRID
@@ -381,7 +381,7 @@ Public Class frmProductionDataUpdate
         'FIND GRADE "A" SHORT
         DGVProdDataSend.DataSource = Nothing  'THIS CLEARS ANY OLD DATA OUT OF DGV
         LExecQuery("SELECT conenum FROM jobs WHERE FLT_S = 'True' " _
-                   & "And P30 = 0 And M30 = 0 And conebarley = 0" _
+                   & "And P30 = 0 And M30 = 0 And conebarley = 0 and defcone = 0" _
                    & "And BCODEJOB = '" & jobNum & "' ")
 
         If LRecordCount > 0 Then
