@@ -821,33 +821,34 @@ Public Class frmB_AL_AD_W
         If Not PrevPath1 = Nothing Then  'If we have a previous date then do a file open check, otherwise do not check
             PathFileName = PrevPath1 & "\" & FileName
 
+            If IO.File.Exists(PathFileName) Then
+                Try
 
-            Try
+                    ' Dim tmpFileName As String = ""
+                    Dim fOpen As IO.FileStream = IO.File.Open(PathFileName, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.None)
+                    fOpen.Close()
+                    fOpen.Dispose()
+                    fOpen = Nothing
+                Catch e1 As IO.IOException
 
-                ' Dim tmpFileName As String = ""
-                Dim fOpen As IO.FileStream = IO.File.Open(PathFileName, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.None)
-                fOpen.Close()
-                fOpen.Dispose()
-                fOpen = Nothing
-            Catch e1 As IO.IOException
-
-                writeerrorLog.writelog("Excel File Open", "File " & PathFileName & "Cannot Save, file is Open", False, "Packing sheet")
+                    writeerrorLog.writelog("Excel File Open", "File " & PathFileName & "Cannot Save, file is Open", False, "Packing sheet")
 
 
 
-                Dim result = MessageBox.Show("The file " & PathFileName & " is open on this computer or another computer." & vbCrLf &
+                    Dim result = MessageBox.Show("The file " & PathFileName & " is open on this computer or another computer." & vbCrLf &
                                     "Please find out who has the file open and close it." & vbCrLf & vbCrLf &
                                     vbCrLf &
                                     "When file has been closed Press OK and then press FINISH on the Cart screen which will Retry the save",
                                     "Excel File Open Cannot Save", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
 
-                If result = DialogResult.OK Then
-                    Exit Sub
-                End If
+                    If result = DialogResult.OK Then
+                        Exit Sub
+                    End If
 
 
-            End Try
+                End Try
+            End If
         End If
 
 
@@ -855,7 +856,7 @@ Public Class frmB_AL_AD_W
 
 
 
-        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+            Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         Label8.Visible = True
 
         pauseScan = 1 'Stop Barcode entry

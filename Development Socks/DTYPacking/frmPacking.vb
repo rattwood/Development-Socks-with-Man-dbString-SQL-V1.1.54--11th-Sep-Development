@@ -837,67 +837,68 @@ Public Class frmPacking
             If Not PrevPath1 = Nothing Then  'If we have a previous date then do a file open check, otherwise do not check
                 PathFileName = PrevPath1 & "\" & FileName
 
+                If IO.File.Exists(PathFileName) Then
+                    Try
 
-                Try
-
-                    ' Dim tmpFileName As String = ""
-                    Dim fOpen As IO.FileStream = IO.File.Open(PathFileName, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.None)
-                    fOpen.Close()
-                    fOpen.Dispose()
-                    fOpen = Nothing
-                Catch e1 As IO.IOException
-
-
-
-                    writeerrorLog.writelog("Excel File Open", "File " & PathFileName & "Cannot Save, file is Open", False, "Packing sheet")
+                        ' Dim tmpFileName As String = ""
+                        Dim fOpen As IO.FileStream = IO.File.Open(PathFileName, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.None)
+                        fOpen.Close()
+                        fOpen.Dispose()
+                        fOpen = Nothing
+                    Catch e1 As IO.IOException
 
 
-                    If saveJob = 1 Then
-                        Dim result = MessageBox.Show("The file " & PathFileName & " is open on this computer or another computer." & vbCrLf &
-                   "Please find out who has the file open and close it." & vbCrLf & vbCrLf &
-                   vbCrLf &
-                   "When file has been closed Press OK and then press SAVE on the Cart screen which will Retry the save",
-                   "Excel File Open Cannot Save", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+                        writeerrorLog.writelog("Excel File Open", "File " & PathFileName & "Cannot Save, file is Open", False, "Packing sheet")
 
 
-                        If result = DialogResult.OK Then
-                            saveJob = 0
-                            finJob = 0
-                            Exit Sub
-                        End If
-                    ElseIf finJob = 1 Then
-                        Dim result = MessageBox.Show("The file " & PathFileName & " is open on this computer or another computer." & vbCrLf &
-                "Please find out who has the file open and close it." & vbCrLf & vbCrLf &
-                vbCrLf &
-                "When file has been closed Press OK and then press FINISH on the Cart screen which will Retry the finish operation",
-                "Excel File Open Cannot Save", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        If saveJob = 1 Then
+                            Dim result = MessageBox.Show("The file " & PathFileName & " is open on this computer or another computer." & vbCrLf &
+                                  "Please find out who has the file open and close it." & vbCrLf & vbCrLf &
+                                  vbCrLf &
+                                 "When file has been closed Press OK and then press SAVE on the Cart screen which will Retry the save",
+                                 "Excel File Open Cannot Save", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
 
-                        If result = DialogResult.OK Then
-                            saveJob = 0
-                            finJob = 0
-                            Exit Sub
-                        End If
-                    Else
-                        Dim result = MessageBox.Show("The file " & PathFileName & " is open on this computer or another computer." & vbCrLf &
+                            If result = DialogResult.OK Then
+                                saveJob = 0
+                                finJob = 0
+                                Exit Sub
+                            End If
+                        ElseIf finJob = 1 Then
+                            Dim result = MessageBox.Show("The file " & PathFileName & " is open on this computer or another computer." & vbCrLf &
+                               "Please find out who has the file open and close it." & vbCrLf & vbCrLf &
+                               vbCrLf &
+                               "When file has been closed Press OK and then press FINISH on the Cart screen which will Retry the finish operation",
+                               "Excel File Open Cannot Save", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+
+                            If result = DialogResult.OK Then
+                                saveJob = 0
+                                finJob = 0
+                                Exit Sub
+                            End If
+                        Else
+                            Dim result = MessageBox.Show("The file " & PathFileName & " is open on this computer or another computer." & vbCrLf &
                                     "Please find out who has the file open and close it." & vbCrLf & vbCrLf &
                                     vbCrLf &
                                     "When file has been closed Press OK and then press SAVE on the Cart screen which will Retry the save",
                                     "Excel File Open Cannot Save", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
 
-                        If result = DialogResult.OK Then
-                            saveJob = 0
-                            finJob = 0
-                            Exit Sub
+                            If result = DialogResult.OK Then
+                                saveJob = 0
+                                finJob = 0
+                                Exit Sub
+                            End If
                         End If
-                    End If
 
-                End Try
+                    End Try
+                End If
             End If
 
 
-            curcone = 0
+                curcone = 0
                 Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
                 Label1.Visible = True
 
