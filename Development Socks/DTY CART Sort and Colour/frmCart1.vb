@@ -1927,7 +1927,7 @@ Public Class frmCart1
 
             For rw = 1 To frmDGV.DGVdata.Rows.Count
                 'Chek to see if an H values already set
-                If IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value) Then
+                If IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value) And frmDGV.DGVdata.Rows(rw - 1).Cells("MISSCONE").Value = "0" Then
                     frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value = "H"
                 End If
             Next
@@ -1943,7 +1943,7 @@ Public Class frmCart1
             For rw = 1 To frmDGV.DGVdata.Rows.Count
                 'Chek to see if an H values already set
 
-                If Not IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value) Then
+                If Not IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value) And frmDGV.DGVdata.Rows(rw - 1).Cells("MISSCONE").Value = "0" Then
                     If frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value.ToString = "L" Then
                         llFound = 1
                     End If
@@ -1965,7 +1965,7 @@ Public Class frmCart1
 
             For rw = 1 To frmDGV.DGVdata.Rows.Count
                 'Chek to see if an H values already set
-                If IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value) Then
+                If IsDBNull(frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value) And frmDGV.DGVdata.Rows(rw - 1).Cells("MISSCONE").Value = "0" Then
                     frmDGV.DGVdata.Rows(rw - 1).Cells("HHLL").Value = "L"
                 End If
             Next
