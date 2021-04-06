@@ -93,6 +93,7 @@ Public Class frmJobEntry
     Public HLColChk As String = Nothing
     Public HLColSep As String = Nothing
     Dim HLPackGrade As String = Nothing
+    Public HLReport As Integer = 0
     Public MDML, HHLL As String  'Identification is product is HHLL or MDML  grading methids
 
     'days to look back for cheeses to be packed
@@ -2737,15 +2738,31 @@ Public Class frmJobEntry
     End Sub
 
     Private Sub btnCartReport_Click(sender As Object, e As EventArgs) Handles btnCartReport.Click
-
+        txtBoxCartReport.Location = New Point(139, 318)
         Me.txtLotNumber.Visible = False
         Me.txtBoxCartReport.Visible = True
         Me.btnJobReport.Visible = False
         btnCancelReport.Visible = True
         Me.txtBoxCartReport.Focus()
+        btnHLReport.Hide()
+        HLReport = 0
         cartReport = 1
         Me.KeyPreview = True
 
+    End Sub
+
+
+    Private Sub btnHLReport_Click(sender As Object, e As EventArgs) Handles btnHLReport.Click
+        txtBoxCartReport.Location = New Point(139, 266)
+        Me.txtLotNumber.Visible = False
+        Me.txtBoxCartReport.Visible = True
+        Me.btnJobReport.Visible = False
+        btnCancelReport.Visible = True
+        Me.txtBoxCartReport.Focus()
+        btnCartReport.Hide()
+        cartReport = 0
+        HLReport = 1
+        Me.KeyPreview = True
     End Sub
 
     Private Sub cartReportSub()
@@ -2756,8 +2773,6 @@ Public Class frmJobEntry
             Me.txtBoxCartReport.Focus()
             Exit Sub
         End If
-
-
 
 
         Dim modLotStr = txtBoxCartReport.Text.Substring(0, 12)
@@ -2809,6 +2824,91 @@ Public Class frmJobEntry
 
     End Sub
 
+    Private Sub HLReportSub()
+
+
+        If txtBoxCartReport.Text = "" Then
+            MsgBox("Please enter Barcode first" & vbCrLf & " กรุณาป้อนรหัสบาร์โค็ด")
+            Me.txtBoxCartReport.Focus()
+            Exit Sub
+        End If
+
+
+
+        'Check Product Type HHLL or MDML
+        LAddParam("@prnum", txtBoxCartReport.Text.Substring(2, 3))
+        LExecQuery("Select * From PRODUCT where prnum = @prnum And prod_HHLL = 'YES' ")
+
+        If LRecordCount > 0 Then
+            HHLL = "YES"
+        Else
+            MsgBox("This is not HL Product, please check sheet")
+
+            Me.txtBoxCartReport.Visible = False
+            Me.btnCancelReport.Visible = False
+            'Me.btnCancelReport.Visible = True
+            Me.btnJobReport.Visible = True
+            Me.btnHLReport.Visible = True
+            Me.txtLotNumber.Visible = True
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Focus()
+            Me.txtLotNumber.Refresh()
+            Exit Sub
+        End If
+
+
+
+        Dim modLotStr = txtBoxCartReport.Text.Substring(0, 12)
+        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+
+        LExecQuery("SELECT * FROM JOBS WHERE BCODEJOB = '" & modLotStr & "' ")
+
+        If LRecordCount > 0 Then
+
+
+            'LOAD THE DATA FROM dB IN TO THE DATAGRID
+            frmPrintHLReport.DGVHLReport.DataSource = LDS.Tables(0)
+            frmPrintHLReport.DGVHLReport.Rows(0).Selected = True
+
+            'SORT GRIDVIEW IN TO CORRECT JOB SEQUENCE
+            frmPrintHLReport.DGVHLReport.Sort(frmPrintHLReport.DGVHLReport.Columns("CONENUM"), ListSortDirection.Ascending)  'sorts On cone number
+            Me.Cursor = System.Windows.Forms.Cursors.Default
+            Me.Hide()
+            frmPrintHLReport.Show()
+
+
+
+        Else
+            Me.Cursor = System.Windows.Forms.Cursors.Default
+            MsgBox("No Job Found, Please check if this Job has been checked" & vbCrLf & " ไม่พบงาน กรุณาตรวจสอบว่างานนี้ได้รับการตรวจเช็คหรือไม่")
+
+            Me.txtBoxCartReport.Visible = False
+            Me.btnCancelReport.Visible = False
+            Me.btnJobReport.Visible = True
+            Me.txtLotNumber.Visible = True
+            Me.txtLotNumber.Clear()
+            Me.txtLotNumber.Focus()
+            Me.txtLotNumber.Refresh()
+
+        End If
+
+
+        Me.txtBoxCartReport.Visible = False
+        Me.btnCancelReport.Visible = False
+        Me.btnJobReport.Visible = True
+        Me.txtLotNumber.Visible = True
+        Me.txtLotNumber.Clear()
+        Me.txtLotNumber.Focus()
+        Me.txtLotNumber.Refresh()
+
+        LRecordCount = 0
+
+
+
+    End Sub
+
+
+
     Private Sub btnCancelReport_Click(sender As Object, e As EventArgs) Handles btnCancelReport.Click
 
         cartReport = 0
@@ -2819,6 +2919,8 @@ Public Class frmJobEntry
         Me.txtLotNumber.Visible = True
         Me.txtLotNumber.Clear()
         Me.txtLotNumber.Focus()
+        btnCartReport.Show()
+        btnHLReport.Show()
 
 
 
@@ -2855,6 +2957,8 @@ Public Class frmJobEntry
 
                 If cartReport = 1 Then
                     cartReportSub()
+                ElseIf HLReport = 1 Then
+                    HLReportSub()
                 ElseIf My.Settings.chkUseSort And (stdcheck = 0 And txtGrade.Text <> "ReCheck") Or My.Settings.chkUseColour Then
                     prgContinue()
                 ElseIf (My.Settings.chkUsePack And txtGrade.Text = "A") Or (My.Settings.chkUsePack And (txtGrade.Text = "Pilot 6Ch" Or
