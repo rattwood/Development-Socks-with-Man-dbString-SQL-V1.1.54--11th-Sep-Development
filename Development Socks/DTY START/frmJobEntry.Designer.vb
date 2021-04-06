@@ -147,6 +147,7 @@ Partial Class frmJobEntry
         Me.lblSelectGrade = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtPilotCount = New System.Windows.Forms.TextBox()
+        Me.btnHLReport = New System.Windows.Forms.Button()
         CType(Me.ToraydbBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Toraydb, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
@@ -194,7 +195,7 @@ Partial Class frmJobEntry
         Me.btnJobReport.Location = New System.Drawing.Point(580, 377)
         Me.btnJobReport.Name = "btnJobReport"
         Me.btnJobReport.Size = New System.Drawing.Size(113, 47)
-        Me.btnJobReport.TabIndex = 16
+        Me.btnJobReport.TabIndex = 17
         Me.btnJobReport.Text = "M/C Report"
         Me.btnJobReport.UseVisualStyleBackColor = True
         Me.btnJobReport.Visible = False
@@ -211,10 +212,10 @@ Partial Class frmJobEntry
         '
         'btnCartReport
         '
-        Me.btnCartReport.Location = New System.Drawing.Point(20, 297)
+        Me.btnCartReport.Location = New System.Drawing.Point(20, 316)
         Me.btnCartReport.Name = "btnCartReport"
         Me.btnCartReport.Size = New System.Drawing.Size(113, 47)
-        Me.btnCartReport.TabIndex = 11
+        Me.btnCartReport.TabIndex = 12
         Me.btnCartReport.Text = "Create Cart Report"
         Me.btnCartReport.UseVisualStyleBackColor = True
         '
@@ -223,17 +224,17 @@ Partial Class frmJobEntry
         Me.btnSearchCone.Location = New System.Drawing.Point(350, 377)
         Me.btnSearchCone.Name = "btnSearchCone"
         Me.btnSearchCone.Size = New System.Drawing.Size(113, 47)
-        Me.btnSearchCone.TabIndex = 15
+        Me.btnSearchCone.TabIndex = 16
         Me.btnSearchCone.Text = "Search  Cheese"
         Me.btnSearchCone.UseVisualStyleBackColor = True
         '
         'txtBoxCartReport
         '
         Me.txtBoxCartReport.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.txtBoxCartReport.Location = New System.Drawing.Point(139, 300)
+        Me.txtBoxCartReport.Location = New System.Drawing.Point(139, 319)
         Me.txtBoxCartReport.Name = "txtBoxCartReport"
         Me.txtBoxCartReport.Size = New System.Drawing.Size(471, 44)
-        Me.txtBoxCartReport.TabIndex = 12
+        Me.txtBoxCartReport.TabIndex = 13
         Me.txtBoxCartReport.Visible = False
         '
         'btnCancelReport
@@ -241,7 +242,7 @@ Partial Class frmJobEntry
         Me.btnCancelReport.Location = New System.Drawing.Point(20, 373)
         Me.btnCancelReport.Name = "btnCancelReport"
         Me.btnCancelReport.Size = New System.Drawing.Size(113, 47)
-        Me.btnCancelReport.TabIndex = 13
+        Me.btnCancelReport.TabIndex = 14
         Me.btnCancelReport.Text = "Cancel"
         Me.btnCancelReport.UseVisualStyleBackColor = True
         '
@@ -250,7 +251,7 @@ Partial Class frmJobEntry
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.Color.Red
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(17, 242)
+        Me.Label3.Location = New System.Drawing.Point(11, 190)
         Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(119, 37)
@@ -263,7 +264,7 @@ Partial Class frmJobEntry
         Me.btnDefRep.Location = New System.Drawing.Point(269, 377)
         Me.btnDefRep.Name = "btnDefRep"
         Me.btnDefRep.Size = New System.Drawing.Size(113, 47)
-        Me.btnDefRep.TabIndex = 14
+        Me.btnDefRep.TabIndex = 15
         Me.btnDefRep.Text = "Defect Report"
         Me.btnDefRep.UseVisualStyleBackColor = True
         Me.btnDefRep.Visible = False
@@ -872,25 +873,25 @@ Partial Class frmJobEntry
         '
         Me.Round1ToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Round1ToolStripMenuItem.Name = "Round1ToolStripMenuItem"
-        Me.Round1ToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.Round1ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.Round1ToolStripMenuItem.Text = "Round1"
         '
         'Round2ToolStripMenuItem
         '
         Me.Round2ToolStripMenuItem.Name = "Round2ToolStripMenuItem"
-        Me.Round2ToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.Round2ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.Round2ToolStripMenuItem.Text = "Round2"
         '
         'Round3ToolStripMenuItem
         '
         Me.Round3ToolStripMenuItem.Name = "Round3ToolStripMenuItem"
-        Me.Round3ToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.Round3ToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.Round3ToolStripMenuItem.Text = "Round3"
         '
         'StdSheetToolStripMenuItem
         '
         Me.StdSheetToolStripMenuItem.Name = "StdSheetToolStripMenuItem"
-        Me.StdSheetToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.StdSheetToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.StdSheetToolStripMenuItem.Text = "STD"
         '
         'ToolStripMenuItem4
@@ -903,25 +904,25 @@ Partial Class frmJobEntry
         'Round1ToolStripMenuItem1
         '
         Me.Round1ToolStripMenuItem1.Name = "Round1ToolStripMenuItem1"
-        Me.Round1ToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.Round1ToolStripMenuItem1.Size = New System.Drawing.Size(130, 22)
         Me.Round1ToolStripMenuItem1.Text = "HLRound1"
         '
         'Round2ToolStripMenuItem1
         '
         Me.Round2ToolStripMenuItem1.Name = "Round2ToolStripMenuItem1"
-        Me.Round2ToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.Round2ToolStripMenuItem1.Size = New System.Drawing.Size(130, 22)
         Me.Round2ToolStripMenuItem1.Text = "HLRound2"
         '
         'Round3ToolStripMenuItem1
         '
         Me.Round3ToolStripMenuItem1.Name = "Round3ToolStripMenuItem1"
-        Me.Round3ToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.Round3ToolStripMenuItem1.Size = New System.Drawing.Size(130, 22)
         Me.Round3ToolStripMenuItem1.Text = "HLRound3"
         '
         'HLStdToolStripMenuItem
         '
         Me.HLStdToolStripMenuItem.Name = "HLStdToolStripMenuItem"
-        Me.HLStdToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.HLStdToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
         Me.HLStdToolStripMenuItem.Text = "HL STD"
         '
         'ToolStripTextBox5
@@ -956,7 +957,7 @@ Partial Class frmJobEntry
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 448)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(821, 22)
-        Me.StatusStrip1.TabIndex = 17
+        Me.StatusStrip1.TabIndex = 18
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'ToolStripStatusLabel1
@@ -1028,11 +1029,21 @@ Partial Class frmJobEntry
         Me.txtPilotCount.TabIndex = 9
         Me.txtPilotCount.Visible = False
         '
+        'btnHLReport
+        '
+        Me.btnHLReport.Location = New System.Drawing.Point(21, 263)
+        Me.btnHLReport.Name = "btnHLReport"
+        Me.btnHLReport.Size = New System.Drawing.Size(113, 47)
+        Me.btnHLReport.TabIndex = 11
+        Me.btnHLReport.Text = "Create HL Seperation"
+        Me.btnHLReport.UseVisualStyleBackColor = True
+        '
         'frmJobEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(821, 470)
+        Me.Controls.Add(Me.btnHLReport)
         Me.Controls.Add(Me.txtPilotCount)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label3)
@@ -1191,4 +1202,5 @@ Partial Class frmJobEntry
     Friend WithEvents LSBToolStripMenuItem2 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem6 As ToolStripMenuItem
+    Friend WithEvents btnHLReport As Button
 End Class
