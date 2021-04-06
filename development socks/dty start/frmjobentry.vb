@@ -749,11 +749,11 @@ Public Class frmJobEntry
                         LAddParam("@prnum", productCode)
                         LExecQuery("Select * From PRODUCT where prnum = @prnum And prod_MDML = 'YES'")
                         If LRecordCount > 0 Then
-                    MDML = "YES"
-                End If
-            End If
+                            MDML = "YES"
+                        End If
+                    End If
 
-            CheckJob()
+                    CheckJob()
 
                 End If
             End If
