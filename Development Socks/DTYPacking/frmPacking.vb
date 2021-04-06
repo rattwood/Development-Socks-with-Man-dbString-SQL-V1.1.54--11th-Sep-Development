@@ -353,6 +353,7 @@ Public Class frmPacking
             If Not frmJobEntry.HLColSep = Nothing Then
                 lblHLSeperation.Text = frmJobEntry.HLColSep & " Colour Seperation Removal"
                 txtCartNum.Text = frmJobEntry.HLColSep
+                Me.Text = "Colour Seperation Removal"
             End If
 
             lblHLSeperation.Show()
