@@ -734,9 +734,9 @@ Public Class frmJobEntry
             If My.Settings.chkUseColour Or My.Settings.chkUseSort Then
 
 
-                If Not HLColChk = Nothing Then
-                    CheckJob()
-                Else
+                If HLColChk = Nothing Then
+                    ' CheckJob()
+                    ' Else
                     'Check Product Type HHLL or MDML
                     LAddParam("@prnum", productCode)
                     LExecQuery("Select * From PRODUCT where prnum = @prnum And prod_HHLL Is Not Null")
@@ -782,6 +782,10 @@ Public Class frmJobEntry
             APacking()
         ElseIf tmpHHLLstate = 3 Then
             HLColGradeSep()
+        ElseIf My.Settings.chkUseColour And frmDGV.DGVdata.Rows(0).Cells("HHLLState").Value = 2 Then
+            frmCart1.Show()
+            Me.Hide()
+            Exit Sub
         End If
 
         'APacking()
@@ -868,6 +872,8 @@ Public Class frmJobEntry
                     coneValUpdate = 1
 
                     If Not HLColChk = Nothing Then
+                        'frmCart1.Show()
+                        ' Me.Hide()
                         Exit Sub
                     Else
                         frmCart1.Show()
