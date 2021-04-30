@@ -768,12 +768,12 @@ Public Class frmJobEntry
 
 
 
-        Dim tmpHHLLstate As String = Nothing
+        Dim tmpHHLLstate As Integer = 0
         If Not HLColChk = Nothing Then
 
             CheckJob()
             If Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("HHLLState").Value) Then
-                If frmDGV.DGVdata.Rows(0).Cells("HHLLState").Value = 3 Then
+                If frmDGV.DGVdata.Rows(0).Cells("HHLLState").Value = "3" Then
                     tmpHHLLstate = "3"
                     HLColSep = txtLotNumber.Text.Substring(9, 1)
                 End If
@@ -786,16 +786,19 @@ Public Class frmJobEntry
         'THIS Selects "A" Packing Routine and if HL master cart show seperation
         If My.Settings.chkUsePack And HLColSep = Nothing Then
             APacking()
-        ElseIf tmpHHLLstate = 3 Then
+        ElseIf tmpHHLLstate = "3" Then
             HLColGradeSep()
-        ElseIf My.Settings.chkUseColour And frmDGV.DGVdata.Rows(0).Cells("HHLLState").Value = 2 Then
-            frmCart1.Show()
-            Me.Hide()
-            Exit Sub
         End If
 
-        'APacking()
+        'End If
 
+        'If My.Settings.chkUseColour And Not IsDBNull(frmDGV.DGVdata.Rows(0).Cells("HHLLState").Value) Then
+        '    If frmDGV.DGVdata.Rows(0).Cells("HHLLState").Value = "2" Then
+        '        frmCart1.Show()
+        '        Me.Hide()
+        '        Exit Sub
+        '    End If
+        'End If
 
 
 
@@ -878,8 +881,8 @@ Public Class frmJobEntry
                     coneValUpdate = 1
 
                     If Not HLColChk = Nothing Then
-                        'frmCart1.Show()
-                        ' Me.Hide()
+                        frmCart1.Show()
+                        Me.Hide()
                         Exit Sub
                     Else
                         frmCart1.Show()
