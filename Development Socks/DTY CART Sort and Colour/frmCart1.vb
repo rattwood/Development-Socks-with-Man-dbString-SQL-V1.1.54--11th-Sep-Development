@@ -839,7 +839,7 @@ Public Class frmCart1
                                 If shortC(rw) = 1 Then
                                     Me.Controls("btnCone" & rw).BackgroundImage = im_LSB  'P50
                                 Else
-                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LSB   'P50
+                                    Me.Controls("btnCone" & rw).BackgroundImage = im_LB   'P50
                                 End If
                         End Select
                     Else
