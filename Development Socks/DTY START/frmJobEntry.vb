@@ -2318,7 +2318,8 @@ Public Class frmJobEntry
                     If stdReChk = 0 Then
 
                         LExecQuery("Select * FROM Jobs Where BCODECONE = '" & txtLotNumber.Text & "' And FLT_S = 'False' And CONESTATE BETWEEN 8 And 14  And " _
-                               & " DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM Is Null And RECHKSTARTTM Is Null and CARTSTARTTM between DateAdd(DD, @days, GETDATE()) and GetDATE()  ")
+                               & " DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM Is Null And RECHKSTARTTM Is Null and " _
+                               & "CARTSTARTTM between DateAdd(DD, @days, GETDATE()) And GetDATE() and RECHECKBARCODE is Null ")
 
                     Else
 

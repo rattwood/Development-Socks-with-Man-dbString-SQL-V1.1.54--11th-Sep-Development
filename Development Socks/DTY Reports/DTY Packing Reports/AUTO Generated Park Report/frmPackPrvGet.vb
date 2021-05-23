@@ -171,6 +171,7 @@ Public Class frmPackPrvGet
                         Exit For
                     End If
                 Next
+
             Case "Pilot 6Ch"
                 For rcount = 13 To 102
                     If MyPrevExcel.Cells(rcount, 4).Value > 0 Then

@@ -3168,7 +3168,7 @@ Public Class frmPackTodayUpdate
                         '******************************************************************
                         'WRITE CONE NUMBER TO SHEET
                         MyTodyExcel.Cells(nfree, 3) = frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value
-
+                        Console.WriteLine("idx = " & chkIdx & " Cheese# = " & frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value)
                         frmDGV.DGVdata.Rows(i - 1).Cells("RECHECKBARCODE").Value = modBarcode
                         nfree = nfree + 1
 
@@ -3218,7 +3218,6 @@ Public Class frmPackTodayUpdate
                             Exit For
 
                         End If
-                        ' End If
                     End If
                 Next
             Next

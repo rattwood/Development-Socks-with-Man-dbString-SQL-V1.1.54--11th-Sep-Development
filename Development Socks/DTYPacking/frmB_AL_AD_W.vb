@@ -516,6 +516,28 @@ Public Class frmB_AL_AD_W
         Me.Hide()
         packingActive = 1
 
+        Dim btnpress As String
+
+        If frmJobEntry.txtGrade.Text = "ReCheck" Then
+
+            btnpress = "Operator " & frmJobEntry.varUserName & " Create ReCheck sheet for " &
+                  " for Product " & prodNameMod & vbCrLf &
+                  " Packing sheet " & FileName & "Sheet name " & sheetname & vbCrLf &
+                  " Last Cheese scanned = " & bcodeScan
+
+            writeerrorLog.writelog("Packing Fault pressed", btnpress, False, "ReCheck Create sheet")
+
+        Else 'Not rechek so packing grade
+
+            btnpress = "Operator " & frmJobEntry.varUserName & " Pressed Finish on Grade " & frmJobEntry.txtGrade.Text & vbCrLf &
+                  " for Product " & prodNameMod & vbCrLf &
+                  " Packing sheet " & FileName & "Sheet name " & sheetname & vbCrLf &
+                  " Last Cheese scanned = " & bcodeScan
+            writeerrorLog.writelog("Packing Fault pressed", btnpress, False, "Packing sheet")
+
+        End If
+
+
         frmPackingFault.Show()
 
 
@@ -527,10 +549,7 @@ Public Class frmB_AL_AD_W
 
     Public Sub prgContinue()
 
-
-
         dgvRows = toAllocatedCount
-
 
         If txtConeBcode.TextLength <> 15 Then
             Label8.Visible = True
@@ -540,17 +559,12 @@ Public Class frmB_AL_AD_W
             Exit Sub
         End If
 
-
-
-
         bcodeScan = txtConeBcode.Text
-
-
 
         Dim fmt As String = "00"
         Dim modIdxNum As String
-        Dim today As String = DateAndTime.Today
-        today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
+        Dim today As String = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
+        ' today = Convert.ToDateTime(today).ToString("dd-MMM-yyyy")
 
 
         Try
@@ -587,7 +601,7 @@ Public Class frmB_AL_AD_W
                     Else
                         conelist(arrayLen) = frmDGV.DGVdata.Rows(i - 1).Cells("id_product").Value
                     End If
-
+                    Console.WriteLine(frmDGV.DGVdata.Rows(i - 1).Cells("id_product").Value)
 
                     If My.Settings.debugSet Then ListBox1.Visible = True
 
@@ -605,26 +619,18 @@ Public Class frmB_AL_AD_W
 
 
 
-                    'Write to Grid Cone Bcode
-                    ' DataGridView1.Rows(gridRow).Cells(gridCol).Style.BackColor = Color.LightGreen
-
-
-
-
-
-
                     If frmJobEntry.txtGrade.Text = "ReCheck" And frmJobEntry.stdReChk = 0 Then  'IF RECHK THEN SET FLAG=1 SET TIME AND SET NUBER 1-32
                         frmDGV.DGVdata.Rows(i - 1).Cells("RECHK").Value = 1
-                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Today
+                        frmDGV.DGVdata.Rows(i - 1).Cells("RECHKSTARTTM").Value = DateAndTime.Now.ToString("yyyy-MMM-dd HH:mm:ss")
                         frmDGV.DGVdata.Rows(i - 1).Cells("OPPACK").Value = frmJobEntry.txtOperator.Text
                         frmDGV.DGVdata.Rows(i - 1).Cells("OPNAME").Value = frmJobEntry.txtOperator.Text
                         '************************************************************************************************************
                         ' routine to get index count from second column
                         If gridCol = 1 Then
-                            tmpNum = DataGridView1.Rows(gridRow).Cells(0).Value  'format first 9 cheese to have leading Zero before sending to db
+                            tmpNum = DataGridView1.Rows(gridRow).Cells(0).Value
                             modIdxNum = tmpNum.ToString(fmt)
                         Else
-                            tmpNum = DataGridView1.Rows(gridRow).Cells(2).Value  'format first 9 cheese to have leading Zero before sending to db
+                            tmpNum = DataGridView1.Rows(gridRow).Cells(2).Value
                             modIdxNum = tmpNum.ToString(fmt)
                         End If
                         '**************************************************************************************************************
@@ -680,7 +686,7 @@ Public Class frmB_AL_AD_W
                     txtConeBcode.Focus()
                     Me.KeyPreview = True 'Allows us to look for advace character from barcode
                     Exit Sub
-                ElseIf frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value <> bcodeScan And i = dgvrows And packedFlag = 0 Then
+                ElseIf frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value <> bcodeScan And i = dgvRows And packedFlag = 0 Then
 
 
                     frmRemoveCone.Show()
@@ -790,6 +796,7 @@ Public Class frmB_AL_AD_W
                 End If
 
 
+
                 If coneCount = 32 Or coneCount = toAllocatedCount Then jobEnd()
 
         End Select
@@ -888,7 +895,7 @@ Public Class frmB_AL_AD_W
             Else
 
                 frmPackRepMain.Close()
-                UpdateDatabase()
+                ' UpdateDatabase()
                 Label8.Visible = False
                 Me.Cursor = System.Windows.Forms.Cursors.Default
                 gradePackActive = 0
@@ -1017,9 +1024,6 @@ Public Class frmB_AL_AD_W
                             & "PSORTERROR = @psorterror, CARTENDTM = @cartendtm,RECHK = @rechk,PACKSHEETBCODE = @packsheet, CARTONNUM = @carton, PACKIDX = @packidx, " _
                             & "RECHKIDX = @rechkidx, RECHECKBARCODE = @recheckbarcode, RECHKSTARTTM = @rechkstarttm, RECHKENDTM = rechkendtm, STDSTATE = @stdstate,  " _
                             & " HHLLState = @hlstate Where id_product = @id")
-
-
-
             Next
 
         Catch dbcx As DBConcurrencyException
@@ -1029,9 +1033,6 @@ Public Class frmB_AL_AD_W
             writeerrorLog.writelog("db B_AL_AD_W Con Error", Response, False, "B_AL_AD_Pk Con Fault")
             Response = dbcx.RowCount.ToString
             writeerrorLog.writelog("db B_AL_AD_W_Pk Con Error", Response, False, "B_AL_AD_Pk Con Fault")
-
-
-
 
         Catch ex As Exception
             'Write error to Log File
@@ -1043,13 +1044,6 @@ Public Class frmB_AL_AD_W
             MsgBox("Update Error: " & vbNewLine & ex.Message)
             pauseScan = 0 'Allow barcode entry
         End Try
-
-
-
-
-
-
-
 
         If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
         frmDGV.DGVdata.ClearSelection()
@@ -1091,10 +1085,44 @@ Public Class frmB_AL_AD_W
     End Sub
 
     Private Sub btnFinish_Click(sender As Object, e As EventArgs) Handles btnFinish.Click
+        Dim btnpress As String = Nothing
+        Dim tmprowsUsed As Integer = 0
 
-        Dim btnpress As String = "Operator " & frmJobEntry.varUserName & "  Pressed Finish on Grade " & frmJobEntry.txtGrade.Text & " Packing sheet"
 
-        writeerrorLog.writelog("Packing Stop/Finish pressed", btnpress, False, "Packing sheet")
+        If frmJobEntry.txtGrade.Text = "ReCheck" Then
+
+            For i = 1 To coneCount  'Find last cheese scanned and row number
+                If Not String.IsNullOrWhiteSpace(DataGridView1.Rows(i - 1).Cells(2).Value) Then
+                    tmprowsUsed = tmprowsUsed + 1
+                Else
+                    Exit For
+                End If  'Cancel count and store value
+            Next
+            Dim tmpCheese As String = DataGridView1.Rows(tmprowsUsed - 1).Cells(2).Value
+
+            btnpress = "Operator " & frmJobEntry.varUserName & " Create ReCheck sheet for " &
+                     Label5.Text & vbCrLf &
+                   " Idx# " & tmprowsUsed & vbCrLf & vbCrLf &
+                   " Last Cheese scanned = " & bcodeScan
+
+            writeerrorLog.writelog("Packing Finish pressed", btnpress, False, "ReCheck Create sheet")
+
+        Else 'Not rechek so packing grade
+
+
+
+            Dim tmpCheese As String = DataGridView1.Rows(tmprowsUsed - 1).Cells(2).Value
+
+
+            btnpress = "Operator " & frmJobEntry.varUserName & "  Pressed Finish on Grade " & frmJobEntry.txtGrade.Text & vbCrLf &
+                  " for Product " & Label5.Text & vbCrLf &
+                  " Last Cheese on screen " & tmpCheese & vbCrLf &
+                  " Last Cheese scanned = " & bcodeScan
+            writeerrorLog.writelog("Packing Finish pressed", btnpress, False, "Packing sheet")
+
+        End If
+
+
 
         jobEnd()
 
