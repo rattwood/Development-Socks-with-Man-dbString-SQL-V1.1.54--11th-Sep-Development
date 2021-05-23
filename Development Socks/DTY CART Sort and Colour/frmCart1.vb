@@ -994,17 +994,18 @@ Public Class frmCart1
                         remaincount = remaincount - 1
 
                     End If
-
-                    'check to see if all cheeses are graded and show finish button if they are
-                    If My.Settings.chkUseColour Then
-                        If remaincount = 0 Then 'All have values
-                            btnFinishedJob.Show()
-                        Else
-                            btnFinishedJob.Hide()
-                        End If
-                    End If
-
                 End If
+
+                'check to see if all cheeses are graded and show finish button if they are
+                If My.Settings.chkUseColour Then
+                    If remaincount > 0 Then 'All have values
+                        btnFinishedJob.Hide()
+                    Else
+                        btnFinishedJob.Show()
+                    End If
+                End If
+
+
             End If
 
 
