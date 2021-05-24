@@ -187,7 +187,7 @@ Partial Class frmJobEntry
         Me.txtLotNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.txtLotNumber.Location = New System.Drawing.Point(399, 153)
         Me.txtLotNumber.Name = "txtLotNumber"
-        Me.txtLotNumber.Size = New System.Drawing.Size(369, 44)
+        Me.txtLotNumber.Size = New System.Drawing.Size(381, 44)
         Me.txtLotNumber.TabIndex = 6
         '
         'btnJobReport
