@@ -342,7 +342,7 @@ Public Class frmJobEntry
 
 
             'check length of barcode and see it it is H or L color check form
-            If My.Settings.chkUseColour And txtLotNumber.Text.Length = 18 Or My.Settings.chkUsePack And txtLotNumber.Text.Length = 18 Then
+            If My.Settings.chkUseColour And txtLotNumber.Text.Length >= 18 Or My.Settings.chkUsePack And txtLotNumber.Text.Length >= 18 Then
                 chkBcode5 = txtLotNumber.Text.Substring(9, 5)
             End If
 
