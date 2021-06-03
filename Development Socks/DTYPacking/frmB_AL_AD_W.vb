@@ -1111,7 +1111,9 @@ Public Class frmB_AL_AD_W
 
 
 
-            Dim tmpCheese As String = DataGridView1.Rows(tmprowsUsed - 1).Cells(2).Value
+            ' Dim tmpCheese As String = DataGridView1.Rows(tmprowsUsed - 1).Cells(2).Value
+
+            Dim tmpCheese As String = "TBA"
 
 
             btnpress = "Operator " & frmJobEntry.varUserName & "  Pressed Finish on Grade " & frmJobEntry.txtGrade.Text & vbCrLf &
