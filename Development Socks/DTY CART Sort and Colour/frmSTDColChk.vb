@@ -561,9 +561,9 @@ Public Class frmSTDColChk
                 Case "OK"
 
                     If YorN = "Y" Then   'If Yes set to finished and std cheese
-                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = tmpstate + 1
-                    Else
                         frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = 8
+                    Else
+                        frmDGV.DGVdata.Rows(i - 1).Cells("STDSTATE").Value = tmpstate + 1
                     End If
 
                 Case "-"

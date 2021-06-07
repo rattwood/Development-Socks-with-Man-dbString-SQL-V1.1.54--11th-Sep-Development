@@ -1091,14 +1091,18 @@ Public Class frmB_AL_AD_W
 
         If frmJobEntry.txtGrade.Text = "ReCheck" Then
 
-            For i = 1 To coneCount  'Find last cheese scanned and row number
-                If Not String.IsNullOrWhiteSpace(DataGridView1.Rows(i - 1).Cells(2).Value) Then
-                    tmprowsUsed = tmprowsUsed + 1
-                Else
-                    Exit For
-                End If  'Cancel count and store value
-            Next
-            Dim tmpCheese As String = DataGridView1.Rows(tmprowsUsed - 1).Cells(2).Value
+
+
+            Dim tmpCheese As String
+            If coneCount > 0 AndAlso coneCount <= 16 Then
+                tmprowsUsed = coneCount
+                tmpCheese = DataGridView1.Rows(tmprowsUsed - 1).Cells(1).Value
+            ElseIf coneCount > 16 Then
+                tmprowsUsed = coneCount - 16
+                tmpCheese = DataGridView1.Rows(tmprowsUsed - 1).Cells(3).Value
+            End If
+
+
 
             btnpress = "Operator " & frmJobEntry.varUserName & " Create ReCheck sheet for " &
                      Label5.Text & vbCrLf &
@@ -1108,10 +1112,6 @@ Public Class frmB_AL_AD_W
             writeerrorLog.writelog("Packing Finish pressed", btnpress, False, "ReCheck Create sheet")
 
         Else 'Not rechek so packing grade
-
-
-
-            ' Dim tmpCheese As String = DataGridView1.Rows(tmprowsUsed - 1).Cells(2).Value
 
             Dim tmpCheese As String = "TBA"
 
