@@ -908,9 +908,9 @@ Public Class frmPackCreateNew
 
                 'Create H and L carts
             Case "Create H Cart"
-                gradeTxt = "H-ColCHK"
+                gradeTxt = "HColCHK"
             Case "Create L Cart"
-                gradeTxt = "L-ColCHK"
+                gradeTxt = "LColCHK"
                      'H and L Packing Full and Short
             Case "H DD"
                 gradeTxt = "HDD" 'H DD Grade

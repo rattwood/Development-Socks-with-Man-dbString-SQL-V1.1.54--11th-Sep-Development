@@ -4402,10 +4402,10 @@ Public Class frmCart1
 
 
         Dim sheetNumber As Integer = 0
-        If frmJobEntry.txtLotNumber.Text.Length > 18 Then
-            sheetNumber = frmJobEntry.txtLotNumber.Text.Substring(17, 2)
+        If frmJobEntry.txtLotNumber.Text.Length > 17 Then
+            sheetNumber = frmJobEntry.txtLotNumber.Text.Substring(16, 2)
         Else
-            sheetNumber = frmJobEntry.txtLotNumber.Text.Substring(17, 1)
+            sheetNumber = frmJobEntry.txtLotNumber.Text.Substring(16, 1)
         End If
 
 
