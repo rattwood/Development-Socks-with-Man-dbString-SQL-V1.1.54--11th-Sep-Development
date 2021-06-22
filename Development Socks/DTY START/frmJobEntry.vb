@@ -2638,7 +2638,8 @@ Public Class frmJobEntry
                 Case "ReCheck"  'CREATE RECHECK SHEET
                     packGrade = txtGrade.Text
                     If stdReChk = 0 Then
-                        LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And (CONESTATE = 8 Or  CONESTATE = 14) And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) And PACKENDTM is Null And RECHKSTARTTM is Null And RECHK is Null ")
+                        LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And (CONESTATE = 8 Or  CONESTATE = 14) And DEFCONE = 0 And CONEBARLEY = 0 And (M30 > 0 Or P30 > 0) " _
+                                 & " And PACKENDTM Is Null And RECHKSTARTTM Is Null And RECHK Is Null and RECHKIDX is NULL AND CARTSTARTTM between DateAdd(DD, @days, GETDATE()) And GetDATE() ")
                     Else
                         'ReCheck creation for std cheese  state 10
                         LExecQuery("Select * FROM Jobs Where PRNUM = '" & varProductCode & "' And FLT_S = 'False' And CONESTATE = 9 And " _
