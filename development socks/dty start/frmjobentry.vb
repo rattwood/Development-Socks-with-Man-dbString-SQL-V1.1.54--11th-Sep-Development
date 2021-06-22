@@ -342,8 +342,8 @@ Public Class frmJobEntry
 
 
             'check length of barcode and see it it is H or L color check form
-            If My.Settings.chkUseColour And txtLotNumber.Text.Length >= 18 Or My.Settings.chkUsePack And txtLotNumber.Text.Length >= 18 Then
-                chkBcode5 = txtLotNumber.Text.Substring(9, 5)
+            If My.Settings.chkUseColour And txtLotNumber.Text.Length >= 17 Or My.Settings.chkUsePack And txtLotNumber.Text.Length >= 17 Then
+                chkBcode5 = txtLotNumber.Text.Substring(9, 4)
             End If
 
             'CHECK TO SEE IT STANDARD RECHECK OR RECHECK CART
@@ -358,19 +358,19 @@ Public Class frmJobEntry
                 End If
 
                 dbBarcode = txtLotNumber.Text
-                ElseIf chkBCode = "R" Then
-                    stdcheck = 0
-                    reCheck = 1
-                    dbBarcode = txtLotNumber.Text
+            ElseIf chkBCode = "R" Then
+                stdcheck = 0
+                reCheck = 1
+                dbBarcode = txtLotNumber.Text
 
-                ElseIf My.Settings.chkUseColour And (chkBcode5 = "H_Col" Or chkBcode5 = "L_Col") Or My.Settings.chkUsePack And (chkBcode5 = "H_Col" Or chkBcode5 = "L_Col") Then
-                    Select Case chkBcode5
+            ElseIf My.Settings.chkUseColour And (chkBcode5 = "HCOL" Or chkBcode5 = "LCOL") Or My.Settings.chkUsePack And (chkBcode5 = "HCOL" Or chkBcode5 = "LCOL") Then
+                Select Case chkBcode5
 
-                        Case "H_Col"
-                            HLColChk = "H"
+                    Case "HCOL"
+                        HLColChk = "H"
                             dbBarcode = txtLotNumber.Text
-                        Case "L_Col"
-                            HLColChk = "L"
+                    Case "LCOL"
+                        HLColChk = "L"
                             dbBarcode = txtLotNumber.Text
                     End Select
 
