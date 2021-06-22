@@ -368,10 +368,10 @@ Public Class frmJobEntry
 
                     Case "HCOL"
                         HLColChk = "H"
-                            dbBarcode = txtLotNumber.Text
+                        dbBarcode = txtLotNumber.Text
                     Case "LCOL"
                         HLColChk = "L"
-                            dbBarcode = txtLotNumber.Text
+                        dbBarcode = txtLotNumber.Text
                     End Select
 
 
