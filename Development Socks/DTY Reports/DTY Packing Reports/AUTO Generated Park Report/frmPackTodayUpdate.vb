@@ -3789,10 +3789,10 @@ Public Class frmPackTodayUpdate
                 gradeTxt = "STD" 'ReCheck Grade
                 boxCount = mycount
             Case "Create H Cart"
-                gradeTxt = "H_ColCHK" 'ReCheck Grade
+                gradeTxt = "H-ColCHK" 'ReCheck Grade
                 boxCount = mycount
             Case "Create L Cart"
-                gradeTxt = "L_ColCHK" 'ReCheck Grade
+                gradeTxt = "L-ColCHK" 'ReCheck Grade
                 boxCount = mycount
             Case "Pilot 6Ch"
                 gradeTxt = "PI06" 'A Grade 6 per box
