@@ -647,6 +647,8 @@ Public Class frmSTDColChk
 
                 frmJobEntry.LDA.Update(frmJobEntry.LDS.Tables(0))
 
+                setnulls()
+
             End If
         Catch ex As Exception
             'Write error to Log File
@@ -663,7 +665,30 @@ Public Class frmSTDColChk
 
     End Sub
 
+    Private Sub setnulls() 'Rutine to check for blank values and update them as Null values
 
+        For i = 1 To frmDGV.DGVdata.Rows.Count
+
+            SQL.AddParam("@bcodecone", frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value)
+            SQL.ExecQuery("Update jobs set STDSTATE = NULL where bcodecone = @bcodecone and STDSTATE = '' ")
+
+
+
+            SQL.AddParam("@bcodecone", frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value)
+            SQL.ExecQuery("Update jobs set STDCHEESE = NULL where bcodecone = @bcodecone and STDCHEESE = '' ")
+
+
+            SQL.AddParam("@bcodecone", frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value)
+            SQL.ExecQuery("Update jobs set RECHECKBARCODE = NULL where bcodecone = @bcodecone and RECHECKBARCODE = '' ")
+
+
+            SQL.AddParam("@bcodecone", frmDGV.DGVdata.Rows(i - 1).Cells("BCODECONE").Value)
+            SQL.ExecQuery("Update jobs set RECHKIDX = NULL where bcodecone = @bcodecone and RECHKIDX = '' ")
+
+        Next
+
+
+    End Sub
 
 
     Public Sub tsbtnSave()
