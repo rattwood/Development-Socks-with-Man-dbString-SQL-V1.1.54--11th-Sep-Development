@@ -253,29 +253,54 @@ Public Class frmStdCreate
         '****************************** Routine to save database and then recall it from SQL and index on Recheck idx
         UpdateDatabase()
 
-        'frmDGV.DGVdata.Sort(frmDGV.DGVdata.Columns("RECHKIDX"), ListSortDirection.Ascending)  'sorts On cone number
+
         If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
         frmDGV.DGVdata.ClearSelection()
 
+        'Select Case frmJobEntry.txtGrade.Text
+        '    Case "Round1"
+        '        frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 25 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "'  ORDER BY RECHKIDX ")
+        '    Case "Round2"
+        '        frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 45 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+        '    Case "Round3"
+        '        frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 65 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+        '    Case "STD"
+        '        frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 75 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+        '    Case "HLRound1"
+        '        frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 25 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "'  ORDER BY RECHKIDX ")
+        '    Case "HLRound2"
+        '        frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 45 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+        '    Case "HLRound3"
+        '        frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 65 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+        '    Case "HL STD"
+        '        frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 75 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+
+        'End Select
+
+        frmJobEntry.LAddParam("@prodcode", frmJobEntry.varProductCode)
+        frmJobEntry.LAddParam("@days", -31)
+
         Select Case frmJobEntry.txtGrade.Text
             Case "Round1"
-                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 25 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "'  ORDER BY RECHKIDX ")
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 25 And  PRNUM = @prodcode And cartstarttm between dateadd(DD,@days, cartstarttm) and getdate() ORDER BY RECHKIDX ")
             Case "Round2"
-                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 45 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 45 And  PRNUM = @prodcode And cartstarttm between dateadd(DD,@days, cartstarttm) and getdate() ORDER BY RECHKIDX")
             Case "Round3"
-                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 65 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 65 And  PRNUM = @prodcode And cartstarttm between dateadd(DD,@days, cartstarttm) and getdate() ORDER BY RECHKIDX ")
             Case "STD"
-                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 75 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 75 And  PRNUM = @prodcode And cartstarttm between dateadd(DD,@days, cartstarttm) and getdate() ORDER BY RECHKIDX ")
             Case "HLRound1"
-                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 25 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "'  ORDER BY RECHKIDX ")
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 25 And  PRNUM = @prodcode And cartstarttm between dateadd(DD,@days, cartstarttm) and getdate() ORDER BY RECHKIDX ")
             Case "HLRound2"
-                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 45 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 45 And  PRNUM = @prodcode And cartstarttm between dateadd(DD,@days, cartstarttm) and getdate() ORDER BY RECHKIDX")
             Case "HLRound3"
-                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 65 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 65 And  PRNUM = @prodcode And cartstarttm between dateadd(DD,@days, cartstarttm) and getdate() ORDER BY RECHKIDX ")
             Case "HL STD"
-                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 75 And  PRNUM = '" & frmJobEntry.varProductCode & "' And PRYY = '" & frmJobEntry.year & "' And PRMM = '" & frmJobEntry.month & "' ORDER BY RECHKIDX ")
+                frmJobEntry.LExecQuery("Select * FROM Jobs Where Stdstate  = 75 And  PRNUM = @prodcode And cartstarttm between dateadd(DD,@days, cartstarttm) and getdate() ORDER BY RECHKIDX ")
+
 
         End Select
+
 
         Dim LCB As SqlCommandBuilder = New SqlCommandBuilder(frmJobEntry.LDA)
 
@@ -394,7 +419,7 @@ Public Class frmStdCreate
             If frmJobEntry.LDS.HasChanges Then
 
 
-                'LDA.UpdateCommand = New Oracle.ManagedDataAccess.Client.OracleCommandBuilder(frmJobEntry.LDA).GetUpdateCommand
+
 
                 frmJobEntry.LDA.Update(frmJobEntry.LDS.Tables(0))
 
@@ -408,13 +433,6 @@ Public Class frmStdCreate
         End Try
 
 
-
-        'If frmJobEntry.LConn.State = ConnectionState.Open Then frmJobEntry.LConn.Close()
-        'frmDGV.DGVdata.ClearSelection()
-        'frmJobEntry.txtLotNumber.Clear()
-        'frmJobEntry.txtLotNumber.Focus()
-        'frmJobEntry.Show()
-        'Me.Close()
 
 
 
