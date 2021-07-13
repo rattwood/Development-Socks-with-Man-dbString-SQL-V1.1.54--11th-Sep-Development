@@ -372,56 +372,56 @@ Public Class frmJobEntry
                     Case "LCOL"
                         HLColChk = "L"
                         dbBarcode = txtLotNumber.Text
-                    End Select
+                End Select
 
 
 
-                ElseIf txtLotNumber.Text.Substring(12, 1) = "B" Then
-                    chkBCode = txtLotNumber.Text.Substring(12, 1)
+            ElseIf txtLotNumber.Text.Substring(12, 1) = "B" Then
+                chkBCode = txtLotNumber.Text.Substring(12, 1)
 
 
-                    stdcheck = 0
-                    reCheck = 0
-                    HLColChk = Nothing
-                    machineCode = txtLotNumber.Text.Substring(0, 2)
+                stdcheck = 0
+                reCheck = 0
+                HLColChk = Nothing
+                machineCode = txtLotNumber.Text.Substring(0, 2)
 
-                    Select Case txtLotNumber.TextLength
-                        Case 14
-                            If txtLotNumber.Text.Substring(13, 1) >= 1 And txtLotNumber.Text.Substring(13, 1) <= 9 Then
-                                cartNum = txtLotNumber.Text.Substring(12, 2)
-                            Else
-                                MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
-                                Me.txtLotNumber.Clear()
-                                Me.txtLotNumber.Focus()
-                                Me.txtLotNumber.Refresh()
-                                Exit Sub
-                            End If
-                        Case 15
-                            If txtLotNumber.Text.Substring(13, 2) = "10" Or txtLotNumber.Text.Substring(13, 2) = "11" Or txtLotNumber.Text.Substring(13, 2) = "12" Then
-                                If machineCode >= 30 Then  'check that carts B10, B11 and B12 are not used on machines 30,31,32,33
-                                    MsgBox("This CART No. " + txtLotNumber.Text.Substring(13, 2) + " Is Not valid For this machine Please check Barcode" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
-                                    Me.txtLotNumber.Clear()
-                                    Me.txtLotNumber.Focus()
-                                    Me.txtLotNumber.Refresh()
-                                    Exit Sub
-                                End If
-                                cartNum = txtLotNumber.Text.Substring(12, 3)
-                            Else
-                                MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
-                                Me.txtLotNumber.Clear()
-                                Me.txtLotNumber.Focus()
-                                Me.txtLotNumber.Refresh()
-                                Exit Sub
-                            End If
-                        Case > 15
+                Select Case txtLotNumber.TextLength
+                    Case 14
+                        If txtLotNumber.Text.Substring(13, 1) >= 1 And txtLotNumber.Text.Substring(13, 1) <= 9 Then
+                            cartNum = txtLotNumber.Text.Substring(12, 2)
+                        Else
                             MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
                             Me.txtLotNumber.Clear()
                             Me.txtLotNumber.Focus()
                             Me.txtLotNumber.Refresh()
                             Exit Sub
-                    End Select
-                Else
-                    MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
+                        End If
+                    Case 15
+                        If txtLotNumber.Text.Substring(13, 2) = "10" Or txtLotNumber.Text.Substring(13, 2) = "11" Or txtLotNumber.Text.Substring(13, 2) = "12" Then
+                            If machineCode >= 30 Then  'check that carts B10, B11 and B12 are not used on machines 30,31,32,33
+                                MsgBox("This CART No. " + txtLotNumber.Text.Substring(13, 2) + " Is Not valid For this machine Please check Barcode" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
+                                Me.txtLotNumber.Clear()
+                                Me.txtLotNumber.Focus()
+                                Me.txtLotNumber.Refresh()
+                                Exit Sub
+                            End If
+                            cartNum = txtLotNumber.Text.Substring(12, 3)
+                        Else
+                            MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
+                            Me.txtLotNumber.Clear()
+                            Me.txtLotNumber.Focus()
+                            Me.txtLotNumber.Refresh()
+                            Exit Sub
+                        End If
+                    Case > 15
+                        MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
+                        Me.txtLotNumber.Clear()
+                        Me.txtLotNumber.Focus()
+                        Me.txtLotNumber.Refresh()
+                        Exit Sub
+                End Select
+            Else
+                MsgBox("This Is Not a CART Barcode Please RE Scan" & vbCrLf & " หมายเลขนี้ไม่ใช่ บาร์โค็ดของรถ กรุณาสแกนใหม่อีกครั้ง")
                 Me.txtLotNumber.Clear()
                 Me.txtLotNumber.Focus()
                 Me.txtLotNumber.Refresh()
@@ -857,7 +857,7 @@ Public Class frmJobEntry
             If Not HLColChk = Nothing Then
                 LExecQuery("SELECT * FROM jobs WHERE recheckbarcode = '" & dbBarcode & "' ORDER BY rechkidx")
             Else
-                    LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ORDER BY CONENUM")
+                LExecQuery("SELECT * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ORDER BY CONENUM")
             End If
 
 
@@ -1376,10 +1376,10 @@ Public Class frmJobEntry
 
             'Check Product Type HHLL or MDML
             LAddParam("@prnum", productCode)
-                LExecQuery("Select * From PRODUCT where prnum = @prnum and prod_HHLL Is Not Null")
-                If LRecordCount > 0 Then
-                    HHLL = "YES"
-                End If
+            LExecQuery("Select * From PRODUCT where prnum = @prnum and prod_HHLL Is Not Null")
+            If LRecordCount > 0 Then
+                HHLL = "YES"
+            End If
 
 
             If Not HHLL = "YES" Then
@@ -1403,7 +1403,7 @@ Public Class frmJobEntry
             End If
 
 
-                If LRecordCount > 0 Then
+            If LRecordCount > 0 Then
                 LExecQuery("Select * FROM jobs WHERE bcodecart = '" & dbBarcode & "' ORDER BY CONENUM")
 
                 'LOAD THE DATA FROM dB IN TO THE DATAGRID
@@ -1517,18 +1517,18 @@ Public Class frmJobEntry
 
             LExecQuery("SELECT * FROM jobs WHERE recheckbarcode = '" & dbBarcode & "' and HHLLState = 3 order by rechkidx   ")
 
-                If LRecordCount = 0 Then
-                    Label3.Visible = True
+            If LRecordCount = 0 Then
+                Label3.Visible = True
 
-                    Label3.Text = "This Cart has not been graded in to H and L by colour section"
+                Label3.Text = "This Cart has not been graded in to H and L by colour section"
 
-                    DelayTM()
-                    Label3.Visible = False
+                DelayTM()
+                Label3.Visible = False
 
-                    Me.txtLotNumber.Clear()
-                    Me.txtLotNumber.Focus()
-                    Exit Sub
-                End If
+                Me.txtLotNumber.Clear()
+                Me.txtLotNumber.Focus()
+                Exit Sub
+            End If
 
 
 
@@ -1949,27 +1949,50 @@ Public Class frmJobEntry
 
 
 
+        'Select Case txtGrade.Text
+        '    Case "Round1"
+        '        LExecQuery("Select * FROM Jobs Where Stdstate  = 1 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' ORDER BY CONENUM ")
+        '    Case "Round2"
+        '        LExecQuery("Select * FROM Jobs Where Stdstate  = 3 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' ORDER BY CONENUM")
+        '    Case "Round3"
+        '        LExecQuery("Select * FROM Jobs Where Stdstate  = 5 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "'ORDER BY CONENUM ")
+        '    Case "STD"
+        '        LExecQuery("Select * FROM Jobs Where Stdstate  = 7 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "'ORDER BY CONENUM ")
+        '    Case "HLRound1"
+        '        LExecQuery("Select * FROM Jobs Where Stdstate  = 1 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' ORDER BY CONENUM ")
+        '    Case "HLRound2"
+        '        LExecQuery("Select * FROM Jobs Where Stdstate  = 3 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' ORDER BY CONENUM")
+        '    Case "HLRound3"
+        '        LExecQuery("Select * FROM Jobs Where Stdstate  = 5 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "'ORDER BY CONENUM ")
+        '    Case "HL STD"
+        '        LExecQuery("Select * FROM Jobs Where Stdstate  = 7 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "'ORDER BY CONENUM ")
+
+
+        'End Select
+
+        LAddParam("@prodcode", varProductCode)
+        LAddParam("@days", -31)
+
         Select Case txtGrade.Text
             Case "Round1"
-                LExecQuery("Select * FROM Jobs Where Stdstate  = 1 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' ORDER BY CONENUM ")
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 1 And  PRNUM = @prodcode And cartstarttm between dateadd(DD,@days, cartstarttm) and getdate() ORDER BY CONENUM ")
             Case "Round2"
-                LExecQuery("Select * FROM Jobs Where Stdstate  = 3 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' ORDER BY CONENUM")
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 3 And  PRNUM = @prodcode And cartstarttm between dateadd(DD,@days, cartstarttm) and getdate() ORDER BY CONENUM")
             Case "Round3"
-                LExecQuery("Select * FROM Jobs Where Stdstate  = 5 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "'ORDER BY CONENUM ")
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 5 And  PRNUM = @prodcode And cartstarttm between dateadd(DD,@days, cartstarttm) and getdate() ORDER BY CONENUM ")
             Case "STD"
-                LExecQuery("Select * FROM Jobs Where Stdstate  = 7 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "'ORDER BY CONENUM ")
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 7 And  PRNUM = @prodcode And cartstarttm between dateadd(DD,@days, cartstarttm) and getdate() ORDER BY CONENUM ")
             Case "HLRound1"
-                LExecQuery("Select * FROM Jobs Where Stdstate  = 1 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' ORDER BY CONENUM ")
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 1 And  PRNUM = @prodcode And cartstarttm between dateadd(DD,@days, cartstarttm) and getdate() ORDER BY CONENUM ")
             Case "HLRound2"
-                LExecQuery("Select * FROM Jobs Where Stdstate  = 3 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "' ORDER BY CONENUM")
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 3 And  PRNUM = @prodcode And cartstarttm between dateadd(DD,@days, cartstarttm) and getdate() ORDER BY CONENUM")
             Case "HLRound3"
-                LExecQuery("Select * FROM Jobs Where Stdstate  = 5 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "'ORDER BY CONENUM ")
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 5 And  PRNUM = @prodcode And cartstarttm between dateadd(DD,@days, cartstarttm) and getdate() ORDER BY CONENUM ")
             Case "HL STD"
-                LExecQuery("Select * FROM Jobs Where Stdstate  = 7 And  PRNUM = '" & varProductCode & "' And PRYY = '" & year & "' And PRMM = '" & month & "'ORDER BY CONENUM ")
+                LExecQuery("Select * FROM Jobs Where Stdstate  = 7 And  PRNUM = @prodcode And cartstarttm between dateadd(DD,@days, cartstarttm) and getdate() ORDER BY CONENUM ")
 
 
         End Select
-
 
 
 
